@@ -28,6 +28,7 @@
 <meta name="twitter:description" content="Browse every package in the official Omarchy repository.">
 <meta name="twitter:image" content="__SITE_URL__/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/home-leaders.js" defer></script>
 <script src="/share.js" defer></script>
 <script type="application/ld+json">__STRUCTURED_DATA__</script>
 <style>
@@ -75,21 +76,23 @@ __STYLE__
 
 <main class="wrap">
 
-  <section class="community-requests" id="community-requests" aria-labelledby="requests-h">
-    <div class="community-head">
+  <section class="home-top" aria-labelledby="home-top-h">
+    <div class="home-top-head">
       <div>
-        <p class="eyebrow">Community wishlist</p>
-        <h2 id="requests-h">What should Omarchy add next?</h2>
-        <p>Vote on public app requests or DM a missing project to @jessyka_boat for review. This is an unofficial wishlist—not the official Omarchy roadmap.</p>
+        <p class="eyebrow">Community favorites</p>
+        <h2 id="home-top-h">Top 3 apps</h2>
+        <p class="home-leader-status" id="home-leader-status" role="status" aria-live="polite">Loading live rankings…</p>
       </div>
-      <div class="community-actions">
-        <a class="button" href="__SUGGEST_APP_URL__" target="_blank" rel="noopener">Suggest on X ↗</a>
+      <a class="button ghost" href="leaderboard.html">View Top 25 →</a>
+    </div>
+    <div class="leader-podium home-leaders" id="home-leaders" aria-label="Top three community-ranked apps" hidden></div>
+    <div class="suggestion-bar" aria-labelledby="suggestion-h">
+      <div>
+        <h2 id="suggestion-h">What should Omarchy add next?</h2>
+        <p>Know a missing app? Send @jessyka_boat the project and why it belongs.</p>
       </div>
+      <a class="button" href="__SUGGEST_APP_URL__" target="_blank" rel="noopener">Suggest on X ↗</a>
     </div>
-    <div class="vote-grid" id="vote-grid" aria-live="polite" aria-busy="true">
-      <p class="vote-loading">Loading the most wanted apps from GitHub…</p>
-    </div>
-    <p class="vote-note">Top three open requests are shown to keep this page focused. Voting uses a 👍 reaction on GitHub, limited to one per GitHub account.</p>
   </section>
 
   <section aria-labelledby="arrivals-h">
@@ -125,14 +128,6 @@ __GROUPS__
   <section class="faq" aria-labelledby="faq-h">
     <h2 class="sec-label" id="faq-h">Common questions</h2>
 __FAQ__
-  </section>
-
-  <section class="sec-label-wrap" style="margin-top: var(--space-xx-large)">
-    <div class="request">
-      <h2>Not in the repo?</h2>
-      <p>This store only lists what the official Omarchy repo ships. Add a missing project to the public community wishlist so others can find it and vote. Suggestions are not a promise of inclusion.</p>
-      <a class="button" href="__SUGGEST_APP_URL__" target="_blank" rel="noopener" id="req-panel">Suggest an app ↗</a>
-    </div>
   </section>
 
 </main>
@@ -227,63 +222,6 @@ __FAQ__
   var catalogue = document.getElementById("catalogue");
   var dlg = document.getElementById("detail");
   var activeCat = "";
-
-  /* ---------- community wishlist ---------- */
-  var voteGrid = document.getElementById("vote-grid");
-  function voteCard(issue, rank) {
-    var card = document.createElement("article");
-    card.className = "vote-card";
-    var top = document.createElement("div");
-    top.className = "vote-card-top";
-    var rankEl = document.createElement("span");
-    rankEl.className = "vote-rank";
-    rankEl.textContent = "#" + rank;
-    var count = document.createElement("span");
-    count.className = "vote-count";
-    var votes = issue.reactions && issue.reactions["+1"] || 0;
-    count.textContent = "👍 " + votes + (votes === 1 ? " vote" : " votes");
-    top.appendChild(rankEl);
-    top.appendChild(count);
-    var title = document.createElement("h3");
-    title.textContent = issue.title.replace(/^\[App request\]:\s*/i, "");
-    var link = document.createElement("a");
-    link.className = "vote-link";
-    link.href = issue.html_url;
-    link.target = "_blank";
-    link.rel = "noopener";
-    link.textContent = "Vote 👍 on GitHub ↗";
-    card.appendChild(top);
-    card.appendChild(title);
-    card.appendChild(link);
-    return card;
-  }
-  fetch("__REQUESTS_API__", { headers: { "Accept": "application/vnd.github+json" } })
-    .then(function (response) { if (!response.ok) throw new Error("request list unavailable"); return response.json(); })
-    .then(function (issues) {
-      var requests = issues.filter(function (issue) { return !issue.pull_request; });
-      requests.sort(function (a, b) {
-        var voteDiff = ((b.reactions && b.reactions["+1"]) || 0) - ((a.reactions && a.reactions["+1"]) || 0);
-        return voteDiff || (b.comments - a.comments) || a.created_at.localeCompare(b.created_at);
-      });
-      voteGrid.textContent = "";
-      if (!requests.length) {
-        var empty = document.createElement("p");
-        empty.className = "vote-loading";
-        empty.textContent = "No requests yet. Be the first to suggest an app by DM.";
-        voteGrid.appendChild(empty);
-      } else {
-        requests.slice(0, 3).forEach(function (issue, index) { voteGrid.appendChild(voteCard(issue, index + 1)); });
-      }
-      voteGrid.setAttribute("aria-busy", "false");
-    })
-    .catch(function () {
-      voteGrid.textContent = "";
-      var message = document.createElement("p");
-      message.className = "vote-loading";
-      message.textContent = "Live results are temporarily unavailable. You can still suggest an app by DM on X.";
-      voteGrid.appendChild(message);
-      voteGrid.setAttribute("aria-busy", "false");
-    });
 
   cards.forEach(function (c) { c._hay = (c.dataset.name + " " + c.dataset.desc).toLowerCase(); });
 

@@ -81,6 +81,12 @@
       });
   }, true);
 
-  window.omarchyVotes = { refresh: render, reload: loadVotes };
+  window.omarchyVotes = {
+    refresh: render,
+    reload: loadVotes,
+    snapshot: function () {
+      return { counts: Object.assign({}, state.counts), voted: Array.from(state.voted), ready: state.ready };
+    },
+  };
   loadVotes();
 })();

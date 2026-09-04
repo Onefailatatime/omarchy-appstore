@@ -47,8 +47,8 @@ dist/         generated site, package pages, sitemap, crawler files, and assets
 
 The icon set includes SVG, ICO, 32px PNG, and 180px Apple-touch variants. The
 The generated Netlify `_headers` file adds a restrictive content policy and standard browser
-security headers while allowing the public GitHub request feed, upstream HTTPS
-screenshots, and click-to-play YouTube embeds.
+security headers while allowing upstream HTTPS screenshots and click-to-play
+YouTube embeds.
 
 ## Search and answer engines
 
@@ -59,13 +59,9 @@ social preview assets for `https://omarchyapps.com`. Keep `SITE_URL` in
 
 ## Community app requests
 
-The homepage shows only the three most-upvoted open GitHub issues labeled
-`app-request`. Visitors vote with a 👍 reaction on GitHub or send a prefilled
-app-suggestion DM to `@jessyka_boat` on X. After reviewing a DM, the site owner
-can create a public issue with the `app-request` label to add it to voting.
-This keeps the homepage compact, avoids an unmoderated public submission form,
-and adds no custom account system or database. Close a request when it no
-longer belongs in the active wishlist; it then disappears from the homepage.
+The homepage keeps requests to one compact call-to-action bar. Visitors send a
+prefilled app-suggestion DM to `@jessyka_boat` on X; there is no public form,
+account system, or request database on the site.
 
 ## Persistent package upvotes
 

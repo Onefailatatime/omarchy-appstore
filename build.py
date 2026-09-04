@@ -35,8 +35,6 @@ FALLBACK_CATEGORY = "Utilities"
 NEW_ARRIVALS = 4
 CONTACT_URL = "https://x.com/jessyka_boat"
 X_DM_RECIPIENT_ID = "1400492097082327040"
-REQUESTS_REPO = "Onefailatatime/omarchy-appstore"
-REQUESTS_API = f"https://api.github.com/repos/{REQUESTS_REPO}/issues?state=open&labels=app-request&per_page=100"
 SUGGEST_APP_URL = "https://x.com/messages/compose?" + urllib.parse.urlencode({
     "recipient_id": X_DM_RECIPIENT_ID,
     "text": (
@@ -54,7 +52,7 @@ FAQ = [
     ("How do I install an app on Omarchy?", "Open a package, review its requirements, then copy the displayed omarchy pkg add command into a terminal. Packages are downloaded from the official Omarchy repository, not from this site."),
     ("Does this site host or sell apps?", "No. The site hosts no packages and sells no software. It organizes public package information and links visitors to upstream projects and official PKGBUILDs."),
     ("How can a developer update or claim an app listing?", "Open the package and choose Claim this app. The X direct-message form asks for the developer's role, project URL, corrections, screenshots, and an optional demo video."),
-    ("How do I request or vote for an app?", "Use the community wishlist near the top of the store. Open an existing request and add a thumbs-up reaction on GitHub to vote, or send @jessyka_boat a direct message on X to suggest a new project."),
+    ("How do I request or vote for an app?", "Use Top Apps to upvote packages already in the repository. To suggest a missing project, use the homepage suggestion bar to send @jessyka_boat a direct message on X."),
     ("How do app upvotes work?", "Use the up-arrow button on any listed package. The public total is stored with this site and survives deployments. A secure anonymous browser cookie recognizes prior votes without requiring an account or email address."),
     ("How do I share a specific app?", "Use Share on any package card or profile. On supported devices it opens the system share sheet; otherwise it copies that app's permanent omarchyapps.com profile URL."),
     ("What does the Indie app sticker mean?", "It is a curated community label for an app or tool currently understood to be independently maintained. It is not an official Omarchy certification or endorsement, and developers can request a correction."),
@@ -624,7 +622,6 @@ def main() -> None:
             .replace("__FAQ__", faq_html)
             .replace("__STRUCTURED_DATA__", json_script(homepage_schema))
             .replace("__CONTACT__", html.escape(CONTACT_URL))
-            .replace("__REQUESTS_API__", REQUESTS_API)
             .replace("__SUGGEST_APP_URL__", html.escape(SUGGEST_APP_URL))
             .replace("__X_DM_RECIPIENT__", X_DM_RECIPIENT_ID)
             .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
@@ -671,6 +668,7 @@ def main() -> None:
             (images / f.name).write_bytes(f.read_bytes())
     (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())
     (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
+    (DIST / "home-leaders.js").write_text((ROOT / "assets" / "home-leaders.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "leaderboard.js").write_text((ROOT / "assets" / "leaderboard.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "share.js").write_text((ROOT / "assets" / "share.js").read_text(encoding="utf-8"), encoding="utf-8")
     about = ((ROOT / "parts" / "about.html").read_text(encoding="utf-8")

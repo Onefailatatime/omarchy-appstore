@@ -39,4 +39,8 @@
     render({});
     status.textContent = "Live vote totals are temporarily unavailable · showing apps A–Z";
   });
+  if (window.omarchyVotes) {
+    var current = window.omarchyVotes.snapshot();
+    if (current.ready) render(current.counts);
+  }
 })();
