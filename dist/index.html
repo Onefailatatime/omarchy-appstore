@@ -252,6 +252,37 @@ b, strong { font-weight: 700; }
 .terms-main p + p, .terms-main ul + p { margin-top: 0.8em; }
 .terms-main ul { margin: 0; padding-left: 1.3em; color: rgb(var(--rgb-terminal-white) / 0.9); }
 .terms-main li + li { margin-top: 0.45em; }
+.about-main { max-width: 62rem; padding-bottom: var(--space-xx-large); }
+.about-card {
+  display: grid;
+  grid-template-columns: 11em 1fr;
+  gap: var(--space-large);
+  align-items: center;
+  margin-top: var(--space-large);
+  padding: var(--space-large);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.about-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 2px solid var(--color-terminal-blue);
+  border-radius: 50%;
+}
+.about-card h2 { margin: 0 0 0.25em; color: var(--color-terminal-white); font-size: 140%; }
+.about-card .handle { margin: 0 0 var(--space-medium); color: var(--color-terminal-cyan); }
+.about-card .bio { margin: 0 0 var(--space-medium); color: var(--color-terminal-white); }
+.about-copy { margin-top: var(--space-large); }
+.about-copy h2 { color: var(--color-terminal-white); }
+.about-copy p { color: rgb(var(--rgb-terminal-white) / 0.9); }
+@media (max-width: 600px) {
+  .about-card { grid-template-columns: 1fr; text-align: center; }
+  .about-photo { width: 9em; margin: 0 auto; }
+  .about-card .button { justify-self: center; }
+}
 
 /* =================== HERO =================== */
 .hero { text-align: center; padding: var(--space-x-large) 0 var(--space-large); }
@@ -752,6 +783,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <a href="https://omarchy.org/">A community package browser for Omarchy — packages ship from the official repo, pkgs.omarchy.org</a>
   <span aria-hidden="true">·</span>
   <a href="develop.html">Develop for Omarchy →</a>
+  <span aria-hidden="true">·</span>
+  <a href="about.html">About</a>
 </div>
 
 <header class="hero">
@@ -2899,6 +2932,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
         <a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs on GitHub</a>
         <a href="https://omarchyplugins.com/">Plugins</a>
         <a href="develop.html">Develop for Omarchy</a>
+        <a href="about.html">About</a>
         <a href="terms.html">Terms of Use</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>

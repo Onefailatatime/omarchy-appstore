@@ -372,12 +372,23 @@ def main() -> None:
     fonts.mkdir(exist_ok=True)
     for f in (ROOT / "assets" / "fonts").glob("*.woff2"):
         (fonts / f.name).write_bytes(f.read_bytes())
+    images = DIST / "images"
+    images.mkdir(exist_ok=True)
+    for f in (ROOT / "assets" / "images").glob("*"):
+        if f.is_file():
+            (images / f.name).write_bytes(f.read_bytes())
+    about = ((ROOT / "parts" / "about.html").read_text(encoding="utf-8")
+             .replace("__SYNCED__", synced)
+             .replace("__CONTACT__", html.escape(CONTACT_URL))
+             .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
+    (DIST / "about.html").write_text(about, encoding="utf-8")
 
     unresolved = [p["name"] for p in pkgs if not p["added"]]
     uncategorized = [p["name"] for p in pkgs if p["category"] == FALLBACK_CATEGORY and p["name"] not in json.loads(CATEGORIES_FILE.read_text() or "{}")]
     print(f"dist/index.html  {len(page):,} bytes · {len(pkgs)} packages · synced {synced}")
     print(f"dist/develop.html {len(develop):,} bytes · public packaging checklist")
     print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
+    print(f"dist/about.html   {len(about):,} bytes · project and builder bio")
     print("new arrivals:    " + ", ".join(f"{p['name']} ({datetime.date.fromtimestamp(p['added'])})" for p in newest))
     if unresolved:
         print(f"no git history for {len(unresolved)}: {', '.join(unresolved)}")
