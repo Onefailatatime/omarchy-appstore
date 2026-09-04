@@ -595,6 +595,9 @@ def main() -> None:
     (DIST / "robots.txt").write_text(
         f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8"
     )
+    (DIST / "_headers").write_text(
+        (ROOT / "resources" / "netlify-headers").read_text(encoding="utf-8"), encoding="utf-8"
+    )
     (DIST / "llms.txt").write_text(
         f"# {SITE_NAME}\n\n"
         "> An independent directory of packages published by the official Omarchy package repository.\n\n"

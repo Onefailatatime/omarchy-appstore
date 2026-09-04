@@ -46,7 +46,7 @@ dist/         generated site, package pages, sitemap, crawler files, and assets
 ```
 
 The icon set includes SVG, ICO, 32px PNG, and 180px Apple-touch variants. The
-Netlify configuration adds a restrictive content policy and standard browser
+The generated Netlify `_headers` file adds a restrictive content policy and standard browser
 security headers while allowing the public GitHub request feed, upstream HTTPS
 screenshots, and click-to-play YouTube embeds.
 
