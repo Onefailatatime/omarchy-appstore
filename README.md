@@ -54,11 +54,11 @@ social preview assets for `https://omarchyapps.com`. Keep `SITE_URL` in
 ## Community app requests
 
 The homepage shows only the three most-upvoted open GitHub issues labeled
-`app-request`. Visitors vote with a 👍 reaction on GitHub, view the complete
-public issue list there, or submit a structured request using
-`.github/ISSUE_TEMPLATE/app-request.yml`. This keeps identity, rate limiting,
-duplicate discussion, and moderation on GitHub instead of adding a custom
-account system or database to the static site. Close a request when it no
+`app-request`. Visitors vote with a 👍 reaction on GitHub or send a prefilled
+app-suggestion DM to `@jessyka_boat` on X. After reviewing a DM, the site owner
+can create a public issue with the `app-request` label to add it to voting.
+This keeps the homepage compact, avoids an unmoderated public submission form,
+and adds no custom account system or database. Close a request when it no
 longer belongs in the active wishlist; it then disappears from the homepage.
 
 ## Curated profiles

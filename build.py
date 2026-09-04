@@ -35,8 +35,16 @@ CONTACT_URL = "https://x.com/jessyka_boat"
 X_DM_RECIPIENT_ID = "1400492097082327040"
 REQUESTS_REPO = "Onefailatatime/omarchy-appstore"
 REQUESTS_API = f"https://api.github.com/repos/{REQUESTS_REPO}/issues?state=open&labels=app-request&per_page=100"
-REQUESTS_URL = f"https://github.com/{REQUESTS_REPO}/issues?q=is%3Aissue+state%3Aopen+label%3Aapp-request"
-SUGGEST_APP_URL = f"https://github.com/{REQUESTS_REPO}/issues/new?template=app-request.yml"
+SUGGEST_APP_URL = "https://x.com/messages/compose?" + urllib.parse.urlencode({
+    "recipient_id": X_DM_RECIPIENT_ID,
+    "text": (
+        "Hi! I'd like to suggest an app for the Unofficial Omarchy App Store wishlist.\n\n"
+        "App name: \n"
+        "Official project URL: \n"
+        "Why it would be useful on Omarchy: \n"
+        "Current Linux or AUR availability: "
+    ),
+})
 SITE_URL = "https://omarchyapps.com"
 SITE_NAME = "Unofficial Omarchy App Store"
 FAQ = [
@@ -44,7 +52,7 @@ FAQ = [
     ("How do I install an app on Omarchy?", "Open a package, review its requirements, then copy the displayed omarchy pkg add command into a terminal. Packages are downloaded from the official Omarchy repository, not from this site."),
     ("Does this site host or sell apps?", "No. The site hosts no packages and sells no software. It organizes public package information and links visitors to upstream projects and official PKGBUILDs."),
     ("How can a developer update or claim an app listing?", "Open the package and choose Claim this app. The X direct-message form asks for the developer's role, project URL, corrections, screenshots, and an optional demo video."),
-    ("How do I request or vote for an app?", "Use the community wishlist near the top of the store. Open an existing request and add a thumbs-up reaction on GitHub to vote, or use the app request form to suggest a new project."),
+    ("How do I request or vote for an app?", "Use the community wishlist near the top of the store. Open an existing request and add a thumbs-up reaction on GitHub to vote, or send @jessyka_boat a direct message on X to suggest a new project."),
     ("How can I prepare an app for Omarchy?", "Use the Develop for Omarchy checklist for packaging, permissions, checksums, desktop integration, clean-build testing, and pull-request preparation. Official repository guidance always takes precedence."),
 ]
 
@@ -530,7 +538,6 @@ def main() -> None:
             .replace("__STRUCTURED_DATA__", json_script(homepage_schema))
             .replace("__CONTACT__", html.escape(CONTACT_URL))
             .replace("__REQUESTS_API__", REQUESTS_API)
-            .replace("__REQUESTS_URL__", html.escape(REQUESTS_URL))
             .replace("__SUGGEST_APP_URL__", html.escape(SUGGEST_APP_URL))
             .replace("__X_DM_RECIPIENT__", X_DM_RECIPIENT_ID)
             .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))

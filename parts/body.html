@@ -76,11 +76,10 @@ __STYLE__
       <div>
         <p class="eyebrow">Community wishlist</p>
         <h2 id="requests-h">What should Omarchy add next?</h2>
-        <p>Vote on public app requests or suggest a project that is missing. This is an unofficial wishlist—not the official Omarchy roadmap.</p>
+        <p>Vote on public app requests or DM a missing project to @jessyka_boat for review. This is an unofficial wishlist—not the official Omarchy roadmap.</p>
       </div>
       <div class="community-actions">
-        <a class="button" href="__SUGGEST_APP_URL__" target="_blank" rel="noopener">Suggest an app ↗</a>
-        <a class="button ghost" href="__REQUESTS_URL__" target="_blank" rel="noopener">View all requests ↗</a>
+        <a class="button" href="__SUGGEST_APP_URL__" target="_blank" rel="noopener">Suggest on X ↗</a>
       </div>
     </div>
     <div class="vote-grid" id="vote-grid" aria-live="polite" aria-busy="true">
@@ -262,7 +261,7 @@ __FAQ__
       if (!requests.length) {
         var empty = document.createElement("p");
         empty.className = "vote-loading";
-        empty.textContent = "No requests yet. Be the first to suggest an app.";
+        empty.textContent = "No requests yet. Be the first to suggest an app by DM.";
         voteGrid.appendChild(empty);
       } else {
         requests.slice(0, 3).forEach(function (issue, index) { voteGrid.appendChild(voteCard(issue, index + 1)); });
@@ -273,7 +272,7 @@ __FAQ__
       voteGrid.textContent = "";
       var message = document.createElement("p");
       message.className = "vote-loading";
-      message.textContent = "Live results are temporarily unavailable. Use View all requests to see the public list.";
+      message.textContent = "Live results are temporarily unavailable. You can still suggest an app by DM on X.";
       voteGrid.appendChild(message);
       voteGrid.setAttribute("aria-busy", "false");
     });
