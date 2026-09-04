@@ -51,6 +51,16 @@ The build generates one canonical page per package under `dist/apps/`, plus
 social preview assets for `https://omarchyapps.com`. Keep `SITE_URL` in
 `build.py` aligned with the primary production domain.
 
+## Community app requests
+
+The homepage shows only the three most-upvoted open GitHub issues labeled
+`app-request`. Visitors vote with a 👍 reaction on GitHub, view the complete
+public issue list there, or submit a structured request using
+`.github/ISSUE_TEMPLATE/app-request.yml`. This keeps identity, rate limiting,
+duplicate discussion, and moderation on GitHub instead of adding a custom
+account system or database to the static site. Close a request when it no
+longer belongs in the active wishlist; it then disappears from the homepage.
+
 ## Curated profiles
 
 `data/enrichment.json` adds a researched tagline, longer description, pricing,

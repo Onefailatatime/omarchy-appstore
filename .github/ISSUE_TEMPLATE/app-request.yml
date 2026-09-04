@@ -1,0 +1,67 @@
+name: Request an app for Omarchy
+description: Add an app to the public community wishlist for voting
+title: "[App request]: "
+labels: ["app-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Suggest an app for the **unofficial community wishlist** on omarchyapps.com.
+
+        This does not submit the app to Omarchy, promise that it will be packaged, or represent an official Omarchy roadmap. Before continuing, search the store and [existing requests](https://github.com/Onefailatatime/omarchy-appstore/issues?q=is%3Aissue+state%3Aopen+label%3Aapp-request). If the request already exists, add a 👍 reaction to it instead.
+
+  - type: input
+    id: app-name
+    attributes:
+      label: App name
+      placeholder: Example App
+    validations:
+      required: true
+
+  - type: input
+    id: project-url
+    attributes:
+      label: Official project URL
+      description: Link to the app's official website or source repository.
+      placeholder: https://github.com/owner/project
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-omarchy
+    attributes:
+      label: Why would this be useful on Omarchy?
+      description: Briefly describe the use case and who it would help.
+      placeholder: This would help Omarchy users...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: linux-status
+    attributes:
+      label: Current Linux availability
+      options:
+        - Existing AUR package
+        - Official Linux release
+        - Source available, but no package
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: license
+    attributes:
+      label: Licence, if known
+      placeholder: MIT, GPL-3.0, proprietary, or unknown
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the current store and open requests and did not find this app.
+          required: true
+        - label: I understand this request will be public and is not an official Omarchy submission or promise of inclusion.
+          required: true
