@@ -1,4 +1,4 @@
-# Omarchy App Store
+# Unofficial Omarchy App Store
 
 A community package browser for [Omarchy](https://omarchy.org): every package
 in the official repo (`pkgs.omarchy.org`), searchable, with the one install

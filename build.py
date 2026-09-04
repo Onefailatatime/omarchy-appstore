@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Omarchy App Store — a static package browser for the official repo.
+"""Build the Unofficial Omarchy App Store — a static package browser for the official repo.
 
 Reads the pacman database from pkgs.omarchy.org (falling back to the cached
 copy in data/), joins it with the omarchy-pkgs git history for first-added
@@ -348,11 +348,11 @@ def main() -> None:
         "Project URL: \r\n"
         "Why it belongs in the Omarchy repo: \r\n"
         "\r\n"
-        "-- sent from the Omarchy App Store (community site)"
+        "-- sent from the Unofficial Omarchy App Store (community site)"
     )
     mailto = (
         f"mailto:{REQUEST_EMAIL}"
-        f"?subject={urllib.parse.quote('Omarchy App Store: package request')}"
+        f"?subject={urllib.parse.quote('Unofficial Omarchy App Store: package request')}"
         f"&body={urllib.parse.quote(mailto_body)}"
     )
 
