@@ -170,6 +170,7 @@ b, strong { font-weight: 700; }
 }
 .notification a { color: inherit; text-decoration: none; }
 .notification a:hover { text-decoration: underline; }
+.notification a[aria-current="page"] { text-decoration: underline; text-underline-offset: 0.2em; }
 
 /* =================== DEVELOPMENT GUIDE =================== */
 .guide-hero { padding-bottom: var(--space-medium); }
@@ -183,6 +184,23 @@ b, strong { font-weight: 700; }
   border-left: 3px solid var(--color-terminal-cyan);
   border-radius: var(--radius);
   color: var(--color-terminal-white);
+}
+.guide-download {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-large);
+  margin: var(--space-large) 0;
+  padding: var(--space-large);
+  background: linear-gradient(135deg, rgb(var(--rgb-terminal-blue) / 0.1), transparent 60%), var(--color-background-storm);
+  border: var(--border-width) solid var(--color-terminal-blue);
+  border-radius: var(--radius);
+}
+.guide-download h2 { margin: 0 0 0.45em; color: var(--color-terminal-white); font-size: 125%; }
+.guide-download p { margin: 0; max-width: 46em; color: rgb(var(--rgb-terminal-white) / 0.88); }
+.guide-download .button { flex: none; }
+@media (max-width: 760px) {
+  .guide-download { align-items: start; flex-direction: column; }
 }
 .guide-intro p { margin: 0; }
 .guide-progress {
@@ -862,7 +880,13 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 </style>
 </head>
 <body>
-<div class="notification"><span>Unofficial package guide — packages come from the official Omarchy repository</span></div>
+<nav class="notification" aria-label="Primary">
+  <a href="/">Home</a><span aria-hidden="true">·</span>
+  <a href="/develop.html">Develop Checklist</a><span aria-hidden="true">·</span>
+  <a href="/about.html">About</a><span aria-hidden="true">·</span>
+  <a href="/terms.html">TOS</a><span aria-hidden="true">·</span>
+  <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact</a>
+</nav>
 <main class="wrap app-page">
   <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../index.html">App Store</a><span aria-hidden="true">/</span><span>lmstudio-bin</span></nav>
   <article>

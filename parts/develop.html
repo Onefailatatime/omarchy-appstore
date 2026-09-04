@@ -29,11 +29,13 @@ __STYLE__
 </head>
 <body>
 
-<div class="notification">
-  <span>Unofficial community guide — always check the upstream repository before submitting</span>
-  <span aria-hidden="true">·</span>
-  <a href="index.html">Browse apps →</a>
-</div>
+<nav class="notification" aria-label="Primary">
+  <a href="/">Home</a><span aria-hidden="true">·</span>
+  <a href="/develop.html" aria-current="page">Develop Checklist</a><span aria-hidden="true">·</span>
+  <a href="/about.html">About</a><span aria-hidden="true">·</span>
+  <a href="/terms.html">TOS</a><span aria-hidden="true">·</span>
+  <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact</a>
+</nav>
 
 <header class="hero guide-hero">
   <div class="wrap">
@@ -52,6 +54,14 @@ __STYLE__
   <div class="guide-intro">
     <p>This guide is for application contributors, not repository operators. It helps you prepare a package and a focused pull request; signing, publishing, promotion, and production access remain the maintainers’ responsibility.</p>
   </div>
+
+  <section class="guide-download" aria-labelledby="download-h">
+    <div>
+      <h2 id="download-h">Add this checklist to your LLM</h2>
+      <p>Download the portable Markdown version for an LLM project, knowledge base, or skill. It includes all 33 checks, safety boundaries, review instructions, and authoritative references—with no personal or machine-specific information.</p>
+    </div>
+    <a class="button" href="/develop-for-omarchy.md" download>Download Markdown (.md) ↓</a>
+  </section>
 
   <div class="guide-progress" aria-live="polite">
     <strong id="progress-text">0 of 33 complete</strong>

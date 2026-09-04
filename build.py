@@ -548,6 +548,9 @@ def main() -> None:
                .replace("__SITE_URL__", SITE_URL)
                .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     (DIST / "develop.html").write_text(develop, encoding="utf-8")
+    develop_md = ((ROOT / "resources" / "develop-for-omarchy.md").read_text(encoding="utf-8")
+                  .replace("__SYNCED__", synced))
+    (DIST / "develop-for-omarchy.md").write_text(develop_md, encoding="utf-8")
     terms = ((ROOT / "parts" / "terms.html").read_text(encoding="utf-8")
              .replace("__SYNCED__", synced)
              .replace("__SITE_URL__", SITE_URL)
@@ -598,6 +601,7 @@ def main() -> None:
         "## Main pages\n"
         f"- [Browse packages]({SITE_URL}/)\n"
         f"- [Develop for Omarchy]({SITE_URL}/develop.html)\n"
+        f"- [Download the LLM-ready development checklist]({SITE_URL}/develop-for-omarchy.md)\n"
         f"- [About]({SITE_URL}/about.html)\n"
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
         "Contact: https://x.com/jessyka_boat\n", encoding="utf-8"
@@ -607,6 +611,7 @@ def main() -> None:
     uncategorized = [p["name"] for p in pkgs if p["category"] == FALLBACK_CATEGORY and p["name"] not in json.loads(CATEGORIES_FILE.read_text() or "{}")]
     print(f"dist/index.html  {len(page):,} bytes · {len(pkgs)} packages · synced {synced}")
     print(f"dist/develop.html {len(develop):,} bytes · public packaging checklist")
+    print(f"dist/develop-for-omarchy.md {len(develop_md):,} bytes · portable LLM checklist")
     print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
     print(f"dist/about.html   {len(about):,} bytes · project and builder bio")
     print(f"dist/apps/        {len(pkgs)} crawlable package pages")

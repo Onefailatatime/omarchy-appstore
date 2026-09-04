@@ -38,6 +38,7 @@ parts/
   about.html   short project description and builder bio
   terms.html   terms, ownership, licence, trademark, and warranty notices
   style.css   Tokyo Night tokens + components (fonts self-hosted from assets/)
+resources/    portable Markdown resources, including the LLM-ready checklist
 assets/fonts/ JetBrains Mono 400/700, latin, woff2
 assets/images/ self-hosted site imagery
 data/         cached omarchy.db (auto-refreshed on each online build)
