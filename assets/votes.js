@@ -26,6 +26,12 @@
     document.querySelectorAll("[data-vote-app]").forEach(render);
   }
 
+  function notify() {
+    window.dispatchEvent(new CustomEvent("omarchy:votes", {
+      detail: { counts: Object.assign({}, state.counts), voted: Array.from(state.voted) },
+    }));
+  }
+
   function loadVotes() {
     return fetch("/api/votes", { credentials: "same-origin", headers: { "Accept": "application/json" } })
       .then(function (response) { if (!response.ok) throw new Error("votes unavailable"); return response.json(); })
@@ -34,12 +40,14 @@
         state.voted = new Set(data.voted || []);
         state.ready = true;
         renderAll();
+        notify();
       })
       .catch(function () {
         document.querySelectorAll("[data-vote-app]").forEach(function (button) {
           button.classList.add("vote-unavailable");
           button.title = "Upvotes are temporarily unavailable";
         });
+        window.dispatchEvent(new CustomEvent("omarchy:votes-error"));
       });
   }
 
@@ -62,6 +70,7 @@
         state.counts[app] = data.count;
         state.voted.add(app);
         buttonsFor(app).forEach(function (item) { item.removeAttribute("aria-busy"); render(item); });
+        notify();
       })
       .catch(function () {
         buttonsFor(app).forEach(function (item) {

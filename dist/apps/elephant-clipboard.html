@@ -320,6 +320,103 @@ b, strong { font-weight: 700; }
 .about-copy { margin-top: var(--space-large); }
 .about-copy h2 { color: var(--color-terminal-white); }
 .about-copy p { color: rgb(var(--rgb-terminal-white) / 0.9); }
+
+/* =================== LEADERBOARD =================== */
+.leaderboard-main { max-width: 70rem; padding-bottom: var(--space-xx-large); }
+.leaderboard-hero .eyebrow { margin: 0 0 0.5em; color: var(--color-green); font-weight: 700; text-transform: uppercase; }
+.leader-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: var(--space-large);
+  margin: var(--space-large) 0 var(--space-medium);
+}
+.leader-intro h2 { margin: 0 0 0.35em; color: var(--color-terminal-white); }
+.leader-intro p { max-width: 50rem; margin: 0; color: rgb(var(--rgb-terminal-white) / 0.82); }
+.leader-intro .button { flex: none; }
+.leader-status { margin: 0 0 var(--space-large); color: rgb(var(--rgb-terminal-blue) / 0.66); font-size: 88%; }
+.leader-podium {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-medium);
+  margin-bottom: var(--space-large);
+}
+.leader-podium[hidden] { display: none; }
+.leader-row {
+  min-width: 0;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  background: rgb(var(--rgb-terminal-blue) / 0.025);
+}
+.leader-row[hidden] { display: none !important; }
+.leader-winner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-content: start;
+  gap: var(--space-medium);
+  min-height: 14.5em;
+  padding: var(--space-large);
+  border-color: rgb(var(--rgb-terminal-blue) / 0.28);
+  box-shadow: inset 0 2px 0 var(--cat);
+}
+.leader-winner .leader-rank {
+  grid-column: 1 / -1;
+  color: var(--cat);
+  font-size: 190%;
+  font-weight: 700;
+  line-height: 1;
+}
+.leader-champion { border-color: rgb(var(--rgb-terminal-blue) / 0.5); background: rgb(var(--rgb-terminal-blue) / 0.06); box-shadow: inset 0 3px 0 var(--cat); }
+.leader-copy { min-width: 0; }
+.leader-copy h2 { margin: 0; color: var(--color-terminal-white); font-size: 118%; overflow-wrap: anywhere; }
+.leader-copy h2 a { color: inherit; text-decoration: none; }
+.leader-copy h2 a:hover { color: var(--color-turquoise); text-decoration: underline; }
+.leader-copy > p { margin: 0.55em 0 0; color: rgb(var(--rgb-terminal-white) / 0.76); font-size: 90%; }
+.leader-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45em 0.9em; margin-top: 0.8em; color: rgb(var(--rgb-terminal-blue) / 0.62); font-size: 78%; }
+.leader-category { display: inline-flex; align-items: center; gap: 0.5em; }
+.leader-category .dot { width: 0.58em; height: 0.58em; border-radius: 50%; background: var(--cat); }
+.leader-author a { color: var(--color-terminal-cyan); }
+.leader-vote { align-self: start; min-width: 5.8em; padding-inline: 0.75em; }
+.leader-board { overflow: hidden; border: var(--border-width) solid var(--border-color); border-radius: var(--radius); }
+.leader-board-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-medium);
+  padding: var(--space-medium) var(--space-large);
+  border-bottom: var(--border-width) solid var(--border-color);
+  background: rgb(var(--rgb-terminal-blue) / 0.05);
+}
+.leader-board-head h2 { margin: 0; color: var(--color-terminal-white); font-size: 120%; }
+.leader-board-head span { color: rgb(var(--rgb-terminal-blue) / 0.6); font-size: 82%; }
+.leader-list { display: grid; }
+.leader-list .leader-row:nth-child(n+26) { display: none; }
+.leader-list .leader-row {
+  display: grid;
+  grid-template-columns: 3.25em minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-medium);
+  padding: var(--space-medium) var(--space-large);
+  border: 0;
+  border-radius: 0;
+}
+.leader-list .leader-row + .leader-row { border-top: var(--border-width) solid var(--border-color); }
+.leader-list .leader-rank { color: rgb(var(--rgb-terminal-blue) / 0.58); font-size: 110%; font-weight: 700; }
+.leader-note { max-width: 58rem; margin: var(--space-medium) 0 0; color: rgb(var(--rgb-terminal-blue) / 0.58); font-size: 80%; }
+
+@media (max-width: 760px) {
+  .leader-podium { grid-template-columns: 1fr; }
+  .leader-winner { min-height: 0; }
+  .leader-intro { align-items: stretch; flex-direction: column; }
+  .leader-intro .button { justify-content: center; }
+}
+
+@media (max-width: 600px) {
+  .leader-winner { padding: var(--space-neutral); }
+  .leader-list .leader-row { grid-template-columns: 2.4em minmax(0, 1fr); padding: var(--space-neutral); }
+  .leader-list .leader-vote { grid-column: 2; min-height: 44px; justify-self: start; }
+  .leader-board-head { padding: var(--space-neutral); }
+}
 .app-page { max-width: 62rem; padding-top: var(--space-large); padding-bottom: var(--space-xx-large); }
 .breadcrumbs { display: flex; gap: 0.8ch; margin-bottom: var(--space-large); color: rgb(var(--rgb-terminal-blue) / 0.62); }
 .app-page article { display: grid; min-width: 0; gap: var(--space-large); }
@@ -997,6 +1094,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 <body>
 <nav class="notification" aria-label="Primary">
   <a href="/">Home</a><span aria-hidden="true">·</span>
+  <a href="/leaderboard.html">Top Apps</a><span aria-hidden="true">·</span>
   <a href="/develop.html">Develop Checklist</a><span aria-hidden="true">·</span>
   <a href="/about.html">About</a><span aria-hidden="true">·</span>
   <a href="/terms.html">TOS</a><span aria-hidden="true">·</span>
@@ -1017,6 +1115,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <div class="actions"><a class="button ghost" href="https://github.com/abenz1267/elephant" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/elephant-clipboard" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
-<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-09-04 · unofficial directory</span></div></div></footer>
+<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-09-04 · unofficial directory</span></div></div></footer>
 </body>
 </html>

@@ -8,6 +8,7 @@ This site is unofficial and is not affiliated with or endorsed by Omarchy, Omaco
 
 ## Main pages
 - [Browse packages](https://omarchyapps.com/)
+- [Top apps leaderboard](https://omarchyapps.com/leaderboard.html)
 - [Develop for Omarchy](https://omarchyapps.com/develop.html)
 - [Download the LLM-ready development checklist](https://omarchyapps.com/develop-for-omarchy.md)
 - [About](https://omarchyapps.com/about.html)

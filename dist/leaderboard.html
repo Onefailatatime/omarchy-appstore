@@ -1,0 +1,2612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top Omarchy Apps | Community Leaderboard</title>
+<meta name="description" content="See the Top 25 Omarchy apps ranked by live community upvotes. Vote for your favorites and open any app for package details and installation instructions.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#1a1b26">
+<link rel="canonical" href="https://omarchyapps.com/leaderboard.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/images/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" sizes="180x180">
+<meta property="og:title" content="Top Omarchy Apps — Community Leaderboard">
+<meta property="og:description" content="The Top 25 apps in the Omarchy package repository, ranked by live community upvotes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://omarchyapps.com/leaderboard.html">
+<meta property="og:site_name" content="Unofficial Omarchy App Store">
+<meta property="og:image" content="https://omarchyapps.com/images/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jessyka_boat">
+<meta name="twitter:title" content="Top Omarchy Apps — Community Leaderboard">
+<meta name="twitter:description" content="See which Omarchy apps the community loves most and vote for your favorites.">
+<meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
+<script src="/votes.js" defer></script>
+<script src="/leaderboard.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Top Omarchy Apps — Community Leaderboard","description":"Live community ranking of apps in the official Omarchy package repository, ordered by votes on the Unofficial Omarchy App Store.","url":"https://omarchyapps.com/leaderboard.html","isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}}</script>
+<style>
+/* =========================================================================
+   Unofficial Omarchy App Store
+   Tokens lifted verbatim from omarchy.org/assets/css/root.css (Tokyo Night)
+   so the store reads as part of the same family. Community project.
+
+   Color grammar (deliberate, four roles, never mixed):
+     structure  — night/storm backgrounds, terminal-blue body text, terminal-
+                  white headings. Always resting, never a signal.
+     data       — green. Version strings and the $ prompt only. Nothing new
+                  gets green.
+     interact   — turquoise. Hover/focus/active only. Never a resting color,
+                  which is the whole reason it still reads as "this responds."
+     recency    — orange. The New Arrivals strip and nothing else. No
+                  category may use orange; that is what keeps "new" legible
+                  at a glance instead of just another hue in the crowd.
+     category   — one hue per category (see .cat-system-drivers { --cat: #41A6B5; }
+.cat-utilities { --cat: #565F89; }
+.cat-gaming-emulation { --cat: #F7768E; }
+.cat-themes-desktop { --cat: #9D7CD8; }
+.cat-ai-agents { --cat: #7DCFFF; }
+.cat-developer-tools { --cat: #E0AF68; }
+.cat-media-creative { --cat: #73DACA; }
+.cat-terminal-shell { --cat: #0DB9D7; }
+.cat-security-privacy { --cat: #DB4B4B; }
+.cat-productivity-notes { --cat: #BB9AF7; }
+.cat-browsers-web { --cat: #737AA2; }
+.cat-communication { --cat: #A9B1D6; } below, injected by
+                  build.py from Tokyo Night's wider palette). Confined to an
+                  8px dot and a 2px rule — never a fill, never body text —
+                  and the category name is always printed next to it, so no
+                  reader ever has to identify a category by hue alone.
+   ========================================================================= */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/jetbrains-mono-latin-400.woff2) format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/jetbrains-mono-latin-700.woff2) format("woff2");
+}
+
+:root {
+  --rgb-background-night: 26, 27, 38;
+  --rgb-background-storm: 36, 40, 59;
+  --rgb-black: 0, 0, 0;
+  --rgb-green: 158, 206, 106;
+  --rgb-terminal-black: 65, 72, 104;
+  --rgb-terminal-blue: 122, 162, 247;
+  --rgb-terminal-cyan: 125, 207, 255;
+  --rgb-terminal-white: 192, 202, 245;
+  --rgb-turquoise: 180, 249, 248;
+  --rgb-orange: 255, 158, 100;
+
+  --color-background-night: rgb(var(--rgb-background-night));
+  --color-background-storm: rgb(var(--rgb-background-storm));
+  --color-green: rgb(var(--rgb-green));
+  --color-terminal-black: rgb(var(--rgb-terminal-black));
+  --color-terminal-blue: rgb(var(--rgb-terminal-blue));
+  --color-terminal-cyan: rgb(var(--rgb-terminal-cyan));
+  --color-terminal-white: rgb(var(--rgb-terminal-white));
+  --color-turquoise: rgb(var(--rgb-turquoise));
+  --color-orange: rgb(var(--rgb-orange));
+
+  --border-color: rgb(var(--rgb-terminal-black) / 0.8);
+  --border-width: max(1px, 0.0625em);
+
+  --font-family: "JetBrains Mono", monospace;
+  --font-size: clamp(0.875rem, 0.84rem + 0.2vw, 0.95rem);
+  --line-height: 1.45;
+
+  --space-small: 0.5em;
+  --space-medium: 1em;
+  --space-neutral: 1.5em;
+  --space-large: 2em;
+  --space-x-large: 3em;
+  --space-xx-large: 4em;
+
+  --radius: 0.4em;
+  --transition: 0.15s cubic-bezier(0.33, 1, 0.68, 1);
+  --maxw: 76rem;
+  --bar-h: 3.6em;
+
+  /* twelve category hues, one line each — injected by build.py */
+  .cat-system-drivers { --cat: #41A6B5; }
+.cat-utilities { --cat: #565F89; }
+.cat-gaming-emulation { --cat: #F7768E; }
+.cat-themes-desktop { --cat: #9D7CD8; }
+.cat-ai-agents { --cat: #7DCFFF; }
+.cat-developer-tools { --cat: #E0AF68; }
+.cat-media-creative { --cat: #73DACA; }
+.cat-terminal-shell { --cat: #0DB9D7; }
+.cat-security-privacy { --cat: #DB4B4B; }
+.cat-productivity-notes { --cat: #BB9AF7; }
+.cat-browsers-web { --cat: #737AA2; }
+.cat-communication { --cat: #A9B1D6; }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+img, video, iframe { max-width: 100%; }
+/* The hidden attribute must always win. An author rule that sets display on
+   an element (.button, .meta div, ...) otherwise beats the UA [hidden]
+   default at equal specificity regardless of source order — toggling
+   el.hidden from JS then silently does nothing. */
+[hidden] { display: none !important; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--color-background-night);
+  color: var(--color-terminal-blue);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+  overflow-wrap: break-word;
+}
+a { color: var(--color-terminal-blue); text-decoration: underline; text-underline-offset: 0.2em; }
+a:hover { color: var(--color-turquoise); }
+:focus-visible { outline: 2px solid var(--color-turquoise); outline-offset: 2px; border-radius: 3px; }
+::selection { background: var(--color-terminal-blue); color: var(--color-background-night); }
+em { color: rgb(var(--rgb-terminal-blue) / 0.7); }
+b, strong { font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; animation: none !important; }
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--space-neutral); }
+
+/* =================== NOTIFICATION STRIP =================== */
+.notification {
+  background: var(--color-terminal-blue);
+  color: var(--color-background-night);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4em 1em;
+  text-align: center;
+  padding: 0.55em var(--space-medium);
+  font-weight: 700;
+}
+.notification a { color: inherit; text-decoration: none; }
+.notification a:hover { text-decoration: underline; }
+.notification a[aria-current="page"] { text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* =================== DEVELOPMENT GUIDE =================== */
+.guide-hero { padding-bottom: var(--space-medium); }
+.guide-hero .back { display: inline-flex; align-items: center; min-height: 32px; margin-bottom: var(--space-large); }
+.guide-main { max-width: 62rem; padding-bottom: var(--space-xx-large); }
+.guide-intro {
+  margin: var(--space-large) 0;
+  padding: var(--space-neutral);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-left: 3px solid var(--color-terminal-cyan);
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+}
+.guide-download {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-large);
+  margin: var(--space-large) 0;
+  padding: var(--space-large);
+  background: linear-gradient(135deg, rgb(var(--rgb-terminal-blue) / 0.1), transparent 60%), var(--color-background-storm);
+  border: var(--border-width) solid var(--color-terminal-blue);
+  border-radius: var(--radius);
+}
+.guide-download h2 { margin: 0 0 0.45em; color: var(--color-terminal-white); font-size: 125%; }
+.guide-download p { margin: 0; max-width: 46em; color: rgb(var(--rgb-terminal-white) / 0.88); }
+.guide-download .button { flex: none; }
+@media (max-width: 760px) {
+  .guide-download { align-items: start; flex-direction: column; }
+  .guide-download .button { width: 100%; justify-content: center; }
+}
+.guide-intro p { margin: 0; }
+.guide-progress {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--space-medium);
+  padding: 0.8em var(--space-medium);
+  background: rgb(var(--rgb-background-night) / 0.96);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+}
+.guide-progress strong { color: var(--color-terminal-white); }
+.guide-progress progress { flex: 1; accent-color: var(--color-green); }
+.guide-progress button {
+  border: 0;
+  background: transparent;
+  color: var(--color-terminal-blue);
+  font: inherit;
+  cursor: pointer;
+}
+.guide-progress button:hover { color: var(--color-turquoise); }
+.check-section { margin-top: var(--space-x-large); }
+.check-section h2 {
+  margin: 0 0 var(--space-medium);
+  padding-bottom: 0.45em;
+  border-bottom: var(--border-width) solid var(--border-color);
+  color: var(--color-terminal-white);
+  font-size: 130%;
+}
+.checklist { display: grid; gap: 0.65em; margin: 0; padding: 0; list-style: none; }
+.checklist label {
+  display: grid;
+  grid-template-columns: 1.25em 1fr;
+  gap: 0.8em;
+  align-items: start;
+  padding: 0.8em 1em;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+  cursor: pointer;
+}
+.checklist label:hover { border-color: var(--color-terminal-blue); }
+.checklist input { margin-top: 0.22em; accent-color: var(--color-green); }
+.checklist input:checked + span { color: rgb(var(--rgb-terminal-blue) / 0.62); text-decoration: line-through; }
+.checklist small { display: block; margin-top: 0.3em; color: rgb(var(--rgb-terminal-blue) / 0.7); }
+.guide-code {
+  margin: var(--space-medium) 0;
+  padding: var(--space-medium);
+  overflow-x: auto;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--color-green);
+  font: inherit;
+}
+.tip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(18em, 1fr)); gap: var(--space-medium); }
+.tip {
+  padding: var(--space-neutral);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.tip h3 { margin: 0 0 0.5em; color: var(--color-terminal-white); font-size: 105%; }
+.tip p { margin: 0; }
+.sources { color: rgb(var(--rgb-terminal-blue) / 0.75); }
+.sources li + li { margin-top: 0.5em; }
+.terms-main { max-width: 62rem; padding-bottom: var(--space-xx-large); }
+.terms-main > section {
+  margin-top: var(--space-large);
+  padding: var(--space-neutral);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.terms-main h2 { margin: 0 0 0.65em; color: var(--color-terminal-white); font-size: 120%; }
+.terms-main p { margin: 0; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.terms-main p + p, .terms-main ul + p { margin-top: 0.8em; }
+.terms-main ul { margin: 0; padding-left: 1.3em; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.terms-main li + li { margin-top: 0.45em; }
+.about-main { max-width: 62rem; padding-bottom: var(--space-xx-large); }
+.about-card {
+  display: grid;
+  grid-template-columns: 11em 1fr;
+  gap: var(--space-large);
+  align-items: center;
+  margin-top: var(--space-large);
+  padding: var(--space-large);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.about-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 2px solid var(--color-terminal-blue);
+  border-radius: 50%;
+}
+.about-card h2 { margin: 0 0 0.25em; color: var(--color-terminal-white); font-size: 140%; }
+.about-card .handle { margin: 0 0 var(--space-medium); color: var(--color-terminal-cyan); }
+.about-card .bio { margin: 0 0 var(--space-medium); color: var(--color-terminal-white); }
+.about-copy { margin-top: var(--space-large); }
+.about-copy h2 { color: var(--color-terminal-white); }
+.about-copy p { color: rgb(var(--rgb-terminal-white) / 0.9); }
+
+/* =================== LEADERBOARD =================== */
+.leaderboard-main { max-width: 70rem; padding-bottom: var(--space-xx-large); }
+.leaderboard-hero .eyebrow { margin: 0 0 0.5em; color: var(--color-green); font-weight: 700; text-transform: uppercase; }
+.leader-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: var(--space-large);
+  margin: var(--space-large) 0 var(--space-medium);
+}
+.leader-intro h2 { margin: 0 0 0.35em; color: var(--color-terminal-white); }
+.leader-intro p { max-width: 50rem; margin: 0; color: rgb(var(--rgb-terminal-white) / 0.82); }
+.leader-intro .button { flex: none; }
+.leader-status { margin: 0 0 var(--space-large); color: rgb(var(--rgb-terminal-blue) / 0.66); font-size: 88%; }
+.leader-podium {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-medium);
+  margin-bottom: var(--space-large);
+}
+.leader-podium[hidden] { display: none; }
+.leader-row {
+  min-width: 0;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  background: rgb(var(--rgb-terminal-blue) / 0.025);
+}
+.leader-row[hidden] { display: none !important; }
+.leader-winner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-content: start;
+  gap: var(--space-medium);
+  min-height: 14.5em;
+  padding: var(--space-large);
+  border-color: rgb(var(--rgb-terminal-blue) / 0.28);
+  box-shadow: inset 0 2px 0 var(--cat);
+}
+.leader-winner .leader-rank {
+  grid-column: 1 / -1;
+  color: var(--cat);
+  font-size: 190%;
+  font-weight: 700;
+  line-height: 1;
+}
+.leader-champion { border-color: rgb(var(--rgb-terminal-blue) / 0.5); background: rgb(var(--rgb-terminal-blue) / 0.06); box-shadow: inset 0 3px 0 var(--cat); }
+.leader-copy { min-width: 0; }
+.leader-copy h2 { margin: 0; color: var(--color-terminal-white); font-size: 118%; overflow-wrap: anywhere; }
+.leader-copy h2 a { color: inherit; text-decoration: none; }
+.leader-copy h2 a:hover { color: var(--color-turquoise); text-decoration: underline; }
+.leader-copy > p { margin: 0.55em 0 0; color: rgb(var(--rgb-terminal-white) / 0.76); font-size: 90%; }
+.leader-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45em 0.9em; margin-top: 0.8em; color: rgb(var(--rgb-terminal-blue) / 0.62); font-size: 78%; }
+.leader-category { display: inline-flex; align-items: center; gap: 0.5em; }
+.leader-category .dot { width: 0.58em; height: 0.58em; border-radius: 50%; background: var(--cat); }
+.leader-author a { color: var(--color-terminal-cyan); }
+.leader-vote { align-self: start; min-width: 5.8em; padding-inline: 0.75em; }
+.leader-board { overflow: hidden; border: var(--border-width) solid var(--border-color); border-radius: var(--radius); }
+.leader-board-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-medium);
+  padding: var(--space-medium) var(--space-large);
+  border-bottom: var(--border-width) solid var(--border-color);
+  background: rgb(var(--rgb-terminal-blue) / 0.05);
+}
+.leader-board-head h2 { margin: 0; color: var(--color-terminal-white); font-size: 120%; }
+.leader-board-head span { color: rgb(var(--rgb-terminal-blue) / 0.6); font-size: 82%; }
+.leader-list { display: grid; }
+.leader-list .leader-row:nth-child(n+26) { display: none; }
+.leader-list .leader-row {
+  display: grid;
+  grid-template-columns: 3.25em minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-medium);
+  padding: var(--space-medium) var(--space-large);
+  border: 0;
+  border-radius: 0;
+}
+.leader-list .leader-row + .leader-row { border-top: var(--border-width) solid var(--border-color); }
+.leader-list .leader-rank { color: rgb(var(--rgb-terminal-blue) / 0.58); font-size: 110%; font-weight: 700; }
+.leader-note { max-width: 58rem; margin: var(--space-medium) 0 0; color: rgb(var(--rgb-terminal-blue) / 0.58); font-size: 80%; }
+
+@media (max-width: 760px) {
+  .leader-podium { grid-template-columns: 1fr; }
+  .leader-winner { min-height: 0; }
+  .leader-intro { align-items: stretch; flex-direction: column; }
+  .leader-intro .button { justify-content: center; }
+}
+
+@media (max-width: 600px) {
+  .leader-winner { padding: var(--space-neutral); }
+  .leader-list .leader-row { grid-template-columns: 2.4em minmax(0, 1fr); padding: var(--space-neutral); }
+  .leader-list .leader-vote { grid-column: 2; min-height: 44px; justify-self: start; }
+  .leader-board-head { padding: var(--space-neutral); }
+}
+.app-page { max-width: 62rem; padding-top: var(--space-large); padding-bottom: var(--space-xx-large); }
+.breadcrumbs { display: flex; gap: 0.8ch; margin-bottom: var(--space-large); color: rgb(var(--rgb-terminal-blue) / 0.62); }
+.app-page article { display: grid; min-width: 0; gap: var(--space-large); }
+.app-page article > *, .app-header > div:first-child { min-width: 0; }
+.app-header { display: flex; justify-content: space-between; align-items: end; gap: var(--space-large); }
+.app-header h1 { margin: 0; color: var(--color-terminal-white); font-size: clamp(1.8rem, 5vw, 3rem); overflow-wrap: anywhere; }
+.app-header .eyebrow { margin: 0 0 0.5em; color: var(--color-green); text-transform: uppercase; font-size: 82%; }
+.app-header .app-byline { margin: 0.35em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.72); font-size: 88%; }
+.app-header .app-byline a { color: var(--color-turquoise); }
+.app-header .app-lead { margin: 0.6em 0 0; max-width: 46em; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-header-actions { display: flex; flex: none; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65em; }
+.app-page section h2 { color: var(--color-terminal-white); font-size: 125%; }
+.app-page section p { color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-large); }
+.app-columns ul { padding-left: 1.3em; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-columns dl { display: grid; grid-template-columns: auto 1fr; gap: 0.45em 1em; }
+.app-columns dt { color: rgb(var(--rgb-terminal-blue) / 0.65); }
+.app-columns dd { margin: 0; color: var(--color-terminal-white); }
+@media (max-width: 600px) {
+  :root {
+    --space-neutral: 1em;
+    --space-large: 1.5em;
+    --space-x-large: 2.25em;
+    --space-xx-large: 3em;
+    --bar-h: 8.5em;
+  }
+  .notification { gap: 0; padding: 0.2em 0.35em; }
+  .notification > span { display: none; }
+  .notification a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.5em; }
+  .guide-progress {
+    display: grid;
+    grid-template-areas: "label reset" "bar bar";
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.55em 1em;
+  }
+  .guide-progress strong { grid-area: label; align-self: center; }
+  .guide-progress progress { grid-area: bar; width: 100%; min-height: 0.8em; }
+  .guide-progress button { grid-area: reset; min-height: 44px; padding: 0 0.6em; }
+  .checklist input { width: 1.25em; height: 1.25em; }
+  .tip-grid { grid-template-columns: 1fr; }
+  .about-card { grid-template-columns: 1fr; text-align: center; }
+  .about-card { padding: var(--space-neutral); }
+  .about-photo { width: 9em; margin: 0 auto; }
+  .about-card .button { justify-self: center; }
+  .app-header { align-items: start; flex-direction: column; }
+  .app-header-actions { width: 100%; justify-content: flex-start; }
+  .app-header-actions .button { min-height: 44px; }
+  .app-columns { grid-template-columns: 1fr; }
+  .breadcrumbs a { display: inline-flex; align-items: center; min-height: 32px; }
+}
+
+/* =================== HERO =================== */
+.hero { text-align: center; padding: var(--space-x-large) 0 var(--space-large); }
+.hero pre {
+  margin: 0 0 var(--space-medium);
+  font-size: 100%;
+  line-height: 1.05;
+  color: var(--color-terminal-blue);
+  user-select: none;
+}
+.hero pre b { color: var(--color-turquoise); font-weight: 400; }
+.hero h1 {
+  margin: 0 0 var(--space-small);
+  font-size: 180%;
+  font-weight: 700;
+  color: var(--color-terminal-white);
+  letter-spacing: -0.01em;
+}
+.hero h1 span { color: var(--color-terminal-blue); }
+.hero .tag {
+  margin: 0 auto var(--space-medium);
+  max-width: 46em;
+  font-style: italic;
+  color: rgb(var(--rgb-terminal-blue) / 0.85);
+}
+.hero .facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5ch 2ch;
+  justify-content: center;
+  font-size: 90%;
+  color: rgb(var(--rgb-terminal-blue) / 0.6);
+}
+.hero .facts b { color: var(--color-terminal-white); font-weight: 700; }
+.hero .facts code { color: var(--color-green); }
+
+/* =================== STICKY COMMAND BAR =================== */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: var(--bar-h);
+  display: flex;
+  align-items: stretch;
+  background: rgb(var(--rgb-background-night) / 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+@media (max-height: 600px) { .bar { position: static; } }
+.bar-row { display: flex; align-items: center; gap: var(--space-small); width: 100%; }
+
+.search {
+  flex: 1 1 20em;
+  display: flex;
+  align-items: center;
+  gap: 0.75ch;
+  height: 2.6em;
+  padding: 0 var(--space-medium);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+}
+.search:focus-within { border-color: var(--color-terminal-blue); }
+.search .prompt { color: var(--color-green); font-weight: 700; user-select: none; }
+.search input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--color-terminal-white);
+  font: inherit;
+}
+.search input::placeholder { color: rgb(var(--rgb-terminal-blue) / 0.55); }
+.search kbd {
+  font: inherit;
+  font-size: 80%;
+  padding: 0.1em 0.5em;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 0.3em;
+  color: rgb(var(--rgb-terminal-blue) / 0.7);
+}
+.sorts { display: flex; gap: var(--space-small); flex: none; }
+.chip.sort {
+  height: 2.6em;
+  padding: 0 var(--space-medium);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--color-terminal-blue);
+  font: inherit;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+.chip.sort:hover { border-color: var(--color-terminal-blue); }
+.chip.sort[aria-pressed="true"] { border-color: var(--color-terminal-blue); color: var(--color-turquoise); }
+.bar .button { flex: none; height: 2.6em; }
+@media (max-width: 860px) {
+  .bar { height: auto; }
+  .bar-row { flex-wrap: wrap; padding: 0.6em 0; gap: 0.5em; }
+  .search { flex: 1 1 100%; order: 1; }
+  .sorts { order: 2; }
+  .bar .button { order: 3; margin-left: auto; }
+}
+@media (max-width: 600px) { .search kbd { display: none; } }
+@media (max-width: 600px) {
+  .search { min-height: 44px; }
+  .search input { font-size: 16px; }
+  .chip.sort, .bar .button { height: 44px; }
+}
+
+.count { color: rgb(var(--rgb-terminal-blue) / 0.6); font-size: 90%; margin: var(--space-small) 0 0; }
+.count b { color: var(--color-terminal-white); font-weight: 700; }
+
+/* =================== SECTION RULE =================== */
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  margin: var(--space-x-large) 0 var(--space-medium);
+  font-size: 90%;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgb(var(--rgb-terminal-blue) / 0.7);
+}
+.sec-label::after { content: ""; flex: 1; border-top: var(--border-width) dashed var(--border-color); }
+.sec-label small {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: rgb(var(--rgb-terminal-blue) / 0.5);
+}
+
+/* =================== NEW ARRIVALS =================== */
+.arrivals { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-medium); }
+@media (max-width: 900px) { .arrivals { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .arrivals { grid-template-columns: 1fr; } }
+
+.card.featured {
+  min-height: 9.5em;
+  border-top: 2px solid var(--color-orange);
+  background: linear-gradient(180deg, rgb(var(--rgb-orange) / 0.07), transparent 45%), var(--color-background-storm);
+}
+.card.featured:hover, .card.featured:focus-visible { transform: translateY(-2px); border-color: var(--border-color); border-top-color: var(--color-orange); }
+.card.featured .new-label {
+  font-size: 70%;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-orange);
+}
+.card.featured p { -webkit-line-clamp: 3; }
+.card.featured .added { color: rgb(var(--rgb-orange) / 0.85); }
+
+/* =================== COMMUNITY WISHLIST =================== */
+.community-requests {
+  scroll-margin-top: calc(var(--bar-h) + 1em);
+  margin-top: var(--space-large);
+  padding: var(--space-large);
+  border: var(--border-width) solid var(--border-color);
+  border-top: 2px solid var(--color-orange);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgb(var(--rgb-orange) / 0.07), transparent 48%), var(--color-background-storm);
+}
+.community-head { display: flex; align-items: end; justify-content: space-between; gap: var(--space-large); }
+.community-head .eyebrow { margin: 0 0 0.45em; color: var(--color-orange); font-size: 78%; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.community-head h2 { margin: 0; color: var(--color-terminal-white); font-size: clamp(1.25rem, 3vw, 1.75rem); }
+.community-head p:not(.eyebrow) { margin: 0.55em 0 0; max-width: 48em; color: rgb(var(--rgb-terminal-blue) / 0.78); }
+.community-actions { display: flex; flex: none; flex-wrap: wrap; gap: 0.6em; }
+.vote-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75em; margin-top: var(--space-large); }
+.vote-card { min-width: 0; padding: var(--space-neutral); border: var(--border-width) solid var(--border-color); border-radius: var(--radius); background: rgb(var(--rgb-terminal-black) / 0.2); }
+.vote-card-top { display: flex; align-items: center; justify-content: space-between; gap: 1ch; }
+.vote-rank { color: var(--color-orange); font-weight: 700; }
+.vote-count { color: var(--color-green); font-size: 82%; font-variant-numeric: tabular-nums; }
+.vote-card h3 { margin: 0.7em 0 1em; color: var(--color-terminal-white); font-size: 105%; overflow-wrap: anywhere; }
+.vote-link { color: var(--color-terminal-blue); font-size: 86%; font-weight: 700; }
+.vote-link:hover { color: var(--color-turquoise); }
+.vote-loading { grid-column: 1 / -1; margin: 0; padding: var(--space-neutral); color: rgb(var(--rgb-terminal-blue) / 0.72); text-align: center; }
+.vote-note { margin: var(--space-medium) 0 0; color: rgb(var(--rgb-terminal-blue) / 0.55); font-size: 80%; }
+@media (max-width: 850px) {
+  .community-head { align-items: start; flex-direction: column; }
+  .community-actions { width: 100%; }
+  .vote-grid { grid-template-columns: 1fr; }
+}
+
+/* =================== CATEGORY FILTER ROW =================== */
+.cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: var(--space-medium) 0 0;
+}
+.chip[data-cat] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7ch;
+  height: 2.4em;
+  padding: 0 0.85em;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.85);
+  font: inherit;
+  font-size: 88%;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+.chip[data-cat] b { font-weight: 400; color: rgb(var(--rgb-terminal-blue) / 0.5); font-variant-numeric: tabular-nums; }
+.chip[data-cat]:hover { border-color: var(--cat); }
+.chip[data-cat][aria-pressed="true"] {
+  border-color: var(--cat);
+  background: rgb(from var(--cat) r g b / 0.14);
+  color: var(--color-terminal-white);
+}
+.chip[data-cat][aria-pressed="true"] b { color: var(--cat); }
+.chip[data-cat] .dot, .group h2 .dot, footer.site .legend .dot {
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--cat);
+  flex: none;
+}
+.filter-active {
+  display: none;
+  align-items: center;
+  gap: 0.6ch;
+  height: 2.4em;
+  padding: 0 0.7em 0 0.9em;
+  margin: var(--space-medium) 0 0;
+  background: rgb(from var(--cat, var(--rgb-terminal-blue)) r g b / 0.12);
+  border: var(--border-width) solid var(--cat, var(--border-color));
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+  font-size: 88%;
+  width: max-content;
+}
+.filter-active.on { display: inline-flex; }
+.filter-active button { background: none; border: 0; color: inherit; font: inherit; cursor: pointer; opacity: 0.7; }
+.filter-active button:hover { opacity: 1; color: var(--color-turquoise); }
+
+/* =================== CATALOGUE GROUPS =================== */
+.group { scroll-margin-top: calc(var(--bar-h) + 1em); }
+.group h2 {
+  position: sticky;
+  top: var(--bar-h);
+  z-index: 15;
+  display: flex;
+  align-items: baseline;
+  gap: 0.8ch;
+  margin: 0;
+  padding: 0.6em 0 0.5em;
+  background: linear-gradient(var(--color-background-night) 78%, transparent);
+  font-size: 95%;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-terminal-white);
+}
+.group h2 .dot { align-self: center; }
+.group h2 b { font-weight: 400; color: rgb(var(--rgb-terminal-blue) / 0.55); font-variant-numeric: tabular-nums; }
+.group + .group { margin-top: var(--space-large); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.5em, 1fr));
+  gap: 0.75em;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  min-height: 7.4em;
+  padding: 0.85em 1em;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.card:hover, .card:focus-visible { border-color: rgb(from var(--cat) r g b / 0.85); background: rgb(var(--rgb-terminal-black) / 0.28); }
+.card header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.2em 1ch; }
+.card h3 {
+  margin: 0;
+  font-size: 100%;
+  font-weight: 700;
+  color: var(--color-terminal-white);
+  overflow-wrap: break-word;
+}
+.card h3 a { color: inherit; text-decoration: none; }
+.card:hover h3 { color: var(--color-turquoise); }
+.card .ver { color: var(--color-green); font-size: 82%; white-space: nowrap; opacity: 0.9; }
+.card .card-description {
+  margin: 0;
+  flex: 1;
+  font-size: 94%;
+  line-height: 1.45;
+  color: rgb(var(--rgb-terminal-blue) / 0.85);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.card .byline { margin: -0.15em 0 0; flex: none; color: rgb(var(--rgb-terminal-blue) / 0.62); font-size: 80%; }
+.card .byline a { color: var(--color-turquoise); text-decoration-color: transparent; }
+.card .byline a:hover { text-decoration-color: currentColor; }
+.card footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 82%;
+  color: rgb(var(--rgb-terminal-blue) / 0.55);
+}
+.card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
+.card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
+.indie-sticker {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  padding: 0.22em 0.62em;
+  border: 1px dashed var(--color-orange);
+  border-radius: 0.25em;
+  background: rgb(var(--rgb-orange) / 0.14);
+  color: var(--color-orange);
+  font-size: 76%;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+}
+.card-sticker { position: absolute; top: -0.55em; right: 0.75em; }
+.app-vote {
+  appearance: none;
+  margin-left: auto;
+  padding: 0.25em 0.55em;
+  border: var(--border-width) solid rgb(var(--rgb-terminal-blue) / 0.35);
+  border-radius: var(--radius);
+  background: transparent;
+  color: rgb(var(--rgb-terminal-blue) / 0.8);
+  cursor: pointer;
+  font: inherit;
+  font-size: 100%;
+  font-variant-numeric: tabular-nums;
+}
+.app-vote:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.app-vote.is-voted { border-color: var(--color-green); color: var(--color-green); }
+.app-vote[aria-busy="true"] { cursor: wait; opacity: 0.55; }
+.app-vote.vote-error { border-color: #f7768e; }
+.app-vote.vote-unavailable { opacity: 0.5; }
+.app-vote-large { margin-left: 0; min-width: 8em; justify-content: center; }
+
+@media (max-width: 600px) {
+  .chip[data-cat] { height: 44px; }
+  .card .byline a { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; min-height: 24px; }
+  .card-actions .app-share, .card-actions .app-vote { min-width: 44px; min-height: 44px; }
+  .faq summary { display: flex; align-items: center; min-height: 44px; }
+}
+
+.empty {
+  display: none;
+  text-align: center;
+  padding: var(--space-x-large) 0;
+  color: rgb(var(--rgb-terminal-blue) / 0.7);
+}
+.faq { margin-top: var(--space-xx-large); }
+.faq details {
+  margin-top: var(--space-small);
+  padding: 0.9em var(--space-medium);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.faq summary { color: var(--color-terminal-white); font-weight: 700; cursor: pointer; }
+.faq details p { margin: 0.7em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.85); }
+.empty.on { display: block; }
+.empty p { margin: 0 0 var(--space-medium); }
+.empty b { color: var(--color-terminal-white); }
+
+/* =================== BUTTON (omarchy.org recipe) =================== */
+.button {
+  align-items: center;
+  background: var(--color-terminal-blue);
+  border: none;
+  border-radius: var(--radius);
+  box-shadow:
+    0 1px 0 0 rgba(var(--rgb-black), 0.1),
+    0 0.2em 1.2em -0.4em rgba(var(--rgb-black), 0.2),
+    0 0.4em 2.0em -0.8em rgba(var(--rgb-black), 0.3),
+    0 0.4em 0.4em -0.8em rgba(var(--rgb-black), 0.4),
+    0 0.8em 0.8em -1.2em rgba(var(--rgb-black), 0.5),
+    0 1.2em 1.2em -1.6em rgba(var(--rgb-black), 0.6);
+  color: var(--color-background-night);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-weight: 700;
+  gap: 1ch;
+  height: 2.9em;
+  min-height: 44px;
+  line-height: 1;
+  padding-inline: var(--space-medium);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background var(--transition), color var(--transition);
+}
+.button:hover { background: var(--color-turquoise); color: var(--color-background-night); }
+.button.ghost { background: transparent; color: var(--color-terminal-blue); box-shadow: none; border: var(--border-width) solid var(--border-color); }
+.button.ghost:hover { border-color: var(--color-terminal-blue); color: var(--color-turquoise); background: transparent; }
+
+/* =================== REQUEST PANEL =================== */
+.request {
+  text-align: center;
+  padding: var(--space-x-large) var(--space-large);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.request h2 { margin: 0 0 0.4em; font-size: 130%; color: var(--color-terminal-white); }
+.request p { margin: 0 auto var(--space-medium); max-width: 40em; color: rgb(var(--rgb-terminal-blue) / 0.8); }
+.request .addr { margin-top: var(--space-medium); font-size: 90%; color: rgb(var(--rgb-terminal-blue) / 0.55); }
+.request .addr a { color: inherit; }
+
+/* =================== DETAIL DIALOG =================== */
+dialog {
+  width: min(52em, calc(100vw - 2em));
+  max-height: min(88vh, 100dvh - 2em);
+  overflow-y: auto;
+  padding: 0;
+  background: var(--color-background-night);
+  color: var(--color-terminal-blue);
+  border: var(--border-width) solid var(--color-terminal-black);
+  border-radius: var(--radius);
+  font: inherit;
+}
+dialog::backdrop { background: rgb(var(--rgb-black) / 0.6); backdrop-filter: blur(3px); }
+.detail { padding: var(--space-large); display: grid; gap: var(--space-medium); }
+.detail header { display: flex; align-items: baseline; justify-content: space-between; gap: 1ch; }
+.detail h2 { margin: 0; font-size: 150%; color: var(--color-terminal-white); overflow-wrap: anywhere; }
+.detail .ver { color: var(--color-green); }
+.detail .close {
+  background: transparent; border: 0; color: var(--color-terminal-blue); font: inherit; font-size: 125%; cursor: pointer; line-height: 1;
+}
+.detail .close:hover { color: var(--color-turquoise); }
+.detail .cat-tag {
+  display: inline-flex; align-items: center; gap: 0.6ch;
+  padding: 0.2em 0.7em; border-radius: 1em;
+  border: var(--border-width) solid rgb(from var(--cat) r g b / 0.5);
+  color: var(--cat); font-size: 82%; width: max-content;
+}
+.detail .cat-tag .dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); }
+.detail p.tagline { margin: 0; font-size: 108%; font-weight: 700; color: var(--color-terminal-white); }
+.detail p.desc { margin: 0; color: var(--color-terminal-white); }
+.detail .label {
+  margin: 0 0 0.5em;
+  font-size: 80%; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: rgb(var(--rgb-terminal-blue) / 0.6);
+}
+.detail .label small {
+  display: block; margin-top: 0.2em;
+  font-size: 100%; font-weight: 400; text-transform: none; letter-spacing: 0;
+  color: rgb(var(--rgb-terminal-blue) / 0.5);
+}
+
+/* --- screenshot --- */
+.shot-wrap {
+  display: block;
+  margin: 0;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-background-storm);
+}
+.shot-wrap img { display: block; width: 100%; height: auto; }
+.shot-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8em;
+}
+.shot-gallery:has(> :only-child) { grid-template-columns: 1fr; }
+.shot-gallery .shot-wrap { transition: border-color 150ms ease, transform 150ms ease; }
+.shot-gallery .shot-wrap:hover { border-color: var(--color-turquoise); transform: translateY(-2px); }
+.media-source { margin: 0.7em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.6); font-size: 82%; }
+.media-source a { color: var(--color-terminal-blue); }
+@media (max-width: 620px) { .shot-gallery { grid-template-columns: 1fr; } }
+
+/* --- pricing badge --- */
+.badges { display: flex; flex-wrap: wrap; gap: 0.5em; }
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 0.3em 0.8em; border-radius: 1em;
+  font-size: 82%; font-weight: 700;
+  border: var(--border-width) solid var(--border-color);
+  color: rgb(var(--rgb-terminal-blue) / 0.85);
+}
+.badge.p-free, .badge.p-free-libre { border-color: rgb(var(--rgb-green) / 0.5); color: var(--color-green); }
+.badge.p-freemium { border-color: rgb(var(--rgb-terminal-cyan) / 0.5); color: var(--color-terminal-cyan); }
+.badge.p-paid, .badge.p-subscription { border-color: rgb(var(--rgb-orange) / 0.5); color: var(--color-orange); }
+
+/* --- requirements --- */
+.reqs { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.4em; }
+.reqs li {
+  padding-left: 1.4em;
+  position: relative;
+  color: var(--color-terminal-white);
+  font-size: 92%;
+}
+.reqs li::before { content: "▸"; position: absolute; left: 0; color: rgb(var(--rgb-terminal-blue) / 0.6); }
+
+/* --- video: click-to-play, zero requests until clicked --- */
+.video-ph {
+  display: flex; align-items: center; gap: 1ch;
+  width: 100%; padding: 1em 1.2em;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+  font: inherit; font-weight: 700;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+.video-ph:hover { border-color: var(--color-terminal-blue); color: var(--color-turquoise); }
+.video-ph .play-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2em; height: 2em; flex: none;
+  border-radius: 50%;
+  background: var(--color-terminal-blue);
+  color: var(--color-background-night);
+  font-size: 80%;
+}
+.video-ph:hover .play-icon { background: var(--color-turquoise); }
+.term {
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.term .bar-line {
+  display: flex; align-items: center; justify-content: space-between; gap: 1ch;
+  padding: 0.5em var(--space-medium);
+  border-bottom: var(--border-width) solid var(--border-color);
+  font-size: 85%; text-transform: uppercase; color: rgb(var(--rgb-terminal-blue) / 0.7);
+}
+.term .bar-line .button { height: 2.2em; font-size: 85%; }
+.term pre { margin: 0; padding: var(--space-medium); overflow-x: auto; color: var(--color-terminal-white); }
+.term pre .p { color: var(--color-green); user-select: none; }
+.meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+  gap: var(--space-small) var(--space-medium);
+  margin: 0;
+}
+.meta div { display: grid; gap: 0.15em; }
+.meta dt { font-size: 80%; text-transform: uppercase; color: rgb(var(--rgb-terminal-blue) / 0.6); }
+.meta dd { margin: 0; color: var(--color-terminal-white); overflow-wrap: anywhere; }
+.deps { display: flex; flex-wrap: wrap; gap: 0.4em; }
+.deps span {
+  padding: 0.15em 0.6em;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 0.3em;
+  font-size: 85%;
+  color: rgb(var(--rgb-terminal-blue) / 0.85);
+}
+.detail .actions { display: flex; flex-wrap: wrap; gap: var(--space-small); }
+.detail .claim-note {
+  margin: calc(-1 * var(--space-small)) 0 0;
+  color: rgb(var(--rgb-terminal-blue) / 0.62);
+  font-size: 82%;
+}
+
+@media (max-width: 600px) {
+  dialog { width: calc(100% - 1em); max-width: calc(100% - 1em); max-height: calc(100dvh - 1em); }
+  .detail { padding: var(--space-neutral); }
+  .detail .close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; }
+  .detail .actions .button { min-height: 44px; }
+  .term .bar-line .button { min-height: 44px; }
+  footer.site nav { gap: 0.25em 1em; }
+  footer.site nav a { display: inline-flex; align-items: center; min-height: 36px; }
+}
+
+/* =================== FOOTER =================== */
+footer.site {
+  border-top: var(--border-width) solid var(--border-color);
+  padding: var(--space-large) 0 var(--space-x-large);
+  color: rgb(var(--rgb-terminal-blue) / 0.75);
+  font-size: 90%;
+}
+footer.site .row { display: flex; flex-wrap: wrap; gap: var(--space-medium) var(--space-large); justify-content: space-between; margin-bottom: var(--space-medium); }
+footer.site nav { display: flex; flex-wrap: wrap; gap: var(--space-medium); }
+footer.site p { margin: 0 0 var(--space-small); max-width: 60em; }
+footer.site .legend {
+  display: flex; flex-wrap: wrap; gap: 0.5em 1.4em;
+  padding-top: var(--space-medium);
+  border-top: var(--border-width) solid var(--border-color);
+  font-size: 85%;
+  color: rgb(var(--rgb-terminal-blue) / 0.6);
+}
+footer.site .legend span { display: inline-flex; align-items: center; gap: 0.6ch; }
+footer.site .legend .dot { width: 0.5em; height: 0.5em; }
+
+@media (max-width: 600px) {
+  .hero { padding-top: var(--space-large); }
+  .hero pre { font-size: 85%; }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="notification" aria-label="Primary">
+  <a href="/">Home</a><span aria-hidden="true">·</span>
+  <a href="/leaderboard.html" aria-current="page">Top Apps</a><span aria-hidden="true">·</span>
+  <a href="/develop.html">Develop Checklist</a><span aria-hidden="true">·</span>
+  <a href="/about.html">About</a><span aria-hidden="true">·</span>
+  <a href="/terms.html">TOS</a><span aria-hidden="true">·</span>
+  <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact</a>
+</nav>
+
+<header class="hero guide-hero leaderboard-hero">
+  <div class="wrap">
+    <a class="back" href="index.html">← Unofficial Omarchy App Store</a>
+    <p class="eyebrow">Community picks</p>
+    <h1>Top Omarchy <span>Apps</span></h1>
+    <p class="tag">The community leaderboard, powered by real votes from across the store.</p>
+    <p class="facts">Top 25 of <b>162</b> packages · one vote per app, per browser · updated live</p>
+  </div>
+</header>
+
+<main class="wrap leaderboard-main">
+  <div class="leader-intro">
+    <div>
+      <h2>Community favorites</h2>
+      <p>Vote for apps you use, love, or want others to discover. Open any app to see its details and Omarchy install command.</p>
+    </div>
+    <a class="button" href="index.html">Browse all apps →</a>
+  </div>
+
+  <p class="leader-status" id="leader-status" role="status" aria-live="polite">Loading live rankings…</p>
+  <section class="leader-podium" id="leader-podium" aria-label="Top three apps" hidden></section>
+  <section class="leader-board" aria-labelledby="top-25-heading">
+    <div class="leader-board-head">
+      <h2 id="top-25-heading">The Top 25</h2>
+      <span>Ranked by upvotes</span>
+    </div>
+    <div class="leader-list" id="leader-list">
+<article class="leader-row cat-security-privacy" data-leader-app="1password">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/1password.html">1password</a></h2>
+    <p>Password manager and secure wallet</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Security &amp; Privacy</span><span class="leader-author">by <a href="https://1password.com" target="_blank" rel="author noopener">1Password</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="1password" aria-pressed="false" aria-label="Upvote 1password"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-security-privacy" data-leader-app="1password-beta">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/1password-beta.html">1password-beta</a></h2>
+    <p>Password manager and secure wallet</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Security &amp; Privacy</span><span class="leader-author">by <a href="https://1password.com" target="_blank" rel="author noopener">1Password</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="1password-beta" aria-pressed="false" aria-label="Upvote 1password-beta"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-security-privacy" data-leader-app="1password-cli">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/1password-cli.html">1password-cli</a></h2>
+    <p>1Password command line tool</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Security &amp; Privacy</span><span class="leader-author">by <a href="https://1password.com" target="_blank" rel="author noopener">1Password</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="1password-cli" aria-pressed="false" aria-label="Upvote 1password-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="aether">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/aether.html">aether</a></h2>
+    <p>Desktop theming application - extract colors from wallpapers and apply cohesive themes</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="aether" aria-pressed="false" aria-label="Upvote aether"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="asdcontrol">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/asdcontrol.html">asdcontrol</a></h2>
+    <p>Control brightness on Apple Displays connected via USB-C</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://omakasui.org" target="_blank" rel="author noopener">Omakasui</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="asdcontrol" aria-pressed="false" aria-label="Upvote asdcontrol"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="asusctl">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/asusctl.html">asusctl</a></h2>
+    <p>A control daemon, CLI tools, and a collection of crates for interacting with ASUS ROG laptops</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://opengamingcollective.org" target="_blank" rel="author noopener">Open Gaming Collective</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="asusctl" aria-pressed="false" aria-label="Upvote asusctl"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-productivity-notes" data-leader-app="basecamp-cli">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/basecamp-cli.html">basecamp-cli</a></h2>
+    <p>CLI for Basecamp project management</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Productivity &amp; Notes</span><span class="leader-author">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="basecamp-cli" aria-pressed="false" aria-label="Upvote basecamp-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="bun-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/bun-bin.html">bun-bin</a></h2>
+    <p>All-in-one JavaScript runtime built for speed, with bundler, transpiler, test runner, and package manager. Includes bunx, shell completions and support for baseline CPUs</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://bun.com" target="_blank" rel="author noopener">Bun</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="bun-bin" aria-pressed="false" aria-label="Upvote bun-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-terminal-shell" data-leader-app="caja-open-any-terminal">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/caja-open-any-terminal.html">caja-open-any-terminal</a></h2>
+    <p>context-menu entry for opening other terminal in nautilus</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Terminal &amp; Shell</span><span class="leader-author">by <a href="https://stunkymonkey.de" target="_blank" rel="author noopener">Felix Bühler</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="caja-open-any-terminal" aria-pressed="false" aria-label="Upvote caja-open-any-terminal"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="claude-code">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/claude-code.html">claude-code</a></h2>
+    <p>An agentic coding tool that lives in your terminal</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://anthropic.com" target="_blank" rel="author noopener">Anthropic</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="claude-code" aria-pressed="false" aria-label="Upvote claude-code"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-media-creative" data-leader-app="cliamp">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/cliamp.html">cliamp</a></h2>
+    <p>A retro terminal music player inspired by Winamp 2.x</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span><span class="leader-author">by <a href="https://x.com/iamdothash" target="_blank" rel="author noopener">bjarneo</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="cliamp" aria-pressed="false" aria-label="Upvote cliamp"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="crush-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/crush-bin.html">crush-bin</a></h2>
+    <p>A powerful terminal-based AI assistant for developers, providing intelligent coding assistance directly in your terminal.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://charm.land" target="_blank" rel="author noopener">Charm</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="crush-bin" aria-pressed="false" aria-label="Upvote crush-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="cursor-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/cursor-bin.html">cursor-bin</a></h2>
+    <p>AI-first coding environment</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://www.cursor.com" target="_blank" rel="author noopener">Anysphere</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="cursor-bin" aria-pressed="false" aria-label="Upvote cursor-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="cursor-cli">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/cursor-cli.html">cursor-cli</a></h2>
+    <p>CLI tool for Cursor, the AI-first coding agent</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://www.cursor.com" target="_blank" rel="author noopener">Anysphere</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="cursor-cli" aria-pressed="false" aria-label="Upvote cursor-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="dbxcli-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/dbxcli-bin.html">dbxcli-bin</a></h2>
+    <p>A command line client for Dropbox built using the Go SDK</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://dropbox.com" target="_blank" rel="author noopener">Dropbox</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="dbxcli-bin" aria-pressed="false" aria-label="Upvote dbxcli-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="dell-xps-touchpad-haptics">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/dell-xps-touchpad-haptics.html">dell-xps-touchpad-haptics</a></h2>
+    <p>Synaptics haptic touchpad presets for Dell XPS on Omarchy</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://www.jacobmink.com" target="_blank" rel="author noopener">Jacob Mink</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="dell-xps-touchpad-haptics" aria-pressed="false" aria-label="Upvote dell-xps-touchpad-haptics"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="dropbox">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/dropbox.html">dropbox</a></h2>
+    <p>A free service that lets you bring your photos, docs, and videos anywhere and share them easily.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://dropbox.com" target="_blank" rel="author noopener">Dropbox</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="dropbox" aria-pressed="false" aria-label="Upvote dropbox"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="dropbox-cli">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/dropbox-cli.html">dropbox-cli</a></h2>
+    <p>Command line interface for Dropbox</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://dropbox.com" target="_blank" rel="author noopener">Dropbox</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="dropbox-cli" aria-pressed="false" aria-label="Upvote dropbox-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant.html">elephant</a></h2>
+    <p>general purpose datasource and executor</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant" aria-pressed="false" aria-label="Upvote elephant"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-all">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-all.html">elephant-all</a></h2>
+    <p>elephant + all official elephant providers</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-all" aria-pressed="false" aria-label="Upvote elephant-all"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-archlinuxpkgs">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-archlinuxpkgs.html">elephant-archlinuxpkgs</a></h2>
+    <p>archlinuxpkgs provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-archlinuxpkgs" aria-pressed="false" aria-label="Upvote elephant-archlinuxpkgs"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-bluetooth">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-bluetooth.html">elephant-bluetooth</a></h2>
+    <p>bluetooth provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-bluetooth" aria-pressed="false" aria-label="Upvote elephant-bluetooth"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-calc">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-calc.html">elephant-calc</a></h2>
+    <p>calc provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-calc" aria-pressed="false" aria-label="Upvote elephant-calc"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-clipboard">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-clipboard.html">elephant-clipboard</a></h2>
+    <p>clipboard provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-clipboard" aria-pressed="false" aria-label="Upvote elephant-clipboard"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-desktopapplications">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-desktopapplications.html">elephant-desktopapplications</a></h2>
+    <p>desktopapplications provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-desktopapplications" aria-pressed="false" aria-label="Upvote elephant-desktopapplications"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-files">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-files.html">elephant-files</a></h2>
+    <p>files provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-files" aria-pressed="false" aria-label="Upvote elephant-files"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-menus">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-menus.html">elephant-menus</a></h2>
+    <p>menus provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-menus" aria-pressed="false" aria-label="Upvote elephant-menus"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-providerlist">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-providerlist.html">elephant-providerlist</a></h2>
+    <p>providerlist provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-providerlist" aria-pressed="false" aria-label="Upvote elephant-providerlist"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-runner">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-runner.html">elephant-runner</a></h2>
+    <p>runner provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-runner" aria-pressed="false" aria-label="Upvote elephant-runner"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-symbols">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-symbols.html">elephant-symbols</a></h2>
+    <p>symbols provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-symbols" aria-pressed="false" aria-label="Upvote elephant-symbols"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-todo">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-todo.html">elephant-todo</a></h2>
+    <p>todo provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-todo" aria-pressed="false" aria-label="Upvote elephant-todo"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-unicode">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-unicode.html">elephant-unicode</a></h2>
+    <p>unicode provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-unicode" aria-pressed="false" aria-label="Upvote elephant-unicode"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="elephant-websearch">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/elephant-websearch.html">elephant-websearch</a></h2>
+    <p>websearch provider for elephant</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="elephant-websearch" aria-pressed="false" aria-label="Upvote elephant-websearch"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="flea">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/flea.html">flea</a></h2>
+    <p>Fast, keyboard-first file manager for Omarchy</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/thisisgm" target="_blank" rel="author noopener">GM</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="flea" aria-pressed="false" aria-label="Upvote flea"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="github-copilot-cli">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/github-copilot-cli.html">github-copilot-cli</a></h2>
+    <p>GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://github.com/about" target="_blank" rel="author noopener">GitHub</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="github-copilot-cli" aria-pressed="false" aria-label="Upvote github-copilot-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-media-creative" data-leader-app="gpu-screen-recorder">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/gpu-screen-recorder.html">gpu-screen-recorder</a></h2>
+    <p>A shadowplay-like screen recorder for Linux. The fastest screen recorder for Linux</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span><span class="leader-author">by <a href="https://git.dec05eba.com" target="_blank" rel="author noopener">dec05eba</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="gpu-screen-recorder" aria-pressed="false" aria-label="Upvote gpu-screen-recorder"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="grok-bot">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/grok-bot.html">grok-bot</a></h2>
+    <p>Grok Bot desktop agent</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://x.ai" target="_blank" rel="author noopener">xAI</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="grok-bot" aria-pressed="false" aria-label="Upvote grok-bot"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="herdr">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/herdr.html">herdr</a></h2>
+    <p>Herdr terminal workspace manager for AI coding agents</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://herdr.dev" target="_blank" rel="author noopener">Herdr</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="herdr" aria-pressed="false" aria-label="Upvote herdr"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="hermes-desktop">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/hermes-desktop.html">hermes-desktop</a></h2>
+    <p>Native desktop shell for Hermes Agent</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://nousresearch.com" target="_blank" rel="author noopener">Nous Research</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="hermes-desktop" aria-pressed="false" aria-label="Upvote hermes-desktop"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="heroic-games-launcher-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/heroic-games-launcher-bin.html">heroic-games-launcher-bin</a></h2>
+    <p>An Open source Launcher for Epic, Amazon and GOG Games</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://heroicgameslauncher.com" target="_blank" rel="author noopener">Heroic Games Launcher</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="heroic-games-launcher-bin" aria-pressed="false" aria-label="Upvote heroic-games-launcher-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-communication" data-leader-app="hey-cli">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/hey-cli.html">hey-cli</a></h2>
+    <p>CLI for HEY email</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Communication</span><span class="leader-author">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="hey-cli" aria-pressed="false" aria-label="Upvote hey-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="hyprland-preview-share-picker">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/hyprland-preview-share-picker.html">hyprland-preview-share-picker</a></h2>
+    <p>An alternative share picker for hyprland with window and monitor previews</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://github.com/WhySoBad" target="_blank" rel="author noopener">WhySoBad</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="hyprland-preview-share-picker" aria-pressed="false" aria-label="Upvote hyprland-preview-share-picker"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="hyprland-preview-share-picker-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/hyprland-preview-share-picker-git.html">hyprland-preview-share-picker-git</a></h2>
+    <p>An alternative share picker for hyprland with window and monitor previews</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://github.com/WhySoBad" target="_blank" rel="author noopener">WhySoBad</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="hyprland-preview-share-picker-git" aria-pressed="false" aria-label="Upvote hyprland-preview-share-picker-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="hyprshade">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/hyprshade.html">hyprshade</a></h2>
+    <p>Hyprland shade configuration tool</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://github.com/loqusion" target="_blank" rel="author noopener">loqusion</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="hyprshade" aria-pressed="false" aria-label="Upvote hyprshade"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="intel-ipu7-camera">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/intel-ipu7-camera.html">intel-ipu7-camera</a></h2>
+    <p>Intel IPU7 MIPI camera stack for Hurrican/Performance (OV08X40 + hardware ISP)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://github.com/TsaiGaggery" target="_blank" rel="author noopener">Gaggery</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="intel-ipu7-camera" aria-pressed="false" aria-label="Upvote intel-ipu7-camera"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="intel-lpmd">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/intel-lpmd.html">intel-lpmd</a></h2>
+    <p>Intel Low Power Mode Daemon</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://intel.com" target="_blank" rel="author noopener">Intel</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="intel-lpmd" aria-pressed="false" aria-label="Upvote intel-lpmd"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="lib32-nvidia-580xx-utils">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/lib32-nvidia-580xx-utils.html">lib32-nvidia-580xx-utils</a></h2>
+    <p>NVIDIA drivers utilities (32-bit) (580xx)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://www.nvidia.com" target="_blank" rel="author noopener">NVIDIA</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="lib32-nvidia-580xx-utils" aria-pressed="false" aria-label="Upvote lib32-nvidia-580xx-utils"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="lib32-opencl-nvidia-580xx">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/lib32-opencl-nvidia-580xx.html">lib32-opencl-nvidia-580xx</a></h2>
+    <p>OpenCL implemention for NVIDIA (32-bit) (580xx)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://www.nvidia.com" target="_blank" rel="author noopener">NVIDIA</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="lib32-opencl-nvidia-580xx" aria-pressed="false" aria-label="Upvote lib32-opencl-nvidia-580xx"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="libfprint-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libfprint-git.html">libfprint-git</a></h2>
+    <p>Library for fingerprint readers (libfprint master with FocalTech MOC updates)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://fprint.freedesktop.org" target="_blank" rel="author noopener">freedesktop.org contributors</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libfprint-git" aria-pressed="false" aria-label="Upvote libfprint-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-cap32-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-cap32-git.html">libretro-cap32-git</a></h2>
+    <p>Amstrad CPC core</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-cap32-git" aria-pressed="false" aria-label="Upvote libretro-cap32-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-database-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-database-git.html">libretro-database-git</a></h2>
+    <p>RetroArch&#x27;s cheatcode files, content data files, etc.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-database-git" aria-pressed="false" aria-label="Upvote libretro-database-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-fbneo-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-fbneo-git.html">libretro-fbneo-git</a></h2>
+    <p>FinalBurn Neo multi-arcade core</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-fbneo-git" aria-pressed="false" aria-label="Upvote libretro-fbneo-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-uae-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-uae-git.html">libretro-uae-git</a></h2>
+    <p>A port of the Commodore Amiga Emulator to libretro (WIP)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-uae-git" aria-pressed="false" aria-label="Upvote libretro-uae-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-vice-x128-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-vice-x128-git.html">libretro-vice-x128-git</a></h2>
+    <p>Commodore C128 core</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-vice-x128-git" aria-pressed="false" aria-label="Upvote libretro-vice-x128-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-vice-x64-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-vice-x64-git.html">libretro-vice-x64-git</a></h2>
+    <p>Commodore C64 core (fast)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-vice-x64-git" aria-pressed="false" aria-label="Upvote libretro-vice-x64-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-vice-x64dtv-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-vice-x64dtv-git.html">libretro-vice-x64dtv-git</a></h2>
+    <p>Commodore C64DTV core</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-vice-x64dtv-git" aria-pressed="false" aria-label="Upvote libretro-vice-x64dtv-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-vice-x64sc-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-vice-x64sc-git.html">libretro-vice-x64sc-git</a></h2>
+    <p>Commodore C64 core (accurate)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-vice-x64sc-git" aria-pressed="false" aria-label="Upvote libretro-vice-x64sc-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-vice-xcbm2-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-vice-xcbm2-git.html">libretro-vice-xcbm2-git</a></h2>
+    <p>Commodore CBM-II 6x0/7x0 core</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-vice-xcbm2-git" aria-pressed="false" aria-label="Upvote libretro-vice-xcbm2-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-vice-xcbm5x0-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-vice-xcbm5x0-git.html">libretro-vice-xcbm5x0-git</a></h2>
+    <p>Commodore CBM-II 5x0 core</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-vice-xcbm5x0-git" aria-pressed="false" aria-label="Upvote libretro-vice-xcbm5x0-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-vice-xpet-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-vice-xpet-git.html">libretro-vice-xpet-git</a></h2>
+    <p>Commodore PET core</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-vice-xpet-git" aria-pressed="false" aria-label="Upvote libretro-vice-xpet-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-vice-xplus4-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-vice-xplus4-git.html">libretro-vice-xplus4-git</a></h2>
+    <p>Commodore Plus/4 core</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-vice-xplus4-git" aria-pressed="false" aria-label="Upvote libretro-vice-xplus4-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-vice-xscpu64-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-vice-xscpu64-git.html">libretro-vice-xscpu64-git</a></h2>
+    <p>Commodore C64 SuperCPU core</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-vice-xscpu64-git" aria-pressed="false" aria-label="Upvote libretro-vice-xscpu64-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="libretro-vice-xvic-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/libretro-vice-xvic-git.html">libretro-vice-xvic-git</a></h2>
+    <p>Commodore VIC-20 core</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="libretro-vice-xvic-git" aria-pressed="false" aria-label="Upvote libretro-vice-xvic-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="limine-mkinitcpio-hook">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/limine-mkinitcpio-hook.html">limine-mkinitcpio-hook</a></h2>
+    <p>Install kernels for the Limine bootloader.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://gitlab.com/Zesko" target="_blank" rel="author noopener">Zesko</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="limine-mkinitcpio-hook" aria-pressed="false" aria-label="Upvote limine-mkinitcpio-hook"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="limine-snapper-sync">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/limine-snapper-sync.html">limine-snapper-sync</a></h2>
+    <p>Integrates Limine boot entries with Snapper snapshots.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://gitlab.com/Zesko" target="_blank" rel="author noopener">Zesko</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="limine-snapper-sync" aria-pressed="false" aria-label="Upvote limine-snapper-sync"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="link-studio">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/link-studio.html">link-studio</a></h2>
+    <p>Native Linux controller for Insta360 Link webcams</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://github.com/jweaver60" target="_blank" rel="author noopener">Jake</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="link-studio" aria-pressed="false" aria-label="Upvote link-studio"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="linux-mainline-panther-lake">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/linux-mainline-panther-lake.html">linux-mainline-panther-lake</a></h2>
+    <p>The Linux Mainline (Panther Lake audio support) kernel and modules</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://kernel.org" target="_blank" rel="author noopener">Linux kernel contributors</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="linux-mainline-panther-lake" aria-pressed="false" aria-label="Upvote linux-mainline-panther-lake"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="linux-mainline-panther-lake-headers">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/linux-mainline-panther-lake-headers.html">linux-mainline-panther-lake-headers</a></h2>
+    <p>Headers and scripts for building modules for the Linux Mainline (Panther Lake audio support) kernel</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://kernel.org" target="_blank" rel="author noopener">Linux kernel contributors</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="linux-mainline-panther-lake-headers" aria-pressed="false" aria-label="Upvote linux-mainline-panther-lake-headers"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="linux-ptl">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/linux-ptl.html">linux-ptl</a></h2>
+    <p>The Linux for Panther Lake with Panel Replay power and OLED VRR fixes kernel and modules</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://archlinux.org" target="_blank" rel="author noopener">Arch Linux</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="linux-ptl" aria-pressed="false" aria-label="Upvote linux-ptl"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="linux-ptl-audio">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/linux-ptl-audio.html">linux-ptl-audio</a></h2>
+    <p>The Linux with Panther Lake SDCA audio backports kernel and modules</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://archlinux.org" target="_blank" rel="author noopener">Arch Linux</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="linux-ptl-audio" aria-pressed="false" aria-label="Upvote linux-ptl-audio"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="linux-ptl-audio-headers">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/linux-ptl-audio-headers.html">linux-ptl-audio-headers</a></h2>
+    <p>Headers and scripts for building modules for the Linux with Panther Lake SDCA audio backports kernel</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://archlinux.org" target="_blank" rel="author noopener">Arch Linux</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="linux-ptl-audio-headers" aria-pressed="false" aria-label="Upvote linux-ptl-audio-headers"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="linux-ptl-headers">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/linux-ptl-headers.html">linux-ptl-headers</a></h2>
+    <p>Headers and scripts for building modules for the Linux for Panther Lake with Panel Replay power and OLED VRR fixes kernel</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://archlinux.org" target="_blank" rel="author noopener">Arch Linux</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="linux-ptl-headers" aria-pressed="false" aria-label="Upvote linux-ptl-headers"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="lmstudio">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/lmstudio.html">lmstudio</a></h2>
+    <p>Discover, download, and run local LLMs</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://lmstudio.ai" target="_blank" rel="author noopener">LM Studio</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="lmstudio" aria-pressed="false" aria-label="Upvote lmstudio"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="lmstudio-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/lmstudio-bin.html">lmstudio-bin</a></h2>
+    <p>LM Studio - A desktop app for exploring and running large language models locally</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://lmstudio.ai" target="_blank" rel="author noopener">LM Studio</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="lmstudio-bin" aria-pressed="false" aria-label="Upvote lmstudio-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="localsend">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/localsend.html">localsend</a></h2>
+    <p>An open source cross-platform alternative to AirDrop</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://localsend.org" target="_blank" rel="author noopener">LocalSend</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="localsend" aria-pressed="false" aria-label="Upvote localsend"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="localsend-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/localsend-bin.html">localsend-bin</a></h2>
+    <p>An open source cross-platform alternative to AirDrop</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://localsend.org" target="_blank" rel="author noopener">LocalSend</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="localsend-bin" aria-pressed="false" aria-label="Upvote localsend-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="macbook12-spi-driver-dkms">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/macbook12-spi-driver-dkms.html">macbook12-spi-driver-dkms</a></h2>
+    <p>Driver for the keyboard, touchpad and touchbar found in newer MacBook (Pro) models</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://github.com/marc-git" target="_blank" rel="author noopener">marc-git</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="macbook12-spi-driver-dkms" aria-pressed="false" aria-label="Upvote macbook12-spi-driver-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="macbook8-spi-pxa2xx-nodma-dkms">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/macbook8-spi-pxa2xx-nodma-dkms.html">macbook8-spi-pxa2xx-nodma-dkms</a></h2>
+    <p>Patched SPI PXA2xx PCI driver forcing PIO mode for MacBook8,1 Wildcat Point GSPI (8086:9ce6)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="macbook8-spi-pxa2xx-nodma-dkms" aria-pressed="false" aria-label="Upvote macbook8-spi-pxa2xx-nodma-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="makima-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/makima-bin.html">makima-bin</a></h2>
+    <p>Linux daemon to remap and create macros for keyboards, mice and controllers.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://github.com/cyber-sushi" target="_blank" rel="author noopener">cyber-sushi</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="makima-bin" aria-pressed="false" aria-label="Upvote makima-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="minecraft-launcher">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/minecraft-launcher.html">minecraft-launcher</a></h2>
+    <p>Official Minecraft Launcher</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.minecraft.net" target="_blank" rel="author noopener">Mojang Studios</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="minecraft-launcher" aria-pressed="false" aria-label="Upvote minecraft-launcher"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="mise-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/mise-bin.html">mise-bin</a></h2>
+    <p>dev tools, env vars, task runner</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://x.com/jdxcode" target="_blank" rel="author noopener">jdx</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="mise-bin" aria-pressed="false" aria-label="Upvote mise-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="nautilus-dropbox">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/nautilus-dropbox.html">nautilus-dropbox</a></h2>
+    <p>Dropbox Nautilus Extension</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://dropbox.com" target="_blank" rel="author noopener">Dropbox</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="nautilus-dropbox" aria-pressed="false" aria-label="Upvote nautilus-dropbox"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-terminal-shell" data-leader-app="nautilus-open-any-terminal">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/nautilus-open-any-terminal.html">nautilus-open-any-terminal</a></h2>
+    <p>context-menu entry for opening other terminal in nautilus</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Terminal &amp; Shell</span><span class="leader-author">by <a href="https://stunkymonkey.de" target="_blank" rel="author noopener">Felix Bühler</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="nautilus-open-any-terminal" aria-pressed="false" aria-label="Upvote nautilus-open-any-terminal"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-security-privacy" data-leader-app="nordvpn-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/nordvpn-bin.html">nordvpn-bin</a></h2>
+    <p>NordVPN CLI tool for Linux</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Security &amp; Privacy</span><span class="leader-author">by <a href="https://nordsecurity.com" target="_blank" rel="author noopener">Nord Security</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="nordvpn-bin" aria-pressed="false" aria-label="Upvote nordvpn-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="nvidia-580xx-dkms">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/nvidia-580xx-dkms.html">nvidia-580xx-dkms</a></h2>
+    <p>NVIDIA kernel modules - module sources (580xx)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://www.nvidia.com" target="_blank" rel="author noopener">NVIDIA</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="nvidia-580xx-dkms" aria-pressed="false" aria-label="Upvote nvidia-580xx-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="nvidia-580xx-utils">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/nvidia-580xx-utils.html">nvidia-580xx-utils</a></h2>
+    <p>NVIDIA drivers utilities (580xx)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://www.nvidia.com" target="_blank" rel="author noopener">NVIDIA</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="nvidia-580xx-utils" aria-pressed="false" aria-label="Upvote nvidia-580xx-utils"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="omacalc">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omacalc.html">omacalc</a></h2>
+    <p>Dead-simple calculator built with Qt Quick</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omacalc" aria-pressed="false" aria-label="Upvote omacalc"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-media-creative" data-leader-app="omacut">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omacut.html">omacut</a></h2>
+    <p>Dead-simple video length trimmer built with Qt Quick and ffmpeg</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omacut" aria-pressed="false" aria-label="Upvote omacut"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="omakade">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omakade.html">omakade</a></h2>
+    <p>A beautiful, local-first game library for Omarchy</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://btso.dev" target="_blank" rel="author noopener">Tyler</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omakade" aria-pressed="false" aria-label="Upvote omakade"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-productivity-notes" data-leader-app="omapresent">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omapresent.html">omapresent</a></h2>
+    <p>Dead-simple, Markdown-only presentation app built with Qt Quick</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Productivity &amp; Notes</span><span class="leader-author">by <a href="https://github.com/jethrojones" target="_blank" rel="author noopener">Jethro Jones</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omapresent" aria-pressed="false" aria-label="Upvote omapresent"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="omarchy">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy.html">omarchy</a></h2>
+    <p>Beautiful, modern, and opinionated Arch Linux by DHH</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy" aria-pressed="false" aria-label="Upvote omarchy"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="omarchy-audio-tuner">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-audio-tuner.html">omarchy-audio-tuner</a></h2>
+    <p>Tools for authoring Omarchy laptop speaker tunings</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-audio-tuner" aria-pressed="false" aria-label="Upvote omarchy-audio-tuner"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-browsers-web" data-leader-app="omarchy-chromium">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-chromium.html">omarchy-chromium</a></h2>
+    <p>A web browser built for speed, simplicity, and security, with patches for Omarchy</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Browsers &amp; Web</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-chromium" aria-pressed="false" aria-label="Upvote omarchy-chromium"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-browsers-web" data-leader-app="omarchy-chromium-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-chromium-bin.html">omarchy-chromium-bin</a></h2>
+    <p>A web browser built for speed, simplicity, and security, with patches for Omarchy (binary package)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Browsers &amp; Web</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-chromium-bin" aria-pressed="false" aria-label="Upvote omarchy-chromium-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="omarchy-dev">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-dev.html">omarchy-dev</a></h2>
+    <p>Beautiful, modern, and opinionated Arch Linux by DHH (quattro branch tip)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-dev" aria-pressed="false" aria-label="Upvote omarchy-dev"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="omarchy-emacs">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-emacs.html">omarchy-emacs</a></h2>
+    <p>Emacs integration for Omarchy with automatic theme and font syncing</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://x.com/bi9kahuna" target="_blank" rel="author noopener">Scott Jones</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-emacs" aria-pressed="false" aria-label="Upvote omarchy-emacs"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-terminal-shell" data-leader-app="omarchy-fish">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-fish.html">omarchy-fish</a></h2>
+    <p>Omarchy shell configuration for Fish</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Terminal &amp; Shell</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-fish" aria-pressed="false" aria-label="Upvote omarchy-fish"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="omarchy-herdr">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-herdr.html">omarchy-herdr</a></h2>
+    <p>Herdr terminal workspace manager with Omarchy pane border support</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://x.com/dhh" target="_blank" rel="author noopener">David Heinemeier Hansson</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-herdr" aria-pressed="false" aria-label="Upvote omarchy-herdr"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="omarchy-keyring">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-keyring.html">omarchy-keyring</a></h2>
+    <p>Omarchy keyring</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-keyring" aria-pressed="false" aria-label="Upvote omarchy-keyring"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="omarchy-nvim">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-nvim.html">omarchy-nvim</a></h2>
+    <p>Pre-built LazyVim configuration with cached plugins</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://x.com/folke" target="_blank" rel="author noopener">LazyVim</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-nvim" aria-pressed="false" aria-label="Upvote omarchy-nvim"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="omarchy-settings">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-settings.html">omarchy-settings</a></h2>
+    <p>Omarchy user defaults, /etc/skel content, fonts, plymouth theme, and support helpers</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-settings" aria-pressed="false" aria-label="Upvote omarchy-settings"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="omarchy-settings-dev">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-settings-dev.html">omarchy-settings-dev</a></h2>
+    <p>Omarchy user defaults, /etc/skel content, fonts, plymouth theme, and support helpers (quattro branch tip)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-settings-dev" aria-pressed="false" aria-label="Upvote omarchy-settings-dev"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="omarchy-walker">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-walker.html">omarchy-walker</a></h2>
+    <p>Meta package for walker with Elephant providers for Omarchy</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-walker" aria-pressed="false" aria-label="Upvote omarchy-walker"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-terminal-shell" data-leader-app="omarchy-zsh">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omarchy-zsh.html">omarchy-zsh</a></h2>
+    <p>Omarchy shell configuration for Zsh</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Terminal &amp; Shell</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omarchy-zsh" aria-pressed="false" aria-label="Upvote omarchy-zsh"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-media-creative" data-leader-app="omasnap">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omasnap.html">omasnap</a></h2>
+    <p>Native Wayland screenshot and annotation overlay for Hyprland</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span><span class="leader-author">by <a href="https://tobi.lutke.com" target="_blank" rel="author noopener">Tobias Lütke</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omasnap" aria-pressed="false" aria-label="Upvote omasnap"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="omatrack">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omatrack.html">omatrack</a></h2>
+    <p>Cross-format motorsport telemetry analysis workstation</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://tobi.lutke.com" target="_blank" rel="author noopener">Tobias Lütke</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omatrack" aria-pressed="false" aria-label="Upvote omatrack"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-productivity-notes" data-leader-app="omawrite">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omawrite.html">omawrite</a></h2>
+    <p>Dead-simple Markdown writing app built with Qt Quick</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Productivity &amp; Notes</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omawrite" aria-pressed="false" aria-label="Upvote omawrite"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="omazed">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/omazed.html">omazed</a></h2>
+    <p>Live theme switching for Zed in Omarchy - automatically synchronize your Zed editor theme with your Omarchy system theme</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://x.com/anirudhasah" target="_blank" rel="author noopener">Anirudha Pratap Sah</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="omazed" aria-pressed="false" aria-label="Upvote omazed"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="once-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/once-bin.html">once-bin</a></h2>
+    <p>CLI/TUI for installing and managing self-hosted web applications</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="once-bin" aria-pressed="false" aria-label="Upvote once-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="openai-codex-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/openai-codex-bin.html">openai-codex-bin</a></h2>
+    <p>Arch Linux package for OpenAI&#x27;s Codex CLI - Auto Updated</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://openai.com" target="_blank" rel="author noopener">OpenAI</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="openai-codex-bin" aria-pressed="false" aria-label="Upvote openai-codex-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="openai-codex-desktop">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/openai-codex-desktop.html">openai-codex-desktop</a></h2>
+    <p>Official ChatGPT desktop app with Codex</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://openai.com" target="_blank" rel="author noopener">OpenAI</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="openai-codex-desktop" aria-pressed="false" aria-label="Upvote openai-codex-desktop"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="opencl-nvidia-580xx">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/opencl-nvidia-580xx.html">opencl-nvidia-580xx</a></h2>
+    <p>OpenCL implemention for NVIDIA (580xx)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://www.nvidia.com" target="_blank" rel="author noopener">NVIDIA</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="opencl-nvidia-580xx" aria-pressed="false" aria-label="Upvote opencl-nvidia-580xx"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="opencode">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/opencode.html">opencode</a></h2>
+    <p>The open source coding agent</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://anoma.ly" target="_blank" rel="author noopener">Anomaly</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="opencode" aria-pressed="false" aria-label="Upvote opencode"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="perplexity">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/perplexity.html">perplexity</a></h2>
+    <p>Official Perplexity desktop app</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://www.perplexity.ai" target="_blank" rel="author noopener">Perplexity</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="perplexity" aria-pressed="false" aria-label="Upvote perplexity"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-media-creative" data-leader-app="pinta">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/pinta.html">pinta</a></h2>
+    <p>Drawing/editing program modeled after Paint.NET. It&#x27;s goal is to provide a simplified alternative to GIMP for casual users</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span><span class="leader-author">by <a href="https://pinta-project.com" target="_blank" rel="author noopener">Pinta contributors</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="pinta" aria-pressed="false" aria-label="Upvote pinta"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="python-mediapipe">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/python-mediapipe.html">python-mediapipe</a></h2>
+    <p>A cross-platform, customizable ML solutions for live and streaming media</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://ai.google.dev/edge" target="_blank" rel="author noopener">Google AI Edge</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="python-mediapipe" aria-pressed="false" aria-label="Upvote python-mediapipe"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="python-sounddevice">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/python-sounddevice.html">python-sounddevice</a></h2>
+    <p>Record and play back sound</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://github.com/spatialaudio/python-sounddevice" target="_blank" rel="author noopener">Matthias Geier</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="python-sounddevice" aria-pressed="false" aria-label="Upvote python-sounddevice"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-terminal-shell" data-leader-app="python-terminaltexteffects">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/python-terminaltexteffects.html">python-terminaltexteffects</a></h2>
+    <p>Visual effects engine applied to text in the terminal.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Terminal &amp; Shell</span><span class="leader-author">by <a href="https://github.com/ChrisBuilds" target="_blank" rel="author noopener">ChrisBuilds</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="python-terminaltexteffects" aria-pressed="false" aria-label="Upvote python-terminaltexteffects"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="qmk-hid">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/qmk-hid.html">qmk-hid</a></h2>
+    <p>Commandline tool for interacting with QMK devices over HID</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://frame.work" target="_blank" rel="author noopener">Framework</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="qmk-hid" aria-pressed="false" aria-label="Upvote qmk-hid"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="quickshell-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/quickshell-git.html">quickshell-git</a></h2>
+    <p>Flexible toolkit for making desktop shells with QtQuick</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://git.outfoxxed.me/outfoxxed" target="_blank" rel="author noopener">Outfoxxed</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="quickshell-git" aria-pressed="false" aria-label="Upvote quickshell-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="retroarch-joypad-autoconfig-git">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/retroarch-joypad-autoconfig-git.html">retroarch-joypad-autoconfig-git</a></h2>
+    <p>RetroArch joypad autoconfig files</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="retroarch-joypad-autoconfig-git" aria-pressed="false" aria-label="Upvote retroarch-joypad-autoconfig-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="rog-control-center">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/rog-control-center.html">rog-control-center</a></h2>
+    <p>App to control asusctl</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://opengamingcollective.org" target="_blank" rel="author noopener">Open Gaming Collective</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="rog-control-center" aria-pressed="false" aria-label="Upvote rog-control-center"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="rustdesk">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/rustdesk.html">rustdesk</a></h2>
+    <p>Yet another remote desktop software, written in Rust. Works out of the box, no configuration required. Great alternative to TeamViewer and AnyDesk!</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://rustdesk.com" target="_blank" rel="author noopener">RustDesk</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="rustdesk" aria-pressed="false" aria-label="Upvote rustdesk"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-media-creative" data-leader-app="schist">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/schist.html">schist</a></h2>
+    <p>Layered image editor with PSD and Affinity support</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span><span class="leader-author">by <a href="https://infrawrench.com" target="_blank" rel="author noopener">Infrawrench LLC</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="schist" aria-pressed="false" aria-label="Upvote schist"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-media-creative" data-leader-app="schist-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/schist-bin.html">schist-bin</a></h2>
+    <p>Layered image editor with PSD and Affinity support (binary release)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span><span class="leader-author">by <a href="https://infrawrench.com" target="_blank" rel="author noopener">Infrawrench LLC</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="schist-bin" aria-pressed="false" aria-label="Upvote schist-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-productivity-notes" data-leader-app="slap-notes-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/slap-notes-bin.html">slap-notes-bin</a></h2>
+    <p>Local-first block notes with a wiki-link graph and a built-in AI research agent</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Productivity &amp; Notes</span><span class="leader-author">by <a href="https://x.com/jessyka_boat" target="_blank" rel="author noopener">Jessyka</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="slap-notes-bin" aria-pressed="false" aria-label="Upvote slap-notes-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-media-creative" data-leader-app="spotify">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/spotify.html">spotify</a></h2>
+    <p>A proprietary music streaming service</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span><span class="leader-author">by <a href="https://www.spotify.com" target="_blank" rel="author noopener">Spotify</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="spotify" aria-pressed="false" aria-label="Upvote spotify"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="strata">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/strata.html">strata</a></h2>
+    <p>Fast, keyboard-first file manager for modern Linux desktops</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://www.lgse.com" target="_blank" rel="author noopener">LGSE</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="strata" aria-pressed="false" aria-label="Upvote strata"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="sublime-text-4">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/sublime-text-4.html">sublime-text-4</a></h2>
+    <p>Sophisticated text editor for code, html and prose - stable build</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://www.sublimehq.com" target="_blank" rel="author noopener">Sublime HQ</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="sublime-text-4" aria-pressed="false" aria-label="Upvote sublime-text-4"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="sunshine">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/sunshine.html">sunshine</a></h2>
+    <p>Self-hosted game stream host for Moonlight</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://app.lizardbyte.dev" target="_blank" rel="author noopener">LizardByte</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="sunshine" aria-pressed="false" aria-label="Upvote sunshine"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="supergfxctl">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/supergfxctl.html">supergfxctl</a></h2>
+    <p>A utility for Linux graphics switching on Intel/AMD iGPU + nVidia dGPU laptops</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://asus-linux.org" target="_blank" rel="author noopener">ASUS Linux</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="supergfxctl" aria-pressed="false" aria-label="Upvote supergfxctl"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="symfony-cli">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/symfony-cli.html">symfony-cli</a></h2>
+    <p>The Symfony client helps developers create and manage Symfony applications.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://symfony.com" target="_blank" rel="author noopener">Symfony CLI</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="symfony-cli" aria-pressed="false" aria-label="Upvote symfony-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-ai-agents" data-leader-app="t3code-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/t3code-bin.html">t3code-bin</a></h2>
+    <p>Open-source control plane for coding agents</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span><span class="leader-author">by <a href="https://ping.gg" target="_blank" rel="author noopener">Ping.gg</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="t3code-bin" aria-pressed="false" aria-label="Upvote t3code-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-media-creative" data-leader-app="tensaku">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/tensaku.html">tensaku</a></h2>
+    <p>Modern screenshot annotation tool for Wayland</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span><span class="leader-author">by <a href="https://x.com/jondkinney" target="_blank" rel="author noopener">Jon Kinney</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="tensaku" aria-pressed="false" aria-label="Upvote tensaku"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="tmog-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/tmog-bin.html">tmog-bin</a></h2>
+    <p>Native system monitor and task manager</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://x.com/dhh" target="_blank" rel="author noopener">David Heinemeier Hansson</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="tmog-bin" aria-pressed="false" aria-label="Upvote tmog-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="tobi-try">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/tobi-try.html">tobi-try</a></h2>
+    <p>Fresh directories for every vibe.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://tobi.lutke.com" target="_blank" rel="author noopener">Tobias Lütke</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="tobi-try" aria-pressed="false" aria-label="Upvote tobi-try"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="ttf-ia-writer">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/ttf-ia-writer.html">ttf-ia-writer</a></h2>
+    <p>Subset of the fonts provided by iA Writer</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://ia.net" target="_blank" rel="author noopener">Oliver Reichenstein</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="ttf-ia-writer" aria-pressed="false" aria-label="Upvote ttf-ia-writer"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="ttf-jetbrains-mono-nerd-basic">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/ttf-jetbrains-mono-nerd-basic.html">ttf-jetbrains-mono-nerd-basic</a></h2>
+    <p>Basic JetBrains Mono Nerd Font family</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://RyanLMcIntyre.com" target="_blank" rel="author noopener">Ryan L McIntyre</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="ttf-jetbrains-mono-nerd-basic" aria-pressed="false" aria-label="Upvote ttf-jetbrains-mono-nerd-basic"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-terminal-shell" data-leader-app="ttfx">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/ttfx.html">ttfx</a></h2>
+    <p>Terminal text effects as a single static binary — Rust port of terminaltexteffects</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Terminal &amp; Shell</span><span class="leader-author">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="ttfx" aria-pressed="false" aria-label="Upvote ttfx"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="tuxedo-drivers-nocompatcheck-dkms">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/tuxedo-drivers-nocompatcheck-dkms.html">tuxedo-drivers-nocompatcheck-dkms</a></h2>
+    <p>TUXEDO Computers kernel module drivers. Compatibility check disabled - works when using identical models from other brands, example being TUXEDO Pulse 14 Gen 4 and Schenker Via 14 Pro (M24)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://gitlab.com/kronerm" target="_blank" rel="author noopener">Martin Kröner</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="tuxedo-drivers-nocompatcheck-dkms" aria-pressed="false" aria-label="Upvote tuxedo-drivers-nocompatcheck-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-productivity-notes" data-leader-app="typora">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/typora.html">typora</a></h2>
+    <p>A minimal markdown editor and reader.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Productivity &amp; Notes</span><span class="leader-author">by <a href="https://typora.io" target="_blank" rel="author noopener">Typora</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="typora" aria-pressed="false" aria-label="Upvote typora"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="tzupdate">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/tzupdate.html">tzupdate</a></h2>
+    <p>Set the system timezone based on IP geolocation</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://chrisdown.name" target="_blank" rel="author noopener">Chris Down</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="tzupdate" aria-pressed="false" aria-label="Upvote tzupdate"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-security-privacy" data-leader-app="ufw-docker">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/ufw-docker.html">ufw-docker</a></h2>
+    <p>To fix the Docker and UFW security flaw without disabling iptables.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Security &amp; Privacy</span><span class="leader-author">by <a href="https://chaifeng.com" target="_blank" rel="author noopener">Chai Feng</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="ufw-docker" aria-pressed="false" aria-label="Upvote ufw-docker"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-gaming-emulation" data-leader-app="umu-launcher">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/umu-launcher.html">umu-launcher</a></h2>
+    <p>This is the Unified Launcher for Windows Games on Linux, to run Proton with fixes outside of Steam</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span><span class="leader-author">by <a href="https://github.com/Open-Wine-Components" target="_blank" rel="author noopener">Open Wine Components</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="umu-launcher" aria-pressed="false" aria-label="Upvote umu-launcher"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="v4l2-relayd">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/v4l2-relayd.html">v4l2-relayd</a></h2>
+    <p>Plays gstreamer sources into v4l2loopback devices.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://gitlab.com/vicamo/v4l2-relayd" target="_blank" rel="author noopener">v4l2-relayd contributors</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="v4l2-relayd" aria-pressed="false" aria-label="Upvote v4l2-relayd"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-developer-tools" data-leader-app="visual-studio-code-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/visual-studio-code-bin.html">visual-studio-code-bin</a></h2>
+    <p>Visual Studio Code (vscode): Editor for building and debugging modern web and cloud applications (official binary version)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Developer Tools</span><span class="leader-author">by <a href="https://www.microsoft.com" target="_blank" rel="author noopener">Microsoft</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="visual-studio-code-bin" aria-pressed="false" aria-label="Upvote visual-studio-code-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="voxtype-bin">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/voxtype-bin.html">voxtype-bin</a></h2>
+    <p>Push-to-talk voice-to-text for Linux (pre-built binaries)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://voxtype.io" target="_blank" rel="author noopener">Voxtype</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="voxtype-bin" aria-pressed="false" aria-label="Upvote voxtype-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="walker">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/walker.html">walker</a></h2>
+    <p>wayland application runner</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="walker" aria-pressed="false" aria-label="Upvote walker"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="wayfreeze">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/wayfreeze.html">wayfreeze</a></h2>
+    <p>Tool to freeze the screen of a Wayland compositor</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://jappie.dev" target="_blank" rel="author noopener">Jappie3</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="wayfreeze" aria-pressed="false" aria-label="Upvote wayfreeze"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-terminal-shell" data-leader-app="xdg-terminal-exec">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/xdg-terminal-exec.html">xdg-terminal-exec</a></h2>
+    <p>Proposed standard to launching desktop apps with Terminal=true</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Terminal &amp; Shell</span><span class="leader-author">by <a href="https://gitlab.freedesktop.org/Vladimir-csp" target="_blank" rel="author noopener">Vladimir-csp</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="xdg-terminal-exec" aria-pressed="false" aria-label="Upvote xdg-terminal-exec"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="xpadneo-dkms">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/xpadneo-dkms.html">xpadneo-dkms</a></h2>
+    <p>Advanced Linux Driver for Xbox One Wireless Gamepad</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://github.com/atar-axis" target="_blank" rel="author noopener">Florian Dollinger</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="xpadneo-dkms" aria-pressed="false" aria-label="Upvote xpadneo-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="yaru-gnome-shell-theme">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yaru-gnome-shell-theme.html">yaru-gnome-shell-theme</a></h2>
+    <p>Yaru default ubuntu gnome shell theme</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yaru-gnome-shell-theme" aria-pressed="false" aria-label="Upvote yaru-gnome-shell-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="yaru-gtk-theme">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yaru-gtk-theme.html">yaru-gtk-theme</a></h2>
+    <p>Yaru default ubuntu gtk theme</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yaru-gtk-theme" aria-pressed="false" aria-label="Upvote yaru-gtk-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="yaru-gtksourceview-theme">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yaru-gtksourceview-theme.html">yaru-gtksourceview-theme</a></h2>
+    <p>Yaru default ubuntu gtksourceview theme</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yaru-gtksourceview-theme" aria-pressed="false" aria-label="Upvote yaru-gtksourceview-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="yaru-icon-theme">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yaru-icon-theme.html">yaru-icon-theme</a></h2>
+    <p>Yaru default ubuntu icon theme</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yaru-icon-theme" aria-pressed="false" aria-label="Upvote yaru-icon-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="yaru-metacity-theme">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yaru-metacity-theme.html">yaru-metacity-theme</a></h2>
+    <p>Yaru default ubuntu metacity theme</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yaru-metacity-theme" aria-pressed="false" aria-label="Upvote yaru-metacity-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="yaru-session">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yaru-session.html">yaru-session</a></h2>
+    <p>Yaru session</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yaru-session" aria-pressed="false" aria-label="Upvote yaru-session"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="yaru-sound-theme">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yaru-sound-theme.html">yaru-sound-theme</a></h2>
+    <p>Yaru default ubuntu sound theme</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yaru-sound-theme" aria-pressed="false" aria-label="Upvote yaru-sound-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="yaru-unity-theme">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yaru-unity-theme.html">yaru-unity-theme</a></h2>
+    <p>Yaru default ubuntu unity theme</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yaru-unity-theme" aria-pressed="false" aria-label="Upvote yaru-unity-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-themes-desktop" data-leader-app="yaru-xfwm4-theme">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yaru-xfwm4-theme.html">yaru-xfwm4-theme</a></h2>
+    <p>Yaru default ubuntu xfwm4 theme</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span><span class="leader-author">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yaru-xfwm4-theme" aria-pressed="false" aria-label="Upvote yaru-xfwm4-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-utilities" data-leader-app="yay">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yay.html">yay</a></h2>
+    <p>Yet another yogurt. Pacman wrapper and AUR helper written in go.</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://jguer.space" target="_blank" rel="author noopener">Jo</a></span><span class="indie-sticker">Indie app</span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yay" aria-pressed="false" aria-label="Upvote yay"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+<article class="leader-row cat-system-drivers" data-leader-app="yt6801-dkms">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/yt6801-dkms.html">yt6801-dkms</a></h2>
+    <p>Kernel module for Motorcomm YT6801 ethernet controller (DKMS)</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span><span class="leader-author">by <a href="https://www.motor-comm.com" target="_blank" rel="author noopener">Motorcomm</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="yt6801-dkms" aria-pressed="false" aria-label="Upvote yt6801-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
+    </div>
+  </section>
+  <p class="leader-note">Votes are community signals, not an official Omarchy ranking, endorsement, quality review, or security assessment.</p>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="row">
+      <nav>
+        <a href="index.html">App Store</a>
+        <a href="leaderboard.html" aria-current="page">Top Apps</a>
+        <a href="develop.html">Develop for Omarchy</a>
+        <a href="about.html">About</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
+      </nav>
+      <span>Synced 2026-09-04 · unofficial community rankings</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

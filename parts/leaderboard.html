@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top Omarchy Apps | Community Leaderboard</title>
+<meta name="description" content="See the Top 25 Omarchy apps ranked by live community upvotes. Vote for your favorites and open any app for package details and installation instructions.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#1a1b26">
+<link rel="canonical" href="__SITE_URL__/leaderboard.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/images/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" sizes="180x180">
+<meta property="og:title" content="Top Omarchy Apps — Community Leaderboard">
+<meta property="og:description" content="The Top 25 apps in the Omarchy package repository, ranked by live community upvotes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="__SITE_URL__/leaderboard.html">
+<meta property="og:site_name" content="Unofficial Omarchy App Store">
+<meta property="og:image" content="__SITE_URL__/images/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jessyka_boat">
+<meta name="twitter:title" content="Top Omarchy Apps — Community Leaderboard">
+<meta name="twitter:description" content="See which Omarchy apps the community loves most and vote for your favorites.">
+<meta name="twitter:image" content="__SITE_URL__/images/social-card.png">
+<script src="/votes.js" defer></script>
+<script src="/leaderboard.js" defer></script>
+<script type="application/ld+json">__STRUCTURED_DATA__</script>
+<style>
+__STYLE__
+</style>
+</head>
+<body>
+
+<nav class="notification" aria-label="Primary">
+  <a href="/">Home</a><span aria-hidden="true">·</span>
+  <a href="/leaderboard.html" aria-current="page">Top Apps</a><span aria-hidden="true">·</span>
+  <a href="/develop.html">Develop Checklist</a><span aria-hidden="true">·</span>
+  <a href="/about.html">About</a><span aria-hidden="true">·</span>
+  <a href="/terms.html">TOS</a><span aria-hidden="true">·</span>
+  <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact</a>
+</nav>
+
+<header class="hero guide-hero leaderboard-hero">
+  <div class="wrap">
+    <a class="back" href="index.html">← Unofficial Omarchy App Store</a>
+    <p class="eyebrow">Community picks</p>
+    <h1>Top Omarchy <span>Apps</span></h1>
+    <p class="tag">The community leaderboard, powered by real votes from across the store.</p>
+    <p class="facts">Top 25 of <b>__COUNT__</b> packages · one vote per app, per browser · updated live</p>
+  </div>
+</header>
+
+<main class="wrap leaderboard-main">
+  <div class="leader-intro">
+    <div>
+      <h2>Community favorites</h2>
+      <p>Vote for apps you use, love, or want others to discover. Open any app to see its details and Omarchy install command.</p>
+    </div>
+    <a class="button" href="index.html">Browse all apps →</a>
+  </div>
+
+  <p class="leader-status" id="leader-status" role="status" aria-live="polite">Loading live rankings…</p>
+  <section class="leader-podium" id="leader-podium" aria-label="Top three apps" hidden></section>
+  <section class="leader-board" aria-labelledby="top-25-heading">
+    <div class="leader-board-head">
+      <h2 id="top-25-heading">The Top 25</h2>
+      <span>Ranked by upvotes</span>
+    </div>
+    <div class="leader-list" id="leader-list">
+__LEADER_ROWS__
+    </div>
+  </section>
+  <p class="leader-note">Votes are community signals, not an official Omarchy ranking, endorsement, quality review, or security assessment.</p>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="row">
+      <nav>
+        <a href="index.html">App Store</a>
+        <a href="leaderboard.html" aria-current="page">Top Apps</a>
+        <a href="develop.html">Develop for Omarchy</a>
+        <a href="about.html">About</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
+      </nav>
+      <span>Synced __SYNCED__ · unofficial community rankings</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

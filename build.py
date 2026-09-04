@@ -440,6 +440,28 @@ def group_section(category: str, pkgs: list[dict]) -> str:
 </section>"""
 
 
+def leaderboard_row(p: dict) -> str:
+    """Render one rankable app. Live vote totals and ordering are applied in
+    the browser from the same persistent vote service used by the catalogue."""
+    name = html.escape(p["name"])
+    description = html.escape(p.get("desc") or "No description provided.")
+    category = html.escape(p["category"])
+    author = ""
+    if p.get("author_name") and p.get("author_url"):
+        author = (f'<span class="leader-author">by <a href="{html.escape(p["author_url"])}" '
+                  f'target="_blank" rel="author noopener">{html.escape(p["author_name"])}</a></span>')
+    indie = ('<span class="indie-sticker">Indie app</span>' if p.get("indie_note") else "")
+    return f"""<article class="leader-row cat-{slug(p['category'])}" data-leader-app="{name}">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/{slug(p['name'])}.html">{name}</a></h2>
+    <p>{description}</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>{category}</span>{author}{indie}</div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="{name}" aria-pressed="false" aria-label="Upvote {name}"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>"""
+
+
 def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
     canonical = f"{SITE_URL}/apps/{slug(p['name'])}.html"
     desc = description_for(p)
@@ -608,6 +630,22 @@ def main() -> None:
             .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     DIST.mkdir(exist_ok=True)
     (DIST / "index.html").write_text(page, encoding="utf-8")
+    leaderboard_schema = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Top Omarchy Apps — Community Leaderboard",
+        "description": "Live community ranking of apps in the official Omarchy package repository, ordered by votes on the Unofficial Omarchy App Store.",
+        "url": SITE_URL + "/leaderboard.html",
+        "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/"},
+    }
+    leaderboard = ((ROOT / "parts" / "leaderboard.html").read_text(encoding="utf-8")
+                   .replace("__COUNT__", str(len(pkgs)))
+                   .replace("__LEADER_ROWS__", "\n".join(leaderboard_row(p) for p in pkgs))
+                   .replace("__STRUCTURED_DATA__", json_script(leaderboard_schema))
+                   .replace("__SYNCED__", synced)
+                   .replace("__SITE_URL__", SITE_URL)
+                   .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
+    (DIST / "leaderboard.html").write_text(leaderboard, encoding="utf-8")
     develop = ((ROOT / "parts" / "develop.html").read_text(encoding="utf-8")
                .replace("__SYNCED__", synced)
                .replace("__SITE_URL__", SITE_URL)
@@ -633,6 +671,7 @@ def main() -> None:
             (images / f.name).write_bytes(f.read_bytes())
     (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())
     (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
+    (DIST / "leaderboard.js").write_text((ROOT / "assets" / "leaderboard.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "share.js").write_text((ROOT / "assets" / "share.js").read_text(encoding="utf-8"), encoding="utf-8")
     about = ((ROOT / "parts" / "about.html").read_text(encoding="utf-8")
              .replace("__SYNCED__", synced)
@@ -651,7 +690,7 @@ def main() -> None:
             render_app_page(app_template, resolved_css, p, synced), encoding="utf-8"
         )
 
-    sitemap_urls = [SITE_URL + "/", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/terms.html"]
+    sitemap_urls = [SITE_URL + "/", SITE_URL + "/leaderboard.html", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/terms.html"]
     sitemap_urls.extend(f"{SITE_URL}/apps/{slug(p['name'])}.html" for p in pkgs)
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     sitemap.extend(f"  <url><loc>{url}</loc><lastmod>{synced}</lastmod></url>" for url in sitemap_urls)
@@ -671,6 +710,7 @@ def main() -> None:
         "It does not host packages. Package facts are refreshed from pkgs.omarchy.org, and official upstream sources take precedence.\n\n"
         "## Main pages\n"
         f"- [Browse packages]({SITE_URL}/)\n"
+        f"- [Top apps leaderboard]({SITE_URL}/leaderboard.html)\n"
         f"- [Develop for Omarchy]({SITE_URL}/develop.html)\n"
         f"- [Download the LLM-ready development checklist]({SITE_URL}/develop-for-omarchy.md)\n"
         f"- [About]({SITE_URL}/about.html)\n"
@@ -681,6 +721,7 @@ def main() -> None:
     unresolved = [p["name"] for p in pkgs if not p["added"]]
     uncategorized = [p["name"] for p in pkgs if p["category"] == FALLBACK_CATEGORY and p["name"] not in json.loads(CATEGORIES_FILE.read_text() or "{}")]
     print(f"dist/index.html  {len(page):,} bytes · {len(pkgs)} packages · synced {synced}")
+    print(f"dist/leaderboard.html {len(leaderboard):,} bytes · live Top 25 community ranking")
     print(f"dist/develop.html {len(develop):,} bytes · public packaging checklist")
     print(f"dist/develop-for-omarchy.md {len(develop_md):,} bytes · portable LLM checklist")
     print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
