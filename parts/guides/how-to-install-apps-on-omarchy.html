@@ -1,0 +1,76 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#official-repo">Official repository</a>
+      <a href="#other-sources">Arch and AUR</a>
+      <a href="#safety-check">Safety check</a>
+      <a href="#updates">Updates and removal</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="official-repo">
+      <h2>Install from the official Omarchy package repository first</h2>
+      <p>The simplest path is a package already published by Omarchy. Search this directory, open the app profile and review its project link, license, requirements and package source. Then copy the displayed command:</p>
+      <pre class="guide-code"><code>omarchy pkg add &lt;package-name&gt;</code></pre>
+      <p>Use the exact package name from the profile. Names ending in <code>-bin</code> commonly install a prebuilt upstream binary, while another package may build from source or package a different release channel. Read the profile instead of guessing which variant you want.</p>
+      <p>This website does not download or serve the package. The command hands installation to Omarchy and its configured package sources.</p>
+    </section>
+
+    <section id="other-sources">
+      <h2>When an app is not in the Omarchy repository</h2>
+      <p>The official manual recommends checking the Omarchy Menu under <strong>Install → Package</strong>, then looking for an Arch package and, if necessary, the AUR. The AUR is powerful because the community can describe how to build software that is not in the official repositories, but it deserves more review—not less.</p>
+      <ol>
+        <li>Prefer the project's official website or repository when choosing a package name.</li>
+        <li>Read the PKGBUILD and associated install scripts before building an unfamiliar AUR package.</li>
+        <li>Check the maintainer, recent comments, update history and source URLs.</li>
+        <li>Be skeptical of install instructions that pipe a remote script directly into a shell.</li>
+        <li>Confirm whether the application needs filesystem, microphone, camera, network or background-service access.</li>
+      </ol>
+    </section>
+
+    <aside class="guide-callout" id="safety-check">
+      <h2>A 60-second package safety check</h2>
+      <p>Ask four questions: Is this the real upstream project? Does the package download from a source I recognize? Does its license and version match what I expect? Are its requested permissions reasonable for the job? A repository listing is useful distribution metadata, not a guarantee that software is risk-free.</p>
+    </aside>
+
+    <section>
+      <h2>Understand the three layers</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th>Source</th><th>Good first choice when</th><th>What to verify</th></tr></thead>
+          <tbody>
+            <tr><td>Omarchy package repository</td><td>The app already has a current profile and package</td><td>Upstream source, package variant, requirements and license</td></tr>
+            <tr><td>Arch repositories</td><td>A standard Arch package meets the need</td><td>Package details and compatibility with your setup</td></tr>
+            <tr><td>AUR</td><td>No suitable official package exists</td><td>PKGBUILD, sources, maintainer activity, comments and install hooks</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="updates">
+      <h2>Update Omarchy through Omarchy</h2>
+      <p>For a full system update, use the Omarchy Menu's update flow or the documented Omarchy update command. The official manual warns that a direct <code>pacman -Syu</code> or <code>yay -Syu</code> skips the snapshot, migrations and coordinated configuration work Omarchy performs around an update.</p>
+      <p>Before removing an app, record any data location or export format you need. Removing a package and deleting your personal application data are separate operations; do not erase a configuration directory unless you know it contains nothing you want to keep.</p>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Find the exact package name</h2><p>Search all current Omarchy packages and open a profile before copying its install command.</p></div>
+      <a class="button" href="/">Search packages →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>What command installs a package from the Omarchy repository?</summary><p>Package profiles in this directory provide a copyable <code>omarchy pkg add</code> command using the exact current package name.</p></details>
+      <details><summary>Can I use pacman and the AUR on Omarchy?</summary><p>Yes. Omarchy is Arch-based, and its manual points users to Arch packages and the AUR when needed. Full system updates should still go through Omarchy's update flow.</p></details>
+      <details><summary>Does the Unofficial Omarchy App Store host packages?</summary><p>No. It is a directory. Install commands retrieve software through Omarchy and the configured package sources, not from this website.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources and next steps</h2>
+      <ul>
+        <li><a href="https://omarchy.org/manual/development-tools/" target="_blank" rel="noopener">Omarchy Manual: packages, AUR and development tools</a></li>
+        <li><a href="https://omarchy.org/manual/updates/" target="_blank" rel="noopener">Omarchy Manual: safe update flow and rollbacks</a></li>
+        <li><a href="https://wiki.archlinux.org/title/Arch_User_Repository" target="_blank" rel="noopener">ArchWiki: Arch User Repository</a></li>
+        <li><a href="/develop.html">Develop for Omarchy packaging checklist</a></li>
+      </ul>
+      <p class="editorial-note">Commands and menus can evolve. When this guide and the official Omarchy manual differ, follow the official manual.</p>
+    </section>

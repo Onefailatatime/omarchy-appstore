@@ -47,6 +47,78 @@ SUGGEST_APP_URL = "https://x.com/messages/compose?" + urllib.parse.urlencode({
 })
 SITE_URL = "https://omarchyapps.com"
 SITE_NAME = "Unofficial Omarchy App Store"
+GUIDES = [
+    {
+        "slug": "omarchy-vs-macos-windows-ubuntu",
+        "title": "Omarchy vs macOS, Windows 11 and Ubuntu: Which Fits You?",
+        "description": "Compare Omarchy with macOS, Windows 11 and Ubuntu for development, gaming, creative work, hardware support, privacy and daily use.",
+        "eyebrow": "Operating system comparison",
+        "heading": "Omarchy vs <span>macOS, Windows & Ubuntu</span>",
+        "tagline": "Four very different desktops, compared without pretending one is best for everyone.",
+        "answer": "Choose Omarchy for a keyboard-first, highly curated Arch and Hyprland workflow; Ubuntu for a familiar, broadly documented Linux desktop; macOS for Apple hardware and Apple-only creative tools; or Windows 11 for the widest commercial software, peripheral and PC-gaming compatibility.",
+        "faqs": [
+            ("Is Omarchy easier than Ubuntu?", "Usually not for a Linux beginner. Omarchy is intentionally keyboard-first and terminal-heavy, while Ubuntu emphasizes a conventional graphical desktop and long-term support."),
+            ("Can Omarchy replace macOS or Windows for development?", "For web, backend, terminal and many AI-assisted workflows, it can. Check any Apple-only, Windows-only, corporate VPN, anti-cheat or specialist hardware requirements before switching."),
+            ("Is Omarchy based on Ubuntu?", "No. Omarchy is based on Arch Linux and uses Hyprland and Quickshell. Ubuntu is Debian-based and uses GNOME by default."),
+        ],
+    },
+    {
+        "slug": "free-notion-alternative-linux-slap-notes",
+        "title": "Free Notion Alternative for Linux: Slap Notes Compared",
+        "description": "Looking for a free Notion alternative on Linux? Compare Slap Notes with Notion, Obsidian and AppFlowy for local notes, blocks, links and privacy.",
+        "eyebrow": "Linux notes comparison",
+        "heading": "A free Notion alternative for Linux: <span>Slap Notes</span>",
+        "tagline": "Local-first blocks, linked notes and an optional research agent—without requiring a cloud workspace.",
+        "answer": "Slap Notes is a strong free Notion alternative for Linux users who want Notion-style blocks, Obsidian-style links and local storage in one native app. Choose Notion for polished cloud collaboration, Obsidian for a mature Markdown ecosystem, or AppFlowy for open-source databases and team features.",
+        "faqs": [
+            ("Is Slap Notes free?", "Yes. Slap Notes is a free, open-source project and the Omarchy package is listed as free software."),
+            ("Does Notion have an official Linux desktop app?", "Notion currently documents desktop apps for macOS and Windows. Linux users can use Notion in a supported web browser."),
+            ("Does Slap Notes require an account?", "No. Its public product page describes a local-first experience with no required account or sync service."),
+        ],
+    },
+    {
+        "slug": "free-video-editor-linux-omarchy",
+        "title": "Free Video Editor for Linux: Omacut vs DaVinci Resolve",
+        "description": "Need a free video editor on Linux? Learn when Omarchy-native Omacut is faster than DaVinci Resolve, Kdenlive or Final Cut Pro for simple video trimming.",
+        "eyebrow": "Linux video editing guide",
+        "heading": "A free video editor for Linux: <span>start with Omacut</span>",
+        "tagline": "For a clean trim, a heavyweight timeline can be more tool than the job needs.",
+        "answer": "Use Omacut when you only need to trim the beginning or end of a clip and export an MP4 quickly on Omarchy. Use Kdenlive or DaVinci Resolve for multitrack timelines, titles, effects and color work. Final Cut Pro is a Mac-only choice and does not run natively on Linux.",
+        "faqs": [
+            ("Is Omacut a full replacement for DaVinci Resolve?", "No. Omacut is deliberately a focused video trimmer. DaVinci Resolve is a full editing, color, audio and effects suite."),
+            ("Can Final Cut Pro run on Linux?", "No native Linux version is offered. Apple's current system requirements specify macOS."),
+            ("Is Omacut included with Omarchy?", "The official Omacut project says it is installed by default on new Omarchy installations from Quattro forward and is also available as the omacut package."),
+        ],
+    },
+    {
+        "slug": "best-apps-for-omarchy",
+        "title": "Best Omarchy Apps to Install First: 12 Useful Picks",
+        "description": "Start a new Omarchy setup with 12 useful apps for notes, files, themes, video, screenshots, gaming, remote access and developer work.",
+        "eyebrow": "Starter app guide",
+        "heading": "The best Omarchy apps to <span>install first</span>",
+        "tagline": "A practical starter set chosen by job, not a pile of packages to install blindly.",
+        "answer": "The best Omarchy apps are the ones that fill a real gap in your workflow. Start with a small set: LocalSend for transfers, Slap Notes for local knowledge, Strata for files, Aether for themes and Omacut for quick video trims—then add specialist tools only when you need them.",
+        "faqs": [
+            ("What should I install first on Omarchy?", "Start with one app for each recurring task you actually have. LocalSend, a notes app, a file manager and one creative tool make a useful first pass."),
+            ("Are every one of these apps official Omarchy projects?", "No. The official repository includes a mix of Omarchy projects, upstream third-party software and independent community apps. Each profile links to its real project source."),
+            ("Does this list automatically install anything?", "No. The guide only links to package profiles. You decide what to install and run the displayed Omarchy command yourself."),
+        ],
+    },
+    {
+        "slug": "how-to-install-apps-on-omarchy",
+        "title": "How to Install Apps on Omarchy Safely",
+        "description": "Learn how to install, inspect, update and remove apps on Omarchy using the official package repository, Arch packages and the AUR.",
+        "eyebrow": "Omarchy package guide",
+        "heading": "How to install apps on <span>Omarchy</span>",
+        "tagline": "Use the official repository first, inspect unfamiliar software, and let Omarchy handle full-system updates.",
+        "answer": "For an app in the official Omarchy package repository, use the profile's copyable omarchy pkg add command. For other software, check Omarchy's Install menu, Arch repositories and then the AUR. Review the source and permissions first, and use Omarchy's own update flow instead of a direct full pacman or yay upgrade.",
+        "faqs": [
+            ("What command installs a package from the Omarchy repository?", "Package profiles in this directory provide a copyable omarchy pkg add command using the exact current package name."),
+            ("Can I use pacman and the AUR on Omarchy?", "Yes. Omarchy is Arch-based, and its manual points users to Arch packages and the AUR when needed. Full system updates should still go through Omarchy's update flow."),
+            ("Does the Unofficial Omarchy App Store host packages?", "No. It is a directory. Install commands retrieve software through Omarchy and the configured package sources, not from this website."),
+        ],
+    },
+]
 FAQ = [
     ("What is the Unofficial Omarchy App Store?", "It is an independent, searchable directory of packages published by the official Omarchy package repository. It is not affiliated with or endorsed by Omarchy or Omacom."),
     ("How do I install an app on Omarchy?", "Open a package, review its requirements, then copy the displayed omarchy pkg add command into a terminal. Packages are downloaded from the official Omarchy repository, not from this site."),
@@ -677,6 +749,62 @@ def main() -> None:
              .replace("__SITE_URL__", SITE_URL)
              .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     (DIST / "about.html").write_text(about, encoding="utf-8")
+
+    guide_template = (ROOT / "parts" / "guide.html").read_text(encoding="utf-8")
+    for guide in GUIDES:
+        guide_url = f"{SITE_URL}/{guide['slug']}.html"
+        related = "\n".join(
+            f'<a class="related-guide" href="/{item["slug"]}.html"><strong>{html.escape(item["title"])}</strong><span>{html.escape(item["description"])}</span></a>'
+            for item in GUIDES if item["slug"] != guide["slug"]
+        )
+        guide_schema = {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Article",
+                    "@id": guide_url + "#article",
+                    "headline": guide["title"],
+                    "description": guide["description"],
+                    "url": guide_url,
+                    "dateModified": synced,
+                    "author": {"@type": "Person", "name": "Jessyka", "url": SITE_URL + "/about.html"},
+                    "publisher": {"@type": "Organization", "name": SITE_NAME, "url": SITE_URL + "/"},
+                    "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/"},
+                },
+                {
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL + "/"},
+                        {"@type": "ListItem", "position": 2, "name": "Guides", "item": SITE_URL + "/#guides"},
+                        {"@type": "ListItem", "position": 3, "name": guide["title"], "item": guide_url},
+                    ],
+                },
+                {
+                    "@type": "FAQPage",
+                    "mainEntity": [
+                        {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
+                        for question, answer in guide["faqs"]
+                    ],
+                },
+            ],
+        }
+        guide_body = (ROOT / "parts" / "guides" / f"{guide['slug']}.html").read_text(encoding="utf-8")
+        guide_page = (guide_template
+                      .replace("__TITLE__", html.escape(guide["title"]))
+                      .replace("__DESCRIPTION__", html.escape(guide["description"]))
+                      .replace("__SLUG__", guide["slug"])
+                      .replace("__EYEBROW__", html.escape(guide["eyebrow"]))
+                      .replace("__HEADING__", guide["heading"])
+                      .replace("__TAGLINE__", html.escape(guide["tagline"]))
+                      .replace("__ANSWER__", html.escape(guide["answer"]))
+                      .replace("__BODY__", guide_body)
+                      .replace("__RELATED_GUIDES__", related)
+                      .replace("__STRUCTURED_DATA__", json_script(guide_schema))
+                      .replace("__SYNCED__", synced)
+                      .replace("__SITE_URL__", SITE_URL)
+                      .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
+        (DIST / f"{guide['slug']}.html").write_text(guide_page, encoding="utf-8")
+
     apps_dir = DIST / "apps"
     apps_dir.mkdir(exist_ok=True)
     for old in apps_dir.glob("*.html"):
@@ -689,6 +817,7 @@ def main() -> None:
         )
 
     sitemap_urls = [SITE_URL + "/", SITE_URL + "/leaderboard.html", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/terms.html"]
+    sitemap_urls.extend(f"{SITE_URL}/{guide['slug']}.html" for guide in GUIDES)
     sitemap_urls.extend(f"{SITE_URL}/apps/{slug(p['name'])}.html" for p in pkgs)
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     sitemap.extend(f"  <url><loc>{url}</loc><lastmod>{synced}</lastmod></url>" for url in sitemap_urls)
@@ -713,6 +842,9 @@ def main() -> None:
         f"- [Download the LLM-ready development checklist]({SITE_URL}/develop-for-omarchy.md)\n"
         f"- [About]({SITE_URL}/about.html)\n"
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
+        "## Guides and comparisons\n"
+        + "".join(f"- [{guide['title']}]({SITE_URL}/{guide['slug']}.html)\n" for guide in GUIDES)
+        + "\n"
         "Contact: https://x.com/jessyka_boat\n", encoding="utf-8"
     )
 
@@ -724,6 +856,7 @@ def main() -> None:
     print(f"dist/develop-for-omarchy.md {len(develop_md):,} bytes · portable LLM checklist")
     print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
     print(f"dist/about.html   {len(about):,} bytes · project and builder bio")
+    print(f"dist/guides       {len(GUIDES)} search-focused editorial guides")
     print(f"dist/apps/        {len(pkgs)} crawlable package pages")
     print(f"dist/sitemap.xml  {len(sitemap_urls)} canonical URLs")
     print("new arrivals:    " + ", ".join(f"{p['name']} ({datetime.date.fromtimestamp(p['added'])})" for p in newest))
