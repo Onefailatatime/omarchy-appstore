@@ -84,6 +84,12 @@ requirements, and optional media to package detail pages. Missing media is an
 expected state: the profile falls back cleanly to text rather than guessing at
 a screenshot or video.
 
+`data/authors.json` supplies public creator attribution for every card. It uses
+published full names where available and links to the creator's X profile,
+personal site, official organization site, or public upstream profile. Keep
+attribution conservative: never infer a private identity or publish maintainer
+email addresses from package recipes.
+
 Before replacing the shipped enrichment file, verify every remote media claim:
 
 ```bash

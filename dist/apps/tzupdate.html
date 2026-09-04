@@ -321,6 +321,8 @@ b, strong { font-weight: 700; }
 .app-header { display: flex; justify-content: space-between; align-items: end; gap: var(--space-large); }
 .app-header h1 { margin: 0; color: var(--color-terminal-white); font-size: clamp(1.8rem, 5vw, 3rem); overflow-wrap: anywhere; }
 .app-header .eyebrow { margin: 0 0 0.5em; color: var(--color-green); text-transform: uppercase; font-size: 82%; }
+.app-header .app-byline { margin: 0.35em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.72); font-size: 88%; }
+.app-header .app-byline a { color: var(--color-turquoise); }
 .app-header .app-lead { margin: 0.6em 0 0; max-width: 46em; color: rgb(var(--rgb-terminal-white) / 0.9); }
 .app-header-actions { display: flex; flex: none; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65em; }
 .app-page section h2 { color: var(--color-terminal-white); font-size: 125%; }
@@ -630,7 +632,7 @@ b, strong { font-weight: 700; }
 .card h3 a { color: inherit; text-decoration: none; }
 .card:hover h3 { color: var(--color-turquoise); }
 .card .ver { color: var(--color-green); font-size: 82%; white-space: nowrap; opacity: 0.9; }
-.card p {
+.card .card-description {
   margin: 0;
   flex: 1;
   font-size: 94%;
@@ -641,6 +643,9 @@ b, strong { font-weight: 700; }
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+.card .byline { margin: -0.15em 0 0; flex: none; color: rgb(var(--rgb-terminal-blue) / 0.62); font-size: 80%; }
+.card .byline a { color: var(--color-turquoise); text-decoration-color: transparent; }
+.card .byline a:hover { text-decoration-color: currentColor; }
 .card footer {
   display: flex;
   align-items: center;
@@ -934,7 +939,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../index.html">App Store</a><span aria-hidden="true">/</span><span>tzupdate</span></nav>
   <article>
     <header class="app-header">
-      <div><p class="eyebrow">Utilities · version 3.1.0-1</p><h1>tzupdate</h1><p class="app-lead">tzupdate is a small command-line tool that figures out your timezone by looking up your public IP address against geolocation services, then updates the…</p></div>
+      <div><p class="eyebrow">Utilities · version 3.1.0-1</p><h1>tzupdate</h1><p class="app-byline">by <a href="https://chrisdown.name" target="_blank" rel="author noopener">Chris Down</a></p><p class="app-lead">tzupdate is a small command-line tool that figures out your timezone by looking up your public IP address against geolocation services, then updates the…</p></div>
       <div class="app-header-actions"><span class="indie-sticker" title="Individual-maintained upstream project">Indie app</span><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="tzupdate" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+tzupdate+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 

@@ -494,6 +494,7 @@ __FAQ__
   document.querySelectorAll(".card").forEach(function (c) {
     c.addEventListener("click", function (e) {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+      if (e.target.closest(".byline a")) return;
       e.preventDefault();
       open(c);
     });

@@ -323,6 +323,8 @@ b, strong { font-weight: 700; }
 .app-header { display: flex; justify-content: space-between; align-items: end; gap: var(--space-large); }
 .app-header h1 { margin: 0; color: var(--color-terminal-white); font-size: clamp(1.8rem, 5vw, 3rem); overflow-wrap: anywhere; }
 .app-header .eyebrow { margin: 0 0 0.5em; color: var(--color-green); text-transform: uppercase; font-size: 82%; }
+.app-header .app-byline { margin: 0.35em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.72); font-size: 88%; }
+.app-header .app-byline a { color: var(--color-turquoise); }
 .app-header .app-lead { margin: 0.6em 0 0; max-width: 46em; color: rgb(var(--rgb-terminal-white) / 0.9); }
 .app-header-actions { display: flex; flex: none; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65em; }
 .app-page section h2 { color: var(--color-terminal-white); font-size: 125%; }
@@ -632,7 +634,7 @@ b, strong { font-weight: 700; }
 .card h3 a { color: inherit; text-decoration: none; }
 .card:hover h3 { color: var(--color-turquoise); }
 .card .ver { color: var(--color-green); font-size: 82%; white-space: nowrap; opacity: 0.9; }
-.card p {
+.card .card-description {
   margin: 0;
   flex: 1;
   font-size: 94%;
@@ -643,6 +645,9 @@ b, strong { font-weight: 700; }
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+.card .byline { margin: -0.15em 0 0; flex: none; color: rgb(var(--rgb-terminal-blue) / 0.62); font-size: 80%; }
+.card .byline a { color: var(--color-turquoise); text-decoration-color: transparent; }
+.card .byline a:hover { text-decoration-color: currentColor; }
 .card footer {
   display: flex;
   align-items: center;
@@ -995,7 +1000,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/schist-bin.html">schist-bin</a></h3><span class="ver">0.11.0-1</span></header>
-  <p>Layered image editor with PSD and Affinity support (binary release)</p>
+  <p class="byline">by <a href="https://infrawrench.com" target="_blank" rel="author noopener">Infrawrench LLC</a></p>
+  <p class="card-description">Layered image editor with PSD and Affinity support (binary release)</p>
   <footer><span class="card-facts"><span class="added">added Sep 4</span><span class="size">44.8 MB</span></span><button class="app-vote" type="button" data-vote-app="schist-bin" aria-pressed="false" aria-label="Upvote schist-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-productivity-notes featured indie-app" data-detail-url="apps/slap-notes-bin.html"
@@ -1009,7 +1015,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/slap-notes-bin.html">slap-notes-bin</a></h3><span class="ver">0.2.3-1</span></header>
   <span class="indie-sticker card-sticker" title="Independent creator project">Indie app</span>
-  <p>Local-first block notes with a wiki-link graph and a built-in AI research agent</p>
+  <p class="byline">by <a href="https://x.com/jessyka_boat" target="_blank" rel="author noopener">Jessyka</a></p>
+  <p class="card-description">Local-first block notes with a wiki-link graph and a built-in AI research agent</p>
   <footer><span class="card-facts"><span class="added">added Sep 4</span><span class="size">129.8 MB</span></span><button class="app-vote" type="button" data-vote-app="slap-notes-bin" aria-pressed="false" aria-label="Upvote slap-notes-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities featured indie-app" data-detail-url="apps/flea.html"
@@ -1023,7 +1030,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/flea.html">flea</a></h3><span class="ver">0.1.3-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Fast, keyboard-first file manager for Omarchy</p>
+  <p class="byline">by <a href="https://x.com/thisisgm" target="_blank" rel="author noopener">GM</a></p>
+  <p class="card-description">Fast, keyboard-first file manager for Omarchy</p>
   <footer><span class="card-facts"><span class="added">added Sep 3</span><span class="size">654.2 KB</span></span><button class="app-vote" type="button" data-vote-app="flea" aria-pressed="false" aria-label="Upvote flea"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities featured" data-detail-url="apps/strata.html"
@@ -1036,7 +1044,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/strata.html">strata</a></h3><span class="ver">0.8.0-2</span></header>
-  <p>Fast, keyboard-first file manager for modern Linux desktops</p>
+  <p class="byline">by <a href="https://www.lgse.com" target="_blank" rel="author noopener">LGSE</a></p>
+  <p class="card-description">Fast, keyboard-first file manager for modern Linux desktops</p>
   <footer><span class="card-facts"><span class="added">added Sep 2</span><span class="size">4.2 MB</span></span><button class="app-vote" type="button" data-vote-app="strata" aria-pressed="false" aria-label="Upvote strata"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
     </div>
@@ -1081,7 +1090,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="IlqJqcl8ONE" data-yt-title="How we Claude Code">
   <header><h3><a href="apps/claude-code.html">claude-code</a></h3><span class="ver">2.1.259-1</span></header>
-  <p>An agentic coding tool that lives in your terminal</p>
+  <p class="byline">by <a href="https://anthropic.com" target="_blank" rel="author noopener">Anthropic</a></p>
+  <p class="card-description">An agentic coding tool that lives in your terminal</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">92.9 MB</span></span><button class="app-vote" type="button" data-vote-app="claude-code" aria-pressed="false" aria-label="Upvote claude-code"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/crush-bin.html"
@@ -1094,7 +1104,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/crush-bin.html">crush-bin</a></h3><span class="ver">0.92.0-1</span></header>
-  <p>A powerful terminal-based AI assistant for developers, providing intelligent coding assistance directly in your terminal.</p>
+  <p class="byline">by <a href="https://charm.land" target="_blank" rel="author noopener">Charm</a></p>
+  <p class="card-description">A powerful terminal-based AI assistant for developers, providing intelligent coding assistance directly in your terminal.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">26.6 MB</span></span><button class="app-vote" type="button" data-vote-app="crush-bin" aria-pressed="false" aria-label="Upvote crush-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/cursor-cli.html"
@@ -1107,7 +1118,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="onaIazLEVi8" data-yt-title="The Cursor CLI is Actually Good!?">
   <header><h3><a href="apps/cursor-cli.html">cursor-cli</a></h3><span class="ver">1:2026.08.25.1.3e8eec8-1</span></header>
-  <p>CLI tool for Cursor, the AI-first coding agent</p>
+  <p class="byline">by <a href="https://www.cursor.com" target="_blank" rel="author noopener">Anysphere</a></p>
+  <p class="card-description">CLI tool for Cursor, the AI-first coding agent</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">79 MB</span></span><button class="app-vote" type="button" data-vote-app="cursor-cli" aria-pressed="false" aria-label="Upvote cursor-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/github-copilot-cli.html"
@@ -1120,7 +1132,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="VkOibxsQ1oU" data-yt-title="The ultimate guide to the GitHub Copilot CLI | Full demo | GitHub Checkout">
   <header><h3><a href="apps/github-copilot-cli.html">github-copilot-cli</a></h3><span class="ver">1.0.82-1</span></header>
-  <p>GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal.</p>
+  <p class="byline">by <a href="https://github.com/about" target="_blank" rel="author noopener">GitHub</a></p>
+  <p class="card-description">GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">140.7 MB</span></span><button class="app-vote" type="button" data-vote-app="github-copilot-cli" aria-pressed="false" aria-label="Upvote github-copilot-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/grok-bot.html"
@@ -1133,7 +1146,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/grok-bot.html">grok-bot</a></h3><span class="ver">0.24.0-1</span></header>
-  <p>Grok Bot desktop agent</p>
+  <p class="byline">by <a href="https://x.ai" target="_blank" rel="author noopener">xAI</a></p>
+  <p class="card-description">Grok Bot desktop agent</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">134.3 MB</span></span><button class="app-vote" type="button" data-vote-app="grok-bot" aria-pressed="false" aria-label="Upvote grok-bot"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/herdr.html"
@@ -1146,7 +1160,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="qnIu-Xu64H0" data-yt-title="Herdr in about 6 minutes">
   <header><h3><a href="apps/herdr.html">herdr</a></h3><span class="ver">0.8.2-1</span></header>
-  <p>Herdr terminal workspace manager for AI coding agents</p>
+  <p class="byline">by <a href="https://herdr.dev" target="_blank" rel="author noopener">Herdr</a></p>
+  <p class="card-description">Herdr terminal workspace manager for AI coding agents</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">6.7 MB</span></span><button class="app-vote" type="button" data-vote-app="herdr" aria-pressed="false" aria-label="Upvote herdr"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/hermes-desktop.html"
@@ -1159,7 +1174,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/hermes-desktop.html">hermes-desktop</a></h3><span class="ver">2026.8.18-2</span></header>
-  <p>Native desktop shell for Hermes Agent</p>
+  <p class="byline">by <a href="https://nousresearch.com" target="_blank" rel="author noopener">Nous Research</a></p>
+  <p class="card-description">Native desktop shell for Hermes Agent</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">134.4 MB</span></span><button class="app-vote" type="button" data-vote-app="hermes-desktop" aria-pressed="false" aria-label="Upvote hermes-desktop"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/lmstudio.html"
@@ -1172,7 +1188,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="fTUGVA2EKq0" data-yt-title="Getting started with LM Studio (100% private local AI)">
   <header><h3><a href="apps/lmstudio.html">lmstudio</a></h3><span class="ver">0.3.35.1-1</span></header>
-  <p>Discover, download, and run local LLMs</p>
+  <p class="byline">by <a href="https://lmstudio.ai" target="_blank" rel="author noopener">LM Studio</a></p>
+  <p class="card-description">Discover, download, and run local LLMs</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1 GB</span></span><button class="app-vote" type="button" data-vote-app="lmstudio" aria-pressed="false" aria-label="Upvote lmstudio"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/lmstudio-bin.html"
@@ -1185,7 +1202,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="fTUGVA2EKq0" data-yt-title="Getting started with LM Studio (100% private local AI)">
   <header><h3><a href="apps/lmstudio-bin.html">lmstudio-bin</a></h3><span class="ver">0.4.23-1</span></header>
-  <p>LM Studio - A desktop app for exploring and running large language models locally</p>
+  <p class="byline">by <a href="https://lmstudio.ai" target="_blank" rel="author noopener">LM Studio</a></p>
+  <p class="card-description">LM Studio - A desktop app for exploring and running large language models locally</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1 GB</span></span><button class="app-vote" type="button" data-vote-app="lmstudio-bin" aria-pressed="false" aria-label="Upvote lmstudio-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/omarchy-herdr.html"
@@ -1198,7 +1216,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-herdr.html">omarchy-herdr</a></h3><span class="ver">0.8.0.r1-1</span></header>
-  <p>Herdr terminal workspace manager with Omarchy pane border support</p>
+  <p class="byline">by <a href="https://x.com/dhh" target="_blank" rel="author noopener">David Heinemeier Hansson</a></p>
+  <p class="card-description">Herdr terminal workspace manager with Omarchy pane border support</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">6.4 MB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-herdr" aria-pressed="false" aria-label="Upvote omarchy-herdr"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/openai-codex-bin.html"
@@ -1211,7 +1230,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="FUq9qRwrDrI" data-yt-title="OpenAI Codex CLI">
   <header><h3><a href="apps/openai-codex-bin.html">openai-codex-bin</a></h3><span class="ver">0.153.0-1</span></header>
-  <p>Arch Linux package for OpenAI&#x27;s Codex CLI - Auto Updated</p>
+  <p class="byline">by <a href="https://openai.com" target="_blank" rel="author noopener">OpenAI</a></p>
+  <p class="card-description">Arch Linux package for OpenAI&#x27;s Codex CLI - Auto Updated</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">116 MB</span></span><button class="app-vote" type="button" data-vote-app="openai-codex-bin" aria-pressed="false" aria-label="Upvote openai-codex-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/openai-codex-desktop.html"
@@ -1224,7 +1244,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="hhdpnbfH6NU" data-yt-title="A research preview of Codex in ChatGPT">
   <header><h3><a href="apps/openai-codex-desktop.html">openai-codex-desktop</a></h3><span class="ver">26.901.20858-1</span></header>
-  <p>Official ChatGPT desktop app with Codex</p>
+  <p class="byline">by <a href="https://openai.com" target="_blank" rel="author noopener">OpenAI</a></p>
+  <p class="card-description">Official ChatGPT desktop app with Codex</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">382.4 MB</span></span><button class="app-vote" type="button" data-vote-app="openai-codex-desktop" aria-pressed="false" aria-label="Upvote openai-codex-desktop"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/opencode.html"
@@ -1237,7 +1258,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="WXffHkvfRpM" data-yt-title="OpenCode CRASH Course | OPEN SOURCE AI CODING AGENT">
   <header><h3><a href="apps/opencode.html">opencode</a></h3><span class="ver">1.1.51-1</span></header>
-  <p>The open source coding agent</p>
+  <p class="byline">by <a href="https://anoma.ly" target="_blank" rel="author noopener">Anomaly</a></p>
+  <p class="card-description">The open source coding agent</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">24.1 MB</span></span><button class="app-vote" type="button" data-vote-app="opencode" aria-pressed="false" aria-label="Upvote opencode"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/perplexity.html"
@@ -1250,7 +1272,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/perplexity.html">perplexity</a></h3><span class="ver">26.9.1+build61614-1</span></header>
-  <p>Official Perplexity desktop app</p>
+  <p class="byline">by <a href="https://www.perplexity.ai" target="_blank" rel="author noopener">Perplexity</a></p>
+  <p class="card-description">Official Perplexity desktop app</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">161 MB</span></span><button class="app-vote" type="button" data-vote-app="perplexity" aria-pressed="false" aria-label="Upvote perplexity"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-ai-agents" data-detail-url="apps/t3code-bin.html"
@@ -1263,7 +1286,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="NBUW3YoO3Dw" data-yt-title="So I tried Theo&#x27;s T3 Code...">
   <header><h3><a href="apps/t3code-bin.html">t3code-bin</a></h3><span class="ver">0.0.38-1</span></header>
-  <p>Open-source control plane for coding agents</p>
+  <p class="byline">by <a href="https://ping.gg" target="_blank" rel="author noopener">Ping.gg</a></p>
+  <p class="card-description">Open-source control plane for coding agents</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">157.8 MB</span></span><button class="app-vote" type="button" data-vote-app="t3code-bin" aria-pressed="false" aria-label="Upvote t3code-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -1281,7 +1305,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/bun-bin.html">bun-bin</a></h3><span class="ver">1.3.11-1</span></header>
-  <p>All-in-one JavaScript runtime built for speed, with bundler, transpiler, test runner, and package manager. Includes bunx, shell completions and support for baseline CPUs</p>
+  <p class="byline">by <a href="https://bun.com" target="_blank" rel="author noopener">Bun</a></p>
+  <p class="card-description">All-in-one JavaScript runtime built for speed, with bundler, transpiler, test runner, and package manager. Includes bunx, shell completions and support for baseline CPUs</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">35.4 MB</span></span><button class="app-vote" type="button" data-vote-app="bun-bin" aria-pressed="false" aria-label="Upvote bun-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools" data-detail-url="apps/cursor-bin.html"
@@ -1294,7 +1319,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="ed26g7jxAbU" data-yt-title="Cursor AI: The Only IDE You Need in 2026 (Beginner to Pro)">
   <header><h3><a href="apps/cursor-bin.html">cursor-bin</a></h3><span class="ver">3.19.7-1</span></header>
-  <p>AI-first coding environment</p>
+  <p class="byline">by <a href="https://www.cursor.com" target="_blank" rel="author noopener">Anysphere</a></p>
+  <p class="card-description">AI-first coding environment</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">93.7 MB</span></span><button class="app-vote" type="button" data-vote-app="cursor-bin" aria-pressed="false" aria-label="Upvote cursor-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools indie-app" data-detail-url="apps/mise-bin.html"
@@ -1308,7 +1334,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/mise-bin.html">mise-bin</a></h3><span class="ver">2026.9.1-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>dev tools, env vars, task runner</p>
+  <p class="byline">by <a href="https://x.com/jdxcode" target="_blank" rel="author noopener">jdx</a></p>
+  <p class="card-description">dev tools, env vars, task runner</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">32.8 MB</span></span><button class="app-vote" type="button" data-vote-app="mise-bin" aria-pressed="false" aria-label="Upvote mise-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools" data-detail-url="apps/omarchy-emacs.html"
@@ -1321,7 +1348,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-emacs.html">omarchy-emacs</a></h3><span class="ver">1.9.1-1</span></header>
-  <p>Emacs integration for Omarchy with automatic theme and font syncing</p>
+  <p class="byline">by <a href="https://x.com/bi9kahuna" target="_blank" rel="author noopener">Scott Jones</a></p>
+  <p class="card-description">Emacs integration for Omarchy with automatic theme and font syncing</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">16.4 KB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-emacs" aria-pressed="false" aria-label="Upvote omarchy-emacs"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools" data-detail-url="apps/omarchy-nvim.html"
@@ -1334,7 +1362,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-nvim.html">omarchy-nvim</a></h3><span class="ver">2026.8.13-1</span></header>
-  <p>Pre-built LazyVim configuration with cached plugins</p>
+  <p class="byline">by <a href="https://x.com/folke" target="_blank" rel="author noopener">LazyVim</a></p>
+  <p class="card-description">Pre-built LazyVim configuration with cached plugins</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">36.5 MB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-nvim" aria-pressed="false" aria-label="Upvote omarchy-nvim"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools indie-app" data-detail-url="apps/omazed.html"
@@ -1348,7 +1377,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omazed.html">omazed</a></h3><span class="ver">2.1.0-2</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Live theme switching for Zed in Omarchy - automatically synchronize your Zed editor theme with your Omarchy system theme</p>
+  <p class="byline">by <a href="https://x.com/anirudhasah" target="_blank" rel="author noopener">Anirudha Pratap Sah</a></p>
+  <p class="card-description">Live theme switching for Zed in Omarchy - automatically synchronize your Zed editor theme with your Omarchy system theme</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">16.6 KB</span></span><button class="app-vote" type="button" data-vote-app="omazed" aria-pressed="false" aria-label="Upvote omazed"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools" data-detail-url="apps/once-bin.html"
@@ -1361,7 +1391,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/once-bin.html">once-bin</a></h3><span class="ver">0.3.0-1</span></header>
-  <p>CLI/TUI for installing and managing self-hosted web applications</p>
+  <p class="byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p>
+  <p class="card-description">CLI/TUI for installing and managing self-hosted web applications</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">5.9 MB</span></span><button class="app-vote" type="button" data-vote-app="once-bin" aria-pressed="false" aria-label="Upvote once-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools" data-detail-url="apps/python-mediapipe.html"
@@ -1374,7 +1405,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/python-mediapipe.html">python-mediapipe</a></h3><span class="ver">1.0.0-2.1</span></header>
-  <p>A cross-platform, customizable ML solutions for live and streaming media</p>
+  <p class="byline">by <a href="https://ai.google.dev/edge" target="_blank" rel="author noopener">Google AI Edge</a></p>
+  <p class="card-description">A cross-platform, customizable ML solutions for live and streaming media</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.2 MB</span></span><button class="app-vote" type="button" data-vote-app="python-mediapipe" aria-pressed="false" aria-label="Upvote python-mediapipe"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools" data-detail-url="apps/python-sounddevice.html"
@@ -1387,7 +1419,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/python-sounddevice.html">python-sounddevice</a></h3><span class="ver">0.5.5-1</span></header>
-  <p>Record and play back sound</p>
+  <p class="byline">by <a href="https://github.com/spatialaudio/python-sounddevice" target="_blank" rel="author noopener">Matthias Geier</a></p>
+  <p class="card-description">Record and play back sound</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">79.3 KB</span></span><button class="app-vote" type="button" data-vote-app="python-sounddevice" aria-pressed="false" aria-label="Upvote python-sounddevice"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools" data-detail-url="apps/sublime-text-4.html"
@@ -1400,7 +1433,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="O91i9rL8VxM" data-yt-title="[MG05] Introduction to the new features in Sublime Text 4!">
   <header><h3><a href="apps/sublime-text-4.html">sublime-text-4</a></h3><span class="ver">4.4200-1</span></header>
-  <p>Sophisticated text editor for code, html and prose - stable build</p>
+  <p class="byline">by <a href="https://www.sublimehq.com" target="_blank" rel="author noopener">Sublime HQ</a></p>
+  <p class="card-description">Sophisticated text editor for code, html and prose - stable build</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">21.1 MB</span></span><button class="app-vote" type="button" data-vote-app="sublime-text-4" aria-pressed="false" aria-label="Upvote sublime-text-4"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools" data-detail-url="apps/symfony-cli.html"
@@ -1413,7 +1447,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/symfony-cli.html">symfony-cli</a></h3><span class="ver">5.20.0-9</span></header>
-  <p>The Symfony client helps developers create and manage Symfony applications.</p>
+  <p class="byline">by <a href="https://symfony.com" target="_blank" rel="author noopener">Symfony CLI</a></p>
+  <p class="card-description">The Symfony client helps developers create and manage Symfony applications.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">7 MB</span></span><button class="app-vote" type="button" data-vote-app="symfony-cli" aria-pressed="false" aria-label="Upvote symfony-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools indie-app" data-detail-url="apps/tobi-try.html"
@@ -1427,7 +1462,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/tobi-try.html">tobi-try</a></h3><span class="ver">1.8.1-3</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Fresh directories for every vibe.</p>
+  <p class="byline">by <a href="https://tobi.lutke.com" target="_blank" rel="author noopener">Tobias Lütke</a></p>
+  <p class="card-description">Fresh directories for every vibe.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">26.4 KB</span></span><button class="app-vote" type="button" data-vote-app="tobi-try" aria-pressed="false" aria-label="Upvote tobi-try"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-developer-tools" data-detail-url="apps/visual-studio-code-bin.html"
@@ -1440,7 +1476,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="f8_uF_IDV50" data-yt-title="Learn Visual Studio Code in 15 minutes: 2026 Official Beginner Tutorial">
   <header><h3><a href="apps/visual-studio-code-bin.html">visual-studio-code-bin</a></h3><span class="ver">1.136.1-1</span></header>
-  <p>Visual Studio Code (vscode): Editor for building and debugging modern web and cloud applications (official binary version)</p>
+  <p class="byline">by <a href="https://www.microsoft.com" target="_blank" rel="author noopener">Microsoft</a></p>
+  <p class="card-description">Visual Studio Code (vscode): Editor for building and debugging modern web and cloud applications (official binary version)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">335.3 MB</span></span><button class="app-vote" type="button" data-vote-app="visual-studio-code-bin" aria-pressed="false" aria-label="Upvote visual-studio-code-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -1459,7 +1496,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/caja-open-any-terminal.html">caja-open-any-terminal</a></h3><span class="ver">0.8.2-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>context-menu entry for opening other terminal in nautilus</p>
+  <p class="byline">by <a href="https://stunkymonkey.de" target="_blank" rel="author noopener">Felix Bühler</a></p>
+  <p class="card-description">context-menu entry for opening other terminal in nautilus</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">26.6 KB</span></span><button class="app-vote" type="button" data-vote-app="caja-open-any-terminal" aria-pressed="false" aria-label="Upvote caja-open-any-terminal"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-terminal-shell indie-app" data-detail-url="apps/nautilus-open-any-terminal.html"
@@ -1473,7 +1511,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/nautilus-open-any-terminal.html">nautilus-open-any-terminal</a></h3><span class="ver">0.8.2-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>context-menu entry for opening other terminal in nautilus</p>
+  <p class="byline">by <a href="https://stunkymonkey.de" target="_blank" rel="author noopener">Felix Bühler</a></p>
+  <p class="card-description">context-menu entry for opening other terminal in nautilus</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">26.6 KB</span></span><button class="app-vote" type="button" data-vote-app="nautilus-open-any-terminal" aria-pressed="false" aria-label="Upvote nautilus-open-any-terminal"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-terminal-shell" data-detail-url="apps/omarchy-fish.html"
@@ -1486,7 +1525,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-fish.html">omarchy-fish</a></h3><span class="ver">1.5.0-1</span></header>
-  <p>Omarchy shell configuration for Fish</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">Omarchy shell configuration for Fish</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">27.4 KB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-fish" aria-pressed="false" aria-label="Upvote omarchy-fish"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-terminal-shell" data-detail-url="apps/omarchy-zsh.html"
@@ -1499,7 +1539,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-zsh.html">omarchy-zsh</a></h3><span class="ver">1.5.0-2</span></header>
-  <p>Omarchy shell configuration for Zsh</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">Omarchy shell configuration for Zsh</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">16.9 KB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-zsh" aria-pressed="false" aria-label="Upvote omarchy-zsh"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-terminal-shell" data-detail-url="apps/python-terminaltexteffects.html"
@@ -1512,7 +1553,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="ngKrVM_jTMM" data-yt-title="「TerminalTextEffects」のエフェクト集">
   <header><h3><a href="apps/python-terminaltexteffects.html">python-terminaltexteffects</a></h3><span class="ver">0.15.0-1</span></header>
-  <p>Visual effects engine applied to text in the terminal.</p>
+  <p class="byline">by <a href="https://github.com/ChrisBuilds" target="_blank" rel="author noopener">ChrisBuilds</a></p>
+  <p class="card-description">Visual effects engine applied to text in the terminal.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">491.4 KB</span></span><button class="app-vote" type="button" data-vote-app="python-terminaltexteffects" aria-pressed="false" aria-label="Upvote python-terminaltexteffects"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-terminal-shell" data-detail-url="apps/ttfx.html"
@@ -1525,7 +1567,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/ttfx.html">ttfx</a></h3><span class="ver">0.3.2-1</span></header>
-  <p>Terminal text effects as a single static binary — Rust port of terminaltexteffects</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">Terminal text effects as a single static binary — Rust port of terminaltexteffects</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">862.9 KB</span></span><button class="app-vote" type="button" data-vote-app="ttfx" aria-pressed="false" aria-label="Upvote ttfx"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-terminal-shell" data-detail-url="apps/xdg-terminal-exec.html"
@@ -1538,7 +1581,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/xdg-terminal-exec.html">xdg-terminal-exec</a></h3><span class="ver">0.14.3-1</span></header>
-  <p>Proposed standard to launching desktop apps with Terminal=true</p>
+  <p class="byline">by <a href="https://gitlab.freedesktop.org/Vladimir-csp" target="_blank" rel="author noopener">Vladimir-csp</a></p>
+  <p class="card-description">Proposed standard to launching desktop apps with Terminal=true</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">22 KB</span></span><button class="app-vote" type="button" data-vote-app="xdg-terminal-exec" aria-pressed="false" aria-label="Upvote xdg-terminal-exec"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -1556,7 +1600,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/aether.html">aether</a></h3><span class="ver">4.29.8-1</span></header>
-  <p>Desktop theming application - extract colors from wallpapers and apply cohesive themes</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">Desktop theming application - extract colors from wallpapers and apply cohesive themes</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">12.9 MB</span></span><button class="app-vote" type="button" data-vote-app="aether" aria-pressed="false" aria-label="Upvote aether"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop indie-app" data-detail-url="apps/hyprland-preview-share-picker.html"
@@ -1570,7 +1615,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/hyprland-preview-share-picker.html">hyprland-preview-share-picker</a></h3><span class="ver">0.2.1-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>An alternative share picker for hyprland with window and monitor previews</p>
+  <p class="byline">by <a href="https://github.com/WhySoBad" target="_blank" rel="author noopener">WhySoBad</a></p>
+  <p class="card-description">An alternative share picker for hyprland with window and monitor previews</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">2.5 MB</span></span><button class="app-vote" type="button" data-vote-app="hyprland-preview-share-picker" aria-pressed="false" aria-label="Upvote hyprland-preview-share-picker"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop indie-app" data-detail-url="apps/hyprland-preview-share-picker-git.html"
@@ -1584,7 +1630,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/hyprland-preview-share-picker-git.html">hyprland-preview-share-picker-git</a></h3><span class="ver">0.2.1.r0.g211b789-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>An alternative share picker for hyprland with window and monitor previews</p>
+  <p class="byline">by <a href="https://github.com/WhySoBad" target="_blank" rel="author noopener">WhySoBad</a></p>
+  <p class="card-description">An alternative share picker for hyprland with window and monitor previews</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">2.5 MB</span></span><button class="app-vote" type="button" data-vote-app="hyprland-preview-share-picker-git" aria-pressed="false" aria-label="Upvote hyprland-preview-share-picker-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop indie-app" data-detail-url="apps/hyprshade.html"
@@ -1598,7 +1645,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/hyprshade.html">hyprshade</a></h3><span class="ver">5.0.0-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Hyprland shade configuration tool</p>
+  <p class="byline">by <a href="https://github.com/loqusion" target="_blank" rel="author noopener">loqusion</a></p>
+  <p class="card-description">Hyprland shade configuration tool</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">22.6 KB</span></span><button class="app-vote" type="button" data-vote-app="hyprshade" aria-pressed="false" aria-label="Upvote hyprshade"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/omarchy-settings.html"
@@ -1611,7 +1659,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-settings.html">omarchy-settings</a></h3><span class="ver">4.0.2-1</span></header>
-  <p>Omarchy user defaults, /etc/skel content, fonts, plymouth theme, and support helpers</p>
+  <p class="byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p>
+  <p class="card-description">Omarchy user defaults, /etc/skel content, fonts, plymouth theme, and support helpers</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">725.6 KB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-settings" aria-pressed="false" aria-label="Upvote omarchy-settings"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/omarchy-settings-dev.html"
@@ -1624,7 +1673,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-settings-dev.html">omarchy-settings-dev</a></h3><span class="ver">4.0.0.r1832.g23dab9e-1</span></header>
-  <p>Omarchy user defaults, /etc/skel content, fonts, plymouth theme, and support helpers (quattro branch tip)</p>
+  <p class="byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p>
+  <p class="card-description">Omarchy user defaults, /etc/skel content, fonts, plymouth theme, and support helpers (quattro branch tip)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">726.7 KB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-settings-dev" aria-pressed="false" aria-label="Upvote omarchy-settings-dev"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/omarchy-walker.html"
@@ -1637,7 +1687,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-walker.html">omarchy-walker</a></h3><span class="ver">1.0.0-2</span></header>
-  <p>Meta package for walker with Elephant providers for Omarchy</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">Meta package for walker with Elephant providers for Omarchy</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">7 KB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-walker" aria-pressed="false" aria-label="Upvote omarchy-walker"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/quickshell-git.html"
@@ -1650,7 +1701,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/quickshell-git.html">quickshell-git</a></h3><span class="ver">0.3.0.r20.g28771c7-2</span></header>
-  <p>Flexible toolkit for making desktop shells with QtQuick</p>
+  <p class="byline">by <a href="https://git.outfoxxed.me/outfoxxed" target="_blank" rel="author noopener">Outfoxxed</a></p>
+  <p class="card-description">Flexible toolkit for making desktop shells with QtQuick</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">69.5 MB</span></span><button class="app-vote" type="button" data-vote-app="quickshell-git" aria-pressed="false" aria-label="Upvote quickshell-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/ttf-ia-writer.html"
@@ -1663,7 +1715,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/ttf-ia-writer.html">ttf-ia-writer</a></h3><span class="ver">20181225-1</span></header>
-  <p>Subset of the fonts provided by iA Writer</p>
+  <p class="byline">by <a href="https://ia.net" target="_blank" rel="author noopener">Oliver Reichenstein</a></p>
+  <p class="card-description">Subset of the fonts provided by iA Writer</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">411.3 KB</span></span><button class="app-vote" type="button" data-vote-app="ttf-ia-writer" aria-pressed="false" aria-label="Upvote ttf-ia-writer"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/ttf-jetbrains-mono-nerd-basic.html"
@@ -1676,7 +1729,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/ttf-jetbrains-mono-nerd-basic.html">ttf-jetbrains-mono-nerd-basic</a></h3><span class="ver">3.5.0-1</span></header>
-  <p>Basic JetBrains Mono Nerd Font family</p>
+  <p class="byline">by <a href="https://RyanLMcIntyre.com" target="_blank" rel="author noopener">Ryan L McIntyre</a></p>
+  <p class="card-description">Basic JetBrains Mono Nerd Font family</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">5.5 MB</span></span><button class="app-vote" type="button" data-vote-app="ttf-jetbrains-mono-nerd-basic" aria-pressed="false" aria-label="Upvote ttf-jetbrains-mono-nerd-basic"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop indie-app" data-detail-url="apps/walker.html"
@@ -1690,7 +1744,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="d_AIIdEAZ3I" data-yt-title="Setup WALKER, the Application Launcher. A Step-by-Step Guide from Installation, Theming to Scripting">
   <header><h3><a href="apps/walker.html">walker</a></h3><span class="ver">2.17.0-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>wayland application runner</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">wayland application runner</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">2.5 MB</span></span><button class="app-vote" type="button" data-vote-app="walker" aria-pressed="false" aria-label="Upvote walker"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/yaru-gnome-shell-theme.html"
@@ -1703,7 +1758,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yaru-gnome-shell-theme.html">yaru-gnome-shell-theme</a></h3><span class="ver">26.04.5.1ubuntu-1</span></header>
-  <p>Yaru default ubuntu gnome shell theme</p>
+  <p class="byline">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></p>
+  <p class="card-description">Yaru default ubuntu gnome shell theme</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">76 KB</span></span><button class="app-vote" type="button" data-vote-app="yaru-gnome-shell-theme" aria-pressed="false" aria-label="Upvote yaru-gnome-shell-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/yaru-gtk-theme.html"
@@ -1716,7 +1772,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yaru-gtk-theme.html">yaru-gtk-theme</a></h3><span class="ver">26.04.5.1ubuntu-1</span></header>
-  <p>Yaru default ubuntu gtk theme</p>
+  <p class="byline">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></p>
+  <p class="card-description">Yaru default ubuntu gtk theme</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">3.9 MB</span></span><button class="app-vote" type="button" data-vote-app="yaru-gtk-theme" aria-pressed="false" aria-label="Upvote yaru-gtk-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/yaru-gtksourceview-theme.html"
@@ -1729,7 +1786,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yaru-gtksourceview-theme.html">yaru-gtksourceview-theme</a></h3><span class="ver">26.04.5.1ubuntu-1</span></header>
-  <p>Yaru default ubuntu gtksourceview theme</p>
+  <p class="byline">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></p>
+  <p class="card-description">Yaru default ubuntu gtksourceview theme</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.3 KB</span></span><button class="app-vote" type="button" data-vote-app="yaru-gtksourceview-theme" aria-pressed="false" aria-label="Upvote yaru-gtksourceview-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/yaru-icon-theme.html"
@@ -1742,7 +1800,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yaru-icon-theme.html">yaru-icon-theme</a></h3><span class="ver">26.04.5.1ubuntu-1</span></header>
-  <p>Yaru default ubuntu icon theme</p>
+  <p class="byline">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></p>
+  <p class="card-description">Yaru default ubuntu icon theme</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">45.5 MB</span></span><button class="app-vote" type="button" data-vote-app="yaru-icon-theme" aria-pressed="false" aria-label="Upvote yaru-icon-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/yaru-metacity-theme.html"
@@ -1755,7 +1814,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yaru-metacity-theme.html">yaru-metacity-theme</a></h3><span class="ver">26.04.5.1ubuntu-1</span></header>
-  <p>Yaru default ubuntu metacity theme</p>
+  <p class="byline">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></p>
+  <p class="card-description">Yaru default ubuntu metacity theme</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">16.6 KB</span></span><button class="app-vote" type="button" data-vote-app="yaru-metacity-theme" aria-pressed="false" aria-label="Upvote yaru-metacity-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/yaru-session.html"
@@ -1768,7 +1828,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yaru-session.html">yaru-session</a></h3><span class="ver">26.04.5.1ubuntu-1</span></header>
-  <p>Yaru session</p>
+  <p class="byline">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></p>
+  <p class="card-description">Yaru session</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">6.7 KB</span></span><button class="app-vote" type="button" data-vote-app="yaru-session" aria-pressed="false" aria-label="Upvote yaru-session"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/yaru-sound-theme.html"
@@ -1781,7 +1842,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yaru-sound-theme.html">yaru-sound-theme</a></h3><span class="ver">26.04.5.1ubuntu-1</span></header>
-  <p>Yaru default ubuntu sound theme</p>
+  <p class="byline">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></p>
+  <p class="card-description">Yaru default ubuntu sound theme</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1.1 MB</span></span><button class="app-vote" type="button" data-vote-app="yaru-sound-theme" aria-pressed="false" aria-label="Upvote yaru-sound-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/yaru-unity-theme.html"
@@ -1794,7 +1856,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yaru-unity-theme.html">yaru-unity-theme</a></h3><span class="ver">26.04.5.1ubuntu-1</span></header>
-  <p>Yaru default ubuntu unity theme</p>
+  <p class="byline">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></p>
+  <p class="card-description">Yaru default ubuntu unity theme</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">13.7 KB</span></span><button class="app-vote" type="button" data-vote-app="yaru-unity-theme" aria-pressed="false" aria-label="Upvote yaru-unity-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-themes-desktop" data-detail-url="apps/yaru-xfwm4-theme.html"
@@ -1807,7 +1870,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yaru-xfwm4-theme.html">yaru-xfwm4-theme</a></h3><span class="ver">26.04.5.1ubuntu-1</span></header>
-  <p>Yaru default ubuntu xfwm4 theme</p>
+  <p class="byline">by <a href="https://ubuntu.com" target="_blank" rel="author noopener">Ubuntu</a></p>
+  <p class="card-description">Yaru default ubuntu xfwm4 theme</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">97.9 KB</span></span><button class="app-vote" type="button" data-vote-app="yaru-xfwm4-theme" aria-pressed="false" aria-label="Upvote yaru-xfwm4-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -1825,7 +1889,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/asdcontrol.html">asdcontrol</a></h3><span class="ver">1:0.6.0-2</span></header>
-  <p>Control brightness on Apple Displays connected via USB-C</p>
+  <p class="byline">by <a href="https://omakasui.org" target="_blank" rel="author noopener">Omakasui</a></p>
+  <p class="card-description">Control brightness on Apple Displays connected via USB-C</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">13.9 KB</span></span><button class="app-vote" type="button" data-vote-app="asdcontrol" aria-pressed="false" aria-label="Upvote asdcontrol"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/asusctl.html"
@@ -1838,7 +1903,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/asusctl.html">asusctl</a></h3><span class="ver">6.3.8-1</span></header>
-  <p>A control daemon, CLI tools, and a collection of crates for interacting with ASUS ROG laptops</p>
+  <p class="byline">by <a href="https://opengamingcollective.org" target="_blank" rel="author noopener">Open Gaming Collective</a></p>
+  <p class="card-description">A control daemon, CLI tools, and a collection of crates for interacting with ASUS ROG laptops</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">11.4 MB</span></span><button class="app-vote" type="button" data-vote-app="asusctl" aria-pressed="false" aria-label="Upvote asusctl"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/dell-xps-touchpad-haptics.html"
@@ -1851,7 +1917,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/dell-xps-touchpad-haptics.html">dell-xps-touchpad-haptics</a></h3><span class="ver">1.0.0-3</span></header>
-  <p>Synaptics haptic touchpad presets for Dell XPS on Omarchy</p>
+  <p class="byline">by <a href="https://www.jacobmink.com" target="_blank" rel="author noopener">Jacob Mink</a></p>
+  <p class="card-description">Synaptics haptic touchpad presets for Dell XPS on Omarchy</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">11.2 KB</span></span><button class="app-vote" type="button" data-vote-app="dell-xps-touchpad-haptics" aria-pressed="false" aria-label="Upvote dell-xps-touchpad-haptics"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/intel-ipu7-camera.html"
@@ -1864,7 +1931,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/intel-ipu7-camera.html">intel-ipu7-camera</a></h3><span class="ver">1.0.5-1</span></header>
-  <p>Intel IPU7 MIPI camera stack for Hurrican/Performance (OV08X40 + hardware ISP)</p>
+  <p class="byline">by <a href="https://github.com/TsaiGaggery" target="_blank" rel="author noopener">Gaggery</a></p>
+  <p class="card-description">Intel IPU7 MIPI camera stack for Hurrican/Performance (OV08X40 + hardware ISP)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">27.9 MB</span></span><button class="app-vote" type="button" data-vote-app="intel-ipu7-camera" aria-pressed="false" aria-label="Upvote intel-ipu7-camera"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/intel-lpmd.html"
@@ -1877,7 +1945,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/intel-lpmd.html">intel-lpmd</a></h3><span class="ver">0.1.0-2</span></header>
-  <p>Intel Low Power Mode Daemon</p>
+  <p class="byline">by <a href="https://intel.com" target="_blank" rel="author noopener">Intel</a></p>
+  <p class="card-description">Intel Low Power Mode Daemon</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">72.7 KB</span></span><button class="app-vote" type="button" data-vote-app="intel-lpmd" aria-pressed="false" aria-label="Upvote intel-lpmd"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/lib32-nvidia-580xx-utils.html"
@@ -1890,7 +1959,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/lib32-nvidia-580xx-utils.html">lib32-nvidia-580xx-utils</a></h3><span class="ver">580.178.04-1.1</span></header>
-  <p>NVIDIA drivers utilities (32-bit) (580xx)</p>
+  <p class="byline">by <a href="https://www.nvidia.com" target="_blank" rel="author noopener">NVIDIA</a></p>
+  <p class="card-description">NVIDIA drivers utilities (32-bit) (580xx)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">51.1 MB</span></span><button class="app-vote" type="button" data-vote-app="lib32-nvidia-580xx-utils" aria-pressed="false" aria-label="Upvote lib32-nvidia-580xx-utils"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/lib32-opencl-nvidia-580xx.html"
@@ -1903,7 +1973,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/lib32-opencl-nvidia-580xx.html">lib32-opencl-nvidia-580xx</a></h3><span class="ver">580.178.04-1.1</span></header>
-  <p>OpenCL implemention for NVIDIA (32-bit) (580xx)</p>
+  <p class="byline">by <a href="https://www.nvidia.com" target="_blank" rel="author noopener">NVIDIA</a></p>
+  <p class="card-description">OpenCL implemention for NVIDIA (32-bit) (580xx)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">2.8 MB</span></span><button class="app-vote" type="button" data-vote-app="lib32-opencl-nvidia-580xx" aria-pressed="false" aria-label="Upvote lib32-opencl-nvidia-580xx"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/libfprint-git.html"
@@ -1916,7 +1987,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libfprint-git.html">libfprint-git</a></h3><span class="ver">1:1.94.10.r12.gd79f157-1.1</span></header>
-  <p>Library for fingerprint readers (libfprint master with FocalTech MOC updates)</p>
+  <p class="byline">by <a href="https://fprint.freedesktop.org" target="_blank" rel="author noopener">freedesktop.org contributors</a></p>
+  <p class="card-description">Library for fingerprint readers (libfprint master with FocalTech MOC updates)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">463.4 KB</span></span><button class="app-vote" type="button" data-vote-app="libfprint-git" aria-pressed="false" aria-label="Upvote libfprint-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/limine-mkinitcpio-hook.html"
@@ -1929,7 +2001,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/limine-mkinitcpio-hook.html">limine-mkinitcpio-hook</a></h3><span class="ver">1.37.1-1</span></header>
-  <p>Install kernels for the Limine bootloader.</p>
+  <p class="byline">by <a href="https://gitlab.com/Zesko" target="_blank" rel="author noopener">Zesko</a></p>
+  <p class="card-description">Install kernels for the Limine bootloader.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">6.9 MB</span></span><button class="app-vote" type="button" data-vote-app="limine-mkinitcpio-hook" aria-pressed="false" aria-label="Upvote limine-mkinitcpio-hook"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/limine-snapper-sync.html"
@@ -1942,7 +2015,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/limine-snapper-sync.html">limine-snapper-sync</a></h3><span class="ver">1.31.0-1</span></header>
-  <p>Integrates Limine boot entries with Snapper snapshots.</p>
+  <p class="byline">by <a href="https://gitlab.com/Zesko" target="_blank" rel="author noopener">Zesko</a></p>
+  <p class="card-description">Integrates Limine boot entries with Snapper snapshots.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">9.4 MB</span></span><button class="app-vote" type="button" data-vote-app="limine-snapper-sync" aria-pressed="false" aria-label="Upvote limine-snapper-sync"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/link-studio.html"
@@ -1955,7 +2029,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/link-studio.html">link-studio</a></h3><span class="ver">1.0.4-1</span></header>
-  <p>Native Linux controller for Insta360 Link webcams</p>
+  <p class="byline">by <a href="https://github.com/jweaver60" target="_blank" rel="author noopener">Jake</a></p>
+  <p class="card-description">Native Linux controller for Insta360 Link webcams</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">3.8 MB</span></span><button class="app-vote" type="button" data-vote-app="link-studio" aria-pressed="false" aria-label="Upvote link-studio"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/linux-mainline-panther-lake.html"
@@ -1968,7 +2043,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/linux-mainline-panther-lake.html">linux-mainline-panther-lake</a></h3><span class="ver">7.0rc4-2</span></header>
-  <p>The Linux Mainline (Panther Lake audio support) kernel and modules</p>
+  <p class="byline">by <a href="https://kernel.org" target="_blank" rel="author noopener">Linux kernel contributors</a></p>
+  <p class="card-description">The Linux Mainline (Panther Lake audio support) kernel and modules</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">152.9 MB</span></span><button class="app-vote" type="button" data-vote-app="linux-mainline-panther-lake" aria-pressed="false" aria-label="Upvote linux-mainline-panther-lake"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/linux-mainline-panther-lake-headers.html"
@@ -1981,7 +2057,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/linux-mainline-panther-lake-headers.html">linux-mainline-panther-lake-headers</a></h3><span class="ver">7.0rc4-2</span></header>
-  <p>Headers and scripts for building modules for the Linux Mainline (Panther Lake audio support) kernel</p>
+  <p class="byline">by <a href="https://kernel.org" target="_blank" rel="author noopener">Linux kernel contributors</a></p>
+  <p class="card-description">Headers and scripts for building modules for the Linux Mainline (Panther Lake audio support) kernel</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">79.8 MB</span></span><button class="app-vote" type="button" data-vote-app="linux-mainline-panther-lake-headers" aria-pressed="false" aria-label="Upvote linux-mainline-panther-lake-headers"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/linux-ptl.html"
@@ -1994,7 +2071,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/linux-ptl.html">linux-ptl</a></h3><span class="ver">7.1.8.arch1-2</span></header>
-  <p>The Linux for Panther Lake with Panel Replay power and OLED VRR fixes kernel and modules</p>
+  <p class="byline">by <a href="https://archlinux.org" target="_blank" rel="author noopener">Arch Linux</a></p>
+  <p class="card-description">The Linux for Panther Lake with Panel Replay power and OLED VRR fixes kernel and modules</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">155 MB</span></span><button class="app-vote" type="button" data-vote-app="linux-ptl" aria-pressed="false" aria-label="Upvote linux-ptl"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/linux-ptl-audio.html"
@@ -2007,7 +2085,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/linux-ptl-audio.html">linux-ptl-audio</a></h3><span class="ver">6.19.9.arch1-1</span></header>
-  <p>The Linux with Panther Lake SDCA audio backports kernel and modules</p>
+  <p class="byline">by <a href="https://archlinux.org" target="_blank" rel="author noopener">Arch Linux</a></p>
+  <p class="card-description">The Linux with Panther Lake SDCA audio backports kernel and modules</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">152.3 MB</span></span><button class="app-vote" type="button" data-vote-app="linux-ptl-audio" aria-pressed="false" aria-label="Upvote linux-ptl-audio"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/linux-ptl-audio-headers.html"
@@ -2020,7 +2099,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/linux-ptl-audio-headers.html">linux-ptl-audio-headers</a></h3><span class="ver">6.19.9.arch1-1</span></header>
-  <p>Headers and scripts for building modules for the Linux with Panther Lake SDCA audio backports kernel</p>
+  <p class="byline">by <a href="https://archlinux.org" target="_blank" rel="author noopener">Arch Linux</a></p>
+  <p class="card-description">Headers and scripts for building modules for the Linux with Panther Lake SDCA audio backports kernel</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">42.3 MB</span></span><button class="app-vote" type="button" data-vote-app="linux-ptl-audio-headers" aria-pressed="false" aria-label="Upvote linux-ptl-audio-headers"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/linux-ptl-headers.html"
@@ -2033,7 +2113,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/linux-ptl-headers.html">linux-ptl-headers</a></h3><span class="ver">7.1.8.arch1-2</span></header>
-  <p>Headers and scripts for building modules for the Linux for Panther Lake with Panel Replay power and OLED VRR fixes kernel</p>
+  <p class="byline">by <a href="https://archlinux.org" target="_blank" rel="author noopener">Arch Linux</a></p>
+  <p class="card-description">Headers and scripts for building modules for the Linux for Panther Lake with Panel Replay power and OLED VRR fixes kernel</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">81.5 MB</span></span><button class="app-vote" type="button" data-vote-app="linux-ptl-headers" aria-pressed="false" aria-label="Upvote linux-ptl-headers"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/macbook12-spi-driver-dkms.html"
@@ -2046,7 +2127,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/macbook12-spi-driver-dkms.html">macbook12-spi-driver-dkms</a></h3><span class="ver">0+git.315-1</span></header>
-  <p>Driver for the keyboard, touchpad and touchbar found in newer MacBook (Pro) models</p>
+  <p class="byline">by <a href="https://github.com/marc-git" target="_blank" rel="author noopener">marc-git</a></p>
+  <p class="card-description">Driver for the keyboard, touchpad and touchbar found in newer MacBook (Pro) models</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">57.6 KB</span></span><button class="app-vote" type="button" data-vote-app="macbook12-spi-driver-dkms" aria-pressed="false" aria-label="Upvote macbook12-spi-driver-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/macbook8-spi-pxa2xx-nodma-dkms.html"
@@ -2059,7 +2141,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/macbook8-spi-pxa2xx-nodma-dkms.html">macbook8-spi-pxa2xx-nodma-dkms</a></h3><span class="ver">1.0-1</span></header>
-  <p>Patched SPI PXA2xx PCI driver forcing PIO mode for MacBook8,1 Wildcat Point GSPI (8086:9ce6)</p>
+  <p class="byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p>
+  <p class="card-description">Patched SPI PXA2xx PCI driver forcing PIO mode for MacBook8,1 Wildcat Point GSPI (8086:9ce6)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">9.2 KB</span></span><button class="app-vote" type="button" data-vote-app="macbook8-spi-pxa2xx-nodma-dkms" aria-pressed="false" aria-label="Upvote macbook8-spi-pxa2xx-nodma-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/makima-bin.html"
@@ -2072,7 +2155,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/makima-bin.html">makima-bin</a></h3><span class="ver">0.10.2-1</span></header>
-  <p>Linux daemon to remap and create macros for keyboards, mice and controllers.</p>
+  <p class="byline">by <a href="https://github.com/cyber-sushi" target="_blank" rel="author noopener">cyber-sushi</a></p>
+  <p class="card-description">Linux daemon to remap and create macros for keyboards, mice and controllers.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">909.1 KB</span></span><button class="app-vote" type="button" data-vote-app="makima-bin" aria-pressed="false" aria-label="Upvote makima-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/nvidia-580xx-dkms.html"
@@ -2085,7 +2169,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/nvidia-580xx-dkms.html">nvidia-580xx-dkms</a></h3><span class="ver">580.178.04-1.1</span></header>
-  <p>NVIDIA kernel modules - module sources (580xx)</p>
+  <p class="byline">by <a href="https://www.nvidia.com" target="_blank" rel="author noopener">NVIDIA</a></p>
+  <p class="card-description">NVIDIA kernel modules - module sources (580xx)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">83.7 MB</span></span><button class="app-vote" type="button" data-vote-app="nvidia-580xx-dkms" aria-pressed="false" aria-label="Upvote nvidia-580xx-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/nvidia-580xx-utils.html"
@@ -2098,7 +2183,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/nvidia-580xx-utils.html">nvidia-580xx-utils</a></h3><span class="ver">580.178.04-1.1</span></header>
-  <p>NVIDIA drivers utilities (580xx)</p>
+  <p class="byline">by <a href="https://www.nvidia.com" target="_blank" rel="author noopener">NVIDIA</a></p>
+  <p class="card-description">NVIDIA drivers utilities (580xx)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">289.7 MB</span></span><button class="app-vote" type="button" data-vote-app="nvidia-580xx-utils" aria-pressed="false" aria-label="Upvote nvidia-580xx-utils"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/omarchy.html"
@@ -2111,7 +2197,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="MsIp_tPGt1o" data-yt-title="Omarchy Quattro Linux Review">
   <header><h3><a href="apps/omarchy.html">omarchy</a></h3><span class="ver">4.0.2-1</span></header>
-  <p>Beautiful, modern, and opinionated Arch Linux by DHH</p>
+  <p class="byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p>
+  <p class="card-description">Beautiful, modern, and opinionated Arch Linux by DHH</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">120.3 MB</span></span><button class="app-vote" type="button" data-vote-app="omarchy" aria-pressed="false" aria-label="Upvote omarchy"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/omarchy-audio-tuner.html"
@@ -2124,7 +2211,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-audio-tuner.html">omarchy-audio-tuner</a></h3><span class="ver">0.1.0-1</span></header>
-  <p>Tools for authoring Omarchy laptop speaker tunings</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">Tools for authoring Omarchy laptop speaker tunings</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">23.5 KB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-audio-tuner" aria-pressed="false" aria-label="Upvote omarchy-audio-tuner"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/omarchy-dev.html"
@@ -2137,7 +2225,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="MsIp_tPGt1o" data-yt-title="Omarchy Quattro Linux Review">
   <header><h3><a href="apps/omarchy-dev.html">omarchy-dev</a></h3><span class="ver">4.0.0.r1832.g23dab9e-1</span></header>
-  <p>Beautiful, modern, and opinionated Arch Linux by DHH (quattro branch tip)</p>
+  <p class="byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p>
+  <p class="card-description">Beautiful, modern, and opinionated Arch Linux by DHH (quattro branch tip)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">66 MB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-dev" aria-pressed="false" aria-label="Upvote omarchy-dev"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/omarchy-keyring.html"
@@ -2150,7 +2239,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-keyring.html">omarchy-keyring</a></h3><span class="ver">20251027-1</span></header>
-  <p>Omarchy keyring</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">Omarchy keyring</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">6.6 KB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-keyring" aria-pressed="false" aria-label="Upvote omarchy-keyring"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/opencl-nvidia-580xx.html"
@@ -2163,7 +2253,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/opencl-nvidia-580xx.html">opencl-nvidia-580xx</a></h3><span class="ver">580.178.04-1.1</span></header>
-  <p>OpenCL implemention for NVIDIA (580xx)</p>
+  <p class="byline">by <a href="https://www.nvidia.com" target="_blank" rel="author noopener">NVIDIA</a></p>
+  <p class="card-description">OpenCL implemention for NVIDIA (580xx)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">5.9 MB</span></span><button class="app-vote" type="button" data-vote-app="opencl-nvidia-580xx" aria-pressed="false" aria-label="Upvote opencl-nvidia-580xx"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/qmk-hid.html"
@@ -2176,7 +2267,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/qmk-hid.html">qmk-hid</a></h3><span class="ver">0.1.11-3</span></header>
-  <p>Commandline tool for interacting with QMK devices over HID</p>
+  <p class="byline">by <a href="https://frame.work" target="_blank" rel="author noopener">Framework</a></p>
+  <p class="card-description">Commandline tool for interacting with QMK devices over HID</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">437 KB</span></span><button class="app-vote" type="button" data-vote-app="qmk-hid" aria-pressed="false" aria-label="Upvote qmk-hid"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/rog-control-center.html"
@@ -2189,7 +2281,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/rog-control-center.html">rog-control-center</a></h3><span class="ver">6.3.8-1</span></header>
-  <p>App to control asusctl</p>
+  <p class="byline">by <a href="https://opengamingcollective.org" target="_blank" rel="author noopener">Open Gaming Collective</a></p>
+  <p class="card-description">App to control asusctl</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.7 MB</span></span><button class="app-vote" type="button" data-vote-app="rog-control-center" aria-pressed="false" aria-label="Upvote rog-control-center"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/supergfxctl.html"
@@ -2202,7 +2295,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/supergfxctl.html">supergfxctl</a></h3><span class="ver">5.2.7-2</span></header>
-  <p>A utility for Linux graphics switching on Intel/AMD iGPU + nVidia dGPU laptops</p>
+  <p class="byline">by <a href="https://asus-linux.org" target="_blank" rel="author noopener">ASUS Linux</a></p>
+  <p class="card-description">A utility for Linux graphics switching on Intel/AMD iGPU + nVidia dGPU laptops</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">2.3 MB</span></span><button class="app-vote" type="button" data-vote-app="supergfxctl" aria-pressed="false" aria-label="Upvote supergfxctl"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/tuxedo-drivers-nocompatcheck-dkms.html"
@@ -2215,7 +2309,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/tuxedo-drivers-nocompatcheck-dkms.html">tuxedo-drivers-nocompatcheck-dkms</a></h3><span class="ver">4.22.1-1</span></header>
-  <p>TUXEDO Computers kernel module drivers. Compatibility check disabled - works when using identical models from other brands, example being TUXEDO Pulse 14 Gen 4 and Schenker Via 14 Pro (M24)</p>
+  <p class="byline">by <a href="https://gitlab.com/kronerm" target="_blank" rel="author noopener">Martin Kröner</a></p>
+  <p class="card-description">TUXEDO Computers kernel module drivers. Compatibility check disabled - works when using identical models from other brands, example being TUXEDO Pulse 14 Gen 4 and Schenker Via 14 Pro (M24)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">89 KB</span></span><button class="app-vote" type="button" data-vote-app="tuxedo-drivers-nocompatcheck-dkms" aria-pressed="false" aria-label="Upvote tuxedo-drivers-nocompatcheck-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/v4l2-relayd.html"
@@ -2228,7 +2323,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/v4l2-relayd.html">v4l2-relayd</a></h3><span class="ver">0.2.0-2.2</span></header>
-  <p>Plays gstreamer sources into v4l2loopback devices.</p>
+  <p class="byline">by <a href="https://gitlab.com/vicamo/v4l2-relayd" target="_blank" rel="author noopener">v4l2-relayd contributors</a></p>
+  <p class="card-description">Plays gstreamer sources into v4l2loopback devices.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">12.6 KB</span></span><button class="app-vote" type="button" data-vote-app="v4l2-relayd" aria-pressed="false" aria-label="Upvote v4l2-relayd"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/xpadneo-dkms.html"
@@ -2241,7 +2337,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/xpadneo-dkms.html">xpadneo-dkms</a></h3><span class="ver">0.10.4-1</span></header>
-  <p>Advanced Linux Driver for Xbox One Wireless Gamepad</p>
+  <p class="byline">by <a href="https://github.com/atar-axis" target="_blank" rel="author noopener">Florian Dollinger</a></p>
+  <p class="card-description">Advanced Linux Driver for Xbox One Wireless Gamepad</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">89.1 KB</span></span><button class="app-vote" type="button" data-vote-app="xpadneo-dkms" aria-pressed="false" aria-label="Upvote xpadneo-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-system-drivers" data-detail-url="apps/yt6801-dkms.html"
@@ -2254,7 +2351,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yt6801-dkms.html">yt6801-dkms</a></h3><span class="ver">1.0.31-2</span></header>
-  <p>Kernel module for Motorcomm YT6801 ethernet controller (DKMS)</p>
+  <p class="byline">by <a href="https://www.motor-comm.com" target="_blank" rel="author noopener">Motorcomm</a></p>
+  <p class="card-description">Kernel module for Motorcomm YT6801 ethernet controller (DKMS)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">140 KB</span></span><button class="app-vote" type="button" data-vote-app="yt6801-dkms" aria-pressed="false" aria-label="Upvote yt6801-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -2272,7 +2370,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="jFdjIYfY-KM" data-yt-title="Heroic Games Launcher on Linux Demo">
   <header><h3><a href="apps/heroic-games-launcher-bin.html">heroic-games-launcher-bin</a></h3><span class="ver">2.22.1-1</span></header>
-  <p>An Open source Launcher for Epic, Amazon and GOG Games</p>
+  <p class="byline">by <a href="https://heroicgameslauncher.com" target="_blank" rel="author noopener">Heroic Games Launcher</a></p>
+  <p class="card-description">An Open source Launcher for Epic, Amazon and GOG Games</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">174.8 MB</span></span><button class="app-vote" type="button" data-vote-app="heroic-games-launcher-bin" aria-pressed="false" aria-label="Upvote heroic-games-launcher-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-cap32-git.html"
@@ -2285,7 +2384,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-cap32-git.html">libretro-cap32-git</a></h3><span class="ver">1:4.5.4.r51.g4abfb8b-1</span></header>
-  <p>Amstrad CPC core</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Amstrad CPC core</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">314.5 KB</span></span><button class="app-vote" type="button" data-vote-app="libretro-cap32-git" aria-pressed="false" aria-label="Upvote libretro-cap32-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-database-git.html"
@@ -2298,7 +2398,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-database-git.html">libretro-database-git</a></h3><span class="ver">1:1.22.1.r200.g9aec589-1</span></header>
-  <p>RetroArch&#x27;s cheatcode files, content data files, etc.</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">RetroArch&#x27;s cheatcode files, content data files, etc.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">66.6 MB</span></span><button class="app-vote" type="button" data-vote-app="libretro-database-git" aria-pressed="false" aria-label="Upvote libretro-database-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-fbneo-git.html"
@@ -2311,7 +2412,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-fbneo-git.html">libretro-fbneo-git</a></h3><span class="ver">1:1.0.0.02.r8581.g074bf13-1</span></header>
-  <p>FinalBurn Neo multi-arcade core</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">FinalBurn Neo multi-arcade core</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">15 MB</span></span><button class="app-vote" type="button" data-vote-app="libretro-fbneo-git" aria-pressed="false" aria-label="Upvote libretro-fbneo-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-uae-git.html"
@@ -2324,7 +2426,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-uae-git.html">libretro-uae-git</a></h3><span class="ver">1720.232ec89b-1</span></header>
-  <p>A port of the Commodore Amiga Emulator to libretro (WIP)</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">A port of the Commodore Amiga Emulator to libretro (WIP)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.5 MB</span></span><button class="app-vote" type="button" data-vote-app="libretro-uae-git" aria-pressed="false" aria-label="Upvote libretro-uae-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-vice-x128-git.html"
@@ -2337,7 +2440,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-vice-x128-git.html">libretro-vice-x128-git</a></h3><span class="ver">r21255.fdda9d0-1</span></header>
-  <p>Commodore C128 core</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Commodore C128 core</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1.3 MB</span></span><button class="app-vote" type="button" data-vote-app="libretro-vice-x128-git" aria-pressed="false" aria-label="Upvote libretro-vice-x128-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-vice-x64-git.html"
@@ -2350,7 +2454,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-vice-x64-git.html">libretro-vice-x64-git</a></h3><span class="ver">r21255.fdda9d0-1</span></header>
-  <p>Commodore C64 core (fast)</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Commodore C64 core (fast)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1.1 MB</span></span><button class="app-vote" type="button" data-vote-app="libretro-vice-x64-git" aria-pressed="false" aria-label="Upvote libretro-vice-x64-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-vice-x64dtv-git.html"
@@ -2363,7 +2468,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-vice-x64dtv-git.html">libretro-vice-x64dtv-git</a></h3><span class="ver">r21255.fdda9d0-1</span></header>
-  <p>Commodore C64DTV core</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Commodore C64DTV core</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">842.6 KB</span></span><button class="app-vote" type="button" data-vote-app="libretro-vice-x64dtv-git" aria-pressed="false" aria-label="Upvote libretro-vice-x64dtv-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-vice-x64sc-git.html"
@@ -2376,7 +2482,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-vice-x64sc-git.html">libretro-vice-x64sc-git</a></h3><span class="ver">r21255.fdda9d0-1</span></header>
-  <p>Commodore C64 core (accurate)</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Commodore C64 core (accurate)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1.1 MB</span></span><button class="app-vote" type="button" data-vote-app="libretro-vice-x64sc-git" aria-pressed="false" aria-label="Upvote libretro-vice-x64sc-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-vice-xcbm2-git.html"
@@ -2389,7 +2496,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-vice-xcbm2-git.html">libretro-vice-xcbm2-git</a></h3><span class="ver">r21255.fdda9d0-1</span></header>
-  <p>Commodore CBM-II 6x0/7x0 core</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Commodore CBM-II 6x0/7x0 core</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">782.7 KB</span></span><button class="app-vote" type="button" data-vote-app="libretro-vice-xcbm2-git" aria-pressed="false" aria-label="Upvote libretro-vice-xcbm2-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-vice-xcbm5x0-git.html"
@@ -2402,7 +2510,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-vice-xcbm5x0-git.html">libretro-vice-xcbm5x0-git</a></h3><span class="ver">r21255.fdda9d0-1</span></header>
-  <p>Commodore CBM-II 5x0 core</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Commodore CBM-II 5x0 core</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">810.4 KB</span></span><button class="app-vote" type="button" data-vote-app="libretro-vice-xcbm5x0-git" aria-pressed="false" aria-label="Upvote libretro-vice-xcbm5x0-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-vice-xpet-git.html"
@@ -2415,7 +2524,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-vice-xpet-git.html">libretro-vice-xpet-git</a></h3><span class="ver">r21255.fdda9d0-1</span></header>
-  <p>Commodore PET core</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Commodore PET core</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">818.5 KB</span></span><button class="app-vote" type="button" data-vote-app="libretro-vice-xpet-git" aria-pressed="false" aria-label="Upvote libretro-vice-xpet-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-vice-xplus4-git.html"
@@ -2428,7 +2538,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-vice-xplus4-git.html">libretro-vice-xplus4-git</a></h3><span class="ver">r21255.fdda9d0-1</span></header>
-  <p>Commodore Plus/4 core</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Commodore Plus/4 core</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">895.2 KB</span></span><button class="app-vote" type="button" data-vote-app="libretro-vice-xplus4-git" aria-pressed="false" aria-label="Upvote libretro-vice-xplus4-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-vice-xscpu64-git.html"
@@ -2441,7 +2552,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-vice-xscpu64-git.html">libretro-vice-xscpu64-git</a></h3><span class="ver">r21255.fdda9d0-1</span></header>
-  <p>Commodore C64 SuperCPU core</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Commodore C64 SuperCPU core</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1.1 MB</span></span><button class="app-vote" type="button" data-vote-app="libretro-vice-xscpu64-git" aria-pressed="false" aria-label="Upvote libretro-vice-xscpu64-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/libretro-vice-xvic-git.html"
@@ -2454,7 +2566,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/libretro-vice-xvic-git.html">libretro-vice-xvic-git</a></h3><span class="ver">r21255.fdda9d0-1</span></header>
-  <p>Commodore VIC-20 core</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">Commodore VIC-20 core</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">896.2 KB</span></span><button class="app-vote" type="button" data-vote-app="libretro-vice-xvic-git" aria-pressed="false" aria-label="Upvote libretro-vice-xvic-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/minecraft-launcher.html"
@@ -2467,7 +2580,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="vVU2inKbx4s" data-yt-title="BRAND NEW OFFICIAL MINECRAFT LAUNCHER">
   <header><h3><a href="apps/minecraft-launcher.html">minecraft-launcher</a></h3><span class="ver">1:2.1.3-3</span></header>
-  <p>Official Minecraft Launcher</p>
+  <p class="byline">by <a href="https://www.minecraft.net" target="_blank" rel="author noopener">Mojang Studios</a></p>
+  <p class="card-description">Official Minecraft Launcher</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1.1 MB</span></span><button class="app-vote" type="button" data-vote-app="minecraft-launcher" aria-pressed="false" aria-label="Upvote minecraft-launcher"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/omakade.html"
@@ -2480,7 +2594,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omakade.html">omakade</a></h3><span class="ver">1.4.0-1</span></header>
-  <p>A beautiful, local-first game library for Omarchy</p>
+  <p class="byline">by <a href="https://btso.dev" target="_blank" rel="author noopener">Tyler</a></p>
+  <p class="card-description">A beautiful, local-first game library for Omarchy</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">801.6 KB</span></span><button class="app-vote" type="button" data-vote-app="omakade" aria-pressed="false" aria-label="Upvote omakade"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/retroarch-joypad-autoconfig-git.html"
@@ -2493,7 +2608,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/retroarch-joypad-autoconfig-git.html">retroarch-joypad-autoconfig-git</a></h3><span class="ver">1.22.0.r96.g0331510-1</span></header>
-  <p>RetroArch joypad autoconfig files</p>
+  <p class="byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p>
+  <p class="card-description">RetroArch joypad autoconfig files</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">333.6 KB</span></span><button class="app-vote" type="button" data-vote-app="retroarch-joypad-autoconfig-git" aria-pressed="false" aria-label="Upvote retroarch-joypad-autoconfig-git"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/sunshine.html"
@@ -2506,7 +2622,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="zVKmQTkLvLY" data-yt-title="Setting up game streaming with Sunshine and Moonlight on Bazzite">
   <header><h3><a href="apps/sunshine.html">sunshine</a></h3><span class="ver">2026.516.143833-4</span></header>
-  <p>Self-hosted game stream host for Moonlight</p>
+  <p class="byline">by <a href="https://app.lizardbyte.dev" target="_blank" rel="author noopener">LizardByte</a></p>
+  <p class="card-description">Self-hosted game stream host for Moonlight</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.7 MB</span></span><button class="app-vote" type="button" data-vote-app="sunshine" aria-pressed="false" aria-label="Upvote sunshine"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/umu-launcher.html"
@@ -2519,7 +2636,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/umu-launcher.html">umu-launcher</a></h3><span class="ver">1.1.3-1.1</span></header>
-  <p>This is the Unified Launcher for Windows Games on Linux, to run Proton with fixes outside of Steam</p>
+  <p class="byline">by <a href="https://github.com/Open-Wine-Components" target="_blank" rel="author noopener">Open Wine Components</a></p>
+  <p class="card-description">This is the Unified Launcher for Windows Games on Linux, to run Proton with fixes outside of Steam</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">98.7 KB</span></span><button class="app-vote" type="button" data-vote-app="umu-launcher" aria-pressed="false" aria-label="Upvote umu-launcher"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -2538,7 +2656,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="7vYp_mhaTKo" data-yt-title="The Ultimate Terminal Music Player? Meet Cliamp.">
   <header><h3><a href="apps/cliamp.html">cliamp</a></h3><span class="ver">1.63.2-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>A retro terminal music player inspired by Winamp 2.x</p>
+  <p class="byline">by <a href="https://x.com/iamdothash" target="_blank" rel="author noopener">bjarneo</a></p>
+  <p class="card-description">A retro terminal music player inspired by Winamp 2.x</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">12.2 MB</span></span><button class="app-vote" type="button" data-vote-app="cliamp" aria-pressed="false" aria-label="Upvote cliamp"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-media-creative" data-detail-url="apps/gpu-screen-recorder.html"
@@ -2551,7 +2670,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/gpu-screen-recorder.html">gpu-screen-recorder</a></h3><span class="ver">5.12.3-2</span></header>
-  <p>A shadowplay-like screen recorder for Linux. The fastest screen recorder for Linux</p>
+  <p class="byline">by <a href="https://git.dec05eba.com" target="_blank" rel="author noopener">dec05eba</a></p>
+  <p class="card-description">A shadowplay-like screen recorder for Linux. The fastest screen recorder for Linux</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">211.4 KB</span></span><button class="app-vote" type="button" data-vote-app="gpu-screen-recorder" aria-pressed="false" aria-label="Upvote gpu-screen-recorder"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-media-creative" data-detail-url="apps/omacut.html"
@@ -2564,7 +2684,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omacut.html">omacut</a></h3><span class="ver">0.4.0-1</span></header>
-  <p>Dead-simple video length trimmer built with Qt Quick and ffmpeg</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">Dead-simple video length trimmer built with Qt Quick and ffmpeg</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">96.6 KB</span></span><button class="app-vote" type="button" data-vote-app="omacut" aria-pressed="false" aria-label="Upvote omacut"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-media-creative indie-app" data-detail-url="apps/omasnap.html"
@@ -2578,7 +2699,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omasnap.html">omasnap</a></h3><span class="ver">1.19.1-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Native Wayland screenshot and annotation overlay for Hyprland</p>
+  <p class="byline">by <a href="https://tobi.lutke.com" target="_blank" rel="author noopener">Tobias Lütke</a></p>
+  <p class="card-description">Native Wayland screenshot and annotation overlay for Hyprland</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">476.2 KB</span></span><button class="app-vote" type="button" data-vote-app="omasnap" aria-pressed="false" aria-label="Upvote omasnap"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-media-creative" data-detail-url="apps/pinta.html"
@@ -2591,7 +2713,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="JMyrf7nz-fc" data-yt-title="Pinta 2.0.1 - Drawing &amp; Image Editor for Linux, macOS, &amp; Windows Users">
   <header><h3><a href="apps/pinta.html">pinta</a></h3><span class="ver">3.1.2-1</span></header>
-  <p>Drawing/editing program modeled after Paint.NET. It&#x27;s goal is to provide a simplified alternative to GIMP for casual users</p>
+  <p class="byline">by <a href="https://pinta-project.com" target="_blank" rel="author noopener">Pinta contributors</a></p>
+  <p class="card-description">Drawing/editing program modeled after Paint.NET. It&#x27;s goal is to provide a simplified alternative to GIMP for casual users</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">7.2 MB</span></span><button class="app-vote" type="button" data-vote-app="pinta" aria-pressed="false" aria-label="Upvote pinta"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-media-creative" data-detail-url="apps/schist.html"
@@ -2604,7 +2727,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/schist.html">schist</a></h3><span class="ver">0.11.0-1</span></header>
-  <p>Layered image editor with PSD and Affinity support</p>
+  <p class="byline">by <a href="https://infrawrench.com" target="_blank" rel="author noopener">Infrawrench LLC</a></p>
+  <p class="card-description">Layered image editor with PSD and Affinity support</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">37.1 MB</span></span><button class="app-vote" type="button" data-vote-app="schist" aria-pressed="false" aria-label="Upvote schist"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-media-creative" data-detail-url="apps/spotify.html"
@@ -2617,7 +2741,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/spotify.html">spotify</a></h3><span class="ver">1:1.2.96.518-2</span></header>
-  <p>A proprietary music streaming service</p>
+  <p class="byline">by <a href="https://www.spotify.com" target="_blank" rel="author noopener">Spotify</a></p>
+  <p class="card-description">A proprietary music streaming service</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">166.2 MB</span></span><button class="app-vote" type="button" data-vote-app="spotify" aria-pressed="false" aria-label="Upvote spotify"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-media-creative indie-app" data-detail-url="apps/tensaku.html"
@@ -2631,7 +2756,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/tensaku.html">tensaku</a></h3><span class="ver">0.28.0-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Modern screenshot annotation tool for Wayland</p>
+  <p class="byline">by <a href="https://x.com/jondkinney" target="_blank" rel="author noopener">Jon Kinney</a></p>
+  <p class="card-description">Modern screenshot annotation tool for Wayland</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">3.4 MB</span></span><button class="app-vote" type="button" data-vote-app="tensaku" aria-pressed="false" aria-label="Upvote tensaku"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -2649,7 +2775,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/basecamp-cli.html">basecamp-cli</a></h3><span class="ver">0.9.1-1</span></header>
-  <p>CLI for Basecamp project management</p>
+  <p class="byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p>
+  <p class="card-description">CLI for Basecamp project management</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">12.4 MB</span></span><button class="app-vote" type="button" data-vote-app="basecamp-cli" aria-pressed="false" aria-label="Upvote basecamp-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-productivity-notes indie-app" data-detail-url="apps/omapresent.html"
@@ -2663,7 +2790,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omapresent.html">omapresent</a></h3><span class="ver">0.1.3-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Dead-simple, Markdown-only presentation app built with Qt Quick</p>
+  <p class="byline">by <a href="https://github.com/jethrojones" target="_blank" rel="author noopener">Jethro Jones</a></p>
+  <p class="card-description">Dead-simple, Markdown-only presentation app built with Qt Quick</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1.1 MB</span></span><button class="app-vote" type="button" data-vote-app="omapresent" aria-pressed="false" aria-label="Upvote omapresent"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-productivity-notes" data-detail-url="apps/omawrite.html"
@@ -2676,7 +2804,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omawrite.html">omawrite</a></h3><span class="ver">0.5.0-1</span></header>
-  <p>Dead-simple Markdown writing app built with Qt Quick</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">Dead-simple Markdown writing app built with Qt Quick</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">230.2 KB</span></span><button class="app-vote" type="button" data-vote-app="omawrite" aria-pressed="false" aria-label="Upvote omawrite"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-productivity-notes" data-detail-url="apps/typora.html"
@@ -2689,7 +2818,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/typora.html">typora</a></h3><span class="ver">1.14.9-1</span></header>
-  <p>A minimal markdown editor and reader.</p>
+  <p class="byline">by <a href="https://typora.io" target="_blank" rel="author noopener">Typora</a></p>
+  <p class="card-description">A minimal markdown editor and reader.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">136.5 MB</span></span><button class="app-vote" type="button" data-vote-app="typora" aria-pressed="false" aria-label="Upvote typora"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -2707,7 +2837,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/1password.html">1password</a></h3><span class="ver">8.12.34-34</span></header>
-  <p>Password manager and secure wallet</p>
+  <p class="byline">by <a href="https://1password.com" target="_blank" rel="author noopener">1Password</a></p>
+  <p class="card-description">Password manager and secure wallet</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">199.2 MB</span></span><button class="app-vote" type="button" data-vote-app="1password" aria-pressed="false" aria-label="Upvote 1password"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-security-privacy" data-detail-url="apps/1password-beta.html"
@@ -2720,7 +2851,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/1password-beta.html">1password-beta</a></h3><span class="ver">8.12.34_29.BETA-29.1</span></header>
-  <p>Password manager and secure wallet</p>
+  <p class="byline">by <a href="https://1password.com" target="_blank" rel="author noopener">1Password</a></p>
+  <p class="card-description">Password manager and secure wallet</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">199.2 MB</span></span><button class="app-vote" type="button" data-vote-app="1password-beta" aria-pressed="false" aria-label="Upvote 1password-beta"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-security-privacy" data-detail-url="apps/1password-cli.html"
@@ -2733,7 +2865,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/1password-cli.html">1password-cli</a></h3><span class="ver">2.39.0-1</span></header>
-  <p>1Password command line tool</p>
+  <p class="byline">by <a href="https://1password.com" target="_blank" rel="author noopener">1Password</a></p>
+  <p class="card-description">1Password command line tool</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">14.4 MB</span></span><button class="app-vote" type="button" data-vote-app="1password-cli" aria-pressed="false" aria-label="Upvote 1password-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-security-privacy" data-detail-url="apps/nordvpn-bin.html"
@@ -2746,7 +2879,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/nordvpn-bin.html">nordvpn-bin</a></h3><span class="ver">5.3.0-1</span></header>
-  <p>NordVPN CLI tool for Linux</p>
+  <p class="byline">by <a href="https://nordsecurity.com" target="_blank" rel="author noopener">Nord Security</a></p>
+  <p class="card-description">NordVPN CLI tool for Linux</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">42.4 MB</span></span><button class="app-vote" type="button" data-vote-app="nordvpn-bin" aria-pressed="false" aria-label="Upvote nordvpn-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-security-privacy indie-app" data-detail-url="apps/ufw-docker.html"
@@ -2760,7 +2894,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/ufw-docker.html">ufw-docker</a></h3><span class="ver">251123-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>To fix the Docker and UFW security flaw without disabling iptables.</p>
+  <p class="byline">by <a href="https://chaifeng.com" target="_blank" rel="author noopener">Chai Feng</a></p>
+  <p class="card-description">To fix the Docker and UFW security flaw without disabling iptables.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">27.4 KB</span></span><button class="app-vote" type="button" data-vote-app="ufw-docker" aria-pressed="false" aria-label="Upvote ufw-docker"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -2778,7 +2913,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-chromium.html">omarchy-chromium</a></h3><span class="ver">148.0.7778.96-21</span></header>
-  <p>A web browser built for speed, simplicity, and security, with patches for Omarchy</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">A web browser built for speed, simplicity, and security, with patches for Omarchy</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">154.2 MB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-chromium" aria-pressed="false" aria-label="Upvote omarchy-chromium"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-browsers-web" data-detail-url="apps/omarchy-chromium-bin.html"
@@ -2791,7 +2927,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omarchy-chromium-bin.html">omarchy-chromium-bin</a></h3><span class="ver">148.0.7778.96-21</span></header>
-  <p>A web browser built for speed, simplicity, and security, with patches for Omarchy (binary package)</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">A web browser built for speed, simplicity, and security, with patches for Omarchy (binary package)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">154.2 MB</span></span><button class="app-vote" type="button" data-vote-app="omarchy-chromium-bin" aria-pressed="false" aria-label="Upvote omarchy-chromium-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -2809,7 +2946,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/hey-cli.html">hey-cli</a></h3><span class="ver">1.3.0-1</span></header>
-  <p>CLI for HEY email</p>
+  <p class="byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p>
+  <p class="card-description">CLI for HEY email</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">12.4 MB</span></span><button class="app-vote" type="button" data-vote-app="hey-cli" aria-pressed="false" aria-label="Upvote hey-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -2827,7 +2965,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/dbxcli-bin.html">dbxcli-bin</a></h3><span class="ver">3.7.2-1</span></header>
-  <p>A command line client for Dropbox built using the Go SDK</p>
+  <p class="byline">by <a href="https://dropbox.com" target="_blank" rel="author noopener">Dropbox</a></p>
+  <p class="card-description">A command line client for Dropbox built using the Go SDK</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">3.4 MB</span></span><button class="app-vote" type="button" data-vote-app="dbxcli-bin" aria-pressed="false" aria-label="Upvote dbxcli-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/dropbox.html"
@@ -2840,7 +2979,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/dropbox.html">dropbox</a></h3><span class="ver">264.4.3421-1</span></header>
-  <p>A free service that lets you bring your photos, docs, and videos anywhere and share them easily.</p>
+  <p class="byline">by <a href="https://dropbox.com" target="_blank" rel="author noopener">Dropbox</a></p>
+  <p class="card-description">A free service that lets you bring your photos, docs, and videos anywhere and share them easily.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">88.5 MB</span></span><button class="app-vote" type="button" data-vote-app="dropbox" aria-pressed="false" aria-label="Upvote dropbox"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/dropbox-cli.html"
@@ -2853,7 +2993,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/dropbox-cli.html">dropbox-cli</a></h3><span class="ver">2024.04.17-2</span></header>
-  <p>Command line interface for Dropbox</p>
+  <p class="byline">by <a href="https://dropbox.com" target="_blank" rel="author noopener">Dropbox</a></p>
+  <p class="card-description">Command line interface for Dropbox</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">24.1 KB</span></span><button class="app-vote" type="button" data-vote-app="dropbox-cli" aria-pressed="false" aria-label="Upvote dropbox-cli"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities indie-app" data-detail-url="apps/elephant.html"
@@ -2867,7 +3008,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant.html">elephant</a></h3><span class="ver">2.22.0-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>general purpose datasource and executor</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">general purpose datasource and executor</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.5 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant" aria-pressed="false" aria-label="Upvote elephant"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-all.html"
@@ -2880,7 +3022,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-all.html">elephant-all</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>elephant + all official elephant providers</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">elephant + all official elephant providers</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">210.7 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-all" aria-pressed="false" aria-label="Upvote elephant-all"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-archlinuxpkgs.html"
@@ -2893,7 +3036,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-archlinuxpkgs.html">elephant-archlinuxpkgs</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>archlinuxpkgs provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">archlinuxpkgs provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.2 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-archlinuxpkgs" aria-pressed="false" aria-label="Upvote elephant-archlinuxpkgs"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-bluetooth.html"
@@ -2906,7 +3050,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-bluetooth.html">elephant-bluetooth</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>bluetooth provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">bluetooth provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-bluetooth" aria-pressed="false" aria-label="Upvote elephant-bluetooth"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-calc.html"
@@ -2919,7 +3064,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-calc.html">elephant-calc</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>calc provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">calc provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-calc" aria-pressed="false" aria-label="Upvote elephant-calc"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-clipboard.html"
@@ -2932,7 +3078,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-clipboard.html">elephant-clipboard</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>clipboard provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">clipboard provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.4 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-clipboard" aria-pressed="false" aria-label="Upvote elephant-clipboard"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-desktopapplications.html"
@@ -2945,7 +3092,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-desktopapplications.html">elephant-desktopapplications</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>desktopapplications provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">desktopapplications provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.2 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-desktopapplications" aria-pressed="false" aria-label="Upvote elephant-desktopapplications"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-files.html"
@@ -2958,7 +3106,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-files.html">elephant-files</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>files provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">files provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">9 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-files" aria-pressed="false" aria-label="Upvote elephant-files"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-menus.html"
@@ -2971,7 +3120,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-menus.html">elephant-menus</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>menus provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">menus provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-menus" aria-pressed="false" aria-label="Upvote elephant-menus"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-providerlist.html"
@@ -2984,7 +3134,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-providerlist.html">elephant-providerlist</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>providerlist provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">providerlist provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.1 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-providerlist" aria-pressed="false" aria-label="Upvote elephant-providerlist"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-runner.html"
@@ -2997,7 +3148,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-runner.html">elephant-runner</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>runner provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">runner provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-runner" aria-pressed="false" aria-label="Upvote elephant-runner"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-symbols.html"
@@ -3010,7 +3162,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-symbols.html">elephant-symbols</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>symbols provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">symbols provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">20.7 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-symbols" aria-pressed="false" aria-label="Upvote elephant-symbols"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-todo.html"
@@ -3023,7 +3176,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-todo.html">elephant-todo</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>todo provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">todo provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">10.9 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-todo" aria-pressed="false" aria-label="Upvote elephant-todo"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-unicode.html"
@@ -3036,7 +3190,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-unicode.html">elephant-unicode</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>unicode provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">unicode provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.3 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-unicode" aria-pressed="false" aria-label="Upvote elephant-unicode"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/elephant-websearch.html"
@@ -3049,7 +3204,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/elephant-websearch.html">elephant-websearch</a></h3><span class="ver">2.22.0-1</span></header>
-  <p>websearch provider for elephant</p>
+  <p class="byline">by <a href="https://x.com/abenzdev1" target="_blank" rel="author noopener">Andrej Benz</a></p>
+  <p class="card-description">websearch provider for elephant</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">8.1 MB</span></span><button class="app-vote" type="button" data-vote-app="elephant-websearch" aria-pressed="false" aria-label="Upvote elephant-websearch"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/localsend.html"
@@ -3062,7 +3218,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="mCaSGrCDo9I" data-yt-title="LocalSend - Airdrop for us All!">
   <header><h3><a href="apps/localsend.html">localsend</a></h3><span class="ver">1.18.2-1</span></header>
-  <p>An open source cross-platform alternative to AirDrop</p>
+  <p class="byline">by <a href="https://localsend.org" target="_blank" rel="author noopener">LocalSend</a></p>
+  <p class="card-description">An open source cross-platform alternative to AirDrop</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">26.6 MB</span></span><button class="app-vote" type="button" data-vote-app="localsend" aria-pressed="false" aria-label="Upvote localsend"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/localsend-bin.html"
@@ -3075,7 +3232,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="mCaSGrCDo9I" data-yt-title="LocalSend - Airdrop for us All!">
   <header><h3><a href="apps/localsend-bin.html">localsend-bin</a></h3><span class="ver">1.18.0-1</span></header>
-  <p>An open source cross-platform alternative to AirDrop</p>
+  <p class="byline">by <a href="https://localsend.org" target="_blank" rel="author noopener">LocalSend</a></p>
+  <p class="card-description">An open source cross-platform alternative to AirDrop</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">20.9 MB</span></span><button class="app-vote" type="button" data-vote-app="localsend-bin" aria-pressed="false" aria-label="Upvote localsend-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/nautilus-dropbox.html"
@@ -3088,7 +3246,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/nautilus-dropbox.html">nautilus-dropbox</a></h3><span class="ver">2026.05.06-1</span></header>
-  <p>Dropbox Nautilus Extension</p>
+  <p class="byline">by <a href="https://dropbox.com" target="_blank" rel="author noopener">Dropbox</a></p>
+  <p class="card-description">Dropbox Nautilus Extension</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">73.6 KB</span></span><button class="app-vote" type="button" data-vote-app="nautilus-dropbox" aria-pressed="false" aria-label="Upvote nautilus-dropbox"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/omacalc.html"
@@ -3101,7 +3260,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omacalc.html">omacalc</a></h3><span class="ver">0.2.2-1</span></header>
-  <p>Dead-simple calculator built with Qt Quick</p>
+  <p class="byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p>
+  <p class="card-description">Dead-simple calculator built with Qt Quick</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">132.7 KB</span></span><button class="app-vote" type="button" data-vote-app="omacalc" aria-pressed="false" aria-label="Upvote omacalc"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities indie-app" data-detail-url="apps/omatrack.html"
@@ -3115,7 +3275,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/omatrack.html">omatrack</a></h3><span class="ver">1.2.0-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Cross-format motorsport telemetry analysis workstation</p>
+  <p class="byline">by <a href="https://tobi.lutke.com" target="_blank" rel="author noopener">Tobias Lütke</a></p>
+  <p class="card-description">Cross-format motorsport telemetry analysis workstation</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">2.9 MB</span></span><button class="app-vote" type="button" data-vote-app="omatrack" aria-pressed="false" aria-label="Upvote omatrack"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/rustdesk.html"
@@ -3128,7 +3289,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/rustdesk.html">rustdesk</a></h3><span class="ver">1.4.9-1</span></header>
-  <p>Yet another remote desktop software, written in Rust. Works out of the box, no configuration required. Great alternative to TeamViewer and AnyDesk!</p>
+  <p class="byline">by <a href="https://rustdesk.com" target="_blank" rel="author noopener">RustDesk</a></p>
+  <p class="card-description">Yet another remote desktop software, written in Rust. Works out of the box, no configuration required. Great alternative to TeamViewer and AnyDesk!</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">31.1 MB</span></span><button class="app-vote" type="button" data-vote-app="rustdesk" aria-pressed="false" aria-label="Upvote rustdesk"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/tmog-bin.html"
@@ -3141,7 +3303,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="9hCi17Qe0no" data-yt-title="TMOG: Dave Answers Your Questions + Rates 23 Feature Requests">
   <header><h3><a href="apps/tmog-bin.html">tmog-bin</a></h3><span class="ver">0.1.1-1</span></header>
-  <p>Native system monitor and task manager</p>
+  <p class="byline">by <a href="https://x.com/dhh" target="_blank" rel="author noopener">David Heinemeier Hansson</a></p>
+  <p class="card-description">Native system monitor and task manager</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">7.9 MB</span></span><button class="app-vote" type="button" data-vote-app="tmog-bin" aria-pressed="false" aria-label="Upvote tmog-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities indie-app" data-detail-url="apps/tzupdate.html"
@@ -3155,7 +3318,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/tzupdate.html">tzupdate</a></h3><span class="ver">3.1.0-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Set the system timezone based on IP geolocation</p>
+  <p class="byline">by <a href="https://chrisdown.name" target="_blank" rel="author noopener">Chris Down</a></p>
+  <p class="card-description">Set the system timezone based on IP geolocation</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1.2 MB</span></span><button class="app-vote" type="button" data-vote-app="tzupdate" aria-pressed="false" aria-label="Upvote tzupdate"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/voxtype-bin.html"
@@ -3168,7 +3332,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-indie-note=""
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/voxtype-bin.html">voxtype-bin</a></h3><span class="ver">1.0.1-1</span></header>
-  <p>Push-to-talk voice-to-text for Linux (pre-built binaries)</p>
+  <p class="byline">by <a href="https://voxtype.io" target="_blank" rel="author noopener">Voxtype</a></p>
+  <p class="card-description">Push-to-talk voice-to-text for Linux (pre-built binaries)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">334.4 MB</span></span><button class="app-vote" type="button" data-vote-app="voxtype-bin" aria-pressed="false" aria-label="Upvote voxtype-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities indie-app" data-detail-url="apps/wayfreeze.html"
@@ -3182,7 +3347,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/wayfreeze.html">wayfreeze</a></h3><span class="ver">0.2.0-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Tool to freeze the screen of a Wayland compositor</p>
+  <p class="byline">by <a href="https://jappie.dev" target="_blank" rel="author noopener">Jappie3</a></p>
+  <p class="card-description">Tool to freeze the screen of a Wayland compositor</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1 MB</span></span><button class="app-vote" type="button" data-vote-app="wayfreeze" aria-pressed="false" aria-label="Upvote wayfreeze"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
 <article class="card cat-utilities indie-app" data-detail-url="apps/yay.html"
@@ -3196,7 +3362,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   data-yt="" data-yt-title="">
   <header><h3><a href="apps/yay.html">yay</a></h3><span class="ver">13.0.1-1</span></header>
   <span class="indie-sticker card-sticker" title="Individual-maintained upstream project">Indie app</span>
-  <p>Yet another yogurt. Pacman wrapper and AUR helper written in go.</p>
+  <p class="byline">by <a href="https://jguer.space" target="_blank" rel="author noopener">Jo</a></p>
+  <p class="card-description">Yet another yogurt. Pacman wrapper and AUR helper written in go.</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">4.7 MB</span></span><button class="app-vote" type="button" data-vote-app="yay" aria-pressed="false" aria-label="Upvote yay"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></footer>
 </article>
   </div>
@@ -3589,6 +3756,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   document.querySelectorAll(".card").forEach(function (c) {
     c.addEventListener("click", function (e) {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+      if (e.target.closest(".byline a")) return;
       e.preventDefault();
       open(c);
     });

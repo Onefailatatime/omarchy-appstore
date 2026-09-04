@@ -30,6 +30,7 @@ PKGS_REPO = ROOT / "data" / "omarchy-pkgs"
 CATEGORIES_FILE = ROOT / "data" / "categories.json"
 ENRICHMENT_FILE = ROOT / "data" / "enrichment.json"
 INDIE_FILE = ROOT / "data" / "indie.json"
+AUTHORS_FILE = ROOT / "data" / "authors.json"
 FALLBACK_CATEGORY = "Utilities"
 NEW_ARRIVALS = 4
 CONTACT_URL = "https://x.com/jessyka_boat"
@@ -246,12 +247,31 @@ def human_size(n: int) -> str:
     return f"{n} GB"
 
 
+def author_for(name: str, url: str, github: str, authors: dict) -> dict:
+    """Resolve a public creator identity without guessing from package names."""
+    override = authors.get("packages", {}).get(name)
+    if override:
+        return override
+    for candidate in (github, url):
+        parsed = urllib.parse.urlparse(candidate or "")
+        if parsed.netloc.lower() not in ("github.com", "www.github.com"):
+            continue
+        owner = urllib.parse.unquote(parsed.path.strip("/").split("/", 1)[0])
+        profile = authors.get("github_owners", {}).get(owner.lower())
+        if profile:
+            return profile
+        if owner:
+            return {"name": owner, "url": f"https://github.com/{urllib.parse.quote(owner)}"}
+    return {}
+
+
 def load_packages() -> list[dict]:
     raw = zstd.decompress(fetch_db())
     index = pkgbuild_index()
     categories = json.loads(CATEGORIES_FILE.read_text()) if CATEGORIES_FILE.exists() else {}
     enrichment = json.loads(ENRICHMENT_FILE.read_text()) if ENRICHMENT_FILE.exists() else {}
     indie = json.loads(INDIE_FILE.read_text()) if INDIE_FILE.exists() else {}
+    authors = json.loads(AUTHORS_FILE.read_text()) if AUTHORS_FILE.exists() else {}
     pkgs = []
     with tarfile.open(fileobj=io.BytesIO(raw)) as tar:
         for member in tar.getmembers():
@@ -274,6 +294,7 @@ def load_packages() -> list[dict]:
             if github == url:
                 github = None  # nothing to add — the project's site already is its GitHub repo
             prof = enrichment.get(name, {})
+            author = author_for(name, url, github or "", authors)
             pkgs.append({
                 "name": name,
                 "dir": directory,
@@ -298,6 +319,8 @@ def load_packages() -> list[dict]:
                 "youtube_id": prof.get("youtube_id", ""),
                 "youtube_title": prof.get("youtube_title", ""),
                 "indie_note": indie.get(name, ""),
+                "author_name": author.get("name", ""),
+                "author_url": author.get("url", ""),
             })
     pkgs.sort(key=lambda p: p["name"])
     return pkgs
@@ -379,6 +402,9 @@ def card(p: dict, featured: bool = False) -> str:
     indie_sticker = (f'<span class="indie-sticker card-sticker" title="{e["indie_note"]}">Indie app</span>'
                       if p.get("indie_note") else "")
     indie_line = f"  {indie_sticker}\n" if indie_sticker else ""
+    byline = (f'<p class="byline">by <a href="{e["author_url"]}" target="_blank" '
+              f'rel="author noopener">{e["author_name"]}</a></p>'
+              if p.get("author_name") and p.get("author_url") else "")
     vote_button = (f'<button class="app-vote" type="button" data-vote-app="{e["name"]}" aria-pressed="false" '
                    f'aria-label="Upvote {e["name"]}"><span aria-hidden="true">▲</span> '
                    f'<span data-vote-count>0</span></button>')
@@ -392,7 +418,8 @@ def card(p: dict, featured: bool = False) -> str:
   data-indie-note="{e['indie_note']}"
   data-yt="{e['youtube_id']}" data-yt-title="{e['youtube_title']}">
   <header><h3><a href="{detail_url}">{e['name']}</a></h3><span class="ver">{e['version']}</span></header>
-{indie_line}  <p>{e['desc'] or '<em>No description provided.</em>'}</p>
+{indie_line}  {byline}
+  <p class="card-description">{e['desc'] or '<em>No description provided.</em>'}</p>
   <footer>{footer}{vote_button}</footer>
 </article>"""
 
@@ -466,6 +493,9 @@ def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
     pricing = p.get("pricing_note") or p.get("pricing") or "Check the project site for current pricing."
     indie_sticker = (f'<span class="indie-sticker" title="{html.escape(p["indie_note"])}">Indie app</span>'
                       if p.get("indie_note") else "")
+    author = (f'by <a href="{html.escape(p["author_url"])}" target="_blank" '
+              f'rel="author noopener">{html.escape(p["author_name"])}</a>'
+              if p.get("author_name") and p.get("author_url") else "")
     replacements = {
         "__STYLE__": css,
         "__SITE_URL__": SITE_URL,
@@ -481,6 +511,7 @@ def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
         "__INSTALLED_SIZE__": html.escape(p["isize"]),
         "__PRICING__": html.escape(pricing),
         "__INDIE_STICKER__": indie_sticker,
+        "__AUTHOR__": author,
         "__REQUIREMENTS__": reqs or "<li>No special requirements documented.</li>",
         "__SCREENSHOT__": gallery,
         "__VIDEO__": video,
@@ -498,6 +529,9 @@ def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
 def main() -> None:
     sync_pkgbuilds()
     pkgs = load_packages()
+    missing_authors = [p["name"] for p in pkgs if not p.get("author_name") or not p.get("author_url")]
+    if missing_authors:
+        print("missing public author attribution for: " + ", ".join(missing_authors))
     synced = datetime.date.today().isoformat()
     functions_dir = ROOT / "netlify" / "functions"
     functions_dir.mkdir(parents=True, exist_ok=True)
