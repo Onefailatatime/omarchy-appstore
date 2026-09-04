@@ -34,6 +34,7 @@ the sync date.
 parts/
   body.html   the page — hero, search, grid, detail dialog, footer, inline JS
   develop.html public packaging checklist and contributor tips
+  terms.html   terms, ownership, licence, trademark, and warranty notices
   style.css   Tokyo Night tokens + components (fonts self-hosted from assets/)
 assets/fonts/ JetBrains Mono 400/700, latin, woff2
 data/         cached omarchy.db (auto-refreshed on each online build)

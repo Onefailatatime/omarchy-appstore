@@ -17,7 +17,6 @@ import pathlib
 import re
 import subprocess
 import tarfile
-import urllib.parse
 import urllib.request
 from compression import zstd  # stdlib since Python 3.14
 
@@ -31,7 +30,7 @@ CATEGORIES_FILE = ROOT / "data" / "categories.json"
 ENRICHMENT_FILE = ROOT / "data" / "enrichment.json"
 FALLBACK_CATEGORY = "Utilities"
 NEW_ARRIVALS = 4
-REQUEST_EMAIL = "jessyka@slapforge.com"
+CONTACT_URL = "https://x.com/jessyka_boat"
 
 # Fixed order controls both the catalogue's section order and the category
 # filter row. Deliberately not alphabetical: biggest/most-relevant first.
@@ -343,19 +342,6 @@ def main() -> None:
     )
     cat_vars = "\n".join(f".cat-{slug(c)} {{ --cat: #{h}; }}" for c, h in CATEGORY_COLOR.items())
 
-    mailto_body = (
-        "Package name: \r\n"
-        "Project URL: \r\n"
-        "Why it belongs in the Omarchy repo: \r\n"
-        "\r\n"
-        "-- sent from the Unofficial Omarchy App Store (community site)"
-    )
-    mailto = (
-        f"mailto:{REQUEST_EMAIL}"
-        f"?subject={urllib.parse.quote('Unofficial Omarchy App Store: package request')}"
-        f"&body={urllib.parse.quote(mailto_body)}"
-    )
-
     body = (ROOT / "parts" / "body.html").read_text(encoding="utf-8")
     css = (ROOT / "parts" / "style.css").read_text(encoding="utf-8")
     page = (body
@@ -367,8 +353,7 @@ def main() -> None:
             .replace("__CATCOUNT__", str(len(CATEGORY_ORDER)))
             .replace("__NEWCOUNT__", str(len(newest)))
             .replace("__SYNCED__", synced)
-            .replace("__MAILTO__", html.escape(mailto))
-            .replace("__EMAIL__", REQUEST_EMAIL)
+            .replace("__CONTACT__", html.escape(CONTACT_URL))
             .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     DIST.mkdir(exist_ok=True)
     (DIST / "index.html").write_text(page, encoding="utf-8")
@@ -376,6 +361,11 @@ def main() -> None:
                .replace("__SYNCED__", synced)
                .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     (DIST / "develop.html").write_text(develop, encoding="utf-8")
+    terms = ((ROOT / "parts" / "terms.html").read_text(encoding="utf-8")
+             .replace("__SYNCED__", synced)
+             .replace("__CONTACT__", html.escape(CONTACT_URL))
+             .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
+    (DIST / "terms.html").write_text(terms, encoding="utf-8")
     fonts = DIST / "fonts"
     fonts.mkdir(exist_ok=True)
     for f in (ROOT / "assets" / "fonts").glob("*.woff2"):
@@ -385,6 +375,7 @@ def main() -> None:
     uncategorized = [p["name"] for p in pkgs if p["category"] == FALLBACK_CATEGORY and p["name"] not in json.loads(CATEGORIES_FILE.read_text() or "{}")]
     print(f"dist/index.html  {len(page):,} bytes · {len(pkgs)} packages · synced {synced}")
     print(f"dist/develop.html {len(develop):,} bytes · public packaging checklist")
+    print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
     print("new arrivals:    " + ", ".join(f"{p['name']} ({datetime.date.fromtimestamp(p['added'])})" for p in newest))
     if unresolved:
         print(f"no git history for {len(unresolved)}: {', '.join(unresolved)}")

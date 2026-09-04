@@ -239,6 +239,19 @@ b, strong { font-weight: 700; }
 .tip p { margin: 0; }
 .sources { color: rgb(var(--rgb-terminal-blue) / 0.75); }
 .sources li + li { margin-top: 0.5em; }
+.terms-main { max-width: 62rem; padding-bottom: var(--space-xx-large); }
+.terms-main > section {
+  margin-top: var(--space-large);
+  padding: var(--space-neutral);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.terms-main h2 { margin: 0 0 0.65em; color: var(--color-terminal-white); font-size: 120%; }
+.terms-main p { margin: 0; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.terms-main p + p, .terms-main ul + p { margin-top: 0.8em; }
+.terms-main ul { margin: 0; padding-left: 1.3em; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.terms-main li + li { margin-top: 0.45em; }
 
 /* =================== HERO =================== */
 .hero { text-align: center; padding: var(--space-x-large) 0 var(--space-large); }
@@ -760,7 +773,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <button class="chip sort" type="button" data-sort="az" aria-pressed="true">A–Z</button>
       <button class="chip sort" type="button" data-sort="new" aria-pressed="false">Updated</button>
     </div>
-    <a class="button" href="mailto:jessyka@slapforge.com?subject=Unofficial%20Omarchy%20App%20Store%3A%20package%20request&amp;body=Package%20name%3A%20%0D%0AProject%20URL%3A%20%0D%0AWhy%20it%20belongs%20in%20the%20Omarchy%20repo%3A%20%0D%0A%0D%0A--%20sent%20from%20the%20Unofficial%20Omarchy%20App%20Store%20%28community%20site%29" id="req-bar">Request an app</a>
+    <a class="button" href="https://x.com/jessyka_boat" target="_blank" rel="noopener" id="req-bar">Contact on X</a>
   </div>
 </div>
 
@@ -2806,15 +2819,14 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 
   <div class="empty" id="empty">
     <p>Nothing matches <b id="empty-q"></b>. Try a shorter word, check the <a href="https://aur.archlinux.org/">AUR</a>, or:</p>
-    <a class="button" href="mailto:jessyka@slapforge.com?subject=Unofficial%20Omarchy%20App%20Store%3A%20package%20request&amp;body=Package%20name%3A%20%0D%0AProject%20URL%3A%20%0D%0AWhy%20it%20belongs%20in%20the%20Omarchy%20repo%3A%20%0D%0A%0D%0A--%20sent%20from%20the%20Unofficial%20Omarchy%20App%20Store%20%28community%20site%29" id="req-empty">Request an app</a>
+    <a class="button" href="https://x.com/jessyka_boat" target="_blank" rel="noopener" id="req-empty">Suggest an app on X</a>
   </div>
 
   <section class="sec-label-wrap" style="margin-top: var(--space-xx-large)">
     <div class="request">
       <h2>Not in the repo?</h2>
-      <p>This store only lists what the official Omarchy repo ships. If a package is missing, say so — it goes to Jessyka, not to Omacom, and it's not a promise of inclusion.</p>
-      <a class="button" href="mailto:jessyka@slapforge.com?subject=Unofficial%20Omarchy%20App%20Store%3A%20package%20request&amp;body=Package%20name%3A%20%0D%0AProject%20URL%3A%20%0D%0AWhy%20it%20belongs%20in%20the%20Omarchy%20repo%3A%20%0D%0A%0D%0A--%20sent%20from%20the%20Unofficial%20Omarchy%20App%20Store%20%28community%20site%29" id="req-panel">Request an app</a>
-      <p class="addr">or email <a href="mailto:jessyka@slapforge.com">jessyka@slapforge.com</a> directly</p>
+      <p>This store only lists what the official Omarchy repo ships. If a package is missing, contact the community site operator—not Omacom. Suggestions are not a promise of inclusion.</p>
+      <a class="button" href="https://x.com/jessyka_boat" target="_blank" rel="noopener" id="req-panel">Contact @jessyka_boat on X</a>
     </div>
   </section>
 
@@ -2880,7 +2892,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
         <a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs on GitHub</a>
         <a href="https://omarchyplugins.com/">Plugins</a>
         <a href="develop.html">Develop for Omarchy</a>
-        <a href="mailto:jessyka@slapforge.com?subject=Unofficial%20Omarchy%20App%20Store%3A%20package%20request&amp;body=Package%20name%3A%20%0D%0AProject%20URL%3A%20%0D%0AWhy%20it%20belongs%20in%20the%20Omarchy%20repo%3A%20%0D%0A%0D%0A--%20sent%20from%20the%20Unofficial%20Omarchy%20App%20Store%20%28community%20site%29">Request an app</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
       <span>Synced 2026-09-04 · no trackers · videos are click-to-play</span>
     </div>
@@ -2924,9 +2937,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     catalogue.hidden = n === 0;
     if (n === 0) {
       emptyQ.textContent = hasQuery ? '"' + q.value.trim() + '"' : "that category";
-      setRequestQuery(q.value.trim());
-    } else {
-      setRequestQuery("");
     }
   }
   q.addEventListener("input", apply);
@@ -2975,22 +2985,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     chip.addEventListener("click", function () { setCategory(chip.dataset.cat, chip); });
   });
   filterClear.addEventListener("click", function () { setCategory("", catChips[0]); });
-
-  /* ---------- request mailto: seed with the failed search ---------- */
-  var MAILTO_BASE = "mailto:jessyka@slapforge.com?subject=Unofficial%20Omarchy%20App%20Store%3A%20package%20request&amp;body=Package%20name%3A%20%0D%0AProject%20URL%3A%20%0D%0AWhy%20it%20belongs%20in%20the%20Omarchy%20repo%3A%20%0D%0A%0D%0A--%20sent%20from%20the%20Unofficial%20Omarchy%20App%20Store%20%28community%20site%29";
-  function setRequestQuery(term) {
-    var href = MAILTO_BASE;
-    if (term) {
-      href += "&body=" + encodeURIComponent(
-        "Package name: " + term + "\r\n" +
-        "Project URL: \r\n" +
-        "Why it belongs in the Omarchy repo: \r\n" +
-        "\r\n" +
-        "-- sent from the Unofficial Omarchy App Store (community site), search: \"" + term + "\""
-      );
-    }
-    document.getElementById("req-empty").href = href;
-  }
 
   /* ---------- detail dialog ---------- */
   var PRICING_LABEL = {
