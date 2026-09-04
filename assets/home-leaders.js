@@ -9,57 +9,31 @@
 
   function leaderCard(source, rank, count) {
     var article = document.createElement("article");
-    article.className = "leader-row leader-winner cat-" + source.dataset.cat;
-    if (rank === 1) article.classList.add("leader-champion");
+    article.className = "home-leader cat-" + source.dataset.cat;
+    if (rank === 1) article.classList.add("home-leader-champion");
+
+    var appLink = document.createElement("a");
+    appLink.className = "home-leader-line";
+    appLink.href = source.dataset.detailUrl;
+    appLink.setAttribute("aria-label", "Rank " + rank + ": " + source.dataset.name + " with " + count + " upvotes");
 
     var rankEl = document.createElement("span");
-    rankEl.className = "leader-rank";
+    rankEl.className = "home-leader-rank";
     rankEl.textContent = "#" + rank;
-    rankEl.setAttribute("aria-label", "Rank " + rank);
 
-    var copy = document.createElement("div");
-    copy.className = "leader-copy";
-    var heading = document.createElement("h3");
-    var appLink = document.createElement("a");
-    appLink.href = source.dataset.detailUrl;
-    appLink.textContent = source.dataset.name;
-    heading.appendChild(appLink);
-    var description = document.createElement("p");
-    description.textContent = source.querySelector(".card-description").textContent.trim();
-
-    var meta = document.createElement("div");
-    meta.className = "leader-meta";
-    var category = document.createElement("span");
-    category.className = "leader-category";
-    var dot = document.createElement("span");
-    dot.className = "dot";
-    dot.setAttribute("aria-hidden", "true");
-    category.appendChild(dot);
-    category.appendChild(document.createTextNode(source.dataset.category));
-    meta.appendChild(category);
-
-    var authorLink = source.querySelector(".byline a");
-    if (authorLink) {
-      var author = document.createElement("span");
-      author.className = "leader-author";
-      author.appendChild(document.createTextNode("by "));
-      author.appendChild(authorLink.cloneNode(true));
-      meta.appendChild(author);
-    }
-    var indie = source.querySelector(".indie-sticker");
-    if (indie) meta.appendChild(indie.cloneNode(true));
-
-    copy.appendChild(heading);
-    copy.appendChild(description);
-    copy.appendChild(meta);
+    var name = document.createElement("strong");
+    name.className = "home-leader-name";
+    name.textContent = source.dataset.name;
 
     var score = document.createElement("span");
     score.className = "home-leader-score";
-    score.innerHTML = '<span aria-hidden="true">▲</span> <b>' + count + '</b> <span class="score-label">upvotes</span>';
+    score.textContent = "▲ " + count;
+    score.setAttribute("aria-hidden", "true");
 
-    article.appendChild(rankEl);
-    article.appendChild(copy);
-    article.appendChild(score);
+    appLink.appendChild(rankEl);
+    appLink.appendChild(name);
+    appLink.appendChild(score);
+    article.appendChild(appLink);
     return article;
   }
 
