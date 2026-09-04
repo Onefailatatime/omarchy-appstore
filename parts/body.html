@@ -123,9 +123,11 @@ __FAQ__
     <span class="cat-tag" id="d-cat"><span class="dot" aria-hidden="true"></span><span id="d-cat-name"></span></span>
     <p class="tagline" id="d-tagline"></p>
 
-    <figure class="shot-wrap" id="d-shot-wrap" hidden>
-      <img id="d-shot" alt="">
-    </figure>
+    <section class="project-media" id="d-gallery-wrap" hidden>
+      <p class="label">Project screenshots <small>loaded from upstream — click any image for full size</small></p>
+      <div class="shot-gallery" id="d-gallery"></div>
+      <p class="media-source" id="d-gallery-source"></p>
+    </section>
 
     <p class="desc" id="d-desc"></p>
 
@@ -288,10 +290,39 @@ __FAQ__
     taglineEl.hidden = !d.tagline;
     if (d.tagline) text("d-tagline", d.tagline);
 
-    var shotWrap = document.getElementById("d-shot-wrap");
-    var shot = document.getElementById("d-shot");
-    if (d.shot) { shot.src = d.shot; shot.alt = d.name + " — screenshot"; shotWrap.hidden = false; }
-    else { shot.removeAttribute("src"); shotWrap.hidden = true; }
+    var galleryWrap = document.getElementById("d-gallery-wrap");
+    var gallery = document.getElementById("d-gallery");
+    var gallerySource = document.getElementById("d-gallery-source");
+    var images = JSON.parse(d.gallery || "[]");
+    gallery.textContent = "";
+    images.forEach(function (image) {
+      var link = document.createElement("a");
+      link.className = "shot-wrap";
+      link.href = image.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.setAttribute("aria-label", "Open full-size " + (image.alt || d.name + " screenshot"));
+      var shot = document.createElement("img");
+      shot.src = image.url;
+      shot.alt = image.alt || (d.name + " — screenshot");
+      shot.loading = "lazy";
+      shot.decoding = "async";
+      shot.referrerPolicy = "no-referrer";
+      link.appendChild(shot);
+      gallery.appendChild(link);
+    });
+    gallerySource.textContent = "";
+    var sourceImage = images.find(function (image) { return image.source_url; });
+    if (sourceImage) {
+      gallerySource.appendChild(document.createTextNode("Loaded from the upstream project · "));
+      var sourceLink = document.createElement("a");
+      sourceLink.href = sourceImage.source_url;
+      sourceLink.target = "_blank";
+      sourceLink.rel = "noopener";
+      sourceLink.textContent = "View upstream source ↗";
+      gallerySource.appendChild(sourceLink);
+    }
+    galleryWrap.hidden = images.length === 0;
 
     text("d-desc", d.fullDesc || d.desc || "No description provided.");
 

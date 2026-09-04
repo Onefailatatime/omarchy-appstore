@@ -6,9 +6,10 @@ command Omarchy users actually type — `omarchy pkg add <name>`.
 
 It serves no packages itself. It reads the official pacman database, hides the
 `-debug` companions, and renders one static page. There is no framework or
-tracker, and fonts are self-hosted. A small set of curated profiles can show a
-verified screenshot from the app's own site; YouTube demos use privacy-enhanced
-embeds and are not requested until the visitor explicitly presses play. Styled
+tracker, and fonts are self-hosted. Profiles without a demo video can show a
+verified gallery linked directly from the upstream repository README; images
+remain on their original hosts and open full-size when clicked. YouTube demos
+use privacy-enhanced embeds and are not requested until the visitor explicitly presses play. Styled
 with the Tokyo Night tokens lifted from omarchy.org's own `root.css` so it reads
 as family.
 
@@ -65,6 +66,16 @@ python3 tools/validate_enrichment.py candidates.json > data/enrichment.json
 
 The validator makes a real request for each screenshot and YouTube ID and drops
 claims that cannot be verified. Review its stderr report, then rebuild normally.
+
+To refresh README galleries for profiles without a video, run:
+
+```bash
+python3 tools/discover_readme_screenshots.py
+```
+
+The discovery tool reads repository README files through GitHub, rejects common
+badges and logos, verifies image responses in memory, and stores remote URLs and
+source attribution only. It never saves the upstream image files.
 
 ## Deploy
 

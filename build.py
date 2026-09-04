@@ -5,8 +5,8 @@ Reads the pacman database from pkgs.omarchy.org (falling back to the cached
 copy in data/), joins it with the omarchy-pkgs git history for first-added
 dates and PKGBUILD locations, joins it with the curated data/categories.json,
 and writes one self-contained page plus fonts to dist/. No framework, no
-tracker, no third-party requests — the store serves no packages itself, it
-only prints the official install command.
+tracker. Remote profile images stay on their upstream hosts; the store serves
+no packages itself and only prints the official install command.
 """
 
 import datetime
@@ -275,6 +275,7 @@ def load_packages() -> list[dict]:
                 "pricing_note": prof.get("pricing_note", ""),
                 "requirements": prof.get("requirements", []),
                 "screenshot_url": prof.get("screenshot_url", ""),
+                "readme_screenshots": prof.get("readme_screenshots", []),
                 "youtube_id": prof.get("youtube_id", ""),
                 "youtube_title": prof.get("youtube_title", ""),
             })
@@ -310,6 +311,33 @@ def claim_url(name: str) -> str:
     })
 
 
+def profile_images(p: dict) -> list[dict]:
+    """Return at most four unique remote images for a profile.
+
+    Curated media remains first. README media is a fallback only when the
+    profile has no demo video, as requested; all URLs continue to point at the
+    upstream host rather than being copied into this site.
+    """
+    images = []
+    if p.get("screenshot_url"):
+        images.append({
+            "url": p["screenshot_url"],
+            "source_url": p.get("github") or p.get("url") or "",
+            "alt": f"{p['name']} app screenshot",
+        })
+    if not p.get("youtube_id"):
+        images.extend(p.get("readme_screenshots") or [])
+    unique = []
+    seen = set()
+    for image in images:
+        url = image.get("url", "") if isinstance(image, dict) else ""
+        if not url or url in seen:
+            continue
+        seen.add(url)
+        unique.append(image)
+    return unique[:4]
+
+
 def card(p: dict, featured: bool = False) -> str:
     e = {k: html.escape(str(v)) for k, v in p.items() if isinstance(v, str)}
     built = datetime.date.fromtimestamp(p["built"]).isoformat()
@@ -317,6 +345,7 @@ def card(p: dict, featured: bool = False) -> str:
     added = added_date.isoformat() if added_date else ""
     deps = html.escape(json.dumps(p["deps"]))
     reqs = html.escape(json.dumps(p["requirements"]))
+    gallery = html.escape(json.dumps(profile_images(p)), quote=True)
     cat_slug = slug(p["category"])
     cls = f"card cat-{cat_slug} featured" if featured else f"card cat-{cat_slug}"
     footer = (
@@ -331,7 +360,7 @@ def card(p: dict, featured: bool = False) -> str:
   data-built="{built}" data-built-ts="{p['built']}" data-added="{added}" data-added-ts="{p['added']}"
   data-deps="{deps}" data-category="{e['category']}" data-cat="{cat_slug}"
   data-tagline="{e['tagline']}" data-full-desc="{e['full_desc']}" data-pricing="{e['pricing']}"
-  data-pricing-note="{e['pricing_note']}" data-reqs="{reqs}" data-shot="{e['screenshot_url']}"
+  data-pricing-note="{e['pricing_note']}" data-reqs="{reqs}" data-gallery="{gallery}"
   data-yt="{e['youtube_id']}" data-yt-title="{e['youtube_title']}">
   <header><h3><a href="{detail_url}">{e['name']}</a></h3><span class="ver">{e['version']}</span></header>
   <p>{e['desc'] or '<em>No description provided.</em>'}</p>
@@ -378,8 +407,9 @@ def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
             },
         ],
     }
-    if p.get("screenshot_url"):
-        schema["@graph"][0]["screenshot"] = p["screenshot_url"]
+    images = profile_images(p)
+    if images:
+        schema["@graph"][0]["screenshot"] = [image["url"] for image in images]
     if p.get("pricing") in ("free", "free-libre"):
         schema["@graph"][0]["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     reqs = "".join(f"<li>{html.escape(str(r))}</li>" for r in p.get("requirements", []))
@@ -389,7 +419,20 @@ def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
     if p.get("github"):
         links.append(f'<a class="button ghost" href="{html.escape(p["github"])}" target="_blank" rel="noopener">GitHub ↗</a>')
     links.append(f'<a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/{urllib.parse.quote(p["dir"])}" target="_blank" rel="noopener">PKGBUILD ↗</a>')
-    shot = (f'<figure class="shot-wrap"><img src="{html.escape(p["screenshot_url"])}" alt="{html.escape(p["name"])} app screenshot" width="1200" height="675"></figure>' if p.get("screenshot_url") else "")
+    gallery = ""
+    if images:
+        tiles = "".join(
+            f'<a class="shot-wrap" href="{html.escape(image["url"])}" target="_blank" rel="noopener" '
+            f'aria-label="Open full-size {html.escape(image.get("alt") or p["name"] + " screenshot")}">'
+            f'<img src="{html.escape(image["url"])}" alt="{html.escape(image.get("alt") or p["name"] + " screenshot")}" '
+            f'loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>'
+            for image in images
+        )
+        source_url = next((image.get("source_url") for image in images if image.get("source_url")), "")
+        source = (f'<p class="media-source">Loaded from the upstream project · '
+                  f'<a href="{html.escape(source_url)}" target="_blank" rel="noopener">View upstream source ↗</a></p>'
+                  if source_url else '<p class="media-source">Loaded directly from the upstream project.</p>')
+        gallery = f'<section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery">{tiles}</div>{source}</section>'
     video = (f'<p><a class="button ghost" href="https://www.youtube.com/watch?v={html.escape(p["youtube_id"])}" target="_blank" rel="noopener">Watch: {html.escape(p["youtube_title"] or p["name"] + " demo")} ↗</a></p>' if p.get("youtube_id") else "")
     pricing = p.get("pricing_note") or p.get("pricing") or "Check the project site for current pricing."
     replacements = {
@@ -407,7 +450,7 @@ def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
         "__INSTALLED_SIZE__": html.escape(p["isize"]),
         "__PRICING__": html.escape(pricing),
         "__REQUIREMENTS__": reqs or "<li>No special requirements documented.</li>",
-        "__SCREENSHOT__": shot,
+        "__SCREENSHOT__": gallery,
         "__VIDEO__": video,
         "__LINKS__": "".join(links),
         "__CLAIM_URL__": html.escape(claim_url(p["name"])),

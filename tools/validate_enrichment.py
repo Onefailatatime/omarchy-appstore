@@ -54,13 +54,21 @@ def check_youtube(video_id: str) -> bool:
 def main() -> None:
     candidates = json.loads(open(sys.argv[1]).read()) if len(sys.argv) > 1 else json.loads(sys.stdin.read())
     out = {}
-    dropped_shots, dropped_videos = [], []
+    dropped_shots, dropped_videos, dropped_readme_shots = [], [], []
     for name, prof in candidates.items():
         prof = dict(prof)
         shot = prof.get("screenshot_url", "")
         if shot and not check_image(shot):
             dropped_shots.append((name, shot))
             prof["screenshot_url"] = ""
+        readme_shots = []
+        for image in prof.get("readme_screenshots", []):
+            if isinstance(image, dict) and check_image(image.get("url", "")):
+                readme_shots.append(image)
+            else:
+                dropped_readme_shots.append((name, image.get("url", "") if isinstance(image, dict) else str(image)))
+        if "readme_screenshots" in prof:
+            prof["readme_screenshots"] = readme_shots
         yt = prof.get("youtube_id", "")
         if yt and not check_youtube(yt):
             dropped_videos.append((name, yt))
@@ -76,6 +84,10 @@ def main() -> None:
         print(f"dropped {len(dropped_videos)} unverifiable youtube IDs:", file=sys.stderr)
         for n, v in dropped_videos:
             print(f"  {n}: {v}", file=sys.stderr)
+    if dropped_readme_shots:
+        print(f"dropped {len(dropped_readme_shots)} unverifiable README screenshots:", file=sys.stderr)
+        for n, u in dropped_readme_shots:
+            print(f"  {n}: {u}", file=sys.stderr)
 
 
 if __name__ == "__main__":

@@ -652,6 +652,7 @@ dialog::backdrop { background: rgb(var(--rgb-black) / 0.6); backdrop-filter: blu
 
 /* --- screenshot --- */
 .shot-wrap {
+  display: block;
   margin: 0;
   border: var(--border-width) solid var(--border-color);
   border-radius: var(--radius);
@@ -659,6 +660,17 @@ dialog::backdrop { background: rgb(var(--rgb-black) / 0.6); backdrop-filter: blu
   background: var(--color-background-storm);
 }
 .shot-wrap img { display: block; width: 100%; height: auto; }
+.shot-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8em;
+}
+.shot-gallery:has(> :only-child) { grid-template-columns: 1fr; }
+.shot-gallery .shot-wrap { transition: border-color 150ms ease, transform 150ms ease; }
+.shot-gallery .shot-wrap:hover { border-color: var(--color-turquoise); transform: translateY(-2px); }
+.media-source { margin: 0.7em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.6); font-size: 82%; }
+.media-source a { color: var(--color-terminal-blue); }
+@media (max-width: 620px) { .shot-gallery { grid-template-columns: 1fr; } }
 
 /* --- pricing badge --- */
 .badges { display: flex; flex-wrap: wrap; gap: 0.5em; }

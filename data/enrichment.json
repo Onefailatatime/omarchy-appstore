@@ -130,6 +130,13 @@
   "name": "bun-bin",
   "pricing": "free-libre",
   "pricing_note": "MIT licensed, open source",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/oven-sh/bun/blob/main/README.md",
+    "url": "https://github.com/user-attachments/assets/50282090-adfd-4ddb-9e27-c30753c6b161"
+   }
+  ],
   "requirements": [
    "Linux kernel 5.6+ recommended (5.1 minimum)"
   ],
@@ -147,6 +154,18 @@
   "name": "caja-open-any-terminal",
   "pricing": "free-libre",
   "pricing_note": "GPLv3 licensed, open source",
+  "readme_screenshots": [
+   {
+    "alt": "screenshot",
+    "source_url": "https://github.com/Stunkymonkey/nautilus-open-any-terminal/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/Stunkymonkey/nautilus-open-any-terminal/master/screenshot.png"
+   },
+   {
+    "alt": "dconf-editor",
+    "source_url": "https://github.com/Stunkymonkey/nautilus-open-any-terminal/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/Stunkymonkey/nautilus-open-any-terminal/master/dconf.png"
+   }
+  ],
   "requirements": [
    "a Caja/Nautilus Python extension runtime (nautilus-python or python3-nautilus)",
    "at least one supported terminal emulator installed to open"
@@ -201,6 +220,28 @@
   "name": "crush-bin",
   "pricing": "free",
   "pricing_note": "Source-available under FSL-1.1-MIT (converts to MIT after 2 years); Crush itself costs nothing but you supply your own API key for whichever model provider you use",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/charmbracelet/crush/blob/main/README.md",
+    "url": "https://github.com/user-attachments/assets/cf8ca3ce-8b02-43f0-9d0f-5a331488da4b"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/charmbracelet/crush/blob/main/README.md",
+    "url": "https://github.com/user-attachments/assets/58280caf-851b-470a-b6f7-d5c4ea8a1968"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/charmbracelet/crush/blob/main/README.md",
+    "url": "https://github.com/user-attachments/assets/50875289-7992-454d-9f14-9f790413fb5e"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/charmbracelet/crush/blob/main/README.md",
+    "url": "https://github.com/user-attachments/assets/95b49515-fe82-4409-b10d-5beb0873787d"
+   }
+  ],
   "requirements": [
    "An API key from at least one supported LLM provider (Anthropic, OpenAI, Google Gemini, OpenRouter, Groq, AWS Bedrock, Azure, Vertex AI, or a local model via Ollama/llama.cpp)",
    "Network access to reach the chosen model provider"
@@ -575,6 +616,28 @@
   "name": "flea",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/thisisgm/flea/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/list.png"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/thisisgm/flea/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/grid.png"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/thisisgm/flea/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/columns.png"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/thisisgm/flea/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/pdf.png"
+   }
+  ],
   "requirements": [
    "Runs on Omarchy with Quickshell 0.3.1+",
    "Optional tools for extra features: bubblewrap/util-linux for thumbnailing, bsdtar/7z for archives, gio for network mounts, Qt PDF/Multimedia modules for previews"
@@ -709,6 +772,13 @@
   "name": "hyprland-preview-share-picker",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/WhySoBad/hyprland-preview-share-picker/blob/master/README.md",
+    "url": "https://github.com/user-attachments/assets/0172f531-08b5-48c7-b167-32c6ce6535e8"
+   }
+  ],
   "requirements": [
    "Hyprland window manager",
    "xdg-desktop-portal-hyprland",
@@ -727,6 +797,13 @@
   "name": "hyprland-preview-share-picker-git",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/WhySoBad/hyprland-preview-share-picker/blob/master/README.md",
+    "url": "https://github.com/user-attachments/assets/0172f531-08b5-48c7-b167-32c6ce6535e8"
+   }
+  ],
   "requirements": [
    "Hyprland window manager",
    "xdg-desktop-portal-hyprland",
@@ -845,6 +922,28 @@
   "name": "libretro-cap32-git",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "imagen",
+    "source_url": "https://github.com/libretro/libretro-cap32/blob/master/README.md",
+    "url": "https://user-images.githubusercontent.com/560310/172238790-09ca924a-099c-4c45-a0be-1738b8d6fa6f.png"
+   },
+   {
+    "alt": "imagen",
+    "source_url": "https://github.com/libretro/libretro-cap32/blob/master/README.md",
+    "url": "https://user-images.githubusercontent.com/560310/172237853-0a18ebee-be5e-4dec-90fa-e4ca7b77a2d7.png"
+   },
+   {
+    "alt": "keyb_en",
+    "source_url": "https://github.com/libretro/libretro-cap32/blob/master/README.md",
+    "url": "https://user-images.githubusercontent.com/560310/54316312-abdeb180-45e0-11e9-9063-faf78fec9d6d.png"
+   },
+   {
+    "alt": "keyb_es",
+    "source_url": "https://github.com/libretro/libretro-cap32/blob/master/README.md",
+    "url": "https://user-images.githubusercontent.com/560310/54316295-9ff2ef80-45e0-11e9-9ae4-a2e3fb064600.png"
+   }
+  ],
   "requirements": [
    "RetroArch (or another libretro frontend) to actually run it",
    "your own legally-owned Amstrad CPC game/software images, since none are bundled"
@@ -1367,6 +1466,13 @@
   "name": "mise-bin",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "demo",
+    "source_url": "https://github.com/jdx/mise/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/jdx/mise/main/docs/tapes/demo.gif"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "One CLI to install your dev tools, load your env vars, and run your project tasks.",
@@ -1397,6 +1503,18 @@
   "name": "nautilus-open-any-terminal",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "screenshot",
+    "source_url": "https://github.com/Stunkymonkey/nautilus-open-any-terminal/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/Stunkymonkey/nautilus-open-any-terminal/master/screenshot.png"
+   },
+   {
+    "alt": "dconf-editor",
+    "source_url": "https://github.com/Stunkymonkey/nautilus-open-any-terminal/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/Stunkymonkey/nautilus-open-any-terminal/master/dconf.png"
+   }
+  ],
   "requirements": [
    "Nautilus or Caja file manager",
    "nautilus-python (or python3-nautilus) support",
@@ -1464,6 +1582,13 @@
   "name": "omacalc",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/omacom/omacalc/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/omacom/omacalc/master/screenshots/omacalc.png"
+   }
+  ],
   "requirements": [
    "xdg-desktop-portal with a backend"
   ],
@@ -1479,6 +1604,13 @@
   "name": "omacut",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/omacom/omacut/blob/master/README.md",
+    "url": "https://github.com/user-attachments/assets/c76047c8-618f-4c1c-91f9-e7024c4f953b"
+   }
+  ],
   "requirements": [
    "ffmpeg and ffprobe installed on PATH",
    "xdg-desktop-portal with a backend for file selection"
@@ -1495,6 +1627,18 @@
   "name": "omakade",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Omakade library showing installed games from multiple launchers",
+    "source_url": "https://github.com/btsouth/omakade/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/btsouth/omakade/main/docs/assets/library-preview.webp"
+   },
+   {
+    "alt": "Omakade game details showing playtime, IGDB insights, and Steam achievements",
+    "source_url": "https://github.com/btsouth/omakade/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/btsouth/omakade/main/docs/assets/game-details.webp"
+   }
+  ],
   "requirements": [
    "At least one supported game launcher (Steam, Lutris, Heroic, etc.) with installed games to display"
   ],
@@ -1510,6 +1654,13 @@
   "name": "omapresent",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/jethrojones/omapresent/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/jethrojones/omapresent/master/welcome/screenshot.png"
+   }
+  ],
   "requirements": [
    "Qt6 (base, declarative, webengine, webchannel, multimedia)",
    "xdg-desktop-portal"
@@ -1663,6 +1814,23 @@
   "name": "omarchy-nvim",
   "pricing": "free-libre",
   "pricing_note": "MIT licensed",
+  "readme_screenshots": [
+   {
+    "alt": "image",
+    "source_url": "https://github.com/LazyVim/LazyVim/blob/main/README.md",
+    "url": "https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png"
+   },
+   {
+    "alt": "image",
+    "source_url": "https://github.com/LazyVim/LazyVim/blob/main/README.md",
+    "url": "https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/LazyVim/LazyVim/blob/main/README.md",
+    "url": "https://user-images.githubusercontent.com/292349/213446185-2db63fd5-8c84-459c-9f04-e286382d6e80.png"
+   }
+  ],
   "requirements": [
    "Neovim 0.11.2+ (built with LuaJIT)",
    "Git 2.19.0+",
@@ -1735,6 +1903,13 @@
   "name": "omasnap",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Looping Omasnap demonstration",
+    "source_url": "https://github.com/tobi/omasnap/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/tobi/omasnap/main/assets/omasnap.gif"
+   }
+  ],
   "requirements": [
    "Wayland session with Hyprland (or a compositor offering equivalent window/monitor APIs)"
   ],
@@ -1750,6 +1925,18 @@
   "name": "omatrack",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Omatrack comparison workspace with primary and reference telemetry traces",
+    "source_url": "https://github.com/tobi/omatrack/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/tobi/omatrack/main/docs/screenshots/lap-comparison.webp"
+   },
+   {
+    "alt": "Omatrack corner analysis comparing braking, turn-in, apex, and throttle pickup",
+    "source_url": "https://github.com/tobi/omatrack/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/tobi/omatrack/main/docs/screenshots/corner-analysis.webp"
+   }
+  ],
   "requirements": [
    "Telemetry/video files from a supported logger (Pi/Cosworth, MoTeC, Racelogic, or AiM) to have anything to analyze"
   ],
@@ -1765,6 +1952,18 @@
   "name": "omawrite",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/omacom/omawrite/blob/master/README.md",
+    "url": "https://github.com/user-attachments/assets/4e930c0d-edda-4046-b444-a59eff523329"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/omacom/omawrite/blob/master/README.md",
+    "url": "https://github.com/user-attachments/assets/8ced7c26-961b-4ded-b263-84403001a951"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "A stripped-down Markdown editor that gets out of the way and just lets you write.",
@@ -1795,6 +1994,13 @@
   "name": "once-bin",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Demo",
+    "source_url": "https://github.com/basecamp/once/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/basecamp/once/main/.github/media/install.gif"
+   }
+  ],
   "requirements": [
    "A Docker-capable Linux or macOS machine to host apps on",
    "Network access for pulling images, updates, and backups"
@@ -1958,6 +2164,13 @@
   "name": "qmk-hid",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/FrameworkComputer/qmk_hid/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/FrameworkComputer/qmk_hid/main/screenshots/qmk_gui_screenshot.png"
+   }
+  ],
   "requirements": [
    "A QMK-firmware keyboard (developed and tested primarily on Framework Laptop 16 keyboard modules)",
    "On Linux, udev rules installed to avoid needing root privileges"
@@ -2098,6 +2311,18 @@
   "name": "strata",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Strata Theme and appearance settings showing Omarchy following, six bundled themes, and the Add a theme option",
+    "source_url": "https://github.com/lgse/strata/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/lgse/strata/main/docs/assets/strata-themes.png"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/lgse/strata/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/lgse/strata/main/docs/assets/strata-columns.png"
+   }
+  ],
   "requirements": [
    "GTK 4.12 or newer and a 64-bit Linux system with glibc 2.39+"
   ],
@@ -2190,6 +2415,13 @@
   "name": "tensaku",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "A screenshot annotated in Tensaku \u2014 arrows, colored text callouts, numbered markers, a highlight box, and a redaction blur",
+    "source_url": "https://github.com/jondkinney/tensaku/blob/main/README.md",
+    "url": "https://raw.githubusercontent.com/jondkinney/tensaku/main/assets/annotation-example.png"
+   }
+  ],
   "requirements": [
    "A wlroots-based Wayland compositor (Sway, Hyprland, River, Wayfire, etc.) that supports wlr-layer-shell and wlr-screencopy"
   ],
@@ -2260,6 +2492,28 @@
   "name": "ttfx",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/omacom/ttfx/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/omacom/ttfx/master/docs/effects/decrypt.gif"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/omacom/ttfx/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/omacom/ttfx/master/docs/effects/beams.gif"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/omacom/ttfx/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/omacom/ttfx/master/docs/effects/binarypath.gif"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/omacom/ttfx/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/omacom/ttfx/master/docs/effects/blackhole.gif"
+   }
+  ],
   "requirements": [
    "A terminal that supports ANSI escape sequences"
   ],
@@ -2454,6 +2708,28 @@
   "name": "yaru-gnome-shell-theme",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Appgrid",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/appgrid.png"
+   },
+   {
+    "alt": "FilesLight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-light.png"
+   },
+   {
+    "alt": "FilesDark",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-dark.png"
+   },
+   {
+    "alt": "widgetfactorylight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/factory-light.png"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "Ubuntu's signature look, for the GNOME Shell chrome around your desktop.",
@@ -2467,6 +2743,28 @@
   "name": "yaru-gtk-theme",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Appgrid",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/appgrid.png"
+   },
+   {
+    "alt": "FilesLight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-light.png"
+   },
+   {
+    "alt": "FilesDark",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-dark.png"
+   },
+   {
+    "alt": "widgetfactorylight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/factory-light.png"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "The GTK widget theme behind Ubuntu's familiar desktop look.",
@@ -2480,6 +2778,28 @@
   "name": "yaru-gtksourceview-theme",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Appgrid",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/appgrid.png"
+   },
+   {
+    "alt": "FilesLight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-light.png"
+   },
+   {
+    "alt": "FilesDark",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-dark.png"
+   },
+   {
+    "alt": "widgetfactorylight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/factory-light.png"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "Ubuntu-matching syntax highlighting colors for GTK-based text and code views.",
@@ -2493,6 +2813,28 @@
   "name": "yaru-icon-theme",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Appgrid",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/appgrid.png"
+   },
+   {
+    "alt": "FilesLight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-light.png"
+   },
+   {
+    "alt": "FilesDark",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-dark.png"
+   },
+   {
+    "alt": "widgetfactorylight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/factory-light.png"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "The colorful, rounded icon set that defines Ubuntu's visual identity.",
@@ -2506,6 +2848,28 @@
   "name": "yaru-metacity-theme",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Appgrid",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/appgrid.png"
+   },
+   {
+    "alt": "FilesLight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-light.png"
+   },
+   {
+    "alt": "FilesDark",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-dark.png"
+   },
+   {
+    "alt": "widgetfactorylight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/factory-light.png"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "Ubuntu-styled window borders and decorations for the Metacity window manager.",
@@ -2519,6 +2883,28 @@
   "name": "yaru-session",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Appgrid",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/appgrid.png"
+   },
+   {
+    "alt": "FilesLight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-light.png"
+   },
+   {
+    "alt": "FilesDark",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-dark.png"
+   },
+   {
+    "alt": "widgetfactorylight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/factory-light.png"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "The glue package that wires Yaru up as a selectable desktop session.",
@@ -2532,6 +2918,28 @@
   "name": "yaru-sound-theme",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Appgrid",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/appgrid.png"
+   },
+   {
+    "alt": "FilesLight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-light.png"
+   },
+   {
+    "alt": "FilesDark",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-dark.png"
+   },
+   {
+    "alt": "widgetfactorylight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/factory-light.png"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "The login, notification, and alert sounds that come with Ubuntu.",
@@ -2545,6 +2953,28 @@
   "name": "yaru-unity-theme",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Appgrid",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/appgrid.png"
+   },
+   {
+    "alt": "FilesLight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-light.png"
+   },
+   {
+    "alt": "FilesDark",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-dark.png"
+   },
+   {
+    "alt": "widgetfactorylight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/factory-light.png"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "Yaru's styling for the Unity desktop's launcher and panel.",
@@ -2558,6 +2988,28 @@
   "name": "yaru-xfwm4-theme",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "Appgrid",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/appgrid.png"
+   },
+   {
+    "alt": "FilesLight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-light.png"
+   },
+   {
+    "alt": "FilesDark",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/nautilus-dark.png"
+   },
+   {
+    "alt": "widgetfactorylight",
+    "source_url": "https://github.com/ubuntu/yaru/blob/master/README.md",
+    "url": "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/factory-light.png"
+   }
+  ],
   "requirements": [],
   "screenshot_url": "",
   "tagline": "Ubuntu's Yaru look, brought to the Xfce window manager.",
@@ -2571,6 +3023,28 @@
   "name": "yay",
   "pricing": "free-libre",
   "pricing_note": "",
+  "readme_screenshots": [
+   {
+    "alt": "asciicast",
+    "source_url": "https://github.com/Jguer/yay/blob/next/README.md",
+    "url": "https://asciinema.org/a/399431.svg"
+   },
+   {
+    "alt": "asciicast",
+    "source_url": "https://github.com/Jguer/yay/blob/next/README.md",
+    "url": "https://asciinema.org/a/399433.svg"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/Jguer/yay/blob/next/README.md",
+    "url": "https://raw.githubusercontent.com/Jguer/jguer.github.io/refs/heads/master/yay/yay.png"
+   },
+   {
+    "alt": "Project screenshot",
+    "source_url": "https://github.com/Jguer/yay/blob/next/README.md",
+    "url": "https://raw.githubusercontent.com/Jguer/jguer.github.io/refs/heads/master/yay/yay-s.png"
+   }
+  ],
   "requirements": [
    "An AUR account (username/password via env vars) only if you want to use its package-voting feature; not needed for normal install/search/update use"
   ],

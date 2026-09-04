@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="crush-bin for Omarchy">
 <meta name="twitter:description" content="Crush is a terminal-based AI coding agent from Charm (makers of Bubble Tea and Glow) that works alongside you directly in the command line. It can switch…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/crush-bin.html#app","name":"crush-bin","description":"Crush is a terminal-based AI coding agent from Charm (makers of Bubble Tea and Glow) that works alongside you directly in the command line. It can switch between many LLM providers mid-session without losing context, understands your project through LSP integration, and extends itself through MCP servers over HTTP, stdio, or SSE. Session history and project context are stored locally in SQLite, so nothing is lost between restarts.","applicationCategory":"AI & Agents","operatingSystem":"Omarchy Linux","softwareVersion":"0.92.0-1","license":"FSL-1.1-MIT","url":"https://omarchyapps.com/apps/crush-bin.html","sameAs":"https://charm.sh/crush","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"crush-bin","item":"https://omarchyapps.com/apps/crush-bin.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/crush-bin.html#app","name":"crush-bin","description":"Crush is a terminal-based AI coding agent from Charm (makers of Bubble Tea and Glow) that works alongside you directly in the command line. It can switch between many LLM providers mid-session without losing context, understands your project through LSP integration, and extends itself through MCP servers over HTTP, stdio, or SSE. Session history and project context are stored locally in SQLite, so nothing is lost between restarts.","applicationCategory":"AI & Agents","operatingSystem":"Omarchy Linux","softwareVersion":"0.92.0-1","license":"FSL-1.1-MIT","url":"https://omarchyapps.com/apps/crush-bin.html","sameAs":"https://charm.sh/crush","screenshot":["https://github.com/user-attachments/assets/cf8ca3ce-8b02-43f0-9d0f-5a331488da4b","https://github.com/user-attachments/assets/58280caf-851b-470a-b6f7-d5c4ea8a1968","https://github.com/user-attachments/assets/50875289-7992-454d-9f14-9f790413fb5e","https://github.com/user-attachments/assets/95b49515-fe82-4409-b10d-5beb0873787d"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"crush-bin","item":"https://omarchyapps.com/apps/crush-bin.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
    Tokens lifted verbatim from omarchy.org/assets/css/root.css (Tokyo Night)
@@ -700,6 +700,7 @@ dialog::backdrop { background: rgb(var(--rgb-black) / 0.6); backdrop-filter: blu
 
 /* --- screenshot --- */
 .shot-wrap {
+  display: block;
   margin: 0;
   border: var(--border-width) solid var(--border-color);
   border-radius: var(--radius);
@@ -707,6 +708,17 @@ dialog::backdrop { background: rgb(var(--rgb-black) / 0.6); backdrop-filter: blu
   background: var(--color-background-storm);
 }
 .shot-wrap img { display: block; width: 100%; height: auto; }
+.shot-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8em;
+}
+.shot-gallery:has(> :only-child) { grid-template-columns: 1fr; }
+.shot-gallery .shot-wrap { transition: border-color 150ms ease, transform 150ms ease; }
+.shot-gallery .shot-wrap:hover { border-color: var(--color-turquoise); transform: translateY(-2px); }
+.media-source { margin: 0.7em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.6); font-size: 82%; }
+.media-source a { color: var(--color-terminal-blue); }
+@media (max-width: 620px) { .shot-gallery { grid-template-columns: 1fr; } }
 
 /* --- pricing badge --- */
 .badges { display: flex; flex-wrap: wrap; gap: 0.5em; }
@@ -827,7 +839,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <div><p class="eyebrow">AI &amp; Agents · version 0.92.0-1</p><h1>crush-bin</h1><p class="app-lead">Crush is a terminal-based AI coding agent from Charm (makers of Bubble Tea and Glow) that works alongside you directly in the command line. It can switch…</p></div>
       <a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+crush-bin+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a>
     </header>
-
+<section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://github.com/user-attachments/assets/cf8ca3ce-8b02-43f0-9d0f-5a331488da4b" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://github.com/user-attachments/assets/cf8ca3ce-8b02-43f0-9d0f-5a331488da4b" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://github.com/user-attachments/assets/58280caf-851b-470a-b6f7-d5c4ea8a1968" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://github.com/user-attachments/assets/58280caf-851b-470a-b6f7-d5c4ea8a1968" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://github.com/user-attachments/assets/50875289-7992-454d-9f14-9f790413fb5e" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://github.com/user-attachments/assets/50875289-7992-454d-9f14-9f790413fb5e" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://github.com/user-attachments/assets/95b49515-fe82-4409-b10d-5beb0873787d" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://github.com/user-attachments/assets/95b49515-fe82-4409-b10d-5beb0873787d" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/charmbracelet/crush/blob/main/README.md" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is crush-bin?</h2><p>Crush is a terminal-based AI coding agent from Charm (makers of Bubble Tea and Glow) that works alongside you directly in the command line. It can switch between many LLM providers mid-session without losing context, understands your project through LSP integration, and extends itself through MCP servers over HTTP, stdio, or SSE. Session history and project context are stored locally in SQLite, so nothing is lost between restarts.</p></section>
     <section><h2>Install crush-bin on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add crush-bin</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>An API key from at least one supported LLM provider (Anthropic, OpenAI, Google Gemini, OpenRouter, Groq, AWS Bedrock, Azure, Vertex AI, or a local model via Ollama/llama.cpp)</li><li>Network access to reach the chosen model provider</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>Source-available under FSL-1.1-MIT (converts to MIT after 2 years); Crush itself costs nothing but you supply your own API key for whichever model provider you use</dd><dt>Licence</dt><dd>FSL-1.1-MIT</dd><dt>Download</dt><dd>26.6 MB</dd><dt>Installed</dt><dd>94.2 MB</dd></dl></div></section>

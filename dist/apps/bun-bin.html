@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="bun-bin for Omarchy">
 <meta name="twitter:description" content="Bun is an all-in-one JavaScript and TypeScript toolkit: a fast runtime (built in Rust/Zig on JavaScriptCore rather than V8) meant as a drop-in alternative…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/bun-bin.html#app","name":"bun-bin","description":"Bun is an all-in-one JavaScript and TypeScript toolkit: a fast runtime (built in Rust/Zig on JavaScriptCore rather than V8) meant as a drop-in alternative to Node.js, plus a built-in package manager, bundler, and test runner in a single executable. The goal is to collapse a typical JS project's separate tools into one fast binary, cutting install and startup times compared to a traditional Node/npm/webpack/Jest stack.","applicationCategory":"Developer Tools","operatingSystem":"Omarchy Linux","softwareVersion":"1.3.11-1","license":"MIT","url":"https://omarchyapps.com/apps/bun-bin.html","sameAs":"https://github.com/oven-sh/bun","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"bun-bin","item":"https://omarchyapps.com/apps/bun-bin.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/bun-bin.html#app","name":"bun-bin","description":"Bun is an all-in-one JavaScript and TypeScript toolkit: a fast runtime (built in Rust/Zig on JavaScriptCore rather than V8) meant as a drop-in alternative to Node.js, plus a built-in package manager, bundler, and test runner in a single executable. The goal is to collapse a typical JS project's separate tools into one fast binary, cutting install and startup times compared to a traditional Node/npm/webpack/Jest stack.","applicationCategory":"Developer Tools","operatingSystem":"Omarchy Linux","softwareVersion":"1.3.11-1","license":"MIT","url":"https://omarchyapps.com/apps/bun-bin.html","sameAs":"https://github.com/oven-sh/bun","screenshot":["https://github.com/user-attachments/assets/50282090-adfd-4ddb-9e27-c30753c6b161"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"bun-bin","item":"https://omarchyapps.com/apps/bun-bin.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
    Tokens lifted verbatim from omarchy.org/assets/css/root.css (Tokyo Night)
@@ -700,6 +700,7 @@ dialog::backdrop { background: rgb(var(--rgb-black) / 0.6); backdrop-filter: blu
 
 /* --- screenshot --- */
 .shot-wrap {
+  display: block;
   margin: 0;
   border: var(--border-width) solid var(--border-color);
   border-radius: var(--radius);
@@ -707,6 +708,17 @@ dialog::backdrop { background: rgb(var(--rgb-black) / 0.6); backdrop-filter: blu
   background: var(--color-background-storm);
 }
 .shot-wrap img { display: block; width: 100%; height: auto; }
+.shot-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8em;
+}
+.shot-gallery:has(> :only-child) { grid-template-columns: 1fr; }
+.shot-gallery .shot-wrap { transition: border-color 150ms ease, transform 150ms ease; }
+.shot-gallery .shot-wrap:hover { border-color: var(--color-turquoise); transform: translateY(-2px); }
+.media-source { margin: 0.7em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.6); font-size: 82%; }
+.media-source a { color: var(--color-terminal-blue); }
+@media (max-width: 620px) { .shot-gallery { grid-template-columns: 1fr; } }
 
 /* --- pricing badge --- */
 .badges { display: flex; flex-wrap: wrap; gap: 0.5em; }
@@ -827,7 +839,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <div><p class="eyebrow">Developer Tools · version 1.3.11-1</p><h1>bun-bin</h1><p class="app-lead">Bun is an all-in-one JavaScript and TypeScript toolkit: a fast runtime (built in Rust/Zig on JavaScriptCore rather than V8) meant as a drop-in alternative…</p></div>
       <a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+bun-bin+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a>
     </header>
-
+<section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://github.com/user-attachments/assets/50282090-adfd-4ddb-9e27-c30753c6b161" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://github.com/user-attachments/assets/50282090-adfd-4ddb-9e27-c30753c6b161" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/oven-sh/bun/blob/main/README.md" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is bun-bin?</h2><p>Bun is an all-in-one JavaScript and TypeScript toolkit: a fast runtime (built in Rust/Zig on JavaScriptCore rather than V8) meant as a drop-in alternative to Node.js, plus a built-in package manager, bundler, and test runner in a single executable. The goal is to collapse a typical JS project&#x27;s separate tools into one fast binary, cutting install and startup times compared to a traditional Node/npm/webpack/Jest stack.</p></section>
     <section><h2>Install bun-bin on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add bun-bin</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>Linux kernel 5.6+ recommended (5.1 minimum)</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>MIT licensed, open source</dd><dt>Licence</dt><dd>MIT</dd><dt>Download</dt><dd>35.4 MB</dd><dt>Installed</dt><dd>99.3 MB</dd></dl></div></section>
