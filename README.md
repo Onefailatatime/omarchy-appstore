@@ -45,6 +45,11 @@ data/         cached omarchy.db (auto-refreshed on each online build)
 dist/         generated site, package pages, sitemap, crawler files, and assets
 ```
 
+The icon set includes SVG, ICO, 32px PNG, and 180px Apple-touch variants. The
+Netlify configuration adds a restrictive content policy and standard browser
+security headers while allowing the public GitHub request feed, upstream HTTPS
+screenshots, and click-to-play YouTube embeds.
+
 ## Search and answer engines
 
 The build generates one canonical page per package under `dist/apps/`, plus

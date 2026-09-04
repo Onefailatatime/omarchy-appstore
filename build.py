@@ -260,6 +260,8 @@ def load_packages() -> list[dict]:
             base = f.get("BASE", [name])[0]
             directory, added, github = index.get(name) or index.get(base) or (name, 0, None)
             url = f.get("URL", [""])[0]
+            if url.startswith("http://www.nvidia.com"):
+                url = "https://" + url.removeprefix("http://")
             if url in OMARCHY_PKGS_URLS:
                 # Some PKGBUILDs default url= to the packaging repo itself when
                 # the underlying project genuinely has no homepage of its own —
@@ -566,6 +568,7 @@ def main() -> None:
     for f in (ROOT / "assets" / "images").glob("*"):
         if f.is_file():
             (images / f.name).write_bytes(f.read_bytes())
+    (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())
     about = ((ROOT / "parts" / "about.html").read_text(encoding="utf-8")
              .replace("__SYNCED__", synced)
              .replace("__CONTACT__", html.escape(CONTACT_URL))
