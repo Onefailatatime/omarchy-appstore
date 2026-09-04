@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Omarchy App Store — every package in the official repo</title>
+<meta name="description" content="Browse all __COUNT__ packages in the official Omarchy package repository, grouped into __CATCOUNT__ categories. Search, read the details, copy one command: omarchy pkg add. A community package browser for Omarchy Linux.">
+<meta property="og:title" content="Omarchy App Store">
+<meta property="og:description" content="Browse every package in the official Omarchy repo and install any of them with one command.">
+<meta property="og:type" content="website">
+<style>
+__STYLE__
+</style>
+</head>
+<body>
+
+<div class="notification">
+  <a href="https://omarchy.org/">A community package browser for Omarchy — packages ship from the official repo, pkgs.omarchy.org</a>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+<pre aria-hidden="true">▄▄▄▄▄▄▄▄▄
+█ <b>▄▄▄▄▄</b> █
+█ <b>█   █</b> █
+█ <b>▀▀▀▀▀</b> █
+▀▀▀▀▀▀▀▀▀</pre>
+    <h1>Omarchy <span>App Store</span></h1>
+    <p class="tag">Every package in the official Omarchy repo, one command away.</p>
+    <p class="facts"><b>__COUNT__</b> packages · <b>__CATCOUNT__</b> categories · synced __SYNCED__ · install with <code>omarchy pkg add &lt;name&gt;</code></p>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap bar-row">
+    <label class="search">
+      <span class="prompt">$</span>
+      <input id="q" type="search" placeholder="search __COUNT__ packages…" autocomplete="off" spellcheck="false" aria-label="Search packages">
+      <kbd>/</kbd>
+    </label>
+    <div class="sorts" role="group" aria-label="Sort">
+      <button class="chip sort" type="button" data-sort="az" aria-pressed="true">A–Z</button>
+      <button class="chip sort" type="button" data-sort="new" aria-pressed="false">Updated</button>
+    </div>
+    <a class="button" href="__MAILTO__" id="req-bar">Request an app</a>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section aria-labelledby="arrivals-h">
+    <h2 class="sec-label" id="arrivals-h">Just landed <small>__NEWCOUNT__ newest additions to the repo</small></h2>
+    <div class="arrivals">
+__NEW__
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-label">Browse by category</h2>
+    <div class="cats" id="cats" role="group" aria-label="Filter by category">
+      <button class="chip cat" type="button" data-cat="" aria-pressed="true">All <b id="all-count">__COUNT__</b></button>
+__CHIPS__
+    </div>
+    <div class="filter-active" id="filter-active">
+      <span class="dot" aria-hidden="true"></span><span id="filter-name"></span>
+      <button type="button" id="filter-clear" aria-label="Clear category filter">✕</button>
+    </div>
+  </section>
+
+  <p class="count"><b id="shown">__COUNT__</b> of <b>__COUNT__</b> packages shown</p>
+
+  <div id="catalogue">
+__GROUPS__
+  </div>
+
+  <div class="empty" id="empty">
+    <p>Nothing matches <b id="empty-q"></b>. Try a shorter word, check the <a href="https://aur.archlinux.org/">AUR</a>, or:</p>
+    <a class="button" href="__MAILTO__" id="req-empty">Request an app</a>
+  </div>
+
+  <section class="sec-label-wrap" style="margin-top: var(--space-xx-large)">
+    <div class="request">
+      <h2>Not in the repo?</h2>
+      <p>This store only lists what the official Omarchy repo ships. If a package is missing, say so — it goes to Jessyka, not to Omacom, and it's not a promise of inclusion.</p>
+      <a class="button" href="__MAILTO__" id="req-panel">Request an app</a>
+      <p class="addr">or email <a href="mailto:__EMAIL__">__EMAIL__</a> directly</p>
+    </div>
+  </section>
+
+</main>
+
+<dialog id="detail" aria-labelledby="d-name">
+  <div class="detail">
+    <header>
+      <div><h2 id="d-name"></h2><span class="ver" id="d-ver"></span></div>
+      <button class="close" type="button" aria-label="Close" data-close>✕</button>
+    </header>
+    <span class="cat-tag" id="d-cat"><span class="dot" aria-hidden="true"></span><span id="d-cat-name"></span></span>
+    <p class="tagline" id="d-tagline"></p>
+
+    <figure class="shot-wrap" id="d-shot-wrap" hidden>
+      <img id="d-shot" alt="">
+    </figure>
+
+    <p class="desc" id="d-desc"></p>
+
+    <div class="badges" id="d-badges">
+      <span class="badge pricing" id="d-pricing"></span>
+    </div>
+
+    <div id="d-reqs-wrap" hidden>
+      <p class="label">Good to know</p>
+      <ul class="reqs" id="d-reqs"></ul>
+    </div>
+
+    <div class="term">
+      <div class="bar-line"><span>install on omarchy</span><button class="button" type="button" id="d-copy">Copy</button></div>
+      <pre><span class="p">$</span> <span id="d-cmd"></span></pre>
+    </div>
+    <dl class="meta">
+      <div><dt>Download</dt><dd id="d-csize"></dd></div>
+      <div><dt>Installed</dt><dd id="d-isize"></dd></div>
+      <div><dt>Licence</dt><dd id="d-license"></dd></div>
+      <div><dt>Last built</dt><dd id="d-built"></dd></div>
+      <div id="d-added-wrap"><dt>Added</dt><dd id="d-added"></dd></div>
+    </dl>
+    <div id="d-deps-wrap"><dl class="meta"><div><dt>Needs</dt><dd class="deps" id="d-deps"></dd></div></dl></div>
+
+    <div id="d-video-wrap" hidden>
+      <p class="label">Demo <small>plays inline only if you click it — nothing loads from YouTube until then</small></p>
+      <div id="d-video-slot"></div>
+    </div>
+
+    <div class="actions">
+      <a class="button ghost" id="d-url" href="#" target="_blank" rel="noopener">Project site ↗</a>
+      <a class="button ghost" id="d-github" href="#" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="button ghost" id="d-src" href="#" target="_blank" rel="noopener">PKGBUILD ↗</a>
+    </div>
+  </div>
+</dialog>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Omarchy App Store is a community project by Jessyka at FunnelFix — not affiliated with Omacom or DHH. It serves no packages of its own: every entry above is read from the official repository at <a href="https://pkgs.omarchy.org/">pkgs.omarchy.org</a>, and the install command hands you to <code>omarchy</code> itself. Debug companion packages are hidden; categories are curated by hand and may not match any official grouping.</p>
+    <div class="row">
+      <nav>
+        <a href="https://omarchy.org/">omarchy.org</a>
+        <a href="https://omarchy.org/manual/">Manual</a>
+        <a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs on GitHub</a>
+        <a href="https://omarchyplugins.com/">Plugins</a>
+        <a href="__MAILTO__">Request an app</a>
+      </nav>
+      <span>Synced __SYNCED__ · no trackers, no third-party requests</span>
+    </div>
+    <div class="legend" aria-hidden="true">__LEGEND__</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var q = document.getElementById("q");
+  var cards = Array.prototype.slice.call(document.querySelectorAll("#catalogue .card"));
+  var groups = Array.prototype.slice.call(document.querySelectorAll("#catalogue .group"));
+  var shown = document.getElementById("shown");
+  var empty = document.getElementById("empty");
+  var emptyQ = document.getElementById("empty-q");
+  var catalogue = document.getElementById("catalogue");
+  var dlg = document.getElementById("detail");
+  var activeCat = "";
+
+  cards.forEach(function (c) { c._hay = (c.dataset.name + " " + c.dataset.desc).toLowerCase(); });
+
+  function apply() {
+    var terms = q.value.toLowerCase().split(/\s+/).filter(Boolean);
+    var n = 0;
+    groups.forEach(function (g) {
+      var catOk = !activeCat || g.dataset.cat === activeCat;
+      var visibleInGroup = 0;
+      if (catOk) {
+        Array.prototype.forEach.call(g.querySelectorAll(".card"), function (c) {
+          var hit = terms.every(function (t) { return c._hay.indexOf(t) !== -1; });
+          c.hidden = !hit;
+          if (hit) { visibleInGroup++; n++; }
+        });
+      }
+      g.hidden = !catOk || visibleInGroup === 0;
+    });
+    shown.textContent = n;
+    var hasQuery = terms.length > 0;
+    empty.classList.toggle("on", n === 0);
+    catalogue.hidden = n === 0;
+    if (n === 0) {
+      emptyQ.textContent = hasQuery ? '"' + q.value.trim() + '"' : "that category";
+      setRequestQuery(q.value.trim());
+    } else {
+      setRequestQuery("");
+    }
+  }
+  q.addEventListener("input", apply);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "/" && document.activeElement !== q && !dlg.open) { e.preventDefault(); q.focus(); }
+    if (e.key === "Escape" && document.activeElement === q) { q.value = ""; apply(); q.blur(); }
+  });
+
+  /* ---------- sort (within each visible group) ---------- */
+  var sortChips = document.querySelectorAll(".chip.sort");
+  sortChips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      sortChips.forEach(function (c) { c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      var mode = chip.dataset.sort;
+      groups.forEach(function (g) {
+        var list = Array.prototype.slice.call(g.querySelectorAll(".card"));
+        list.sort(function (a, b) {
+          if (mode === "new") { return (+b.dataset.builtTs) - (+a.dataset.builtTs); }
+          return a.dataset.name.localeCompare(b.dataset.name);
+        });
+        var grid = g.querySelector(".grid");
+        list.forEach(function (c) { grid.appendChild(c); });
+      });
+    });
+  });
+
+  /* ---------- category chips ---------- */
+  var catChips = document.querySelectorAll(".chip[data-cat]");
+  var filterActive = document.getElementById("filter-active");
+  var filterName = document.getElementById("filter-name");
+  var filterClear = document.getElementById("filter-clear");
+
+  function setCategory(cat, chip) {
+    activeCat = cat;
+    catChips.forEach(function (c) { c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+    if (cat) {
+      filterActive.classList.add("on");
+      filterActive.style.setProperty("--cat", getComputedStyle(chip).getPropertyValue("--cat"));
+      filterName.textContent = chip.textContent.replace(/\s*\d+\s*$/, "").trim();
+    } else {
+      filterActive.classList.remove("on");
+    }
+    apply();
+  }
+  catChips.forEach(function (chip) {
+    chip.addEventListener("click", function () { setCategory(chip.dataset.cat, chip); });
+  });
+  filterClear.addEventListener("click", function () { setCategory("", catChips[0]); });
+
+  /* ---------- request mailto: seed with the failed search ---------- */
+  var MAILTO_BASE = "__MAILTO__";
+  function setRequestQuery(term) {
+    var href = MAILTO_BASE;
+    if (term) {
+      href += "&body=" + encodeURIComponent(
+        "Package name: " + term + "\r\n" +
+        "Project URL: \r\n" +
+        "Why it belongs in the Omarchy repo: \r\n" +
+        "\r\n" +
+        "-- sent from the Omarchy App Store (community site), search: \"" + term + "\""
+      );
+    }
+    document.getElementById("req-empty").href = href;
+  }
+
+  /* ---------- detail dialog ---------- */
+  var PRICING_LABEL = {
+    "free": "Free", "free-libre": "Free & open source", "freemium": "Freemium",
+    "paid": "Paid", "subscription": "Subscription",
+  };
+  function text(id, v) { document.getElementById(id).textContent = v; }
+  function open(c) {
+    var d = c.dataset;
+    text("d-name", d.name);
+    text("d-ver", d.version);
+    text("d-cat-name", d.category);
+    document.getElementById("d-cat").style.setProperty("--cat", getComputedStyle(c).getPropertyValue("--cat"));
+
+    var taglineEl = document.getElementById("d-tagline");
+    taglineEl.hidden = !d.tagline;
+    if (d.tagline) text("d-tagline", d.tagline);
+
+    var shotWrap = document.getElementById("d-shot-wrap");
+    var shot = document.getElementById("d-shot");
+    if (d.shot) { shot.src = d.shot; shot.alt = d.name + " — screenshot"; shotWrap.hidden = false; }
+    else { shot.removeAttribute("src"); shotWrap.hidden = true; }
+
+    text("d-desc", d.fullDesc || d.desc || "No description provided.");
+
+    var pricingEl = document.getElementById("d-pricing");
+    if (d.pricing && PRICING_LABEL[d.pricing]) {
+      pricingEl.textContent = PRICING_LABEL[d.pricing] + (d.pricingNote ? " · " + d.pricingNote : "");
+      pricingEl.className = "badge pricing p-" + d.pricing;
+      pricingEl.hidden = false;
+    } else {
+      pricingEl.hidden = true;
+    }
+
+    var reqs = JSON.parse(d.reqs || "[]");
+    var reqsWrap = document.getElementById("d-reqs-wrap");
+    var reqsList = document.getElementById("d-reqs");
+    reqsList.textContent = "";
+    reqs.forEach(function (r) { var li = document.createElement("li"); li.textContent = r; reqsList.appendChild(li); });
+    reqsWrap.hidden = reqs.length === 0;
+
+    text("d-cmd", "omarchy pkg add " + d.name);
+    text("d-csize", d.csize);
+    text("d-isize", d.isize);
+    text("d-license", d.license);
+    text("d-built", d.built);
+    var addedWrap = document.getElementById("d-added-wrap");
+    if (d.added) { text("d-added", d.added); addedWrap.hidden = false; } else { addedWrap.hidden = true; }
+    var deps = JSON.parse(d.deps || "[]");
+    var wrap = document.getElementById("d-deps-wrap");
+    var list = document.getElementById("d-deps");
+    list.textContent = "";
+    deps.forEach(function (name) { var s = document.createElement("span"); s.textContent = name; list.appendChild(s); });
+    wrap.hidden = deps.length === 0;
+
+    /* Click-to-play: nothing is fetched from YouTube until this button is
+       pressed, so opening a dialog never makes a third-party request. */
+    var videoWrap = document.getElementById("d-video-wrap");
+    var videoSlot = document.getElementById("d-video-slot");
+    videoSlot.textContent = "";
+    if (d.yt) {
+      var playBtn = document.createElement("button");
+      playBtn.type = "button";
+      playBtn.className = "video-ph";
+      playBtn.setAttribute("aria-label", "Play demo video");
+      var icon = document.createElement("span");
+      icon.className = "play-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = "▶";
+      var label = document.createElement("span");
+      label.textContent = d.ytTitle ? "Watch: " + d.ytTitle : "Watch demo";
+      playBtn.appendChild(icon);
+      playBtn.appendChild(label);
+      playBtn.addEventListener("click", function () {
+        var iframe = document.createElement("iframe");
+        iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(d.yt) + "?autoplay=1";
+        iframe.title = d.ytTitle || (d.name + " demo video");
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.style.cssText = "width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius);display:block";
+        videoSlot.textContent = "";
+        videoSlot.appendChild(iframe);
+      });
+      videoSlot.appendChild(playBtn);
+      videoWrap.hidden = false;
+    } else {
+      videoWrap.hidden = true;
+    }
+
+    var url = document.getElementById("d-url");
+    url.href = d.url || "#";
+    url.hidden = !d.url;
+    var gh = document.getElementById("d-github");
+    gh.href = d.github || "#";
+    gh.hidden = !d.github;
+    document.getElementById("d-src").href = "https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/" + encodeURIComponent(d.dir || d.name);
+    dlg.showModal();
+  }
+  document.querySelectorAll(".card").forEach(function (c) {
+    c.addEventListener("click", function () { open(c); });
+    c.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(c); } });
+  });
+  dlg.querySelector("[data-close]").addEventListener("click", function () { dlg.close(); });
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+  // Covers every close path (button, backdrop click, native Esc) in one place:
+  // destroy any playing embed so it doesn't keep playing behind a closed dialog.
+  dlg.addEventListener("close", function () { document.getElementById("d-video-slot").textContent = ""; });
+
+  /* ---------- copy ---------- */
+  var copy = document.getElementById("d-copy");
+  copy.addEventListener("click", function () {
+    var cmd = document.getElementById("d-cmd").textContent;
+    var done = function () {
+      copy.textContent = "Copied";
+      setTimeout(function () { copy.textContent = "Copy"; }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(cmd).then(done, function () { copy.textContent = "Select it"; });
+    } else {
+      copy.textContent = "Select it";
+    }
+  });
+})();
+</script>
+</body>
+</html>

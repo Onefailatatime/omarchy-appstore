@@ -1,0 +1,2600 @@
+{
+ "1password": {
+  "confidence": "medium",
+  "description": "1Password stores your passwords, passkeys, credit cards, and other sensitive items in an encrypted vault you unlock with one master password (plus a secret key), then autofills them across your browser, desktop, and phone. Beyond personal password management it has grown into a broader access-security platform, adding features like a password-health dashboard, SaaS app discovery, device-trust checks, and credential management for AI agents and automated workflows.",
+  "has_gui": true,
+  "name": "1password",
+  "pricing": "subscription",
+  "pricing_note": "individual and family plans, plus separate custom-quoted business/enterprise tiers",
+  "requirements": [
+   "a 1Password account (paid subscription) to store and sync vault data",
+   "network access to sync vaults"
+  ],
+  "requirements_note": "",
+  "screenshot_url": "https://images.ctfassets.net/2h488pz7kgfv/3LFtMDyAFpNaDt3e0phRIH/e727fca0c8c1245f06e516a06bf64c50/03_vaults_2x.webp",
+  "source_url": "https://1password.com",
+  "tagline": "The password manager and secrets vault that keeps every login, card, and passkey behind one master password.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "1password-beta": {
+  "confidence": "medium",
+  "description": "1password-beta packages the pre-release beta build of the 1Password desktop app, so users can try new features and fixes before they reach the stable channel. It is the same encrypted password, passkey, and secrets vault as regular 1Password, just built from a newer, less-tested release track.",
+  "has_gui": true,
+  "name": "1password-beta",
+  "pricing": "subscription",
+  "pricing_note": "same 1Password subscription plans as the stable app",
+  "requirements": [
+   "a 1Password account (paid subscription) to store and sync vault data",
+   "network access to sync vaults",
+   "tolerance for pre-release bugs since this is the beta channel"
+  ],
+  "requirements_note": "",
+  "screenshot_url": "https://images.ctfassets.net/2h488pz7kgfv/3LFtMDyAFpNaDt3e0phRIH/e727fca0c8c1245f06e516a06bf64c50/03_vaults_2x.webp",
+  "source_url": "https://1password.com",
+  "tagline": "The bleeding-edge preview channel of 1Password's password manager, ahead of the stable release.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "1password-cli": {
+  "confidence": "medium",
+  "description": "The 1Password CLI (the `op` command) lets you fetch and manage vault items, inject secrets into environment variables, and provision shells with credentials, all without opening the desktop app. It is aimed at developers and admins who want to script secret retrieval, wire secrets into CI pipelines, or manage vaults, users, and service accounts from the command line.",
+  "has_gui": false,
+  "name": "1password-cli",
+  "pricing": "free",
+  "pricing_note": "the CLI binary itself is free; it is only useful with a paid 1Password account behind it",
+  "requirements": [
+   "a 1Password account (paid subscription) to authenticate against",
+   "network access to reach 1Password's servers"
+  ],
+  "requirements_note": "",
+  "screenshot_url": "",
+  "source_url": "https://app-updates.agilebits.com/product_history/CLI2",
+  "tagline": "Read, write, and script your 1Password vault straight from the terminal.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "aether": {
+  "confidence": "medium",
+  "description": "Aether analyzes a wallpaper's colors (using a median-cut palette algorithm with several extraction modes and fine-tuning sliders) and generates a cohesive 16-color theme from it, then applies that theme across 20+ apps like Hyprland, Kitty, Alacritty, VS Code, and Neovim. It also bundles a wallpaper browser/downloader for wallhaven.cc, an image editor with filters, and a library of built-in presets (Dracula, Nord, Gruvbox, Catppuccin) plus 250+ importable Base16 community schemes.",
+  "has_gui": true,
+  "name": "aether",
+  "pricing": "free-libre",
+  "pricing_note": "MIT licensed, open source",
+  "requirements": [],
+  "requirements_note": "",
+  "screenshot_url": "",
+  "source_url": "https://github.com/omacom-io/aether",
+  "tagline": "Turn any wallpaper into a matching color scheme for your whole Linux desktop.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "asdcontrol": {
+  "confidence": "medium",
+  "description": "asdcontrol is a small Linux utility for controlling the brightness of Apple's Thunderbolt-connected displays, specifically the Studio Display and Pro Display XDR. It talks to the monitor over its USB HID interface, letting you read the current brightness or set it to an absolute value or a relative adjustment from a terminal command or a bound hotkey.",
+  "has_gui": false,
+  "name": "asdcontrol",
+  "pricing": "free-libre",
+  "pricing_note": "GPLv2 licensed, open source",
+  "requirements": [
+   "one of the supported Apple displays (Studio Display 2022, Pro Display XDR) connected via USB-C",
+   "read/write access to the display's USB HID device node (usually granted via a udev rule)"
+  ],
+  "requirements_note": "",
+  "screenshot_url": "",
+  "source_url": "https://github.com/omakasui/asdcontrol",
+  "tagline": "Command-line brightness control for Apple's Thunderbolt displays, on Linux.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "asusctl": {
+  "confidence": "medium",
+  "description": "asusctl is a background daemon plus a set of command-line tools for managing ASUS ROG laptop hardware on Linux: keyboard backlight and per-key RGB lighting, custom fan curves, switching between integrated and dedicated GPU modes, VFIO passthrough toggling for VMs, AniMe Matrix display animations, and power-profile-triggered scripts. A separate companion app, rog-control-center, provides a graphical front end for it, but this package itself is the daemon and CLI layer.",
+  "has_gui": false,
+  "name": "asusctl",
+  "pricing": "free-libre",
+  "pricing_note": "MPL-2.0 licensed, open source",
+  "requirements": [
+   "an ASUS ROG laptop (features vary by model, e.g. AniMe Matrix or per-key RGB only on models that have that hardware)"
+  ],
+  "requirements_note": "",
+  "screenshot_url": "",
+  "source_url": "https://asus-linux.org",
+  "tagline": "The control daemon and CLI toolkit that unlocks ASUS ROG laptop features on Linux.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "basecamp-cli": {
+  "confidence": "medium",
+  "description": "basecamp-cli is Basecamp's official command-line client, letting you list and manage projects, to-dos, cards, and messages, post updates, and search across your Basecamp account from a terminal. It authenticates via OAuth 2.1 in the browser on first login and then handles token refresh automatically, and it also ships plugins/MCP support so AI coding agents like Claude Code, Codex, and Copilot can act on your Basecamp account directly.",
+  "has_gui": false,
+  "name": "basecamp-cli",
+  "pricing": "free",
+  "pricing_note": "the CLI is free; it requires a Basecamp account, and Basecamp itself is a paid product",
+  "requirements": [
+   "a Basecamp account",
+   "a Basecamp subscription for the underlying project-management service",
+   "network access, since it talks to Basecamp's API"
+  ],
+  "requirements_note": "",
+  "screenshot_url": "",
+  "source_url": "https://github.com/basecamp/basecamp-cli",
+  "tagline": "Manage your Basecamp projects, to-dos, and messages without leaving the terminal.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "bun-bin": {
+  "confidence": "medium",
+  "description": "Bun is an all-in-one JavaScript and TypeScript toolkit: a fast runtime (built in Rust/Zig on JavaScriptCore rather than V8) meant as a drop-in alternative to Node.js, plus a built-in package manager, bundler, and test runner in a single executable. The goal is to collapse a typical JS project's separate tools into one fast binary, cutting install and startup times compared to a traditional Node/npm/webpack/Jest stack.",
+  "has_gui": false,
+  "name": "bun-bin",
+  "pricing": "free-libre",
+  "pricing_note": "MIT licensed, open source",
+  "requirements": [
+   "Linux kernel 5.6+ recommended (5.1 minimum)"
+  ],
+  "requirements_note": "",
+  "screenshot_url": "",
+  "source_url": "https://github.com/oven-sh/bun",
+  "tagline": "One fast binary that replaces Node.js, npm, webpack, and your test runner.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "caja-open-any-terminal": {
+  "confidence": "medium",
+  "description": "This is a Caja (and originally Nautilus) file-manager extension that adds a right-click context-menu entry to open a terminal at the current folder. Rather than being locked to one default terminal, it supports 40+ terminal emulators (Kitty, Alacritty, Konsole, Terminator, and more), configurable through gsettings or a dconf-editor panel.",
+  "has_gui": false,
+  "name": "caja-open-any-terminal",
+  "pricing": "free-libre",
+  "pricing_note": "GPLv3 licensed, open source",
+  "requirements": [
+   "a Caja/Nautilus Python extension runtime (nautilus-python or python3-nautilus)",
+   "at least one supported terminal emulator installed to open"
+  ],
+  "requirements_note": "",
+  "screenshot_url": "",
+  "source_url": "https://github.com/Stunkymonkey/nautilus-open-any-terminal",
+  "tagline": "Adds an \"Open Terminal Here\" option for your favorite terminal to the Caja file manager.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "claude-code": {
+  "confidence": "medium",
+  "description": "Claude Code is Anthropic's agentic coding tool: you run it from a project directory and describe what you want in plain language, and it reads your codebase, edits files, runs commands, and handles git workflows like commits and PRs on your behalf. It runs primarily as a terminal CLI but also integrates with IDEs and GitHub (by tagging @claude on issues or PRs).",
+  "has_gui": false,
+  "name": "claude-code",
+  "pricing": "freemium",
+  "pricing_note": "usable with a Claude.ai subscription (Pro/Max) or pay-as-you-go Anthropic API credits; the official site did not surface exact figures during this review",
+  "requirements": [
+   "a Claude.ai account or Anthropic API key",
+   "network access to reach Anthropic's API"
+  ],
+  "requirements_note": "",
+  "screenshot_url": "",
+  "source_url": "https://github.com/anthropics/claude-code",
+  "tagline": "An AI coding agent that works directly in your terminal, understands your whole codebase, and ships changes for you.",
+  "youtube_id": "IlqJqcl8ONE",
+  "youtube_title": "How we Claude Code"
+ },
+ "cliamp": {
+  "confidence": "medium",
+  "description": "cliamp is a retro-styled music player that lives entirely in the terminal, built to evoke Winamp 2.x with a spectrum visualizer and a parametric EQ rendered in ASCII. It plays local files as well as internet radio, podcasts, and streams pulled from YouTube, YouTube Music, SoundCloud, Spotify, Navidrome, Jellyfin, and more. Playlists, a Lua plugin system, and cross-platform support (Linux, macOS, Windows) round it out.",
+  "has_gui": true,
+  "name": "cliamp",
+  "pricing": "free-libre",
+  "pricing_note": "MIT licensed, source available on GitHub",
+  "requirements": [
+   "Network access to stream from services like YouTube, Spotify, or internet radio",
+   "ffmpeg and yt-dlp needed for extended codec and streaming-provider support",
+   "Linux needs ALSA dev headers and a PipeWire-ALSA or PulseAudio-ALSA bridge for audio"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/bjarneo/cliamp",
+  "tagline": "Winamp's ghost, reincarnated in your terminal.",
+  "youtube_id": "7vYp_mhaTKo",
+  "youtube_title": "The Ultimate Terminal Music Player? Meet Cliamp."
+ },
+ "crush-bin": {
+  "confidence": "medium",
+  "description": "Crush is a terminal-based AI coding agent from Charm (makers of Bubble Tea and Glow) that works alongside you directly in the command line. It can switch between many LLM providers mid-session without losing context, understands your project through LSP integration, and extends itself through MCP servers over HTTP, stdio, or SSE. Session history and project context are stored locally in SQLite, so nothing is lost between restarts.",
+  "has_gui": false,
+  "name": "crush-bin",
+  "pricing": "free",
+  "pricing_note": "Source-available under FSL-1.1-MIT (converts to MIT after 2 years); Crush itself costs nothing but you supply your own API key for whichever model provider you use",
+  "requirements": [
+   "An API key from at least one supported LLM provider (Anthropic, OpenAI, Google Gemini, OpenRouter, Groq, AWS Bedrock, Azure, Vertex AI, or a local model via Ollama/llama.cpp)",
+   "Network access to reach the chosen model provider"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/charmbracelet/crush",
+  "tagline": "Your coding bestie, now living in your favorite terminal.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "cursor-bin": {
+  "confidence": "medium",
+  "description": "Cursor is a full desktop coding environment, forked from VS Code, that puts AI agents at the center of the workflow. It lets you pick from multiple frontier models to generate code, run autonomous cloud agents that build and test features in the background, and review pull requests or trigger automations straight from the editor, terminal, or Slack. It's aimed at developers who want an IDE where an AI agent can take on real chunks of implementation work, not just autocomplete.",
+  "has_gui": true,
+  "name": "cursor-bin",
+  "pricing": "freemium",
+  "pricing_note": "Hobby tier is free with limited agent requests; Pro is $20/mo, Pro+ $60/mo, Ultra $200/mo, Teams from $40/user/mo",
+  "requirements": [
+   "A Cursor account",
+   "Network access",
+   "A paid plan (Pro or higher) for meaningful agent usage beyond the free tier's limits"
+  ],
+  "screenshot_url": "https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/misc/asset-cc24ca462279ca23250c.jpg",
+  "source_url": "https://www.cursor.com",
+  "tagline": "An AI-first code editor built to build ambitious software.",
+  "youtube_id": "ed26g7jxAbU",
+  "youtube_title": "Cursor AI: The Only IDE You Need in 2026 (Beginner to Pro)"
+ },
+ "cursor-cli": {
+  "confidence": "medium",
+  "description": "Cursor CLI brings Cursor's AI coding agents to the terminal, so they can be run interactively, wired into GitHub Actions, or scripted into other automations without opening the full IDE. It supports the same range of underlying models as Cursor's desktop app, includes a shell mode for running commands with safety checks, and is meant for tasks like auto-updating docs, triggering security reviews, or building custom agents into CI pipelines.",
+  "has_gui": false,
+  "name": "cursor-cli",
+  "pricing": "freemium",
+  "pricing_note": "Shares Cursor's account and plan tiers (free Hobby tier, paid Pro/Pro+/Ultra/Teams plans)",
+  "requirements": [
+   "A Cursor account",
+   "Network access to reach Cursor's model backend",
+   "A paid Cursor plan for extended agent usage"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://cursor.com/cli",
+  "tagline": "Cursor's AI agents, running straight from your shell.",
+  "youtube_id": "onaIazLEVi8",
+  "youtube_title": "The Cursor CLI is Actually Good!?"
+ },
+ "dbxcli-bin": {
+  "confidence": "high",
+  "description": "dbxcli is Dropbox's own scriptable command-line client, built with the Go SDK, for listing, uploading, downloading, and otherwise managing files without leaving the terminal. It supports recursive transfers, piping data in and out, shared-link management, search, revisions, and JSON output for automation, plus team and member-scoped operations for business accounts. It's maintained by Dropbox engineers but explicitly noted as not an officially supported product.",
+  "has_gui": false,
+  "name": "dbxcli-bin",
+  "pricing": "free-libre",
+  "pricing_note": "Apache-2.0 licensed",
+  "requirements": [
+   "A Dropbox account (OAuth login)",
+   "Network access",
+   "Dropbox storage limits and paid tiers still apply for how much you can store, separate from the tool itself"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/dropbox/dbxcli",
+  "tagline": "Dropbox from the command line, scripts included.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "dell-xps-touchpad-haptics": {
+  "confidence": "medium",
+  "description": "This package installs Omarchy's presets and control hooks for the Synaptics haptic touchpad found on newer Dell XPS laptops, exposing a Trigger > Hardware > Touchpad Haptics menu to switch the simulated click strength between low, mid, and high. It's a small, targeted driver-adjacent utility rather than a standalone app, only relevant if you're running Omarchy on the specific Dell XPS hardware it targets.",
+  "has_gui": false,
+  "name": "dell-xps-touchpad-haptics",
+  "pricing": "free-libre",
+  "pricing_note": "MIT licensed",
+  "requirements": [
+   "A Dell XPS laptop with a Synaptics haptic touchpad (only certain controller revisions, e.g. 06CB:D01A, are supported; newer 06CB:D01D units have reported compatibility issues)",
+   "Running the Omarchy desktop environment"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/basecamp/omarchy/issues/5303",
+  "tagline": "Dials in the click feel of Dell XPS haptic touchpads under Omarchy.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "dropbox": {
+  "confidence": "high",
+  "description": "Dropbox is a cloud storage and file-sharing service that syncs your files, photos, and documents across devices and lets you share or collaborate on them with others. It previews over 175 file types in the browser or app, supports large file transfers up to 250GB, and now layers in AI-assisted search and organization features alongside its core sync-and-share functionality.",
+  "has_gui": true,
+  "name": "dropbox",
+  "pricing": "freemium",
+  "pricing_note": "Basic tier is free with 2GB; Plus is $9.99/mo for 2TB; Standard $15/user/mo, Advanced $24/user/mo for teams, Enterprise is custom",
+  "requirements": [
+   "A Dropbox account",
+   "Network access to sync files"
+  ],
+  "screenshot_url": "https://fjord.dropboxstatic.com/warp/conversion/dropbox/warp/en-us/index/october-2025-launch/hero/dropbox-homepage-hero-2025-ui-transparent-1920x1280.png",
+  "source_url": "https://www.dropbox.com",
+  "tagline": "Cloud storage that follows your files everywhere.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "dropbox-cli": {
+  "confidence": "low",
+  "description": "dropbox-cli is a command-line control script for the official Dropbox desktop client on Linux, used to start, stop, or check the status of the Dropbox sync daemon, manage selective sync exclusions, and throttle bandwidth, all from a terminal without opening a GUI. It's a companion to the main Dropbox app rather than a replacement for it.",
+  "has_gui": false,
+  "name": "dropbox-cli",
+  "pricing": "free",
+  "pricing_note": "GPL-3.0-or-later licensed control script; it manages the Dropbox client, which itself has free and paid storage tiers",
+  "requirements": [
+   "The Dropbox daemon/client installed and running",
+   "A Dropbox account",
+   "Network access"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://www.dropbox.com",
+  "tagline": "Terminal controls for the Dropbox desktop daemon.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant": {
+  "confidence": "medium",
+  "description": "Elephant is a headless data-provider and executor service that acts as a shared backend for building custom application launchers and desktop utilities on Linux. It aggregates data from a plugin-based set of providers (apps, files, clipboard, Bluetooth, calculator, package search, and more) and exposes them over Unix sockets using Protocol Buffers, so a separate frontend like Walker can query it and render results. On its own, without a frontend and provider plugins installed, it does nothing visible.",
+  "has_gui": false,
+  "name": "elephant",
+  "pricing": "free-libre",
+  "pricing_note": "GPLv3 licensed",
+  "requirements": [
+   "A frontend launcher (such as Walker) to actually see and use its results",
+   "Individual provider plugins for the data sources you want (apps, files, clipboard, etc.) \u2014 the base package alone has none installed",
+   "A systemd-based Linux environment is expected, though it can run standalone"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "The backend brain behind fast Linux application launchers.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-all": {
+  "confidence": "medium",
+  "description": "elephant-all is a convenience package that installs the Elephant launcher backend together with its full set of official data providers in one shot, including desktop applications, files, clipboard history, Bluetooth, calculator, Arch package search, todo lists, bookmarks, Unicode symbols, window management, and web search. It exists because installing bare Elephant alone leaves a launcher frontend with nothing to search, since no providers ship by default.",
+  "has_gui": false,
+  "name": "elephant-all",
+  "pricing": "free-libre",
+  "pricing_note": "GPLv3 licensed",
+  "requirements": [
+   "A frontend launcher (such as Walker) to actually present and interact with results",
+   "A systemd-based Linux environment is expected, though it can run standalone"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Elephant plus every official provider, bundled in one install.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-archlinuxpkgs": {
+  "confidence": "medium",
+  "description": "Elephant is a backend daemon (used by launchers like Walker) that exposes different data sources as \"providers\" over a Unix socket. This package adds the Arch Linux package provider, letting the launcher search official repo and AUR packages and trigger install/remove actions without opening a terminal.",
+  "has_gui": false,
+  "name": "elephant-archlinuxpkgs",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A running elephant daemon and a frontend such as Walker to actually use it",
+   "pacman/AUR helper on the system for package operations"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Search and install Arch and AUR packages right from your launcher.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-bluetooth": {
+  "confidence": "medium",
+  "description": "This is elephant's Bluetooth provider, giving any elephant-powered launcher a way to list, pair, connect, and disconnect Bluetooth devices as searchable/selectable items instead of switching to a separate settings app.",
+  "has_gui": false,
+  "name": "elephant-bluetooth",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A running elephant daemon and a frontend such as Walker",
+   "A Bluetooth adapter and a working BlueZ/system Bluetooth stack"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Manage Bluetooth devices from the same launcher you open apps with.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-calc": {
+  "confidence": "medium",
+  "description": "The calculator/unit-conversion provider for elephant. It lets a launcher evaluate arithmetic expressions and unit conversions as you type, so results appear live in the search results instead of needing a separate calculator app.",
+  "has_gui": false,
+  "name": "elephant-calc",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A running elephant daemon and a frontend such as Walker"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Type a math expression, get the answer instantly.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-clipboard": {
+  "confidence": "medium",
+  "description": "This provider gives elephant access to clipboard history, tracking previously copied text and images so a launcher frontend can search and re-paste earlier clipboard entries rather than only the most recent item.",
+  "has_gui": false,
+  "name": "elephant-clipboard",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A running elephant daemon and a frontend such as Walker",
+   "A clipboard manager backend (e.g. wl-clipboard/cliphist on Wayland) actually recording history"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Search your clipboard history, including past images.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-desktopapplications": {
+  "confidence": "medium",
+  "description": "This is elephant's core application-launching provider: it parses .desktop entries, tracks launch history/frequency, and exposes your installed applications so a launcher frontend like Walker can search for and open them. For most users this is the most essential of the elephant providers.",
+  "has_gui": false,
+  "name": "elephant-desktopapplications",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A running elephant daemon and a frontend such as Walker"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "The provider that turns your installed apps into launcher results.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-files": {
+  "confidence": "medium",
+  "description": "The file-browsing provider for elephant. It lets a launcher frontend navigate directories, preview files, and perform basic file operations like opening or copying, turning the launcher into a lightweight file finder alongside its usual app-launching role.",
+  "has_gui": false,
+  "name": "elephant-files",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A running elephant daemon and a frontend such as Walker"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Browse, preview, and open files without leaving your launcher.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-menus": {
+  "confidence": "medium",
+  "description": "This provider lets you define custom, user-configured menus of actions or shortcuts that show up as selectable entries in an elephant-powered launcher, useful for scripts, quick toggles, or workflows you want one keystroke away.",
+  "has_gui": false,
+  "name": "elephant-menus",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A running elephant daemon and a frontend such as Walker",
+   "User-authored menu configuration to be useful beyond defaults"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Build your own custom quick-action menus for the launcher.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-providerlist": {
+  "confidence": "medium",
+  "description": "A meta-provider that lists elephant's available providers so a launcher frontend can offer a way to jump between them (e.g. switching from app search to file search) directly within the launcher's interface.",
+  "has_gui": false,
+  "name": "elephant-providerlist",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A running elephant daemon and a frontend such as Walker",
+   "Other elephant providers installed to have anything to switch between"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Lets you switch between elephant's other providers on the fly.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-runner": {
+  "confidence": "medium",
+  "description": "The command-runner provider for elephant: it scans your PATH and lets you type and execute arbitrary shell commands as launcher results, similar to a run dialog but integrated into the same search interface used for apps and files.",
+  "has_gui": false,
+  "name": "elephant-runner",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A running elephant daemon and a frontend such as Walker"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Run shell commands straight from your launcher's search bar.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-symbols": {
+  "confidence": "medium",
+  "description": "This provider supplies elephant's symbol and emoji picker data, covering multi-locale unicode names so you can search for a symbol or emoji by description and insert it. Its larger install size reflects the bundled unicode/locale symbol database compared to the other, mostly code-only providers.",
+  "has_gui": false,
+  "name": "elephant-symbols",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A running elephant daemon and a frontend such as Walker"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Find and insert emoji and unicode symbols by name, in any language.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-todo": {
+  "confidence": "medium",
+  "description": "Elephant is a background data-provider service (communicating over Unix sockets and Protocol Buffers) that powers application launchers and desktop widgets on Linux. The todo provider is one of its plugins, letting a launcher frontend add items, mark them active or done, set due times, and surface notifications, all without its own window; you interact with it through whatever launcher UI is connected to Elephant.",
+  "has_gui": false,
+  "name": "elephant-todo",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "The Elephant backend service running (elephant-unicode/websearch are separate provider plugins, not needed for this one)",
+   "A launcher frontend that talks to Elephant over its Unix socket to actually see or use the todo list"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Turns Elephant's launcher backend into a quick-capture task list.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-unicode": {
+  "confidence": "medium",
+  "description": "This is a plugin for Elephant, a headless provider service that Linux application launchers query over Unix sockets. The unicode provider lets a connected launcher search and insert unicode symbols and emoji across multiple locales. It has no interface of its own; a launcher frontend (like a custom Omarchy menu) displays the results.",
+  "has_gui": false,
+  "name": "elephant-unicode",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "The Elephant backend service running",
+   "A launcher frontend connected to Elephant to actually browse or pick symbols"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Emoji and unicode symbol lookup for the Elephant launcher backend.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "elephant-websearch": {
+  "confidence": "medium",
+  "description": "This is a plugin for Elephant, a headless data-provider service Linux launchers query over Unix sockets. The websearch provider lets you define custom search engines and trigger web queries straight from a connected launcher, without opening a browser first. Like the rest of Elephant, it runs as a background service with no GUI of its own.",
+  "has_gui": false,
+  "name": "elephant-websearch",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "The Elephant backend service running",
+   "A launcher frontend connected to Elephant, and a browser to open the resulting search"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/abenz1267/elephant",
+  "tagline": "Custom web search shortcuts for the Elephant launcher backend.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "flea": {
+  "confidence": "high",
+  "description": "Flea is a native file manager built specifically for the Omarchy Hyprland desktop, pairing a Rust backend with a Quickshell frontend rather than extending an existing manager like Nautilus. It supports vim-style keyboard navigation, list/columns/grid views, rich previews (images, video, PDFs, archives), undoable file operations, and network mounts (SMB/NFS, Taildrop, Dropbox), all styled to match Omarchy's live color palette.",
+  "has_gui": true,
+  "name": "flea",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Runs on Omarchy with Quickshell 0.3.1+",
+   "Optional tools for extra features: bubblewrap/util-linux for thumbnailing, bsdtar/7z for archives, gio for network mounts, Qt PDF/Multimedia modules for previews"
+  ],
+  "screenshot_url": "https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/list.png",
+  "source_url": "https://github.com/thisisgm/flea",
+  "tagline": "The fastest, keyboard-first file manager built for Omarchy.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "github-copilot-cli": {
+  "confidence": "high",
+  "description": "GitHub Copilot CLI brings GitHub's Copilot coding agent into the terminal, letting you describe what you want in natural language and have it read, edit, and run code in your project. It can pull in context from your GitHub repositories, issues, and pull requests, extends via MCP for custom tools, and previews every action for you to approve before it runs. It is entirely command-line, with no window of its own.",
+  "has_gui": false,
+  "name": "github-copilot-cli",
+  "pricing": "subscription",
+  "pricing_note": "requires an active GitHub Copilot subscription",
+  "requirements": [
+   "A GitHub account",
+   "An active GitHub Copilot subscription",
+   "Network access to GitHub"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/github/copilot-cli",
+  "tagline": "GitHub Copilot's coding agent, right in your terminal.",
+  "youtube_id": "VkOibxsQ1oU",
+  "youtube_title": "The ultimate guide to the GitHub Copilot CLI | Full demo | GitHub Checkout"
+ },
+ "gpu-screen-recorder": {
+  "confidence": "medium",
+  "description": "gpu-screen-recorder is a lightweight, high-performance screen recorder for Linux that offloads capture and encoding to the GPU, minimizing the performance hit compared to typical CPU-based recorders. It works on both X11 and Wayland across AMD, Intel, and NVIDIA GPUs (plus Apple Silicon via Asahi Linux with software encoding), and supports plain recording, live streaming, instant-replay clips, and screenshots. This package is the core command-line tool; a separate GTK-based GUI exists as its own project.",
+  "has_gui": false,
+  "name": "gpu-screen-recorder",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A supported GPU driver (AMD, Intel, or NVIDIA) for hardware-accelerated encoding"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://git.dec05eba.com/gpu-screen-recorder",
+  "tagline": "Shadowplay-style, GPU-accelerated screen recording for Linux.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "grok-bot": {
+  "confidence": "low",
+  "description": "Grok Bot is xAI's always-on AI agent product: each Bot you create gets a persistent cloud virtual machine with its own browser, filesystem, and terminal, and can sign into your tools and apps to carry out multi-step work, resuming after you close your device. You can watch a live screen-share of what a Bot is doing, and access the same Bot from desktop or mobile. It uses a permission-escalation model, starting read-only and gaining write/execute access as it proves reliable.",
+  "has_gui": true,
+  "name": "grok-bot",
+  "pricing": "subscription",
+  "pricing_note": "bundled into paid tiers such as SuperGrok Heavy ($300/mo), Cursor Ultra ($200/mo), or Cursor Teams Premium ($120/seat/mo); no free tier at launch",
+  "requirements": [
+   "An xAI/X account",
+   "One of the qualifying paid subscription tiers",
+   "Network access for the persistent cloud VM"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://docs.x.ai/grok-bot/overview",
+  "tagline": "An always-on AI teammate with its own persistent cloud computer.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "herdr": {
+  "confidence": "high",
+  "description": "Herdr is a Rust-based terminal session manager purpose-built for running multiple AI coding agents (Claude Code, Codex, Cursor, and similar tools) at once. It works like tmux or screen, keeping sessions alive through disconnects or reboots and letting you reattach from anywhere, but it also detects each agent's state, working, blocked, done, or idle, and shows it in a sidebar so you're not hunting for a stuck agent. It runs inside your existing terminal (ghostty, alacritty, kitty, wezterm) with no Electron overhead.",
+  "has_gui": false,
+  "name": "herdr",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "source_url": "https://herdr.dev/",
+  "tagline": "One terminal that keeps every AI coding agent running and visible.",
+  "youtube_id": "qnIu-Xu64H0",
+  "youtube_title": "Herdr in about 6 minutes"
+ },
+ "hermes-desktop": {
+  "confidence": "medium",
+  "description": "Hermes Agent is an open-source AI agent from Nous Research that is built around a learning loop: it creates and improves its own skills from experience, persists knowledge across sessions, and searches its own past conversations. Hermes Desktop is the native app version of it for macOS, Windows, and Linux, giving you a local window onto the same agent that's also reachable through Telegram, Discord, Slack, WhatsApp, Signal, and email. It can run against Nous Portal, OpenRouter, OpenAI, or your own model endpoint.",
+  "has_gui": true,
+  "name": "hermes-desktop",
+  "pricing": "freemium",
+  "pricing_note": "the app itself is free and open-source (MIT), but it needs an LLM provider; either your own API keys or a paid Nous Portal subscription that bundles model and tool access",
+  "requirements": [
+   "An API key for an LLM provider (OpenAI, Anthropic, OpenRouter, etc.) or a Nous Portal subscription",
+   "Network access"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/NousResearch/hermes-agent",
+  "tagline": "A native desktop shell for Nous Research's self-improving Hermes agent.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "heroic-games-launcher-bin": {
+  "confidence": "high",
+  "description": "Heroic Games Launcher is a free, open-source alternative launcher for Linux, Windows, and macOS (plus Steam Deck) that brings your Epic Games, GOG, and Amazon Prime Gaming libraries together in one app. It handles downloads and install queues with live progress, lets you manage Wine/Proton compatibility tools for running Windows games, offers a controller-friendly full-screen console mode for TVs and handhelds, and supports custom cover art and multiple language and theme options.",
+  "has_gui": true,
+  "name": "heroic-games-launcher-bin",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Accounts on whichever storefronts you want to use: Epic Games, GOG, and/or Amazon Prime Gaming",
+   "Network access to those storefronts"
+  ],
+  "screenshot_url": "https://heroicgameslauncher.com/_next/static/images/01-home-350a8d44c674a888040a577e9656fecc.webp",
+  "source_url": "https://heroicgameslauncher.com/",
+  "tagline": "One free launcher for your Epic, GOG, and Amazon Prime game libraries.",
+  "youtube_id": "jFdjIYfY-KM",
+  "youtube_title": "Heroic Games Launcher on Linux Demo"
+ },
+ "hey-cli": {
+  "confidence": "high",
+  "description": "HEY CLI is Basecamp's official command-line and text-based interface for the HEY email service. It gives terminal users a full-screen TUI (run with `hey tui`) for Mail, Contacts, Calendar, and Journal, using HEY's own keyboard shortcuts, alongside individual CLI commands for scripting things like composing, searching, and watching for new mail as JSON. It also ships as a skill and MCP server so AI coding agents like Claude can read and act on your HEY mail directly.",
+  "has_gui": false,
+  "name": "hey-cli",
+  "pricing": "subscription",
+  "pricing_note": "the CLI itself is free and open source (MIT); it requires a paid HEY.com email subscription to be useful",
+  "requirements": [
+   "an active HEY.com email account/subscription",
+   "browser-based sign-in to authenticate the CLI",
+   "network access to sync with HEY"
+  ],
+  "screenshot_url": "",
+  "tagline": "Your HEY inbox, calendar, and contacts, without leaving the terminal.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "hyprland-preview-share-picker": {
+  "confidence": "high",
+  "description": "This is a drop-in replacement for Hyprland's default screen-share picker. Instead of a bare text list, it shows live thumbnail previews of every open window and every connected monitor in a tabbed GTK4 window, so you can visually confirm what you're about to share over video calls or screen recordings. It plugs into the standard XDG desktop portal for Hyprland and its look can be themed with a custom stylesheet.",
+  "has_gui": true,
+  "name": "hyprland-preview-share-picker",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Hyprland window manager",
+   "xdg-desktop-portal-hyprland",
+   "GTK4 and GTK4 Layer Shell installed",
+   "slurp (optional, for manual region selection)"
+  ],
+  "screenshot_url": "https://github.com/user-attachments/assets/0172f531-08b5-48c7-b167-32c6ce6535e8",
+  "tagline": "Pick exactly the window or monitor you're sharing, by actually seeing it first.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "hyprland-preview-share-picker-git": {
+  "confidence": "high",
+  "description": "This is the git/development-snapshot build of hyprland-preview-share-picker, Hyprland's alternative screen-share picker. It replaces the default text-only picker with live thumbnail previews of open windows and connected monitors in a tabbed GTK4 window, so you can confirm what you're sharing before a call or recording starts. Being the -git package, it tracks the latest unreleased commits rather than a tagged release.",
+  "has_gui": true,
+  "name": "hyprland-preview-share-picker-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Hyprland window manager",
+   "xdg-desktop-portal-hyprland",
+   "GTK4 and GTK4 Layer Shell installed",
+   "slurp (optional, for manual region selection)",
+   "Rust nightly toolchain to build from source"
+  ],
+  "screenshot_url": "https://github.com/user-attachments/assets/0172f531-08b5-48c7-b167-32c6ce6535e8",
+  "tagline": "Pick exactly the window or monitor you're sharing, by actually seeing it first.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "hyprshade": {
+  "confidence": "high",
+  "description": "Hyprshade is a command-line tool that manages Hyprland's built-in screen-shader feature, letting you turn visual filters like a blue-light-reduction warm filter on or off, or switch between them automatically based on time of day. It's meant as a Wayland-native replacement for older tools like Redshift or f.lux, and comes with a default blue-light shader plus support for custom GLSL shaders and systemd-based scheduling.",
+  "has_gui": false,
+  "name": "hyprshade",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Hyprland window manager with screen_shader support",
+   "systemd (only if using the scheduling/auto feature)"
+  ],
+  "screenshot_url": "",
+  "tagline": "Automatic blue-light filtering and screen shaders for Hyprland, on a schedule.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "intel-ipu7-camera": {
+  "confidence": "medium",
+  "description": "This package builds and installs the driver stack needed to make the OV08X40 MIPI camera work on specific Intel 'Hurrican/Performance' reference laptops, using Intel's IPU7 hardware image signal processor (ISP). It's a hardware-enablement/installer package: it compiles kernel patches and firmware integration rather than providing any user-facing app, and is only relevant if you own that specific hardware.",
+  "has_gui": false,
+  "name": "intel-ipu7-camera",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "a Hurrican/Performance reference laptop with the OV08X40 camera and Intel IPU7 ISP",
+   "root privileges to build kernel modules and install firmware",
+   "a compatible kernel (project targets kernel 6.19.6-series patches)"
+  ],
+  "screenshot_url": "",
+  "tagline": "Gets the built-in webcam working on Intel Hurrican/Performance laptops.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "intel-lpmd": {
+  "confidence": "high",
+  "description": "Intel's Low Power Mode Daemon watches how busy your system is and, on light workloads like idling or basic browsing, steers work onto a more power-efficient subset of CPU cores to cut idle power draw, then restores full CPU capacity when demand rises. It runs quietly in the background as a systemd service and is configured and monitored through a companion command-line control tool or D-Bus, with no graphical interface.",
+  "has_gui": false,
+  "name": "intel-lpmd",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "a supported Intel CPU/platform",
+   "must be explicitly enabled via config or the intel_lpmd_control tool (disabled by default)"
+  ],
+  "screenshot_url": "",
+  "tagline": "Squeezes extra battery life out of Intel laptops during light workloads.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "lib32-nvidia-580xx-utils": {
+  "confidence": "medium",
+  "description": "This package provides the 32-bit companion utilities and shared libraries for NVIDIA's proprietary 580xx driver branch, needed so that 32-bit applications and games (commonly run through Steam/Proton on a 64-bit system) can talk to an NVIDIA GPU correctly. It has no interface of its own; it just supplies libraries other 32-bit programs link against. The 580 driver branch is NVIDIA's current long-lived branch, notable for improved Wayland support and being the last branch to support older Maxwell/Pascal/Volta GPUs.",
+  "has_gui": false,
+  "name": "lib32-nvidia-580xx-utils",
+  "pricing": "free",
+  "pricing_note": "proprietary driver, free to download and use, not open source",
+  "requirements": [
+   "a supported NVIDIA GPU (matching the 580xx branch's supported architectures)",
+   "the matching 64-bit nvidia-580xx driver package installed alongside it",
+   "multilib/32-bit support enabled on the system"
+  ],
+  "screenshot_url": "",
+  "tagline": "32-bit helper tools and libraries for NVIDIA's 580-series Linux driver.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "lib32-opencl-nvidia-580xx": {
+  "confidence": "medium",
+  "description": "This package installs NVIDIA's 32-bit OpenCL implementation for the 580xx proprietary driver branch, allowing 32-bit applications to run GPU-accelerated compute (OpenCL) workloads on an NVIDIA card. Like other lib32 packages it is purely a runtime library with no interface of its own, used by other software rather than run directly by a user.",
+  "has_gui": false,
+  "name": "lib32-opencl-nvidia-580xx",
+  "pricing": "free",
+  "pricing_note": "proprietary driver component, free to download and use, not open source",
+  "requirements": [
+   "a supported NVIDIA GPU (matching the 580xx branch's supported architectures)",
+   "the matching nvidia-580xx driver installed",
+   "an OpenCL-using 32-bit application to actually invoke it"
+  ],
+  "screenshot_url": "",
+  "tagline": "32-bit OpenCL support for NVIDIA GPUs on the 580-series driver.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libfprint-git": {
+  "confidence": "high",
+  "description": "libfprint is the core software library that handles low-level communication with fingerprint scanning hardware and processes the fingerprint image data it captures. It is not something end users interact with directly; instead, system services like fprintd (which exposes fingerprint scanning over D-Bus) and desktop settings panels such as GNOME's Users settings build fingerprint login on top of it. This -git build tracks the current development branch with FocalTech MOC (Match-on-Chip) sensor support included, ahead of the stable release.",
+  "has_gui": false,
+  "name": "libfprint-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "a supported fingerprint reader (e.g. FocalTech Match-on-Chip devices for this build)",
+   "a service like fprintd, plus desktop or PAM integration, to actually use it for login"
+  ],
+  "screenshot_url": "",
+  "tagline": "The library that lets Linux talk to your fingerprint reader.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-cap32-git": {
+  "confidence": "high",
+  "description": "This is Caprice32 packaged as a libretro core, letting RetroArch emulate the 1980s Amstrad CPC line of home computers, including the CPC 464, 464+, 6128, 6128+ and the GX4000 console variant. It plays original tape (CDT) and disk (DSK) images with autostart support, supports period keyboard layouts and joystick/lightgun input, and can use RetroArch's shaders for CRT-style visual effects. On its own it has no interface; it's a plugin loaded by RetroArch, which provides the actual on-screen menus.",
+  "has_gui": false,
+  "name": "libretro-cap32-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "RetroArch (or another libretro frontend) to actually run it",
+   "your own legally-owned Amstrad CPC game/software images, since none are bundled"
+  ],
+  "screenshot_url": "",
+  "tagline": "Brings the classic Amstrad CPC home computer into RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-database-git": {
+  "confidence": "high",
+  "description": "A collection of game databases and cheat-code files used by RetroArch and its emulator cores. It lets RetroArch verify that a ROM file is the genuine, correct version, assign it a clean display name, pull box-art thumbnails, and show metadata like developer, release year, and genre. The data is compiled from trusted preservation groups such as No-Intro, Redump, TOSEC, GameTDB, and MAME.",
+  "has_gui": false,
+  "name": "libretro-database-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Used alongside RetroArch and its emulator cores; on its own it is just reference data with no interface"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/libretro/libretro-database",
+  "tagline": "The shared catalog that lets RetroArch actually recognize your games.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-fbneo-git": {
+  "confidence": "medium",
+  "description": "FinalBurn Neo (FBNeo) is a multi-system arcade emulator core packaged for RetroArch, continuing the earlier FinalBurn line of emulators. It accurately emulates classic arcade hardware including Capcom's CPS systems and Neo Geo, plus a handful of consoles, with support for netplay, rewind, and shader effects. As a libretro core it has no interface of its own \u2014 RetroArch loads it to run arcade ROMs you supply.",
+  "has_gui": false,
+  "name": "libretro-fbneo-git",
+  "pricing": "free",
+  "pricing_note": "custom license (see the project's license.txt), not a standard OSI license",
+  "requirements": [
+   "Arcade ROM files matching the exact revisions FBNeo expects (not included and not distributed by the project)",
+   "RetroArch installed to load the core"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/libretro/FBNeo",
+  "tagline": "Bringing the arcade to your living room, one CPS and Neo Geo board at a time.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-uae-git": {
+  "confidence": "high",
+  "description": "PUAE-libretro is a work-in-progress port of the Amiga emulator UAE (based on WinUAE 5.3.1) to the libretro API, so RetroArch can boot and run classic Amiga software. It reads standard Amiga disk formats (ADF, ADZ, IPF, DMS, FDI), hard drive images, and CDs, with support for WHDLoad game packages, multi-disk M3U playlists, and remappable virtual-keyboard controls. It is a backend emulation core with no interface of its own.",
+  "has_gui": false,
+  "name": "libretro-uae-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Kickstart ROM files matching specific MD5 checksums for the Amiga model being emulated (A500, A1200, A4000, CD32, etc.) \u2014 not included",
+   "RetroArch installed to load the core",
+   "External CAPSIMG library for IPF copy-protected disk support"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/libretro/libretro-uae",
+  "tagline": "A whole Commodore Amiga, folded into a single RetroArch core.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-vice-x128-git": {
+  "confidence": "high",
+  "description": "This package builds the Commodore 128 variant of the VICE (Versatile Commodore Emulator) core for RetroArch, letting it boot C128 software. VICE-libretro supports save states, ZIP archive loading, M3U multi-disk playlists, and optional JiffyDOS fast-loading ROMs. It is purely an emulation backend \u2014 you interact with it through RetroArch's own interface, not a UI of its own.",
+  "has_gui": false,
+  "name": "libretro-vice-x128-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Commodore 128 software/disk images to run (not included)",
+   "RetroArch installed to load the core",
+   "Optional JiffyDOS ROM files for faster disk access"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/libretro/vice-libretro",
+  "tagline": "Your Commodore 128, resurrected inside RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-vice-x64-git": {
+  "confidence": "high",
+  "description": "This is the 'fast' Commodore 64 core from VICE-libretro, a RetroArch port of the VICE emulator, tuned for speed over full cycle accuracy. It plays standard C64 disk and tape images, supports ZIP archives and M3U multi-disk playlists, and offers save states and remappable controls. Like all VICE cores it's a pure emulation backend with no interface of its own \u2014 RetroArch provides the front end.",
+  "has_gui": false,
+  "name": "libretro-vice-x64-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Commodore 64 software/disk images to run (not included)",
+   "RetroArch installed to load the core",
+   "Optional JiffyDOS ROM files for faster disk access"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/libretro/vice-libretro",
+  "tagline": "The classic C64, running fast inside RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-vice-x64dtv-git": {
+  "confidence": "high",
+  "description": "This VICE-libretro core emulates the Commodore 64 Direct-to-TV (C64DTV), the single-chip, joystick-shaped mini-console Commodore released with games built in. It's part of the same RetroArch port of VICE as the other Commodore cores, offering save states, ZIP/M3U support, and remappable controls. It has no interface of its own \u2014 RetroArch is the front end.",
+  "has_gui": false,
+  "name": "libretro-vice-x64dtv-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "C64DTV-compatible software/images to run (not included)",
+   "RetroArch installed to load the core"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/libretro/vice-libretro",
+  "tagline": "The plug-and-play Commodore 64 console, emulated in RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-vice-x64sc-git": {
+  "confidence": "high",
+  "description": "This is the cycle-accurate 'sc' Commodore 64 core from VICE-libretro, prioritizing faithful timing and compatibility over raw speed. Built on the same RetroArch port of VICE as the other cores, it plays standard C64 disk and tape images with save states, ZIP archive support, and multi-disk M3U playlists. It's an emulation backend with no interface of its own \u2014 you run it through RetroArch.",
+  "has_gui": false,
+  "name": "libretro-vice-x64sc-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Commodore 64 software/disk images to run (not included)",
+   "RetroArch installed to load the core",
+   "Optional JiffyDOS ROM files for faster disk access"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/libretro/vice-libretro",
+  "tagline": "The Commodore 64, emulated cycle-for-cycle inside RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-vice-xcbm2-git": {
+  "confidence": "high",
+  "description": "This VICE-libretro core emulates the Commodore CBM-II 6x0/7x0 series, the business and professional-oriented 8-bit computers Commodore sold alongside the C64. It's part of the same RetroArch port of VICE as the other Commodore cores, with save states, disk/tape image support, and remappable controls, and has no interface of its own beyond RetroArch's.",
+  "has_gui": false,
+  "name": "libretro-vice-xcbm2-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "CBM-II software/disk images to run (not included)",
+   "RetroArch installed to load the core"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/libretro/vice-libretro",
+  "tagline": "Commodore's business-class 8-bit machine, alive again in RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-vice-xcbm5x0-git": {
+  "confidence": "high",
+  "description": "This VICE-libretro core emulates the Commodore CBM-II 5x0 series, a lower-end, home-computer-styled variant of Commodore's professional CBM-II line. Built on the same RetroArch port of VICE as the other cores, it supports save states, disk/tape image loading, and remappable controls, with no interface beyond what RetroArch provides.",
+  "has_gui": false,
+  "name": "libretro-vice-xcbm5x0-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "CBM-II 5x0 software/disk images to run (not included)",
+   "RetroArch installed to load the core"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/libretro/vice-libretro",
+  "tagline": "The compact CBM-II, emulated inside RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-vice-xpet-git": {
+  "confidence": "high",
+  "description": "This VICE-libretro core emulates the Commodore PET, one of the earliest personal computers Commodore released in the late 1970s. It's part of the same RetroArch port of VICE as the other Commodore cores, offering save states, disk/tape image support, and configurable controls, with no interface of its own \u2014 it runs entirely inside RetroArch.",
+  "has_gui": false,
+  "name": "libretro-vice-xpet-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Commodore PET software/disk images to run (not included)",
+   "RetroArch installed to load the core"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/libretro/vice-libretro",
+  "tagline": "One of Commodore's very first computers, running again in RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-vice-xplus4-git": {
+  "confidence": "high",
+  "description": "This is the Plus/4 core of VICE (the Versatile Commodore Emulator) built for the libretro/RetroArch framework. It lets RetroArch load and run Commodore Plus/4 software, cycle-accurate down to the original hardware, so old Plus/4 disk and tape images can be played on a modern Linux desktop. It has no interface of its own; it plugs into RetroArch, which supplies the menus, controller mapping, and video output.",
+  "has_gui": false,
+  "name": "libretro-vice-xplus4-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "RetroArch installed to load and run the core",
+   "Plus/4 software/ROM images supplied by the user"
+  ],
+  "screenshot_url": "",
+  "tagline": "Bring the Commodore Plus/4 back to life inside RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-vice-xscpu64-git": {
+  "confidence": "high",
+  "description": "This is the SuperCPU core of VICE (the Versatile Commodore Emulator) built for the libretro/RetroArch framework. It emulates a Commodore 64 fitted with the SuperCPU accelerator cartridge, which boosted the C64's clock speed far beyond the stock 1MHz. It is a RetroArch plug-in core with no interface of its own; RetroArch handles loading software and displaying it.",
+  "has_gui": false,
+  "name": "libretro-vice-xscpu64-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "RetroArch installed to load and run the core",
+   "C64/SuperCPU software or ROM images supplied by the user"
+  ],
+  "screenshot_url": "",
+  "tagline": "Emulate the souped-up Commodore 64 SuperCPU inside RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "libretro-vice-xvic-git": {
+  "confidence": "high",
+  "description": "This is the VIC-20 core of VICE (the Versatile Commodore Emulator) built for the libretro/RetroArch framework. It emulates Commodore's 1980-era VIC-20 home computer so its games and programs can run inside RetroArch on a modern Linux machine. As a libretro core it has no standalone window or menu of its own; RetroArch provides the surrounding interface.",
+  "has_gui": false,
+  "name": "libretro-vice-xvic-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "RetroArch installed to load and run the core",
+   "VIC-20 software/ROM images supplied by the user"
+  ],
+  "screenshot_url": "",
+  "tagline": "Play Commodore VIC-20 software straight from RetroArch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "limine-mkinitcpio-hook": {
+  "confidence": "medium",
+  "description": "This package hooks limine-entry-tool into mkinitcpio so that installing, updating, or removing a kernel automatically regenerates the corresponding Limine bootloader entry, including unified kernel images and fallback images. It writes and prunes entries by machine-id and periodically backs up limine.conf, removing the need to hand-edit boot configuration after a kernel update.",
+  "has_gui": false,
+  "name": "limine-mkinitcpio-hook",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Limine bootloader version 8 or newer",
+   "A FAT32 EFI/boot partition with at least 1 GiB free",
+   "mkinitcpio-based kernel install workflow",
+   "efibootmgr for UEFI systems"
+  ],
+  "screenshot_url": "",
+  "tagline": "Keeps Limine's boot menu in sync every time you install a kernel.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "limine-snapper-sync": {
+  "confidence": "medium",
+  "description": "This tool bridges the Snapper snapshot manager and the Limine bootloader on Btrfs systems: whenever a Snapper snapshot is created or deleted, it automatically adds or removes a matching bootable entry in Limine, complete with the right kernel files. It can also restore the system from a chosen snapshot (via rsync, file replace, or Snapper) and creates a safety backup entry after a restore so you can undo it, plus it checks bootable files for corruption.",
+  "has_gui": false,
+  "name": "limine-snapper-sync",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Limine bootloader version 8 or newer",
+   "Snapper and btrfs-progs installed on a Btrfs root",
+   "A FAT32 boot partition, 4 GB or more recommended"
+  ],
+  "screenshot_url": "",
+  "tagline": "Turns every Btrfs snapshot into a bootable Limine menu entry.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "link-studio": {
+  "confidence": "medium",
+  "description": "Link Studio is an open-source, unofficial Linux app for controlling Insta360 Link webcams, filling the gap left by Insta360's Windows/macOS-only software. It gives direct access to the camera's pan, tilt, zoom, autofocus, and privacy-mode controls, plus its built-in AI tracking modes (like Whiteboard and DeskView), alongside live preview, H.264 recording, and local effects such as background blur and green screen. It's built with GTK4 and libadwaita, so it follows your desktop's light/dark theme, and it can also act as a virtual camera and offer optional offline transcription of voice notes.",
+  "has_gui": true,
+  "name": "link-studio",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "An Insta360 Link or Link 2 webcam (hardware-tested with Link 2)",
+   "GTK4, libadwaita, V4L2/UVC, GStreamer, PipeWire, OpenCV and MediaPipe on the system"
+  ],
+  "screenshot_url": "",
+  "tagline": "A native Linux control panel for your Insta360 Link webcam.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "linux-mainline-panther-lake": {
+  "confidence": "medium",
+  "description": "This package builds the Linux mainline kernel (the newest, still-in-development upstream branch tracked at kernel.org) with the audio driver work needed for Intel's Panther Lake laptop chips. It exists for people who want the very latest kernel changes rather than a stable release, on hardware new enough that its audio hasn't yet landed in a standard Arch kernel build.",
+  "has_gui": false,
+  "name": "linux-mainline-panther-lake",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "An Intel Panther Lake-based laptop to benefit from the audio support",
+   "Comfort running an unstable/mainline kernel and its module headers"
+  ],
+  "screenshot_url": "",
+  "tagline": "The bleeding-edge upstream kernel, built with Panther Lake audio support baked in.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "linux-mainline-panther-lake-headers": {
+  "confidence": "medium",
+  "description": "This package supplies the kernel headers and build scripts needed to compile external kernel modules (like proprietary drivers or DKMS packages) against the linux-mainline-panther-lake kernel. It has no functionality on its own; it exists purely to support building modules for that specific kernel build.",
+  "has_gui": false,
+  "name": "linux-mainline-panther-lake-headers",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "The matching linux-mainline-panther-lake kernel installed",
+   "Only needed if compiling third-party kernel modules"
+  ],
+  "screenshot_url": "",
+  "tagline": "The build headers that pair with the Panther Lake mainline kernel.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "linux-ptl": {
+  "confidence": "medium",
+  "description": "linux-ptl is a specially patched Linux kernel built for Intel Panther Lake laptops (such as the Dell XPS Panther Lake line) that packages roughly twenty hardware backports ahead of their arrival in a standard stable kernel. It focuses on fixes for Panel Replay power management and OLED variable refresh rate (VRR), the kind of day-one enablement work that lets brand-new silicon run properly on Linux before upstream stable catches up. It was built through collaboration between Intel, Dell, and the Omarchy project and is meant to be a stopgap until mainline Linux fully absorbs the changes.",
+  "has_gui": false,
+  "name": "linux-ptl",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "An Intel Panther Lake-based laptop (e.g. Dell XPS Panther Lake) to see any benefit"
+  ],
+  "screenshot_url": "",
+  "tagline": "A custom Arch kernel giving new Intel Panther Lake laptops day-one Linux support.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "linux-ptl-audio": {
+  "confidence": "medium",
+  "description": "linux-ptl-audio is a variant of the Panther Lake enablement kernel that backports SDCA (SoundWire Device Class for Audio) driver support so speakers and microphones work correctly on new Intel Panther Lake laptops. Like its sibling linux-ptl, it exists to give very new hardware working audio on Linux before those fixes land in a standard stable kernel release.",
+  "has_gui": false,
+  "name": "linux-ptl-audio",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "An Intel Panther Lake-based laptop with SoundWire/SDCA audio hardware to see any benefit"
+  ],
+  "screenshot_url": "",
+  "tagline": "The Panther Lake kernel variant focused purely on getting sound working.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "linux-ptl-audio-headers": {
+  "confidence": "medium",
+  "description": "This package ships the kernel headers and build scripts that pair with a specific Arch Linux kernel build carrying SDCA audio backports for Intel Panther Lake laptops. It contains no runtime software of its own; DKMS and other tools use it to compile kernel modules (like proprietary drivers) against that exact kernel version. It only matters if you are running that particular kernel and need to build a module for it.",
+  "has_gui": false,
+  "name": "linux-ptl-audio-headers",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Only useful when running the matching linux-ptl-audio kernel package",
+   "Intel Panther Lake hardware for the audio fixes to be relevant"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/archlinux/linux",
+  "tagline": "The build-time headers for Arch's Panther Lake audio kernel, needed to compile out-of-tree kernel modules.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "linux-ptl-headers": {
+  "confidence": "medium",
+  "description": "Like other kernel-headers packages, this provides the compiled headers and scripts needed to build kernel modules against a specific custom Arch kernel, in this case one patched for Intel Panther Lake laptops with Panel Replay power-saving and OLED variable refresh rate fixes. There is nothing to launch or configure directly; it exists purely to support DKMS module builds for that kernel.",
+  "has_gui": false,
+  "name": "linux-ptl-headers",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Only useful when running the matching linux-ptl kernel package",
+   "Intel Panther Lake hardware with an OLED / Panel Replay-capable display for the fixes to apply"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/archlinux/linux",
+  "tagline": "Build headers for Arch's Panther Lake kernel variant with Panel Replay and OLED VRR display fixes.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "lmstudio": {
+  "confidence": "medium",
+  "description": "LM Studio is a desktop app for browsing, downloading, and running large language models locally, so your prompts and data never leave your computer. It offers a ChatGPT-style chat interface with threads and folders, an OpenAI-compatible local API server for developers, and a model browser that pulls open models from Hugging Face. It can also connect out to larger cloud models when you want them, but local, offline inference is the core pitch.",
+  "has_gui": true,
+  "name": "lmstudio",
+  "pricing": "free",
+  "pricing_note": "free for personal and commercial use, no premium tiers",
+  "requirements": [
+   "Enough disk space and RAM/VRAM to hold whichever local model you download",
+   "A capable GPU (or Apple Silicon) speeds up inference but is not strictly required",
+   "Network access only when browsing or downloading models from Hugging Face; runs fully offline afterward"
+  ],
+  "screenshot_url": "https://lmstudio.ai/assets/marketing/blog/0.4.0/app-screen.png",
+  "source_url": "https://lmstudio.ai/",
+  "tagline": "Discover, download, and chat with open-source AI models entirely on your own machine.",
+  "youtube_id": "fTUGVA2EKq0",
+  "youtube_title": "Getting started with LM Studio (100% private local AI)"
+ },
+ "lmstudio-bin": {
+  "confidence": "medium",
+  "description": "This is the same LM Studio desktop app as the source-build package, just distributed as a ready-to-run binary instead of being compiled from source at install time. It lets you discover, download, and chat with open-source language models locally through a ChatGPT-style interface, keeping all inference on your own hardware.",
+  "has_gui": true,
+  "name": "lmstudio-bin",
+  "pricing": "free",
+  "pricing_note": "free for personal and commercial use, no premium tiers",
+  "requirements": [
+   "Enough disk space and RAM/VRAM to hold whichever local model you download",
+   "A capable GPU (or Apple Silicon) speeds up inference but is not strictly required",
+   "Network access only when browsing or downloading models from Hugging Face; runs fully offline afterward"
+  ],
+  "screenshot_url": "https://lmstudio.ai/assets/marketing/blog/0.4.0/app-screen.png",
+  "source_url": "https://lmstudio.ai",
+  "tagline": "The prebuilt-binary package of LM Studio, for running local AI models without waiting on a build.",
+  "youtube_id": "fTUGVA2EKq0",
+  "youtube_title": "Getting started with LM Studio (100% private local AI)"
+ },
+ "localsend": {
+  "confidence": "medium",
+  "description": "LocalSend lets you send files and messages between nearby devices - phones, laptops, desktops, whatever - over your local Wi-Fi, without needing the internet or any cloud account. It uses an encrypted REST API over HTTPS to move files directly between devices, and works across Windows, macOS, Linux, Android, and iOS. Think of it as a free, cross-platform, privacy-respecting AirDrop.",
+  "has_gui": true,
+  "name": "localsend",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Sending device must be reachable over a local network (Wi-Fi/LAN) with the receiving device"
+  ],
+  "screenshot_url": "https://localsend.org/img/screenshot-pc.webp",
+  "source_url": "https://github.com/localsend/localsend",
+  "tagline": "An open-source AirDrop alternative that beams files across any platform over your local network.",
+  "youtube_id": "mCaSGrCDo9I",
+  "youtube_title": "LocalSend - Airdrop for us All!"
+ },
+ "localsend-bin": {
+  "confidence": "medium",
+  "description": "Same app as the localsend source package: a free, open-source, cross-platform tool for beaming files and messages between nearby devices over a local network, with no cloud account or internet connection required. This variant is packaged as a precompiled binary for a faster install.",
+  "has_gui": true,
+  "name": "localsend-bin",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Sending device must be reachable over a local network (Wi-Fi/LAN) with the receiving device"
+  ],
+  "screenshot_url": "https://localsend.org/img/screenshot-pc.webp",
+  "source_url": "https://github.com/localsend/localsend",
+  "tagline": "The prebuilt-binary package of LocalSend, ready to send files across your network without a build step.",
+  "youtube_id": "mCaSGrCDo9I",
+  "youtube_title": "LocalSend - Airdrop for us All!"
+ },
+ "macbook12-spi-driver-dkms": {
+  "confidence": "high",
+  "description": "This DKMS package builds and installs the input driver for the SPI-connected keyboard and touchpad found in the 12-inch MacBook (2015+) and the 2016-2018 MacBook Pro (13-inch and 15-inch Touch Bar models). Basic keyboard and trackpad support has since been merged into the mainline Linux kernel, so today this package is mainly useful for its extras: Touch Bar support (with idle dimming), the ambient light sensor, and low-level packet tracing for debugging.",
+  "has_gui": false,
+  "name": "macbook12-spi-driver-dkms",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A 12-inch MacBook (2015 or later) or a 2016-2018 MacBook Pro (13\"/15\") to have any effect",
+   "DKMS set up so the module rebuilds automatically on kernel updates"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/marc-git/macbook12-spi-driver",
+  "tagline": "Kernel driver that brings the keyboard, trackpad, Touch Bar, and light sensor of newer MacBooks to Linux.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "macbook8-spi-pxa2xx-nodma-dkms": {
+  "confidence": "medium",
+  "description": "This is a modified version of the Intel PXA2xx SPI PCI driver, patched specifically to force PIO (programmed I/O) mode for the Wildcat Point GSPI controller (PCI ID 8086:9ce6) found in the MacBook8,1 (early 2015 12-inch MacBook). It exists as a workaround for DMA-related issues on that exact chipset so the SPI-attached keyboard and trackpad function correctly. It is distributed through the Omarchy project's package repository rather than upstream, and has no interface of its own - it is a background kernel module.",
+  "has_gui": false,
+  "name": "macbook8-spi-pxa2xx-nodma-dkms",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A MacBook8,1 (2015 12-inch MacBook) with the Wildcat Point GSPI controller (8086:9ce6)",
+   "DKMS to rebuild the module across kernel updates"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/basecamp/omarchy",
+  "tagline": "A patched SPI driver that forces PIO mode so the 2015 MacBook's touchpad and keyboard work reliably on Linux.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "makima-bin": {
+  "confidence": "high",
+  "description": "Makima is a Linux daemon that intercepts input from keyboards, mice, game controllers, and tablets (via the evdev kernel interface) and remaps them - individual keys, button combos, analog sticks - into other keys, key sequences, or shell commands. It can even auto-switch remapping profiles based on which window is focused, on Hyprland, Sway, Niri, or X11. There is no graphical interface; everything is configured by hand-editing TOML files under ~/.config/makima/ and restarting the service.",
+  "has_gui": false,
+  "name": "makima-bin",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "The uinput kernel module, for creating virtual input devices",
+   "Systemd, if installed as a service (manual execution is also possible)",
+   "kdotool, optionally, for per-window layout switching on Plasma Wayland"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/cyber-sushi/makima",
+  "tagline": "A background daemon that remaps keys, buttons, and macros for any keyboard, mouse, or controller on Linux.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "minecraft-launcher": {
+  "confidence": "medium",
+  "description": "The official Minecraft Launcher is the app Mojang provides for installing, updating, and launching Minecraft: Java Edition (and linking to Bedrock Edition) on your computer. You sign in with a Microsoft account, choose a game version and modpack profile, and the launcher handles downloading and keeping the game up to date. The launcher itself is free to use, but playing the full game requires either owning Minecraft or an active Xbox Game Pass subscription; a short free trial (about 100 minutes) is available without a purchase.",
+  "has_gui": true,
+  "name": "minecraft-launcher",
+  "pricing": "freemium",
+  "pricing_note": "launcher is free; playing requires buying Minecraft (one-time) or an Xbox Game Pass subscription, after a ~100-minute free trial",
+  "requirements": [
+   "A free Microsoft account to sign in",
+   "A Minecraft purchase or Xbox Game Pass subscription to play beyond the free trial",
+   "Network access to download the game and verify your account"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://www.minecraft.net/en-us/free-trial",
+  "tagline": "Mojang's official launcher for downloading, updating, and starting Minecraft with your Microsoft account.",
+  "youtube_id": "vVU2inKbx4s",
+  "youtube_title": "BRAND NEW OFFICIAL MINECRAFT LAUNCHER"
+ },
+ "mise-bin": {
+  "confidence": "high",
+  "description": "mise is a command-line tool that replaces a pile of separate version managers (like nvm, pyenv, rbenv) with one binary. It installs and switches between versions of programming languages and dev tools per project, loads project-specific environment variables automatically when you cd into a directory, and can define and run project tasks, all driven by a single mise.toml config file.",
+  "has_gui": false,
+  "name": "mise-bin",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "One CLI to install your dev tools, load your env vars, and run your project tasks.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "nautilus-dropbox": {
+  "confidence": "medium",
+  "description": "This package integrates the Dropbox desktop client with the GNOME Files (Nautilus) file manager, adding sync-status overlay icons and right-click context menu options (like Share Dropbox Link) directly in your normal file browsing. It requires the separate Dropbox daemon to actually be installed and running, and a Dropbox account to sign in and sync files.",
+  "has_gui": true,
+  "name": "nautilus-dropbox",
+  "pricing": "freemium",
+  "pricing_note": "free tier + paid Plus/Professional/Business/Enterprise plans",
+  "requirements": [
+   "A Dropbox account (sign up/log in)",
+   "The Dropbox sync daemon installed and running",
+   "Network access to sync files"
+  ],
+  "screenshot_url": "",
+  "tagline": "Brings Dropbox's sync status and sharing menu right into your file manager.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "nautilus-open-any-terminal": {
+  "confidence": "high",
+  "description": "A small Nautilus (and Caja) extension that adds an \"Open Terminal Here\" context-menu entry, but lets you choose which of 40+ terminal emulators it launches, such as Kitty, Alacritty, Konsole, or Tilix, instead of being stuck with GNOME Terminal. It also supports custom launch commands for more specialized setups.",
+  "has_gui": false,
+  "name": "nautilus-open-any-terminal",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Nautilus or Caja file manager",
+   "nautilus-python (or python3-nautilus) support",
+   "A terminal emulator to launch"
+  ],
+  "screenshot_url": "",
+  "tagline": "Right-click any folder and pop open the terminal you actually use.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "nordvpn-bin": {
+  "confidence": "medium",
+  "description": "This is NordVPN's official command-line client for Linux, letting you connect to NordVPN's VPN servers, enable a kill switch, set up split tunneling, and manage settings without a graphical app. The CLI itself is free to install, but connecting to actual VPN servers requires logging into a paid NordVPN account, the app's free Meshnet feature is the exception.",
+  "has_gui": false,
+  "name": "nordvpn-bin",
+  "pricing": "subscription",
+  "pricing_note": "app is free to install; VPN server access needs a paid NordVPN plan (from about $3.49/mo on longer terms)",
+  "requirements": [
+   "A NordVPN account",
+   "An active paid NordVPN subscription to use the VPN servers",
+   "Network access"
+  ],
+  "screenshot_url": "",
+  "tagline": "Encrypt and route your traffic through NordVPN's global network, right from the terminal.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "nvidia-580xx-dkms": {
+  "confidence": "medium",
+  "description": "This package provides the NVIDIA 580xx-series proprietary kernel module source, built automatically against your running kernel via DKMS. It's the low-level piece that lets the Linux kernel drive an NVIDIA graphics card; the 580 branch is a current driver series used for recent GPU generations. It has no interface of its own, it just needs to be present for the matching nvidia-580xx-utils package (and your GPU) to work.",
+  "has_gui": false,
+  "name": "nvidia-580xx-dkms",
+  "pricing": "free",
+  "pricing_note": "driver is free to use, distributed under NVIDIA's custom license, not open source",
+  "requirements": [
+   "An NVIDIA GPU compatible with the 580xx driver branch",
+   "A Linux kernel with DKMS support",
+   "Matching nvidia-580xx-utils package"
+  ],
+  "screenshot_url": "",
+  "tagline": "Kernel module sources so your Linux kernel can talk to your NVIDIA GPU.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "nvidia-580xx-utils": {
+  "confidence": "medium",
+  "description": "This package supplies the user-space side of NVIDIA's proprietary 580xx driver: the OpenGL/Vulkan/CUDA libraries, nvidia-smi, and Xorg driver bits that applications and games rely on to talk to an NVIDIA GPU. It pairs with nvidia-580xx-dkms (the kernel module) to form a complete driver stack for a compatible NVIDIA card.",
+  "has_gui": false,
+  "name": "nvidia-580xx-utils",
+  "pricing": "free",
+  "pricing_note": "driver is free to use, distributed under NVIDIA's custom license, not open source",
+  "requirements": [
+   "An NVIDIA GPU compatible with the 580xx driver branch",
+   "Matching nvidia-580xx-dkms kernel module package"
+  ],
+  "screenshot_url": "",
+  "tagline": "The user-space libraries and tools that make the NVIDIA 580xx driver actually usable.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omacalc": {
+  "confidence": "high",
+  "description": "Omacalc is a minimal calculator app built with Qt Quick and C++, made for the Omarchy desktop. It handles standard arithmetic with proper operator precedence, decimals, percentages, and sign toggling, showing your typed expression above the result so you can double-check your input. It automatically follows your system's Omarchy theme and light/dark mode, and supports full keyboard entry.",
+  "has_gui": true,
+  "name": "omacalc",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "xdg-desktop-portal with a backend"
+  ],
+  "screenshot_url": "",
+  "tagline": "A calculator that gets out of your way and matches your desktop theme.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omacut": {
+  "confidence": "high",
+  "description": "Omacut is a bare-bones video trimmer built with Qt Quick and ffmpeg. You open a video, drag start and end handles to select the section you want, preview it, and export as MP4 at its original resolution, 1080p, or 720p, always keeping the original aspect ratio. It's built for quick trims rather than full editing, with keyboard shortcuts for playback, frame-stepping, and zooming.",
+  "has_gui": true,
+  "name": "omacut",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "ffmpeg and ffprobe installed on PATH",
+   "xdg-desktop-portal with a backend for file selection"
+  ],
+  "screenshot_url": "",
+  "tagline": "Drag two handles, trim your clip, done.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omakade": {
+  "confidence": "medium",
+  "description": "Omakade is a local-first game library for the Omarchy desktop that aggregates games you've installed across Steam, Lutris, Heroic, Faugus, RetroArch, Battle.net, Epic, GOG, and Amazon into a single cover-art browsing interface. It's built for keyboard and controller use, including a couch-mode layout, and stores everything locally rather than depending on a cloud service. It's an independent community project, not an official Omarchy app.",
+  "has_gui": true,
+  "name": "omakade",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "At least one supported game launcher (Steam, Lutris, Heroic, etc.) with installed games to display"
+  ],
+  "screenshot_url": "https://github.com/tsouth89/omakade/raw/main/docs/assets/library-preview.webp",
+  "tagline": "One local game library that pulls together every launcher you use.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omapresent": {
+  "confidence": "medium",
+  "description": "Omapresent turns any plain Markdown file into a slide deck automatically, treating the structure of your writing as the deck itself. It runs a dual-window mode with a separate editor and audience display, supports speaker notes only you can see, auto-tiles consecutive images into grids, embeds videos, and can export the result as a PDF or a static web bundle. It picks up your Omarchy desktop theme's colors automatically.",
+  "has_gui": true,
+  "name": "omapresent",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Qt6 (base, declarative, webengine, webchannel, multimedia)",
+   "xdg-desktop-portal"
+  ],
+  "screenshot_url": "",
+  "tagline": "Write a Markdown file, get a presentation, no slide design required.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy": {
+  "confidence": "high",
+  "description": "Omarchy is a complete, ready-to-install Linux distribution built by DHH on top of Arch Linux and the Hyprland tiling window manager. Rather than making you assemble a desktop piece by piece, it ships with a curated terminal, Neovim setup, themes, hotkeys, and AI/agent tooling already configured and working together out of the box. It targets developers who want a fast, keyboard-centric, visually polished setup without doing the usual weeks of Arch ricing themselves.",
+  "has_gui": true,
+  "name": "omarchy",
+  "pricing": "free-libre",
+  "pricing_note": "MIT licensed, free ISO download and install",
+  "requirements": [
+   "A machine (or VM) that can run Arch Linux; installs as a full OS via ISO"
+  ],
+  "screenshot_url": "https://omarchy.org/assets/images/video/omarchy-quattro.webp",
+  "tagline": "An opinionated Arch Linux desktop, pre-wired for keyboard-driven, agentic workflows.",
+  "youtube_id": "MsIp_tPGt1o",
+  "youtube_title": "Omarchy Quattro Linux Review"
+ },
+ "omarchy-audio-tuner": {
+  "confidence": "high",
+  "description": "Omarchy Audio Tuner is a command-line toolkit for authoring speaker tuning profiles that restore the vendor sound signature Linux normally strips away on laptops. It walks through capturing microphone measurements, analyzing frequency response, fitting a correction curve, and generating a PipeWire filter chain, with A/B auditioning to check the result. It's explicitly for advanced users building a tuning for a laptop model Omarchy doesn't already cover \u2014 most people never need it.",
+  "has_gui": false,
+  "name": "omarchy-audio-tuner",
+  "pricing": "free-libre",
+  "pricing_note": "MIT licensed",
+  "requirements": [
+   "Python, FFmpeg, MPV, and LSP Plugins LV2 installed",
+   "A calibrated measurement microphone for building tunings from scratch (not required just to audition existing ones)"
+  ],
+  "screenshot_url": "",
+  "tagline": "A measurement toolkit for building custom laptop-speaker EQ profiles on Linux.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-chromium": {
+  "confidence": "medium",
+  "description": "Omarchy Chromium was a fork of the Chromium web browser maintained specifically to give it live theme-switching support before upstream Chromium had that capability via policy-based refreshes. It behaved like a normal Chromium-based browser day to day, just with Omarchy's theme integration built in. The project has since been archived and marked read-only because the upstream Chromium project absorbed the underlying fix, making the fork unnecessary.",
+  "has_gui": true,
+  "name": "omarchy-chromium",
+  "pricing": "free-libre",
+  "pricing_note": "0BSD licensed; project is now archived/unmaintained",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "A Chromium build patched for live theme switching on Omarchy.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-chromium-bin": {
+  "confidence": "medium",
+  "description": "Chromium is the open-source web browser project developed and used by Google as the base for Chrome, and also underlying Edge, Opera, Brave, and others. It aims to be a fast, safe, and stable way to browse the web, and its source and design documents are fully public. This package delivers a prebuilt Chromium binary with Omarchy's patches applied, so you get a working browser without compiling it yourself.",
+  "has_gui": true,
+  "name": "omarchy-chromium-bin",
+  "pricing": "free-libre",
+  "pricing_note": "BSD-licensed source; site content under CC-BY 2.5",
+  "requirements": [
+   "Network access to browse the web"
+  ],
+  "screenshot_url": "",
+  "tagline": "Chromium, the open-source browser behind Chrome, packaged as a ready-to-run binary for Omarchy.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-dev": {
+  "confidence": "medium",
+  "description": "This is the same Omarchy Linux distribution by DHH, but built from the tip of its in-development 'quattro' branch rather than a stable release. It carries the same curated Hyprland desktop, terminal, editor, and agent tooling as the main omarchy package, just with the newest, potentially unstable changes applied first. It's meant for people who want to track Omarchy's development in real time rather than wait for tagged releases.",
+  "has_gui": true,
+  "name": "omarchy-dev",
+  "pricing": "free-libre",
+  "pricing_note": "MIT licensed, free ISO/package",
+  "requirements": [
+   "A machine (or VM) that can run Arch Linux",
+   "Tolerance for in-development, potentially unstable changes"
+  ],
+  "screenshot_url": "https://omarchy.org/assets/images/video/omarchy-quattro.webp",
+  "tagline": "The bleeding-edge development build of Omarchy, tracking the quattro branch tip.",
+  "youtube_id": "MsIp_tPGt1o",
+  "youtube_title": "Omarchy Quattro Linux Review"
+ },
+ "omarchy-emacs": {
+  "confidence": "medium",
+  "description": "Omarchy Emacs is a small integration package that syncs Emacs to Omarchy's active theme and font automatically, so switching your system theme also restyles Emacs immediately, no restart needed. It pulls colors from Omarchy's generated theme file, reads the font family from Waybar's config, and reads the font size from whichever terminal (foot, Alacritty, kitty, or Ghostty) you have configured. It installs the Wayland-native build of Emacs for you as part of setup.",
+  "has_gui": false,
+  "name": "omarchy-emacs",
+  "pricing": "free-libre",
+  "pricing_note": "MIT licensed",
+  "requirements": [
+   "Arch Linux with Omarchy installed",
+   "emacs-wayland (installed automatically by the setup script)",
+   "One of foot, Alacritty, kitty, or Ghostty configured, for font-size detection"
+  ],
+  "screenshot_url": "",
+  "tagline": "Keeps Emacs looking and feeling like the rest of your Omarchy desktop, automatically.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-fish": {
+  "confidence": "high",
+  "description": "Omarchy Fish is a configuration package that turns the Fish shell into a more productive out-of-the-box experience, adding custom functions, completions, and keybindings tuned for common developer tasks. It bundles fzf.fish for fuzzy-searching directories, git logs, shell history, and running processes, reachable through a set of Ctrl-based shortcuts. It also includes a small setup utility to make Fish your default shell.",
+  "has_gui": false,
+  "name": "omarchy-fish",
+  "pricing": "free-libre",
+  "pricing_note": "MIT licensed",
+  "requirements": [
+   "Arch Linux",
+   "Fish shell",
+   "fzf.fish for the fuzzy-search functionality"
+  ],
+  "screenshot_url": "",
+  "tagline": "A pre-built Fish shell setup with fuzzy search, git shortcuts, and Omarchy-friendly keybindings.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-herdr": {
+  "confidence": "medium",
+  "description": "Herdr is a background terminal runtime purpose-built for running AI coding agents like Claude Code, Codex, or Cursor. It keeps each agent in its own real terminal session inside workspaces, tabs, and panes, and those sessions keep running even if you close the terminal or lose network \u2014 you reattach later with a single command. It shows at a glance which agents are working, blocked, or idle, and lets agents spawn panes or prompt each other for multi-agent coordination. This Omarchy package adds Omarchy-specific pane border styling on top of upstream Herdr.",
+  "has_gui": false,
+  "name": "omarchy-herdr",
+  "pricing": "free-libre",
+  "pricing_note": "Apache-2.0 licensed",
+  "requirements": [
+   "A terminal \u2014 Herdr runs as a terminal-based runtime, not a standalone GUI app"
+  ],
+  "screenshot_url": "",
+  "tagline": "A persistent terminal runtime for keeping AI coding agents alive and organized in the background.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-keyring": {
+  "confidence": "medium",
+  "description": "Omarchy Keyring holds the PGP keys pacman uses to verify that Omarchy packages actually came from the Omarchy project and haven't been tampered with. It's a tiny, invisible piece of plumbing installed alongside the package manager configuration rather than something you interact with directly. Without it, pacman would refuse to trust signed Omarchy packages.",
+  "has_gui": false,
+  "name": "omarchy-keyring",
+  "pricing": "free-libre",
+  "pricing_note": "GPL-3.0-or-later licensed",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "The cryptographic keyring that lets pacman trust official Omarchy packages.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-nvim": {
+  "confidence": "high",
+  "description": "Omarchy Neovim packages LazyVim, a popular configuration framework for the Neovim text editor, with its plugins pre-built and cached so you're not waiting on downloads and compilation the first time you open it. LazyVim turns plain Neovim into a full IDE-like environment: sensible default keybindings, file navigation, LSP support, and a large pre-configured plugin set, while still letting you customize anything. It's a terminal-based editor experience, not a separate graphical application.",
+  "has_gui": false,
+  "name": "omarchy-nvim",
+  "pricing": "free-libre",
+  "pricing_note": "MIT licensed",
+  "requirements": [
+   "Neovim 0.11.2+ (built with LuaJIT)",
+   "Git 2.19.0+",
+   "A C compiler (for nvim-treesitter)",
+   "A Nerd Font recommended for icons"
+  ],
+  "screenshot_url": "",
+  "tagline": "A ready-to-go LazyVim setup for Neovim, plugins pre-cached so it starts fast on first launch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-settings": {
+  "confidence": "medium",
+  "description": "Omarchy-settings installs the baseline configuration for the Omarchy Linux distribution: the files that get copied into every new user's home directory (/etc/skel), the default font set, the Plymouth boot-splash theme, and small helper scripts the rest of the system relies on. It is not an app you open; it is the plumbing that makes a freshly installed Omarchy desktop look and behave consistently out of the box.",
+  "has_gui": false,
+  "name": "omarchy-settings",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "The default look, fonts, and boot theme Omarchy ships with, in one system package.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-settings-dev": {
+  "confidence": "medium",
+  "description": "This is a development build of omarchy-settings, pulling its defaults (skel files, fonts, Plymouth theme, helper scripts) from the tip of Omarchy's in-progress 'quattro' branch rather than a stable release. It exists so testers and contributors can run tomorrow's Omarchy defaults today, ahead of them landing in the main package.",
+  "has_gui": false,
+  "name": "omarchy-settings-dev",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Intended for users tracking Omarchy's development branch rather than a stable release; may be less tested than omarchy-settings"
+  ],
+  "screenshot_url": "",
+  "tagline": "The same Omarchy defaults package, built straight from the bleeding-edge quattro branch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-walker": {
+  "confidence": "medium",
+  "description": "Omarchy-walker is a meta-package: it doesn't contain code itself but installs Walker, a fast GTK4/Rust application launcher for Wayland, together with Elephant, the provider system that feeds it results. Once installed, hitting the launcher keybind opens an overlay where you can search and launch apps, browse files, run calculations, look up symbols/emoji, search the clipboard, and more, all from one prefix-based search box.",
+  "has_gui": true,
+  "name": "omarchy-walker",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "https://raw.githubusercontent.com/abenz1267/walker/master/resources/screenshot.png",
+  "tagline": "Pulls in Walker, Omarchy's app launcher, wired up to search everything through Elephant.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omarchy-zsh": {
+  "confidence": "high",
+  "description": "Omarchy-zsh applies Omarchy's system-wide shell configuration (aliases, functions, environment variables, pulled from the omadots dotfiles project) to Zsh, then layers on Zsh-specific extras like fzf-powered keybindings for fuzzy-searching files, command history, and git logs. Personal tweaks still go in your own ~/.zshrc, which is loaded on top and stays untouched by system updates.",
+  "has_gui": false,
+  "name": "omarchy-zsh",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "Turns Omarchy's shared shell config into a ready-to-use Zsh setup.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omasnap": {
+  "confidence": "high",
+  "description": "Omasnap is a native screenshot and markup overlay for Hyprland on Wayland. Beyond capturing a region, window, or whole monitor, it lets you draw arrows, shapes, freehand lines, and text over the shot, blur or block out sensitive areas, run one-click OCR to pull text out of an image, and even stitch together scrolling captures of long pages. Finished screenshots can be pinned on top of your other windows or reopened later from a recent-captures shelf, with full undo history preserved even if the app crashes.",
+  "has_gui": true,
+  "name": "omasnap",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Wayland session with Hyprland (or a compositor offering equivalent window/monitor APIs)"
+  ],
+  "screenshot_url": "",
+  "tagline": "A tiny, fast Wayland screenshot tool that turns capture into a full annotation session.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omatrack": {
+  "confidence": "medium",
+  "description": "Omatrack is a desktop app for analyzing racing telemetry: it imports data from Pi/Cosworth, MoTeC, Racelogic, and AiM loggers and normalizes it all into one consistent per-lap model, so you can overlay traces, compare a lap against a reference lap, and step through corner-by-corner braking, turn-in, apex, and throttle data with synchronized onboard video. Sessions are organized by track, date, and session, and it can pull footage and logs straight from cloud storage (WebDAV, S3, Google Cloud Storage) instead of only local files.",
+  "has_gui": true,
+  "name": "omatrack",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Telemetry/video files from a supported logger (Pi/Cosworth, MoTeC, Racelogic, or AiM) to have anything to analyze"
+  ],
+  "screenshot_url": "https://github.com/tobi/omatrack/raw/main/docs/screenshots/lap-comparison.webp",
+  "tagline": "One workstation for reading, comparing, and picking apart motorsport telemetry from any data logger.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omawrite": {
+  "confidence": "medium",
+  "description": "Omawrite is a minimalist Markdown writing app built with Qt Quick, aimed at distraction-free drafting rather than full document editing. Markdown syntax stays visible but fades visually as you type, it follows your system's light or dark theme automatically, and it recovers unsaved drafts after a crash and warns you before an external edit would overwrite your work. It covers the basics newcomers expect: open/save/save-as through native file pickers, find and replace, and keyboard shortcuts for bold, italic, and links.",
+  "has_gui": true,
+  "name": "omawrite",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "A stripped-down Markdown editor that gets out of the way and just lets you write.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "omazed": {
+  "confidence": "high",
+  "description": "Omazed is a small Bash utility that watches for Omarchy theme changes and automatically regenerates a matching Zed editor theme, so switching your desktop's color palette also re-colors your code editor without any manual steps. After picking a theme once during setup, it keeps Zed synced through Omarchy's own theme-change hooks.",
+  "has_gui": false,
+  "name": "omazed",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Omarchy (v3.8.0 or later) as the source of the color palette",
+   "Zed editor installed"
+  ],
+  "screenshot_url": "",
+  "tagline": "Keeps your Zed editor theme in lockstep with whatever Omarchy color scheme you're running.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "once-bin": {
+  "confidence": "medium",
+  "desc_unused": "",
+  "description": "ONCE is a self-hosting platform from 37signals (Basecamp's parent company): a single Go binary that automates installing, updating, backing up, and monitoring Docker-based web applications on your own hardware, from a VPS down to a Raspberry Pi. It ships with 37signals' own apps ready to go but works with any Docker image that serves HTTP on port 80 and exposes a health-check endpoint, and it's driven through both a terminal dashboard and plain CLI commands.",
+  "has_gui": false,
+  "name": "once-bin",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A Docker-capable Linux or macOS machine to host apps on",
+   "Network access for pulling images, updates, and backups"
+  ],
+  "screenshot_url": "",
+  "tagline": "Turns any Linux or Mac machine into a self-hosted server for Docker web apps, with one install command.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "openai-codex-bin": {
+  "confidence": "medium",
+  "description": "Codex CLI is OpenAI's lightweight AI coding agent that runs locally on your machine instead of in the cloud. From the terminal you describe what you want built, fixed, or explained, and it reads your codebase, edits files, and runs commands to get it done; it also plugs into editors like VS Code, Cursor, and Windsurf. It needs an OpenAI account to function, either signing in with a ChatGPT Plus/Pro/Business/Edu/Enterprise plan or authenticating with an OpenAI API key.",
+  "has_gui": false,
+  "name": "openai-codex-bin",
+  "pricing": "freemium",
+  "pricing_note": "CLI itself is free and open-source; using it requires a ChatGPT paid plan or pay-as-you-go OpenAI API usage",
+  "requirements": [
+   "An OpenAI account: either a ChatGPT Plus/Pro/Business/Edu/Enterprise subscription, or an OpenAI API key with billing enabled",
+   "Network access to reach OpenAI's servers"
+  ],
+  "screenshot_url": "",
+  "tagline": "OpenAI's coding agent, living in your terminal and wired into your ChatGPT or API account.",
+  "youtube_id": "FUq9qRwrDrI",
+  "youtube_title": "OpenAI Codex CLI"
+ },
+ "openai-codex-desktop": {
+  "confidence": "medium",
+  "description": "The official ChatGPT desktop app bundled with Codex, OpenAI's agentic coding assistant. From one window you can chat with ChatGPT or hand a coding task to Codex, which can work across your local files and projects, run in cloud environments for longer jobs, and even do automatic code review. It's aimed at developers who want an agent that completes multi-step coding work rather than just answering questions.",
+  "has_gui": true,
+  "name": "openai-codex-desktop",
+  "pricing": "freemium",
+  "pricing_note": "Codex usage is included (limited) in the ChatGPT Free plan; expanded usage needs Go ($8/mo), Plus ($20/mo), Pro ($100-200/mo) or Business",
+  "requirements": [
+   "A ChatGPT account",
+   "A paid ChatGPT plan (Plus, Pro, Business, etc.) for meaningful Codex usage beyond the free allowance",
+   "Network access"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan",
+  "tagline": "ChatGPT's desktop home for OpenAI's autonomous coding agent.",
+  "youtube_id": "hhdpnbfH6NU",
+  "youtube_title": "A research preview of Codex in ChatGPT"
+ },
+ "opencl-nvidia-580xx": {
+  "confidence": "high",
+  "description": "This package provides the OpenCL implementation shipped with NVIDIA's 580xx proprietary driver series, so NVIDIA GPUs can be used for general-purpose parallel compute through the standard OpenCL API (alongside CUDA). It's a low-level driver component rather than an application \u2014 it does nothing on its own and is installed to pair with the matching nvidia-580xx driver package.",
+  "has_gui": false,
+  "name": "opencl-nvidia-580xx",
+  "pricing": "free",
+  "pricing_note": "Free driver component; requires owning NVIDIA hardware",
+  "requirements": [
+   "An NVIDIA GPU supported by the 580xx driver branch",
+   "The matching nvidia-580xx driver package installed"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://aur.archlinux.org/packages/opencl-nvidia-580xx",
+  "tagline": "Lets NVIDIA GPUs crunch OpenCL workloads under the proprietary 580xx driver branch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "opencode": {
+  "confidence": "medium",
+  "description": "Opencode is an MIT-licensed, open-source coding agent centered on a rich terminal UI: you chat with it, it reads and edits files in your project, and runs commands on your behalf, with separate build (full-access) and plan (read-only) modes. A desktop app for macOS, Windows and Linux is now available in beta on top of the same agent. You bring your own API key from Anthropic, OpenAI, Google or any of 75+ supported providers.",
+  "has_gui": true,
+  "name": "opencode",
+  "pricing": "free-libre",
+  "pricing_note": "The tool itself is free and open source; you pay your chosen LLM provider for API usage",
+  "requirements": [
+   "An API key from a supported LLM provider (Anthropic, OpenAI, Google, etc.) or a free/local model",
+   "Network access to the chosen provider"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/anomalyco/opencode",
+  "tagline": "An open-source AI coding agent that lives in your terminal (and now a desktop app too).",
+  "youtube_id": "WXffHkvfRpM",
+  "youtube_title": "OpenCode CRASH Course | OPEN SOURCE AI CODING AGENT"
+ },
+ "perplexity": {
+  "confidence": "medium",
+  "description": "The official desktop client for Perplexity, an AI answer engine that searches the web and returns a synthesized, source-cited response rather than just a list of results. The desktop app adds OS-level conveniences such as screenshot-to-search and quick access to chat and research directly from your desktop, on top of Perplexity's usual free and paid web features.",
+  "has_gui": true,
+  "name": "perplexity",
+  "pricing": "freemium",
+  "pricing_note": "Free plan available; Pro $20/mo, Max $50/mo, Enterprise $40/user/mo for advanced models and features",
+  "requirements": [
+   "A Perplexity account (free or paid)",
+   "Network access",
+   "A paid subscription for advanced models, higher limits, and some premium features"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://www.perplexity.ai/help-center/en/collections/19800000-perplexity-desktop-app",
+  "tagline": "Perplexity's official desktop app for cited, AI-powered answers instead of a list of links.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "pinta": {
+  "confidence": "high",
+  "description": "Pinta is a free, open-source drawing and image-editing program for Linux, Mac, Windows and *BSD, modeled after the discontinued Paint.NET. It offers straightforward tools for freehand drawing, selection, cropping and resizing, over 35 real-time-preview effects and adjustments, layer support, and unlimited undo \u2014 aiming to be a simpler, more approachable alternative to heavyweight editors like GIMP for casual users.",
+  "has_gui": true,
+  "name": "pinta",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "https://www.pinta-project.com/img/home/interface-light.webp",
+  "source_url": "https://www.pinta-project.com",
+  "tagline": "A friendly, free painting and photo-editing app for people who find GIMP intimidating.",
+  "youtube_id": "JMyrf7nz-fc",
+  "youtube_title": "Pinta 2.0.1 - Drawing & Image Editor for Linux, macOS, & Windows Users"
+ },
+ "python-mediapipe": {
+  "confidence": "high",
+  "description": "MediaPipe is a Google framework for building cross-platform, on-device machine learning pipelines \u2014 things like face, hand and pose detection, object tracking, and audio or text classification. It ships pre-trained models and cross-platform APIs (MediaPipe Tasks) so developers can add these ML features to mobile, web, and desktop apps without sending data to a server, along with tools to customize models on your own data.",
+  "has_gui": false,
+  "name": "python-mediapipe",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "source_url": "https://github.com/google-ai-edge/mediapipe",
+  "tagline": "Google's toolkit for running ready-made ML models for vision, audio and text right on-device.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "python-sounddevice": {
+  "confidence": "high",
+  "description": "python-sounddevice is a small Python library wrapping PortAudio, letting you play and record audio using NumPy arrays. It's aimed at developers, researchers and musicians who want simple, cross-platform programmatic control over audio input and output from Python, fitting naturally into existing NumPy-based signal-processing code.",
+  "has_gui": false,
+  "name": "python-sounddevice",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "The PortAudio library installed on the system",
+   "A working audio input/output device to actually record or play sound"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://python-sounddevice.readthedocs.io/",
+  "tagline": "Python bindings for PortAudio to record and play back sound as NumPy arrays.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "python-terminaltexteffects": {
+  "confidence": "medium",
+  "description": "TerminalTextEffects (TTE) is a Python library and command-line tool that adds animated visual effects to text printed in the terminal \u2014 color gradients, particle-like motion paths, Matrix-style rain, and more. It ships 40+ built-in effects, usable either by piping text into the CLI application or by calling it as a library from your own scripts, with no third-party Python dependencies required.",
+  "has_gui": false,
+  "name": "python-terminaltexteffects",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A terminal that supports Xterm 256 or RGB hex colors"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/ChrisBuilds/terminaltexteffects",
+  "tagline": "A visual effects engine that animates terminal text output \u2014 think Matrix rain, but for any string.",
+  "youtube_id": "ngKrVM_jTMM",
+  "youtube_title": "\u300cTerminalTextEffects\u300d\u306e\u30a8\u30d5\u30a7\u30af\u30c8\u96c6"
+ },
+ "qmk-hid": {
+  "confidence": "high",
+  "description": "qmk_hid is a command-line tool from Framework Computer for controlling QMK-firmware keyboards through their raw HID interface (the same protocol VIA uses), without needing special drivers or admin rights on Windows or Linux. It can adjust RGB and backlight settings, read device info, jump into bootloader mode for firmware updates, and reset EEPROM/VIA settings. It works with any QMK device but was built and tested specifically for Framework's keyboard modules.",
+  "has_gui": false,
+  "name": "qmk-hid",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A QMK-firmware keyboard (developed and tested primarily on Framework Laptop 16 keyboard modules)",
+   "On Linux, udev rules installed to avoid needing root privileges"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/FrameworkComputer/qmk_hid",
+  "tagline": "A driver-free command-line tool for talking to QMK keyboards over raw HID.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "quickshell-git": {
+  "confidence": "high",
+  "description": "Quickshell is a flexible, code-first toolkit for building custom desktop shell components \u2014 status bars, widgets, lock screens, notification centers and more \u2014 using QtQuick/QML, primarily for Wayland compositors such as Hyprland (with X11 support too). Rather than a ready-made shell, it's a low-level building-block library with hot reloading that developers use to assemble their own desktop UI, so it powers other people's Hyprland setups rather than offering one out of the box.",
+  "has_gui": false,
+  "name": "quickshell-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Qt development libraries and a C++ toolchain to build from source",
+   "Programming in QML/C++ to actually build a shell with it \u2014 it is not a ready-made desktop UI"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://git.outfoxxed.me/quickshell/quickshell",
+  "tagline": "A QtQuick-based toolkit for coding your own Linux desktop shell from scratch.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "retroarch-joypad-autoconfig-git": {
+  "confidence": "medium",
+  "description": "A shared database of joypad autoconfig files for RetroArch, the multi-system emulator frontend. Each file maps a specific physical controller's buttons and sticks onto RetroArch's virtual RetroPad automatically, so gamepads are recognized and ready to use without manual button mapping. It's not an app on its own, just data that RetroArch reads on startup.",
+  "has_gui": false,
+  "name": "retroarch-joypad-autoconfig-git",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "Plug in a controller and RetroArch just knows what it is.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "rog-control-center": {
+  "confidence": "medium",
+  "description": "ROG Control Center is the graphical front end for asusctl, the Linux control suite for ASUS ROG (and many other ASUS) laptops. It talks to the asusd background daemon over D-Bus to let you set keyboard RGB lighting and AniMe Matrix displays, tune per-profile fan curves, switch power/graphics modes, and manage battery charge limits, all from a windowed app instead of the command line.",
+  "has_gui": true,
+  "name": "rog-control-center",
+  "pricing": "free-libre",
+  "pricing_note": "community-funded via Patreon/Ko-fi, no purchase needed",
+  "requirements": [
+   "An ASUS ROG (or compatible ASUS) laptop with supported embedded controller hardware",
+   "The asusd daemon running in the background",
+   "A recent Linux kernel, since features track upstream kernel patches"
+  ],
+  "screenshot_url": "",
+  "tagline": "Windows-grade ROG laptop controls, built for the Linux desktop.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "rustdesk": {
+  "confidence": "high",
+  "description": "RustDesk is an open-source remote desktop app that lets you view and control another computer over the internet or a local network, similar to TeamViewer or AnyDesk. It works out of the box using RustDesk's public relay servers, or you can self-host your own rendezvous/relay server for full privacy and control. A paid RustDesk Server Pro edition adds enterprise features like address books, audit logs, and easier deployment for teams.",
+  "has_gui": true,
+  "name": "rustdesk",
+  "pricing": "freemium",
+  "pricing_note": "core app and self-hosted server free (AGPL-3.0); RustDesk Server Pro is a paid add-on for teams",
+  "requirements": [
+   "Network access between the two machines (via RustDesk's relay or your own self-hosted server)"
+  ],
+  "screenshot_url": "https://user-images.githubusercontent.com/71636191/171661982-430285f0-2e12-4b1d-9957-4a58e375304d.png",
+  "tagline": "Your own TeamViewer, minus the subscription and the phone-home server.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "schist": {
+  "confidence": "medium",
+  "description": "Schist is a layered image editor built in Rust with a plugin-first design, aimed at people who need real PSD and Affinity file compatibility on Linux without giving up source control. It ships dozens of brushes, selection and retouching tools, adjustment layers, and Photoshop-style filters, plus GPU-accelerated compositing, content-aware fill, liquify, and non-destructive editing. Every tool and filter is itself a plugin, so the whole editor is meant to be extended.",
+  "has_gui": true,
+  "name": "schist",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A Vulkan-capable GPU and driver for GPU-accelerated filters and compositing"
+  ],
+  "screenshot_url": "https://schist.app/features/ui.png",
+  "tagline": "A Photoshop-fluent layered image editor that's actually open source.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "schist-bin": {
+  "confidence": "medium",
+  "description": "Schist is a layered image editor built in Rust with a plugin-first design, aimed at people who need real PSD and Affinity file compatibility on Linux without giving up source control. It ships dozens of brushes, selection and retouching tools, adjustment layers, and Photoshop-style filters, plus GPU-accelerated compositing, content-aware fill, liquify, and non-destructive editing. This package installs the prebuilt binary release instead of compiling from source.",
+  "has_gui": true,
+  "name": "schist-bin",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A Vulkan-capable GPU and driver for GPU-accelerated filters and compositing"
+  ],
+  "screenshot_url": "https://schist.app/features/ui.png",
+  "tagline": "A Photoshop-fluent layered image editor that's actually open source.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "slap-notes-bin": {
+  "confidence": "high",
+  "description": "Slap Notes is a local-first, block-based notes app that combines Notion-style blocks with Obsidian-style wiki-links, automatically building a visual graph of how your notes connect. It supports text, headings, lists, to-dos, tables, images and video blocks, daily notes, tagging, and full search. An optional built-in AI research agent can answer questions about your existing notes and draft new content back into your vault, but everything runs and stores locally otherwise.",
+  "has_gui": true,
+  "name": "slap-notes-bin",
+  "pricing": "free",
+  "pricing_note": "proprietary freeware, free to use and redistribute unmodified",
+  "requirements": [
+   "Your own API key from a provider such as Anthropic, OpenAI, Google, Groq, or OpenRouter, only if you want to use the optional AI research agent"
+  ],
+  "screenshot_url": "",
+  "tagline": "Notes that link to each other and can go do research for you.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "spotify": {
+  "confidence": "medium",
+  "description": "Spotify is a proprietary music and podcast streaming service with a catalog of tens of millions of tracks. The free tier is ad-supported with shuffle-only play on mobile, while paid Premium plans remove ads and add offline downloads, unlimited skips, and on-demand playback. It requires a Spotify account and an internet connection to stream.",
+  "has_gui": true,
+  "name": "spotify",
+  "pricing": "freemium",
+  "pricing_note": "free ad-supported tier; Premium subscription for ad-free/offline listening",
+  "requirements": [
+   "A Spotify account",
+   "Network access to stream"
+  ],
+  "screenshot_url": "",
+  "tagline": "Millions of songs and podcasts, ad-free if you pay for it.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "strata": {
+  "confidence": "medium",
+  "description": "Strata is a keyboard-first file manager for modern Linux desktops, built with GTK4 and designed to fit Omarchy-style setups. It offers three ways to browse, macOS-style Miller columns for spatial navigation, a thumbnail grid, and a sortable table view, along with instant fuzzy filename search, rich file previews, and sandboxed preview rendering for security.",
+  "has_gui": true,
+  "name": "strata",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "GTK 4.12 or newer and a 64-bit Linux system with glibc 2.39+"
+  ],
+  "screenshot_url": "https://github.com/lgse/strata/raw/main/docs/assets/strata-columns.png",
+  "tagline": "A file manager built for people who'd rather press keys than click.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "sublime-text-4": {
+  "confidence": "medium",
+  "description": "Sublime Text is a proprietary text and code editor known for its speed, a distraction-free \"Goto Anything\" file/symbol jumper, multiple simultaneous cursors, and deep customization through plugins and key bindings. It can be downloaded and evaluated in full for free with no enforced time limit, but continued regular use is expected to be licensed.",
+  "has_gui": true,
+  "name": "sublime-text-4",
+  "pricing": "paid",
+  "pricing_note": "$99 one-time personal license (includes 3 years of updates); free unlimited evaluation",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "The fast, endlessly customizable text editor that trusts you to pay for it.",
+  "youtube_id": "O91i9rL8VxM",
+  "youtube_title": "[MG05] Introduction to the new features in Sublime Text 4!"
+ },
+ "sunshine": {
+  "confidence": "medium",
+  "description": "Sunshine is a self-hosted game stream host that works with the Moonlight client to let you play PC games remotely on another device, from a phone to a Steam Deck to a smart TV. It uses hardware encoding on AMD, Intel, or Nvidia GPUs when available, falling back to software encoding otherwise, and emulates Xbox, PlayStation, and Switch controllers for the client side.",
+  "has_gui": true,
+  "name": "sunshine",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A Moonlight client app on the device you'll stream to",
+   "A GPU with hardware encoding support (AMD, Intel, or Nvidia) for best performance, though software encoding works without one",
+   "Network access between the host and the streaming device"
+  ],
+  "screenshot_url": "",
+  "tagline": "Turn your own PC into a private game-streaming server.",
+  "youtube_id": "zVKmQTkLvLY",
+  "youtube_title": "Setting up game streaming with Sunshine and Moonlight on Bazzite"
+ },
+ "supergfxctl": {
+  "confidence": "medium",
+  "description": "supergfxctl is a background daemon and command-line client for laptops that have both an integrated GPU and a discrete Nvidia GPU. It lets you flip between Hybrid, Integrated-only, VFIO passthrough, and ASUS-specific eGPU/MUX modes so you can trade battery life for graphics power on demand. It grew out of the ASUS ROG Linux tooling but works on other hybrid-graphics laptops too.",
+  "has_gui": false,
+  "name": "supergfxctl",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A laptop with hybrid integrated/discrete (Nvidia) graphics",
+   "A Wayland session (X11 switching is no longer supported)",
+   "On ASUS models, kernel 6.1 or newer",
+   "Not compatible with optimus-manager or system76-power installed alongside it"
+  ],
+  "screenshot_url": "",
+  "tagline": "Switch your laptop between integrated and discrete GPU modes without rebooting into a different OS setup.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "symfony-cli": {
+  "confidence": "high",
+  "description": "Symfony CLI is a terminal tool from the Symfony project that scaffolds new Symfony applications, runs a local development web server with HTTPS and Docker Compose integration, and handles day-to-day tasks like checking security advisories in your dependencies. It is aimed at PHP developers working with the Symfony framework and installs once as a single binary.",
+  "has_gui": false,
+  "name": "symfony-cli",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "The official command-line companion for building and running Symfony PHP applications.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "t3code-bin": {
+  "confidence": "medium",
+  "description": "T3 Code is an open-source app that lets you monitor and steer multiple AI coding agents (Claude Code, Codex, Cursor, OpenCode, Grok, Antigravity) from a single desktop, web, or mobile interface. It connects to the coding-agent accounts you already pay for rather than reselling usage, and adds features like one-click GitHub pull-request creation with auto-generated titles and diff review.",
+  "has_gui": true,
+  "name": "t3code-bin",
+  "pricing": "free-libre",
+  "pricing_note": "no token reselling or quota caps",
+  "requirements": [
+   "Your own credentials/subscription for whichever coding agent(s) you connect (Claude Code, Codex, Cursor, etc.)",
+   "A GitHub account to use the pull-request features"
+  ],
+  "screenshot_url": "https://t3.codes/app-desktop.webp",
+  "tagline": "One control surface to drive Claude Code, Codex, Cursor, and other coding agents from your desktop or phone.",
+  "youtube_id": "NBUW3YoO3Dw",
+  "youtube_title": "So I tried Theo's T3 Code..."
+ },
+ "tensaku": {
+  "confidence": "medium",
+  "description": "Tensaku is a screenshot annotation app for Wayland desktops (Sway, Hyprland, and other wlroots-based compositors), forked from Satty. You take or paste a screenshot and add arrows, boxes, freehand marks, text callouts, and blur/redaction, with the twist that every annotation stays a movable, resizable object organized in a layers panel rather than being burned in immediately. It also supports stitching scrolling screenshots of tall content into one image.",
+  "has_gui": true,
+  "name": "tensaku",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A wlroots-based Wayland compositor (Sway, Hyprland, River, Wayfire, etc.) that supports wlr-layer-shell and wlr-screencopy"
+  ],
+  "screenshot_url": "https://tensaku.dev/assets/hero-demo.webp",
+  "tagline": "Mark up a screenshot with movable arrows, text, and blur, right from your Wayland compositor.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "tmog-bin": {
+  "confidence": "medium",
+  "description": "TMOG (Task Manager OG) is a native system monitor and task manager built by Dave Plummer, the original author of Windows Task Manager, now rebuilt for Windows, macOS, and Linux. It shows CPU, GPU, memory, storage, network, power draw, and thermals alongside a process list and process tree, aiming for the depth and low overhead of a truly native app rather than a web-wrapped one.",
+  "has_gui": true,
+  "name": "tmog-bin",
+  "pricing": "freemium",
+  "pricing_note": "currently free beta; a paid Pro tier is planned but not yet on sale",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "A dense, native task manager reborn: CPU, GPU, thermals, and processes at a glance, from the guy who wrote the original.",
+  "youtube_id": "9hCi17Qe0no",
+  "youtube_title": "TMOG: Dave Answers Your Questions + Rates 23 Feature Requests"
+ },
+ "tobi-try": {
+  "confidence": "medium",
+  "description": "try is a small command-line tool for people who spin up throwaway coding experiments constantly. Instead of hunting through a messy folder tree, you type a short name and it either fuzzy-jumps you into a matching, previously-created experiment directory or instantly creates a new date-prefixed one (like 2025-08-17-redis-experiment) and cds your shell into it. It can also clone a git repo straight into a new dated directory.",
+  "has_gui": false,
+  "name": "tobi-try",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Ruby installed",
+   "Bash, Zsh, or Fish shell integration to enable the auto-cd behavior"
+  ],
+  "screenshot_url": "",
+  "tagline": "Type a word, land in a fresh, dated folder for whatever idea you're chasing right now.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "ttf-ia-writer": {
+  "confidence": "medium",
+  "description": "This package bundles iA Writer's own font families, iA Writer Mono, iA Writer Duo, and iA Writer Quattro, derived from IBM's Plex typeface family and tuned for distraction-free writing. They are the same fonts iA ships in its iA Writer apps across Mac, Windows, iOS, iPadOS, and Android, released here so anyone can install and use them system-wide.",
+  "has_gui": false,
+  "name": "ttf-ia-writer",
+  "pricing": "free-libre",
+  "pricing_note": "SIL Open Font License; iA asks that forks credit iA Writer and not be used to clone its product or site",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "The clean monospaced and duo-width fonts behind the iA Writer app, free to use on your own desktop.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "ttf-jetbrains-mono-nerd-basic": {
+  "confidence": "high",
+  "description": "This is JetBrains' popular monospaced coding typeface run through the Nerd Fonts patcher, which adds glyphs from icon sets like Font Awesome, Devicons, and Octicons directly into the font. Terminal prompts, file-manager TUIs, and status bars that expect Nerd Font icon glyphs (folder icons, git branch symbols, language logos, and so on) render correctly once this font is installed and selected.",
+  "has_gui": false,
+  "name": "ttf-jetbrains-mono-nerd-basic",
+  "pricing": "free-libre",
+  "pricing_note": "SIL Open Font License",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "JetBrains Mono, patched with thousands of extra icons for terminals and code editors.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "ttfx": {
+  "confidence": "high",
+  "description": "ttfx is a single static binary that applies flashy visual effects, such as matrix-style rain, decryption reveals, fireworks, and waves, to text piped into it, for example `ls -la | ttfx decrypt`. It is a Rust rewrite of the Python TerminalTextEffects project, built for speed: it starts in under a millisecond and reportedly runs over 27 times faster than the original, so it is practical to drop into everyday shell pipelines rather than just for one-off demos.",
+  "has_gui": false,
+  "name": "ttfx",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A terminal that supports ANSI escape sequences"
+  ],
+  "screenshot_url": "",
+  "tagline": "Pipe any text through your terminal and watch it decrypt, burn, or rain down like The Matrix.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "tuxedo-drivers-nocompatcheck-dkms": {
+  "confidence": "medium",
+  "description": "This package builds the same DKMS kernel modules TUXEDO Computers ships for its laptops, covering function keys, keyboard backlight, fan control, power profiles, and other embedded-controller sensors, but with the hardware compatibility check disabled. That lets it run on laptops from other brands that share the same underlying barebone hardware as a supported TUXEDO model (for example a TUXEDO Pulse 14 Gen 4 and a rebadged Schenker Via 14 Pro). The maintainer warns this bypass can be risky since embedded-controller code that targets the wrong hardware can potentially cause damage.",
+  "has_gui": false,
+  "name": "tuxedo-drivers-nocompatcheck-dkms",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A laptop whose hardware is identical or near-identical to a model TUXEDO's drivers already support (e.g. NB05/NB04/NB02, Sirius 16, or a rebadged equivalent from another brand)",
+   "DKMS and kernel headers for the running kernel"
+  ],
+  "screenshot_url": "",
+  "tagline": "TUXEDO's laptop kernel drivers, with the model whitelist switched off so lookalike laptops can use them too.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "typora": {
+  "confidence": "medium",
+  "description": "Typora merges the writing and preview panes into one live document: type an asterisk for bold or a hash for a heading and it renders instantly, with no separate preview window and no visible syntax clutter. It handles tables, code blocks, math, diagrams, and images inline, and can export a finished document to PDF, Word, LaTeX, EPUB, and other formats. Outline navigation, focus/typewriter modes, and CSS-based theming round it out for long-form writing.",
+  "has_gui": true,
+  "name": "typora",
+  "pricing": "paid",
+  "pricing_note": "$14.99 one-time, licensed for up to 3 devices; 15-day free trial",
+  "requirements": [
+   "Purchases a license after the 15-day trial to keep using it"
+  ],
+  "screenshot_url": "",
+  "tagline": "Markdown that never asks you to look at markdown.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "tzupdate": {
+  "confidence": "high",
+  "description": "tzupdate is a small command-line tool that figures out your timezone by looking up your public IP address against geolocation services, then updates the system timezone automatically. It's meant for machines that move around, or for skipping manual timezone setup entirely. A preview flag lets you see the detected timezone before it changes anything.",
+  "has_gui": false,
+  "name": "tzupdate",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Network access to reach IP geolocation services",
+   "Root/administrator privileges to change the system timezone"
+  ],
+  "screenshot_url": "",
+  "tagline": "Your clock, wherever your IP address says you are.",
+  "youtube_id": ""
+ },
+ "ufw-docker": {
+  "confidence": "high",
+  "description": "By default, Docker writes its own iptables rules that bypass UFW, so a published container port can be reachable from the internet even though UFW looks like it's blocking it. ufw-docker patches UFW's rule files so container ports are only exposed the way you explicitly allow with normal `ufw route allow` commands, while still letting containers talk to each other internally.",
+  "has_gui": false,
+  "name": "ufw-docker",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Docker and UFW already installed",
+   "Root/sudo access to edit /etc/ufw/after.rules"
+  ],
+  "screenshot_url": "",
+  "tagline": "Closes the hole Docker punches through your firewall.",
+  "youtube_id": ""
+ },
+ "umu-launcher": {
+  "confidence": "medium",
+  "description": "umu-launcher packages Valve's Proton compatibility tooling and the Steam Linux Runtime so any launcher, not just Steam, can run Windows games on Linux. Tools like Lutris, Heroic, and Bottles use it under the hood to set up the Wine prefix, pick a Proton version, and apply community game-specific fixes automatically.",
+  "has_gui": false,
+  "name": "umu-launcher",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A Proton or Proton-compatible build to actually run games",
+   "Network access to download the Steam Runtime and game-fix database on first run"
+  ],
+  "screenshot_url": "",
+  "tagline": "Proton for your Windows games, no Steam required.",
+  "youtube_id": ""
+ },
+ "v4l2-relayd": {
+  "confidence": "medium",
+  "description": "v4l2-relayd is a small background service that uses GStreamer to relay a video source, a file, a network stream, or another camera, into a v4l2loopback virtual camera device. Once running, other applications (video calls, streaming software) can pick the virtual device up as if it were a regular webcam.",
+  "has_gui": false,
+  "name": "v4l2-relayd",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "v4l2loopback kernel module loaded",
+   "GStreamer installed"
+  ],
+  "screenshot_url": "",
+  "tagline": "Pipes any video source into a virtual webcam device.",
+  "youtube_id": ""
+ },
+ "visual-studio-code-bin": {
+  "confidence": "high",
+  "description": "Visual Studio Code is a free code editor from Microsoft with built-in debugging, Git integration, an integrated terminal, and IntelliSense completions, extendable through a marketplace of tens of thousands of extensions covering nearly every language and framework. Recent versions add AI coding agents that can plan and carry out multi-step edits, run commands, and iterate, on top of the traditional editing experience.",
+  "has_gui": true,
+  "name": "visual-studio-code-bin",
+  "pricing": "free",
+  "pricing_note": "Free binary; Microsoft's own build under a proprietary (non-OSS) license, distinct from the open-source Code - OSS project",
+  "requirements": [
+   "A GitHub account to use the built-in AI agent features"
+  ],
+  "screenshot_url": "https://code.visualstudio.com/assets/docs/agents/getting-started/explorer-and-chat-view.png",
+  "tagline": "The code editor most developers open first.",
+  "youtube_id": "f8_uF_IDV50",
+  "youtube_title": "Learn Visual Studio Code in 15 minutes: 2026 Official Beginner Tutorial"
+ },
+ "voxtype-bin": {
+  "confidence": "medium",
+  "description": "Voxtype turns speech into typed text: hold a push-to-talk hotkey, speak, and release, and the transcription is typed at your cursor or copied to the clipboard. Transcription runs locally through engines like Whisper or Parakeet rather than a cloud service, and it can automatically duck your music while you're dictating. It works across GNOME, KDE, Sway, Hyprland, and River.",
+  "has_gui": false,
+  "name": "voxtype-bin",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Optional GPU (NVIDIA CUDA, AMD ROCm/MIGraphX, or Vulkan) to accelerate transcription; runs on CPU otherwise"
+  ],
+  "screenshot_url": "",
+  "tagline": "Hold a key, talk, get text, all on-device.",
+  "youtube_id": ""
+ },
+ "walker": {
+  "confidence": "medium",
+  "description": "Walker is a fast, GTK4-based application launcher for Linux that goes beyond opening apps: type a prefix to do quick math, browse files, run shell commands, search the web, dig through clipboard history, or manage Arch packages, all from the same popup. It's built for tiling Wayland setups like Hyprland and is themed and configured through simple config files.",
+  "has_gui": true,
+  "name": "walker",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Its companion 'Elephant' service running in the background"
+  ],
+  "screenshot_url": "https://raw.githubusercontent.com/abenz1267/walker/refs/heads/master/resources/screenshot.png",
+  "tagline": "One popup for apps, math, files, and more.",
+  "youtube_id": "d_AIIdEAZ3I",
+  "youtube_title": "Setup WALKER, the Application Launcher. A Step-by-Step Guide from Installation, Theming to Scripting"
+ },
+ "wayfreeze": {
+  "confidence": "high",
+  "description": "wayfreeze is a tiny utility for Wayland compositors that freezes what's currently on screen, a still frame you can then screenshot or annotate without anything shifting underneath you. It supports multiple monitors, fractional scaling, and can hide the cursor or run commands before and after the freeze.",
+  "has_gui": false,
+  "name": "wayfreeze",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A wlroots-based compositor supporting the wlr-layer-shell, wlr-screencopy, wp-fractional-scale, and wp-viewporter protocols"
+  ],
+  "screenshot_url": "",
+  "tagline": "Pauses your screen so you can screenshot it in peace.",
+  "youtube_id": ""
+ },
+ "xdg-terminal-exec": {
+  "confidence": "high",
+  "description": "xdg-terminal-exec is a reference implementation of a proposed freedesktop.org standard for launching a user's preferred terminal emulator, the same way xdg-open resolves a preferred browser or file handler. Instead of a script or app hard-coding a specific terminal, it calls xdg-terminal-exec and the system resolves whichever terminal the user has configured, optionally running a command inside it.",
+  "has_gui": false,
+  "name": "xdg-terminal-exec",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Terminal emulators need a compatible desktop entry (TerminalEmulator category with an X-TerminalArgExec key) to be selectable"
+  ],
+  "screenshot_url": "",
+  "tagline": "Lets apps open 'the terminal' without guessing which one.",
+  "youtube_id": ""
+ },
+ "xpadneo-dkms": {
+  "confidence": "high",
+  "description": "xpadneo is a kernel driver that lets Xbox One, Xbox Series X|S, and Xbox Elite Series 2 wireless controllers connect to Linux over Bluetooth with full feature support, not just basic button input. It adds rumble, proportional trigger feedback, battery-level reporting, and paddle button support that the generic in-kernel driver lacks. It started as a student project at fortiss GmbH (affiliated with TU Munich) and is packaged here via DKMS so the kernel module rebuilds automatically across kernel updates.",
+  "has_gui": false,
+  "name": "xpadneo-dkms",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "A Bluetooth adapter (Bluetooth Low Energy support needed for Xbox Series X|S controllers)",
+   "An Xbox wireless controller (One S, Series X|S, or Elite Series 2) to pair"
+  ],
+  "screenshot_url": "",
+  "tagline": "Makes your Xbox wireless controller feel first-class on Linux, over Bluetooth.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yaru-gnome-shell-theme": {
+  "confidence": "medium",
+  "description": "This package installs the GNOME Shell portion of Yaru, Ubuntu's default desktop theme, styling the top bar, overview, lock screen, and system menus to match Ubuntu's look. It's derived from the official upstream GNOME Shell theme and ships in light and dark variants. Installing it alone gives you Yaru's shell styling without pulling in the full icon or GTK theme.",
+  "has_gui": false,
+  "name": "yaru-gnome-shell-theme",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "Ubuntu's signature look, for the GNOME Shell chrome around your desktop.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yaru-gtk-theme": {
+  "confidence": "medium",
+  "description": "This is the core GTK2/GTK3 stylesheet of Yaru, Ubuntu's default theme, controlling how buttons, menus, title bars, and other widgets look and feel across GTK applications. It's built on top of upstream Adwaita and ships light and dark variants. This is the largest and most visible piece of the Yaru suite since it affects nearly every application window.",
+  "has_gui": false,
+  "name": "yaru-gtk-theme",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "The GTK widget theme behind Ubuntu's familiar desktop look.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yaru-gtksourceview-theme": {
+  "confidence": "medium",
+  "description": "This package provides a GtkSourceView color scheme matching the Yaru theme, so code editors and text views built on the GtkSourceView library (like GNOME Text Editor or gedit) get syntax highlighting that fits the rest of the Yaru-themed desktop. It's a small, focused piece of the wider Yaru theme suite.",
+  "has_gui": false,
+  "name": "yaru-gtksourceview-theme",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "Ubuntu-matching syntax highlighting colors for GTK-based text and code views.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yaru-icon-theme": {
+  "confidence": "medium",
+  "description": "Yaru's icon theme provides application, folder, and system icons for the Ubuntu desktop, built from the Unity8 Suru icon set and its Suru successor. It's the component most people recognize as 'the Ubuntu look' \u2014 orange folder icons, flat colorful app icons, and a matching cursor theme. It's the largest Yaru sub-package by size since it bundles a large set of icon assets.",
+  "has_gui": false,
+  "name": "yaru-icon-theme",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "The colorful, rounded icon set that defines Ubuntu's visual identity.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yaru-metacity-theme": {
+  "confidence": "medium",
+  "description": "This package brings Yaru's visual style to Metacity, the window manager used in GNOME Flashback and some classic desktop setups, theming window borders, title bars, and controls to match the rest of the Yaru suite. It's a small, targeted component for users running a Metacity-based session rather than modern GNOME Shell.",
+  "has_gui": false,
+  "name": "yaru-metacity-theme",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "Ubuntu-styled window borders and decorations for the Metacity window manager.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yaru-session": {
+  "confidence": "medium",
+  "description": "This is a tiny metadata package that registers Yaru as a coherent desktop session/theme option, tying together the GTK, icon, shell, and sound components so a display manager or settings panel can offer 'Yaru' as a single selectable theme. It contains no visual assets itself.",
+  "has_gui": false,
+  "name": "yaru-session",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "The glue package that wires Yaru up as a selectable desktop session.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yaru-sound-theme": {
+  "confidence": "medium",
+  "description": "This package provides Yaru's system sound theme, the audio cues for logging in, notifications, alerts, and other desktop events. It combines sounds from the WoodenBeaver and Touch-Remix projects into one cohesive set matching Ubuntu's default sound design.",
+  "has_gui": false,
+  "name": "yaru-sound-theme",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "The login, notification, and alert sounds that come with Ubuntu.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yaru-unity-theme": {
+  "confidence": "medium",
+  "description": "This package adapts the Yaru theme for the Unity desktop environment, styling Unity's launcher, top panel, and dash to match the rest of the Yaru suite. It's aimed at users still running or reviving a Unity session rather than modern GNOME Shell.",
+  "has_gui": false,
+  "name": "yaru-unity-theme",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "Yaru's styling for the Unity desktop's launcher and panel.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yaru-xfwm4-theme": {
+  "confidence": "medium",
+  "description": "This package themes xfwm4, the window manager used by Xfce, with Yaru's window borders, title bars, and decorations so an Xfce session can visually match the rest of the Yaru desktop suite. It's for users pairing Xfce with Ubuntu's default theming rather than GNOME.",
+  "has_gui": false,
+  "name": "yaru-xfwm4-theme",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [],
+  "screenshot_url": "",
+  "tagline": "Ubuntu's Yaru look, brought to the Xfce window manager.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yay": {
+  "confidence": "high",
+  "description": "yay is a command-line helper for Arch Linux that wraps pacman and adds support for the Arch User Repository (AUR). It resolves dependencies, downloads and lets you review PKGBUILDs before building, searches both official repos and the AUR in one command, and can track and update development (-git) packages. It's the de facto standard way Arch and Arch-based distros like Omarchy install community packages that aren't in the official repositories.",
+  "has_gui": false,
+  "name": "yay",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "An AUR account (username/password via env vars) only if you want to use its package-voting feature; not needed for normal install/search/update use"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://github.com/Jguer/yay",
+  "tagline": "The AUR helper that makes pacman feel complete.",
+  "youtube_id": "",
+  "youtube_title": ""
+ },
+ "yt6801-dkms": {
+  "confidence": "medium",
+  "description": "This package is a DKMS-packaged kernel module for the Motorcomm YT6801, a Gigabit PCIe Ethernet controller chip found in some laptop and desktop motherboards (including certain models this driver was added to Omarchy for). DKMS means the module is automatically rebuilt whenever your kernel updates, so wired networking keeps working across kernel upgrades without manual recompilation. It has no user interface; it just needs to be installed on a machine that actually has this specific ethernet chip.",
+  "has_gui": false,
+  "name": "yt6801-dkms",
+  "pricing": "free-libre",
+  "pricing_note": "",
+  "requirements": [
+   "Only useful on hardware that actually has a Motorcomm YT6801 Gigabit PCIe Ethernet controller chip",
+   "Linux kernel headers installed for DKMS to build against"
+  ],
+  "screenshot_url": "",
+  "source_url": "https://www.motor-comm.com/product/ethernet-control-chip",
+  "tagline": "The Linux driver that lets a Motorcomm YT6801 chip actually talk to your network.",
+  "youtube_id": "",
+  "youtube_title": ""
+ }
+}

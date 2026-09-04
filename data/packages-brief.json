@@ -1,0 +1,1460 @@
+[
+ {
+  "name": "1password",
+  "desc": "Password manager and secure wallet",
+  "url": "https://1password.com",
+  "github": "",
+  "category": "Security & Privacy",
+  "license": "LicenseRef-1Password-Proprietary",
+  "isize": "587 MB"
+ },
+ {
+  "name": "1password-beta",
+  "desc": "Password manager and secure wallet",
+  "url": "https://1password.com",
+  "github": "",
+  "category": "Security & Privacy",
+  "license": "LicenseRef-1Password-Proprietary",
+  "isize": "587 MB"
+ },
+ {
+  "name": "1password-cli",
+  "desc": "1Password command line tool",
+  "url": "https://app-updates.agilebits.com/product_history/CLI2",
+  "github": "",
+  "category": "Security & Privacy",
+  "license": "custom",
+  "isize": "43 MB"
+ },
+ {
+  "name": "aether",
+  "desc": "Desktop theming application - extract colors from wallpapers and apply cohesive themes",
+  "url": "https://github.com/omacom/aether",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "MIT",
+  "isize": "19.8 MB"
+ },
+ {
+  "name": "asdcontrol",
+  "desc": "Control brightness on Apple Displays connected via USB-C",
+  "url": "https://github.com/omakasui/asdcontrol",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL2",
+  "isize": "31.4 KB"
+ },
+ {
+  "name": "asusctl",
+  "desc": "A control daemon, CLI tools, and a collection of crates for interacting with ASUS ROG laptops",
+  "url": "https://asus-linux.org",
+  "github": "https://github.com/OpenGamingCollective/asusctl",
+  "category": "System & Drivers",
+  "license": "MPL-2.0",
+  "isize": "24.2 MB"
+ },
+ {
+  "name": "basecamp-cli",
+  "desc": "CLI for Basecamp project management",
+  "url": "https://github.com/basecamp/basecamp-cli",
+  "github": "",
+  "category": "Productivity & Notes",
+  "license": "MIT",
+  "isize": "37.5 MB"
+ },
+ {
+  "name": "bun-bin",
+  "desc": "All-in-one JavaScript runtime built for speed, with bundler, transpiler, test runner, and package manager. Includes bunx, shell completions and support for baseline CPUs",
+  "url": "https://github.com/oven-sh/bun",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "MIT",
+  "isize": "99.3 MB"
+ },
+ {
+  "name": "caja-open-any-terminal",
+  "desc": "context-menu entry for opening other terminal in nautilus",
+  "url": "https://github.com/Stunkymonkey/nautilus-open-any-terminal",
+  "github": "",
+  "category": "Terminal & Shell",
+  "license": "GPL3",
+  "isize": "85.6 KB"
+ },
+ {
+  "name": "claude-code",
+  "desc": "An agentic coding tool that lives in your terminal",
+  "url": "https://github.com/anthropics/claude-code",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "LicenseRef-claude-code",
+  "isize": "216.7 MB"
+ },
+ {
+  "name": "cliamp",
+  "desc": "A retro terminal music player inspired by Winamp 2.x",
+  "url": "https://github.com/bjarneo/cliamp",
+  "github": "",
+  "category": "Media & Creative",
+  "license": "MIT",
+  "isize": "36.8 MB"
+ },
+ {
+  "name": "crush-bin",
+  "desc": "A powerful terminal-based AI assistant for developers, providing intelligent coding assistance directly in your terminal.",
+  "url": "https://charm.sh/crush",
+  "github": "https://github.com/charmbracelet/crush",
+  "category": "AI & Agents",
+  "license": "FSL-1.1-MIT",
+  "isize": "94.2 MB"
+ },
+ {
+  "name": "cursor-bin",
+  "desc": "AI-first coding environment",
+  "url": "https://www.cursor.com",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "LicenseRef-Cursor_EULA",
+  "isize": "401.7 MB"
+ },
+ {
+  "name": "cursor-cli",
+  "desc": "CLI tool for Cursor, the AI-first coding agent",
+  "url": "https://cursor.com/cli",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "LicenseRef-Cursor",
+  "isize": "254.6 MB"
+ },
+ {
+  "name": "dbxcli-bin",
+  "desc": "A command line client for Dropbox built using the Go SDK",
+  "url": "https://github.com/dropbox/dbxcli",
+  "github": "",
+  "category": "Utilities",
+  "license": "Apache-2.0",
+  "isize": "8.7 MB"
+ },
+ {
+  "name": "dell-xps-touchpad-haptics",
+  "desc": "Synaptics haptic touchpad presets for Dell XPS on Omarchy",
+  "url": "",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "MIT",
+  "isize": "15.4 KB"
+ },
+ {
+  "name": "dropbox",
+  "desc": "A free service that lets you bring your photos, docs, and videos anywhere and share them easily.",
+  "url": "https://www.dropbox.com",
+  "github": "",
+  "category": "Utilities",
+  "license": "custom:Dropbox",
+  "isize": "156 MB"
+ },
+ {
+  "name": "dropbox-cli",
+  "desc": "Command line interface for Dropbox",
+  "url": "https://www.dropbox.com",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL-3.0-or-later",
+  "isize": "119.8 KB"
+ },
+ {
+  "name": "elephant",
+  "desc": "general purpose datasource and executor",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "21.9 MB"
+ },
+ {
+  "name": "elephant-all",
+  "desc": "elephant + all official elephant providers",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "688 MB"
+ },
+ {
+  "name": "elephant-archlinuxpkgs",
+  "desc": "archlinuxpkgs provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "23.2 MB"
+ },
+ {
+  "name": "elephant-bluetooth",
+  "desc": "bluetooth provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "22.9 MB"
+ },
+ {
+  "name": "elephant-calc",
+  "desc": "calc provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "22.9 MB"
+ },
+ {
+  "name": "elephant-clipboard",
+  "desc": "clipboard provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "25.1 MB"
+ },
+ {
+  "name": "elephant-desktopapplications",
+  "desc": "desktopapplications provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "23.5 MB"
+ },
+ {
+  "name": "elephant-files",
+  "desc": "files provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "24.9 MB"
+ },
+ {
+  "name": "elephant-menus",
+  "desc": "menus provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "22.7 MB"
+ },
+ {
+  "name": "elephant-providerlist",
+  "desc": "providerlist provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "22.9 MB"
+ },
+ {
+  "name": "elephant-runner",
+  "desc": "runner provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "22.9 MB"
+ },
+ {
+  "name": "elephant-symbols",
+  "desc": "symbols provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "146.4 MB"
+ },
+ {
+  "name": "elephant-todo",
+  "desc": "todo provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "32.2 MB"
+ },
+ {
+  "name": "elephant-unicode",
+  "desc": "unicode provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "25.1 MB"
+ },
+ {
+  "name": "elephant-websearch",
+  "desc": "websearch provider for elephant",
+  "url": "https://github.com/abenz1267/elephant",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL",
+  "isize": "22.9 MB"
+ },
+ {
+  "name": "flea",
+  "desc": "Fast, keyboard-first file manager for Omarchy",
+  "url": "https://github.com/thisisgm/flea",
+  "github": "",
+  "category": "Utilities",
+  "license": "MIT",
+  "isize": "1.6 MB"
+ },
+ {
+  "name": "github-copilot-cli",
+  "desc": "GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal.",
+  "url": "https://github.com/github/copilot-cli",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "LicenseRef-GitHub-Copilot",
+  "isize": "313.1 MB"
+ },
+ {
+  "name": "gpu-screen-recorder",
+  "desc": "A shadowplay-like screen recorder for Linux. The fastest screen recorder for Linux",
+  "url": "https://git.dec05eba.com/gpu-screen-recorder",
+  "github": "",
+  "category": "Media & Creative",
+  "license": "GPL-3.0-only",
+  "isize": "452.5 KB"
+ },
+ {
+  "name": "grok-bot",
+  "desc": "Grok Bot desktop agent",
+  "url": "https://x.ai/bot",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "custom",
+  "isize": "430 MB"
+ },
+ {
+  "name": "herdr",
+  "desc": "Herdr terminal workspace manager for AI coding agents",
+  "url": "https://github.com/herdrdev/herdr",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "Apache-2.0",
+  "isize": "18.9 MB"
+ },
+ {
+  "name": "hermes-desktop",
+  "desc": "Native desktop shell for Hermes Agent",
+  "url": "https://github.com/NousResearch/hermes-agent",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "MIT",
+  "isize": "352.8 MB"
+ },
+ {
+  "name": "heroic-games-launcher-bin",
+  "desc": "An Open source Launcher for Epic, Amazon and GOG Games",
+  "url": "https://heroicgameslauncher.com/",
+  "github": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher",
+  "category": "Gaming & Emulation",
+  "license": "GPL-3.0-only",
+  "isize": "474.8 MB"
+ },
+ {
+  "name": "hey-cli",
+  "desc": "CLI for HEY email",
+  "url": "https://github.com/basecamp/hey-cli",
+  "github": "",
+  "category": "Communication",
+  "license": "MIT",
+  "isize": "37.7 MB"
+ },
+ {
+  "name": "hyprland-preview-share-picker",
+  "desc": "An alternative share picker for hyprland with window and monitor previews",
+  "url": "https://github.com/WhySoBad/hyprland-preview-share-picker",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "MIT",
+  "isize": "6.6 MB"
+ },
+ {
+  "name": "hyprland-preview-share-picker-git",
+  "desc": "An alternative share picker for hyprland with window and monitor previews",
+  "url": "https://github.com/WhySoBad/hyprland-preview-share-picker",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "MIT",
+  "isize": "6.6 MB"
+ },
+ {
+  "name": "hyprshade",
+  "desc": "Hyprland shade configuration tool",
+  "url": "https://github.com/loqusion/hyprshade",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "MIT",
+  "isize": "39.6 KB"
+ },
+ {
+  "name": "intel-ipu7-camera",
+  "desc": "Intel IPU7 MIPI camera stack for Hurrican/Performance (OV08X40 + hardware ISP)",
+  "url": "https://github.com/TsaiGaggery/hurrican_omarchy_enabling",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-or-later",
+  "isize": "100 MB"
+ },
+ {
+  "name": "intel-lpmd",
+  "desc": "Intel Low Power Mode Daemon",
+  "url": "https://github.com/intel/intel-lpmd",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-or-later",
+  "isize": "160 KB"
+ },
+ {
+  "name": "lib32-nvidia-580xx-utils",
+  "desc": "NVIDIA drivers utilities (32-bit) (580xx)",
+  "url": "http://www.nvidia.com/",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "custom",
+  "isize": "290.4 MB"
+ },
+ {
+  "name": "lib32-opencl-nvidia-580xx",
+  "desc": "OpenCL implemention for NVIDIA (32-bit) (580xx)",
+  "url": "http://www.nvidia.com/",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "custom",
+  "isize": "23 MB"
+ },
+ {
+  "name": "libfprint-git",
+  "desc": "Library for fingerprint readers (libfprint master with FocalTech MOC updates)",
+  "url": "https://fprint.freedesktop.org/",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "LGPL-2.1-or-later",
+  "isize": "1.8 MB"
+ },
+ {
+  "name": "libretro-cap32-git",
+  "desc": "Amstrad CPC core",
+  "url": "https://github.com/libretro/libretro-cap32",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "1.5 MB"
+ },
+ {
+  "name": "libretro-database-git",
+  "desc": "RetroArch's cheatcode files, content data files, etc.",
+  "url": "https://github.com/libretro/libretro-database",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "CC-BY-SA-4.0",
+  "isize": "355.3 MB"
+ },
+ {
+  "name": "libretro-fbneo-git",
+  "desc": "FinalBurn Neo multi-arcade core",
+  "url": "https://github.com/libretro/FBNeo",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "LicenseRef-FBNeo",
+  "isize": "49.6 MB"
+ },
+ {
+  "name": "libretro-uae-git",
+  "desc": "A port of the Commodore Amiga Emulator to libretro (WIP)",
+  "url": "https://github.com/libretro/libretro-uae",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL3",
+  "isize": "21.3 MB"
+ },
+ {
+  "name": "libretro-vice-x128-git",
+  "desc": "Commodore C128 core",
+  "url": "https://github.com/libretro/vice-libretro",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "3.2 MB"
+ },
+ {
+  "name": "libretro-vice-x64-git",
+  "desc": "Commodore C64 core (fast)",
+  "url": "https://github.com/libretro/vice-libretro",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "2.9 MB"
+ },
+ {
+  "name": "libretro-vice-x64dtv-git",
+  "desc": "Commodore C64DTV core",
+  "url": "https://github.com/libretro/vice-libretro",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "2.1 MB"
+ },
+ {
+  "name": "libretro-vice-x64sc-git",
+  "desc": "Commodore C64 core (accurate)",
+  "url": "https://github.com/libretro/vice-libretro",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "2.9 MB"
+ },
+ {
+  "name": "libretro-vice-xcbm2-git",
+  "desc": "Commodore CBM-II 6x0/7x0 core",
+  "url": "https://github.com/libretro/vice-libretro",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "2.1 MB"
+ },
+ {
+  "name": "libretro-vice-xcbm5x0-git",
+  "desc": "Commodore CBM-II 5x0 core",
+  "url": "https://github.com/libretro/vice-libretro",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "2.2 MB"
+ },
+ {
+  "name": "libretro-vice-xpet-git",
+  "desc": "Commodore PET core",
+  "url": "https://github.com/libretro/vice-libretro",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "2.1 MB"
+ },
+ {
+  "name": "libretro-vice-xplus4-git",
+  "desc": "Commodore Plus/4 core",
+  "url": "https://github.com/libretro/vice-libretro",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "2.3 MB"
+ },
+ {
+  "name": "libretro-vice-xscpu64-git",
+  "desc": "Commodore C64 SuperCPU core",
+  "url": "https://github.com/libretro/vice-libretro",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "3.4 MB"
+ },
+ {
+  "name": "libretro-vice-xvic-git",
+  "desc": "Commodore VIC-20 core",
+  "url": "https://github.com/libretro/vice-libretro",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-2.0-or-later",
+  "isize": "2.3 MB"
+ },
+ {
+  "name": "limine-mkinitcpio-hook",
+  "desc": "Install kernels for the Limine bootloader.",
+  "url": "https://gitlab.com/Zesko/limine-entry-tool",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL3",
+  "isize": "20.1 MB"
+ },
+ {
+  "name": "limine-snapper-sync",
+  "desc": "Integrates Limine boot entries with Snapper snapshots.",
+  "url": "https://gitlab.com/Zesko/limine-snapper-sync",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL3",
+  "isize": "27.4 MB"
+ },
+ {
+  "name": "link-studio",
+  "desc": "Native Linux controller for Insta360 Link webcams",
+  "url": "https://jweaver60.github.io/link-studio/",
+  "github": "https://github.com/jweaver60/link-studio",
+  "category": "System & Drivers",
+  "license": "MIT",
+  "isize": "5.3 MB"
+ },
+ {
+  "name": "linux-mainline-panther-lake",
+  "desc": "The Linux Mainline (Panther Lake audio support) kernel and modules",
+  "url": "https://kernel.org/",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-only",
+  "isize": "152.9 MB"
+ },
+ {
+  "name": "linux-mainline-panther-lake-headers",
+  "desc": "Headers and scripts for building modules for the Linux Mainline (Panther Lake audio support) kernel",
+  "url": "https://kernel.org/",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-only",
+  "isize": "290.7 MB"
+ },
+ {
+  "name": "linux-ptl",
+  "desc": "The Linux for Panther Lake with Panel Replay power and OLED VRR fixes kernel and modules",
+  "url": "https://github.com/archlinux/linux",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-only",
+  "isize": "155 MB"
+ },
+ {
+  "name": "linux-ptl-audio",
+  "desc": "The Linux with Panther Lake SDCA audio backports kernel and modules",
+  "url": "https://github.com/archlinux/linux",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-only",
+  "isize": "152.3 MB"
+ },
+ {
+  "name": "linux-ptl-audio-headers",
+  "desc": "Headers and scripts for building modules for the Linux with Panther Lake SDCA audio backports kernel",
+  "url": "https://github.com/archlinux/linux",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-only",
+  "isize": "156.7 MB"
+ },
+ {
+  "name": "linux-ptl-headers",
+  "desc": "Headers and scripts for building modules for the Linux for Panther Lake with Panel Replay power and OLED VRR fixes kernel",
+  "url": "https://github.com/archlinux/linux",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-only",
+  "isize": "295.9 MB"
+ },
+ {
+  "name": "lmstudio",
+  "desc": "Discover, download, and run local LLMs",
+  "url": "https://lmstudio.ai/",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "LicenseRef-EULA",
+  "isize": "1.1 GB"
+ },
+ {
+  "name": "lmstudio-bin",
+  "desc": "LM Studio - A desktop app for exploring and running large language models locally",
+  "url": "https://lmstudio.ai",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "EULA",
+  "isize": "1 GB"
+ },
+ {
+  "name": "localsend",
+  "desc": "An open source cross-platform alternative to AirDrop",
+  "url": "https://github.com/localsend/localsend",
+  "github": "",
+  "category": "Utilities",
+  "license": "Apache-2.0",
+  "isize": "70.4 MB"
+ },
+ {
+  "name": "localsend-bin",
+  "desc": "An open source cross-platform alternative to AirDrop",
+  "url": "https://github.com/localsend/localsend",
+  "github": "",
+  "category": "Utilities",
+  "license": "Apache-2.0",
+  "isize": "56 MB"
+ },
+ {
+  "name": "macbook12-spi-driver-dkms",
+  "desc": "Driver for the keyboard, touchpad and touchbar found in newer MacBook (Pro) models",
+  "url": "https://github.com/marc-git/macbook12-spi-driver",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL2",
+  "isize": "181.5 KB"
+ },
+ {
+  "name": "macbook8-spi-pxa2xx-nodma-dkms",
+  "desc": "Patched SPI PXA2xx PCI driver forcing PIO mode for MacBook8,1 Wildcat Point GSPI (8086:9ce6)",
+  "url": "https://github.com/basecamp/omarchy",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-only",
+  "isize": "13.3 KB"
+ },
+ {
+  "name": "makima-bin",
+  "desc": "Linux daemon to remap and create macros for keyboards, mice and controllers.",
+  "url": "https://github.com/cyber-sushi/makima",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-3.0-or-later",
+  "isize": "2.2 MB"
+ },
+ {
+  "name": "minecraft-launcher",
+  "desc": "Official Minecraft Launcher",
+  "url": "https://mojang.com/",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "custom",
+  "isize": "3 MB"
+ },
+ {
+  "name": "mise-bin",
+  "desc": "dev tools, env vars, task runner",
+  "url": "https://github.com/jdx/mise",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "MIT",
+  "isize": "103.3 MB"
+ },
+ {
+  "name": "nautilus-dropbox",
+  "desc": "Dropbox Nautilus Extension",
+  "url": "https://www.dropbox.com/",
+  "github": "https://github.com/dropbox/nautilus-dropbox",
+  "category": "Utilities",
+  "license": "CC-BY-ND-3.0 AND GPL-3.0-or-later",
+  "isize": "113.5 KB"
+ },
+ {
+  "name": "nautilus-open-any-terminal",
+  "desc": "context-menu entry for opening other terminal in nautilus",
+  "url": "https://github.com/Stunkymonkey/nautilus-open-any-terminal",
+  "github": "",
+  "category": "Terminal & Shell",
+  "license": "GPL3",
+  "isize": "85.6 KB"
+ },
+ {
+  "name": "nordvpn-bin",
+  "desc": "NordVPN CLI tool for Linux",
+  "url": "https://nordvpn.com/download/linux/",
+  "github": "",
+  "category": "Security & Privacy",
+  "license": "GPL3",
+  "isize": "123.8 MB"
+ },
+ {
+  "name": "nvidia-580xx-dkms",
+  "desc": "NVIDIA kernel modules - module sources (580xx)",
+  "url": "http://www.nvidia.com/",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "custom",
+  "isize": "123.7 MB"
+ },
+ {
+  "name": "nvidia-580xx-utils",
+  "desc": "NVIDIA drivers utilities (580xx)",
+  "url": "http://www.nvidia.com/",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "custom",
+  "isize": "947.3 MB"
+ },
+ {
+  "name": "omacalc",
+  "desc": "Dead-simple calculator built with Qt Quick",
+  "url": "https://github.com/omacom-io/omacalc",
+  "github": "",
+  "category": "Utilities",
+  "license": "MIT, OFL-1.1",
+  "isize": "304.2 KB"
+ },
+ {
+  "name": "omacut",
+  "desc": "Dead-simple video length trimmer built with Qt Quick and ffmpeg",
+  "url": "https://github.com/omacom-io/omacut",
+  "github": "",
+  "category": "Media & Creative",
+  "license": "MIT",
+  "isize": "196.1 KB"
+ },
+ {
+  "name": "omakade",
+  "desc": "A beautiful, local-first game library for Omarchy",
+  "url": "https://tsouth89.github.io/omakade/",
+  "github": "https://github.com/tsouth89/omakade",
+  "category": "Gaming & Emulation",
+  "license": "GPL-3.0-or-later",
+  "isize": "2.3 MB"
+ },
+ {
+  "name": "omapresent",
+  "desc": "Dead-simple, Markdown-only presentation app built with Qt Quick",
+  "url": "https://github.com/jethrojones/omapresent",
+  "github": "",
+  "category": "Productivity & Notes",
+  "license": "MIT",
+  "isize": "1.9 MB"
+ },
+ {
+  "name": "omarchy",
+  "desc": "Beautiful, modern, and opinionated Arch Linux by DHH",
+  "url": "https://github.com/basecamp/omarchy",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "MIT",
+  "isize": "126.9 MB"
+ },
+ {
+  "name": "omarchy-audio-tuner",
+  "desc": "Tools for authoring Omarchy laptop speaker tunings",
+  "url": "https://github.com/omacom-io/omarchy-audio-tuner",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "MIT",
+  "isize": "46.4 KB"
+ },
+ {
+  "name": "omarchy-chromium",
+  "desc": "A web browser built for speed, simplicity, and security, with patches for Omarchy",
+  "url": "https://github.com/omacom-io/omarchy-chromium",
+  "github": "",
+  "category": "Browsers & Web",
+  "license": "BSD-3-Clause",
+  "isize": "385.5 MB"
+ },
+ {
+  "name": "omarchy-chromium-bin",
+  "desc": "A web browser built for speed, simplicity, and security, with patches for Omarchy (binary package)",
+  "url": "https://www.chromium.org/Home",
+  "github": "https://github.com/omacom-io/omarchy-chromium",
+  "category": "Browsers & Web",
+  "license": "BSD-3-Clause",
+  "isize": "385.5 MB"
+ },
+ {
+  "name": "omarchy-dev",
+  "desc": "Beautiful, modern, and opinionated Arch Linux by DHH (quattro branch tip)",
+  "url": "https://github.com/basecamp/omarchy",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "MIT",
+  "isize": "69.1 MB"
+ },
+ {
+  "name": "omarchy-emacs",
+  "desc": "Emacs integration for Omarchy with automatic theme and font syncing",
+  "url": "https://github.com/scottjones/omarchy-emacs",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "MIT",
+  "isize": "32.6 KB"
+ },
+ {
+  "name": "omarchy-fish",
+  "desc": "Omarchy shell configuration for Fish",
+  "url": "https://github.com/omacom-io/omarchy-fish",
+  "github": "",
+  "category": "Terminal & Shell",
+  "license": "MIT",
+  "isize": "53.8 KB"
+ },
+ {
+  "name": "omarchy-herdr",
+  "desc": "Herdr terminal workspace manager with Omarchy pane border support",
+  "url": "https://github.com/dhh/herdr",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "Apache-2.0",
+  "isize": "18.2 MB"
+ },
+ {
+  "name": "omarchy-keyring",
+  "desc": "Omarchy keyring",
+  "url": "https://omarchy.org",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-3.0-or-later",
+  "isize": "676 B"
+ },
+ {
+  "name": "omarchy-nvim",
+  "desc": "Pre-built LazyVim configuration with cached plugins",
+  "url": "https://github.com/LazyVim/LazyVim",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "MIT",
+  "isize": "65.4 MB"
+ },
+ {
+  "name": "omarchy-settings",
+  "desc": "Omarchy user defaults, /etc/skel content, fonts, plymouth theme, and support helpers",
+  "url": "https://github.com/basecamp/omarchy",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "MIT",
+  "isize": "1.3 MB"
+ },
+ {
+  "name": "omarchy-settings-dev",
+  "desc": "Omarchy user defaults, /etc/skel content, fonts, plymouth theme, and support helpers (quattro branch tip)",
+  "url": "https://github.com/basecamp/omarchy",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "MIT",
+  "isize": "1.3 MB"
+ },
+ {
+  "name": "omarchy-walker",
+  "desc": "Meta package for walker with Elephant providers for Omarchy",
+  "url": "https://omarchy.org",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "MIT",
+  "isize": "0 B"
+ },
+ {
+  "name": "omarchy-zsh",
+  "desc": "Omarchy shell configuration for Zsh",
+  "url": "https://github.com/omacom-io/omarchy-zsh",
+  "github": "",
+  "category": "Terminal & Shell",
+  "license": "MIT",
+  "isize": "29.4 KB"
+ },
+ {
+  "name": "omasnap",
+  "desc": "Native Wayland screenshot and annotation overlay for Hyprland",
+  "url": "https://github.com/tobi/omasnap",
+  "github": "",
+  "category": "Media & Creative",
+  "license": "MIT, OFL-1.1",
+  "isize": "1.1 MB"
+ },
+ {
+  "name": "omatrack",
+  "desc": "Cross-format motorsport telemetry analysis workstation",
+  "url": "https://github.com/tobi/omatrack",
+  "github": "",
+  "category": "Utilities",
+  "license": "MIT",
+  "isize": "7.8 MB"
+ },
+ {
+  "name": "omawrite",
+  "desc": "Dead-simple Markdown writing app built with Qt Quick",
+  "url": "https://github.com/omacom-io/omawrite",
+  "github": "",
+  "category": "Productivity & Notes",
+  "license": "MIT, OFL-1.1",
+  "isize": "578.3 KB"
+ },
+ {
+  "name": "omazed",
+  "desc": "Live theme switching for Zed in Omarchy - automatically synchronize your Zed editor theme with your Omarchy system theme",
+  "url": "https://github.com/aps6/omazed",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "MIT",
+  "isize": "53 KB"
+ },
+ {
+  "name": "once-bin",
+  "desc": "CLI/TUI for installing and managing self-hosted web applications",
+  "url": "https://github.com/basecamp/once",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "MIT",
+  "isize": "16.2 MB"
+ },
+ {
+  "name": "openai-codex-bin",
+  "desc": "Arch Linux package for OpenAI's Codex CLI - Auto Updated",
+  "url": "https://github.com/openai/codex",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "Apache",
+  "isize": "329 MB"
+ },
+ {
+  "name": "openai-codex-desktop",
+  "desc": "Official ChatGPT desktop app with Codex",
+  "url": "https://chatgpt.com/codex/",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "custom",
+  "isize": "1.4 GB"
+ },
+ {
+  "name": "opencl-nvidia-580xx",
+  "desc": "OpenCL implemention for NVIDIA (580xx)",
+  "url": "http://www.nvidia.com/",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "custom",
+  "isize": "89.9 MB"
+ },
+ {
+  "name": "opencode",
+  "desc": "The open source coding agent",
+  "url": "https://github.com/anomalyco/opencode",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "MIT",
+  "isize": "107.8 MB"
+ },
+ {
+  "name": "perplexity",
+  "desc": "Official Perplexity desktop app",
+  "url": "https://www.perplexity.ai",
+  "github": "",
+  "category": "AI & Agents",
+  "license": "custom",
+  "isize": "616 MB"
+ },
+ {
+  "name": "pinta",
+  "desc": "Drawing/editing program modeled after Paint.NET. It's goal is to provide a simplified alternative to GIMP for casual users",
+  "url": "https://pinta-project.com",
+  "github": "",
+  "category": "Media & Creative",
+  "license": "MIT",
+  "isize": "21 MB"
+ },
+ {
+  "name": "python-mediapipe",
+  "desc": "A cross-platform, customizable ML solutions for live and streaming media",
+  "url": "https://github.com/google-ai-edge/mediapipe",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "Apache-2.0",
+  "isize": "26.2 MB"
+ },
+ {
+  "name": "python-sounddevice",
+  "desc": "Record and play back sound",
+  "url": "https://python-sounddevice.rtfd.io/",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "MIT",
+  "isize": "389.2 KB"
+ },
+ {
+  "name": "python-terminaltexteffects",
+  "desc": "Visual effects engine applied to text in the terminal.",
+  "url": "https://github.com/ChrisBuilds/terminaltexteffects",
+  "github": "",
+  "category": "Terminal & Shell",
+  "license": "MIT",
+  "isize": "3.4 MB"
+ },
+ {
+  "name": "qmk-hid",
+  "desc": "Commandline tool for interacting with QMK devices over HID",
+  "url": "https://github.com/FrameworkComputer/qmk_hid",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "BSD",
+  "isize": "982.7 KB"
+ },
+ {
+  "name": "quickshell-git",
+  "desc": "Flexible toolkit for making desktop shells with QtQuick",
+  "url": "https://git.outfoxxed.me/quickshell/quickshell",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "LGPL-3.0-only",
+  "isize": "204.2 MB"
+ },
+ {
+  "name": "retroarch-joypad-autoconfig-git",
+  "desc": "RetroArch joypad autoconfig files",
+  "url": "https://github.com/libretro/retroarch-joypad-autoconfig",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "MIT",
+  "isize": "1.8 MB"
+ },
+ {
+  "name": "rog-control-center",
+  "desc": "App to control asusctl",
+  "url": "https://asus-linux.org",
+  "github": "https://github.com/OpenGamingCollective/asusctl",
+  "category": "System & Drivers",
+  "license": "MPL-2.0",
+  "isize": "22.8 MB"
+ },
+ {
+  "name": "rustdesk",
+  "desc": "Yet another remote desktop software, written in Rust. Works out of the box, no configuration required. Great alternative to TeamViewer and AnyDesk!",
+  "url": "https://rustdesk.com/",
+  "github": "",
+  "category": "Utilities",
+  "license": "AGPL-3.0-only",
+  "isize": "81.2 MB"
+ },
+ {
+  "name": "schist",
+  "desc": "Layered image editor with PSD and Affinity support",
+  "url": "https://github.com/Infrawrench/schist",
+  "github": "",
+  "category": "Media & Creative",
+  "license": "MIT",
+  "isize": "134.5 MB"
+ },
+ {
+  "name": "schist-bin",
+  "desc": "Layered image editor with PSD and Affinity support (binary release)",
+  "url": "https://github.com/Infrawrench/schist",
+  "github": "",
+  "category": "Media & Creative",
+  "license": "MIT",
+  "isize": "134.5 MB"
+ },
+ {
+  "name": "slap-notes-bin",
+  "desc": "Local-first block notes with a wiki-link graph and a built-in AI research agent",
+  "url": "https://slapnotes.com",
+  "github": "https://github.com/Onefailatatime/slap-notes",
+  "category": "Productivity & Notes",
+  "license": "LicenseRef-proprietary",
+  "isize": "380 MB"
+ },
+ {
+  "name": "spotify",
+  "desc": "A proprietary music streaming service",
+  "url": "https://www.spotify.com",
+  "github": "",
+  "category": "Media & Creative",
+  "license": "custom",
+  "isize": "387.8 MB"
+ },
+ {
+  "name": "strata",
+  "desc": "Fast, keyboard-first file manager for modern Linux desktops",
+  "url": "https://github.com/lgse/strata",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL-3.0-or-later",
+  "isize": "9.8 MB"
+ },
+ {
+  "name": "sublime-text-4",
+  "desc": "Sophisticated text editor for code, html and prose - stable build",
+  "url": "https://www.sublimetext.com/download",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "custom",
+  "isize": "53.6 MB"
+ },
+ {
+  "name": "sunshine",
+  "desc": "Self-hosted game stream host for Moonlight",
+  "url": "https://app.lizardbyte.dev/Sunshine",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-3.0-only",
+  "isize": "24.1 MB"
+ },
+ {
+  "name": "supergfxctl",
+  "desc": "A utility for Linux graphics switching on Intel/AMD iGPU + nVidia dGPU laptops",
+  "url": "https://gitlab.com/asus-linux/supergfxctl",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "MPL-2.0",
+  "isize": "5.7 MB"
+ },
+ {
+  "name": "symfony-cli",
+  "desc": "The Symfony client helps developers create and manage Symfony applications.",
+  "url": "https://symfony.com/",
+  "github": "https://github.com/symfony-cli/symfony-cli",
+  "category": "Developer Tools",
+  "license": "AGPL3",
+  "isize": "18.4 MB"
+ },
+ {
+  "name": "t3code-bin",
+  "desc": "Open-source control plane for coding agents",
+  "url": "https://t3.codes",
+  "github": "https://github.com/pingdotgg/t3code",
+  "category": "AI & Agents",
+  "license": "MIT",
+  "isize": "516.4 MB"
+ },
+ {
+  "name": "tensaku",
+  "desc": "Modern screenshot annotation tool for Wayland",
+  "url": "https://github.com/jondkinney/tensaku",
+  "github": "",
+  "category": "Media & Creative",
+  "license": "MPL-2.0",
+  "isize": "8.5 MB"
+ },
+ {
+  "name": "tmog-bin",
+  "desc": "Native system monitor and task manager",
+  "url": "https://tmog.org/",
+  "github": "",
+  "category": "Utilities",
+  "license": "LicenseRef-proprietary",
+  "isize": "9.6 MB"
+ },
+ {
+  "name": "tobi-try",
+  "desc": "Fresh directories for every vibe.",
+  "url": "https://github.com/tobi/try",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "MIT",
+  "isize": "72.5 KB"
+ },
+ {
+  "name": "ttf-ia-writer",
+  "desc": "Subset of the fonts provided by iA Writer",
+  "url": "https://github.com/iaolo/iA-Fonts",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "custom:OFL",
+  "isize": "2.1 MB"
+ },
+ {
+  "name": "ttf-jetbrains-mono-nerd-basic",
+  "desc": "Basic JetBrains Mono Nerd Font family",
+  "url": "https://github.com/ryanoasis/nerd-fonts",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "OFL-1.1-no-RFN",
+  "isize": "10.1 MB"
+ },
+ {
+  "name": "ttfx",
+  "desc": "Terminal text effects as a single static binary \u2014 Rust port of terminaltexteffects",
+  "url": "https://github.com/omacom-io/ttfx",
+  "github": "",
+  "category": "Terminal & Shell",
+  "license": "MIT",
+  "isize": "2.4 MB"
+ },
+ {
+  "name": "tuxedo-drivers-nocompatcheck-dkms",
+  "desc": "TUXEDO Computers kernel module drivers. Compatibility check disabled - works when using identical models from other brands, example being TUXEDO Pulse 14 Gen 4 and Schenker Via 14 Pro (M24)",
+  "url": "https://gitlab.com/kronerm/tuxedo-drivers-nocompatcheck",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-or-later",
+  "isize": "440.5 KB"
+ },
+ {
+  "name": "typora",
+  "desc": "A minimal markdown editor and reader.",
+  "url": "https://typora.io/",
+  "github": "",
+  "category": "Productivity & Notes",
+  "license": "custom:\"Copyright (c) 2015 Abner Lee All Rights Reserved.\"",
+  "isize": "369.8 MB"
+ },
+ {
+  "name": "tzupdate",
+  "desc": "Set the system timezone based on IP geolocation",
+  "url": "https://github.com/cdown/tzupdate",
+  "github": "",
+  "category": "Utilities",
+  "license": "MIT",
+  "isize": "2.6 MB"
+ },
+ {
+  "name": "ufw-docker",
+  "desc": "To fix the Docker and UFW security flaw without disabling iptables.",
+  "url": "https://github.com/chaifeng/ufw-docker",
+  "github": "",
+  "category": "Security & Privacy",
+  "license": "GPL License Version 3.0",
+  "isize": "67 KB"
+ },
+ {
+  "name": "umu-launcher",
+  "desc": "This is the Unified Launcher for Windows Games on Linux, to run Proton with fixes outside of Steam",
+  "url": "https://github.com/Open-Wine-Components/umu-launcher",
+  "github": "",
+  "category": "Gaming & Emulation",
+  "license": "GPL-3.0-only",
+  "isize": "362 KB"
+ },
+ {
+  "name": "v4l2-relayd",
+  "desc": "Plays gstreamer sources into v4l2loopback devices.",
+  "url": "https://gitlab.com/vicamo/v4l2-relayd",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL",
+  "isize": "25.1 KB"
+ },
+ {
+  "name": "visual-studio-code-bin",
+  "desc": "Visual Studio Code (vscode): Editor for building and debugging modern web and cloud applications (official binary version)",
+  "url": "https://code.visualstudio.com/",
+  "github": "",
+  "category": "Developer Tools",
+  "license": "custom: commercial",
+  "isize": "1.1 GB"
+ },
+ {
+  "name": "voxtype-bin",
+  "desc": "Push-to-talk voice-to-text for Linux (pre-built binaries)",
+  "url": "https://voxtype.io",
+  "github": "",
+  "category": "Utilities",
+  "license": "MIT",
+  "isize": "664.4 MB"
+ },
+ {
+  "name": "walker",
+  "desc": "wayland application runner",
+  "url": "https://github.com/abenz1267/walker",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "GPL",
+  "isize": "6.7 MB"
+ },
+ {
+  "name": "wayfreeze",
+  "desc": "Tool to freeze the screen of a Wayland compositor",
+  "url": "https://github.com/Jappie3/wayfreeze",
+  "github": "",
+  "category": "Utilities",
+  "license": "AGPL-3.0",
+  "isize": "2.5 MB"
+ },
+ {
+  "name": "xdg-terminal-exec",
+  "desc": "Proposed standard to launching desktop apps with Terminal=true",
+  "url": "https://gitlab.freedesktop.org/Vladimir-csp/xdg-terminal-exec",
+  "github": "",
+  "category": "Terminal & Shell",
+  "license": "GPL-3.0-or-later",
+  "isize": "47.7 KB"
+ },
+ {
+  "name": "xpadneo-dkms",
+  "desc": "Advanced Linux Driver for Xbox One Wireless Gamepad",
+  "url": "https://github.com/atar-axis/xpadneo",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-only AND GPL-3.0-or-later",
+  "isize": "256.9 KB"
+ },
+ {
+  "name": "yaru-gnome-shell-theme",
+  "desc": "Yaru default ubuntu gnome shell theme",
+  "url": "https://github.com/ubuntu/yaru",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "GPL3",
+  "isize": "1 MB"
+ },
+ {
+  "name": "yaru-gtk-theme",
+  "desc": "Yaru default ubuntu gtk theme",
+  "url": "https://github.com/ubuntu/yaru",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "GPL3",
+  "isize": "27.7 MB"
+ },
+ {
+  "name": "yaru-gtksourceview-theme",
+  "desc": "Yaru default ubuntu gtksourceview theme",
+  "url": "https://github.com/ubuntu/yaru",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "GPL3",
+  "isize": "80.5 KB"
+ },
+ {
+  "name": "yaru-icon-theme",
+  "desc": "Yaru default ubuntu icon theme",
+  "url": "https://github.com/ubuntu/yaru",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "GPL3",
+  "isize": "66.5 MB"
+ },
+ {
+  "name": "yaru-metacity-theme",
+  "desc": "Yaru default ubuntu metacity theme",
+  "url": "https://github.com/ubuntu/yaru",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "GPL3",
+  "isize": "224.9 KB"
+ },
+ {
+  "name": "yaru-session",
+  "desc": "Yaru session",
+  "url": "https://github.com/ubuntu/yaru",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "GPL3",
+  "isize": "1.4 KB"
+ },
+ {
+  "name": "yaru-sound-theme",
+  "desc": "Yaru default ubuntu sound theme",
+  "url": "https://github.com/ubuntu/yaru",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "GPL3",
+  "isize": "1.3 MB"
+ },
+ {
+  "name": "yaru-unity-theme",
+  "desc": "Yaru default ubuntu unity theme",
+  "url": "https://github.com/ubuntu/yaru",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "GPL3",
+  "isize": "70.6 KB"
+ },
+ {
+  "name": "yaru-xfwm4-theme",
+  "desc": "Yaru default ubuntu xfwm4 theme",
+  "url": "https://github.com/ubuntu/yaru",
+  "github": "",
+  "category": "Themes & Desktop",
+  "license": "GPL3",
+  "isize": "116.5 KB"
+ },
+ {
+  "name": "yay",
+  "desc": "Yet another yogurt. Pacman wrapper and AUR helper written in go.",
+  "url": "https://github.com/Jguer/yay",
+  "github": "",
+  "category": "Utilities",
+  "license": "GPL-3.0-or-later",
+  "isize": "11.9 MB"
+ },
+ {
+  "name": "yt6801-dkms",
+  "desc": "Kernel module for Motorcomm YT6801 ethernet controller (DKMS)",
+  "url": "https://www.motor-comm.com/product/ethernet-control-chip",
+  "github": "",
+  "category": "System & Drivers",
+  "license": "GPL-2.0-or-later",
+  "isize": "742 KB"
+ }
+]

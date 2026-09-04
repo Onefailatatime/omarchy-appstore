@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+
+# Synced by build.py; keep the upstream checkout out of this repository.
+data/omarchy-pkgs/
+
+# Local editor and OS files.
+.DS_Store
+.idea/
+.vscode/
