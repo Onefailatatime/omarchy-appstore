@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="GitHub Copilot CLI brings GitHub&#x27;s Copilot coding agent into the terminal, letting you describe what you want in natural language and have it read, edit,…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/github-copilot-cli.html#app","name":"github-copilot-cli","description":"GitHub Copilot CLI brings GitHub's Copilot coding agent into the terminal, letting you describe what you want in natural language and have it read, edit, and run code in your project. It can pull in context from your GitHub repositories, issues, and pull requests, extends via MCP for custom tools, and previews every action for you to approve before it runs. It is entirely command-line, with no window of its own.","applicationCategory":"AI & Agents","operatingSystem":"Omarchy Linux","softwareVersion":"1.0.82-1","license":"LicenseRef-GitHub-Copilot","url":"https://omarchyapps.com/apps/github-copilot-cli.html","sameAs":"https://github.com/github/copilot-cli"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"github-copilot-cli","item":"https://omarchyapps.com/apps/github-copilot-cli.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">AI &amp; Agents · version 1.0.82-1</p><h1>github-copilot-cli</h1><p class="app-byline">by <a href="https://github.com/about" target="_blank" rel="author noopener">GitHub</a></p><p class="app-lead">GitHub Copilot CLI brings GitHub&#x27;s Copilot coding agent into the terminal, letting you describe what you want in natural language and have it read, edit,…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="github-copilot-cli" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+github-copilot-cli+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="github-copilot-cli" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/github-copilot-cli.html" data-share-app="github-copilot-cli" data-share-title="github-copilot-cli for Omarchy" data-share-url="https://omarchyapps.com/apps/github-copilot-cli.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+github-copilot-cli+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is github-copilot-cli?</h2><p>GitHub Copilot CLI brings GitHub&#x27;s Copilot coding agent into the terminal, letting you describe what you want in natural language and have it read, edit, and run code in your project. It can pull in context from your GitHub repositories, issues, and pull requests, extends via MCP for custom tools, and previews every action for you to approve before it runs. It is entirely command-line, with no window of its own.</p></section>

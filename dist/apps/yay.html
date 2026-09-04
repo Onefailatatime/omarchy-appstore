@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="yay is a command-line helper for Arch Linux that wraps pacman and adds support for the Arch User Repository (AUR). It resolves dependencies, downloads and…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/yay.html#app","name":"yay","description":"yay is a command-line helper for Arch Linux that wraps pacman and adds support for the Arch User Repository (AUR). It resolves dependencies, downloads and lets you review PKGBUILDs before building, searches both official repos and the AUR in one command, and can track and update development (-git) packages. It's the de facto standard way Arch and Arch-based distros like Omarchy install community packages that aren't in the official repositories.","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"13.0.1-1","license":"GPL-3.0-or-later","url":"https://omarchyapps.com/apps/yay.html","sameAs":"https://github.com/Jguer/yay","screenshot":["https://asciinema.org/a/399431.svg","https://asciinema.org/a/399433.svg","https://raw.githubusercontent.com/Jguer/jguer.github.io/refs/heads/master/yay/yay.png","https://raw.githubusercontent.com/Jguer/jguer.github.io/refs/heads/master/yay/yay-s.png"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"yay","item":"https://omarchyapps.com/apps/yay.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Utilities · version 13.0.1-1</p><h1>yay</h1><p class="app-byline">by <a href="https://jguer.space" target="_blank" rel="author noopener">Jo</a></p><p class="app-lead">yay is a command-line helper for Arch Linux that wraps pacman and adds support for the Arch User Repository (AUR). It resolves dependencies, downloads and…</p></div>
-      <div class="app-header-actions"><span class="indie-sticker" title="Individual-maintained upstream project">Indie app</span><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="yay" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+yay+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><span class="indie-sticker" title="Individual-maintained upstream project">Indie app</span><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="yay" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/yay.html" data-share-app="yay" data-share-title="yay for Omarchy" data-share-url="https://omarchyapps.com/apps/yay.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+yay+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://asciinema.org/a/399431.svg" target="_blank" rel="noopener" aria-label="Open full-size asciicast"><img src="https://asciinema.org/a/399431.svg" alt="asciicast" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://asciinema.org/a/399433.svg" target="_blank" rel="noopener" aria-label="Open full-size asciicast"><img src="https://asciinema.org/a/399433.svg" alt="asciicast" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://raw.githubusercontent.com/Jguer/jguer.github.io/refs/heads/master/yay/yay.png" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://raw.githubusercontent.com/Jguer/jguer.github.io/refs/heads/master/yay/yay.png" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://raw.githubusercontent.com/Jguer/jguer.github.io/refs/heads/master/yay/yay-s.png" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://raw.githubusercontent.com/Jguer/jguer.github.io/refs/heads/master/yay/yay-s.png" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/Jguer/yay/blob/next/README.md" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is yay?</h2><p>yay is a command-line helper for Arch Linux that wraps pacman and adds support for the Arch User Repository (AUR). It resolves dependencies, downloads and lets you review PKGBUILDs before building, searches both official repos and the AUR in one command, and can track and update development (-git) packages. It&#x27;s the de facto standard way Arch and Arch-based distros like Omarchy install community packages that aren&#x27;t in the official repositories.</p></section>

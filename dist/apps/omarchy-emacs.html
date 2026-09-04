@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Omarchy Emacs is a small integration package that syncs Emacs to Omarchy&#x27;s active theme and font automatically, so switching your system theme also restyles…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/omarchy-emacs.html#app","name":"omarchy-emacs","description":"Omarchy Emacs is a small integration package that syncs Emacs to Omarchy's active theme and font automatically, so switching your system theme also restyles Emacs immediately, no restart needed. It pulls colors from Omarchy's generated theme file, reads the font family from Waybar's config, and reads the font size from whichever terminal (foot, Alacritty, kitty, or Ghostty) you have configured. It installs the Wayland-native build of Emacs for you as part of setup.","applicationCategory":"Developer Tools","operatingSystem":"Omarchy Linux","softwareVersion":"1.9.1-1","license":"MIT","url":"https://omarchyapps.com/apps/omarchy-emacs.html","sameAs":"https://github.com/scottjones/omarchy-emacs","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"omarchy-emacs","item":"https://omarchyapps.com/apps/omarchy-emacs.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Developer Tools · version 1.9.1-1</p><h1>omarchy-emacs</h1><p class="app-byline">by <a href="https://x.com/bi9kahuna" target="_blank" rel="author noopener">Scott Jones</a></p><p class="app-lead">Omarchy Emacs is a small integration package that syncs Emacs to Omarchy&#x27;s active theme and font automatically, so switching your system theme also restyles…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-emacs" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-emacs+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-emacs" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/omarchy-emacs.html" data-share-app="omarchy-emacs" data-share-title="omarchy-emacs for Omarchy" data-share-url="https://omarchyapps.com/apps/omarchy-emacs.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-emacs+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is omarchy-emacs?</h2><p>Omarchy Emacs is a small integration package that syncs Emacs to Omarchy&#x27;s active theme and font automatically, so switching your system theme also restyles Emacs immediately, no restart needed. It pulls colors from Omarchy&#x27;s generated theme file, reads the font family from Waybar&#x27;s config, and reads the font size from whichever terminal (foot, Alacritty, kitty, or Ghostty) you have configured. It installs the Wayland-native build of Emacs for you as part of setup.</p></section>

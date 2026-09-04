@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Omawrite is a minimalist Markdown writing app built with Qt Quick, aimed at distraction-free drafting rather than full document editing. Markdown syntax…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/omawrite.html#app","name":"omawrite","description":"Omawrite is a minimalist Markdown writing app built with Qt Quick, aimed at distraction-free drafting rather than full document editing. Markdown syntax stays visible but fades visually as you type, it follows your system's light or dark theme automatically, and it recovers unsaved drafts after a crash and warns you before an external edit would overwrite your work. It covers the basics newcomers expect: open/save/save-as through native file pickers, find and replace, and keyboard shortcuts for bold, italic, and links.","applicationCategory":"Productivity & Notes","operatingSystem":"Omarchy Linux","softwareVersion":"0.5.0-1","license":"MIT, OFL-1.1","url":"https://omarchyapps.com/apps/omawrite.html","sameAs":"https://github.com/omacom-io/omawrite","screenshot":["https://github.com/user-attachments/assets/4e930c0d-edda-4046-b444-a59eff523329","https://github.com/user-attachments/assets/8ced7c26-961b-4ded-b263-84403001a951"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"omawrite","item":"https://omarchyapps.com/apps/omawrite.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Productivity &amp; Notes · version 0.5.0-1</p><h1>omawrite</h1><p class="app-byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p><p class="app-lead">Omawrite is a minimalist Markdown writing app built with Qt Quick, aimed at distraction-free drafting rather than full document editing. Markdown syntax…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omawrite" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omawrite+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omawrite" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/omawrite.html" data-share-app="omawrite" data-share-title="omawrite for Omarchy" data-share-url="https://omarchyapps.com/apps/omawrite.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omawrite+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://github.com/user-attachments/assets/4e930c0d-edda-4046-b444-a59eff523329" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://github.com/user-attachments/assets/4e930c0d-edda-4046-b444-a59eff523329" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://github.com/user-attachments/assets/8ced7c26-961b-4ded-b263-84403001a951" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://github.com/user-attachments/assets/8ced7c26-961b-4ded-b263-84403001a951" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/omacom/omawrite/blob/master/README.md" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is omawrite?</h2><p>Omawrite is a minimalist Markdown writing app built with Qt Quick, aimed at distraction-free drafting rather than full document editing. Markdown syntax stays visible but fades visually as you type, it follows your system&#x27;s light or dark theme automatically, and it recovers unsaved drafts after a crash and warns you before an external edit would overwrite your work. It covers the basics newcomers expect: open/save/save-as through native file pickers, find and replace, and keyboard shortcuts for bold, italic, and links.</p></section>

@@ -56,6 +56,7 @@ FAQ = [
     ("How can a developer update or claim an app listing?", "Open the package and choose Claim this app. The X direct-message form asks for the developer's role, project URL, corrections, screenshots, and an optional demo video."),
     ("How do I request or vote for an app?", "Use the community wishlist near the top of the store. Open an existing request and add a thumbs-up reaction on GitHub to vote, or send @jessyka_boat a direct message on X to suggest a new project."),
     ("How do app upvotes work?", "Use the up-arrow button on any listed package. The public total is stored with this site and survives deployments. A secure anonymous browser cookie recognizes prior votes without requiring an account or email address."),
+    ("How do I share a specific app?", "Use Share on any package card or profile. On supported devices it opens the system share sheet; otherwise it copies that app's permanent omarchyapps.com profile URL."),
     ("What does the Indie app sticker mean?", "It is a curated community label for an app or tool currently understood to be independently maintained. It is not an official Omarchy certification or endorsement, and developers can request a correction."),
     ("How can I prepare an app for Omarchy?", "Use the Develop for Omarchy checklist for packaging, permissions, checksums, desktop integration, clean-build testing, and pull-request preparation. Official repository guidance always takes precedence."),
 ]
@@ -399,6 +400,7 @@ def card(p: dict, featured: bool = False) -> str:
         f'<span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">{e["csize"]}</span></span>'
     )
     detail_url = f"apps/{slug(p['name'])}.html"
+    share_url = f"{SITE_URL}/{detail_url}"
     indie_sticker = (f'<span class="indie-sticker card-sticker" title="{e["indie_note"]}">Indie app</span>'
                       if p.get("indie_note") else "")
     indie_line = f"  {indie_sticker}\n" if indie_sticker else ""
@@ -408,6 +410,9 @@ def card(p: dict, featured: bool = False) -> str:
     vote_button = (f'<button class="app-vote" type="button" data-vote-app="{e["name"]}" aria-pressed="false" '
                    f'aria-label="Upvote {e["name"]}"><span aria-hidden="true">▲</span> '
                    f'<span data-vote-count>0</span></button>')
+    share_link = (f'<a class="app-share" href="{share_url}" data-share-app="{e["name"]}" '
+                  f'data-share-title="{e["name"]} for Omarchy" data-share-url="{share_url}" '
+                  f'aria-label="Share {e["name"]}">share</a>')
     return f"""<article class="{cls}" data-detail-url="{detail_url}"
   data-name="{e['name']}" data-dir="{e['dir']}" data-version="{e['version']}" data-desc="{e['desc']}"
   data-url="{e['url']}" data-github="{e['github']}" data-license="{e['license']}" data-csize="{e['csize']}" data-isize="{e['isize']}"
@@ -420,7 +425,7 @@ def card(p: dict, featured: bool = False) -> str:
   <header><h3><a href="{detail_url}">{e['name']}</a></h3><span class="ver">{e['version']}</span></header>
 {indie_line}  {byline}
   <p class="card-description">{e['desc'] or '<em>No description provided.</em>'}</p>
-  <footer>{footer}{vote_button}</footer>
+  <footer>{footer}<span class="card-actions">{share_link}{vote_button}</span></footer>
 </article>"""
 
 
@@ -500,6 +505,7 @@ def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
         "__STYLE__": css,
         "__SITE_URL__": SITE_URL,
         "__CANONICAL__": canonical,
+        "__SHARE_URL__": canonical,
         "__NAME__": html.escape(p["name"]),
         "__VERSION__": html.escape(p["version"]),
         "__CATEGORY__": html.escape(p["category"]),
@@ -627,6 +633,7 @@ def main() -> None:
             (images / f.name).write_bytes(f.read_bytes())
     (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())
     (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
+    (DIST / "share.js").write_text((ROOT / "assets" / "share.js").read_text(encoding="utf-8"), encoding="utf-8")
     about = ((ROOT / "parts" / "about.html").read_text(encoding="utf-8")
              .replace("__SYNCED__", synced)
              .replace("__CONTACT__", html.escape(CONTACT_URL))

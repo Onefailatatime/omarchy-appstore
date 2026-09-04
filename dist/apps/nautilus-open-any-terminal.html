@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="A small Nautilus (and Caja) extension that adds an &quot;Open Terminal Here&quot; context-menu entry, but lets you choose which of 40+ terminal emulators it launches,…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/nautilus-open-any-terminal.html#app","name":"nautilus-open-any-terminal","description":"A small Nautilus (and Caja) extension that adds an \"Open Terminal Here\" context-menu entry, but lets you choose which of 40+ terminal emulators it launches, such as Kitty, Alacritty, Konsole, or Tilix, instead of being stuck with GNOME Terminal. It also supports custom launch commands for more specialized setups.","applicationCategory":"Terminal & Shell","operatingSystem":"Omarchy Linux","softwareVersion":"0.8.2-1","license":"GPL3","url":"https://omarchyapps.com/apps/nautilus-open-any-terminal.html","sameAs":"https://github.com/Stunkymonkey/nautilus-open-any-terminal","screenshot":["https://raw.githubusercontent.com/Stunkymonkey/nautilus-open-any-terminal/master/screenshot.png","https://raw.githubusercontent.com/Stunkymonkey/nautilus-open-any-terminal/master/dconf.png"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"nautilus-open-any-terminal","item":"https://omarchyapps.com/apps/nautilus-open-any-terminal.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Terminal &amp; Shell · version 0.8.2-1</p><h1>nautilus-open-any-terminal</h1><p class="app-byline">by <a href="https://stunkymonkey.de" target="_blank" rel="author noopener">Felix Bühler</a></p><p class="app-lead">A small Nautilus (and Caja) extension that adds an &quot;Open Terminal Here&quot; context-menu entry, but lets you choose which of 40+ terminal emulators it launches,…</p></div>
-      <div class="app-header-actions"><span class="indie-sticker" title="Individual-maintained upstream project">Indie app</span><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="nautilus-open-any-terminal" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+nautilus-open-any-terminal+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><span class="indie-sticker" title="Individual-maintained upstream project">Indie app</span><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="nautilus-open-any-terminal" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/nautilus-open-any-terminal.html" data-share-app="nautilus-open-any-terminal" data-share-title="nautilus-open-any-terminal for Omarchy" data-share-url="https://omarchyapps.com/apps/nautilus-open-any-terminal.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+nautilus-open-any-terminal+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://raw.githubusercontent.com/Stunkymonkey/nautilus-open-any-terminal/master/screenshot.png" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img src="https://raw.githubusercontent.com/Stunkymonkey/nautilus-open-any-terminal/master/screenshot.png" alt="screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://raw.githubusercontent.com/Stunkymonkey/nautilus-open-any-terminal/master/dconf.png" target="_blank" rel="noopener" aria-label="Open full-size dconf-editor"><img src="https://raw.githubusercontent.com/Stunkymonkey/nautilus-open-any-terminal/master/dconf.png" alt="dconf-editor" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/Stunkymonkey/nautilus-open-any-terminal/blob/master/README.md" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is nautilus-open-any-terminal?</h2><p>A small Nautilus (and Caja) extension that adds an &quot;Open Terminal Here&quot; context-menu entry, but lets you choose which of 40+ terminal emulators it launches, such as Kitty, Alacritty, Konsole, or Tilix, instead of being stuck with GNOME Terminal. It also supports custom launch commands for more specialized setups.</p></section>

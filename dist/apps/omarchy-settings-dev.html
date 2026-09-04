@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="This is a development build of omarchy-settings, pulling its defaults (skel files, fonts, Plymouth theme, helper scripts) from the tip of Omarchy&#x27;s…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/omarchy-settings-dev.html#app","name":"omarchy-settings-dev","description":"This is a development build of omarchy-settings, pulling its defaults (skel files, fonts, Plymouth theme, helper scripts) from the tip of Omarchy's in-progress 'quattro' branch rather than a stable release. It exists so testers and contributors can run tomorrow's Omarchy defaults today, ahead of them landing in the main package.","applicationCategory":"Themes & Desktop","operatingSystem":"Omarchy Linux","softwareVersion":"4.0.0.r1832.g23dab9e-1","license":"MIT","url":"https://omarchyapps.com/apps/omarchy-settings-dev.html","sameAs":"https://github.com/basecamp/omarchy","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"omarchy-settings-dev","item":"https://omarchyapps.com/apps/omarchy-settings-dev.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Themes &amp; Desktop · version 4.0.0.r1832.g23dab9e-1</p><h1>omarchy-settings-dev</h1><p class="app-byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p><p class="app-lead">This is a development build of omarchy-settings, pulling its defaults (skel files, fonts, Plymouth theme, helper scripts) from the tip of Omarchy&#x27;s…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-settings-dev" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-settings-dev+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-settings-dev" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/omarchy-settings-dev.html" data-share-app="omarchy-settings-dev" data-share-title="omarchy-settings-dev for Omarchy" data-share-url="https://omarchyapps.com/apps/omarchy-settings-dev.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-settings-dev+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is omarchy-settings-dev?</h2><p>This is a development build of omarchy-settings, pulling its defaults (skel files, fonts, Plymouth theme, helper scripts) from the tip of Omarchy&#x27;s in-progress &#x27;quattro&#x27; branch rather than a stable release. It exists so testers and contributors can run tomorrow&#x27;s Omarchy defaults today, ahead of them landing in the main package.</p></section>

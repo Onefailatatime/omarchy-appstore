@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Strata is a keyboard-first file manager for modern Linux desktops, built with GTK4 and designed to fit Omarchy-style setups. It offers three ways to browse,…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/strata.html#app","name":"strata","description":"Strata is a keyboard-first file manager for modern Linux desktops, built with GTK4 and designed to fit Omarchy-style setups. It offers three ways to browse, macOS-style Miller columns for spatial navigation, a thumbnail grid, and a sortable table view, along with instant fuzzy filename search, rich file previews, and sandboxed preview rendering for security.","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"0.8.0-2","license":"GPL-3.0-or-later","url":"https://omarchyapps.com/apps/strata.html","sameAs":"https://github.com/lgse/strata","screenshot":["https://github.com/lgse/strata/raw/main/docs/assets/strata-columns.png","https://raw.githubusercontent.com/lgse/strata/main/docs/assets/strata-themes.png","https://raw.githubusercontent.com/lgse/strata/main/docs/assets/strata-columns.png"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"strata","item":"https://omarchyapps.com/apps/strata.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Utilities · version 0.8.0-2</p><h1>strata</h1><p class="app-byline">by <a href="https://www.lgse.com" target="_blank" rel="author noopener">LGSE</a></p><p class="app-lead">Strata is a keyboard-first file manager for modern Linux desktops, built with GTK4 and designed to fit Omarchy-style setups. It offers three ways to browse,…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="strata" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+strata+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="strata" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/strata.html" data-share-app="strata" data-share-title="strata for Omarchy" data-share-url="https://omarchyapps.com/apps/strata.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+strata+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://github.com/lgse/strata/raw/main/docs/assets/strata-columns.png" target="_blank" rel="noopener" aria-label="Open full-size strata app screenshot"><img src="https://github.com/lgse/strata/raw/main/docs/assets/strata-columns.png" alt="strata app screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://raw.githubusercontent.com/lgse/strata/main/docs/assets/strata-themes.png" target="_blank" rel="noopener" aria-label="Open full-size Strata Theme and appearance settings showing Omarchy following, six bundled themes, and the Add a theme option"><img src="https://raw.githubusercontent.com/lgse/strata/main/docs/assets/strata-themes.png" alt="Strata Theme and appearance settings showing Omarchy following, six bundled themes, and the Add a theme option" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://raw.githubusercontent.com/lgse/strata/main/docs/assets/strata-columns.png" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://raw.githubusercontent.com/lgse/strata/main/docs/assets/strata-columns.png" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/lgse/strata" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is strata?</h2><p>Strata is a keyboard-first file manager for modern Linux desktops, built with GTK4 and designed to fit Omarchy-style setups. It offers three ways to browse, macOS-style Miller columns for spatial navigation, a thumbnail grid, and a sortable table view, along with instant fuzzy filename search, rich file previews, and sandboxed preview rendering for security.</p></section>

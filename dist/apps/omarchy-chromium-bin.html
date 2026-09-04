@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Chromium is the open-source web browser project developed and used by Google as the base for Chrome, and also underlying Edge, Opera, Brave, and others. It…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/omarchy-chromium-bin.html#app","name":"omarchy-chromium-bin","description":"Chromium is the open-source web browser project developed and used by Google as the base for Chrome, and also underlying Edge, Opera, Brave, and others. It aims to be a fast, safe, and stable way to browse the web, and its source and design documents are fully public. This package delivers a prebuilt Chromium binary with Omarchy's patches applied, so you get a working browser without compiling it yourself.","applicationCategory":"Browsers & Web","operatingSystem":"Omarchy Linux","softwareVersion":"148.0.7778.96-21","license":"BSD-3-Clause","url":"https://omarchyapps.com/apps/omarchy-chromium-bin.html","sameAs":"https://www.chromium.org/Home","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"omarchy-chromium-bin","item":"https://omarchyapps.com/apps/omarchy-chromium-bin.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Browsers &amp; Web · version 148.0.7778.96-21</p><h1>omarchy-chromium-bin</h1><p class="app-byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p><p class="app-lead">Chromium is the open-source web browser project developed and used by Google as the base for Chrome, and also underlying Edge, Opera, Brave, and others. It…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-chromium-bin" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-chromium-bin+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-chromium-bin" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/omarchy-chromium-bin.html" data-share-app="omarchy-chromium-bin" data-share-title="omarchy-chromium-bin for Omarchy" data-share-url="https://omarchyapps.com/apps/omarchy-chromium-bin.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-chromium-bin+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is omarchy-chromium-bin?</h2><p>Chromium is the open-source web browser project developed and used by Google as the base for Chrome, and also underlying Edge, Opera, Brave, and others. It aims to be a fast, safe, and stable way to browse the web, and its source and design documents are fully public. This package delivers a prebuilt Chromium binary with Omarchy&#x27;s patches applied, so you get a working browser without compiling it yourself.</p></section>

@@ -28,6 +28,7 @@
 <meta name="twitter:description" content="Browse every package in the official Omarchy repository.">
 <meta name="twitter:image" content="__SITE_URL__/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">__STRUCTURED_DATA__</script>
 <style>
 __STYLE__
@@ -182,6 +183,7 @@ __FAQ__
 
     <div class="actions">
       <button class="button ghost app-vote app-vote-large" type="button" id="d-vote" data-vote-app="" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button>
+      <a class="button ghost" id="d-share" href="#" data-share-app="" data-share-title="" data-share-url="">Share</a>
       <a class="button" id="d-claim" href="#" target="_blank" rel="noopener">Claim this app ↗</a>
       <a class="button ghost" id="d-url" href="#" target="_blank" rel="noopener">Project site ↗</a>
       <a class="button ghost" id="d-github" href="#" target="_blank" rel="noopener">GitHub ↗</a>
@@ -483,6 +485,11 @@ __FAQ__
     gh.href = d.github || "#";
     gh.hidden = !d.github;
     document.getElementById("d-src").href = "https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/" + encodeURIComponent(d.dir || d.name);
+    var share = document.getElementById("d-share");
+    share.href = new URL(c.dataset.detailUrl, window.location.href).href;
+    share.dataset.shareUrl = share.href;
+    share.dataset.shareApp = d.name;
+    share.dataset.shareTitle = d.name + " for Omarchy";
     var claimText =
       "Hi! I'd like to claim the " + d.name + " listing on the Unofficial Omarchy App Store.\n\n" +
       "I can provide:\n- a correction or edit\n- screenshots of the app\n- a demo video\n\n" +
@@ -494,7 +501,7 @@ __FAQ__
   document.querySelectorAll(".card").forEach(function (c) {
     c.addEventListener("click", function (e) {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
-      if (e.target.closest(".byline a")) return;
+      if (e.target.closest(".byline a, .app-share")) return;
       e.preventDefault();
       open(c);
     });

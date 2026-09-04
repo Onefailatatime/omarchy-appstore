@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Omarchy Audio Tuner is a command-line toolkit for authoring speaker tuning profiles that restore the vendor sound signature Linux normally strips away on…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/omarchy-audio-tuner.html#app","name":"omarchy-audio-tuner","description":"Omarchy Audio Tuner is a command-line toolkit for authoring speaker tuning profiles that restore the vendor sound signature Linux normally strips away on laptops. It walks through capturing microphone measurements, analyzing frequency response, fitting a correction curve, and generating a PipeWire filter chain, with A/B auditioning to check the result. It's explicitly for advanced users building a tuning for a laptop model Omarchy doesn't already cover — most people never need it.","applicationCategory":"System & Drivers","operatingSystem":"Omarchy Linux","softwareVersion":"0.1.0-1","license":"MIT","url":"https://omarchyapps.com/apps/omarchy-audio-tuner.html","sameAs":"https://github.com/omacom-io/omarchy-audio-tuner","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"omarchy-audio-tuner","item":"https://omarchyapps.com/apps/omarchy-audio-tuner.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">System &amp; Drivers · version 0.1.0-1</p><h1>omarchy-audio-tuner</h1><p class="app-byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p><p class="app-lead">Omarchy Audio Tuner is a command-line toolkit for authoring speaker tuning profiles that restore the vendor sound signature Linux normally strips away on…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-audio-tuner" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-audio-tuner+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-audio-tuner" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/omarchy-audio-tuner.html" data-share-app="omarchy-audio-tuner" data-share-title="omarchy-audio-tuner for Omarchy" data-share-url="https://omarchyapps.com/apps/omarchy-audio-tuner.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-audio-tuner+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is omarchy-audio-tuner?</h2><p>Omarchy Audio Tuner is a command-line toolkit for authoring speaker tuning profiles that restore the vendor sound signature Linux normally strips away on laptops. It walks through capturing microphone measurements, analyzing frequency response, fitting a correction curve, and generating a PipeWire filter chain, with A/B auditioning to check the result. It&#x27;s explicitly for advanced users building a tuning for a laptop model Omarchy doesn&#x27;t already cover — most people never need it.</p></section>

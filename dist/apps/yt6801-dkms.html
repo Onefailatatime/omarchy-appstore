@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="This package is a DKMS-packaged kernel module for the Motorcomm YT6801, a Gigabit PCIe Ethernet controller chip found in some laptop and desktop…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/yt6801-dkms.html#app","name":"yt6801-dkms","description":"This package is a DKMS-packaged kernel module for the Motorcomm YT6801, a Gigabit PCIe Ethernet controller chip found in some laptop and desktop motherboards (including certain models this driver was added to Omarchy for). DKMS means the module is automatically rebuilt whenever your kernel updates, so wired networking keeps working across kernel upgrades without manual recompilation. It has no user interface; it just needs to be installed on a machine that actually has this specific ethernet chip.","applicationCategory":"System & Drivers","operatingSystem":"Omarchy Linux","softwareVersion":"1.0.31-2","license":"GPL-2.0-or-later","url":"https://omarchyapps.com/apps/yt6801-dkms.html","sameAs":"https://www.motor-comm.com/product/ethernet-control-chip","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"yt6801-dkms","item":"https://omarchyapps.com/apps/yt6801-dkms.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">System &amp; Drivers · version 1.0.31-2</p><h1>yt6801-dkms</h1><p class="app-byline">by <a href="https://www.motor-comm.com" target="_blank" rel="author noopener">Motorcomm</a></p><p class="app-lead">This package is a DKMS-packaged kernel module for the Motorcomm YT6801, a Gigabit PCIe Ethernet controller chip found in some laptop and desktop…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="yt6801-dkms" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+yt6801-dkms+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="yt6801-dkms" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/yt6801-dkms.html" data-share-app="yt6801-dkms" data-share-title="yt6801-dkms for Omarchy" data-share-url="https://omarchyapps.com/apps/yt6801-dkms.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+yt6801-dkms+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is yt6801-dkms?</h2><p>This package is a DKMS-packaged kernel module for the Motorcomm YT6801, a Gigabit PCIe Ethernet controller chip found in some laptop and desktop motherboards (including certain models this driver was added to Omarchy for). DKMS means the module is automatically rebuilt whenever your kernel updates, so wired networking keeps working across kernel upgrades without manual recompilation. It has no user interface; it just needs to be installed on a machine that actually has this specific ethernet chip.</p></section>

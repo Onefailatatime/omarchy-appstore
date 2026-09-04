@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="This is the same Omarchy Linux distribution by DHH, but built from the tip of its in-development &#x27;quattro&#x27; branch rather than a stable release. It carries…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/omarchy-dev.html#app","name":"omarchy-dev","description":"This is the same Omarchy Linux distribution by DHH, but built from the tip of its in-development 'quattro' branch rather than a stable release. It carries the same curated Hyprland desktop, terminal, editor, and agent tooling as the main omarchy package, just with the newest, potentially unstable changes applied first. It's meant for people who want to track Omarchy's development in real time rather than wait for tagged releases.","applicationCategory":"System & Drivers","operatingSystem":"Omarchy Linux","softwareVersion":"4.0.0.r1832.g23dab9e-1","license":"MIT","url":"https://omarchyapps.com/apps/omarchy-dev.html","sameAs":"https://github.com/basecamp/omarchy","screenshot":["https://omarchy.org/assets/images/video/omarchy-quattro.webp"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"omarchy-dev","item":"https://omarchyapps.com/apps/omarchy-dev.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">System &amp; Drivers · version 4.0.0.r1832.g23dab9e-1</p><h1>omarchy-dev</h1><p class="app-byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p><p class="app-lead">This is the same Omarchy Linux distribution by DHH, but built from the tip of its in-development &#x27;quattro&#x27; branch rather than a stable release. It carries…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-dev" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-dev+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-dev" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/omarchy-dev.html" data-share-app="omarchy-dev" data-share-title="omarchy-dev for Omarchy" data-share-url="https://omarchyapps.com/apps/omarchy-dev.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-dev+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://omarchy.org/assets/images/video/omarchy-quattro.webp" target="_blank" rel="noopener" aria-label="Open full-size omarchy-dev app screenshot"><img src="https://omarchy.org/assets/images/video/omarchy-quattro.webp" alt="omarchy-dev app screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/basecamp/omarchy" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is omarchy-dev?</h2><p>This is the same Omarchy Linux distribution by DHH, but built from the tip of its in-development &#x27;quattro&#x27; branch rather than a stable release. It carries the same curated Hyprland desktop, terminal, editor, and agent tooling as the main omarchy package, just with the newest, potentially unstable changes applied first. It&#x27;s meant for people who want to track Omarchy&#x27;s development in real time rather than wait for tagged releases.</p></section>

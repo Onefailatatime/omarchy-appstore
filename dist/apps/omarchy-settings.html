@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Omarchy-settings installs the baseline configuration for the Omarchy Linux distribution: the files that get copied into every new user&#x27;s home directory…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/omarchy-settings.html#app","name":"omarchy-settings","description":"Omarchy-settings installs the baseline configuration for the Omarchy Linux distribution: the files that get copied into every new user's home directory (/etc/skel), the default font set, the Plymouth boot-splash theme, and small helper scripts the rest of the system relies on. It is not an app you open; it is the plumbing that makes a freshly installed Omarchy desktop look and behave consistently out of the box.","applicationCategory":"Themes & Desktop","operatingSystem":"Omarchy Linux","softwareVersion":"4.0.2-1","license":"MIT","url":"https://omarchyapps.com/apps/omarchy-settings.html","sameAs":"https://github.com/basecamp/omarchy","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"omarchy-settings","item":"https://omarchyapps.com/apps/omarchy-settings.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Themes &amp; Desktop · version 4.0.2-1</p><h1>omarchy-settings</h1><p class="app-byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p><p class="app-lead">Omarchy-settings installs the baseline configuration for the Omarchy Linux distribution: the files that get copied into every new user&#x27;s home directory…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-settings" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-settings+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-settings" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/omarchy-settings.html" data-share-app="omarchy-settings" data-share-title="omarchy-settings for Omarchy" data-share-url="https://omarchyapps.com/apps/omarchy-settings.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-settings+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is omarchy-settings?</h2><p>Omarchy-settings installs the baseline configuration for the Omarchy Linux distribution: the files that get copied into every new user&#x27;s home directory (/etc/skel), the default font set, the Plymouth boot-splash theme, and small helper scripts the rest of the system relies on. It is not an app you open; it is the plumbing that makes a freshly installed Omarchy desktop look and behave consistently out of the box.</p></section>

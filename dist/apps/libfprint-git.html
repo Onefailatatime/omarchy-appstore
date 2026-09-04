@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="libfprint is the core software library that handles low-level communication with fingerprint scanning hardware and processes the fingerprint image data it…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/libfprint-git.html#app","name":"libfprint-git","description":"libfprint is the core software library that handles low-level communication with fingerprint scanning hardware and processes the fingerprint image data it captures. It is not something end users interact with directly; instead, system services like fprintd (which exposes fingerprint scanning over D-Bus) and desktop settings panels such as GNOME's Users settings build fingerprint login on top of it. This -git build tracks the current development branch with FocalTech MOC (Match-on-Chip) sensor support included, ahead of the stable release.","applicationCategory":"System & Drivers","operatingSystem":"Omarchy Linux","softwareVersion":"1:1.94.10.r12.gd79f157-1.1","license":"LGPL-2.1-or-later","url":"https://omarchyapps.com/apps/libfprint-git.html","sameAs":"https://fprint.freedesktop.org/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"libfprint-git","item":"https://omarchyapps.com/apps/libfprint-git.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">System &amp; Drivers · version 1:1.94.10.r12.gd79f157-1.1</p><h1>libfprint-git</h1><p class="app-byline">by <a href="https://fprint.freedesktop.org" target="_blank" rel="author noopener">freedesktop.org contributors</a></p><p class="app-lead">libfprint is the core software library that handles low-level communication with fingerprint scanning hardware and processes the fingerprint image data it…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="libfprint-git" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+libfprint-git+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="libfprint-git" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/libfprint-git.html" data-share-app="libfprint-git" data-share-title="libfprint-git for Omarchy" data-share-url="https://omarchyapps.com/apps/libfprint-git.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+libfprint-git+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is libfprint-git?</h2><p>libfprint is the core software library that handles low-level communication with fingerprint scanning hardware and processes the fingerprint image data it captures. It is not something end users interact with directly; instead, system services like fprintd (which exposes fingerprint scanning over D-Bus) and desktop settings panels such as GNOME&#x27;s Users settings build fingerprint login on top of it. This -git build tracks the current development branch with FocalTech MOC (Match-on-Chip) sensor support included, ahead of the stable release.</p></section>

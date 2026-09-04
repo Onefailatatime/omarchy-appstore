@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Quickshell is a flexible, code-first toolkit for building custom desktop shell components — status bars, widgets, lock screens, notification centers and…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/quickshell-git.html#app","name":"quickshell-git","description":"Quickshell is a flexible, code-first toolkit for building custom desktop shell components — status bars, widgets, lock screens, notification centers and more — using QtQuick/QML, primarily for Wayland compositors such as Hyprland (with X11 support too). Rather than a ready-made shell, it's a low-level building-block library with hot reloading that developers use to assemble their own desktop UI, so it powers other people's Hyprland setups rather than offering one out of the box.","applicationCategory":"Themes & Desktop","operatingSystem":"Omarchy Linux","softwareVersion":"0.3.0.r20.g28771c7-2","license":"LGPL-3.0-only","url":"https://omarchyapps.com/apps/quickshell-git.html","sameAs":"https://git.outfoxxed.me/quickshell/quickshell","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"quickshell-git","item":"https://omarchyapps.com/apps/quickshell-git.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Themes &amp; Desktop · version 0.3.0.r20.g28771c7-2</p><h1>quickshell-git</h1><p class="app-byline">by <a href="https://git.outfoxxed.me/outfoxxed" target="_blank" rel="author noopener">Outfoxxed</a></p><p class="app-lead">Quickshell is a flexible, code-first toolkit for building custom desktop shell components — status bars, widgets, lock screens, notification centers and…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="quickshell-git" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+quickshell-git+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="quickshell-git" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/quickshell-git.html" data-share-app="quickshell-git" data-share-title="quickshell-git for Omarchy" data-share-url="https://omarchyapps.com/apps/quickshell-git.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+quickshell-git+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is quickshell-git?</h2><p>Quickshell is a flexible, code-first toolkit for building custom desktop shell components — status bars, widgets, lock screens, notification centers and more — using QtQuick/QML, primarily for Wayland compositors such as Hyprland (with X11 support too). Rather than a ready-made shell, it&#x27;s a low-level building-block library with hot reloading that developers use to assemble their own desktop UI, so it powers other people&#x27;s Hyprland setups rather than offering one out of the box.</p></section>

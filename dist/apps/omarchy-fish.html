@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Omarchy Fish is a configuration package that turns the Fish shell into a more productive out-of-the-box experience, adding custom functions, completions,…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/omarchy-fish.html#app","name":"omarchy-fish","description":"Omarchy Fish is a configuration package that turns the Fish shell into a more productive out-of-the-box experience, adding custom functions, completions, and keybindings tuned for common developer tasks. It bundles fzf.fish for fuzzy-searching directories, git logs, shell history, and running processes, reachable through a set of Ctrl-based shortcuts. It also includes a small setup utility to make Fish your default shell.","applicationCategory":"Terminal & Shell","operatingSystem":"Omarchy Linux","softwareVersion":"1.5.0-1","license":"MIT","url":"https://omarchyapps.com/apps/omarchy-fish.html","sameAs":"https://github.com/omacom-io/omarchy-fish","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"omarchy-fish","item":"https://omarchyapps.com/apps/omarchy-fish.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Terminal &amp; Shell · version 1.5.0-1</p><h1>omarchy-fish</h1><p class="app-byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p><p class="app-lead">Omarchy Fish is a configuration package that turns the Fish shell into a more productive out-of-the-box experience, adding custom functions, completions,…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-fish" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-fish+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-fish" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/omarchy-fish.html" data-share-app="omarchy-fish" data-share-title="omarchy-fish for Omarchy" data-share-url="https://omarchyapps.com/apps/omarchy-fish.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-fish+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is omarchy-fish?</h2><p>Omarchy Fish is a configuration package that turns the Fish shell into a more productive out-of-the-box experience, adding custom functions, completions, and keybindings tuned for common developer tasks. It bundles fzf.fish for fuzzy-searching directories, git logs, shell history, and running processes, reachable through a set of Ctrl-based shortcuts. It also includes a small setup utility to make Fish your default shell.</p></section>

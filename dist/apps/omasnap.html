@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Omasnap is a native screenshot and markup overlay for Hyprland on Wayland. Beyond capturing a region, window, or whole monitor, it lets you draw arrows,…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/omasnap.html#app","name":"omasnap","description":"Omasnap is a native screenshot and markup overlay for Hyprland on Wayland. Beyond capturing a region, window, or whole monitor, it lets you draw arrows, shapes, freehand lines, and text over the shot, blur or block out sensitive areas, run one-click OCR to pull text out of an image, and even stitch together scrolling captures of long pages. Finished screenshots can be pinned on top of your other windows or reopened later from a recent-captures shelf, with full undo history preserved even if the app crashes.","applicationCategory":"Media & Creative","operatingSystem":"Omarchy Linux","softwareVersion":"1.19.1-1","license":"MIT, OFL-1.1","url":"https://omarchyapps.com/apps/omasnap.html","sameAs":"https://github.com/tobi/omasnap","screenshot":["https://raw.githubusercontent.com/tobi/omasnap/main/assets/omasnap.gif"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"omasnap","item":"https://omarchyapps.com/apps/omasnap.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Media &amp; Creative · version 1.19.1-1</p><h1>omasnap</h1><p class="app-byline">by <a href="https://tobi.lutke.com" target="_blank" rel="author noopener">Tobias Lütke</a></p><p class="app-lead">Omasnap is a native screenshot and markup overlay for Hyprland on Wayland. Beyond capturing a region, window, or whole monitor, it lets you draw arrows,…</p></div>
-      <div class="app-header-actions"><span class="indie-sticker" title="Individual-maintained upstream project">Indie app</span><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omasnap" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omasnap+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><span class="indie-sticker" title="Individual-maintained upstream project">Indie app</span><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omasnap" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/omasnap.html" data-share-app="omasnap" data-share-title="omasnap for Omarchy" data-share-url="https://omarchyapps.com/apps/omasnap.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omasnap+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://raw.githubusercontent.com/tobi/omasnap/main/assets/omasnap.gif" target="_blank" rel="noopener" aria-label="Open full-size Looping Omasnap demonstration"><img src="https://raw.githubusercontent.com/tobi/omasnap/main/assets/omasnap.gif" alt="Looping Omasnap demonstration" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/tobi/omasnap/blob/main/README.md" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is omasnap?</h2><p>Omasnap is a native screenshot and markup overlay for Hyprland on Wayland. Beyond capturing a region, window, or whole monitor, it lets you draw arrows, shapes, freehand lines, and text over the shot, blur or block out sensitive areas, run one-click OCR to pull text out of an image, and even stitch together scrolling captures of long pages. Finished screenshots can be pinned on top of your other windows or reopened later from a recent-captures shelf, with full undo history preserved even if the app crashes.</p></section>

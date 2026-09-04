@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="This package builds and installs the driver stack needed to make the OV08X40 MIPI camera work on specific Intel &#x27;Hurrican/Performance&#x27; reference laptops,…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/intel-ipu7-camera.html#app","name":"intel-ipu7-camera","description":"This package builds and installs the driver stack needed to make the OV08X40 MIPI camera work on specific Intel 'Hurrican/Performance' reference laptops, using Intel's IPU7 hardware image signal processor (ISP). It's a hardware-enablement/installer package: it compiles kernel patches and firmware integration rather than providing any user-facing app, and is only relevant if you own that specific hardware.","applicationCategory":"System & Drivers","operatingSystem":"Omarchy Linux","softwareVersion":"1.0.5-1","license":"GPL-2.0-or-later","url":"https://omarchyapps.com/apps/intel-ipu7-camera.html","sameAs":"https://github.com/TsaiGaggery/hurrican_omarchy_enabling","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"intel-ipu7-camera","item":"https://omarchyapps.com/apps/intel-ipu7-camera.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">System &amp; Drivers · version 1.0.5-1</p><h1>intel-ipu7-camera</h1><p class="app-byline">by <a href="https://github.com/TsaiGaggery" target="_blank" rel="author noopener">Gaggery</a></p><p class="app-lead">This package builds and installs the driver stack needed to make the OV08X40 MIPI camera work on specific Intel &#x27;Hurrican/Performance&#x27; reference laptops,…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="intel-ipu7-camera" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+intel-ipu7-camera+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="intel-ipu7-camera" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/intel-ipu7-camera.html" data-share-app="intel-ipu7-camera" data-share-title="intel-ipu7-camera for Omarchy" data-share-url="https://omarchyapps.com/apps/intel-ipu7-camera.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+intel-ipu7-camera+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is intel-ipu7-camera?</h2><p>This package builds and installs the driver stack needed to make the OV08X40 MIPI camera work on specific Intel &#x27;Hurrican/Performance&#x27; reference laptops, using Intel&#x27;s IPU7 hardware image signal processor (ISP). It&#x27;s a hardware-enablement/installer package: it compiles kernel patches and firmware integration rather than providing any user-facing app, and is only relevant if you own that specific hardware.</p></section>

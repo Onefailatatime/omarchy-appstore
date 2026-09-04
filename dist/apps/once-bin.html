@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="ONCE is a self-hosting platform from 37signals (Basecamp&#x27;s parent company): a single Go binary that automates installing, updating, backing up, and…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/once-bin.html#app","name":"once-bin","description":"ONCE is a self-hosting platform from 37signals (Basecamp's parent company): a single Go binary that automates installing, updating, backing up, and monitoring Docker-based web applications on your own hardware, from a VPS down to a Raspberry Pi. It ships with 37signals' own apps ready to go but works with any Docker image that serves HTTP on port 80 and exposes a health-check endpoint, and it's driven through both a terminal dashboard and plain CLI commands.","applicationCategory":"Developer Tools","operatingSystem":"Omarchy Linux","softwareVersion":"0.3.0-1","license":"MIT","url":"https://omarchyapps.com/apps/once-bin.html","sameAs":"https://github.com/basecamp/once","screenshot":["https://raw.githubusercontent.com/basecamp/once/main/.github/media/install.gif"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"once-bin","item":"https://omarchyapps.com/apps/once-bin.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Developer Tools · version 0.3.0-1</p><h1>once-bin</h1><p class="app-byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p><p class="app-lead">ONCE is a self-hosting platform from 37signals (Basecamp&#x27;s parent company): a single Go binary that automates installing, updating, backing up, and…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="once-bin" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+once-bin+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="once-bin" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/once-bin.html" data-share-app="once-bin" data-share-title="once-bin for Omarchy" data-share-url="https://omarchyapps.com/apps/once-bin.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+once-bin+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://raw.githubusercontent.com/basecamp/once/main/.github/media/install.gif" target="_blank" rel="noopener" aria-label="Open full-size Demo"><img src="https://raw.githubusercontent.com/basecamp/once/main/.github/media/install.gif" alt="Demo" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/basecamp/once/blob/main/README.md" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is once-bin?</h2><p>ONCE is a self-hosting platform from 37signals (Basecamp&#x27;s parent company): a single Go binary that automates installing, updating, backing up, and monitoring Docker-based web applications on your own hardware, from a VPS down to a Raspberry Pi. It ships with 37signals&#x27; own apps ready to go but works with any Docker image that serves HTTP on port 80 and exposes a health-check endpoint, and it&#x27;s driven through both a terminal dashboard and plain CLI commands.</p></section>

@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="FinalBurn Neo (FBNeo) is a multi-system arcade emulator core packaged for RetroArch, continuing the earlier FinalBurn line of emulators. It accurately…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/libretro-fbneo-git.html#app","name":"libretro-fbneo-git","description":"FinalBurn Neo (FBNeo) is a multi-system arcade emulator core packaged for RetroArch, continuing the earlier FinalBurn line of emulators. It accurately emulates classic arcade hardware including Capcom's CPS systems and Neo Geo, plus a handful of consoles, with support for netplay, rewind, and shader effects. As a libretro core it has no interface of its own — RetroArch loads it to run arcade ROMs you supply.","applicationCategory":"Gaming & Emulation","operatingSystem":"Omarchy Linux","softwareVersion":"1:1.0.0.02.r8581.g074bf13-1","license":"LicenseRef-FBNeo","url":"https://omarchyapps.com/apps/libretro-fbneo-git.html","sameAs":"https://github.com/libretro/FBNeo","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"libretro-fbneo-git","item":"https://omarchyapps.com/apps/libretro-fbneo-git.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Gaming &amp; Emulation · version 1:1.0.0.02.r8581.g074bf13-1</p><h1>libretro-fbneo-git</h1><p class="app-byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p><p class="app-lead">FinalBurn Neo (FBNeo) is a multi-system arcade emulator core packaged for RetroArch, continuing the earlier FinalBurn line of emulators. It accurately…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="libretro-fbneo-git" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+libretro-fbneo-git+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="libretro-fbneo-git" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/libretro-fbneo-git.html" data-share-app="libretro-fbneo-git" data-share-title="libretro-fbneo-git for Omarchy" data-share-url="https://omarchyapps.com/apps/libretro-fbneo-git.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+libretro-fbneo-git+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is libretro-fbneo-git?</h2><p>FinalBurn Neo (FBNeo) is a multi-system arcade emulator core packaged for RetroArch, continuing the earlier FinalBurn line of emulators. It accurately emulates classic arcade hardware including Capcom&#x27;s CPS systems and Neo Geo, plus a handful of consoles, with support for netplay, rewind, and shader effects. As a libretro core it has no interface of its own — RetroArch loads it to run arcade ROMs you supply.</p></section>

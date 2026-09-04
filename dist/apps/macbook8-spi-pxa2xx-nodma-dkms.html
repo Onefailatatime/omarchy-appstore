@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="This is a modified version of the Intel PXA2xx SPI PCI driver, patched specifically to force PIO (programmed I/O) mode for the Wildcat Point GSPI controller…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/macbook8-spi-pxa2xx-nodma-dkms.html#app","name":"macbook8-spi-pxa2xx-nodma-dkms","description":"This is a modified version of the Intel PXA2xx SPI PCI driver, patched specifically to force PIO (programmed I/O) mode for the Wildcat Point GSPI controller (PCI ID 8086:9ce6) found in the MacBook8,1 (early 2015 12-inch MacBook). It exists as a workaround for DMA-related issues on that exact chipset so the SPI-attached keyboard and trackpad function correctly. It is distributed through the Omarchy project's package repository rather than upstream, and has no interface of its own - it is a background kernel module.","applicationCategory":"System & Drivers","operatingSystem":"Omarchy Linux","softwareVersion":"1.0-1","license":"GPL-2.0-only","url":"https://omarchyapps.com/apps/macbook8-spi-pxa2xx-nodma-dkms.html","sameAs":"https://github.com/basecamp/omarchy","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"macbook8-spi-pxa2xx-nodma-dkms","item":"https://omarchyapps.com/apps/macbook8-spi-pxa2xx-nodma-dkms.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">System &amp; Drivers · version 1.0-1</p><h1>macbook8-spi-pxa2xx-nodma-dkms</h1><p class="app-byline">by <a href="https://37signals.com" target="_blank" rel="author noopener">37signals</a></p><p class="app-lead">This is a modified version of the Intel PXA2xx SPI PCI driver, patched specifically to force PIO (programmed I/O) mode for the Wildcat Point GSPI controller…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="macbook8-spi-pxa2xx-nodma-dkms" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+macbook8-spi-pxa2xx-nodma-dkms+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="macbook8-spi-pxa2xx-nodma-dkms" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/macbook8-spi-pxa2xx-nodma-dkms.html" data-share-app="macbook8-spi-pxa2xx-nodma-dkms" data-share-title="macbook8-spi-pxa2xx-nodma-dkms for Omarchy" data-share-url="https://omarchyapps.com/apps/macbook8-spi-pxa2xx-nodma-dkms.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+macbook8-spi-pxa2xx-nodma-dkms+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is macbook8-spi-pxa2xx-nodma-dkms?</h2><p>This is a modified version of the Intel PXA2xx SPI PCI driver, patched specifically to force PIO (programmed I/O) mode for the Wildcat Point GSPI controller (PCI ID 8086:9ce6) found in the MacBook8,1 (early 2015 12-inch MacBook). It exists as a workaround for DMA-related issues on that exact chipset so the SPI-attached keyboard and trackpad function correctly. It is distributed through the Omarchy project&#x27;s package repository rather than upstream, and has no interface of its own - it is a background kernel module.</p></section>

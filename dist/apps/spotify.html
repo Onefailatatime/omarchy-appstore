@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Spotify is a proprietary music and podcast streaming service with a catalog of tens of millions of tracks. The free tier is ad-supported with shuffle-only…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/spotify.html#app","name":"spotify","description":"Spotify is a proprietary music and podcast streaming service with a catalog of tens of millions of tracks. The free tier is ad-supported with shuffle-only play on mobile, while paid Premium plans remove ads and add offline downloads, unlimited skips, and on-demand playback. It requires a Spotify account and an internet connection to stream.","applicationCategory":"Media & Creative","operatingSystem":"Omarchy Linux","softwareVersion":"1:1.2.96.518-2","license":"custom","url":"https://omarchyapps.com/apps/spotify.html","sameAs":"https://www.spotify.com"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"spotify","item":"https://omarchyapps.com/apps/spotify.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Media &amp; Creative · version 1:1.2.96.518-2</p><h1>spotify</h1><p class="app-byline">by <a href="https://www.spotify.com" target="_blank" rel="author noopener">Spotify</a></p><p class="app-lead">Spotify is a proprietary music and podcast streaming service with a catalog of tens of millions of tracks. The free tier is ad-supported with shuffle-only…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="spotify" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+spotify+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="spotify" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/spotify.html" data-share-app="spotify" data-share-title="spotify for Omarchy" data-share-url="https://omarchyapps.com/apps/spotify.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+spotify+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is spotify?</h2><p>Spotify is a proprietary music and podcast streaming service with a catalog of tens of millions of tracks. The free tier is ad-supported with shuffle-only play on mobile, while paid Premium plans remove ads and add offline downloads, unlimited skips, and on-demand playback. It requires a Spotify account and an internet connection to stream.</p></section>

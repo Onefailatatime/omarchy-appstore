@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="RustDesk is an open-source remote desktop app that lets you view and control another computer over the internet or a local network, similar to TeamViewer or…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/rustdesk.html#app","name":"rustdesk","description":"RustDesk is an open-source remote desktop app that lets you view and control another computer over the internet or a local network, similar to TeamViewer or AnyDesk. It works out of the box using RustDesk's public relay servers, or you can self-host your own rendezvous/relay server for full privacy and control. A paid RustDesk Server Pro edition adds enterprise features like address books, audit logs, and easier deployment for teams.","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"1.4.9-1","license":"AGPL-3.0-only","url":"https://omarchyapps.com/apps/rustdesk.html","sameAs":"https://rustdesk.com/","screenshot":["https://user-images.githubusercontent.com/71636191/171661982-430285f0-2e12-4b1d-9957-4a58e375304d.png"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"rustdesk","item":"https://omarchyapps.com/apps/rustdesk.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Utilities · version 1.4.9-1</p><h1>rustdesk</h1><p class="app-byline">by <a href="https://rustdesk.com" target="_blank" rel="author noopener">RustDesk</a></p><p class="app-lead">RustDesk is an open-source remote desktop app that lets you view and control another computer over the internet or a local network, similar to TeamViewer or…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="rustdesk" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+rustdesk+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="rustdesk" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/rustdesk.html" data-share-app="rustdesk" data-share-title="rustdesk for Omarchy" data-share-url="https://omarchyapps.com/apps/rustdesk.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+rustdesk+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://user-images.githubusercontent.com/71636191/171661982-430285f0-2e12-4b1d-9957-4a58e375304d.png" target="_blank" rel="noopener" aria-label="Open full-size rustdesk app screenshot"><img src="https://user-images.githubusercontent.com/71636191/171661982-430285f0-2e12-4b1d-9957-4a58e375304d.png" alt="rustdesk app screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://rustdesk.com/" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is rustdesk?</h2><p>RustDesk is an open-source remote desktop app that lets you view and control another computer over the internet or a local network, similar to TeamViewer or AnyDesk. It works out of the box using RustDesk&#x27;s public relay servers, or you can self-host your own rendezvous/relay server for full privacy and control. A paid RustDesk Server Pro edition adds enterprise features like address books, audit logs, and easier deployment for teams.</p></section>

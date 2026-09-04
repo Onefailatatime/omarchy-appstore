@@ -27,6 +27,7 @@
 <meta name="twitter:description" content="Like other kernel-headers packages, this provides the compiled headers and scripts needed to build kernel modules against a specific custom Arch kernel, in…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
+<script src="/share.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/linux-ptl-headers.html#app","name":"linux-ptl-headers","description":"Like other kernel-headers packages, this provides the compiled headers and scripts needed to build kernel modules against a specific custom Arch kernel, in this case one patched for Intel Panther Lake laptops with Panel Replay power-saving and OLED variable refresh rate fixes. There is nothing to launch or configure directly; it exists purely to support DKMS module builds for that kernel.","applicationCategory":"System & Drivers","operatingSystem":"Omarchy Linux","softwareVersion":"7.1.8.arch1-2","license":"GPL-2.0-only","url":"https://omarchyapps.com/apps/linux-ptl-headers.html","sameAs":"https://github.com/archlinux/linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"linux-ptl-headers","item":"https://omarchyapps.com/apps/linux-ptl-headers.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -655,6 +656,17 @@ b, strong { font-weight: 700; }
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
 .card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.card-actions { display: inline-flex; align-items: center; gap: 0.45em; margin-left: auto; }
+.app-share {
+  padding: 0.25em 0.45em;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.72);
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-share:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.card-actions .app-vote { margin-left: 0; }
 .indie-sticker {
   display: inline-flex;
   align-items: center;
@@ -940,7 +952,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">System &amp; Drivers · version 7.1.8.arch1-2</p><h1>linux-ptl-headers</h1><p class="app-byline">by <a href="https://archlinux.org" target="_blank" rel="author noopener">Arch Linux</a></p><p class="app-lead">Like other kernel-headers packages, this provides the compiled headers and scripts needed to build kernel modules against a specific custom Arch kernel, in…</p></div>
-      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="linux-ptl-headers" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+linux-ptl-headers+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="linux-ptl-headers" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/linux-ptl-headers.html" data-share-app="linux-ptl-headers" data-share-title="linux-ptl-headers for Omarchy" data-share-url="https://omarchyapps.com/apps/linux-ptl-headers.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+linux-ptl-headers+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is linux-ptl-headers?</h2><p>Like other kernel-headers packages, this provides the compiled headers and scripts needed to build kernel modules against a specific custom Arch kernel, in this case one patched for Intel Panther Lake laptops with Panel Replay power-saving and OLED variable refresh rate fixes. There is nothing to launch or configure directly; it exists purely to support DKMS module builds for that kernel.</p></section>
