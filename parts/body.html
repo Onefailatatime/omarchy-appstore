@@ -3,11 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Unofficial Omarchy App Store — every package in the official repo</title>
-<meta name="description" content="Browse all __COUNT__ packages in the official Omarchy package repository, grouped into __CATCOUNT__ categories. Search, read the details, copy one command: omarchy pkg add. A community package browser for Omarchy Linux.">
+<title>Unofficial Omarchy App Store | Browse __COUNT__ Packages</title>
+<meta name="description" content="Browse __COUNT__ apps and packages from the official Omarchy repository. Compare requirements, screenshots and install commands in one searchable directory.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#1a1b26">
+<link rel="canonical" href="__SITE_URL__/">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="Unofficial Omarchy App Store">
 <meta property="og:description" content="Browse every package in the official Omarchy repo and install any of them with one command.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="__SITE_URL__/">
+<meta property="og:site_name" content="Unofficial Omarchy App Store">
+<meta property="og:image" content="__SITE_URL__/images/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Unofficial Omarchy App Store — browse every package in the official repository">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jessyka_boat">
+<meta name="twitter:title" content="Unofficial Omarchy App Store">
+<meta name="twitter:description" content="Browse every package in the official Omarchy repository.">
+<meta name="twitter:image" content="__SITE_URL__/images/social-card.png">
+<script type="application/ld+json">__STRUCTURED_DATA__</script>
 <style>
 __STYLE__
 </style>
@@ -81,6 +98,11 @@ __GROUPS__
     <p>Nothing matches <b id="empty-q"></b>. Try a shorter word, check the <a href="https://aur.archlinux.org/">AUR</a>, or:</p>
     <a class="button" href="__CONTACT__" target="_blank" rel="noopener" id="req-empty">Suggest an app on X</a>
   </div>
+
+  <section class="faq" aria-labelledby="faq-h">
+    <h2 class="sec-label" id="faq-h">Common questions</h2>
+__FAQ__
+  </section>
 
   <section class="sec-label-wrap" style="margin-top: var(--space-xx-large)">
     <div class="request">
@@ -353,8 +375,11 @@ __GROUPS__
     dlg.showModal();
   }
   document.querySelectorAll(".card").forEach(function (c) {
-    c.addEventListener("click", function () { open(c); });
-    c.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(c); } });
+    c.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+      e.preventDefault();
+      open(c);
+    });
   });
   dlg.querySelector("[data-close]").addEventListener("click", function () { dlg.close(); });
   dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });

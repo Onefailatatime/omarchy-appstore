@@ -5,20 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About — Unofficial Omarchy App Store</title>
 <meta name="description" content="Learn why the Unofficial Omarchy App Store exists and meet Jessyka, the independent builder behind this community package directory.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#1a1b26">
+<link rel="canonical" href="https://omarchyapps.com/about.html">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="About the Unofficial Omarchy App Store">
 <meta property="og:description" content="A community-built directory that makes official Omarchy packages easier to discover and understand.">
-<meta property="og:type" content="profile">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://omarchyapps.com/about.html">
+<meta property="og:site_name" content="Unofficial Omarchy App Store">
+<meta property="og:image" content="https://omarchyapps.com/images/jessyka-boat-x.jpg">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:alt" content="Jessyka, builder of the Unofficial Omarchy App Store">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@jessyka_boat">
+<meta name="twitter:title" content="About the Unofficial Omarchy App Store">
+<meta name="twitter:description" content="Meet Jessyka, the independent builder behind this community package directory.">
+<meta name="twitter:image" content="https://omarchyapps.com/images/jessyka-boat-x.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "AboutPage",
+  "url": "https://omarchyapps.com/about.html",
   "name": "About the Unofficial Omarchy App Store",
   "description": "A short introduction to the community package directory and its independent builder.",
   "mainEntity": {
     "@type": "Person",
     "name": "Jessyka",
     "alternateName": "@jessyka_boat",
-    "sameAs": "https://x.com/jessyka_boat"
+    "sameAs": "https://x.com/jessyka_boat",
+    "image": "https://omarchyapps.com/images/jessyka-boat-x.jpg"
   }
 }
 </script>
@@ -292,10 +309,26 @@ b, strong { font-weight: 700; }
 .about-copy { margin-top: var(--space-large); }
 .about-copy h2 { color: var(--color-terminal-white); }
 .about-copy p { color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-page { max-width: 62rem; padding-top: var(--space-large); padding-bottom: var(--space-xx-large); }
+.breadcrumbs { display: flex; gap: 0.8ch; margin-bottom: var(--space-large); color: rgb(var(--rgb-terminal-blue) / 0.62); }
+.app-page article { display: grid; gap: var(--space-large); }
+.app-header { display: flex; justify-content: space-between; align-items: end; gap: var(--space-large); }
+.app-header h1 { margin: 0; color: var(--color-terminal-white); font-size: clamp(1.8rem, 5vw, 3rem); overflow-wrap: anywhere; }
+.app-header .eyebrow { margin: 0 0 0.5em; color: var(--color-green); text-transform: uppercase; font-size: 82%; }
+.app-header .app-lead { margin: 0.6em 0 0; max-width: 46em; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-page section h2 { color: var(--color-terminal-white); font-size: 125%; }
+.app-page section p { color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-large); }
+.app-columns ul { padding-left: 1.3em; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-columns dl { display: grid; grid-template-columns: auto 1fr; gap: 0.45em 1em; }
+.app-columns dt { color: rgb(var(--rgb-terminal-blue) / 0.65); }
+.app-columns dd { margin: 0; color: var(--color-terminal-white); }
 @media (max-width: 600px) {
   .about-card { grid-template-columns: 1fr; text-align: center; }
   .about-photo { width: 9em; margin: 0 auto; }
   .about-card .button { justify-self: center; }
+  .app-header { align-items: start; flex-direction: column; }
+  .app-columns { grid-template-columns: 1fr; }
 }
 
 /* =================== HERO =================== */
@@ -554,6 +587,7 @@ b, strong { font-weight: 700; }
   color: var(--color-terminal-white);
   overflow-wrap: break-word;
 }
+.card h3 a { color: inherit; text-decoration: none; }
 .card:hover h3 { color: var(--color-turquoise); }
 .card .ver { color: var(--color-green); font-size: 82%; white-space: nowrap; opacity: 0.9; }
 .card p {
@@ -582,6 +616,16 @@ b, strong { font-weight: 700; }
   padding: var(--space-x-large) 0;
   color: rgb(var(--rgb-terminal-blue) / 0.7);
 }
+.faq { margin-top: var(--space-xx-large); }
+.faq details {
+  margin-top: var(--space-small);
+  padding: 0.9em var(--space-medium);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.faq summary { color: var(--color-terminal-white); font-weight: 700; cursor: pointer; }
+.faq details p { margin: 0.7em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.85); }
 .empty.on { display: block; }
 .empty p { margin: 0 0 var(--space-medium); }
 .empty b { color: var(--color-terminal-white); }

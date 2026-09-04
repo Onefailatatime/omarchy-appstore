@@ -17,6 +17,7 @@ import pathlib
 import re
 import subprocess
 import tarfile
+import urllib.parse
 import urllib.request
 from compression import zstd  # stdlib since Python 3.14
 
@@ -32,6 +33,15 @@ FALLBACK_CATEGORY = "Utilities"
 NEW_ARRIVALS = 4
 CONTACT_URL = "https://x.com/jessyka_boat"
 X_DM_RECIPIENT_ID = "1400492097082327040"
+SITE_URL = "https://omarchyapps.com"
+SITE_NAME = "Unofficial Omarchy App Store"
+FAQ = [
+    ("What is the Unofficial Omarchy App Store?", "It is an independent, searchable directory of packages published by the official Omarchy package repository. It is not affiliated with or endorsed by Omarchy or Omacom."),
+    ("How do I install an app on Omarchy?", "Open a package, review its requirements, then copy the displayed omarchy pkg add command into a terminal. Packages are downloaded from the official Omarchy repository, not from this site."),
+    ("Does this site host or sell apps?", "No. The site hosts no packages and sells no software. It organizes public package information and links visitors to upstream projects and official PKGBUILDs."),
+    ("How can a developer update or claim an app listing?", "Open the package and choose Claim this app. The X direct-message form asks for the developer's role, project URL, corrections, screenshots, and an optional demo video."),
+    ("How can I prepare an app for Omarchy?", "Use the Develop for Omarchy checklist for packaging, permissions, checksums, desktop integration, clean-build testing, and pull-request preparation. Official repository guidance always takes precedence."),
+]
 
 # Fixed order controls both the catalogue's section order and the category
 # filter row. Deliberately not alphabetical: biggest/most-relevant first.
@@ -276,6 +286,30 @@ def slug(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
+def json_script(value: object) -> str:
+    """Serialize JSON-LD without allowing a value to close its script tag."""
+    return json.dumps(value, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+
+
+def description_for(p: dict, limit: int = 158) -> str:
+    text = re.sub(r"\s+", " ", p.get("full_desc") or p.get("desc") or "").strip()
+    if len(text) <= limit:
+        return text
+    return text[:limit - 1].rsplit(" ", 1)[0] + "…"
+
+
+def claim_url(name: str) -> str:
+    message = (
+        f"Hi! I'd like to claim the {name} listing on the Unofficial Omarchy App Store.\n\n"
+        "I can provide:\n- a correction or edit\n- screenshots of the app\n- a demo video\n\n"
+        "Project URL: \nMy role with the app: "
+    )
+    return "https://x.com/messages/compose?" + urllib.parse.urlencode({
+        "recipient_id": X_DM_RECIPIENT_ID,
+        "text": message,
+    })
+
+
 def card(p: dict, featured: bool = False) -> str:
     e = {k: html.escape(str(v)) for k, v in p.items() if isinstance(v, str)}
     built = datetime.date.fromtimestamp(p["built"]).isoformat()
@@ -290,7 +324,8 @@ def card(p: dict, featured: bool = False) -> str:
         if featured else
         f'<span class="cat-dot" aria-hidden="true"></span><span class="size">{e["csize"]}</span>'
     )
-    return f"""<article class="{cls}" tabindex="0" role="button" aria-label="{e['name']} — details"
+    detail_url = f"apps/{slug(p['name'])}.html"
+    return f"""<article class="{cls}" data-detail-url="{detail_url}"
   data-name="{e['name']}" data-dir="{e['dir']}" data-version="{e['version']}" data-desc="{e['desc']}"
   data-url="{e['url']}" data-github="{e['github']}" data-license="{e['license']}" data-csize="{e['csize']}" data-isize="{e['isize']}"
   data-built="{built}" data-built-ts="{p['built']}" data-added="{added}" data-added-ts="{p['added']}"
@@ -298,7 +333,7 @@ def card(p: dict, featured: bool = False) -> str:
   data-tagline="{e['tagline']}" data-full-desc="{e['full_desc']}" data-pricing="{e['pricing']}"
   data-pricing-note="{e['pricing_note']}" data-reqs="{reqs}" data-shot="{e['screenshot_url']}"
   data-yt="{e['youtube_id']}" data-yt-title="{e['youtube_title']}">
-  <header><h3>{e['name']}</h3><span class="ver">{e['version']}</span></header>
+  <header><h3><a href="{detail_url}">{e['name']}</a></h3><span class="ver">{e['version']}</span></header>
   <p>{e['desc'] or '<em>No description provided.</em>'}</p>
   <footer>{footer}</footer>
 </article>"""
@@ -313,6 +348,76 @@ def group_section(category: str, pkgs: list[dict]) -> str:
 {cards}
   </div>
 </section>"""
+
+
+def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
+    canonical = f"{SITE_URL}/apps/{slug(p['name'])}.html"
+    desc = description_for(p)
+    project_url = p.get("url") or p.get("github") or f"https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/{urllib.parse.quote(p['dir'])}"
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "SoftwareApplication",
+                "@id": canonical + "#app",
+                "name": p["name"],
+                "description": p.get("full_desc") or p.get("desc") or "Omarchy package",
+                "applicationCategory": p["category"],
+                "operatingSystem": "Omarchy Linux",
+                "softwareVersion": p["version"],
+                "license": p["license"],
+                "url": canonical,
+                "sameAs": project_url,
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": SITE_NAME, "item": SITE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": p["name"], "item": canonical},
+                ],
+            },
+        ],
+    }
+    if p.get("screenshot_url"):
+        schema["@graph"][0]["screenshot"] = p["screenshot_url"]
+    if p.get("pricing") in ("free", "free-libre"):
+        schema["@graph"][0]["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    reqs = "".join(f"<li>{html.escape(str(r))}</li>" for r in p.get("requirements", []))
+    links = []
+    if p.get("url"):
+        links.append(f'<a class="button ghost" href="{html.escape(p["url"])}" target="_blank" rel="noopener">Project site ↗</a>')
+    if p.get("github"):
+        links.append(f'<a class="button ghost" href="{html.escape(p["github"])}" target="_blank" rel="noopener">GitHub ↗</a>')
+    links.append(f'<a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/{urllib.parse.quote(p["dir"])}" target="_blank" rel="noopener">PKGBUILD ↗</a>')
+    shot = (f'<figure class="shot-wrap"><img src="{html.escape(p["screenshot_url"])}" alt="{html.escape(p["name"])} app screenshot" width="1200" height="675"></figure>' if p.get("screenshot_url") else "")
+    video = (f'<p><a class="button ghost" href="https://www.youtube.com/watch?v={html.escape(p["youtube_id"])}" target="_blank" rel="noopener">Watch: {html.escape(p["youtube_title"] or p["name"] + " demo")} ↗</a></p>' if p.get("youtube_id") else "")
+    pricing = p.get("pricing_note") or p.get("pricing") or "Check the project site for current pricing."
+    replacements = {
+        "__STYLE__": css,
+        "__SITE_URL__": SITE_URL,
+        "__CANONICAL__": canonical,
+        "__NAME__": html.escape(p["name"]),
+        "__VERSION__": html.escape(p["version"]),
+        "__CATEGORY__": html.escape(p["category"]),
+        "__DESCRIPTION__": html.escape(desc),
+        "__FULL_DESCRIPTION__": html.escape(p.get("full_desc") or p.get("desc") or "No description provided."),
+        "__INSTALL_COMMAND__": html.escape("omarchy pkg add " + p["name"]),
+        "__LICENSE__": html.escape(p["license"]),
+        "__DOWNLOAD_SIZE__": html.escape(p["csize"]),
+        "__INSTALLED_SIZE__": html.escape(p["isize"]),
+        "__PRICING__": html.escape(pricing),
+        "__REQUIREMENTS__": reqs or "<li>No special requirements documented.</li>",
+        "__SCREENSHOT__": shot,
+        "__VIDEO__": video,
+        "__LINKS__": "".join(links),
+        "__CLAIM_URL__": html.escape(claim_url(p["name"])),
+        "__STRUCTURED_DATA__": json_script(schema),
+        "__SYNCED__": synced,
+    }
+    page = template
+    for key, value in replacements.items():
+        page = page.replace(key, value)
+    return page
 
 
 def main() -> None:
@@ -345,6 +450,24 @@ def main() -> None:
 
     body = (ROOT / "parts" / "body.html").read_text(encoding="utf-8")
     css = (ROOT / "parts" / "style.css").read_text(encoding="utf-8")
+    faq_html = "\n".join(
+        f"    <details><summary>{html.escape(question)}</summary><p>{html.escape(answer)}</p></details>"
+        for question, answer in FAQ
+    )
+    homepage_schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "WebSite", "@id": SITE_URL + "/#website", "url": SITE_URL + "/", "name": SITE_NAME, "alternateName": "Omarchy Apps", "description": "Searchable community directory of packages in the official Omarchy repository."},
+            {"@type": "CollectionPage", "@id": SITE_URL + "/#webpage", "url": SITE_URL + "/", "name": SITE_NAME, "isPartOf": {"@id": SITE_URL + "/#website"}, "mainEntity": {"@type": "ItemList", "numberOfItems": len(pkgs), "itemListElement": [
+                {"@type": "ListItem", "position": i, "url": f"{SITE_URL}/apps/{slug(p['name'])}.html", "name": p["name"]}
+                for i, p in enumerate(pkgs, 1)
+            ]}},
+            {"@type": "FAQPage", "@id": SITE_URL + "/#faq", "mainEntity": [
+                {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                for q, a in FAQ
+            ]},
+        ],
+    }
     page = (body
             .replace("__NEW__", "\n".join(card(p, featured=True) for p in newest))
             .replace("__GROUPS__", groups)
@@ -354,6 +477,9 @@ def main() -> None:
             .replace("__CATCOUNT__", str(len(CATEGORY_ORDER)))
             .replace("__NEWCOUNT__", str(len(newest)))
             .replace("__SYNCED__", synced)
+            .replace("__SITE_URL__", SITE_URL)
+            .replace("__FAQ__", faq_html)
+            .replace("__STRUCTURED_DATA__", json_script(homepage_schema))
             .replace("__CONTACT__", html.escape(CONTACT_URL))
             .replace("__X_DM_RECIPIENT__", X_DM_RECIPIENT_ID)
             .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
@@ -361,10 +487,12 @@ def main() -> None:
     (DIST / "index.html").write_text(page, encoding="utf-8")
     develop = ((ROOT / "parts" / "develop.html").read_text(encoding="utf-8")
                .replace("__SYNCED__", synced)
+               .replace("__SITE_URL__", SITE_URL)
                .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     (DIST / "develop.html").write_text(develop, encoding="utf-8")
     terms = ((ROOT / "parts" / "terms.html").read_text(encoding="utf-8")
              .replace("__SYNCED__", synced)
+             .replace("__SITE_URL__", SITE_URL)
              .replace("__CONTACT__", html.escape(CONTACT_URL))
              .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     (DIST / "terms.html").write_text(terms, encoding="utf-8")
@@ -380,8 +508,42 @@ def main() -> None:
     about = ((ROOT / "parts" / "about.html").read_text(encoding="utf-8")
              .replace("__SYNCED__", synced)
              .replace("__CONTACT__", html.escape(CONTACT_URL))
+             .replace("__SITE_URL__", SITE_URL)
              .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     (DIST / "about.html").write_text(about, encoding="utf-8")
+    apps_dir = DIST / "apps"
+    apps_dir.mkdir(exist_ok=True)
+    for old in apps_dir.glob("*.html"):
+        old.unlink()
+    app_template = (ROOT / "parts" / "app.html").read_text(encoding="utf-8")
+    resolved_css = css.replace("__CATVARS__", cat_vars).replace("url(fonts/", "url(../fonts/")
+    for p in pkgs:
+        (apps_dir / f"{slug(p['name'])}.html").write_text(
+            render_app_page(app_template, resolved_css, p, synced), encoding="utf-8"
+        )
+
+    sitemap_urls = [SITE_URL + "/", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/terms.html"]
+    sitemap_urls.extend(f"{SITE_URL}/apps/{slug(p['name'])}.html" for p in pkgs)
+    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    sitemap.extend(f"  <url><loc>{url}</loc><lastmod>{synced}</lastmod></url>" for url in sitemap_urls)
+    sitemap.append("</urlset>")
+    (DIST / "sitemap.xml").write_text("\n".join(sitemap) + "\n", encoding="utf-8")
+    (DIST / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8"
+    )
+    (DIST / "llms.txt").write_text(
+        f"# {SITE_NAME}\n\n"
+        "> An independent directory of packages published by the official Omarchy package repository.\n\n"
+        f"Canonical site: {SITE_URL}/\n\n"
+        "This site is unofficial and is not affiliated with or endorsed by Omarchy, Omacom, or DHH. "
+        "It does not host packages. Package facts are refreshed from pkgs.omarchy.org, and official upstream sources take precedence.\n\n"
+        "## Main pages\n"
+        f"- [Browse packages]({SITE_URL}/)\n"
+        f"- [Develop for Omarchy]({SITE_URL}/develop.html)\n"
+        f"- [About]({SITE_URL}/about.html)\n"
+        f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
+        "Contact: https://x.com/jessyka_boat\n", encoding="utf-8"
+    )
 
     unresolved = [p["name"] for p in pkgs if not p["added"]]
     uncategorized = [p["name"] for p in pkgs if p["category"] == FALLBACK_CATEGORY and p["name"] not in json.loads(CATEGORIES_FILE.read_text() or "{}")]
@@ -389,6 +551,8 @@ def main() -> None:
     print(f"dist/develop.html {len(develop):,} bytes · public packaging checklist")
     print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
     print(f"dist/about.html   {len(about):,} bytes · project and builder bio")
+    print(f"dist/apps/        {len(pkgs)} crawlable package pages")
+    print(f"dist/sitemap.xml  {len(sitemap_urls)} canonical URLs")
     print("new arrivals:    " + ", ".join(f"{p['name']} ({datetime.date.fromtimestamp(p['added'])})" for p in newest))
     if unresolved:
         print(f"no git history for {len(unresolved)}: {', '.join(unresolved)}")

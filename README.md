@@ -40,8 +40,15 @@ parts/
 assets/fonts/ JetBrains Mono 400/700, latin, woff2
 assets/images/ self-hosted site imagery
 data/         cached omarchy.db (auto-refreshed on each online build)
-dist/         what ships: index.html + fonts/, nothing else
+dist/         generated site, package pages, sitemap, crawler files, and assets
 ```
+
+## Search and answer engines
+
+The build generates one canonical page per package under `dist/apps/`, plus
+`robots.txt`, `sitemap.xml`, `llms.txt`, page-specific metadata, JSON-LD, and
+social preview assets for `https://omarchyapps.com`. Keep `SITE_URL` in
+`build.py` aligned with the primary production domain.
 
 ## Curated profiles
 

@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>elephant-runner for Omarchy | Install and Package Details</title>
+<meta name="description" content="The command-runner provider for elephant: it scans your PATH and lets you type and execute arbitrary shell commands as launcher results, similar to a run…">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#1a1b26">
+<link rel="canonical" href="https://omarchyapps.com/apps/elephant-runner.html">
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="elephant-runner for Omarchy">
+<meta property="og:description" content="The command-runner provider for elephant: it scans your PATH and lets you type and execute arbitrary shell commands as launcher results, similar to a run…">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://omarchyapps.com/apps/elephant-runner.html">
+<meta property="og:site_name" content="Unofficial Omarchy App Store">
+<meta property="og:image" content="https://omarchyapps.com/images/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Unofficial Omarchy App Store">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jessyka_boat">
+<meta name="twitter:title" content="elephant-runner for Omarchy">
+<meta name="twitter:description" content="The command-runner provider for elephant: it scans your PATH and lets you type and execute arbitrary shell commands as launcher results, similar to a run…">
+<meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/elephant-runner.html#app","name":"elephant-runner","description":"The command-runner provider for elephant: it scans your PATH and lets you type and execute arbitrary shell commands as launcher results, similar to a run dialog but integrated into the same search interface used for apps and files.","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"2.22.0-1","license":"GPL","url":"https://omarchyapps.com/apps/elephant-runner.html","sameAs":"https://github.com/abenz1267/elephant","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"elephant-runner","item":"https://omarchyapps.com/apps/elephant-runner.html"}]}]}</script>
+<style>/* =========================================================================
+   Unofficial Omarchy App Store
+   Tokens lifted verbatim from omarchy.org/assets/css/root.css (Tokyo Night)
+   so the store reads as part of the same family. Community project.
+
+   Color grammar (deliberate, four roles, never mixed):
+     structure  — night/storm backgrounds, terminal-blue body text, terminal-
+                  white headings. Always resting, never a signal.
+     data       — green. Version strings and the $ prompt only. Nothing new
+                  gets green.
+     interact   — turquoise. Hover/focus/active only. Never a resting color,
+                  which is the whole reason it still reads as "this responds."
+     recency    — orange. The New Arrivals strip and nothing else. No
+                  category may use orange; that is what keeps "new" legible
+                  at a glance instead of just another hue in the crowd.
+     category   — one hue per category (see .cat-system-drivers { --cat: #41A6B5; }
+.cat-utilities { --cat: #565F89; }
+.cat-gaming-emulation { --cat: #F7768E; }
+.cat-themes-desktop { --cat: #9D7CD8; }
+.cat-ai-agents { --cat: #7DCFFF; }
+.cat-developer-tools { --cat: #E0AF68; }
+.cat-media-creative { --cat: #73DACA; }
+.cat-terminal-shell { --cat: #0DB9D7; }
+.cat-security-privacy { --cat: #DB4B4B; }
+.cat-productivity-notes { --cat: #BB9AF7; }
+.cat-browsers-web { --cat: #737AA2; }
+.cat-communication { --cat: #A9B1D6; } below, injected by
+                  build.py from Tokyo Night's wider palette). Confined to an
+                  8px dot and a 2px rule — never a fill, never body text —
+                  and the category name is always printed next to it, so no
+                  reader ever has to identify a category by hue alone.
+   ========================================================================= */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/jetbrains-mono-latin-400.woff2) format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/jetbrains-mono-latin-700.woff2) format("woff2");
+}
+
+:root {
+  --rgb-background-night: 26, 27, 38;
+  --rgb-background-storm: 36, 40, 59;
+  --rgb-black: 0, 0, 0;
+  --rgb-green: 158, 206, 106;
+  --rgb-terminal-black: 65, 72, 104;
+  --rgb-terminal-blue: 122, 162, 247;
+  --rgb-terminal-cyan: 125, 207, 255;
+  --rgb-terminal-white: 192, 202, 245;
+  --rgb-turquoise: 180, 249, 248;
+  --rgb-orange: 255, 158, 100;
+
+  --color-background-night: rgb(var(--rgb-background-night));
+  --color-background-storm: rgb(var(--rgb-background-storm));
+  --color-green: rgb(var(--rgb-green));
+  --color-terminal-black: rgb(var(--rgb-terminal-black));
+  --color-terminal-blue: rgb(var(--rgb-terminal-blue));
+  --color-terminal-cyan: rgb(var(--rgb-terminal-cyan));
+  --color-terminal-white: rgb(var(--rgb-terminal-white));
+  --color-turquoise: rgb(var(--rgb-turquoise));
+  --color-orange: rgb(var(--rgb-orange));
+
+  --border-color: rgb(var(--rgb-terminal-black) / 0.8);
+  --border-width: max(1px, 0.0625em);
+
+  --font-family: "JetBrains Mono", monospace;
+  --font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+  --line-height: 1.4;
+
+  --space-small: 0.5em;
+  --space-medium: 1em;
+  --space-neutral: 1.5em;
+  --space-large: 2em;
+  --space-x-large: 3em;
+  --space-xx-large: 4em;
+
+  --radius: 0.4em;
+  --transition: 0.15s cubic-bezier(0.33, 1, 0.68, 1);
+  --maxw: 76rem;
+  --bar-h: 3.6em;
+
+  /* twelve category hues, one line each — injected by build.py */
+  .cat-system-drivers { --cat: #41A6B5; }
+.cat-utilities { --cat: #565F89; }
+.cat-gaming-emulation { --cat: #F7768E; }
+.cat-themes-desktop { --cat: #9D7CD8; }
+.cat-ai-agents { --cat: #7DCFFF; }
+.cat-developer-tools { --cat: #E0AF68; }
+.cat-media-creative { --cat: #73DACA; }
+.cat-terminal-shell { --cat: #0DB9D7; }
+.cat-security-privacy { --cat: #DB4B4B; }
+.cat-productivity-notes { --cat: #BB9AF7; }
+.cat-browsers-web { --cat: #737AA2; }
+.cat-communication { --cat: #A9B1D6; }
+}
+
+* { box-sizing: border-box; }
+/* The hidden attribute must always win. An author rule that sets display on
+   an element (.button, .meta div, ...) otherwise beats the UA [hidden]
+   default at equal specificity regardless of source order — toggling
+   el.hidden from JS then silently does nothing. */
+[hidden] { display: none !important; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--color-background-night);
+  color: var(--color-terminal-blue);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--color-terminal-blue); text-decoration: underline; text-underline-offset: 0.2em; }
+a:hover { color: var(--color-turquoise); }
+:focus-visible { outline: 2px solid var(--color-turquoise); outline-offset: 2px; border-radius: 3px; }
+::selection { background: var(--color-terminal-blue); color: var(--color-background-night); }
+em { color: rgb(var(--rgb-terminal-blue) / 0.7); }
+b, strong { font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; animation: none !important; }
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--space-neutral); }
+
+/* =================== NOTIFICATION STRIP =================== */
+.notification {
+  background: var(--color-terminal-blue);
+  color: var(--color-background-night);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4em 1em;
+  text-align: center;
+  padding: 0.55em var(--space-medium);
+  font-weight: 700;
+}
+.notification a { color: inherit; text-decoration: none; }
+.notification a:hover { text-decoration: underline; }
+
+/* =================== DEVELOPMENT GUIDE =================== */
+.guide-hero { padding-bottom: var(--space-medium); }
+.guide-hero .back { display: inline-block; margin-bottom: var(--space-large); }
+.guide-main { max-width: 62rem; padding-bottom: var(--space-xx-large); }
+.guide-intro {
+  margin: var(--space-large) 0;
+  padding: var(--space-neutral);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-left: 3px solid var(--color-terminal-cyan);
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+}
+.guide-intro p { margin: 0; }
+.guide-progress {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--space-medium);
+  padding: 0.8em var(--space-medium);
+  background: rgb(var(--rgb-background-night) / 0.96);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+}
+.guide-progress strong { color: var(--color-terminal-white); }
+.guide-progress progress { flex: 1; accent-color: var(--color-green); }
+.guide-progress button {
+  border: 0;
+  background: transparent;
+  color: var(--color-terminal-blue);
+  font: inherit;
+  cursor: pointer;
+}
+.guide-progress button:hover { color: var(--color-turquoise); }
+.check-section { margin-top: var(--space-x-large); }
+.check-section h2 {
+  margin: 0 0 var(--space-medium);
+  padding-bottom: 0.45em;
+  border-bottom: var(--border-width) solid var(--border-color);
+  color: var(--color-terminal-white);
+  font-size: 130%;
+}
+.checklist { display: grid; gap: 0.65em; margin: 0; padding: 0; list-style: none; }
+.checklist label {
+  display: grid;
+  grid-template-columns: 1.25em 1fr;
+  gap: 0.8em;
+  align-items: start;
+  padding: 0.8em 1em;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+  cursor: pointer;
+}
+.checklist label:hover { border-color: var(--color-terminal-blue); }
+.checklist input { margin-top: 0.22em; accent-color: var(--color-green); }
+.checklist input:checked + span { color: rgb(var(--rgb-terminal-blue) / 0.62); text-decoration: line-through; }
+.checklist small { display: block; margin-top: 0.3em; color: rgb(var(--rgb-terminal-blue) / 0.7); }
+.guide-code {
+  margin: var(--space-medium) 0;
+  padding: var(--space-medium);
+  overflow-x: auto;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--color-green);
+  font: inherit;
+}
+.tip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(18em, 1fr)); gap: var(--space-medium); }
+.tip {
+  padding: var(--space-neutral);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.tip h3 { margin: 0 0 0.5em; color: var(--color-terminal-white); font-size: 105%; }
+.tip p { margin: 0; }
+.sources { color: rgb(var(--rgb-terminal-blue) / 0.75); }
+.sources li + li { margin-top: 0.5em; }
+.terms-main { max-width: 62rem; padding-bottom: var(--space-xx-large); }
+.terms-main > section {
+  margin-top: var(--space-large);
+  padding: var(--space-neutral);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.terms-main h2 { margin: 0 0 0.65em; color: var(--color-terminal-white); font-size: 120%; }
+.terms-main p { margin: 0; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.terms-main p + p, .terms-main ul + p { margin-top: 0.8em; }
+.terms-main ul { margin: 0; padding-left: 1.3em; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.terms-main li + li { margin-top: 0.45em; }
+.about-main { max-width: 62rem; padding-bottom: var(--space-xx-large); }
+.about-card {
+  display: grid;
+  grid-template-columns: 11em 1fr;
+  gap: var(--space-large);
+  align-items: center;
+  margin-top: var(--space-large);
+  padding: var(--space-large);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.about-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 2px solid var(--color-terminal-blue);
+  border-radius: 50%;
+}
+.about-card h2 { margin: 0 0 0.25em; color: var(--color-terminal-white); font-size: 140%; }
+.about-card .handle { margin: 0 0 var(--space-medium); color: var(--color-terminal-cyan); }
+.about-card .bio { margin: 0 0 var(--space-medium); color: var(--color-terminal-white); }
+.about-copy { margin-top: var(--space-large); }
+.about-copy h2 { color: var(--color-terminal-white); }
+.about-copy p { color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-page { max-width: 62rem; padding-top: var(--space-large); padding-bottom: var(--space-xx-large); }
+.breadcrumbs { display: flex; gap: 0.8ch; margin-bottom: var(--space-large); color: rgb(var(--rgb-terminal-blue) / 0.62); }
+.app-page article { display: grid; gap: var(--space-large); }
+.app-header { display: flex; justify-content: space-between; align-items: end; gap: var(--space-large); }
+.app-header h1 { margin: 0; color: var(--color-terminal-white); font-size: clamp(1.8rem, 5vw, 3rem); overflow-wrap: anywhere; }
+.app-header .eyebrow { margin: 0 0 0.5em; color: var(--color-green); text-transform: uppercase; font-size: 82%; }
+.app-header .app-lead { margin: 0.6em 0 0; max-width: 46em; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-page section h2 { color: var(--color-terminal-white); font-size: 125%; }
+.app-page section p { color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-large); }
+.app-columns ul { padding-left: 1.3em; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-columns dl { display: grid; grid-template-columns: auto 1fr; gap: 0.45em 1em; }
+.app-columns dt { color: rgb(var(--rgb-terminal-blue) / 0.65); }
+.app-columns dd { margin: 0; color: var(--color-terminal-white); }
+@media (max-width: 600px) {
+  .about-card { grid-template-columns: 1fr; text-align: center; }
+  .about-photo { width: 9em; margin: 0 auto; }
+  .about-card .button { justify-self: center; }
+  .app-header { align-items: start; flex-direction: column; }
+  .app-columns { grid-template-columns: 1fr; }
+}
+
+/* =================== HERO =================== */
+.hero { text-align: center; padding: var(--space-x-large) 0 var(--space-large); }
+.hero pre {
+  margin: 0 0 var(--space-medium);
+  font-size: 100%;
+  line-height: 1.05;
+  color: var(--color-terminal-blue);
+  user-select: none;
+}
+.hero pre b { color: var(--color-turquoise); font-weight: 400; }
+.hero h1 {
+  margin: 0 0 var(--space-small);
+  font-size: 180%;
+  font-weight: 700;
+  color: var(--color-terminal-white);
+  letter-spacing: -0.01em;
+}
+.hero h1 span { color: var(--color-terminal-blue); }
+.hero .tag {
+  margin: 0 auto var(--space-medium);
+  max-width: 46em;
+  font-style: italic;
+  color: rgb(var(--rgb-terminal-blue) / 0.85);
+}
+.hero .facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5ch 2ch;
+  justify-content: center;
+  font-size: 90%;
+  color: rgb(var(--rgb-terminal-blue) / 0.6);
+}
+.hero .facts b { color: var(--color-terminal-white); font-weight: 700; }
+.hero .facts code { color: var(--color-green); }
+
+/* =================== STICKY COMMAND BAR =================== */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: var(--bar-h);
+  display: flex;
+  align-items: stretch;
+  background: rgb(var(--rgb-background-night) / 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+@media (max-height: 600px) { .bar { position: static; } }
+.bar-row { display: flex; align-items: center; gap: var(--space-small); width: 100%; }
+
+.search {
+  flex: 1 1 20em;
+  display: flex;
+  align-items: center;
+  gap: 0.75ch;
+  height: 2.6em;
+  padding: 0 var(--space-medium);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+}
+.search:focus-within { border-color: var(--color-terminal-blue); }
+.search .prompt { color: var(--color-green); font-weight: 700; user-select: none; }
+.search input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--color-terminal-white);
+  font: inherit;
+}
+.search input::placeholder { color: rgb(var(--rgb-terminal-blue) / 0.55); }
+.search kbd {
+  font: inherit;
+  font-size: 80%;
+  padding: 0.1em 0.5em;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 0.3em;
+  color: rgb(var(--rgb-terminal-blue) / 0.7);
+}
+.sorts { display: flex; gap: var(--space-small); flex: none; }
+.chip.sort {
+  height: 2.6em;
+  padding: 0 var(--space-medium);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--color-terminal-blue);
+  font: inherit;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+.chip.sort:hover { border-color: var(--color-terminal-blue); }
+.chip.sort[aria-pressed="true"] { border-color: var(--color-terminal-blue); color: var(--color-turquoise); }
+.bar .button { flex: none; height: 2.6em; }
+@media (max-width: 860px) {
+  .bar { height: auto; }
+  .bar-row { flex-wrap: wrap; padding: 0.6em 0; gap: 0.5em; }
+  .search { flex: 1 1 100%; order: 1; }
+  .sorts { order: 2; }
+  .bar .button { order: 3; margin-left: auto; }
+}
+@media (max-width: 600px) { .search kbd { display: none; } }
+
+.count { color: rgb(var(--rgb-terminal-blue) / 0.6); font-size: 90%; margin: var(--space-small) 0 0; }
+.count b { color: var(--color-terminal-white); font-weight: 700; }
+
+/* =================== SECTION RULE =================== */
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  margin: var(--space-x-large) 0 var(--space-medium);
+  font-size: 90%;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgb(var(--rgb-terminal-blue) / 0.7);
+}
+.sec-label::after { content: ""; flex: 1; border-top: var(--border-width) dashed var(--border-color); }
+.sec-label small {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: rgb(var(--rgb-terminal-blue) / 0.5);
+}
+
+/* =================== NEW ARRIVALS =================== */
+.arrivals { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-medium); }
+@media (max-width: 900px) { .arrivals { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .arrivals { grid-template-columns: 1fr; } }
+
+.card.featured {
+  min-height: 9.5em;
+  border-top: 2px solid var(--color-orange);
+  background: linear-gradient(180deg, rgb(var(--rgb-orange) / 0.07), transparent 45%), var(--color-background-storm);
+}
+.card.featured:hover, .card.featured:focus-visible { transform: translateY(-2px); border-color: var(--border-color); border-top-color: var(--color-orange); }
+.card.featured .new-label {
+  font-size: 70%;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-orange);
+}
+.card.featured p { -webkit-line-clamp: 3; }
+.card.featured .added { color: rgb(var(--rgb-orange) / 0.85); }
+
+/* =================== CATEGORY FILTER ROW =================== */
+.cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: var(--space-medium) 0 0;
+}
+.chip[data-cat] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7ch;
+  height: 2.4em;
+  padding: 0 0.85em;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: rgb(var(--rgb-terminal-blue) / 0.85);
+  font: inherit;
+  font-size: 88%;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+.chip[data-cat] b { font-weight: 400; color: rgb(var(--rgb-terminal-blue) / 0.5); font-variant-numeric: tabular-nums; }
+.chip[data-cat]:hover { border-color: var(--cat); }
+.chip[data-cat][aria-pressed="true"] {
+  border-color: var(--cat);
+  background: rgb(from var(--cat) r g b / 0.14);
+  color: var(--color-terminal-white);
+}
+.chip[data-cat][aria-pressed="true"] b { color: var(--cat); }
+.chip[data-cat] .dot, .group h2 .dot, footer.site .legend .dot {
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--cat);
+  flex: none;
+}
+.filter-active {
+  display: none;
+  align-items: center;
+  gap: 0.6ch;
+  height: 2.4em;
+  padding: 0 0.7em 0 0.9em;
+  margin: var(--space-medium) 0 0;
+  background: rgb(from var(--cat, var(--rgb-terminal-blue)) r g b / 0.12);
+  border: var(--border-width) solid var(--cat, var(--border-color));
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+  font-size: 88%;
+  width: max-content;
+}
+.filter-active.on { display: inline-flex; }
+.filter-active button { background: none; border: 0; color: inherit; font: inherit; cursor: pointer; opacity: 0.7; }
+.filter-active button:hover { opacity: 1; color: var(--color-turquoise); }
+
+/* =================== CATALOGUE GROUPS =================== */
+.group { scroll-margin-top: calc(var(--bar-h) + 1em); }
+.group h2 {
+  position: sticky;
+  top: var(--bar-h);
+  z-index: 15;
+  display: flex;
+  align-items: baseline;
+  gap: 0.8ch;
+  margin: 0;
+  padding: 0.6em 0 0.5em;
+  background: linear-gradient(var(--color-background-night) 78%, transparent);
+  font-size: 95%;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-terminal-white);
+}
+.group h2 .dot { align-self: center; }
+.group h2 b { font-weight: 400; color: rgb(var(--rgb-terminal-blue) / 0.55); font-variant-numeric: tabular-nums; }
+.group + .group { margin-top: var(--space-large); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.5em, 1fr));
+  gap: 0.75em;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  min-height: 7.4em;
+  padding: 0.85em 1em;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.card:hover, .card:focus-visible { border-color: rgb(from var(--cat) r g b / 0.85); background: rgb(var(--rgb-terminal-black) / 0.28); }
+.card header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.2em 1ch; }
+.card h3 {
+  margin: 0;
+  font-size: 100%;
+  font-weight: 700;
+  color: var(--color-terminal-white);
+  overflow-wrap: break-word;
+}
+.card h3 a { color: inherit; text-decoration: none; }
+.card:hover h3 { color: var(--color-turquoise); }
+.card .ver { color: var(--color-green); font-size: 82%; white-space: nowrap; opacity: 0.9; }
+.card p {
+  margin: 0;
+  flex: 1;
+  font-size: 94%;
+  line-height: 1.45;
+  color: rgb(var(--rgb-terminal-blue) / 0.85);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.card footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 82%;
+  color: rgb(var(--rgb-terminal-blue) / 0.55);
+}
+.card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
+
+.empty {
+  display: none;
+  text-align: center;
+  padding: var(--space-x-large) 0;
+  color: rgb(var(--rgb-terminal-blue) / 0.7);
+}
+.faq { margin-top: var(--space-xx-large); }
+.faq details {
+  margin-top: var(--space-small);
+  padding: 0.9em var(--space-medium);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.faq summary { color: var(--color-terminal-white); font-weight: 700; cursor: pointer; }
+.faq details p { margin: 0.7em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.85); }
+.empty.on { display: block; }
+.empty p { margin: 0 0 var(--space-medium); }
+.empty b { color: var(--color-terminal-white); }
+
+/* =================== BUTTON (omarchy.org recipe) =================== */
+.button {
+  align-items: center;
+  background: var(--color-terminal-blue);
+  border: none;
+  border-radius: var(--radius);
+  box-shadow:
+    0 1px 0 0 rgba(var(--rgb-black), 0.1),
+    0 0.2em 1.2em -0.4em rgba(var(--rgb-black), 0.2),
+    0 0.4em 2.0em -0.8em rgba(var(--rgb-black), 0.3),
+    0 0.4em 0.4em -0.8em rgba(var(--rgb-black), 0.4),
+    0 0.8em 0.8em -1.2em rgba(var(--rgb-black), 0.5),
+    0 1.2em 1.2em -1.6em rgba(var(--rgb-black), 0.6);
+  color: var(--color-background-night);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-weight: 700;
+  gap: 1ch;
+  height: 2.9em;
+  line-height: 1;
+  padding-inline: var(--space-medium);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background var(--transition), color var(--transition);
+}
+.button:hover { background: var(--color-turquoise); color: var(--color-background-night); }
+.button.ghost { background: transparent; color: var(--color-terminal-blue); box-shadow: none; border: var(--border-width) solid var(--border-color); }
+.button.ghost:hover { border-color: var(--color-terminal-blue); color: var(--color-turquoise); background: transparent; }
+
+/* =================== REQUEST PANEL =================== */
+.request {
+  text-align: center;
+  padding: var(--space-x-large) var(--space-large);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.request h2 { margin: 0 0 0.4em; font-size: 130%; color: var(--color-terminal-white); }
+.request p { margin: 0 auto var(--space-medium); max-width: 40em; color: rgb(var(--rgb-terminal-blue) / 0.8); }
+.request .addr { margin-top: var(--space-medium); font-size: 90%; color: rgb(var(--rgb-terminal-blue) / 0.55); }
+.request .addr a { color: inherit; }
+
+/* =================== DETAIL DIALOG =================== */
+dialog {
+  width: min(52em, calc(100vw - 2em));
+  max-height: min(88vh, 100dvh - 2em);
+  overflow-y: auto;
+  padding: 0;
+  background: var(--color-background-night);
+  color: var(--color-terminal-blue);
+  border: var(--border-width) solid var(--color-terminal-black);
+  border-radius: var(--radius);
+  font: inherit;
+}
+dialog::backdrop { background: rgb(var(--rgb-black) / 0.6); backdrop-filter: blur(3px); }
+.detail { padding: var(--space-large); display: grid; gap: var(--space-medium); }
+.detail header { display: flex; align-items: baseline; justify-content: space-between; gap: 1ch; }
+.detail h2 { margin: 0; font-size: 150%; color: var(--color-terminal-white); overflow-wrap: anywhere; }
+.detail .ver { color: var(--color-green); }
+.detail .close {
+  background: transparent; border: 0; color: var(--color-terminal-blue); font: inherit; font-size: 125%; cursor: pointer; line-height: 1;
+}
+.detail .close:hover { color: var(--color-turquoise); }
+.detail .cat-tag {
+  display: inline-flex; align-items: center; gap: 0.6ch;
+  padding: 0.2em 0.7em; border-radius: 1em;
+  border: var(--border-width) solid rgb(from var(--cat) r g b / 0.5);
+  color: var(--cat); font-size: 82%; width: max-content;
+}
+.detail .cat-tag .dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); }
+.detail p.tagline { margin: 0; font-size: 108%; font-weight: 700; color: var(--color-terminal-white); }
+.detail p.desc { margin: 0; color: var(--color-terminal-white); }
+.detail .label {
+  margin: 0 0 0.5em;
+  font-size: 80%; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: rgb(var(--rgb-terminal-blue) / 0.6);
+}
+.detail .label small {
+  display: block; margin-top: 0.2em;
+  font-size: 100%; font-weight: 400; text-transform: none; letter-spacing: 0;
+  color: rgb(var(--rgb-terminal-blue) / 0.5);
+}
+
+/* --- screenshot --- */
+.shot-wrap {
+  margin: 0;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-background-storm);
+}
+.shot-wrap img { display: block; width: 100%; height: auto; }
+
+/* --- pricing badge --- */
+.badges { display: flex; flex-wrap: wrap; gap: 0.5em; }
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 0.3em 0.8em; border-radius: 1em;
+  font-size: 82%; font-weight: 700;
+  border: var(--border-width) solid var(--border-color);
+  color: rgb(var(--rgb-terminal-blue) / 0.85);
+}
+.badge.p-free, .badge.p-free-libre { border-color: rgb(var(--rgb-green) / 0.5); color: var(--color-green); }
+.badge.p-freemium { border-color: rgb(var(--rgb-terminal-cyan) / 0.5); color: var(--color-terminal-cyan); }
+.badge.p-paid, .badge.p-subscription { border-color: rgb(var(--rgb-orange) / 0.5); color: var(--color-orange); }
+
+/* --- requirements --- */
+.reqs { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.4em; }
+.reqs li {
+  padding-left: 1.4em;
+  position: relative;
+  color: var(--color-terminal-white);
+  font-size: 92%;
+}
+.reqs li::before { content: "▸"; position: absolute; left: 0; color: rgb(var(--rgb-terminal-blue) / 0.6); }
+
+/* --- video: click-to-play, zero requests until clicked --- */
+.video-ph {
+  display: flex; align-items: center; gap: 1ch;
+  width: 100%; padding: 1em 1.2em;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+  font: inherit; font-weight: 700;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+.video-ph:hover { border-color: var(--color-terminal-blue); color: var(--color-turquoise); }
+.video-ph .play-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2em; height: 2em; flex: none;
+  border-radius: 50%;
+  background: var(--color-terminal-blue);
+  color: var(--color-background-night);
+  font-size: 80%;
+}
+.video-ph:hover .play-icon { background: var(--color-turquoise); }
+.term {
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.term .bar-line {
+  display: flex; align-items: center; justify-content: space-between; gap: 1ch;
+  padding: 0.5em var(--space-medium);
+  border-bottom: var(--border-width) solid var(--border-color);
+  font-size: 85%; text-transform: uppercase; color: rgb(var(--rgb-terminal-blue) / 0.7);
+}
+.term .bar-line .button { height: 2.2em; font-size: 85%; }
+.term pre { margin: 0; padding: var(--space-medium); overflow-x: auto; color: var(--color-terminal-white); }
+.term pre .p { color: var(--color-green); user-select: none; }
+.meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+  gap: var(--space-small) var(--space-medium);
+  margin: 0;
+}
+.meta div { display: grid; gap: 0.15em; }
+.meta dt { font-size: 80%; text-transform: uppercase; color: rgb(var(--rgb-terminal-blue) / 0.6); }
+.meta dd { margin: 0; color: var(--color-terminal-white); overflow-wrap: anywhere; }
+.deps { display: flex; flex-wrap: wrap; gap: 0.4em; }
+.deps span {
+  padding: 0.15em 0.6em;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 0.3em;
+  font-size: 85%;
+  color: rgb(var(--rgb-terminal-blue) / 0.85);
+}
+.detail .actions { display: flex; flex-wrap: wrap; gap: var(--space-small); }
+.detail .claim-note {
+  margin: calc(-1 * var(--space-small)) 0 0;
+  color: rgb(var(--rgb-terminal-blue) / 0.62);
+  font-size: 82%;
+}
+
+/* =================== FOOTER =================== */
+footer.site {
+  border-top: var(--border-width) solid var(--border-color);
+  padding: var(--space-large) 0 var(--space-x-large);
+  color: rgb(var(--rgb-terminal-blue) / 0.75);
+  font-size: 90%;
+}
+footer.site .row { display: flex; flex-wrap: wrap; gap: var(--space-medium) var(--space-large); justify-content: space-between; margin-bottom: var(--space-medium); }
+footer.site nav { display: flex; flex-wrap: wrap; gap: var(--space-medium); }
+footer.site p { margin: 0 0 var(--space-small); max-width: 60em; }
+footer.site .legend {
+  display: flex; flex-wrap: wrap; gap: 0.5em 1.4em;
+  padding-top: var(--space-medium);
+  border-top: var(--border-width) solid var(--border-color);
+  font-size: 85%;
+  color: rgb(var(--rgb-terminal-blue) / 0.6);
+}
+footer.site .legend span { display: inline-flex; align-items: center; gap: 0.6ch; }
+footer.site .legend .dot { width: 0.5em; height: 0.5em; }
+
+@media (max-width: 600px) {
+  .hero { padding-top: var(--space-large); }
+  .hero pre { font-size: 85%; }
+}
+</style>
+</head>
+<body>
+<div class="notification"><span>Unofficial package guide — packages come from the official Omarchy repository</span></div>
+<main class="wrap app-page">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../index.html">App Store</a><span aria-hidden="true">/</span><span>elephant-runner</span></nav>
+  <article>
+    <header class="app-header">
+      <div><p class="eyebrow">Utilities · version 2.22.0-1</p><h1>elephant-runner</h1><p class="app-lead">The command-runner provider for elephant: it scans your PATH and lets you type and execute arbitrary shell commands as launcher results, similar to a run…</p></div>
+      <a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+elephant-runner+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a>
+    </header>
+    
+    <section><h2>What is elephant-runner?</h2><p>The command-runner provider for elephant: it scans your PATH and lets you type and execute arbitrary shell commands as launcher results, similar to a run dialog but integrated into the same search interface used for apps and files.</p></section>
+    <section><h2>Install elephant-runner on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add elephant-runner</pre></div></section>
+    <section class="app-columns"><div><h2>Good to know</h2><ul><li>A running elephant daemon and a frontend such as Walker</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>free-libre</dd><dt>Licence</dt><dd>GPL</dd><dt>Download</dt><dd>8 MB</dd><dt>Installed</dt><dd>22.9 MB</dd></dl></div></section>
+    
+    <div class="actions"><a class="button ghost" href="https://github.com/abenz1267/elephant" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/elephant-runner" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
+  </article>
+</main>
+<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-09-04 · unofficial directory</span></div></div></footer>
+</body>
+</html>
