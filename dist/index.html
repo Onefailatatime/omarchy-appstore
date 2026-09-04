@@ -145,12 +145,100 @@ b, strong { font-weight: 700; }
 .notification {
   background: var(--color-terminal-blue);
   color: var(--color-background-night);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4em 1em;
   text-align: center;
   padding: 0.55em var(--space-medium);
   font-weight: 700;
 }
 .notification a { color: inherit; text-decoration: none; }
 .notification a:hover { text-decoration: underline; }
+
+/* =================== DEVELOPMENT GUIDE =================== */
+.guide-hero { padding-bottom: var(--space-medium); }
+.guide-hero .back { display: inline-block; margin-bottom: var(--space-large); }
+.guide-main { max-width: 62rem; padding-bottom: var(--space-xx-large); }
+.guide-intro {
+  margin: var(--space-large) 0;
+  padding: var(--space-neutral);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-left: 3px solid var(--color-terminal-cyan);
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+}
+.guide-intro p { margin: 0; }
+.guide-progress {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--space-medium);
+  padding: 0.8em var(--space-medium);
+  background: rgb(var(--rgb-background-night) / 0.96);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+}
+.guide-progress strong { color: var(--color-terminal-white); }
+.guide-progress progress { flex: 1; accent-color: var(--color-green); }
+.guide-progress button {
+  border: 0;
+  background: transparent;
+  color: var(--color-terminal-blue);
+  font: inherit;
+  cursor: pointer;
+}
+.guide-progress button:hover { color: var(--color-turquoise); }
+.check-section { margin-top: var(--space-x-large); }
+.check-section h2 {
+  margin: 0 0 var(--space-medium);
+  padding-bottom: 0.45em;
+  border-bottom: var(--border-width) solid var(--border-color);
+  color: var(--color-terminal-white);
+  font-size: 130%;
+}
+.checklist { display: grid; gap: 0.65em; margin: 0; padding: 0; list-style: none; }
+.checklist label {
+  display: grid;
+  grid-template-columns: 1.25em 1fr;
+  gap: 0.8em;
+  align-items: start;
+  padding: 0.8em 1em;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+  cursor: pointer;
+}
+.checklist label:hover { border-color: var(--color-terminal-blue); }
+.checklist input { margin-top: 0.22em; accent-color: var(--color-green); }
+.checklist input:checked + span { color: rgb(var(--rgb-terminal-blue) / 0.62); text-decoration: line-through; }
+.checklist small { display: block; margin-top: 0.3em; color: rgb(var(--rgb-terminal-blue) / 0.7); }
+.guide-code {
+  margin: var(--space-medium) 0;
+  padding: var(--space-medium);
+  overflow-x: auto;
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--color-green);
+  font: inherit;
+}
+.tip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(18em, 1fr)); gap: var(--space-medium); }
+.tip {
+  padding: var(--space-neutral);
+  background: var(--color-background-storm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+}
+.tip h3 { margin: 0 0 0.5em; color: var(--color-terminal-white); font-size: 105%; }
+.tip p { margin: 0; }
+.sources { color: rgb(var(--rgb-terminal-blue) / 0.75); }
+.sources li + li { margin-top: 0.5em; }
 
 /* =================== HERO =================== */
 .hero { text-align: center; padding: var(--space-x-large) 0 var(--space-large); }
@@ -644,6 +732,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 
 <div class="notification">
   <a href="https://omarchy.org/">A community package browser for Omarchy — packages ship from the official repo, pkgs.omarchy.org</a>
+  <span aria-hidden="true">·</span>
+  <a href="develop.html">Develop for Omarchy →</a>
 </div>
 
 <header class="hero">
@@ -2789,9 +2879,10 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
         <a href="https://omarchy.org/manual/">Manual</a>
         <a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs on GitHub</a>
         <a href="https://omarchyplugins.com/">Plugins</a>
+        <a href="develop.html">Develop for Omarchy</a>
         <a href="mailto:jessyka@slapforge.com?subject=Unofficial%20Omarchy%20App%20Store%3A%20package%20request&amp;body=Package%20name%3A%20%0D%0AProject%20URL%3A%20%0D%0AWhy%20it%20belongs%20in%20the%20Omarchy%20repo%3A%20%0D%0A%0D%0A--%20sent%20from%20the%20Unofficial%20Omarchy%20App%20Store%20%28community%20site%29">Request an app</a>
       </nav>
-      <span>Synced 2026-09-04 · no trackers, no third-party requests</span>
+      <span>Synced 2026-09-04 · no trackers · videos are click-to-play</span>
     </div>
     <div class="legend" aria-hidden="true"><span class="cat-ai-agents"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span> · <span class="cat-developer-tools"><span class="dot" aria-hidden="true"></span>Developer Tools</span> · <span class="cat-terminal-shell"><span class="dot" aria-hidden="true"></span>Terminal &amp; Shell</span> · <span class="cat-themes-desktop"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span> · <span class="cat-system-drivers"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span> · <span class="cat-gaming-emulation"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span> · <span class="cat-media-creative"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span> · <span class="cat-productivity-notes"><span class="dot" aria-hidden="true"></span>Productivity &amp; Notes</span> · <span class="cat-security-privacy"><span class="dot" aria-hidden="true"></span>Security &amp; Privacy</span> · <span class="cat-browsers-web"><span class="dot" aria-hidden="true"></span>Browsers &amp; Web</span> · <span class="cat-communication"><span class="dot" aria-hidden="true"></span>Communication</span> · <span class="cat-utilities"><span class="dot" aria-hidden="true"></span>Utilities</span></div>
   </div>

@@ -372,6 +372,10 @@ def main() -> None:
             .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     DIST.mkdir(exist_ok=True)
     (DIST / "index.html").write_text(page, encoding="utf-8")
+    develop = ((ROOT / "parts" / "develop.html").read_text(encoding="utf-8")
+               .replace("__SYNCED__", synced)
+               .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
+    (DIST / "develop.html").write_text(develop, encoding="utf-8")
     fonts = DIST / "fonts"
     fonts.mkdir(exist_ok=True)
     for f in (ROOT / "assets" / "fonts").glob("*.woff2"):
@@ -380,6 +384,7 @@ def main() -> None:
     unresolved = [p["name"] for p in pkgs if not p["added"]]
     uncategorized = [p["name"] for p in pkgs if p["category"] == FALLBACK_CATEGORY and p["name"] not in json.loads(CATEGORIES_FILE.read_text() or "{}")]
     print(f"dist/index.html  {len(page):,} bytes · {len(pkgs)} packages · synced {synced}")
+    print(f"dist/develop.html {len(develop):,} bytes · public packaging checklist")
     print("new arrivals:    " + ", ".join(f"{p['name']} ({datetime.date.fromtimestamp(p['added'])})" for p in newest))
     if unresolved:
         print(f"no git history for {len(unresolved)}: {', '.join(unresolved)}")

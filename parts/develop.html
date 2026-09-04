@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Develop for Omarchy — public app packaging checklist</title>
+<meta name="description" content="A practical, unofficial checklist for safely packaging and testing applications for the Omarchy package repository.">
+<meta property="og:title" content="Develop for Omarchy">
+<meta property="og:description" content="An unofficial app packaging checklist based on current Omarchy and Arch Linux guidance.">
+<meta property="og:type" content="website">
+<style>
+__STYLE__
+</style>
+</head>
+<body>
+
+<div class="notification">
+  <span>Unofficial community guide — always check the upstream repository before submitting</span>
+  <span aria-hidden="true">·</span>
+  <a href="index.html">Browse apps →</a>
+</div>
+
+<header class="hero guide-hero">
+  <div class="wrap">
+    <a class="back" href="index.html">← Unofficial Omarchy App Store</a>
+<pre aria-hidden="true">╭──────────╮
+│ <b>PKGBUILD</b> │
+│    ✓     │
+╰──────────╯</pre>
+    <h1>Develop for <span>Omarchy</span></h1>
+    <p class="tag">A practical checklist for preparing safe, maintainable app packages.</p>
+    <p class="facts">Unofficial guide · based on public Omarchy and Arch Linux documentation · reviewed __SYNCED__</p>
+  </div>
+</header>
+
+<main class="wrap guide-main">
+  <div class="guide-intro">
+    <p>This guide is for application contributors, not repository operators. It helps you prepare a package and a focused pull request; signing, publishing, promotion, and production access remain the maintainers’ responsibility.</p>
+  </div>
+
+  <div class="guide-progress" aria-live="polite">
+    <strong id="progress-text">0 of 33 complete</strong>
+    <progress id="progress" value="0" max="33">0%</progress>
+    <button type="button" id="reset">Reset</button>
+  </div>
+
+  <section class="check-section">
+    <h2>1. Choose the right source</h2>
+    <ul class="checklist">
+      <li><label><input type="checkbox"><span>Confirm the application has a stable upstream release, a real project homepage, and a licence that permits redistribution.</span></label></li>
+      <li><label><input type="checkbox"><span>Search the official Omarchy repository and the AUR first so you do not create a duplicate package.</span></label></li>
+      <li><label><input type="checkbox"><span>Prefer the AUR route when a healthy package already exists there; use a local Omarchy package when custom packaging is genuinely needed.</span></label></li>
+      <li><label><input type="checkbox"><span>Verify every release URL, asset name, architecture, version tag, and checksum against the upstream release.</span></label></li>
+    </ul>
+  </section>
+
+  <section class="check-section">
+    <h2>2. Scaffold the Omarchy package</h2>
+    <p>Work in a fork of the official package repository. Each package belongs in <code>pkgbuilds/&lt;package-name&gt;/</code> and carries Omarchy metadata in <code>.omarchy/package.json</code>.</p>
+<pre class="guide-code"># Existing AUR package
+bin/add-package package-name
+
+# New package maintained in this repository
+bin/add-package package-name --local --scaffold</pre>
+    <ul class="checklist">
+      <li><label><input type="checkbox"><span>Use a lowercase, descriptive package name consistent with Arch naming conventions.</span></label></li>
+      <li><label><input type="checkbox"><span>Keep <code>.omarchy/package.json</code> minimal: declare whether the source is <code>aur</code> or <code>local</code>, then add only behavior the package needs.</span></label></li>
+      <li><label><input type="checkbox"><span>If an AUR package needs lasting changes, store focused patches under <code>.omarchy/patches/</code> rather than editing synced files without a reproducible patch.</span></label></li>
+      <li><label><input type="checkbox"><span>Use a custom upstream hook only when the repository’s declarative GitHub release provider cannot describe the vendor’s releases.</span></label></li>
+    </ul>
+  </section>
+
+  <section class="check-section">
+    <h2>3. Write trustworthy package metadata</h2>
+    <ul class="checklist">
+      <li><label><input type="checkbox"><span>Set accurate <code>pkgver</code>, <code>pkgrel</code>, description, architecture, URL, and licence fields.</span></label></li>
+      <li><label><input type="checkbox"><span>List runtime dependencies in <code>depends</code> and build-only tools in <code>makedepends</code>; do not rely on software that merely happens to be installed on your machine.</span></label></li>
+      <li><label><input type="checkbox"><span>Use <code>provides</code>, <code>conflicts</code>, and <code>replaces</code> only when their exact package-management semantics are required.</span></label></li>
+      <li><label><input type="checkbox"><span>Use cryptographic checksums for downloaded release assets. Never copy a checksum from an untrusted mirror or disable verification just to make a build pass.</span></label></li>
+      <li><label><input type="checkbox"><span>Map every supported architecture to the correct asset, or explicitly limit <code>arch</code> when upstream does not support another architecture.</span></label></li>
+    </ul>
+  </section>
+
+  <section class="check-section">
+    <h2>4. Package files safely</h2>
+    <ul class="checklist">
+      <li><label><input type="checkbox"><span>Install bundled applications under an appropriate system location such as <code>/opt/&lt;app&gt;</code>, with launchers in standard executable paths.</span></label></li>
+      <li><label><input type="checkbox"><span>Keep PKGBUILDs, metadata, desktop entries, and data files non-executable; grant <code>755</code> only to actual programs and scripts.</span></label></li>
+      <li><label><input type="checkbox"><span>Avoid setuid, broad write permissions, unnecessary capabilities, and elevated post-install actions. Document any privilege that is truly unavoidable.</span></label></li>
+      <li><label><input type="checkbox"><span>Do not hard-code a username, home directory, local build path, private host, credential, API key, or maintainer-only infrastructure.</span></label></li>
+      <li><label><input type="checkbox"><span>Make uninstalling remove packaged files without deleting user-created data or configuration.</span></label></li>
+    </ul>
+  </section>
+
+  <section class="check-section">
+    <h2>5. Integrate with the desktop</h2>
+    <ul class="checklist">
+      <li><label><input type="checkbox"><span>Provide a valid <code>.desktop</code> launcher with matching executable, icon, categories, and startup behavior.</span></label></li>
+      <li><label><input type="checkbox"><span>Install icons into standard system icon locations and verify they appear in the Omarchy application launcher.</span></label></li>
+      <li><label><input type="checkbox"><span>Launch the app from both a terminal and the application menu under Hyprland; watch for Wayland, portal, tray, notification, and file-picker problems.</span></label></li>
+      <li><label><input type="checkbox"><span>Keep install messages short and limited to user actions that are genuinely required after installation.</span></label></li>
+    </ul>
+  </section>
+
+  <section class="check-section">
+    <h2>6. Test like a new user</h2>
+    <ul class="checklist">
+      <li><label><input type="checkbox"><span>Build from a clean checkout and, when practical, in a clean Arch chroot so undeclared local dependencies cannot hide mistakes.</span></label></li>
+      <li><label><input type="checkbox"><span>Run <code>namcap</code> against the PKGBUILD and built package, then review warnings rather than dismissing them automatically.</span></label></li>
+      <li><label><input type="checkbox"><span>Use the repository’s dry-run option to inspect the build plan before running a real package build.</span></label></li>
+      <li><label><input type="checkbox"><span>Install the resulting package, exercise its main workflows as a normal user, reboot or log in again if integration depends on a new session, then uninstall it.</span></label></li>
+      <li><label><input type="checkbox"><span>Inspect the final package file list, ownership, permissions, dependencies, installed size, and absence of build-machine paths or secrets.</span></label></li>
+      <li><label><input type="checkbox"><span>If multiple architectures are declared, test each one or clearly state which architecture remains unverified.</span></label></li>
+    </ul>
+  </section>
+
+  <section class="check-section">
+    <h2>7. Prepare a useful pull request</h2>
+    <ul class="checklist">
+      <li><label><input type="checkbox"><span>Keep the change focused: package files, required Omarchy metadata, and only the patches or hooks needed to reproduce the result.</span></label></li>
+      <li><label><input type="checkbox"><span>Explain the app, why it belongs in Omarchy, where the source came from, how updates are tracked, and exactly what you tested.</span></label></li>
+      <li><label><input type="checkbox"><span>Include important limitations, architecture gaps, unusual permissions, proprietary licensing, network services, or accounts the app requires.</span></label></li>
+      <li><label><input type="checkbox"><span>Review the complete diff for generated junk, personal information, credentials, local paths, and unrelated edits before pushing.</span></label></li>
+      <li><label><input type="checkbox"><span>Expect maintainer revisions. A strong submission is safe, reproducible, understandable, and easy to refine.</span></label></li>
+    </ul>
+  </section>
+
+  <section class="check-section">
+    <h2>Extra tips that prevent common failures</h2>
+    <div class="tip-grid">
+      <article class="tip"><h3>Pin inputs together</h3><p>When a URL, version, asset name, or checksum changes, review them as one unit. A valid checksum for the wrong artifact is still the wrong package.</p></article>
+      <article class="tip"><h3>Do not publish from contributor machines</h3><p>Build, test, and open a pull request. Repository signing keys, production syncing, release promotion, and infrastructure secrets belong to maintainers.</p></article>
+      <article class="tip"><h3>Prefer reproducible customization</h3><p>For AUR-derived packages, use the repository’s patch and package-worktree workflow so the next upstream sync can recreate your changes.</p></article>
+      <article class="tip"><h3>Treat fast releases carefully</h3><p>Release rings and channel restrictions affect how packages reach users. Do not opt into faster delivery unless maintainers request it and the update risk is understood.</p></article>
+      <article class="tip"><h3>Consider release quarantine</h3><p>For automated upstream tracking, a minimum release age can give compromised or broken releases time to be noticed before packaging.</p></article>
+      <article class="tip"><h3>Test the actual desktop path</h3><p>A binary launching in a terminal does not prove its desktop entry, icon, portal integration, environment, or Wayland behavior works from the launcher.</p></article>
+    </div>
+  </section>
+
+  <section class="check-section">
+    <h2>Authoritative references</h2>
+    <p>This page is a friendly companion, not a replacement for upstream rules.</p>
+    <ul class="sources">
+      <li><a href="https://github.com/omacom/omarchy-pkgs" target="_blank" rel="noopener">Official Omarchy Package Repository</a> — current metadata, scaffolding, build, architecture, and update workflow.</li>
+      <li><a href="https://wiki.archlinux.org/title/Creating_packages" target="_blank" rel="noopener">ArchWiki: Creating packages</a> — PKGBUILD fundamentals and validation.</li>
+      <li><a href="https://wiki.archlinux.org/title/DeveloperWiki:Building_in_a_clean_chroot" target="_blank" rel="noopener">ArchWiki: Building in a clean chroot</a> — isolated build testing.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Develop for Omarchy is an unofficial community resource and is not affiliated with Omacom or DHH. Upstream repository guidance always takes precedence.</p>
+    <div class="row">
+      <nav>
+        <a href="index.html">App Store</a>
+        <a href="https://github.com/omacom/omarchy-pkgs">Official package repository</a>
+        <a href="https://omarchy.org/manual/">Omarchy manual</a>
+      </nav>
+      <span>Reviewed __SYNCED__ · checklist progress stays in this browser</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.checklist input[type="checkbox"]'));
+  var progress = document.getElementById("progress");
+  var progressText = document.getElementById("progress-text");
+  var storageKey = "omarchy-develop-checklist-v1";
+
+  function render() {
+    var complete = boxes.filter(function (box) { return box.checked; }).length;
+    progress.max = boxes.length;
+    progress.value = complete;
+    progressText.textContent = complete + " of " + boxes.length + " complete";
+  }
+  function save() {
+    try { localStorage.setItem(storageKey, JSON.stringify(boxes.map(function (box) { return box.checked; }))); } catch (e) {}
+    render();
+  }
+  try {
+    var saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    boxes.forEach(function (box, i) { box.checked = saved[i] === true; });
+  } catch (e) {}
+  boxes.forEach(function (box) { box.addEventListener("change", save); });
+  document.getElementById("reset").addEventListener("click", function () {
+    boxes.forEach(function (box) { box.checked = false; });
+    save();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
