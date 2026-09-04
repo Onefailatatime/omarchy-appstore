@@ -634,20 +634,27 @@ b, strong { font-weight: 700; }
 
 /* =================== HOMEPAGE TOP APPS =================== */
 .home-top { scroll-margin-top: calc(var(--bar-h) + 1em); margin-top: var(--space-large); }
+.home-rankings {
+  padding: var(--space-large);
+  border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.24);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(var(--rgb-terminal-blue), 0.095), rgba(var(--rgb-background-storm), 0.65));
+  box-shadow: inset 0 2px 0 rgba(var(--rgb-terminal-blue), 0.72);
+}
 .home-top-head { display: flex; align-items: end; justify-content: space-between; gap: var(--space-large); }
 .home-top-head .eyebrow { margin: 0 0 0.35em; color: var(--color-green); font-size: 78%; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .home-top-head h2 { margin: 0; color: var(--color-terminal-white); font-size: clamp(1.25rem, 3vw, 1.75rem); }
 .home-leader-status { margin: 0.45em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.58); font-size: 82%; }
-.home-leaders { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75em; margin: var(--space-medium) 0; }
+.home-leaders { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75em; margin: var(--space-medium) 0 0; }
 .home-leader {
   min-width: 0;
   overflow: hidden;
-  border: var(--border-width) solid var(--border-color);
+  border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.18);
   border-top: 2px solid var(--cat);
   border-radius: var(--radius);
-  background: rgb(var(--rgb-terminal-blue) / 0.025);
+  background: rgba(var(--rgb-background-night), 0.46);
 }
-.home-leader-champion { border-color: rgb(var(--rgb-terminal-blue) / 0.42); border-top-color: var(--cat); background: rgb(var(--rgb-terminal-blue) / 0.055); }
+.home-leader-champion { border-color: rgba(var(--rgb-terminal-blue), 0.42); border-top-color: var(--cat); background: rgba(var(--rgb-terminal-blue), 0.075); }
 .home-leader-line {
   display: flex;
   align-items: center;
@@ -661,7 +668,7 @@ b, strong { font-weight: 700; }
   text-decoration: none;
   white-space: nowrap;
 }
-.home-leader-line:hover { color: var(--color-turquoise); background: rgb(var(--rgb-terminal-blue) / 0.04); }
+.home-leader-line:hover { color: var(--color-turquoise); background: rgba(var(--rgb-terminal-blue), 0.07); }
 .home-leader-rank { flex: none; color: var(--cat); font-weight: 700; }
 .home-leader-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .home-leader-score { flex: none; color: var(--color-green); font-size: 82%; }
@@ -671,10 +678,11 @@ b, strong { font-weight: 700; }
   justify-content: space-between;
   gap: var(--space-large);
   padding: var(--space-neutral);
-  border: var(--border-width) solid var(--border-color);
+  border: var(--border-width) solid rgba(var(--rgb-orange), 0.26);
   border-left: 2px solid var(--color-orange);
   border-radius: var(--radius);
-  background: rgb(var(--rgb-terminal-blue) / 0.025);
+  margin-top: 0.75em;
+  background: linear-gradient(90deg, rgba(var(--rgb-orange), 0.105), rgba(var(--rgb-background-storm), 0.48) 72%);
 }
 .suggestion-bar h2 { margin: 0; color: var(--color-terminal-white); font-size: 105%; }
 .suggestion-bar p { margin: 0.3em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.68); font-size: 86%; }
@@ -686,8 +694,40 @@ b, strong { font-weight: 700; }
   .suggestion-bar .button { justify-content: center; }
 }
 @media (max-width: 600px) {
+  .home-rankings { padding: var(--space-neutral); }
   .home-leaders { grid-template-columns: 1fr; gap: 0.5em; }
   .home-leader-line { min-height: 48px; }
+}
+
+/* =================== HOMEPAGE SECTION SURFACES =================== */
+.arrivals-section,
+.category-browser,
+.faq {
+  border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.16);
+  border-radius: var(--radius);
+}
+.arrivals-section {
+  margin-top: var(--space-x-large);
+  padding: var(--space-large);
+  background: linear-gradient(145deg, rgba(var(--rgb-orange), 0.075), rgba(var(--rgb-background-storm), 0.42) 58%, transparent);
+}
+.arrivals-section .sec-label,
+.category-browser .sec-label,
+.faq .sec-label { margin-top: 0; }
+.arrivals-section .sec-label { color: rgba(var(--rgb-orange), 0.9); }
+.arrivals-section .sec-label::after { border-top-color: rgba(var(--rgb-orange), 0.32); }
+.category-browser {
+  margin-top: var(--space-x-large);
+  padding: var(--space-large);
+  background: rgba(var(--rgb-background-storm), 0.7);
+  box-shadow: inset 0 1px 0 rgba(var(--rgb-terminal-white), 0.055);
+}
+.category-browser .sec-label { color: rgba(var(--rgb-terminal-white), 0.88); }
+.category-browser .sec-label::after { border-top-color: rgba(var(--rgb-terminal-blue), 0.2); }
+@media (max-width: 600px) {
+  .arrivals-section,
+  .category-browser,
+  .faq { padding: var(--space-neutral); }
 }
 
 /* =================== CATEGORY FILTER ROW =================== */
@@ -883,11 +923,15 @@ b, strong { font-weight: 700; }
   padding: var(--space-x-large) 0;
   color: rgb(var(--rgb-terminal-blue) / 0.7);
 }
-.faq { margin-top: var(--space-xx-large); }
+.faq {
+  margin-top: var(--space-xx-large);
+  padding: var(--space-large);
+  background: linear-gradient(180deg, rgba(var(--rgb-background-storm), 0.7), rgba(var(--rgb-terminal-blue), 0.035));
+}
 .faq details {
   margin-top: var(--space-small);
   padding: 0.9em var(--space-medium);
-  background: var(--color-background-storm);
+  background: rgba(var(--rgb-background-night), 0.54);
   border: var(--border-width) solid var(--border-color);
   border-radius: var(--radius);
 }
@@ -1167,15 +1211,17 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 <main class="wrap">
 
   <section class="home-top" aria-labelledby="home-top-h">
-    <div class="home-top-head">
-      <div>
-        <p class="eyebrow">Community favorites</p>
-        <h2 id="home-top-h">Top 3 apps</h2>
-        <p class="home-leader-status" id="home-leader-status" role="status" aria-live="polite">Loading live rankings…</p>
+    <div class="home-rankings">
+      <div class="home-top-head">
+        <div>
+          <p class="eyebrow">Community favorites</p>
+          <h2 id="home-top-h">Top 3 apps</h2>
+          <p class="home-leader-status" id="home-leader-status" role="status" aria-live="polite">Loading live rankings…</p>
+        </div>
+        <a class="button ghost" href="leaderboard.html">View Top 25 →</a>
       </div>
-      <a class="button ghost" href="leaderboard.html">View Top 25 →</a>
+      <div class="leader-podium home-leaders" id="home-leaders" aria-label="Top three community-ranked apps" hidden></div>
     </div>
-    <div class="leader-podium home-leaders" id="home-leaders" aria-label="Top three community-ranked apps" hidden></div>
     <div class="suggestion-bar" aria-labelledby="suggestion-h">
       <div>
         <h2 id="suggestion-h">What should Omarchy add next?</h2>
@@ -1185,7 +1231,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     </div>
   </section>
 
-  <section aria-labelledby="arrivals-h">
+  <section class="arrivals-section" aria-labelledby="arrivals-h">
     <h2 class="sec-label" id="arrivals-h">Just landed <small>4 newest additions to the repo</small></h2>
     <div class="arrivals">
 <article class="card cat-media-creative featured" data-detail-url="apps/schist-bin.html"
@@ -1249,7 +1295,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     </div>
   </section>
 
-  <section>
+  <section class="category-browser">
     <h2 class="sec-label">Browse by category</h2>
     <div class="cats" id="cats" role="group" aria-label="Filter by category">
       <button class="chip cat" type="button" data-cat="" aria-pressed="true">All <b id="all-count">162</b></button>

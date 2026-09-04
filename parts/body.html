@@ -77,15 +77,17 @@ __STYLE__
 <main class="wrap">
 
   <section class="home-top" aria-labelledby="home-top-h">
-    <div class="home-top-head">
-      <div>
-        <p class="eyebrow">Community favorites</p>
-        <h2 id="home-top-h">Top 3 apps</h2>
-        <p class="home-leader-status" id="home-leader-status" role="status" aria-live="polite">Loading live rankings…</p>
+    <div class="home-rankings">
+      <div class="home-top-head">
+        <div>
+          <p class="eyebrow">Community favorites</p>
+          <h2 id="home-top-h">Top 3 apps</h2>
+          <p class="home-leader-status" id="home-leader-status" role="status" aria-live="polite">Loading live rankings…</p>
+        </div>
+        <a class="button ghost" href="leaderboard.html">View Top 25 →</a>
       </div>
-      <a class="button ghost" href="leaderboard.html">View Top 25 →</a>
+      <div class="leader-podium home-leaders" id="home-leaders" aria-label="Top three community-ranked apps" hidden></div>
     </div>
-    <div class="leader-podium home-leaders" id="home-leaders" aria-label="Top three community-ranked apps" hidden></div>
     <div class="suggestion-bar" aria-labelledby="suggestion-h">
       <div>
         <h2 id="suggestion-h">What should Omarchy add next?</h2>
@@ -95,14 +97,14 @@ __STYLE__
     </div>
   </section>
 
-  <section aria-labelledby="arrivals-h">
+  <section class="arrivals-section" aria-labelledby="arrivals-h">
     <h2 class="sec-label" id="arrivals-h">Just landed <small>__NEWCOUNT__ newest additions to the repo</small></h2>
     <div class="arrivals">
 __NEW__
     </div>
   </section>
 
-  <section>
+  <section class="category-browser">
     <h2 class="sec-label">Browse by category</h2>
     <div class="cats" id="cats" role="group" aria-label="Filter by category">
       <button class="chip cat" type="button" data-cat="" aria-pressed="true">All <b id="all-count">__COUNT__</b></button>
