@@ -31,6 +31,7 @@ ENRICHMENT_FILE = ROOT / "data" / "enrichment.json"
 FALLBACK_CATEGORY = "Utilities"
 NEW_ARRIVALS = 4
 CONTACT_URL = "https://x.com/jessyka_boat"
+X_DM_RECIPIENT_ID = "1400492097082327040"
 
 # Fixed order controls both the catalogue's section order and the category
 # filter row. Deliberately not alphabetical: biggest/most-relevant first.
@@ -354,6 +355,7 @@ def main() -> None:
             .replace("__NEWCOUNT__", str(len(newest)))
             .replace("__SYNCED__", synced)
             .replace("__CONTACT__", html.escape(CONTACT_URL))
+            .replace("__X_DM_RECIPIENT__", X_DM_RECIPIENT_ID)
             .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     DIST.mkdir(exist_ok=True)
     (DIST / "index.html").write_text(page, encoding="utf-8")

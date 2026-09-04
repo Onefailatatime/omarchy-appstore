@@ -133,10 +133,12 @@ __GROUPS__
     </div>
 
     <div class="actions">
+      <a class="button" id="d-claim" href="#" target="_blank" rel="noopener">Claim this app ↗</a>
       <a class="button ghost" id="d-url" href="#" target="_blank" rel="noopener">Project site ↗</a>
       <a class="button ghost" id="d-github" href="#" target="_blank" rel="noopener">GitHub ↗</a>
       <a class="button ghost" id="d-src" href="#" target="_blank" rel="noopener">PKGBUILD ↗</a>
     </div>
+    <p class="claim-note">Are you the developer or maintainer? Claim this listing to request an edit or send screenshots and a demo video by DM.</p>
   </div>
 </dialog>
 
@@ -339,6 +341,12 @@ __GROUPS__
     gh.href = d.github || "#";
     gh.hidden = !d.github;
     document.getElementById("d-src").href = "https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/" + encodeURIComponent(d.dir || d.name);
+    var claimText =
+      "Hi! I'd like to claim the " + d.name + " listing on the Unofficial Omarchy App Store.\n\n" +
+      "I can provide:\n- a correction or edit\n- screenshots of the app\n- a demo video\n\n" +
+      "Project URL: \nMy role with the app: ";
+    document.getElementById("d-claim").href =
+      "https://x.com/messages/compose?recipient_id=__X_DM_RECIPIENT__&text=" + encodeURIComponent(claimText);
     dlg.showModal();
   }
   document.querySelectorAll(".card").forEach(function (c) {
