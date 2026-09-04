@@ -27,6 +27,7 @@
 <meta name="twitter:title" content="Unofficial Omarchy App Store">
 <meta name="twitter:description" content="Browse every package in the official Omarchy repository.">
 <meta name="twitter:image" content="__SITE_URL__/images/social-card.png">
+<script src="/votes.js" defer></script>
 <script type="application/ld+json">__STRUCTURED_DATA__</script>
 <style>
 __STYLE__
@@ -153,6 +154,7 @@ __FAQ__
 
     <div class="badges" id="d-badges">
       <span class="badge pricing" id="d-pricing"></span>
+      <span class="indie-sticker" id="d-indie" hidden>Indie app</span>
     </div>
 
     <div id="d-reqs-wrap" hidden>
@@ -179,6 +181,7 @@ __FAQ__
     </div>
 
     <div class="actions">
+      <button class="button ghost app-vote app-vote-large" type="button" id="d-vote" data-vote-app="" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button>
       <a class="button" id="d-claim" href="#" target="_blank" rel="noopener">Claim this app ↗</a>
       <a class="button ghost" id="d-url" href="#" target="_blank" rel="noopener">Project site ↗</a>
       <a class="button ghost" id="d-github" href="#" target="_blank" rel="noopener">GitHub ↗</a>
@@ -411,6 +414,12 @@ __FAQ__
     } else {
       pricingEl.hidden = true;
     }
+    var indieEl = document.getElementById("d-indie");
+    indieEl.hidden = !d.indieNote;
+    indieEl.title = d.indieNote || "";
+    var appVote = document.getElementById("d-vote");
+    appVote.dataset.voteApp = d.name;
+    if (window.omarchyVotes) window.omarchyVotes.refresh(appVote);
 
     var reqs = JSON.parse(d.reqs || "[]");
     var reqsWrap = document.getElementById("d-reqs-wrap");

@@ -29,6 +29,7 @@ PKGS_REMOTE = "https://github.com/omacom/omarchy-pkgs"
 PKGS_REPO = ROOT / "data" / "omarchy-pkgs"
 CATEGORIES_FILE = ROOT / "data" / "categories.json"
 ENRICHMENT_FILE = ROOT / "data" / "enrichment.json"
+INDIE_FILE = ROOT / "data" / "indie.json"
 FALLBACK_CATEGORY = "Utilities"
 NEW_ARRIVALS = 4
 CONTACT_URL = "https://x.com/jessyka_boat"
@@ -53,6 +54,8 @@ FAQ = [
     ("Does this site host or sell apps?", "No. The site hosts no packages and sells no software. It organizes public package information and links visitors to upstream projects and official PKGBUILDs."),
     ("How can a developer update or claim an app listing?", "Open the package and choose Claim this app. The X direct-message form asks for the developer's role, project URL, corrections, screenshots, and an optional demo video."),
     ("How do I request or vote for an app?", "Use the community wishlist near the top of the store. Open an existing request and add a thumbs-up reaction on GitHub to vote, or send @jessyka_boat a direct message on X to suggest a new project."),
+    ("How do app upvotes work?", "Use the up-arrow button on any listed package. The public total is stored with this site and survives deployments. A secure anonymous browser cookie recognizes prior votes without requiring an account or email address."),
+    ("What does the Indie app sticker mean?", "It is a curated community label for an app or tool currently understood to be independently maintained. It is not an official Omarchy certification or endorsement, and developers can request a correction."),
     ("How can I prepare an app for Omarchy?", "Use the Develop for Omarchy checklist for packaging, permissions, checksums, desktop integration, clean-build testing, and pull-request preparation. Official repository guidance always takes precedence."),
 ]
 
@@ -248,6 +251,7 @@ def load_packages() -> list[dict]:
     index = pkgbuild_index()
     categories = json.loads(CATEGORIES_FILE.read_text()) if CATEGORIES_FILE.exists() else {}
     enrichment = json.loads(ENRICHMENT_FILE.read_text()) if ENRICHMENT_FILE.exists() else {}
+    indie = json.loads(INDIE_FILE.read_text()) if INDIE_FILE.exists() else {}
     pkgs = []
     with tarfile.open(fileobj=io.BytesIO(raw)) as tar:
         for member in tar.getmembers():
@@ -293,6 +297,7 @@ def load_packages() -> list[dict]:
                 "readme_screenshots": prof.get("readme_screenshots", []),
                 "youtube_id": prof.get("youtube_id", ""),
                 "youtube_title": prof.get("youtube_title", ""),
+                "indie_note": indie.get(name, ""),
             })
     pkgs.sort(key=lambda p: p["name"])
     return pkgs
@@ -363,12 +368,20 @@ def card(p: dict, featured: bool = False) -> str:
     gallery = html.escape(json.dumps(profile_images(p)), quote=True)
     cat_slug = slug(p["category"])
     cls = f"card cat-{cat_slug} featured" if featured else f"card cat-{cat_slug}"
+    if p.get("indie_note"):
+        cls += " indie-app"
     footer = (
-        f'<span class="added">added {added_date.strftime("%b")} {added_date.day}</span><span class="size">{e["csize"]}</span>'
+        f'<span class="card-facts"><span class="added">added {added_date.strftime("%b")} {added_date.day}</span><span class="size">{e["csize"]}</span></span>'
         if featured else
-        f'<span class="cat-dot" aria-hidden="true"></span><span class="size">{e["csize"]}</span>'
+        f'<span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">{e["csize"]}</span></span>'
     )
     detail_url = f"apps/{slug(p['name'])}.html"
+    indie_sticker = (f'<span class="indie-sticker card-sticker" title="{e["indie_note"]}">Indie app</span>'
+                      if p.get("indie_note") else "")
+    indie_line = f"  {indie_sticker}\n" if indie_sticker else ""
+    vote_button = (f'<button class="app-vote" type="button" data-vote-app="{e["name"]}" aria-pressed="false" '
+                   f'aria-label="Upvote {e["name"]}"><span aria-hidden="true">▲</span> '
+                   f'<span data-vote-count>0</span></button>')
     return f"""<article class="{cls}" data-detail-url="{detail_url}"
   data-name="{e['name']}" data-dir="{e['dir']}" data-version="{e['version']}" data-desc="{e['desc']}"
   data-url="{e['url']}" data-github="{e['github']}" data-license="{e['license']}" data-csize="{e['csize']}" data-isize="{e['isize']}"
@@ -376,10 +389,11 @@ def card(p: dict, featured: bool = False) -> str:
   data-deps="{deps}" data-category="{e['category']}" data-cat="{cat_slug}"
   data-tagline="{e['tagline']}" data-full-desc="{e['full_desc']}" data-pricing="{e['pricing']}"
   data-pricing-note="{e['pricing_note']}" data-reqs="{reqs}" data-gallery="{gallery}"
+  data-indie-note="{e['indie_note']}"
   data-yt="{e['youtube_id']}" data-yt-title="{e['youtube_title']}">
   <header><h3><a href="{detail_url}">{e['name']}</a></h3><span class="ver">{e['version']}</span></header>
-  <p>{e['desc'] or '<em>No description provided.</em>'}</p>
-  <footer>{footer}</footer>
+{indie_line}  <p>{e['desc'] or '<em>No description provided.</em>'}</p>
+  <footer>{footer}{vote_button}</footer>
 </article>"""
 
 
@@ -450,6 +464,8 @@ def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
         gallery = f'<section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery">{tiles}</div>{source}</section>'
     video = (f'<p><a class="button ghost" href="https://www.youtube.com/watch?v={html.escape(p["youtube_id"])}" target="_blank" rel="noopener">Watch: {html.escape(p["youtube_title"] or p["name"] + " demo")} ↗</a></p>' if p.get("youtube_id") else "")
     pricing = p.get("pricing_note") or p.get("pricing") or "Check the project site for current pricing."
+    indie_sticker = (f'<span class="indie-sticker" title="{html.escape(p["indie_note"])}">Indie app</span>'
+                      if p.get("indie_note") else "")
     replacements = {
         "__STYLE__": css,
         "__SITE_URL__": SITE_URL,
@@ -464,6 +480,7 @@ def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
         "__DOWNLOAD_SIZE__": html.escape(p["csize"]),
         "__INSTALLED_SIZE__": html.escape(p["isize"]),
         "__PRICING__": html.escape(pricing),
+        "__INDIE_STICKER__": indie_sticker,
         "__REQUIREMENTS__": reqs or "<li>No special requirements documented.</li>",
         "__SCREENSHOT__": gallery,
         "__VIDEO__": video,
@@ -482,6 +499,12 @@ def main() -> None:
     sync_pkgbuilds()
     pkgs = load_packages()
     synced = datetime.date.today().isoformat()
+    functions_dir = ROOT / "netlify" / "functions"
+    functions_dir.mkdir(parents=True, exist_ok=True)
+    (functions_dir / "app-names.mjs").write_text(
+        "export default " + json.dumps([p["name"] for p in pkgs], ensure_ascii=False) + ";\n",
+        encoding="utf-8",
+    )
 
     newest = sorted((p for p in pkgs if p["added"]), key=lambda p: (-p["added"], p["name"]))[:NEW_ARRIVALS]
     newest_names = {p["name"] for p in newest}
@@ -569,6 +592,7 @@ def main() -> None:
         if f.is_file():
             (images / f.name).write_bytes(f.read_bytes())
     (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())
+    (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
     about = ((ROOT / "parts" / "about.html").read_text(encoding="utf-8")
              .replace("__SYNCED__", synced)
              .replace("__CONTACT__", html.escape(CONTACT_URL))

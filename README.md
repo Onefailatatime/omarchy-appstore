@@ -67,6 +67,16 @@ This keeps the homepage compact, avoids an unmoderated public submission form,
 and adds no custom account system or database. Close a request when it no
 longer belongs in the active wishlist; it then disappears from the homepage.
 
+## Persistent package upvotes
+
+Every package card and profile has a first-party upvote control backed by the
+Netlify Function at `/api/votes` and the site-wide `omarchy-app-votes` Blob
+store. Vote records survive deploys. A secure HTTP-only random browser cookie
+prevents ordinary duplicate votes without storing an IP address or asking for
+an account. The function uses one immutable Blob key per app/browser pair,
+strong consistency, package allow-listing, same-origin POST checks, and Netlify
+rate limiting. `data/indie.json` controls the curated Indie app stickers.
+
 ## Curated profiles
 
 `data/enrichment.json` adds a researched tagline, longer description, pricing,

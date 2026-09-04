@@ -26,6 +26,7 @@
 <meta name="twitter:title" content="retroarch-joypad-autoconfig-git for Omarchy">
 <meta name="twitter:description" content="A shared database of joypad autoconfig files for RetroArch, the multi-system emulator frontend. Each file maps a specific physical controller&#x27;s buttons and…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
+<script src="/votes.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/retroarch-joypad-autoconfig-git.html#app","name":"retroarch-joypad-autoconfig-git","description":"A shared database of joypad autoconfig files for RetroArch, the multi-system emulator frontend. Each file maps a specific physical controller's buttons and sticks onto RetroArch's virtual RetroPad automatically, so gamepads are recognized and ready to use without manual button mapping. It's not an app on its own, just data that RetroArch reads on startup.","applicationCategory":"Gaming & Emulation","operatingSystem":"Omarchy Linux","softwareVersion":"1.22.0.r96.g0331510-1","license":"MIT","url":"https://omarchyapps.com/apps/retroarch-joypad-autoconfig-git.html","sameAs":"https://github.com/libretro/retroarch-joypad-autoconfig","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"retroarch-joypad-autoconfig-git","item":"https://omarchyapps.com/apps/retroarch-joypad-autoconfig-git.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
@@ -321,6 +322,7 @@ b, strong { font-weight: 700; }
 .app-header h1 { margin: 0; color: var(--color-terminal-white); font-size: clamp(1.8rem, 5vw, 3rem); overflow-wrap: anywhere; }
 .app-header .eyebrow { margin: 0 0 0.5em; color: var(--color-green); text-transform: uppercase; font-size: 82%; }
 .app-header .app-lead { margin: 0.6em 0 0; max-width: 46em; color: rgb(var(--rgb-terminal-white) / 0.9); }
+.app-header-actions { display: flex; flex: none; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65em; }
 .app-page section h2 { color: var(--color-terminal-white); font-size: 125%; }
 .app-page section p { color: rgb(var(--rgb-terminal-white) / 0.9); }
 .app-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-large); }
@@ -333,6 +335,7 @@ b, strong { font-weight: 700; }
   .about-photo { width: 9em; margin: 0 auto; }
   .about-card .button { justify-self: center; }
   .app-header { align-items: start; flex-direction: column; }
+  .app-header-actions { justify-content: flex-start; }
   .app-columns { grid-template-columns: 1fr; }
 }
 
@@ -603,6 +606,7 @@ b, strong { font-weight: 700; }
   gap: 0.75em;
 }
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
@@ -645,6 +649,42 @@ b, strong { font-weight: 700; }
   color: rgb(var(--rgb-terminal-blue) / 0.55);
 }
 .card footer .cat-dot { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--cat); flex: none; }
+.card-facts { display: inline-flex; align-items: center; gap: 0.8em; min-width: 0; }
+.indie-sticker {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  padding: 0.22em 0.62em;
+  border: 1px dashed var(--color-orange);
+  border-radius: 0.25em;
+  background: rgb(var(--rgb-orange) / 0.14);
+  color: var(--color-orange);
+  font-size: 76%;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+}
+.card-sticker { position: absolute; top: -0.55em; right: 0.75em; }
+.app-vote {
+  appearance: none;
+  margin-left: auto;
+  padding: 0.25em 0.55em;
+  border: var(--border-width) solid rgb(var(--rgb-terminal-blue) / 0.35);
+  border-radius: var(--radius);
+  background: transparent;
+  color: rgb(var(--rgb-terminal-blue) / 0.8);
+  cursor: pointer;
+  font: inherit;
+  font-size: 100%;
+  font-variant-numeric: tabular-nums;
+}
+.app-vote:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+.app-vote.is-voted { border-color: var(--color-green); color: var(--color-green); }
+.app-vote[aria-busy="true"] { cursor: wait; opacity: 0.55; }
+.app-vote.vote-error { border-color: #f7768e; }
+.app-vote.vote-unavailable { opacity: 0.5; }
+.app-vote-large { margin-left: 0; min-width: 8em; justify-content: center; }
 
 .empty {
   display: none;
@@ -895,7 +935,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <article>
     <header class="app-header">
       <div><p class="eyebrow">Gaming &amp; Emulation · version 1.22.0.r96.g0331510-1</p><h1>retroarch-joypad-autoconfig-git</h1><p class="app-lead">A shared database of joypad autoconfig files for RetroArch, the multi-system emulator frontend. Each file maps a specific physical controller&#x27;s buttons and…</p></div>
-      <a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+retroarch-joypad-autoconfig-git+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a>
+      <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="retroarch-joypad-autoconfig-git" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+retroarch-joypad-autoconfig-git+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is retroarch-joypad-autoconfig-git?</h2><p>A shared database of joypad autoconfig files for RetroArch, the multi-system emulator frontend. Each file maps a specific physical controller&#x27;s buttons and sticks onto RetroArch&#x27;s virtual RetroPad automatically, so gamepads are recognized and ready to use without manual button mapping. It&#x27;s not an app on its own, just data that RetroArch reads on startup.</p></section>
