@@ -143,6 +143,11 @@ Then set these environment variables on the Netlify site:
 | `NEWSLETTER_FROM` | e.g. `Omarchy App Store <hello@omarchyapps.com>` |
 | `NEWSLETTER_REPLY_TO` | optional; a mailbox you read, defaults to the from address |
 
+Netlify applies environment variables at deploy time, so trigger a redeploy
+after adding them — until it finishes the deployed function still runs with the
+old values. Where the plan exposes variable scopes, include Functions: a
+build-only variable never reaches `/api/subscribe`.
+
 Until they are set the form reports that signup is not configured yet.
 
 ## Curated profiles
