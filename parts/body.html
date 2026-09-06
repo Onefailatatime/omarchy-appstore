@@ -30,6 +30,7 @@
 <script src="/votes.js" defer></script>
 <script src="/home-leaders.js" defer></script>
 <script src="/share.js" defer></script>
+<script src="/newsletter.js" defer></script>
 <script type="application/ld+json">__STRUCTURED_DATA__</script>
 <style>
 __STYLE__
@@ -149,6 +150,19 @@ __GROUPS__
 __FAQ__
   </section>
 
+  <section class="guide-download" id="newsletter" aria-labelledby="newsletter-h">
+    <div>
+      <h2 id="newsletter-h">Building an app for Omarchy?</h2>
+      <p>Join the newsletter and get the Develop for Omarchy packaging checklist as a portable Markdown file, plus occasional news when notable apps land in the repo.</p>
+    </div>
+    <form class="newsletter" data-newsletter action="/api/subscribe" method="post">
+      <label for="home-newsletter-email">Email address</label>
+      <input id="home-newsletter-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+      <input class="newsletter-trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="button" type="submit">Send me the checklist ↓</button>
+      <p data-newsletter-status aria-live="polite"></p>
+    </form>
+  </section>
 </main>
 
 <dialog id="detail" aria-labelledby="d-name">

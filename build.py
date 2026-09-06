@@ -720,9 +720,11 @@ def main() -> None:
                .replace("__SITE_URL__", SITE_URL)
                .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     (DIST / "develop.html").write_text(develop, encoding="utf-8")
+    # The checklist is emailed to newsletter subscribers, not published as a file.
     develop_md = ((ROOT / "resources" / "develop-for-omarchy.md").read_text(encoding="utf-8")
                   .replace("__SYNCED__", synced))
-    (DIST / "develop-for-omarchy.md").write_text(develop_md, encoding="utf-8")
+    (functions_dir / "checklist.mjs").write_text(
+        "export default " + json.dumps(develop_md, ensure_ascii=False) + ";\n", encoding="utf-8")
     terms = ((ROOT / "parts" / "terms.html").read_text(encoding="utf-8")
              .replace("__SYNCED__", synced)
              .replace("__SITE_URL__", SITE_URL)
@@ -739,6 +741,7 @@ def main() -> None:
         if f.is_file():
             (images / f.name).write_bytes(f.read_bytes())
     (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())
+    (DIST / "newsletter.js").write_text((ROOT / "assets" / "newsletter.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "home-leaders.js").write_text((ROOT / "assets" / "home-leaders.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "leaderboard.js").write_text((ROOT / "assets" / "leaderboard.js").read_text(encoding="utf-8"), encoding="utf-8")
@@ -839,7 +842,6 @@ def main() -> None:
         f"- [Browse packages]({SITE_URL}/)\n"
         f"- [Top apps leaderboard]({SITE_URL}/leaderboard.html)\n"
         f"- [Develop for Omarchy]({SITE_URL}/develop.html)\n"
-        f"- [Download the LLM-ready development checklist]({SITE_URL}/develop-for-omarchy.md)\n"
         f"- [About]({SITE_URL}/about.html)\n"
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
         "## Guides and comparisons\n"
@@ -853,7 +855,7 @@ def main() -> None:
     print(f"dist/index.html  {len(page):,} bytes · {len(pkgs)} packages · synced {synced}")
     print(f"dist/leaderboard.html {len(leaderboard):,} bytes · live Top 25 community ranking")
     print(f"dist/develop.html {len(develop):,} bytes · public packaging checklist")
-    print(f"dist/develop-for-omarchy.md {len(develop_md):,} bytes · portable LLM checklist")
+    print(f"netlify/functions/checklist.mjs {len(develop_md):,} bytes · checklist emailed to subscribers")
     print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
     print(f"dist/about.html   {len(about):,} bytes · project and builder bio")
     print(f"dist/guides       {len(GUIDES)} search-focused editorial guides")
