@@ -23,6 +23,7 @@
 <meta name="twitter:title" content="Develop for Omarchy">
 <meta name="twitter:description" content="A practical app packaging checklist for Omarchy contributors.">
 <meta name="twitter:image" content="__SITE_URL__/images/social-card.png">
+<script src="/newsletter.js" defer></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"TechArticle","headline":"Develop for Omarchy","description":"A practical app packaging checklist for Omarchy contributors.","url":"__SITE_URL__/develop.html","dateModified":"__SYNCED__","author":{"@type":"Person","name":"Jessyka","sameAs":"https://x.com/jessyka_boat"},"about":{"@type":"Thing","name":"Omarchy application packaging"}}
 </script>
@@ -59,12 +60,18 @@ __STYLE__
     <p>This guide is for application contributors, not repository operators. It helps you prepare a package and a focused pull request; signing, publishing, promotion, and production access remain the maintainers’ responsibility.</p>
   </div>
 
-  <section class="guide-download" aria-labelledby="download-h">
+  <section class="guide-download" id="newsletter" aria-labelledby="download-h">
     <div>
-      <h2 id="download-h">Add this checklist to your LLM</h2>
-      <p>Download the portable Markdown version for an LLM project, knowledge base, or skill. It includes all 34 checks, safety boundaries, review instructions, and authoritative references—with no personal or machine-specific information.</p>
+      <h2 id="download-h">Get the checklist by email</h2>
+      <p>Join the newsletter and the portable Markdown version lands in your inbox: all 34 checks, safety boundaries, review instructions, and authoritative references, ready for an LLM project, knowledge base, or skill. After that, occasional news when notable apps reach the Omarchy repo.</p>
     </div>
-    <a class="button" href="/develop-for-omarchy.md" download>Download Markdown (.md) ↓</a>
+    <form class="newsletter" data-newsletter action="/api/subscribe" method="post">
+      <label for="newsletter-email">Email address</label>
+      <input id="newsletter-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+      <input class="newsletter-trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="button" type="submit">Send me the checklist ↓</button>
+      <p data-newsletter-status aria-live="polite"></p>
+    </form>
   </section>
 
   <div class="guide-progress" aria-live="polite">

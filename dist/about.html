@@ -221,9 +221,26 @@ b, strong { font-weight: 700; }
 .guide-download h2 { margin: 0 0 0.45em; color: var(--color-terminal-white); font-size: 125%; }
 .guide-download p { margin: 0; max-width: 46em; color: rgb(var(--rgb-terminal-white) / 0.88); }
 .guide-download .button { flex: none; }
+.newsletter { display: flex; flex: none; flex-wrap: wrap; gap: var(--space-small); max-width: 26em; }
+.newsletter label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.newsletter input[type="email"] {
+  flex: 1;
+  min-width: 12em;
+  padding: 0.55em 0.8em;
+  background: var(--color-background-night);
+  border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.45);
+  border-radius: var(--radius);
+  color: var(--color-terminal-white);
+  font: inherit;
+}
+.newsletter input[type="email"]:focus { outline: 0; border-color: var(--color-terminal-blue); }
+.newsletter-trap { position: absolute; left: -9999px; }
+.newsletter [data-newsletter-status] { flex-basis: 100%; margin: 0; min-height: 1.4em; color: var(--color-terminal-blue); font-size: 86%; }
+.newsletter.is-done input, .newsletter.is-done button { display: none; }
+.newsletter.is-done [data-newsletter-status] { color: var(--color-green); }
 @media (max-width: 760px) {
   .guide-download { align-items: start; flex-direction: column; }
-  .guide-download .button { width: 100%; justify-content: center; }
+  .guide-download .button, .newsletter { width: 100%; max-width: none; justify-content: center; }
 }
 .guide-intro p { margin: 0; }
 .guide-progress {

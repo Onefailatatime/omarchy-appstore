@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist data/omarchy.db netlify/functions/app-names.mjs
+          git add dist data/omarchy.db netlify/functions/app-names.mjs netlify/functions/checklist.mjs
           git diff --cached --quiet && exit 0
           git commit -m "Refresh package catalogue from pkgs.omarchy.org"
           git push
