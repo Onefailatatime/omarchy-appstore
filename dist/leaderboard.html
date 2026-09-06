@@ -997,6 +997,10 @@ b, strong { font-weight: 700; }
   padding: 0.25em 0.55em;
   border: var(--border-width) solid rgb(var(--rgb-terminal-blue) / 0.35);
   border-radius: var(--radius);
+  --vote-share: 0%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: transparent;
   color: rgb(var(--rgb-terminal-blue) / 0.8);
   cursor: pointer;
@@ -1005,7 +1009,18 @@ b, strong { font-weight: 700; }
   font-variant-numeric: tabular-nums;
 }
 .app-vote:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+/* Meter: fills the button in proportion to the most-voted app. */
+.app-vote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: var(--vote-share);
+  background: rgba(var(--rgb-terminal-blue), 0.22);
+  transition: width 0.4s ease;
+}
 .app-vote.is-voted { border-color: var(--color-green); color: var(--color-green); }
+.app-vote.is-voted::before { background: rgba(var(--rgb-green), 0.22); }
 .app-vote[aria-busy="true"] { cursor: wait; opacity: 0.55; }
 .app-vote.vote-error { border-color: #f7768e; }
 .app-vote.vote-unavailable { opacity: 0.5; }
@@ -1287,7 +1302,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <p class="eyebrow">Community picks</p>
     <h1>Top Omarchy <span>Apps</span></h1>
     <p class="tag">The community leaderboard, powered by real votes from across the store.</p>
-    <p class="facts">Top 25 of <b>162</b> packages · one vote per app, per browser · updated live</p>
+    <p class="facts">Top 25 of <b>163</b> packages · one vote per app, per browser · updated live</p>
   </div>
 </header>
 
@@ -2316,6 +2331,15 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   </div>
   <button class="button ghost app-vote leader-vote" type="button" data-vote-app="opencl-nvidia-580xx" aria-pressed="false" aria-label="Upvote opencl-nvidia-580xx"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
 </article>
+<article class="leader-row cat-utilities" data-leader-app="openclaw">
+  <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
+  <div class="leader-copy">
+    <h2><a href="apps/openclaw.html">openclaw</a></h2>
+    <p>Multi-channel AI gateway with extensible messaging integrations</p>
+    <div class="leader-meta"><span class="leader-category"><span class="dot" aria-hidden="true"></span>Utilities</span><span class="leader-author">by <a href="https://github.com/openclaw" target="_blank" rel="author noopener">openclaw</a></span></div>
+  </div>
+  <button class="button ghost app-vote leader-vote" type="button" data-vote-app="openclaw" aria-pressed="false" aria-label="Upvote openclaw"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button>
+</article>
 <article class="leader-row cat-ai-agents" data-leader-app="opencode">
   <span class="leader-rank" data-leader-rank aria-label="Rank">—</span>
   <div class="leader-copy">
@@ -2782,7 +2806,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
         <a href="terms.html">Terms of Use</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Synced 2026-09-04 · unofficial community rankings</span>
+      <span>Synced 2026-09-06 · unofficial community rankings</span>
     </div>
   </div>
 </footer>

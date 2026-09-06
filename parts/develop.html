@@ -62,14 +62,14 @@ __STYLE__
   <section class="guide-download" aria-labelledby="download-h">
     <div>
       <h2 id="download-h">Add this checklist to your LLM</h2>
-      <p>Download the portable Markdown version for an LLM project, knowledge base, or skill. It includes all 33 checks, safety boundaries, review instructions, and authoritative references—with no personal or machine-specific information.</p>
+      <p>Download the portable Markdown version for an LLM project, knowledge base, or skill. It includes all 34 checks, safety boundaries, review instructions, and authoritative references—with no personal or machine-specific information.</p>
     </div>
     <a class="button" href="/develop-for-omarchy.md" download>Download Markdown (.md) ↓</a>
   </section>
 
   <div class="guide-progress" aria-live="polite">
-    <strong id="progress-text">0 of 33 complete</strong>
-    <progress id="progress" value="0" max="33">0%</progress>
+    <strong id="progress-text">0 of 34 complete</strong>
+    <progress id="progress" value="0" max="34">0%</progress>
     <button type="button" id="reset">Reset</button>
   </div>
 
@@ -139,6 +139,7 @@ bin/add-package package-name --local --scaffold</pre>
       <li><label><input type="checkbox"><span>Use the repository’s dry-run option to inspect the build plan before running a real package build.</span></label></li>
       <li><label><input type="checkbox"><span>Install the resulting package, exercise its main workflows as a normal user, reboot or log in again if integration depends on a new session, then uninstall it.</span></label></li>
       <li><label><input type="checkbox"><span>Inspect the final package file list, ownership, permissions, dependencies, installed size, and absence of build-machine paths or secrets.</span></label></li>
+      <li><label><input type="checkbox"><span>Keep the download small. Prefer upstream release binaries over bundled toolchains, strip debug symbols, and split large optional assets into their own package; the store shows download and installed size on every card, and a multi-hundred-megabyte package is the first thing reviewers question.</span></label></li>
       <li><label><input type="checkbox"><span>If multiple architectures are declared, test each one or clearly state which architecture remains unverified.</span></label></li>
     </ul>
   </section>

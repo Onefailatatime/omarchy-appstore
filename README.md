@@ -27,7 +27,25 @@ cached copy in `data/` when offline), parses every `desc`, and writes
 `compression.zstd` module — Omarchy ships it.
 
 Re-run it whenever you deploy; the repo changes daily and the page bakes in
-the sync date.
+the sync date. Without a system Python 3.14, `uv run --python 3.14 --no-project
+python build.py` works.
+
+## How apps get in
+
+The store has no submission form. Every listing comes from the official
+`omacom/omarchy-pkgs` repository: a contributor opens a PKGBUILD pull request
+there, the Omarchy maintainers merge and publish it to `pkgs.omarchy.org`, and
+the next scheduled build here picks it up. Point people at `/develop.html`,
+which covers the checklist, package size expectations, and the pull request.
+
+## Automated builds
+
+`.github/workflows/deploy.yml` rebuilds the site at 06:00 and 18:00 UTC, and
+can be run on demand from the Actions tab. It runs `build.py` and the tests,
+then commits the refreshed `dist/`, `data/omarchy.db`, and vote allow-list.
+Netlify is connected to this repository and publishes every push to `main`,
+so that commit is the deploy. GitHub only runs schedules from the default
+branch. No secrets are needed.
 
 ## Layout
 
@@ -73,6 +91,10 @@ an account. The function uses one immutable Blob key per app/browser pair,
 strong consistency, package allow-listing, same-origin POST checks, and Netlify
 rate limiting. `data/indie.json` controls the curated Indie app stickers.
 
+Each vote button doubles as a meter: `votes.js` fills it in proportion to the
+most-voted app, so a full bar is the current leader and the hover title reads
+"N of top M".
+
 ## Curated profiles
 
 `data/enrichment.json` adds a researched tagline, longer description, pricing,
@@ -107,4 +129,5 @@ source attribution only. It never saves the upstream image files.
 
 ## Deploy
 
-Static folder: publish `dist/`. House rule: Netlify CLI only.
+Static folder: publish `dist/`. Netlify publishes `main` on push; the Netlify
+CLI remains the house rule for any manual deploy.

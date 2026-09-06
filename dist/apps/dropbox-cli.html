@@ -28,7 +28,7 @@
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script src="/votes.js" defer></script>
 <script src="/share.js" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/dropbox-cli.html#app","name":"dropbox-cli","description":"dropbox-cli is a command-line control script for the official Dropbox desktop client on Linux, used to start, stop, or check the status of the Dropbox sync daemon, manage selective sync exclusions, and throttle bandwidth, all from a terminal without opening a GUI. It's a companion to the main Dropbox app rather than a replacement for it.","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"2024.04.17-2","license":"GPL-3.0-or-later","url":"https://omarchyapps.com/apps/dropbox-cli.html","sameAs":"https://www.dropbox.com","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"dropbox-cli","item":"https://omarchyapps.com/apps/dropbox-cli.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/apps/dropbox-cli.html#app","name":"dropbox-cli","description":"dropbox-cli is a command-line control script for the official Dropbox desktop client on Linux, used to start, stop, or check the status of the Dropbox sync daemon, manage selective sync exclusions, and throttle bandwidth, all from a terminal without opening a GUI. It's a companion to the main Dropbox app rather than a replacement for it.","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"2024.04.17-2.1","license":"GPL-3.0-or-later","url":"https://omarchyapps.com/apps/dropbox-cli.html","sameAs":"https://www.dropbox.com","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Unofficial Omarchy App Store","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"dropbox-cli","item":"https://omarchyapps.com/apps/dropbox-cli.html"}]}]}</script>
 <style>/* =========================================================================
    Unofficial Omarchy App Store
    Tokens lifted verbatim from omarchy.org/assets/css/root.css (Tokyo Night)
@@ -997,6 +997,10 @@ b, strong { font-weight: 700; }
   padding: 0.25em 0.55em;
   border: var(--border-width) solid rgb(var(--rgb-terminal-blue) / 0.35);
   border-radius: var(--radius);
+  --vote-share: 0%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: transparent;
   color: rgb(var(--rgb-terminal-blue) / 0.8);
   cursor: pointer;
@@ -1005,7 +1009,18 @@ b, strong { font-weight: 700; }
   font-variant-numeric: tabular-nums;
 }
 .app-vote:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+/* Meter: fills the button in proportion to the most-voted app. */
+.app-vote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: var(--vote-share);
+  background: rgba(var(--rgb-terminal-blue), 0.22);
+  transition: width 0.4s ease;
+}
 .app-vote.is-voted { border-color: var(--color-green); color: var(--color-green); }
+.app-vote.is-voted::before { background: rgba(var(--rgb-green), 0.22); }
 .app-vote[aria-busy="true"] { cursor: wait; opacity: 0.55; }
 .app-vote.vote-error { border-color: #f7768e; }
 .app-vote.vote-unavailable { opacity: 0.5; }
@@ -1282,17 +1297,17 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../index.html">App Store</a><span aria-hidden="true">/</span><span>dropbox-cli</span></nav>
   <article>
     <header class="app-header">
-      <div><p class="eyebrow">Utilities · version 2024.04.17-2</p><h1>dropbox-cli</h1><p class="app-byline">by <a href="https://dropbox.com" target="_blank" rel="author noopener">Dropbox</a></p><p class="app-lead">dropbox-cli is a command-line control script for the official Dropbox desktop client on Linux, used to start, stop, or check the status of the Dropbox sync…</p></div>
+      <div><p class="eyebrow">Utilities · version 2024.04.17-2.1</p><h1>dropbox-cli</h1><p class="app-byline">by <a href="https://dropbox.com" target="_blank" rel="author noopener">Dropbox</a></p><p class="app-lead">dropbox-cli is a command-line control script for the official Dropbox desktop client on Linux, used to start, stop, or check the status of the Dropbox sync…</p></div>
       <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="dropbox-cli" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/dropbox-cli.html" data-share-app="dropbox-cli" data-share-title="dropbox-cli for Omarchy" data-share-url="https://omarchyapps.com/apps/dropbox-cli.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+dropbox-cli+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
     <section><h2>What is dropbox-cli?</h2><p>dropbox-cli is a command-line control script for the official Dropbox desktop client on Linux, used to start, stop, or check the status of the Dropbox sync daemon, manage selective sync exclusions, and throttle bandwidth, all from a terminal without opening a GUI. It&#x27;s a companion to the main Dropbox app rather than a replacement for it.</p></section>
     <section><h2>Install dropbox-cli on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add dropbox-cli</pre></div></section>
-    <section class="app-columns"><div><h2>Good to know</h2><ul><li>The Dropbox daemon/client installed and running</li><li>A Dropbox account</li><li>Network access</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>GPL-3.0-or-later licensed control script; it manages the Dropbox client, which itself has free and paid storage tiers</dd><dt>Licence</dt><dd>GPL-3.0-or-later</dd><dt>Download</dt><dd>24.1 KB</dd><dt>Installed</dt><dd>119.8 KB</dd></dl></div></section>
+    <section class="app-columns"><div><h2>Good to know</h2><ul><li>The Dropbox daemon/client installed and running</li><li>A Dropbox account</li><li>Network access</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>GPL-3.0-or-later licensed control script; it manages the Dropbox client, which itself has free and paid storage tiers</dd><dt>Licence</dt><dd>GPL-3.0-or-later</dd><dt>Download</dt><dd>20.8 KB</dd><dt>Installed</dt><dd>119.8 KB</dd></dl></div></section>
 
     <div class="actions"><a class="button ghost" href="https://www.dropbox.com" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/dropbox-cli" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
-<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-09-04 · unofficial directory</span></div></div></footer>
+<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-09-06 · unofficial directory</span></div></div></footer>
 </body>
 </html>

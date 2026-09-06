@@ -26,7 +26,7 @@
 <meta name="twitter:title" content="Free Notion Alternative for Linux: Slap Notes Compared">
 <meta name="twitter:description" content="Looking for a free Notion alternative on Linux? Compare Slap Notes with Notion, Obsidian and AppFlowy for local notes, blocks, links and privacy.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/free-notion-alternative-linux-slap-notes.html#article","headline":"Free Notion Alternative for Linux: Slap Notes Compared","description":"Looking for a free Notion alternative on Linux? Compare Slap Notes with Notion, Obsidian and AppFlowy for local notes, blocks, links and privacy.","url":"https://omarchyapps.com/free-notion-alternative-linux-slap-notes.html","dateModified":"2026-09-04","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Free Notion Alternative for Linux: Slap Notes Compared","item":"https://omarchyapps.com/free-notion-alternative-linux-slap-notes.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Slap Notes free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Slap Notes is a free, open-source project and the Omarchy package is listed as free software."}},{"@type":"Question","name":"Does Notion have an official Linux desktop app?","acceptedAnswer":{"@type":"Answer","text":"Notion currently documents desktop apps for macOS and Windows. Linux users can use Notion in a supported web browser."}},{"@type":"Question","name":"Does Slap Notes require an account?","acceptedAnswer":{"@type":"Answer","text":"No. Its public product page describes a local-first experience with no required account or sync service."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/free-notion-alternative-linux-slap-notes.html#article","headline":"Free Notion Alternative for Linux: Slap Notes Compared","description":"Looking for a free Notion alternative on Linux? Compare Slap Notes with Notion, Obsidian and AppFlowy for local notes, blocks, links and privacy.","url":"https://omarchyapps.com/free-notion-alternative-linux-slap-notes.html","dateModified":"2026-09-06","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Free Notion Alternative for Linux: Slap Notes Compared","item":"https://omarchyapps.com/free-notion-alternative-linux-slap-notes.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Slap Notes free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Slap Notes is a free, open-source project and the Omarchy package is listed as free software."}},{"@type":"Question","name":"Does Notion have an official Linux desktop app?","acceptedAnswer":{"@type":"Answer","text":"Notion currently documents desktop apps for macOS and Windows. Linux users can use Notion in a supported web browser."}},{"@type":"Question","name":"Does Slap Notes require an account?","acceptedAnswer":{"@type":"Answer","text":"No. Its public product page describes a local-first experience with no required account or sync service."}}]}]}</script>
 <style>
 /* =========================================================================
    Unofficial Omarchy App Store
@@ -996,6 +996,10 @@ b, strong { font-weight: 700; }
   padding: 0.25em 0.55em;
   border: var(--border-width) solid rgb(var(--rgb-terminal-blue) / 0.35);
   border-radius: var(--radius);
+  --vote-share: 0%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: transparent;
   color: rgb(var(--rgb-terminal-blue) / 0.8);
   cursor: pointer;
@@ -1004,7 +1008,18 @@ b, strong { font-weight: 700; }
   font-variant-numeric: tabular-nums;
 }
 .app-vote:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+/* Meter: fills the button in proportion to the most-voted app. */
+.app-vote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: var(--vote-share);
+  background: rgba(var(--rgb-terminal-blue), 0.22);
+  transition: width 0.4s ease;
+}
 .app-vote.is-voted { border-color: var(--color-green); color: var(--color-green); }
+.app-vote.is-voted::before { background: rgba(var(--rgb-green), 0.22); }
 .app-vote[aria-busy="true"] { cursor: wait; opacity: 0.55; }
 .app-vote.vote-error { border-color: #f7768e; }
 .app-vote.vote-unavailable { opacity: 0.5; }
@@ -1286,7 +1301,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <p class="eyebrow">Linux notes comparison</p>
     <h1>A free Notion alternative for Linux: <span>Slap Notes</span></h1>
     <p class="tag">Local-first blocks, linked notes and an optional research agent—without requiring a cloud workspace.</p>
-    <p class="facts">Reviewed 2026-09-04 · independent editorial guide</p>
+    <p class="facts">Reviewed 2026-09-06 · independent editorial guide</p>
   </div>
 </header>
 
@@ -1397,7 +1412,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
         <a href="/terms.html">Terms</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Reviewed 2026-09-04 · unofficial and independent</span>
+      <span>Reviewed 2026-09-06 · unofficial and independent</span>
     </div>
   </div>
 </footer>

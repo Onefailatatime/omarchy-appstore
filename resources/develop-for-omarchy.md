@@ -78,6 +78,7 @@ bin/add-package package-name --local --scaffold
 - [ ] Use the repository's dry-run option to inspect the build plan before running a real package build.
 - [ ] Install the resulting package, exercise its main workflows as a normal user, reboot or log in again if integration depends on a new session, then uninstall it.
 - [ ] Inspect the final package file list, ownership, permissions, dependencies, installed size, and absence of build-machine paths or secrets.
+- [ ] Keep the download small. Prefer upstream release binaries over bundled toolchains, strip debug symbols, and split large optional assets into their own package; the store shows download and installed size on every card, and a multi-hundred-megabyte package is the first thing reviewers question.
 - [ ] If multiple architectures are declared, test each one or clearly state which architecture remains unverified.
 
 ## 7. Prepare a useful pull request
