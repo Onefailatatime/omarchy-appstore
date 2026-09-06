@@ -98,8 +98,8 @@ most-voted app, so a full bar is the current leader and the hover title reads
 ## Newsletter
 
 Both the homepage and `/develop.html` carry a signup form posting to the
-Netlify Function at `/api/subscribe`. It adds the address to a Resend audience
-and emails the Develop for Omarchy checklist as a Markdown attachment; the
+Netlify Function at `/api/subscribe`. It adds the address to the Resend
+contacts (and a segment when one is configured) and emails the Develop for Omarchy checklist as a Markdown attachment; the
 checklist is no longer published as a public file. `build.py` bakes
 `resources/develop-for-omarchy.md` into `netlify/functions/checklist.mjs` on
 every build. The function checks for an existing contact first, ignores
@@ -110,15 +110,16 @@ Setup, once, in Resend (`resend.com`):
 
 1. Add and verify the sending domain (`omarchyapps.com`); Resend lists the
    DNS records (DKIM, SPF, and a return-path MX) to add at the DNS host.
-2. Create an audience and copy its ID.
-3. Create an API key with sending and audience access.
+2. Optionally create a segment (Resend's replacement for audiences) to keep
+   store subscribers apart from other contacts, and copy its ID.
+3. Create an API key with full access.
 
 Then set these environment variables on the Netlify site:
 
 | Variable | Value |
 | --- | --- |
 | `RESEND_API_KEY` | the API key |
-| `RESEND_AUDIENCE_ID` | the audience ID |
+| `RESEND_SEGMENT_ID` | optional; the segment ID |
 | `NEWSLETTER_FROM` | e.g. `Omarchy App Store <hello@omarchyapps.com>` |
 | `NEWSLETTER_REPLY_TO` | optional; a mailbox you read, defaults to the from address |
 

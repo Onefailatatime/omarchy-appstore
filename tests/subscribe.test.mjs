@@ -3,7 +3,7 @@ import { handleSubscribeRequest } from "../netlify/functions/subscribe.mjs";
 import checklist from "../netlify/functions/checklist.mjs";
 
 const url = "https://omarchyapps.com/api/subscribe";
-const env = { RESEND_API_KEY: "re_test", RESEND_AUDIENCE_ID: "aud_1", NEWSLETTER_FROM: "Omarchy App Store <hello@omarchyapps.com>" };
+const env = { RESEND_API_KEY: "re_test", RESEND_SEGMENT_ID: "seg_1", NEWSLETTER_FROM: "Omarchy App Store <hello@omarchyapps.com>" };
 
 function fakeResend(existing) {
   const calls = [];
@@ -33,12 +33,12 @@ let res = await handleSubscribeRequest(post({ email: " Dev@Example.com " }), env
 assert.equal(res.status, 200);
 assert.deepEqual(await res.json(), { status: "subscribed" });
 assert.deepEqual(calls.map((c) => c.method + " " + c.url), [
-  "GET https://api.resend.com/audiences/aud_1/contacts/dev%40example.com",
-  "POST https://api.resend.com/audiences/aud_1/contacts",
+  "GET https://api.resend.com/contacts/dev%40example.com",
+  "POST https://api.resend.com/contacts",
   "POST https://api.resend.com/emails",
 ]);
 assert.equal(calls[0].auth, "Bearer re_test");
-assert.deepEqual(calls[1].body, { email: "dev@example.com", unsubscribed: false });
+assert.deepEqual(calls[1].body, { email: "dev@example.com", unsubscribed: false, segments: [{ id: "seg_1" }] });
 const mail = calls[2].body;
 assert.equal(mail.from, env.NEWSLETTER_FROM);
 assert.deepEqual(mail.to, ["dev@example.com"]);

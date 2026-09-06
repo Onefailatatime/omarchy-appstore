@@ -1,8 +1,8 @@
 import checklist from "./checklist.mjs";
 
-// Newsletter signup: adds the address to the Resend audience and emails the
-// packaging checklist as an attachment. Resend is called over plain fetch so
-// the function carries no SDK.
+// Newsletter signup: adds the address to the Resend contacts (and a segment
+// when configured) and emails the packaging checklist as an attachment.
+// Resend is called over plain fetch so the function carries no SDK.
 const RESEND = "https://api.resend.com";
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const jsonHeaders = {
@@ -63,14 +63,14 @@ export async function handleSubscribeRequest(request, env, fetchImpl = fetch) {
   if (!EMAIL.test(email) || email.length > 254) return response({ error: "Enter a valid email address" }, 400);
 
   const key = env.RESEND_API_KEY;
-  const audience = env.RESEND_AUDIENCE_ID;
   const from = env.NEWSLETTER_FROM;
-  if (!key || !audience || !from) return response({ error: "Newsletter signup is not configured yet" }, 500);
+  if (!key || !from) return response({ error: "Newsletter signup is not configured yet" }, 500);
 
-  const existing = await resend(fetchImpl, key, "GET", `/audiences/${audience}/contacts/${encodeURIComponent(email)}`);
+  const existing = await resend(fetchImpl, key, "GET", `/contacts/${encodeURIComponent(email)}`);
   if (existing.ok && existing.data.unsubscribed === false) return response({ status: "existing" });
 
-  const contact = await resend(fetchImpl, key, "POST", `/audiences/${audience}/contacts`, { email, unsubscribed: false });
+  const segments = env.RESEND_SEGMENT_ID ? [{ id: env.RESEND_SEGMENT_ID }] : [];
+  const contact = await resend(fetchImpl, key, "POST", "/contacts", { email, unsubscribed: false, segments });
   if (!contact.ok) {
     console.error("resend contact failed", contact.status, contact.data);
     return response({ error: "Could not save your signup. Please try again." }, 502);
