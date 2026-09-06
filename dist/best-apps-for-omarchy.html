@@ -26,7 +26,7 @@
 <meta name="twitter:title" content="Best Omarchy Apps to Install First: 12 Useful Picks">
 <meta name="twitter:description" content="Start a new Omarchy setup with 12 useful apps for notes, files, themes, video, screenshots, gaming, remote access and developer work.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/best-apps-for-omarchy.html#article","headline":"Best Omarchy Apps to Install First: 12 Useful Picks","description":"Start a new Omarchy setup with 12 useful apps for notes, files, themes, video, screenshots, gaming, remote access and developer work.","url":"https://omarchyapps.com/best-apps-for-omarchy.html","dateModified":"2026-09-04","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Best Omarchy Apps to Install First: 12 Useful Picks","item":"https://omarchyapps.com/best-apps-for-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What should I install first on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Start with one app for each recurring task you actually have. LocalSend, a notes app, a file manager and one creative tool make a useful first pass."}},{"@type":"Question","name":"Are every one of these apps official Omarchy projects?","acceptedAnswer":{"@type":"Answer","text":"No. The official repository includes a mix of Omarchy projects, upstream third-party software and independent community apps. Each profile links to its real project source."}},{"@type":"Question","name":"Does this list automatically install anything?","acceptedAnswer":{"@type":"Answer","text":"No. The guide only links to package profiles. You decide what to install and run the displayed Omarchy command yourself."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/best-apps-for-omarchy.html#article","headline":"Best Omarchy Apps to Install First: 12 Useful Picks","description":"Start a new Omarchy setup with 12 useful apps for notes, files, themes, video, screenshots, gaming, remote access and developer work.","url":"https://omarchyapps.com/best-apps-for-omarchy.html","dateModified":"2026-09-06","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Best Omarchy Apps to Install First: 12 Useful Picks","item":"https://omarchyapps.com/best-apps-for-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What should I install first on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Start with one app for each recurring task you actually have. LocalSend, a notes app, a file manager and one creative tool make a useful first pass."}},{"@type":"Question","name":"Are every one of these apps official Omarchy projects?","acceptedAnswer":{"@type":"Answer","text":"No. The official repository includes a mix of Omarchy projects, upstream third-party software and independent community apps. Each profile links to its real project source."}},{"@type":"Question","name":"Does this list automatically install anything?","acceptedAnswer":{"@type":"Answer","text":"No. The guide only links to package profiles. You decide what to install and run the displayed Omarchy command yourself."}}]}]}</script>
 <style>
 /* =========================================================================
    Unofficial Omarchy App Store
@@ -996,6 +996,10 @@ b, strong { font-weight: 700; }
   padding: 0.25em 0.55em;
   border: var(--border-width) solid rgb(var(--rgb-terminal-blue) / 0.35);
   border-radius: var(--radius);
+  --vote-share: 0%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: transparent;
   color: rgb(var(--rgb-terminal-blue) / 0.8);
   cursor: pointer;
@@ -1004,7 +1008,18 @@ b, strong { font-weight: 700; }
   font-variant-numeric: tabular-nums;
 }
 .app-vote:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+/* Meter: fills the button in proportion to the most-voted app. */
+.app-vote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: var(--vote-share);
+  background: rgba(var(--rgb-terminal-blue), 0.22);
+  transition: width 0.4s ease;
+}
 .app-vote.is-voted { border-color: var(--color-green); color: var(--color-green); }
+.app-vote.is-voted::before { background: rgba(var(--rgb-green), 0.22); }
 .app-vote[aria-busy="true"] { cursor: wait; opacity: 0.55; }
 .app-vote.vote-error { border-color: #f7768e; }
 .app-vote.vote-unavailable { opacity: 0.5; }
@@ -1286,7 +1301,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <p class="eyebrow">Starter app guide</p>
     <h1>The best Omarchy apps to <span>install first</span></h1>
     <p class="tag">A practical starter set chosen by job, not a pile of packages to install blindly.</p>
-    <p class="facts">Reviewed 2026-09-04 · independent editorial guide</p>
+    <p class="facts">Reviewed 2026-09-06 · independent editorial guide</p>
   </div>
 </header>
 
@@ -1365,7 +1380,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <section class="sources">
       <h2>How to verify a pick</h2>
       <p>Every linked profile displays the current package version, license, size, upstream website or repository, PKGBUILD and known requirements. Treat those pages as a starting point and read the upstream documentation before granting an app access to important data.</p>
-      <p class="editorial-note">This list is maintained from the same package database that powers the store and was reviewed on 2026-09-04. Package availability and features can change.</p>
+      <p class="editorial-note">This list is maintained from the same package database that powers the store and was reviewed on 2026-09-06. Package availability and features can change.</p>
     </section>
 
   </article>
@@ -1394,7 +1409,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
         <a href="/terms.html">Terms</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Reviewed 2026-09-04 · unofficial and independent</span>
+      <span>Reviewed 2026-09-06 · unofficial and independent</span>
     </div>
   </div>
 </footer>

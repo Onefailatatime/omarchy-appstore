@@ -24,7 +24,7 @@
 <meta name="twitter:description" content="A practical app packaging checklist for Omarchy contributors.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TechArticle","headline":"Develop for Omarchy","description":"A practical app packaging checklist for Omarchy contributors.","url":"https://omarchyapps.com/develop.html","dateModified":"2026-09-04","author":{"@type":"Person","name":"Jessyka","sameAs":"https://x.com/jessyka_boat"},"about":{"@type":"Thing","name":"Omarchy application packaging"}}
+{"@context":"https://schema.org","@type":"TechArticle","headline":"Develop for Omarchy","description":"A practical app packaging checklist for Omarchy contributors.","url":"https://omarchyapps.com/develop.html","dateModified":"2026-09-06","author":{"@type":"Person","name":"Jessyka","sameAs":"https://x.com/jessyka_boat"},"about":{"@type":"Thing","name":"Omarchy application packaging"}}
 </script>
 <style>
 /* =========================================================================
@@ -995,6 +995,10 @@ b, strong { font-weight: 700; }
   padding: 0.25em 0.55em;
   border: var(--border-width) solid rgb(var(--rgb-terminal-blue) / 0.35);
   border-radius: var(--radius);
+  --vote-share: 0%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: transparent;
   color: rgb(var(--rgb-terminal-blue) / 0.8);
   cursor: pointer;
@@ -1003,7 +1007,18 @@ b, strong { font-weight: 700; }
   font-variant-numeric: tabular-nums;
 }
 .app-vote:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+/* Meter: fills the button in proportion to the most-voted app. */
+.app-vote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: var(--vote-share);
+  background: rgba(var(--rgb-terminal-blue), 0.22);
+  transition: width 0.4s ease;
+}
 .app-vote.is-voted { border-color: var(--color-green); color: var(--color-green); }
+.app-vote.is-voted::before { background: rgba(var(--rgb-green), 0.22); }
 .app-vote[aria-busy="true"] { cursor: wait; opacity: 0.55; }
 .app-vote.vote-error { border-color: #f7768e; }
 .app-vote.vote-unavailable { opacity: 0.5; }
@@ -1288,7 +1303,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 ╰──────────╯</pre>
     <h1>Develop for <span>Omarchy</span></h1>
     <p class="tag">A practical checklist for preparing safe, maintainable app packages.</p>
-    <p class="facts">Unofficial guide · based on public Omarchy and Arch Linux documentation · reviewed 2026-09-04</p>
+    <p class="facts">Unofficial guide · based on public Omarchy and Arch Linux documentation · reviewed 2026-09-06</p>
   </div>
 </header>
 
@@ -1300,14 +1315,14 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <section class="guide-download" aria-labelledby="download-h">
     <div>
       <h2 id="download-h">Add this checklist to your LLM</h2>
-      <p>Download the portable Markdown version for an LLM project, knowledge base, or skill. It includes all 33 checks, safety boundaries, review instructions, and authoritative references—with no personal or machine-specific information.</p>
+      <p>Download the portable Markdown version for an LLM project, knowledge base, or skill. It includes all 34 checks, safety boundaries, review instructions, and authoritative references—with no personal or machine-specific information.</p>
     </div>
     <a class="button" href="/develop-for-omarchy.md" download>Download Markdown (.md) ↓</a>
   </section>
 
   <div class="guide-progress" aria-live="polite">
-    <strong id="progress-text">0 of 33 complete</strong>
-    <progress id="progress" value="0" max="33">0%</progress>
+    <strong id="progress-text">0 of 34 complete</strong>
+    <progress id="progress" value="0" max="34">0%</progress>
     <button type="button" id="reset">Reset</button>
   </div>
 
@@ -1377,6 +1392,7 @@ bin/add-package package-name --local --scaffold</pre>
       <li><label><input type="checkbox"><span>Use the repository’s dry-run option to inspect the build plan before running a real package build.</span></label></li>
       <li><label><input type="checkbox"><span>Install the resulting package, exercise its main workflows as a normal user, reboot or log in again if integration depends on a new session, then uninstall it.</span></label></li>
       <li><label><input type="checkbox"><span>Inspect the final package file list, ownership, permissions, dependencies, installed size, and absence of build-machine paths or secrets.</span></label></li>
+      <li><label><input type="checkbox"><span>Keep the download small. Prefer upstream release binaries over bundled toolchains, strip debug symbols, and split large optional assets into their own package; the store shows download and installed size on every card, and a multi-hundred-megabyte package is the first thing reviewers question.</span></label></li>
       <li><label><input type="checkbox"><span>If multiple architectures are declared, test each one or clearly state which architecture remains unverified.</span></label></li>
     </ul>
   </section>
@@ -1428,7 +1444,7 @@ bin/add-package package-name --local --scaffold</pre>
         <a href="terms.html">Terms of Use</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Reviewed 2026-09-04 · checklist progress stays in this browser</span>
+      <span>Reviewed 2026-09-06 · checklist progress stays in this browser</span>
     </div>
   </div>
 </footer>

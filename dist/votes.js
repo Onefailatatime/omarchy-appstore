@@ -9,17 +9,26 @@
     });
   }
 
+  function topCount() {
+    var top = 0;
+    for (var app in state.counts) if (state.counts[app] > top) top = state.counts[app];
+    return top;
+  }
+
   function render(button) {
     var app = button.dataset.voteApp;
     if (!app) return;
     var count = state.counts[app] || 0;
+    var top = topCount();
+    // Meter: this app's votes as a share of the current leader's.
+    button.style.setProperty("--vote-share", (top ? Math.round(count / top * 100) : 0) + "%");
     var countEl = button.querySelector("[data-vote-count]");
     if (countEl) countEl.textContent = count;
     var didVote = state.voted.has(app);
     button.classList.toggle("is-voted", didVote);
     button.setAttribute("aria-pressed", didVote ? "true" : "false");
     button.setAttribute("aria-label", didVote ? "You upvoted " + app : "Upvote " + app);
-    button.title = didVote ? "Your upvote is saved on the site" : "Upvote this app";
+    button.title = (didVote ? "Your upvote is saved on the site" : "Upvote this app") + " · " + count + " of " + top + " (top app)";
   }
 
   function renderAll() {

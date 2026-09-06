@@ -1,0 +1,44 @@
+# Rebuilds the store from the official Omarchy package repo and deploys it
+# twice a day, so new packages appear without anyone running build.py by hand.
+name: Build and deploy
+
+on:
+  schedule:
+    - cron: "0 6,18 * * *" # 06:00 and 18:00 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: python3 build.py
+      - run: for t in tests/*.test.mjs; do node --test "$t"; done
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: npx --yes netlify-cli@latest deploy --prod --dir=dist --message "Scheduled rebuild $(date -u +%Y-%m-%dT%H:%MZ)"
+      - name: Commit refreshed site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist data/omarchy.db netlify/functions/app-names.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Refresh package catalogue from pkgs.omarchy.org"
+          git push

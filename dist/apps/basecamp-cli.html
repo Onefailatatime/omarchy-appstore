@@ -997,6 +997,10 @@ b, strong { font-weight: 700; }
   padding: 0.25em 0.55em;
   border: var(--border-width) solid rgb(var(--rgb-terminal-blue) / 0.35);
   border-radius: var(--radius);
+  --vote-share: 0%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: transparent;
   color: rgb(var(--rgb-terminal-blue) / 0.8);
   cursor: pointer;
@@ -1005,7 +1009,18 @@ b, strong { font-weight: 700; }
   font-variant-numeric: tabular-nums;
 }
 .app-vote:hover { border-color: var(--color-turquoise); color: var(--color-turquoise); }
+/* Meter: fills the button in proportion to the most-voted app. */
+.app-vote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: var(--vote-share);
+  background: rgba(var(--rgb-terminal-blue), 0.22);
+  transition: width 0.4s ease;
+}
 .app-vote.is-voted { border-color: var(--color-green); color: var(--color-green); }
+.app-vote.is-voted::before { background: rgba(var(--rgb-green), 0.22); }
 .app-vote[aria-busy="true"] { cursor: wait; opacity: 0.55; }
 .app-vote.vote-error { border-color: #f7768e; }
 .app-vote.vote-unavailable { opacity: 0.5; }
@@ -1293,6 +1308,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <div class="actions"><a class="button ghost" href="https://github.com/basecamp/basecamp-cli" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/basecamp-cli" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
-<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-09-04 · unofficial directory</span></div></div></footer>
+<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-09-06 · unofficial directory</span></div></div></footer>
 </body>
 </html>
