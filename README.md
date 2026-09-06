@@ -40,13 +40,12 @@ which covers the checklist, package size expectations, and the pull request.
 
 ## Automated builds
 
-`.github/workflows/deploy.yml` rebuilds and deploys the site at 06:00 and
-18:00 UTC, and can be run on demand from the Actions tab. It runs `build.py`
-and the tests, deploys `dist/` with the Netlify CLI, then commits the refreshed
-`dist/`, `data/omarchy.db`, and vote allow-list back to the branch. GitHub only
-runs schedules from the default branch, and the deploy step needs two
-repository secrets: `NETLIFY_AUTH_TOKEN` (a Netlify personal access token) and
-`NETLIFY_SITE_ID` (from the site's settings page).
+`.github/workflows/deploy.yml` rebuilds the site at 06:00 and 18:00 UTC, and
+can be run on demand from the Actions tab. It runs `build.py` and the tests,
+then commits the refreshed `dist/`, `data/omarchy.db`, and vote allow-list.
+Netlify is connected to this repository and publishes every push to `main`,
+so that commit is the deploy. GitHub only runs schedules from the default
+branch. No secrets are needed.
 
 ## Layout
 
@@ -130,5 +129,5 @@ source attribution only. It never saves the upstream image files.
 
 ## Deploy
 
-Static folder: publish `dist/`. House rule: Netlify CLI only, by hand or via
-the scheduled workflow above.
+Static folder: publish `dist/`. Netlify publishes `main` on push; the Netlify
+CLI remains the house rule for any manual deploy.
