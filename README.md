@@ -21,8 +21,10 @@ Not affiliated with Omacom or DHH — say so on the page, always.
 git clone https://github.com/Onefailatatime/omarchy-appstore
 cd omarchy-appstore
 python3 build.py
-python3 -m http.server -d dist 8000   # http://localhost:8000
+python3 -m http.server -d dist 8000
 ```
+
+The last command serves the built site at http://localhost:8000 until Ctrl-C.
 
 The first build also clones `omacom/omarchy-pkgs` into `data/omarchy-pkgs`
 (gitignored) for the first-added dates, so it needs git and network access.
