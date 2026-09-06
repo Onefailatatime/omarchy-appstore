@@ -139,7 +139,7 @@ Then set these environment variables on the Netlify site:
 | Variable | Value |
 | --- | --- |
 | `RESEND_API_KEY` | the API key |
-| `RESEND_SEGMENT_ID` | optional; the segment ID |
+| `RESEND_SEGMENT_ID` | the segment ID; optional for signup, required to send a digest |
 | `NEWSLETTER_FROM` | e.g. `Omarchy App Store <hello@omarchyapps.com>` |
 | `NEWSLETTER_REPLY_TO` | optional; a mailbox you read, defaults to the from address |
 
@@ -149,6 +149,28 @@ old values. Where the plan exposes variable scopes, include Functions: a
 build-only variable never reaches `/api/subscribe`.
 
 Until they are set the form reports that signup is not configured yet.
+
+## Release digest
+
+The signup collects the list; this drafts what goes out to it.
+
+```bash
+python3 tools/draft_newsletter.py --dry-run
+python3 tools/draft_newsletter.py
+```
+
+It reads the same package data `build.py` renders, takes every package added
+since the last issue, and creates the Resend broadcast as a draft. It never
+sends: open the draft in Resend, write the news section where the placeholder
+sits, and send it yourself. `--dry-run` prints the issue and touches nothing.
+
+`data/newsletter.json` records when the last issue was drafted and is the only
+thing deciding what counts as new; the first run looks back seven days. Commit
+it afterwards so the next issue picks up where this one left off, or delete it
+to start the window over.
+
+Needs `RESEND_API_KEY`, `RESEND_SEGMENT_ID`, and `NEWSLETTER_FROM` in the
+environment, and Python 3.14 like the build.
 
 ## Curated profiles
 
