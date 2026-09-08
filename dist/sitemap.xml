@@ -26,6 +26,7 @@
   <url><loc>https://omarchyapps.com/apps/cursor-cli.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/dbxcli-bin.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/dell-xps-touchpad-haptics.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/dell-xps13-sidecar-amps.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/dropbox.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/dropbox-cli.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/elephant.html</loc><lastmod>2026-09-08</lastmod></url>
@@ -78,6 +79,12 @@
   <url><loc>https://omarchyapps.com/apps/link-studio.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/linux-mainline-panther-lake.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/linux-mainline-panther-lake-headers.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/linux-omarchy.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/linux-omarchy-bore.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/linux-omarchy-bore-headers.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/linux-omarchy-headers.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/linux-omarchy-muqss.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/linux-omarchy-muqss-headers.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/linux-ptl.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/linux-ptl-audio.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/linux-ptl-audio-headers.html</loc><lastmod>2026-09-08</lastmod></url>
@@ -114,6 +121,7 @@
   <url><loc>https://omarchyapps.com/apps/omarchy-settings-dev.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/omarchy-walker.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/omarchy-zsh.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/omareel.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/omasnap.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/omatrack.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/omawrite.html</loc><lastmod>2026-09-08</lastmod></url>
@@ -144,6 +152,7 @@
   <url><loc>https://omarchyapps.com/apps/supergfxctl.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/symfony-cli.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-bin.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/t3code-patched-bin.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tensaku.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tmog-bin.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tobi-try.html</loc><lastmod>2026-09-08</lastmod></url>
@@ -156,6 +165,7 @@
   <url><loc>https://omarchyapps.com/apps/ufw-docker.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/umu-launcher.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/v4l2-relayd.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/vi.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/visual-studio-code-bin.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/voxtype-bin.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/walker.html</loc><lastmod>2026-09-08</lastmod></url>
