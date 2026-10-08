@@ -34,21 +34,6 @@
   <url><loc>https://omarchyapps.com/apps/dell-xps13-sidecar-amps.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/dropbox.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/dropbox-cli.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-all.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-archlinuxpkgs.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-bluetooth.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-calc.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-clipboard.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-desktopapplications.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-files.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-menus.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-providerlist.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-runner.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-symbols.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-todo.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-unicode.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/elephant-websearch.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/elsewhen.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/flea.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/ghostty.html</loc><lastmod>2026-10-08</lastmod></url>
@@ -136,7 +121,6 @@
   <url><loc>https://omarchyapps.com/apps/omarchy-settings.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/omarchy-settings-dev.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/omarchy-task-manager.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/omarchy-walker.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/omarchy-zsh.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/omareel.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/omasnap.html</loc><lastmod>2026-10-08</lastmod></url>
@@ -165,12 +149,14 @@
   <url><loc>https://omarchyapps.com/apps/rustdesk.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/schist.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/schist-bin.html</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/slack-desktop.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/slap-notes-bin.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/spotify.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/strata.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/sublime-text-4.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/sunshine.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/supergfxctl.html</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/superwhisper-bin.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/symfony-cli.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-bin.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-nightly-bin.html</loc><lastmod>2026-10-08</lastmod></url>
