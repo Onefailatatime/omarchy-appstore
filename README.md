@@ -15,14 +15,34 @@ as family.
 
 Not affiliated with Omacom or DHH — say so on the page, always.
 
-## Build
+## Local copy
 
 ```bash
+git clone https://github.com/Onefailatatime/omarchy-appstore
+cd omarchy-appstore
 python3 build.py
+python3 -m http.server -d dist 8000
 ```
 
-Fetches `https://pkgs.omarchy.org/stable/x86_64/omarchy.db` (falls back to the
-cached copy in `data/` when offline), parses every `desc`, and writes
+The last command serves the built site at http://localhost:8000 until Ctrl-C.
+
+The first build also clones `omacom/omarchy-pkgs` into `data/omarchy-pkgs`
+(gitignored) for the first-added dates, so it needs git and network access.
+
+The static server serves the pages. Upvotes and the newsletter form call the
+Netlify Functions, which it does not run; `npx netlify dev` serves those.
+
+The tests need Node 22.12+ and the one dependency:
+
+```bash
+npm ci
+for t in tests/*.test.mjs; do node --test "$t"; done
+```
+
+## Build
+
+`python3 build.py` fetches `https://pkgs.omarchy.org/stable/x86_64/omarchy.db`
+(falls back to the cached copy in `data/` when offline), parses every `desc`, and writes
 `dist/index.html` plus `dist/fonts/`. Needs Python 3.14+ for the stdlib
 `compression.zstd` module — Omarchy ships it.
 
@@ -122,6 +142,11 @@ Then set these environment variables on the Netlify site:
 | `RESEND_SEGMENT_ID` | optional; the segment ID |
 | `NEWSLETTER_FROM` | e.g. `Omarchy App Store <hello@omarchyapps.com>` |
 | `NEWSLETTER_REPLY_TO` | optional; a mailbox you read, defaults to the from address |
+
+Netlify applies environment variables at deploy time, so trigger a redeploy
+after adding them — until it finishes the deployed function still runs with the
+old values. Where the plan exposes variable scopes, include Functions: a
+build-only variable never reaches `/api/subscribe`.
 
 Until they are set the form reports that signup is not configured yet.
 
