@@ -2,7 +2,7 @@
   "_comment": "Sponsor slots. Prices are reserve (minimum) bids in USD; people bid above them. A null sponsor renders nothing except the lifetime slot, which shows the auction card. Update high_bid as bids arrive and rebuild.",
   "lifetime": {
     "label": "Lifetime sponsor",
-    "position": "Top of the right rail beside the Top 3 podium on desktop, directly under the search bar on phones. Above the fold on every screen size.",
+    "position": "Top of the sidebar, above the fold on every screen.",
     "reserve": 1000,
     "auction_days": 30,
     "extend_hours": 24,
@@ -13,7 +13,7 @@
   },
   "header": {
     "label": "Header strip",
-    "position": "One slim text unit under the hero, above the search bar, on every homepage visit.",
+    "position": "Slim text line under the hero, above search.",
     "reserve_month": 55,
     "term_days": 90,
     "high_bid": null,
@@ -21,7 +21,7 @@
   },
   "rail": {
     "label": "Right rail",
-    "position": "A 300 pixel wide unit directly below the lifetime sponsor. It stays pinned while the visitor scrolls the package grid.",
+    "position": "Sidebar, directly under the lifetime sponsor.",
     "reserve_month": 200,
     "term_days": 90,
     "high_bid": null,
@@ -29,13 +29,22 @@
   },
   "footer": {
     "label": "Footer row",
-    "position": "One of three units in a sponsor row above the site footer, after the FAQ and newsletter.",
+    "position": "One of three units above the site footer.",
     "reserve_month": 25,
     "term_days": 90,
     "units": [
-      {"high_bid": null, "sponsor": null},
-      {"high_bid": null, "sponsor": null},
-      {"high_bid": null, "sponsor": null}
+      {
+        "high_bid": null,
+        "sponsor": null
+      },
+      {
+        "high_bid": null,
+        "sponsor": null
+      },
+      {
+        "high_bid": null,
+        "sponsor": null
+      }
     ]
   },
   "_sponsor_shape": {

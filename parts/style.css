@@ -1310,10 +1310,12 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 /* advertise page: each section gets its own surface so the page reads as
    a sequence of panels, not one column of blue text. */
 .advertise-main { max-width: 64rem; padding-bottom: var(--space-xx-large); }
-.advertise-main h2 { margin: 0 0 var(--space-medium); color: var(--color-terminal-white); font-size: clamp(1.2rem, 2.6vw, 1.55rem); }
+.advertise-main h2 { margin: 0 0 var(--space-medium); color: var(--color-terminal-white); font-size: clamp(1.3rem, 2.8vw, 1.7rem); }
+.advertise-main .slots-panel { margin-top: var(--space-large); }
+.advertise-main .faq { margin-top: var(--space-large); }
 .advertise-main .eyebrow { margin: 0 0 0.35em; color: var(--color-green); font-size: 78%; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .advertise-main p { color: rgb(var(--rgb-terminal-white) / 0.88); }
-.ad-panel { margin-top: var(--space-x-large); padding: var(--space-large); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.16); border-radius: var(--radius); background: rgba(var(--rgb-background-storm), 0.45); }
+.ad-panel { margin-top: var(--space-large); padding: var(--space-large); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.16); border-radius: var(--radius); background: rgba(var(--rgb-background-storm), 0.45); }
 .lifetime-panel { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); background: linear-gradient(145deg, rgba(var(--rgb-terminal-white), 0.06), rgba(var(--rgb-background-storm), 0.7) 60%); }
 .lifetime-panel .eyebrow { color: var(--color-terminal-white); }
 .slots-panel { background: var(--color-background-storm); box-shadow: inset 0 1px 0 rgba(var(--rgb-terminal-white), 0.055); }
@@ -1327,7 +1329,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slots-head p:last-child { margin-bottom: 0; }
 .slots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-medium); }
 .slot { display: flex; flex-direction: column; gap: 0.5em; padding: var(--space-neutral); background: var(--color-background-night); border: var(--border-width) solid var(--border-color); border-radius: var(--radius); }
-.slot.featured { grid-column: 1 / -1; border: 3px double rgb(var(--rgb-terminal-white) / 0.55); background: linear-gradient(145deg, rgba(var(--rgb-terminal-white), 0.05), var(--color-background-night) 60%); }
+.slot.featured { grid-column: 1 / -1; border: 3px double rgb(var(--rgb-terminal-white) / 0.85); background: linear-gradient(145deg, rgba(var(--rgb-terminal-white), 0.05), var(--color-background-night) 60%); }
 .slot h3 { margin: 0; color: var(--color-terminal-white); font-size: 115%; }
 .slot.featured h3 { font-size: 135%; }
 .slot .pos { margin: 0; font-size: 90%; color: rgb(var(--rgb-terminal-blue) / 0.85); }
@@ -1337,7 +1339,9 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slot .status b { color: var(--color-terminal-white); }
 .slot .button { align-self: flex-start; margin-top: auto; }
 .rules-list { margin: 0; padding-left: 1.2em; color: rgb(var(--rgb-terminal-white) / 0.88); }
-.rules-list li + li { margin-top: 0.6em; }
+.rules-list li + li { margin-top: 0.5em; }
+.lifetime-panel .rules-list { font-size: 105%; }
+.lifetime-panel .rules-list b { color: var(--color-terminal-white); font-size: 105%; }
 .rules-list b { color: var(--color-terminal-white); }
 .advertise-cta { margin-top: var(--space-x-large); text-align: center; }
 .advertise-cta p { margin: 0 0 var(--space-medium); }

@@ -49,12 +49,10 @@ SUGGEST_APP_URL = "https://x.com/messages/compose?" + urllib.parse.urlencode({
 })
 SITE_URL = "https://omarchyapps.com"
 AD_FAQ = [
-    ("Why an auction instead of a price list?", "A small community site has no honest way to know what a slot is worth. Letting sponsors set the price between themselves is fairer than guessing, and the reserve keeps it from going below what the slot costs to run."),
-    ("What does \"lifetime\" actually mean?", "For as long as the site is online, the ad stays in the same position with no renewal and no further charge. If the site were ever shut down, there is nothing left to refund against, so treat it as the life of the site, not a fixed number of years."),
-    ("Can I be outbid after I win the lifetime slot?", "No. Outbidding only happens while the auction is open. Once it closes, the winning sponsor holds the slot permanently and no later offer can displace it."),
-    ("How do I pay?", "The winning bidder receives an invoice by email. The slot goes live once it is paid, and for 90 day slots the next term is invoiced before it starts. If you choose not to renew, the slot simply opens for bids again."),
-    ("Can I change my ad after it is live?", "Yes, any time and as often as you like, at no charge. Send the new link, text, or image by DM and it is rebuilt into the page, usually within a day."),
-    ("Does sponsoring affect my package's listing or rank?", "No. Listings come from the official repository and rankings come from reader votes. A sponsor slot is a separate, labelled unit and never changes how a package appears."),
+    ("Why an auction instead of a price list?", "A small community site cannot honestly know what a slot is worth. Sponsors setting the price between themselves is fairer than guessing, and the reserve keeps it above what the slot costs to run."),
+    ("What does \"lifetime\" mean?", "For as long as the site is online, the ad stays in the same position with no renewal and no further charge. Treat it as the life of the site, not a fixed number of years."),
+    ("How do I pay?", "The winning bidder gets an invoice by email. The slot goes live once it is paid. For 90 day slots the next term is invoiced before it starts, and if you do not renew the slot simply reopens for bids."),
+    ("Does sponsoring affect my package's listing or rank?", "No. Listings come from the official repository and rankings come from reader votes. A sponsor slot is a separate, labelled unit."),
 ]
 SITE_NAME = "Unofficial Omarchy App Store"
 GUIDES = [
