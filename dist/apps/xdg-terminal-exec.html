@@ -1299,6 +1299,123 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   .hero { padding-top: var(--space-large); }
   .hero pre { font-size: 85%; }
 }
+
+/* =================== SPONSOR SLOTS =================== */
+/* Ads use the structure palette only (night, storm, terminal-blue,
+   terminal-white). No green, orange, or turquoise at rest, so the colour
+   grammar above stays intact. Every unit carries a visible tag; the lifetime
+   unit gets a double border so it reads as permanent and paid. */
+.ad { position: relative; display: flex; gap: 1em; align-items: center; overflow: visible;
+  padding: 0.85em 1em; background: rgba(var(--rgb-background-storm), 0.7);
+  border: var(--border-width) solid var(--border-color); border-radius: var(--radius);
+  color: var(--color-terminal-white); text-decoration: none; }
+.ad:hover { border-color: var(--color-terminal-blue); }
+.ad .tag { position: absolute; top: -0.65em; left: 0.9em; padding: 0 0.5em;
+  background: var(--color-background-night); color: rgb(var(--rgb-terminal-blue) / 0.75);
+  font-size: 68%; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.ad .mark { flex: none; width: 2.6em; height: 2.6em; display: grid; place-items: center;
+  border-radius: var(--radius); background: var(--color-background-night);
+  border: var(--border-width) solid var(--border-color); color: var(--color-terminal-white); font-weight: 700; }
+.ad .copy { min-width: 0; flex: 1; }
+.ad strong { display: block; color: var(--color-terminal-white); }
+.ad .sub { display: block; color: rgb(var(--rgb-terminal-blue) / 0.8); font-size: 88%; }
+.ad .cta { flex: none; padding: 0.4em 0.8em; border: var(--border-width) solid rgb(var(--rgb-terminal-blue) / 0.6);
+  border-radius: var(--radius); color: var(--color-terminal-blue); font-size: 85%; white-space: nowrap; }
+.ad.lifetime { border: 3px double rgb(var(--rgb-terminal-white) / 0.55); background: rgba(var(--rgb-background-storm), 0.9); }
+.ad.lifetime .tag { color: rgb(var(--rgb-terminal-white) / 0.85); }
+.ad.lifetime:hover { border-color: var(--color-terminal-blue); }
+.ad.stack { flex-direction: column; align-items: stretch; gap: 0.75em; }
+.ad.stack .shot { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) - 2px); border: var(--border-width) solid var(--border-color); }
+.ad.stack .cta { align-self: flex-start; }
+.ad.text { padding: 0.55em 1em; font-size: 90%; }
+.ad.text .mark { width: 1.8em; height: 1.8em; font-size: 85%; }
+.ad.open { border-style: dashed; background: rgba(var(--rgb-background-storm), 0.35); }
+.ad.open .mark { color: rgb(var(--rgb-terminal-blue) / 0.8); border-style: dashed; }
+.ad.open strong { color: rgb(var(--rgb-terminal-white) / 0.85); }
+.ad.open .cta { color: var(--color-terminal-white); border-color: rgb(var(--rgb-terminal-white) / 0.5); }
+
+.ad-header { max-width: var(--maxw); margin: 0 auto var(--space-medium); padding: 0 var(--space-neutral); }
+.ad-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--space-large); align-items: start; }
+.ad-rail { position: sticky; top: var(--bar-h); display: flex; flex-direction: column; gap: var(--space-neutral); padding-top: 1em; }
+.ad-rail .rail-note { margin: 0; color: rgb(var(--rgb-terminal-blue) / 0.5); font-size: 72%; text-align: center; }
+.ad-rail .rail-note a { color: inherit; }
+.ad-footer { max-width: var(--maxw); margin: var(--space-x-large) auto 0; padding: 0 var(--space-neutral); }
+.ad-footer .sec-label { margin-top: 0; }
+.ad-footer-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; margin-bottom: var(--space-x-large); }
+@media (max-width: 1000px) {
+  /* phones and small tablets: no side panel. The rail becomes one compact
+     unit placed before the content, and only its first unit survives. */
+  .ad-layout { grid-template-columns: 1fr; }
+  .ad-rail { position: static; order: -1; padding-top: 0.5em; gap: var(--space-small); }
+  .ad-rail .ad + .ad { display: none; }
+  .ad-rail .rail-note { text-align: right; }
+  .ad.stack { flex-direction: row; align-items: center; gap: 1em; }
+  .ad.stack .shot { display: none; }
+  .ad.stack .cta { align-self: center; }
+}
+@media (max-width: 760px) { .ad-footer-row { grid-template-columns: 1fr; } }
+@media (max-width: 480px) {
+  .ad .cta { display: none; }
+  .ad { padding: 0.75em 0.85em; }
+  .ad .sub { font-size: 82%; }
+}
+
+/* advertise page: each section gets its own surface so the page reads as
+   a sequence of panels, not one column of blue text. */
+.advertise-main { max-width: 64rem; padding-bottom: var(--space-xx-large); }
+.advertise-main h2 { margin: 0 0 var(--space-medium); color: var(--color-terminal-white); font-size: clamp(1.3rem, 2.8vw, 1.7rem); }
+.advertise-main .slots-panel { margin-top: var(--space-large); }
+.advertise-main .faq { margin-top: var(--space-large); }
+.advertise-main .eyebrow { margin: 0 0 0.35em; color: var(--color-green); font-size: 78%; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.advertise-main p { color: rgb(var(--rgb-terminal-white) / 0.88); }
+.ad-panel { margin-top: var(--space-large); padding: var(--space-large); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.16); border-radius: var(--radius); background: rgba(var(--rgb-background-storm), 0.45); }
+.lifetime-panel { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); background: linear-gradient(145deg, rgba(var(--rgb-terminal-white), 0.06), rgba(var(--rgb-background-storm), 0.7) 60%); }
+.lifetime-panel .eyebrow { color: var(--color-terminal-white); }
+.slots-panel { background: var(--color-background-storm); box-shadow: inset 0 1px 0 rgba(var(--rgb-terminal-white), 0.055); }
+.rules-panel { border-color: rgba(var(--rgb-terminal-cyan), 0.2); background: linear-gradient(135deg, rgba(var(--rgb-terminal-cyan), 0.055), rgba(var(--rgb-background-storm), 0.62)); }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-medium); counter-reset: step; margin: 0; padding: 0; list-style: none; }
+.steps li { padding: var(--space-neutral); background: var(--color-background-night); border: var(--border-width) solid var(--border-color); border-radius: var(--radius); }
+.steps li::before { counter-increment: step; content: counter(step, decimal-leading-zero); display: block; margin-bottom: 0.5em; color: var(--color-green); font-size: 135%; font-weight: 700; }
+.steps h3 { margin: 0 0 0.4em; color: var(--color-terminal-white); font-size: 105%; }
+.steps p { margin: 0; font-size: 92%; color: rgb(var(--rgb-terminal-blue) / 0.9); }
+.slots-head { display: grid; grid-template-columns: minmax(0, 1fr) 20em; gap: var(--space-large); align-items: start; margin-bottom: var(--space-large); }
+.slots-head p:last-child { margin-bottom: 0; }
+.slots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-medium); }
+.slot { display: flex; flex-direction: column; gap: 0.5em; padding: var(--space-neutral); background: var(--color-background-night); border: var(--border-width) solid var(--border-color); border-radius: var(--radius); }
+.slot.featured { grid-column: 1 / -1; border: 3px double rgb(var(--rgb-terminal-white) / 0.85); background: linear-gradient(145deg, rgba(var(--rgb-terminal-white), 0.05), var(--color-background-night) 60%); }
+.slot h3 { margin: 0; color: var(--color-terminal-white); font-size: 115%; }
+.slot.featured h3 { font-size: 135%; }
+.slot .pos { margin: 0; font-size: 90%; color: rgb(var(--rgb-terminal-blue) / 0.85); }
+.slot .price { margin: 0.35em 0 0; color: var(--color-terminal-white); }
+.slot .price b { color: var(--color-green); font-size: 110%; }
+.slot .status { margin: 0; font-size: 88%; color: rgb(var(--rgb-terminal-blue) / 0.75); }
+.slot .status b { color: var(--color-terminal-white); }
+.slot .button { align-self: flex-start; margin-top: auto; }
+.rules-list { margin: 0; padding-left: 1.2em; color: rgb(var(--rgb-terminal-white) / 0.88); }
+.rules-list li + li { margin-top: 0.5em; }
+.lifetime-panel .rules-list { font-size: 105%; }
+.lifetime-panel .rules-list b { color: var(--color-terminal-white); font-size: 105%; }
+.rules-list b { color: var(--color-terminal-white); }
+.advertise-cta { margin-top: var(--space-x-large); text-align: center; }
+.advertise-cta p { margin: 0 0 var(--space-medium); }
+
+/* slot map: a wireframe of the homepage with the four positions marked */
+.slot-map { margin: 0; padding: 0.6em; border: var(--border-width) solid var(--border-color); border-radius: var(--radius); background: var(--color-background-night); font-size: 70%; }
+.slot-map > div { margin-bottom: 0.35em; }
+.sm-nav { height: 0.6em; border-radius: 2px; background: rgba(var(--rgb-terminal-blue), 0.5); }
+.sm-hero { height: 2.2em; border-radius: 2px; background: rgba(var(--rgb-background-storm), 1); }
+.sm-bar { height: 0.9em; border-radius: 2px; background: rgba(var(--rgb-background-storm), 1); border: 1px solid var(--border-color); }
+.sm-slot { display: flex; align-items: center; gap: 0.5em; padding: 0.3em 0.5em; border: 1px dashed rgba(var(--rgb-terminal-white), 0.6); border-radius: 2px; color: var(--color-terminal-white); white-space: nowrap; }
+.sm-slot span { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border-radius: 2px; background: var(--color-terminal-white); color: var(--color-background-night); font-weight: 700; }
+.sm-lifetime { border: 2px double rgba(var(--rgb-terminal-white), 0.9); }
+.sm-body { display: grid; grid-template-columns: 1fr 7.5em; gap: 0.35em; }
+.sm-main { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.3em; }
+.sm-main i { display: block; height: 2.4em; border-radius: 2px; background: rgba(var(--rgb-background-storm), 1); border: 1px solid var(--border-color); }
+.sm-rail { display: flex; flex-direction: column; gap: 0.35em; }
+.sm-footer { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.3em; }
+.sm-footer .sm-slot { justify-content: center; padding: 0.3em; }
+.slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
+@media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
 </style>
 </head>
 <body>
@@ -1325,6 +1442,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <div class="actions"><a class="button ghost" href="https://gitlab.freedesktop.org/Vladimir-csp/xdg-terminal-exec" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/xdg-terminal-exec" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
-<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-10-08 · unofficial directory</span></div></div></footer>
+<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-10-09 · unofficial directory</span></div></div></footer>
 </body>
 </html>

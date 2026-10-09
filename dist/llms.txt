@@ -11,6 +11,7 @@ This site is unofficial and is not affiliated with or endorsed by Omarchy, Omaco
 - [Top apps leaderboard](https://omarchyapps.com/leaderboard.html)
 - [Develop for Omarchy](https://omarchyapps.com/develop.html)
 - [About](https://omarchyapps.com/about.html)
+- [Advertise](https://omarchyapps.com/advertise.html)
 - [Terms of Use](https://omarchyapps.com/terms.html)
 
 ## Guides and comparisons

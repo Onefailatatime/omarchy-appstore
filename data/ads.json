@@ -1,0 +1,58 @@
+{
+  "_comment": "Sponsor slots. Prices are reserve (minimum) bids in USD; people bid above them. A null sponsor renders nothing except the lifetime slot, which shows the auction card. Update high_bid as bids arrive and rebuild.",
+  "lifetime": {
+    "label": "Lifetime sponsor",
+    "position": "Top of the sidebar, above the fold on every screen.",
+    "reserve": 1000,
+    "auction_days": 30,
+    "extend_hours": 24,
+    "opened": null,
+    "closes": null,
+    "high_bid": null,
+    "sponsor": null
+  },
+  "header": {
+    "label": "Header strip",
+    "position": "Slim text line under the hero, above search.",
+    "reserve_month": 55,
+    "term_days": 90,
+    "high_bid": null,
+    "sponsor": null
+  },
+  "rail": {
+    "label": "Right rail",
+    "position": "Sidebar, directly under the lifetime sponsor.",
+    "reserve_month": 200,
+    "term_days": 90,
+    "high_bid": null,
+    "sponsor": null
+  },
+  "footer": {
+    "label": "Footer row",
+    "position": "One of three units above the site footer.",
+    "reserve_month": 25,
+    "term_days": 90,
+    "units": [
+      {
+        "high_bid": null,
+        "sponsor": null
+      },
+      {
+        "high_bid": null,
+        "sponsor": null
+      },
+      {
+        "high_bid": null,
+        "sponsor": null
+      }
+    ]
+  },
+  "_sponsor_shape": {
+    "name": "Product name",
+    "tagline": "One sentence, under 90 characters.",
+    "url": "https://example.com",
+    "mark": "◆",
+    "image": "https://example.com/300x180.png or null",
+    "since": "2026-11-01"
+  }
+}
