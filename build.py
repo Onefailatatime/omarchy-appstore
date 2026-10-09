@@ -21,6 +21,8 @@ import urllib.parse
 import urllib.request
 from compression import zstd  # stdlib since Python 3.14
 
+import ads
+
 ROOT = pathlib.Path(__file__).parent
 DIST = ROOT / "dist"
 DB_URL = "https://pkgs.omarchy.org/stable/x86_64/omarchy.db"
@@ -46,6 +48,14 @@ SUGGEST_APP_URL = "https://x.com/messages/compose?" + urllib.parse.urlencode({
     ),
 })
 SITE_URL = "https://omarchyapps.com"
+AD_FAQ = [
+    ("Why an auction instead of a price list?", "A small community site has no honest way to know what a slot is worth. Letting sponsors set the price between themselves is fairer than guessing, and the reserve keeps it from going below what the slot costs to run."),
+    ("What does \"lifetime\" actually mean?", "For as long as the site is online, the ad stays in the same position with no renewal and no further charge. If the site were ever shut down, there is nothing left to refund against, so treat it as the life of the site, not a fixed number of years."),
+    ("Can I be outbid after I win the lifetime slot?", "No. Outbidding only happens while the auction is open. Once it closes, the winning sponsor holds the slot permanently and no later offer can displace it."),
+    ("How do I pay?", "The winning bidder receives an invoice by email. The slot goes live once it is paid, and for 90 day slots the next term is invoiced before it starts. If you choose not to renew, the slot simply opens for bids again."),
+    ("Can I change my ad after it is live?", "Yes, any time and as often as you like, at no charge. Send the new link, text, or image by DM and it is rebuilt into the page, usually within a day."),
+    ("Does sponsoring affect my package's listing or rank?", "No. Listings come from the official repository and rankings come from reader votes. A sponsor slot is a separate, labelled unit and never changes how a package appears."),
+]
 SITE_NAME = "Unofficial Omarchy App Store"
 GUIDES = [
     {
@@ -681,7 +691,12 @@ def main() -> None:
             ]},
         ],
     }
+    sponsor = ads.load()
+    ad_slots = ads.render_homepage(sponsor)
     page = (body
+            .replace("__AD_HEADER__", ad_slots["__AD_HEADER__"])
+            .replace("__AD_RAIL__", ad_slots["__AD_RAIL__"])
+            .replace("__AD_FOOTER__", ad_slots["__AD_FOOTER__"])
             .replace("__NEW__", "\n".join(card(p, featured=True) for p in newest))
             .replace("__GROUPS__", groups)
             .replace("__CHIPS__", chips)
@@ -753,6 +768,35 @@ def main() -> None:
              .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     (DIST / "about.html").write_text(about, encoding="utf-8")
 
+    ad_faq_html = "\n".join(
+        f"    <details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>" for q, a in AD_FAQ
+    )
+    advertise_schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "WebPage", "@id": SITE_URL + "/advertise.html", "url": SITE_URL + "/advertise.html",
+             "name": "Advertise on Omarchy Apps", "isPartOf": {"@id": SITE_URL + "/#website"},
+             "description": "Sponsor slots on the Unofficial Omarchy App Store, sold by open bid. One lifetime slot never expires.",
+             "dateModified": synced},
+            {"@type": "FAQPage", "@id": SITE_URL + "/advertise.html#faq", "mainEntity": [
+                {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in AD_FAQ
+            ]},
+        ],
+    }
+    advertise = ((ROOT / "parts" / "advertise.html").read_text(encoding="utf-8")
+                 .replace("__AD_SLOTS__", ads.render_slot_cards(sponsor))
+                 .replace("__AD_FAQ__", ad_faq_html)
+                 .replace("__AUCTION_DAYS__", str(sponsor["lifetime"]["auction_days"]))
+                 .replace("__EXTEND_HOURS__", str(sponsor["lifetime"]["extend_hours"]))
+                 .replace("__STRUCTURED_DATA__", json_script(advertise_schema))
+                 .replace("__CONTACT_DM__", html.escape(ads.bid_url("sponsor", "any slot")))
+                 .replace("__COUNT__", str(len(pkgs)))
+                 .replace("__SYNCED__", synced)
+                 .replace("__CONTACT__", html.escape(CONTACT_URL))
+                 .replace("__SITE_URL__", SITE_URL)
+                 .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
+    (DIST / "advertise.html").write_text(advertise, encoding="utf-8")
+
     guide_template = (ROOT / "parts" / "guide.html").read_text(encoding="utf-8")
     for guide in GUIDES:
         guide_url = f"{SITE_URL}/{guide['slug']}.html"
@@ -819,7 +863,7 @@ def main() -> None:
             render_app_page(app_template, resolved_css, p, synced), encoding="utf-8"
         )
 
-    sitemap_urls = [SITE_URL + "/", SITE_URL + "/leaderboard.html", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/terms.html"]
+    sitemap_urls = [SITE_URL + "/", SITE_URL + "/leaderboard.html", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/advertise.html", SITE_URL + "/terms.html"]
     sitemap_urls.extend(f"{SITE_URL}/{guide['slug']}.html" for guide in GUIDES)
     sitemap_urls.extend(f"{SITE_URL}/apps/{slug(p['name'])}.html" for p in pkgs)
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -843,6 +887,7 @@ def main() -> None:
         f"- [Top apps leaderboard]({SITE_URL}/leaderboard.html)\n"
         f"- [Develop for Omarchy]({SITE_URL}/develop.html)\n"
         f"- [About]({SITE_URL}/about.html)\n"
+        f"- [Advertise]({SITE_URL}/advertise.html)\n"
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
         "## Guides and comparisons\n"
         + "".join(f"- [{guide['title']}]({SITE_URL}/{guide['slug']}.html)\n" for guide in GUIDES)
@@ -858,6 +903,7 @@ def main() -> None:
     print(f"netlify/functions/checklist.mjs {len(develop_md):,} bytes · checklist emailed to subscribers")
     print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
     print(f"dist/about.html   {len(about):,} bytes · project and builder bio")
+    print(f"dist/advertise.html {len(advertise):,} bytes · sponsor slots and lifetime auction")
     print(f"dist/guides       {len(GUIDES)} search-focused editorial guides")
     print(f"dist/apps/        {len(pkgs)} crawlable package pages")
     print(f"dist/sitemap.xml  {len(sitemap_urls)} canonical URLs")
