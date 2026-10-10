@@ -22,7 +22,9 @@
 <meta name="twitter:creator" content="@jessyka_boat">
 <meta name="twitter:title" content="Advertise on Omarchy Apps">
 <meta name="twitter:description" content="Sponsor slots sold by open bid. One lifetime slot never expires.">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://omarchyapps.com/advertise.html","url":"https://omarchyapps.com/advertise.html","name":"Advertise on Omarchy Apps","isPartOf":{"@id":"https://omarchyapps.com/#website"},"description":"Sponsor slots on the Unofficial Omarchy App Store, sold by open bid. One lifetime slot never expires.","dateModified":"2026-10-09"},{"@type":"FAQPage","@id":"https://omarchyapps.com/advertise.html#faq","mainEntity":[{"@type":"Question","name":"Why an auction instead of a price list?","acceptedAnswer":{"@type":"Answer","text":"A small community site cannot honestly know what a slot is worth. Sponsors setting the price between themselves is fairer than guessing, and the reserve keeps it above what the slot costs to run."}},{"@type":"Question","name":"What does \"lifetime\" mean?","acceptedAnswer":{"@type":"Answer","text":"For as long as the site is online, the ad stays in the same position with no renewal and no further charge. Treat it as the life of the site, not a fixed number of years."}},{"@type":"Question","name":"How do I pay?","acceptedAnswer":{"@type":"Answer","text":"The winning bidder gets an invoice by email. The slot goes live once it is paid. For 90 day slots the next term is invoiced before it starts, and if you do not renew the slot simply reopens for bids."}},{"@type":"Question","name":"Does sponsoring affect my package's listing or rank?","acceptedAnswer":{"@type":"Answer","text":"No. Listings come from the official repository and rankings come from reader votes. A sponsor slot is a separate, labelled unit."}}]}]}</script>
+<meta name="omarchy-auction" content="https://omarchy-auction.modecandsllc.workers.dev">
+<script src="/ads.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://omarchyapps.com/advertise.html","url":"https://omarchyapps.com/advertise.html","name":"Advertise on Omarchy Apps","isPartOf":{"@id":"https://omarchyapps.com/#website"},"description":"Sponsor slots on the Unofficial Omarchy App Store, sold by open bid. One lifetime slot never expires.","dateModified":"2026-10-10"},{"@type":"FAQPage","@id":"https://omarchyapps.com/advertise.html#faq","mainEntity":[{"@type":"Question","name":"Why an auction instead of a price list?","acceptedAnswer":{"@type":"Answer","text":"A small community site cannot honestly know what a slot is worth. Sponsors setting the price between themselves is fairer than guessing, and the reserve keeps it above what the slot costs to run."}},{"@type":"Question","name":"What does \"lifetime\" mean?","acceptedAnswer":{"@type":"Answer","text":"For as long as the site is online, the ad stays in the same position with no renewal and no further charge. Treat it as the life of the site, not a fixed number of years."}},{"@type":"Question","name":"How do I pay?","acceptedAnswer":{"@type":"Answer","text":"The winning bidder gets an invoice by email when the clock runs out. The slot goes live once it is paid. For 90 day slots the next term is invoiced before it starts, and if you do not renew the slot simply reopens for bids."}},{"@type":"Question","name":"Why does my bid not show straight away?","acceptedAnswer":{"@type":"Answer","text":"Every bid is checked by a person before it joins the board, usually within a day. It keeps fake numbers off the board, so the high bid you see is one somebody will actually pay."}},{"@type":"Question","name":"Does sponsoring affect my package's listing or rank?","acceptedAnswer":{"@type":"Answer","text":"No. Listings come from the official repository and rankings come from reader votes. A sponsor slot is a separate, labelled unit."}}]}]}</script>
 <style>
 /* =========================================================================
    Unofficial Omarchy App Store
@@ -1412,6 +1414,26 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
 
+/* bid forms on the advertise page */
+.bid-notice { margin: 0.5em 0 0; padding: 0.6em 0.9em; border: var(--border-width) solid rgba(var(--rgb-green), 0.5); border-radius: var(--radius); color: var(--color-green); font-size: 92%; }
+.bid-wrap { margin-top: auto; }
+.bid-wrap > summary { list-style: none; width: max-content; max-width: 100%; }
+.bid-wrap > summary::-webkit-details-marker { display: none; }
+.bid-wrap[open] > summary { margin-bottom: var(--space-medium); }
+.bid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-small) var(--space-medium); }
+.bid label { display: flex; flex-direction: column; gap: 0.25em; font-size: 88%; color: rgb(var(--rgb-terminal-blue) / 0.9); }
+.bid label small { color: rgb(var(--rgb-terminal-blue) / 0.6); }
+.bid input:not([type="checkbox"]) { padding: 0.55em 0.8em; background: var(--color-background-storm); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.45); border-radius: var(--radius); color: var(--color-terminal-white); font: inherit; }
+.bid input:focus { outline: 0; border-color: var(--color-terminal-blue); }
+.bid .trap { position: absolute; left: -9999px; }
+.bid .agree { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; gap: 0.6em; color: rgb(var(--rgb-terminal-white) / 0.85); }
+.bid .agree input { margin-top: 0.25em; accent-color: var(--color-green); }
+.bid .button { grid-column: 1 / -1; justify-self: start; }
+.bid .bid-status { grid-column: 1 / -1; margin: 0; min-height: 1.4em; color: var(--color-terminal-blue); font-size: 88%; }
+.bid.is-done > *:not(.bid-status) { display: none; }
+.bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
+@media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
+
 </style>
 </head>
 <body>
@@ -1435,7 +1457,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 ╰──────────╯</pre>
     <h1>Advertise on <span>Omarchy Apps</span></h1>
     <p class="tag">Four slots, sold by open bid. One is yours for life.</p>
-    <p class="facts"><b>182</b> packages listed · no trackers · every ad is static and labelled</p>
+    <p class="facts"><b>186</b> packages listed · no trackers · every ad is static and labelled</p>
     <p><a class="button" href="#slots">See the slots ↓</a></p>
   </div>
 </header>
@@ -1448,7 +1470,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <div>
         <p class="eyebrow">Four positions</p>
         <h2>Pick a slot, name your price</h2>
-        <p>Every slot is sold by open bid. The reserve is the lowest bid it takes. Figures update at each build.</p>
+        <p>Every slot is sold by open bid, right here. The reserve is the lowest bid it takes. Figures are live.</p>
+        <p class="bid-notice" data-bid-notice hidden></p>
       </div>
       <figure class="slot-map" aria-label="Where each slot sits on the homepage">
         <div class="sm-nav"></div>
@@ -1467,10 +1490,10 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       </figure>
     </div>
     <div class="slots">
-<article class="slot featured" id="lifetime"><h3>Lifetime sponsor</h3><p class="pos">Top of the sidebar, above the fold on every screen.</p><p class="price">Reserve <b>$1,000</b> · one payment · never expires</p><p class="status">No bids yet · the 30 day clock starts at the first qualifying bid</p><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+bid+on+the+Lifetime+sponsor+slot+on+omarchyapps.com.%0A%0AMy+bid%3A+%24+%28reserve+%241%2C000%29%0AProduct+name%3A+%0ALink%3A+%0AOne-line+tagline%3A+%0ABilling+email%3A+" target="_blank" rel="noopener">Bid on the lifetime slot ↗</a></article>
-<article class="slot" id="header"><h3>Header strip</h3><p class="pos">Slim text line under the hero, above search.</p><p class="price">Reserve <b>$55</b> / month · billed as <b>$165</b> per 90 day term</p><p class="status">Open · no bids yet</p><a class="button ghost" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+bid+on+the+Header+strip+slot+on+omarchyapps.com.%0A%0AMy+bid%3A+%24+%28reserve+%24165+per+90+days%29%0AProduct+name%3A+%0ALink%3A+%0AOne-line+tagline%3A+%0ABilling+email%3A+" target="_blank" rel="noopener">Bid on the header strip ↗</a></article>
-<article class="slot" id="rail"><h3>Right rail</h3><p class="pos">Sidebar, directly under the lifetime sponsor.</p><p class="price">Reserve <b>$200</b> / month · billed as <b>$600</b> per 90 day term</p><p class="status">Open · no bids yet</p><a class="button ghost" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+bid+on+the+Right+rail+slot+on+omarchyapps.com.%0A%0AMy+bid%3A+%24+%28reserve+%24600+per+90+days%29%0AProduct+name%3A+%0ALink%3A+%0AOne-line+tagline%3A+%0ABilling+email%3A+" target="_blank" rel="noopener">Bid on the right rail ↗</a></article>
-<article class="slot" id="footer"><h3>Footer row</h3><p class="pos">One of three units above the site footer.</p><p class="price">Reserve <b>$25</b> / month · billed as <b>$75</b> per 90 day term</p><p class="status"><b>3</b> of 3 units open</p><a class="button ghost" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+bid+on+the+Footer+row+slot+on+omarchyapps.com.%0A%0AMy+bid%3A+%24+%28reserve+%2475+per+90+days%29%0AProduct+name%3A+%0ALink%3A+%0AOne-line+tagline%3A+%0ABilling+email%3A+" target="_blank" rel="noopener">Bid on a footer unit ↗</a></article>
+<article class="slot featured" id="lifetime" data-slot="lifetime"><h3>Lifetime sponsor</h3><p class="pos">Top of the sidebar, above the fold on every screen.</p><p class="price">Reserve <b>$1,000</b> · one payment · never expires</p><p class="status" data-slot-status>No bids yet · the 30 day clock starts at the first approved bid</p><details class="bid-wrap"><summary class="button">Bid on the lifetime slot</summary><form class="bid" data-bid data-slot="lifetime" data-per-month="0" action="https://omarchy-auction.modecandsllc.workers.dev/api/bid" method="post"><label>Your bid <small>$ one payment</small><input name="amount" type="number" inputmode="numeric" min="1000" step="1" placeholder="1000" required data-bid-amount></label><label>Product name<input name="name" maxlength="60" required autocomplete="organization"></label><label>Link<input name="url" type="url" maxlength="200" placeholder="https://" required autocomplete="url"></label><label>One line tagline<input name="tagline" maxlength="90" required placeholder="Under 90 characters"></label><label>Your email<input name="email" type="email" maxlength="254" required autocomplete="email"></label><input class="trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><label class="agree"><input type="checkbox" name="agree" required> A winning bid is a commitment to pay. I have read the <a href="#terms">bidding terms</a>.</label><button class="button" type="submit">Place bid</button><p class="bid-status" data-bid-status aria-live="polite"></p></form></details></article>
+<article class="slot" id="header" data-slot="header"><h3>Header strip</h3><p class="pos">Slim text line under the hero, above search.</p><p class="price">Reserve <b>$55</b> / month · billed as <b>$165</b> per 90 day term</p><p class="status" data-slot-status>No bids yet · the 7 day clock starts at the first approved bid</p><details class="bid-wrap"><summary class="button ghost">Bid on the header strip</summary><form class="bid" data-bid data-slot="header" data-per-month="1" action="https://omarchy-auction.modecandsllc.workers.dev/api/bid" method="post"><label>Your bid <small>$ per month</small><input name="amount" type="number" inputmode="numeric" min="55" step="1" placeholder="55" required data-bid-amount></label><label>Product name<input name="name" maxlength="60" required autocomplete="organization"></label><label>Link<input name="url" type="url" maxlength="200" placeholder="https://" required autocomplete="url"></label><label>One line tagline<input name="tagline" maxlength="90" required placeholder="Under 90 characters"></label><label>Your email<input name="email" type="email" maxlength="254" required autocomplete="email"></label><input class="trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><label class="agree"><input type="checkbox" name="agree" required> A winning bid is a commitment to pay. I have read the <a href="#terms">bidding terms</a>.</label><button class="button" type="submit">Place bid</button><p class="bid-status" data-bid-status aria-live="polite"></p></form></details></article>
+<article class="slot" id="rail" data-slot="rail"><h3>Right rail</h3><p class="pos">Sidebar, directly under the lifetime sponsor.</p><p class="price">Reserve <b>$200</b> / month · billed as <b>$600</b> per 90 day term</p><p class="status" data-slot-status>No bids yet · the 7 day clock starts at the first approved bid</p><details class="bid-wrap"><summary class="button ghost">Bid on the right rail</summary><form class="bid" data-bid data-slot="rail" data-per-month="1" action="https://omarchy-auction.modecandsllc.workers.dev/api/bid" method="post"><label>Your bid <small>$ per month</small><input name="amount" type="number" inputmode="numeric" min="200" step="1" placeholder="200" required data-bid-amount></label><label>Product name<input name="name" maxlength="60" required autocomplete="organization"></label><label>Link<input name="url" type="url" maxlength="200" placeholder="https://" required autocomplete="url"></label><label>One line tagline<input name="tagline" maxlength="90" required placeholder="Under 90 characters"></label><label>Your email<input name="email" type="email" maxlength="254" required autocomplete="email"></label><input class="trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><label class="agree"><input type="checkbox" name="agree" required> A winning bid is a commitment to pay. I have read the <a href="#terms">bidding terms</a>.</label><button class="button" type="submit">Place bid</button><p class="bid-status" data-bid-status aria-live="polite"></p></form></details></article>
+<article class="slot" id="footer" data-slot="footer"><h3>Footer row</h3><p class="pos">One of three units above the site footer.</p><p class="price">Reserve <b>$25</b> / month · billed as <b>$75</b> per 90 day term · <b>3</b> of 3 units open</p><p class="status" data-slot-status>No bids yet · the 7 day clock starts at the first approved bid</p><details class="bid-wrap"><summary class="button ghost">Bid on a footer unit</summary><form class="bid" data-bid data-slot="footer" data-per-month="1" action="https://omarchy-auction.modecandsllc.workers.dev/api/bid" method="post"><label>Your bid <small>$ per month</small><input name="amount" type="number" inputmode="numeric" min="25" step="1" placeholder="25" required data-bid-amount></label><label>Product name<input name="name" maxlength="60" required autocomplete="organization"></label><label>Link<input name="url" type="url" maxlength="200" placeholder="https://" required autocomplete="url"></label><label>One line tagline<input name="tagline" maxlength="90" required placeholder="Under 90 characters"></label><label>Your email<input name="email" type="email" maxlength="254" required autocomplete="email"></label><input class="trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><label class="agree"><input type="checkbox" name="agree" required> A winning bid is a commitment to pay. I have read the <a href="#terms">bidding terms</a>.</label><button class="button" type="submit">Place bid</button><p class="bid-status" data-bid-status aria-live="polite"></p></form></details></article>
     </div>
   </section>
 
@@ -1479,8 +1502,8 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <p class="eyebrow">Three steps</p>
     <h2>How it works</h2>
     <ol class="steps">
-      <li><h3>Send a bid</h3><p>DM the slot, your amount, and a link. The current high bid is shown above.</p></li>
-      <li><h3>Highest bid holds it</h3><p>Paid slots run 90 days. You get an invoice, the ad goes live when it is paid.</p></li>
+      <li><h3>Place a bid</h3><p>Pick a slot above, enter your amount, product, link, and email. Each bid is checked before it joins the board, usually within a day.</p></li>
+      <li><h3>Highest bid holds it</h3><p>The clock runs from the first approved bid. When it ends, the winner gets an invoice by email and the ad goes live when it is paid.</p></li>
       <li><h3>Edit any time</h3><p>New link, text, or image whenever you like. Free. The position never moves.</p></li>
     </ol>
   </section>
@@ -1493,7 +1516,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <li><b>Timed auction.</b> The first bid at or above the reserve starts a 30 day clock. Outbid each other until it runs out.</li>
       <li><b>No sniping.</b> A bid in the last 24 hours adds 24 hours.</li>
       <li><b>One payment.</b> The winner pays once and keeps the spot for the life of the site. No renewal, no rate change, nobody can outbid you after close.</li>
-      <li><b>Outbid, owe nothing.</b> Only the winning bid is invoiced.</li>
+      <li><b>Outbid, owe nothing.</b> Only the winning bid is invoiced. Term slots run the same way on a 7 day clock.</li>
     </ul>
   </section>
 
@@ -1509,19 +1532,32 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     </ul>
   </section>
 
+<!-- =================== BIDDING TERMS =================== -->
+  <section class="ad-panel rules-panel" id="terms">
+    <p class="eyebrow">Bidding terms</p>
+    <h2>What a bid means</h2>
+    <ul class="rules-list">
+      <li><b>A bid is a commitment.</b> If it wins, you agree to pay the amount you entered: once for the lifetime slot, or for the first 90 day term on a paid slot. Nothing is charged for a bid that does not win.</li>
+      <li><b>Bids are checked before they count.</b> A bid joins the board once it is reviewed, usually within a day. Bids that look fake or that break the house rules are removed.</li>
+      <li><b>Invoices are due within 3 days.</b> Unpaid, the slot passes to the next highest bid.</li>
+      <li><b>Your details stay private.</b> Only amounts are public. Your name, link, and email are used to run the auction and to invoice you, nothing else.</li>
+    </ul>
+  </section>
+
 <!-- =================== FAQ =================== -->
   <section class="faq" aria-labelledby="ad-faq-h">
     <h2 class="sec-label" id="ad-faq-h">Common questions</h2>
     <details><summary>Why an auction instead of a price list?</summary><p>A small community site cannot honestly know what a slot is worth. Sponsors setting the price between themselves is fairer than guessing, and the reserve keeps it above what the slot costs to run.</p></details>
     <details><summary>What does &quot;lifetime&quot; mean?</summary><p>For as long as the site is online, the ad stays in the same position with no renewal and no further charge. Treat it as the life of the site, not a fixed number of years.</p></details>
-    <details><summary>How do I pay?</summary><p>The winning bidder gets an invoice by email. The slot goes live once it is paid. For 90 day slots the next term is invoiced before it starts, and if you do not renew the slot simply reopens for bids.</p></details>
+    <details><summary>How do I pay?</summary><p>The winning bidder gets an invoice by email when the clock runs out. The slot goes live once it is paid. For 90 day slots the next term is invoiced before it starts, and if you do not renew the slot simply reopens for bids.</p></details>
+    <details><summary>Why does my bid not show straight away?</summary><p>Every bid is checked by a person before it joins the board, usually within a day. It keeps fake numbers off the board, so the high bid you see is one somebody will actually pay.</p></details>
     <details><summary>Does sponsoring affect my package&#x27;s listing or rank?</summary><p>No. Listings come from the official repository and rankings come from reader votes. A sponsor slot is a separate, labelled unit.</p></details>
   </section>
 
 <!-- =================== FINAL CTA =================== -->
   <div class="advertise-cta">
-    <p>Ready to bid, or want to ask something first?</p>
-    <a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+bid+on+the+sponsor+slot+on+omarchyapps.com.%0A%0AMy+bid%3A+%24+%28any+slot%29%0AProduct+name%3A+%0ALink%3A+%0AOne-line+tagline%3A+%0ABilling+email%3A+" target="_blank" rel="noopener">Message @jessyka_boat on X ↗</a>
+    <p>Want to ask something before you bid?</p>
+    <a class="button ghost" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I+have+a+question+about+sponsoring+omarchyapps.com." target="_blank" rel="noopener">Message @jessyka_boat on X ↗</a>
   </div>
 </main>
 
@@ -1537,7 +1573,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
         <a href="terms.html">Terms of Use</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Updated 2026-10-09 · no trackers</span>
+      <span>Updated 2026-10-10 · no trackers</span>
     </div>
   </div>
 </footer>

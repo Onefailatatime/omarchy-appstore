@@ -22,6 +22,8 @@
 <meta name="twitter:creator" content="@jessyka_boat">
 <meta name="twitter:title" content="Advertise on Omarchy Apps">
 <meta name="twitter:description" content="Sponsor slots sold by open bid. One lifetime slot never expires.">
+<meta name="omarchy-auction" content="__AUCTION_URL__">
+<script src="/ads.js" defer></script>
 <script type="application/ld+json">__STRUCTURED_DATA__</script>
 <style>
 __STYLE__
@@ -61,7 +63,8 @@ __STYLE__
       <div>
         <p class="eyebrow">Four positions</p>
         <h2>Pick a slot, name your price</h2>
-        <p>Every slot is sold by open bid. The reserve is the lowest bid it takes. Figures update at each build.</p>
+        <p>Every slot is sold by open bid, right here. The reserve is the lowest bid it takes. Figures are live.</p>
+        <p class="bid-notice" data-bid-notice hidden></p>
       </div>
       <figure class="slot-map" aria-label="Where each slot sits on the homepage">
         <div class="sm-nav"></div>
@@ -89,8 +92,8 @@ __AD_SLOTS__
     <p class="eyebrow">Three steps</p>
     <h2>How it works</h2>
     <ol class="steps">
-      <li><h3>Send a bid</h3><p>DM the slot, your amount, and a link. The current high bid is shown above.</p></li>
-      <li><h3>Highest bid holds it</h3><p>Paid slots run 90 days. You get an invoice, the ad goes live when it is paid.</p></li>
+      <li><h3>Place a bid</h3><p>Pick a slot above, enter your amount, product, link, and email. Each bid is checked before it joins the board, usually within a day.</p></li>
+      <li><h3>Highest bid holds it</h3><p>The clock runs from the first approved bid. When it ends, the winner gets an invoice by email and the ad goes live when it is paid.</p></li>
       <li><h3>Edit any time</h3><p>New link, text, or image whenever you like. Free. The position never moves.</p></li>
     </ol>
   </section>
@@ -103,7 +106,7 @@ __AD_SLOTS__
       <li><b>Timed auction.</b> The first bid at or above the reserve starts a __AUCTION_DAYS__ day clock. Outbid each other until it runs out.</li>
       <li><b>No sniping.</b> A bid in the last __EXTEND_HOURS__ hours adds __EXTEND_HOURS__ hours.</li>
       <li><b>One payment.</b> The winner pays once and keeps the spot for the life of the site. No renewal, no rate change, nobody can outbid you after close.</li>
-      <li><b>Outbid, owe nothing.</b> Only the winning bid is invoiced.</li>
+      <li><b>Outbid, owe nothing.</b> Only the winning bid is invoiced. Term slots run the same way on a __TERM_AUCTION_DAYS__ day clock.</li>
     </ul>
   </section>
 
@@ -119,6 +122,18 @@ __AD_SLOTS__
     </ul>
   </section>
 
+<!-- =================== BIDDING TERMS =================== -->
+  <section class="ad-panel rules-panel" id="terms">
+    <p class="eyebrow">Bidding terms</p>
+    <h2>What a bid means</h2>
+    <ul class="rules-list">
+      <li><b>A bid is a commitment.</b> If it wins, you agree to pay the amount you entered: once for the lifetime slot, or for the first 90 day term on a paid slot. Nothing is charged for a bid that does not win.</li>
+      <li><b>Bids are checked before they count.</b> A bid joins the board once it is reviewed, usually within a day. Bids that look fake or that break the house rules are removed.</li>
+      <li><b>Invoices are due within 3 days.</b> Unpaid, the slot passes to the next highest bid.</li>
+      <li><b>Your details stay private.</b> Only amounts are public. Your name, link, and email are used to run the auction and to invoice you, nothing else.</li>
+    </ul>
+  </section>
+
 <!-- =================== FAQ =================== -->
   <section class="faq" aria-labelledby="ad-faq-h">
     <h2 class="sec-label" id="ad-faq-h">Common questions</h2>
@@ -127,8 +142,8 @@ __AD_FAQ__
 
 <!-- =================== FINAL CTA =================== -->
   <div class="advertise-cta">
-    <p>Ready to bid, or want to ask something first?</p>
-    <a class="button" href="__CONTACT_DM__" target="_blank" rel="noopener">Message @jessyka_boat on X ↗</a>
+    <p>Want to ask something before you bid?</p>
+    <a class="button ghost" href="__CONTACT_DM__" target="_blank" rel="noopener">Message @jessyka_boat on X ↗</a>
   </div>
 </main>
 

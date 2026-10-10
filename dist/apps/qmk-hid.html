@@ -1416,6 +1416,26 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .sm-footer .sm-slot { justify-content: center; padding: 0.3em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
+
+/* bid forms on the advertise page */
+.bid-notice { margin: 0.5em 0 0; padding: 0.6em 0.9em; border: var(--border-width) solid rgba(var(--rgb-green), 0.5); border-radius: var(--radius); color: var(--color-green); font-size: 92%; }
+.bid-wrap { margin-top: auto; }
+.bid-wrap > summary { list-style: none; width: max-content; max-width: 100%; }
+.bid-wrap > summary::-webkit-details-marker { display: none; }
+.bid-wrap[open] > summary { margin-bottom: var(--space-medium); }
+.bid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-small) var(--space-medium); }
+.bid label { display: flex; flex-direction: column; gap: 0.25em; font-size: 88%; color: rgb(var(--rgb-terminal-blue) / 0.9); }
+.bid label small { color: rgb(var(--rgb-terminal-blue) / 0.6); }
+.bid input:not([type="checkbox"]) { padding: 0.55em 0.8em; background: var(--color-background-storm); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.45); border-radius: var(--radius); color: var(--color-terminal-white); font: inherit; }
+.bid input:focus { outline: 0; border-color: var(--color-terminal-blue); }
+.bid .trap { position: absolute; left: -9999px; }
+.bid .agree { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; gap: 0.6em; color: rgb(var(--rgb-terminal-white) / 0.85); }
+.bid .agree input { margin-top: 0.25em; accent-color: var(--color-green); }
+.bid .button { grid-column: 1 / -1; justify-self: start; }
+.bid .bid-status { grid-column: 1 / -1; margin: 0; min-height: 1.4em; color: var(--color-terminal-blue); font-size: 88%; }
+.bid.is-done > *:not(.bid-status) { display: none; }
+.bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
+@media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
 </style>
 </head>
 <body>
@@ -1442,6 +1462,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <div class="actions"><a class="button ghost" href="https://github.com/FrameworkComputer/qmk_hid" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/qmk-hid" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
-<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-10-09 · unofficial directory</span></div></div></footer>
+<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-10-10 · unofficial directory</span></div></div></footer>
 </body>
 </html>

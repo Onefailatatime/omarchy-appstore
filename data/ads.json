@@ -1,31 +1,36 @@
 {
-  "_comment": "Sponsor slots. Prices are reserve (minimum) bids in USD; people bid above them. A null sponsor renders nothing except the lifetime slot, which shows the auction card. Update high_bid as bids arrive and rebuild.",
+  "_comment": "Sponsor slots. Prices are reserve (minimum) bids in USD; people bid above them on /advertise.html. Live bids and clocks live in the auction Worker (worker/), which bundles this file, so redeploy it after changing a figure. A sponsor set here renders in that slot; a null sponsor renders the live auction card.",
   "lifetime": {
     "label": "Lifetime sponsor",
     "position": "Top of the sidebar, above the fold on every screen.",
     "reserve": 1000,
     "auction_days": 30,
     "extend_hours": 24,
-    "opened": null,
-    "closes": null,
-    "high_bid": null,
-    "sponsor": null
+    "sponsor": null,
+    "increment": 25,
+    "max_bid": 50000
   },
   "header": {
     "label": "Header strip",
     "position": "Slim text line under the hero, above search.",
     "reserve_month": 55,
     "term_days": 90,
-    "high_bid": null,
-    "sponsor": null
+    "sponsor": null,
+    "auction_days": 7,
+    "extend_hours": 12,
+    "increment": 5,
+    "max_bid": 5000
   },
   "rail": {
     "label": "Right rail",
     "position": "Sidebar, directly under the lifetime sponsor.",
     "reserve_month": 200,
     "term_days": 90,
-    "high_bid": null,
-    "sponsor": null
+    "sponsor": null,
+    "auction_days": 7,
+    "extend_hours": 12,
+    "increment": 10,
+    "max_bid": 10000
   },
   "footer": {
     "label": "Footer row",
@@ -34,18 +39,19 @@
     "term_days": 90,
     "units": [
       {
-        "high_bid": null,
         "sponsor": null
       },
       {
-        "high_bid": null,
         "sponsor": null
       },
       {
-        "high_bid": null,
         "sponsor": null
       }
-    ]
+    ],
+    "auction_days": 7,
+    "extend_hours": 12,
+    "increment": 5,
+    "max_bid": 2500
   },
   "_sponsor_shape": {
     "name": "Product name",

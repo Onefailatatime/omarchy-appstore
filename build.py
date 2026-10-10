@@ -51,7 +51,8 @@ SITE_URL = "https://omarchyapps.com"
 AD_FAQ = [
     ("Why an auction instead of a price list?", "A small community site cannot honestly know what a slot is worth. Sponsors setting the price between themselves is fairer than guessing, and the reserve keeps it above what the slot costs to run."),
     ("What does \"lifetime\" mean?", "For as long as the site is online, the ad stays in the same position with no renewal and no further charge. Treat it as the life of the site, not a fixed number of years."),
-    ("How do I pay?", "The winning bidder gets an invoice by email. The slot goes live once it is paid. For 90 day slots the next term is invoiced before it starts, and if you do not renew the slot simply reopens for bids."),
+    ("How do I pay?", "The winning bidder gets an invoice by email when the clock runs out. The slot goes live once it is paid. For 90 day slots the next term is invoiced before it starts, and if you do not renew the slot simply reopens for bids."),
+    ("Why does my bid not show straight away?", "Every bid is checked by a person before it joins the board, usually within a day. It keeps fake numbers off the board, so the high bid you see is one somebody will actually pay."),
     ("Does sponsoring affect my package's listing or rank?", "No. Listings come from the official repository and rankings come from reader votes. A sponsor slot is a separate, labelled unit."),
 ]
 SITE_NAME = "Unofficial Omarchy App Store"
@@ -709,6 +710,7 @@ def main() -> None:
             .replace("__CONTACT__", html.escape(CONTACT_URL))
             .replace("__SUGGEST_APP_URL__", html.escape(SUGGEST_APP_URL))
             .replace("__X_DM_RECIPIENT__", X_DM_RECIPIENT_ID)
+            .replace("__AUCTION_URL__", ads.AUCTION_URL)
             .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     DIST.mkdir(exist_ok=True)
     (DIST / "index.html").write_text(page, encoding="utf-8")
@@ -755,6 +757,7 @@ def main() -> None:
             (images / f.name).write_bytes(f.read_bytes())
     (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())
     (DIST / "newsletter.js").write_text((ROOT / "assets" / "newsletter.js").read_text(encoding="utf-8"), encoding="utf-8")
+    (DIST / "ads.js").write_text((ROOT / "assets" / "ads.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "home-leaders.js").write_text((ROOT / "assets" / "home-leaders.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "leaderboard.js").write_text((ROOT / "assets" / "leaderboard.js").read_text(encoding="utf-8"), encoding="utf-8")
@@ -786,8 +789,10 @@ def main() -> None:
                  .replace("__AD_FAQ__", ad_faq_html)
                  .replace("__AUCTION_DAYS__", str(sponsor["lifetime"]["auction_days"]))
                  .replace("__EXTEND_HOURS__", str(sponsor["lifetime"]["extend_hours"]))
+                 .replace("__TERM_AUCTION_DAYS__", str(sponsor["header"]["auction_days"]))
+                 .replace("__AUCTION_URL__", ads.AUCTION_URL)
                  .replace("__STRUCTURED_DATA__", json_script(advertise_schema))
-                 .replace("__CONTACT_DM__", html.escape(ads.bid_url("sponsor", "any slot")))
+                 .replace("__CONTACT_DM__", html.escape(ads.dm_url("Hi! I have a question about sponsoring omarchyapps.com.")))
                  .replace("__COUNT__", str(len(pkgs)))
                  .replace("__SYNCED__", synced)
                  .replace("__CONTACT__", html.escape(CONTACT_URL))

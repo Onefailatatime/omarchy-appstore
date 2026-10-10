@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "omarchy-auction",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-28",
+  "workers_dev": true,
+  "preview_urls": false,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "omarchy-auction",
+      "database_id": "9cb8086b-9390-4007-bc59-e68a9d4d50b6",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "triggers": { "crons": ["*/15 * * * *"] },
+  "observability": { "enabled": true, "traces": { "enabled": true } },
+  "vars": {
+    "SITE_URL": "https://omarchyapps.com",
+    "ALLOWED_ORIGINS": "https://omarchyapps.com,https://unoffical-omarchy-app-store.netlify.app"
+  }
+}

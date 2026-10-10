@@ -10,3 +10,8 @@ data/omarchy-pkgs/
 .vscode/
 node_modules/
 mockups/
+
+# Auction Worker: local secrets, local D1 state, dependencies.
+worker/.dev.vars
+worker/.wrangler/
+worker/node_modules/

@@ -150,6 +150,44 @@ build-only variable never reaches `/api/subscribe`.
 
 Until they are set the form reports that signup is not configured yet.
 
+## Sponsor slots and the auction
+
+`data/ads.json` defines the four slots (lifetime, header, rail, footer) with
+their reserves, bid increments, caps, and clocks. `ads.py` renders them into
+the homepage units and the `/advertise.html` slot cards, each with a bid form.
+
+Bidding runs on a Cloudflare Worker in `worker/` (D1 database
+`omarchy-auction`, live at `https://omarchy-auction.modecandsllc.workers.dev`).
+It bundles `data/ads.json`, so redeploy it after changing a figure:
+
+```bash
+cd worker && npm ci && npx wrangler deploy
+```
+
+How a bid moves: a visitor posts it from the advertise page (`POST /api/bid`,
+same-origin only, rate limited, honeypot) and it lands as `submitted`. In
+review mode, the default, Jessyka approves or voids it at `/admin` on the
+Worker (token in the macOS Keychain, item `omarchy-auction-admin`). The first
+approved bid starts the slot's clock; one approved inside the final extend
+window pushes the close out by that window. The top bid wins a one unit slot,
+the top three win footer units, and one bid per email counts. A cron every 15
+minutes closes rounds whose clock has run out; winners become `won`, the rest
+`lost`. Mark a winner paid and approve its ad in `/admin` and the next build
+renders it in the slot (`GET /api/state` carries the figures and sponsors;
+`ads.js` refreshes them in the browser, `build.py` bakes them in).
+
+Optional Worker secrets (`npx wrangler secret put NAME` inside `worker/`):
+
+| Secret | Effect |
+| --- | --- |
+| `RESEND_API_KEY` + `MAIL_FROM` | Bidders confirm by email link before review, and get outbid and win emails. `MAIL_REPLY_TO` optional. |
+| `AUTO_APPROVE=1` (a var) | With email on, a confirmed bid joins the board without manual review. |
+| `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` | A Telegram message on every new bid and every close. |
+
+Tests: `tests/auction.test.mjs` and `tests/auction-mail.test.mjs` cover the
+rules and the email copy; `worker/scripts/smoke.sh` runs the whole flow
+against a running Worker and resets what it touched.
+
 ## Curated profiles
 
 `data/enrichment.json` adds a researched tagline, longer description, pricing,
