@@ -292,6 +292,11 @@ GUIDES = [
         "title": "Omadesign on Omarchy: Install & Setup Guide (2026)",
         "description": "Install Omadesign, the free Linux design, paint, photo and motion app, on Omarchy. One-line install, theme integration, fixes, and why there is no package yet.",
         "eyebrow": "Creative suite guide",
+        "package_watch": {
+            "app": "Omadesign",
+            "names": ["omadesign", "omadesign-bin"],
+            "fallback_cta": '<div><h2>Get Omadesign</h2><p>There is no package page on this site yet because there is no Omarchy package. The releases page has the tarballs, checksums and changelog.</p></div><a class="button" href="https://github.com/michaelmonetized/omadesign/releases" target="_blank" rel="noopener">Omadesign releases →</a>',
+        },
         "heading": "Omadesign on <span>Omarchy</span>",
         "tagline": "A free, native, Omarchy-themed design, paint, photo and motion app. Alpha, and not in the package repo yet.",
         "answer": "Install with curl -fsSL https://omadesign.app/install | sh. There is no omarchy pkg add omadesign yet: the package PR to omarchy-pkgs has sat unmerged since September 2026 and the maintainer declined an AUR package. Omadesign is free (MIT), follows your Omarchy theme and font, and updates itself from About > Update.",
@@ -731,6 +736,29 @@ def leaderboard_row(p: dict) -> str:
 </article>"""
 
 
+
+def fill_package_watch(guide, body, pkgs):
+    """Guides for apps not yet in the Omarchy repo carry __PKG_CTA__ and __PKG_NOTE__
+    markers. Once any of the watched package names appears in the catalogue, the
+    twice-daily rebuild links the guide to that package page without a manual edit."""
+    watch = guide.get("package_watch")
+    if not watch:
+        return body
+    found = next((p for p in pkgs if p["name"] in watch["names"]), None)
+    if found:
+        name = found["name"]
+        cta = (f'<div><h2>Open the {html.escape(watch["app"])} package</h2><p>It is in the official Omarchy repo now. '
+               f'See the live version, requirements, source and exact install command.</p></div>'
+               f'<a class="button" href="/apps/{slug(name)}.html">View {html.escape(watch["app"])} →</a>')
+        note = (f'<p><strong>Update:</strong> {html.escape(watch["app"])} landed in the official Omarchy package repo as '
+                f'<code>{html.escape(name)}</code>. <code>omarchy pkg add {html.escape(name)}</code> now works and is the '
+                f'better route, since it updates with everything else. See the <a href="/apps/{slug(name)}.html">package page</a>. '
+                f'The notes below about the missing package are kept for people on older installs.</p>')
+    else:
+        cta = watch["fallback_cta"]
+        note = ""
+    return body.replace("__PKG_CTA__", cta).replace("__PKG_NOTE__", note)
+
 def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: dict | None = None) -> str:
     canonical = f"{SITE_URL}/apps/{slug(p['name'])}.html"
     desc = description_for(p)
@@ -1046,6 +1074,7 @@ def main() -> None:
             ],
         }
         guide_body = (ROOT / "parts" / "guides" / f"{guide['slug']}.html").read_text(encoding="utf-8")
+        guide_body = fill_package_watch(guide, guide_body, pkgs)
         guide_page = (guide_template
                       .replace("__TITLE__", html.escape(guide["title"]))
                       .replace("__DESCRIPTION__", html.escape(guide["description"]))

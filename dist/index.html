@@ -1521,7 +1521,7 @@ footer.site nav a:hover { color: var(--color-turquoise); }
 
 <main class="wrap">
 
-  <section class="home-top" aria-labelledby="home-top-h">
+  <section data-browse-only class="home-top" aria-labelledby="home-top-h">
     <div class="home-rankings">
       <div class="home-top-head">
         <div>
@@ -1542,7 +1542,7 @@ footer.site nav a:hover { color: var(--color-turquoise); }
     </div>
   </section>
 
-  <section class="arrivals-section" aria-labelledby="arrivals-h">
+  <section data-browse-only class="arrivals-section" aria-labelledby="arrivals-h">
     <h2 class="sec-label" id="arrivals-h">Just landed <small>4 newest additions to the repo</small></h2>
     <div class="arrivals">
 <article class="card cat-utilities featured" data-detail-url="apps/buzz.html"
@@ -1627,7 +1627,7 @@ footer.site nav a:hover { color: var(--color-turquoise); }
     </div>
   </section>
 
-  <section class="guide-strip" id="guides" aria-labelledby="guides-h">
+  <section data-browse-only class="guide-strip" id="guides" aria-labelledby="guides-h">
     <div class="guide-strip-head">
       <div>
         <p class="eyebrow">Practical answers</p>
@@ -4405,10 +4405,20 @@ footer.site nav a:hover { color: var(--color-turquoise); }
 
   cards.forEach(function (c) { c._hay = (c.dataset.name + " " + c.dataset.desc).toLowerCase(); });
 
+  // Rankings, arrivals and guides sit between the search box and the catalogue.
+  // Hide them while a query or category is active so results land right under
+  // the box instead of 2,000px further down, where typing looked like a no-op.
+  var browseOnly = Array.prototype.slice.call(document.querySelectorAll("[data-browse-only]"));
+  var categoryBrowser = document.querySelector(".category-browser");
+
   function apply() {
     var terms = q.value.toLowerCase().split(/\s+/).filter(Boolean);
     var n = 0;
     var browsing = terms.length === 0 && !activeCat;
+    browseOnly.forEach(function (el) { el.hidden = !browsing; });
+    // The category chips stay while a category filter is active (they show the
+    // state) but get out of the way of a typed query.
+    categoryBrowser.hidden = terms.length > 0;
     groups.forEach(function (g) {
       g.classList.toggle("collapsed", browsing && g.dataset.preview && !g.dataset.opened);
       var catOk = !activeCat || g.dataset.cat === activeCat;

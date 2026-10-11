@@ -30,6 +30,7 @@ SEO notes:
       <p>Omadesign is a free, native Linux creative suite (vector design, layout, pixel painting, RAW photo development and motion in one app) written in Rust and built to follow your Omarchy theme and font out of the box. Michael Hurley wrote it, it is MIT-licensed, and it calls itself alpha.</p>
       <h3>TL;DR install</h3>
       <pre><code class="language-bash">curl -fsSL https://omadesign.app/install | sh</code></pre>
+      __PKG_NOTE__
       <p>That is the only supported install route as of October 2026. The script picks your architecture, downloads the 0.6.3 release tarball from GitHub, verifies its SHA-256 and unpacks into <code>~/.local</code>. Nothing touches <code>/usr</code> and no sudo is needed. Omadesign is free with no paid tier. Cloud features (shared projects, team review) need an account, but every editing feature works offline without one.</p>
       <p><strong>The honest caveat up front: there is no <code>omarchy pkg add omadesign</code> yet.</strong> A package was submitted to the Omarchy repo in September 2026 but it is still open and pinned to an old alpha, and the maintainer has said no to an AUR package. So the install line above is a <code>curl | sh</code>, with everything that implies. Read the script first if you want; it is 62 lines, and the SHA-256 check happens before anything is extracted. Second caveat: the project moves fast (0.6.0 to 0.6.3 in one month) and this guide is written against 0.6.3.</p>
     </section>
@@ -103,8 +104,7 @@ SEO notes:
     </section>
 
     <div class="guide-cta">
-      <div><h2>Get Omadesign</h2><p>There is no package page on this site yet because there is no Omarchy package. The releases page has the tarballs, checksums and changelog.</p></div>
-      <a class="button" href="https://github.com/michaelmonetized/omadesign/releases" target="_blank" rel="noopener">Omadesign releases →</a>
+      __PKG_CTA__
     </div>
 
     <section class="guide-faq" id="faq">
