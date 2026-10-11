@@ -11,7 +11,7 @@ git worktree add -q "$W" origin/main
 sed "s/__EXPORT_KEY__/$KEY/" scripts/netlify-export/votes-export.mjs > "$W/netlify/functions/votes-export.mjs"
 (cd "$W" && npm ci --no-audit --no-fund >/dev/null && netlify deploy --prod --site $SITE --dir dist --functions netlify/functions --message "upvote export for the Cloudflare move")
 sleep 20
-curl -sf --retry 5 --retry-delay 10 "https://omarchyapps.com/api/votes-export?key=$KEY" > data/votes-export-$(date +%F).json
+curl -sf --retry 5 --retry-delay 10 "https://unoffical-omarchy-app-store.netlify.app/api/votes-export?key=$KEY" > data/votes-export-$(date +%F).json
 git worktree remove --force "$W"
 python3 - <<'PY' > /tmp/votes-import.sql
 import json, glob
