@@ -181,6 +181,19 @@ Tests: `tests/auction.test.mjs` and `tests/auction-mail.test.mjs` cover the
 rules and the email copy; `worker/scripts/smoke.sh` runs the whole flow
 against a running Worker and resets what it touched.
 
+## Sponsorships and Stripe
+
+Sponsor spots are flat-rate subscriptions that renew every 90 days; the
+lifetime pin has no price and is sold by offer over X DMs. Billing runs on the
+site's own Stripe account, "Omarchy Apps" (`acct_1UPILeQ9sv2NBeln`), a
+documented exception to the workspace's shared-account rule. Products in that
+account: Header rotation sponsorship ($165 every 3 months), Footer rotation
+sponsorship ($75 every 3 months), App profile banner sponsorship ($75 every 3
+months). Each paid slot in `data/ads.json` has a `checkout_url`; paste the
+live Stripe Payment Link there and the advertise page shows a pay button beside
+the DM button. When a sponsor pays, add their entry to `data/ads.json` with
+start and end dates and let the next refresh publish it.
+
 ## Curated profiles
 
 `data/enrichment.json` adds a researched tagline, longer description, pricing,
