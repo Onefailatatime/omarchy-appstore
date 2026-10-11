@@ -2,7 +2,7 @@
   "_comment": "Sponsor inventory — set prices, direct placement, NO auctions. To add a sponsor, append an object to the right sponsors array (or to app_banners.banners under the app's slug) with: name, tagline (<=90 chars), url, optional mark (defaults to first letter), optional image (300x180 or null), start and end dates (YYYY-MM-DD). A sponsor appears only while today is inside [start, end]; expired entries are skipped at build time with a console note. Header and footer rotate fairly through ALL active sponsors (3 visible at a time, equal screen time, sequential order). App banners show on that app's page. The lifetime slot is inquiry-only: Jessyka handles it manually, one sponsor pinned permanently. Prices in USD.",
   "header": {
     "label": "Header rotation",
-    "position": "Three sponsor units under the hero, above search — rotating fairly through every active header sponsor.",
+    "position": "Three sponsor units under the hero, above search, rotating fairly through every active header sponsor.",
     "price_month": 55,
     "term_days": 90,
     "visible_units": 3,
@@ -10,7 +10,7 @@
   },
   "footer": {
     "label": "Footer rotation",
-    "position": "Sponsor units above the site footer — rotating fairly through every active footer sponsor.",
+    "position": "Sponsor units above the site footer, rotating fairly through every active footer sponsor.",
     "price_month": 25,
     "term_days": 90,
     "visible_units": 3,
@@ -26,7 +26,7 @@
   },
   "lifetime": {
     "label": "Lifetime pin",
-    "position": "Pinned permanently at the top of the homepage, above the header rotation — never rotates out, never expires.",
+    "position": "Pinned permanently at the top of the homepage, above the header rotation. It never rotates out, never expires.",
     "price_once": 1000,
     "inquiry_only": true,
     "_note": "Inquiry-only: Jessyka handles lifetime deals manually via X DMs. Add the sponsor object here once a deal closes. A missing end date means forever.",
