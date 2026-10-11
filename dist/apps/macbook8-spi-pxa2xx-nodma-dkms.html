@@ -1416,6 +1416,26 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .sm-footer .sm-slot { justify-content: center; padding: 0.3em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
+
+
+/* =================== SPONSOR ROTATION =================== */
+/* Header and footer each rotate fairly through every active sponsor:
+   3 units shown at a time, the window advancing sequentially (assets/ads.js).
+   Padding-top leaves room for the .ad .tag which sits above the unit. */
+.ad-rotate { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; }
+.ad-header .ad-rotate { margin-bottom: var(--space-small); }
+.ad-footer .ad-rotate { margin-bottom: var(--space-x-large); }
+@media (max-width: 760px) { .ad-rotate { grid-template-columns: 1fr; } }
+
+/* App profile banner: one sponsor unit on the sponsor's own app page. */
+.ad-app-banner { margin: 0 0 var(--space-large); padding-top: 0.6em; }
+.ad-app-banner .ad { border-width: 2px; }
+
+/* Lifetime pin: one permanent sponsor unit at the top of the homepage.
+   Never rotates — the premium forever placement. */
+.ad-lifetime { max-width: var(--maxw); margin: 0 auto var(--space-medium); padding: 0.6em var(--space-neutral) 0; }
+.ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
+
 </style>
 </head>
 <body>
@@ -1435,6 +1455,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="macbook8-spi-pxa2xx-nodma-dkms" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/macbook8-spi-pxa2xx-nodma-dkms.html" data-share-app="macbook8-spi-pxa2xx-nodma-dkms" data-share-title="macbook8-spi-pxa2xx-nodma-dkms for Omarchy" data-share-url="https://omarchyapps.com/apps/macbook8-spi-pxa2xx-nodma-dkms.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+macbook8-spi-pxa2xx-nodma-dkms+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
+
     <section><h2>What is macbook8-spi-pxa2xx-nodma-dkms?</h2><p>This is a modified version of the Intel PXA2xx SPI PCI driver, patched specifically to force PIO (programmed I/O) mode for the Wildcat Point GSPI controller (PCI ID 8086:9ce6) found in the MacBook8,1 (early 2015 12-inch MacBook). It exists as a workaround for DMA-related issues on that exact chipset so the SPI-attached keyboard and trackpad function correctly. It is distributed through the Omarchy project&#x27;s package repository rather than upstream, and has no interface of its own - it is a background kernel module.</p></section>
     <section><h2>Install macbook8-spi-pxa2xx-nodma-dkms on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add macbook8-spi-pxa2xx-nodma-dkms</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>A MacBook8,1 (2015 12-inch MacBook) with the Wildcat Point GSPI controller (8086:9ce6)</li><li>DKMS to rebuild the module across kernel updates</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>free-libre</dd><dt>Licence</dt><dd>GPL-2.0-only</dd><dt>Download</dt><dd>7.3 KB</dd><dt>Installed</dt><dd>13.3 KB</dd></dl></div></section>
@@ -1442,6 +1463,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <div class="actions"><a class="button ghost" href="https://github.com/basecamp/omarchy" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/macbook8-spi-pxa2xx-nodma-dkms" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
-<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-10-10 · unofficial directory</span></div></div></footer>
+<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-10-11 · unofficial directory</span></div></div></footer>
 </body>
 </html>

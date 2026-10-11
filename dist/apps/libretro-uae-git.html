@@ -1416,6 +1416,26 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .sm-footer .sm-slot { justify-content: center; padding: 0.3em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
+
+
+/* =================== SPONSOR ROTATION =================== */
+/* Header and footer each rotate fairly through every active sponsor:
+   3 units shown at a time, the window advancing sequentially (assets/ads.js).
+   Padding-top leaves room for the .ad .tag which sits above the unit. */
+.ad-rotate { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; }
+.ad-header .ad-rotate { margin-bottom: var(--space-small); }
+.ad-footer .ad-rotate { margin-bottom: var(--space-x-large); }
+@media (max-width: 760px) { .ad-rotate { grid-template-columns: 1fr; } }
+
+/* App profile banner: one sponsor unit on the sponsor's own app page. */
+.ad-app-banner { margin: 0 0 var(--space-large); padding-top: 0.6em; }
+.ad-app-banner .ad { border-width: 2px; }
+
+/* Lifetime pin: one permanent sponsor unit at the top of the homepage.
+   Never rotates — the premium forever placement. */
+.ad-lifetime { max-width: var(--maxw); margin: 0 auto var(--space-medium); padding: 0.6em var(--space-neutral) 0; }
+.ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
+
 </style>
 </head>
 <body>
@@ -1435,6 +1455,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="libretro-uae-git" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/libretro-uae-git.html" data-share-app="libretro-uae-git" data-share-title="libretro-uae-git for Omarchy" data-share-url="https://omarchyapps.com/apps/libretro-uae-git.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+libretro-uae-git+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
 
+
     <section><h2>What is libretro-uae-git?</h2><p>PUAE-libretro is a work-in-progress port of the Amiga emulator UAE (based on WinUAE 5.3.1) to the libretro API, so RetroArch can boot and run classic Amiga software. It reads standard Amiga disk formats (ADF, ADZ, IPF, DMS, FDI), hard drive images, and CDs, with support for WHDLoad game packages, multi-disk M3U playlists, and remappable virtual-keyboard controls. It is a backend emulation core with no interface of its own.</p></section>
     <section><h2>Install libretro-uae-git on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add libretro-uae-git</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>Kickstart ROM files matching specific MD5 checksums for the Amiga model being emulated (A500, A1200, A4000, CD32, etc.) — not included</li><li>RetroArch installed to load the core</li><li>External CAPSIMG library for IPF copy-protected disk support</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>free-libre</dd><dt>Licence</dt><dd>GPL3</dd><dt>Download</dt><dd>8.5 MB</dd><dt>Installed</dt><dd>21.3 MB</dd></dl></div></section>
@@ -1442,6 +1463,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <div class="actions"><a class="button ghost" href="https://github.com/libretro/libretro-uae" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/libretro-uae-git" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
-<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-10-10 · unofficial directory</span></div></div></footer>
+<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-10-11 · unofficial directory</span></div></div></footer>
 </body>
 </html>

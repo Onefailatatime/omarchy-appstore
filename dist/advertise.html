@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Advertise on Omarchy Apps | Sponsor Slots & Lifetime Auction</title>
-<meta name="description" content="Bid for a sponsor slot on the Unofficial Omarchy App Store. Header, sidebar and footer ads run on 90 day terms. One lifetime sponsor slot goes to the highest bidder.">
+<title>Advertise on Omarchy Apps | Sponsor the App Store</title>
+<meta name="description" content="Sponsor the Unofficial Omarchy App Store: header and footer rotations plus app profile banners. Flat monthly rates, 90 day terms, fair rotation for every sponsor.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/advertise.html">
@@ -13,7 +13,7 @@
 <link rel="icon" href="/images/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" sizes="180x180">
 <meta property="og:title" content="Advertise on Omarchy Apps">
-<meta property="og:description" content="Sponsor slots on the Unofficial Omarchy App Store, sold by open bid. One lifetime slot never expires.">
+<meta property="og:description" content="Sponsor the Unofficial Omarchy App Store. Flat rates, 90 day terms, fair rotation.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://omarchyapps.com/advertise.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
@@ -21,8 +21,8 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@jessyka_boat">
 <meta name="twitter:title" content="Advertise on Omarchy Apps">
-<meta name="twitter:description" content="Sponsor slots sold by open bid. One lifetime slot never expires.">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://omarchyapps.com/advertise.html","url":"https://omarchyapps.com/advertise.html","name":"Advertise on Omarchy Apps","isPartOf":{"@id":"https://omarchyapps.com/#website"},"description":"Sponsor slots on the Unofficial Omarchy App Store, sold by open bid. One lifetime slot never expires.","dateModified":"2026-10-10"},{"@type":"FAQPage","@id":"https://omarchyapps.com/advertise.html#faq","mainEntity":[{"@type":"Question","name":"Why an auction instead of a price list?","acceptedAnswer":{"@type":"Answer","text":"A small community site cannot honestly know what a slot is worth. Sponsors setting the price between themselves is fairer than guessing, and the reserve keeps it above what the slot costs to run."}},{"@type":"Question","name":"What does \"lifetime\" mean?","acceptedAnswer":{"@type":"Answer","text":"For as long as the site is online, the ad stays in the same position with no renewal and no further charge. Treat it as the life of the site, not a fixed number of years."}},{"@type":"Question","name":"How do I pay?","acceptedAnswer":{"@type":"Answer","text":"The winning bidder gets an invoice by email. The slot goes live once it is paid. For 90 day slots the next term is invoiced before it starts, and if you do not renew the slot simply reopens for bids."}},{"@type":"Question","name":"Does sponsoring affect my package's listing or rank?","acceptedAnswer":{"@type":"Answer","text":"No. Listings come from the official repository and rankings come from reader votes. A sponsor slot is a separate, labelled unit."}}]}]}</script>
+<meta name="twitter:description" content="Sponsor the Unofficial Omarchy App Store. Flat rates, 90 day terms, fair rotation.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://omarchyapps.com/advertise.html","url":"https://omarchyapps.com/advertise.html","name":"Advertise on Omarchy Apps","isPartOf":{"@id":"https://omarchyapps.com/#website"},"description":"Sponsor the Unofficial Omarchy App Store: header and footer rotations plus app profile banners. Flat monthly rates on 90-day terms, fair rotation for every sponsor.","dateModified":"2026-10-11"},{"@type":"FAQPage","@id":"https://omarchyapps.com/advertise.html#faq","mainEntity":[{"@type":"Question","name":"How does the rotation work?","acceptedAnswer":{"@type":"Answer","text":"The header and footer each show three sponsors at a time and rotate through every active sponsor in order, on a fixed timer. Every sponsor gets exactly the same screen time, there is no bidding for position. The starting order changes daily so nobody is permanently first or last."}},{"@type":"Question","name":"How long does a sponsorship last?","acceptedAnswer":{"@type":"Answer","text":"Every sponsorship is a 90 day term, billed up front. Your ad appears only inside your contract dates and drops out automatically when the term ends. Renew before it ends to keep your spot."}},{"@type":"Question","name":"How do I pay?","acceptedAnswer":{"@type":"Answer","text":"Message @jessyka_boat on X about the slot you want. You get an invoice by email and the ad goes live once it is paid. Invoices are due within 3 days."}},{"@type":"Question","name":"What is an app profile banner?","acceptedAnswer":{"@type":"Answer","text":"Your banner on your app's own page, the highest intent spot on the site, seen by everyone who looks up that app. Only the app's own sponsor can buy it."}},{"@type":"Question","name":"What is the lifetime pin?","acceptedAnswer":{"@type":"Answer","text":"One sponsor, pinned permanently at the top of the homepage. It never rotates out and never expires. $1,000 one time. It is inquiry only: message @jessyka_boat on X and we'll talk it through."}},{"@type":"Question","name":"Does sponsoring affect my package's listing or rank?","acceptedAnswer":{"@type":"Answer","text":"No. Listings come from the official repository and rankings come from reader votes. A sponsor unit is a separate, labelled ad."}}]}]}</script>
 <style>
 /* =========================================================================
    Unofficial Omarchy App Store
@@ -1412,6 +1412,26 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
 
+
+/* =================== SPONSOR ROTATION =================== */
+/* Header and footer each rotate fairly through every active sponsor:
+   3 units shown at a time, the window advancing sequentially (assets/ads.js).
+   Padding-top leaves room for the .ad .tag which sits above the unit. */
+.ad-rotate { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; }
+.ad-header .ad-rotate { margin-bottom: var(--space-small); }
+.ad-footer .ad-rotate { margin-bottom: var(--space-x-large); }
+@media (max-width: 760px) { .ad-rotate { grid-template-columns: 1fr; } }
+
+/* App profile banner: one sponsor unit on the sponsor's own app page. */
+.ad-app-banner { margin: 0 0 var(--space-large); padding-top: 0.6em; }
+.ad-app-banner .ad { border-width: 2px; }
+
+/* Lifetime pin: one permanent sponsor unit at the top of the homepage.
+   Never rotates — the premium forever placement. */
+.ad-lifetime { max-width: var(--maxw); margin: 0 auto var(--space-medium); padding: 0.6em var(--space-neutral) 0; }
+.ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
+
+
 </style>
 </head>
 <body>
@@ -1429,99 +1449,99 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 <header class="hero guide-hero">
   <div class="wrap">
     <a class="back" href="index.html">← Unofficial Omarchy App Store</a>
-<pre aria-hidden="true">╭──────────╮
+    <pre aria-hidden="true">╭──────────╮
 │ <b>SPONSOR</b>  │
 │    ◆     │
 ╰──────────╯</pre>
-    <h1>Advertise on <span>Omarchy Apps</span></h1>
-    <p class="tag">Four slots, sold by open bid. One is yours for life.</p>
+    <h1>Sponsor the <span>Omarchy App Store</span></h1>
+    <p class="tag">Four ways in. Set prices, no auctions, no bidding.</p>
     <p class="facts"><b>186</b> packages listed · no trackers · every ad is static and labelled</p>
-    <p><a class="button" href="#slots">See the slots ↓</a></p>
+    <p><a class="button" href="#slots">See the options ↓</a></p>
   </div>
 </header>
 
 <main class="wrap advertise-main">
-
-<!-- =================== SLOTS =================== -->
   <section class="ad-panel slots-panel" id="slots">
     <div class="slots-head">
       <div>
-        <p class="eyebrow">Four positions</p>
-        <h2>Pick a slot, name your price</h2>
-        <p>Every slot is sold by open bid. The reserve is the lowest bid it takes. Figures update at each build.</p>
+        <p class="eyebrow">Four products</p>
+        <h2>Pick your spot, pay a flat rate</h2>
+        <p>No bidding, no auctions. Every sponsorship is a flat rate, monthly slots run on 90 day terms billed up front, and the lifetime pin is a single one time payment. Header and footer spots are unlimited: they rotate fairly through every active sponsor. The lifetime pin is inquiry-only. Message to start, your ad goes live once it's paid.</p>
       </div>
-      <figure class="slot-map" aria-label="Where each slot sits on the homepage">
+      <figure class="slot-map" aria-label="Where each sponsor product sits">
         <div class="sm-nav"></div>
         <div class="sm-hero"></div>
-        <div class="sm-slot sm-header"><span>H</span> header strip</div>
+        <div class="sm-slot"><span>L</span> lifetime pin, pinned forever, inquiry only</div>
+        <div class="sm-slot"><span>H</span> header rotation, 3 units, rotating</div>
         <div class="sm-bar"></div>
-        <div class="sm-body">
-          <div class="sm-main"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <div class="sm-rail">
-            <div class="sm-slot sm-lifetime"><span>L</span> lifetime</div>
-            <div class="sm-slot sm-rail-unit"><span>R</span> rail</div>
-          </div>
-        </div>
+        <div class="sm-main"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="sm-slot"><span>A</span> app profile banner, on your app's page</div>
         <div class="sm-footer"><div class="sm-slot"><span>F</span></div><div class="sm-slot"><span>F</span></div><div class="sm-slot"><span>F</span></div></div>
-        <figcaption>Desktop. On phones the lifetime unit sits under the search bar.</figcaption>
+        <figcaption>Header and footer rotate fairly through every active sponsor. App banners sit on your app's own page.</figcaption>
       </figure>
     </div>
     <div class="slots">
-<article class="slot featured" id="lifetime"><h3>Lifetime sponsor</h3><p class="pos">Top of the sidebar, above the fold on every screen.</p><p class="price">Reserve <b>$1,000</b> · one payment · never expires</p><p class="status">No bids yet · the 30 day clock starts at the first qualifying bid</p><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+bid+on+the+Lifetime+sponsor+slot+on+omarchyapps.com.%0A%0AMy+bid%3A+%24+%28reserve+%241%2C000%29%0AProduct+name%3A+%0ALink%3A+%0AOne-line+tagline%3A+%0ABilling+email%3A+" target="_blank" rel="noopener">Bid on the lifetime slot ↗</a></article>
-<article class="slot" id="header"><h3>Header strip</h3><p class="pos">Slim text line under the hero, above search.</p><p class="price">Reserve <b>$55</b> / month · billed as <b>$165</b> per 90 day term</p><p class="status">Open · no bids yet</p><a class="button ghost" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+bid+on+the+Header+strip+slot+on+omarchyapps.com.%0A%0AMy+bid%3A+%24+%28reserve+%24165+per+90+days%29%0AProduct+name%3A+%0ALink%3A+%0AOne-line+tagline%3A+%0ABilling+email%3A+" target="_blank" rel="noopener">Bid on the header strip ↗</a></article>
-<article class="slot" id="rail"><h3>Right rail</h3><p class="pos">Sidebar, directly under the lifetime sponsor.</p><p class="price">Reserve <b>$200</b> / month · billed as <b>$600</b> per 90 day term</p><p class="status">Open · no bids yet</p><a class="button ghost" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+bid+on+the+Right+rail+slot+on+omarchyapps.com.%0A%0AMy+bid%3A+%24+%28reserve+%24600+per+90+days%29%0AProduct+name%3A+%0ALink%3A+%0AOne-line+tagline%3A+%0ABilling+email%3A+" target="_blank" rel="noopener">Bid on the right rail ↗</a></article>
-<article class="slot" id="footer"><h3>Footer row</h3><p class="pos">One of three units above the site footer.</p><p class="price">Reserve <b>$25</b> / month · billed as <b>$75</b> per 90 day term</p><p class="status"><b>3</b> of 3 units open</p><a class="button ghost" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+bid+on+the+Footer+row+slot+on+omarchyapps.com.%0A%0AMy+bid%3A+%24+%28reserve+%2475+per+90+days%29%0AProduct+name%3A+%0ALink%3A+%0AOne-line+tagline%3A+%0ABilling+email%3A+" target="_blank" rel="noopener">Bid on a footer unit ↗</a></article>
+<article class="slot" id="header"><h3>Header rotation</h3><p class="pos">Three sponsor units under the hero, above search — rotating fairly through every active header sponsor.</p><p class="price"><b>$55</b> / month · billed as <b>$165</b> per 90 day term</p><p class="status">Three units under the hero, rotating fairly through every active sponsor. Equal screen time, no bidding for position. <b>0</b> sponsors active now; unlimited spots.</p><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I+want+to+sponsor+omarchyapps.com+%28Header+rotation%29." target="_blank" rel="noopener">Sponsor the header ↗</a></article>
+<article class="slot" id="footer"><h3>Footer rotation</h3><p class="pos">Sponsor units above the site footer — rotating fairly through every active footer sponsor.</p><p class="price"><b>$25</b> / month · billed as <b>$75</b> per 90 day term</p><p class="status">Sponsor units above the site footer, rotating fairly through every active sponsor. <b>0</b> sponsors active now; unlimited spots.</p><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I+want+to+sponsor+omarchyapps.com+%28Footer+rotation%29." target="_blank" rel="noopener">Sponsor the footer ↗</a></article>
+<article class="slot" id="app-banner"><h3>App profile banner</h3><p class="pos">Banner on the sponsor&#x27;s own app page (/apps/&lt;slug&gt;.html).</p><p class="price"><b>$25</b> / month · billed as <b>$75</b> per 90 day term</p><p class="status">Your banner on your app's own page, the highest intent spot on the site, seen by everyone who looks up that app. <b>0</b> apps sponsored now.</p><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I+want+to+sponsor+omarchyapps.com+%28App+profile+banner%29." target="_blank" rel="noopener">Sponsor an app page ↗</a></article>
+<article class="slot" id="lifetime"><h3>Lifetime pin</h3><p class="pos">Pinned permanently at the top of the homepage, above the header rotation — never rotates out, never expires.</p><p class="price"><b>$1,000</b> one-time · yours forever</p><p class="status">Inquiry only, no checkout, no auction. Message to talk it through; one sponsor holds this spot permanently. <b>0</b> active now.</p><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I+want+to+inquire+about+the+lifetime+sponsor+slot+on+omarchyapps.com." target="_blank" rel="noopener">Inquire about lifetime ↗</a></article>
     </div>
   </section>
 
-<!-- =================== HOW IT WORKS =================== -->
   <section class="ad-panel">
-    <p class="eyebrow">Three steps</p>
-    <h2>How it works</h2>
+    <p class="eyebrow">Fair by design</p>
+    <h2>How the rotation works</h2>
     <ol class="steps">
-      <li><h3>Send a bid</h3><p>DM the slot, your amount, and a link. The current high bid is shown above.</p></li>
-      <li><h3>Highest bid holds it</h3><p>Paid slots run 90 days. You get an invoice, the ad goes live when it is paid.</p></li>
-      <li><h3>Edit any time</h3><p>New link, text, or image whenever you like. Free. The position never moves.</p></li>
+      <li>
+        <h3>Three at a time</h3>
+        <p>The header and footer each show three sponsors at once, rotating through every active sponsor in order. App banners don't rotate, they're yours alone on your app's page.</p>
+      </li>
+      <li>
+        <h3>Equal screen time</h3>
+        <p>The rotation advances on a fixed timer and every active sponsor gets exactly the same visibility. There's no bidding for position, ever, the order is the order you signed up.</p>
+      </li>
+      <li>
+        <h3>Contracts keep it honest</h3>
+        <p>Your ad appears only inside your 90 day contract dates and drops out automatically when the term ends. The starting position changes daily, so nobody is permanently first or last.</p>
+      </li>
     </ol>
   </section>
 
-<!-- =================== LIFETIME =================== -->
-  <section class="ad-panel lifetime-panel">
-    <p class="eyebrow">Sold once, never again</p>
-    <h2>The lifetime slot</h2>
-    <ul class="rules-list">
-      <li><b>Timed auction.</b> The first bid at or above the reserve starts a 30 day clock. Outbid each other until it runs out.</li>
-      <li><b>No sniping.</b> A bid in the last 24 hours adds 24 hours.</li>
-      <li><b>One payment.</b> The winner pays once and keeps the spot for the life of the site. No renewal, no rate change, nobody can outbid you after close.</li>
-      <li><b>Outbid, owe nothing.</b> Only the winning bid is invoiced.</li>
-    </ul>
-  </section>
-
-<!-- =================== RULES =================== -->
   <section class="ad-panel rules-panel">
     <p class="eyebrow">House rules</p>
-    <h2>What an ad can be</h2>
+    <h2>What a sponsor unit is</h2>
     <ul class="rules-list">
-      <li>A name, one line, a link, and for sidebar units an optional 300 by 180 image. Set in the site's own type and colours, always tagged Ad.</li>
-      <li>No scripts or tracking. Links carry <code>rel="sponsored"</code>.</li>
-      <li>Software, hardware, hosting, and tools that belong next to a Linux package directory. No gambling, adult, or token promotion.</li>
-      <li>Any ad can be declined with a refund. Sponsoring never changes a listing, a rank, or a vote.</li>
+      <li><b>A name, one line of text, a link,</b> and an optional 300 by 180 image. No scripts, no tracking pixels, every unit is static HTML with a visible tag, and links carry <code>rel="sponsored"</code>.</li>
+      <li><b>Software, hardware, hosting, and tools</b> that belong next to a Linux package directory. Ads unrelated to the audience get declined with a full refund.</li>
+      <li><b>No editorial say.</b> Sponsoring never affects a package's listing, ranking, or review, those come from the official repo and reader votes.</li>
+      <li><b>You own your banner image.</b> Send a 300 by 180 PNG or SVG, or just a logo, we'll set the unit type.</li>
     </ul>
   </section>
 
-<!-- =================== FAQ =================== -->
-  <section class="faq" aria-labelledby="ad-faq-h">
-    <h2 class="sec-label" id="ad-faq-h">Common questions</h2>
-    <details><summary>Why an auction instead of a price list?</summary><p>A small community site cannot honestly know what a slot is worth. Sponsors setting the price between themselves is fairer than guessing, and the reserve keeps it above what the slot costs to run.</p></details>
-    <details><summary>What does &quot;lifetime&quot; mean?</summary><p>For as long as the site is online, the ad stays in the same position with no renewal and no further charge. Treat it as the life of the site, not a fixed number of years.</p></details>
-    <details><summary>How do I pay?</summary><p>The winning bidder gets an invoice by email. The slot goes live once it is paid. For 90 day slots the next term is invoiced before it starts, and if you do not renew the slot simply reopens for bids.</p></details>
-    <details><summary>Does sponsoring affect my package&#x27;s listing or rank?</summary><p>No. Listings come from the official repository and rankings come from reader votes. A sponsor slot is a separate, labelled unit.</p></details>
+  <section class="ad-panel rules-panel" id="terms">
+    <p class="eyebrow">Terms</p>
+    <h2>What a sponsorship means</h2>
+    <ul class="rules-list">
+      <li><b>90 day terms.</b> Every sponsorship runs 90 days from the day it goes live, billed up front as a single payment (monthly rate × 3).</li>
+      <li><b>Flat rates, unlimited spots.</b> The price on the card is the price, no bidding, no position auctions. As many sponsors as sign up share the rotation equally.</li>
+      <li><b>Invoices are due within 3 days.</b> Your ad goes live once payment lands; the contract clock starts that day.</li>
+      <li><b>Your details stay private.</b> We publish your ad, not your invoice. Sponsor names and rates are never disclosed to other sponsors.</li>
+    </ul>
   </section>
 
-<!-- =================== FINAL CTA =================== -->
+  <section class="faq" aria-labelledby="ad-faq-h">
+    <h2 class="sec-label" id="ad-faq-h">Common questions</h2>
+    <details><summary>How does the rotation work?</summary><p>The header and footer each show three sponsors at a time and rotate through every active sponsor in order, on a fixed timer. Every sponsor gets exactly the same screen time, there is no bidding for position. The starting order changes daily so nobody is permanently first or last.</p></details>
+    <details><summary>How long does a sponsorship last?</summary><p>Every sponsorship is a 90 day term, billed up front. Your ad appears only inside your contract dates and drops out automatically when the term ends. Renew before it ends to keep your spot.</p></details>
+    <details><summary>How do I pay?</summary><p>Message @jessyka_boat on X about the slot you want. You get an invoice by email and the ad goes live once it is paid. Invoices are due within 3 days.</p></details>
+    <details><summary>What is an app profile banner?</summary><p>Your banner on your app&#x27;s own page, the highest intent spot on the site, seen by everyone who looks up that app. Only the app&#x27;s own sponsor can buy it.</p></details>
+    <details><summary>What is the lifetime pin?</summary><p>One sponsor, pinned permanently at the top of the homepage. It never rotates out and never expires. $1,000 one time. It is inquiry only: message @jessyka_boat on X and we&#x27;ll talk it through.</p></details>
+    <details><summary>Does sponsoring affect my package&#x27;s listing or rank?</summary><p>No. Listings come from the official repository and rankings come from reader votes. A sponsor unit is a separate, labelled ad.</p></details>
+  </section>
+
   <div class="advertise-cta">
-    <p>Ready to bid, or want to ask something first?</p>
-    <a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+bid+on+the+sponsor+slot+on+omarchyapps.com.%0A%0AMy+bid%3A+%24+%28any+slot%29%0AProduct+name%3A+%0ALink%3A+%0AOne-line+tagline%3A+%0ABilling+email%3A+" target="_blank" rel="noopener">Message @jessyka_boat on X ↗</a>
+    <p>Ready to sponsor, or want to ask something first?</p>
+    <a class="button ghost" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I+have+a+question+about+sponsoring+omarchyapps.com." target="_blank" rel="noopener">Message @jessyka_boat on X ↗</a>
   </div>
 </main>
 
@@ -1537,7 +1557,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
         <a href="terms.html">Terms of Use</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Updated 2026-10-10 · no trackers</span>
+      <span>Updated 2026-10-11 · no trackers</span>
     </div>
   </div>
 </footer>

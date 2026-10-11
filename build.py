@@ -49,10 +49,12 @@ SUGGEST_APP_URL = "https://x.com/messages/compose?" + urllib.parse.urlencode({
 })
 SITE_URL = "https://omarchyapps.com"
 AD_FAQ = [
-    ("Why an auction instead of a price list?", "A small community site cannot honestly know what a slot is worth. Sponsors setting the price between themselves is fairer than guessing, and the reserve keeps it above what the slot costs to run."),
-    ("What does \"lifetime\" mean?", "For as long as the site is online, the ad stays in the same position with no renewal and no further charge. Treat it as the life of the site, not a fixed number of years."),
-    ("How do I pay?", "The winning bidder gets an invoice by email. The slot goes live once it is paid. For 90 day slots the next term is invoiced before it starts, and if you do not renew the slot simply reopens for bids."),
-    ("Does sponsoring affect my package's listing or rank?", "No. Listings come from the official repository and rankings come from reader votes. A sponsor slot is a separate, labelled unit."),
+    ("How does the rotation work?", "The header and footer each show three sponsors at a time and rotate through every active sponsor in order, on a fixed timer. Every sponsor gets exactly the same screen time, there is no bidding for position. The starting order changes daily so nobody is permanently first or last."),
+    ("How long does a sponsorship last?", "Every sponsorship is a 90 day term, billed up front. Your ad appears only inside your contract dates and drops out automatically when the term ends. Renew before it ends to keep your spot."),
+    ("How do I pay?", "Message @jessyka_boat on X about the slot you want. You get an invoice by email and the ad goes live once it is paid. Invoices are due within 3 days."),
+    ("What is an app profile banner?", "Your banner on your app's own page, the highest intent spot on the site, seen by everyone who looks up that app. Only the app's own sponsor can buy it."),
+    ("What is the lifetime pin?", "One sponsor, pinned permanently at the top of the homepage. It never rotates out and never expires. $1,000 one time. It is inquiry only: message @jessyka_boat on X and we'll talk it through."),
+    ("Does sponsoring affect my package's listing or rank?", "No. Listings come from the official repository and rankings come from reader votes. A sponsor unit is a separate, labelled ad."),
 ]
 SITE_NAME = "Unofficial Omarchy App Store"
 GUIDES = [
@@ -124,6 +126,165 @@ GUIDES = [
             ("What command installs a package from the Omarchy repository?", "Package profiles in this directory provide a copyable omarchy pkg add command using the exact current package name."),
             ("Can I use pacman and the AUR on Omarchy?", "Yes. Omarchy is Arch-based, and its manual points users to Arch packages and the AUR when needed. Full system updates should still go through Omarchy's update flow."),
             ("Does the Unofficial Omarchy App Store host packages?", "No. It is a directory. Install commands retrieve software through Omarchy and the configured package sources, not from this website."),
+        ],
+    },
+    {
+        "slug": "how-to-use-omarchy-zsh",
+        "title": "omarchy-zsh on Omarchy: install, fzf keybindings, aliases & the chsh trap",
+        "description": "Install omarchy-zsh on Omarchy the safe way (not chsh), learn the fzf keybindings and built-in aliases, and fix common issues like double inits and oh-my-zsh conflicts.",
+        "eyebrow": "Omarchy shell guide",
+        "heading": "omarchy-zsh on <span>Omarchy</span>",
+        "tagline": "Zero-config Zsh with Omarchy's aliases — installed the safe way, not with chsh.",
+        "answer": "Install omarchy-zsh with omarchy pkg add omarchy-zsh, then run omarchy-setup-zsh. Keep bash as your login shell — the setup auto-launches zsh from it. Do not use chsh: it breaks Omarchy's session startup.",
+        "faqs": [
+            ("How do I switch to zsh on Omarchy?", "Run omarchy pkg add omarchy-zsh, then omarchy-setup-zsh. Keep bash as your login shell — the setup makes zsh auto-launch from your ~/.bashrc. Do not use chsh; it breaks Omarchy's session startup."),
+            ("Will it overwrite my .zshrc?", "The setup writes a small loader ~/.zshrc. If you already have one with real content, back it up first. Package updates never touch ~/.zshrc; everything system-owned lives under /usr/share/omarchy-zsh/."),
+            ("omarchy-zsh vs oh-my-zsh?", "omarchy-zsh ports Omarchy's shared shell config to Zsh with fzf keybindings; it's small, fast, and Omarchy-aware. oh-my-zsh is a huge plugin framework — you can run it on Omarchy, but disable its duplicated inits and never define functions over omarchy's aliases."),
+            ("Do my bash habits carry over?", "Mostly, yes. The aliases, functions, and env vars are the same ones Omarchy ships for bash, and the syntax is compatible. The prompt is starship in both."),
+            ("How do I go back to plain bash?", "Remove the package with sudo pacman -R omarchy-zsh, then restore ~/.bashrc from a .bashrc.backup-* file or remove the exec zsh line."),
+        ],
+    },
+    {
+        "slug": "rustdesk-on-omarchy",
+        "title": "How to Install & Use RustDesk on Omarchy (2026) — Free TeamViewer Alternative",
+        "description": "Install RustDesk on Omarchy with one command. Free, open-source remote desktop: ID/password flow, unattended access, self-hosting, and fixes for the Wayland black-screen issue on Hyprland.",
+        "eyebrow": "Remote desktop guide",
+        "heading": "RustDesk on <span>Omarchy</span>",
+        "tagline": "Free, open-source remote desktop — the $0 answer to TeamViewer's $50.90/mo.",
+        "answer": "Install RustDesk with omarchy pkg add rustdesk, launch it, and connect with the 9-digit ID and password. No account, no payment. On Hyprland/Wayland, accept the screen-share prompt the first time.",
+        "faqs": [
+            ("Does RustDesk work on Omarchy/Wayland?", "Yes, with one caveat. Inside a logged-in Hyprland session, RustDesk captures via PipeWire and xdg-desktop-portal-hyprland — accept the screen-share prompt the first time and it works."),
+            ("Is RustDesk really free?", "Yes. The client and self-hostable server are AGPL-3.0 open source and free forever. The paid product is RustDesk Server Pro for teams; core remote-desktop functionality is not gated."),
+            ("RustDesk vs TeamViewer — which should I pick?", "Pick RustDesk for remote control, file transfer, and unattended access without a $50.90/mo bill. Pick TeamViewer for the enterprise admin console, compliance features, or third-party integrations."),
+            ("Is RustDesk safe?", "Sessions are end-to-end encrypted and the code is open source. With a self-hosted server, sessions never pass through third-party infrastructure. Use a strong permanent password and keep RustDesk updated."),
+        ],
+    },
+    {
+        "slug": "flea-file-manager-omarchy",
+        "title": "How to Install & Use Flea on Omarchy (2026)",
+        "description": "Install Flea on Omarchy with one command. Keyboard-first file manager with Quick Look, undoable operations, and network shares. Setup, shortcuts, and real fixes from the issue tracker.",
+        "eyebrow": "Omarchy file manager guide",
+        "heading": "Flea on <span>Omarchy</span>",
+        "tagline": "The keyboard-first file manager that feels like it belongs on Omarchy.",
+        "answer": "Install Flea with omarchy pkg add flea, then make it your default with flea --default. You get Vim-style navigation, Space-bar Quick Look previews, undoable file operations, and network shares — all following your Omarchy theme.",
+        "faqs": [
+            ("Does Flea work on Omarchy?", "Yes — it's built exclusively for Omarchy. omarchy and quickshell are hard dependencies, and per the install docs it will not install on a plain Arch box. The Omarchy repo carries it as flea, and the AUR carries the faster-updating flea-bin."),
+            ("Is Flea free?", "Yes. It's MIT-licensed open source. There's an optional GitHub Sponsors link and a Buy Me a Coffee page, but no paid tier, no trial, no feature gates."),
+            ("How do I make Flea my default file manager?", "Run flea --default in a terminal inside your Omarchy session. It sets the inode/directory handler, routes Show-in-folder requests to Flea, and binds Super+Shift+F to it. Undo with flea --default off."),
+            ("Can Flea replace the file Open/Save dialogs?", "Yes. flea --picker makes Flea answer the org.freedesktop.impl.portal.FileChooser contract, replacing the GTK Open/Save dialog in every portal-using app (including Flatpaks), then restart the portal: systemctl --user restart xdg-desktop-portal. Revert with flea --picker off."),
+            ("How do I uninstall Flea cleanly?", "Run the integration undo first, then drop the package: flea --default off then omarchy pkg drop flea. Skipping the undo leaves stale per-user state (a D-Bus service file naming the removed binary, inode/directory handler lines, Hyprland keybinds)."),
+        ],
+    },
+    {
+        "slug": "omacut-video-editor-omarchy",
+        "title": "How to Use omacut on Omarchy (2026): trim, split & export in minutes",
+        "description": "omacut is Omarchy's dead-simple video trimmer (preinstalled on Quattro+). Open a video, drag the handles, split the middle, export an MP4 — plus shortcuts and fixes for AV1 black preview and export failures.",
+        "eyebrow": "Omarchy video trimmer guide",
+        "heading": "Use omacut on <span>Omarchy</span>",
+        "tagline": "Open a video, cut the boring parts, export an MP4. That's the whole app.",
+        "answer": "omacut ships by default on Omarchy 4.x (Quattro) and newer; older installs use omarchy pkg add omacut. Open a video with Ctrl+O, drag the start/end handles, double-click to split out middle sections, and export with Ctrl+S as an MP4.",
+        "faqs": [
+            ("Does omacut work on Omarchy?", "Yes — it's made for Omarchy. Written by DHH/omacom, it follows your theme's accent color, and it's installed by default in Omarchy from Quattro (v4.x) onward. Install manually with omarchy pkg add omacut on older installs."),
+            ("Is omacut free?", "Yes, free and libre — MIT licensed, source on GitHub at omacom/omacut. No accounts, no watermarks, no upsells."),
+            ("omacut vs LosslessCut — which should I use?", "omacut for speed and native Omarchy looks; it re-encodes, so exports are fast but not instant. LosslessCut for lossless (no re-encode) cuts that finish in seconds with zero quality loss — at the cost of an Electron app that doesn't match your theme. For cutting the dead air off a screen recording, omacut wins."),
+            ("Can omacut cut the middle out of a video, or just the ends?", "The middle too. Double-click a clip to split it, drag the handles apart to remove the section between them, double-click the gap to join it back. Playback skips the gaps and exports the clips in order."),
+            ("Why does my AV1 video show a black preview?", "That's a known Qt/ffmpeg hardware-decode issue fixed in omacut (Oct 2026) — update to the latest build. If it persists on unusual GPUs, run QT_FFMPEG_DECODING_HW_DEVICE_TYPES=vaapi,cuda omacut."),
+        ],
+    },
+    {
+        "slug": "sunshine-game-streaming-omarchy",
+        "title": "How to Install & Use Sunshine on Omarchy (2026)",
+        "description": "Install Sunshine on Omarchy and stream your games to any device with Moonlight. Pairing walkthrough, Hyprland capture-method fixes, and how it replaces NVIDIA GameStream.",
+        "eyebrow": "Game streaming guide",
+        "heading": "Sunshine on <span>Omarchy</span>",
+        "tagline": "Turn your Omarchy PC into your own cloud-gaming server — free, no tiers.",
+        "answer": "Install Sunshine with omarchy pkg add sunshine, open https://localhost:47990 to set credentials, and pair Moonlight on your phone, laptop, or Steam Deck with the one-time PIN. Your host's GPU encodes the stream in hardware.",
+        "faqs": [
+            ("Does Sunshine work on Omarchy/Hyprland?", "Yes — Omarchy is Arch-based, and the official docs cover Arch installs directly. On Hyprland (Wayland) prefer the KMS or PipeWire capture method; there are recent wlroots capture regressions (#5018), so if you get a black screen, switch capture methods in Configuration → Advanced first."),
+            ("Is Sunshine free?", "Completely. It's free and open-source (LizardByte, GPL-licensed), with no paid tiers, no feature gates, no accounts, and no telemetry. Everything — hardware encoding, multi-client streaming, virtual displays, HDR — is in the same free build."),
+            ("Sunshine vs Parsec — which should I use?", "For playing your own games remotely, Sunshine + Moonlight is free forever and matches Parsec's paid tiers on the features that matter (encoders, latency, gamepads). Pick Parsec if you want zero-config internet connectivity and session sharing — its $9.99/mo Warp buys convenience and relay infrastructure, not better streaming quality."),
+            ("Do I need an NVIDIA GPU?", "No. Sunshine uses hardware encoding on AMD (VAAPI), Intel (VAAPI/QuickSync), and NVIDIA (NVENC) GPUs, with software x264/x265 as a fallback. This was NVIDIA GameStream's biggest limitation; Sunshine removed it."),
+            ("Can I stream outside my home?", "Yes, two ways: forward the streaming ports on your router (TCP 47984, 47989, 48010; UDP 47998–48000, 48002, 48010), or install Tailscale on host and client and connect Moonlight to the host's Tailscale IP — no port forwarding, works behind CGNAT."),
+        ],
+    },
+    {
+        "slug": "hermes-desktop-omarchy",
+        "title": "How to Install & Use Hermes Desktop on Omarchy (2026)",
+        "description": "Install Hermes Desktop on Omarchy: the native GUI for Hermes Agent with memory, skills, scheduled tasks, and messaging integrations. Bring your own key, use Nous Portal's free tier, or run local models.",
+        "eyebrow": "AI agent guide",
+        "heading": "Hermes Desktop on <span>Omarchy</span>",
+        "tagline": "A self-improving AI agent with a chat window — no terminal required.",
+        "answer": "Install with omarchy pkg add hermes-desktop, pick Local mode in the first-run wizard, and connect a provider — an OpenRouter key, Nous Portal's free tier, or a local Ollama/LM Studio endpoint for $0. You get chat with memory, skills, scheduled tasks, and messaging gateways.",
+        "faqs": [
+            ("Does Hermes Desktop work on Omarchy?", "Yes — install with omarchy pkg add hermes-desktop. It's an Electron app (Linux AppImage/.deb/.rpm builds ship upstream), and the underlying Hermes Agent is a Unix-native Python tool, so Arch/Linux is its home turf."),
+            ("Is Hermes Desktop free?", "Yes. The app is open-source under the MIT License. But it's a client, not a model — you supply the intelligence via your own provider key, a local model, or Nous Portal's free tier."),
+            ("Do I need an API key?", "Not necessarily. You need a provider, but that can be a free one: Ollama or LM Studio running locally (no key at all), Nous Portal's free tier, or OpenRouter's free models. A paid key (OpenRouter/Anthropic/OpenAI/etc.) just buys you stronger models."),
+            ("Can I run it against a remote Hermes server?", "Yes — the first-run wizard offers Remote mode (API URL + key). But know the caveat: in Remote mode several screens (Schedules, Skills, Gateway, Providers, Memory) are degraded or unavailable, and HTTPS remote sign-in has a known cookie bug (#996). Local mode is the smooth path."),
+            ("Does it remember me across sessions?", "Yes — that's the headline feature. Persistent memory, session history with full-text search, and a skill system that distills repeated tasks into reusable knowledge. Check the Memory screen to see what it knows, and back it up from Settings before migrating machines."),
+        ],
+    },
+    {
+        "slug": "omawrite-writing-omarchy",
+        "title": "Omawrite on Omarchy: Install, Shortcuts & Typora Alternative Guide",
+        "description": "Omawrite is Omarchy's free default Markdown editor — a distraction-free, open-source Typora alternative. Install guide, keyboard shortcuts, real GitHub issues, and how to switch from Typora.",
+        "eyebrow": "Omarchy writing guide",
+        "heading": "Omawrite on <span>Omarchy</span>",
+        "tagline": "The cleanest place to put words down on Omarchy — already installed.",
+        "answer": "Omawrite ships by default on Omarchy 4.0 Quattro and newer; older installs use omarchy pkg add omawrite. Open it and write — Markdown syntax dims instead of shouting, drafts recover after crashes, and Pandoc covers the exports it skips.",
+        "faqs": [
+            ("Does Omawrite work on Omarchy?", "Yes — it's a first-class Omarchy citizen. It installs from the Omarchy package repository via omarchy pkg add omawrite and has been preinstalled on every fresh Omarchy install since version 4.0 Quattro. It's also in the AUR for other Arch-based systems."),
+            ("Is Omawrite free?", "Yes, completely. It's MIT-licensed open source (omacom/omawrite), with the bundled IBM Plex Mono font under the SIL Open Font License. No trial, no paid tier, no account."),
+            ("Omawrite vs Typora — which should I use?", "If you write Markdown and want zero friction, Omawrite — free, lighter, already installed, and Omarchy's chosen default. If you regularly export to Word/EPUB or live in custom themes, Typora's $14.99 buys you that. Most people can cover the export gap with Pandoc and keep the $14.99."),
+            ("Does Omawrite have a preview mode?", "Not a side-by-side WYSIWYG preview — the editor is the view, with syntax dimmed rather than hidden. Print (Ctrl+P) renders real Markdown to PDF, which is the closest thing to a preview."),
+            ("Will I lose my draft if it crashes?", "No — unsaved drafts are recovered after an abnormal exit, and the app warns you before an external edit to an open file can overwrite your work."),
+        ],
+    },
+    {
+        "slug": "strata-file-manager-omarchy",
+        "title": "Strata on Omarchy: Install the Keyboard-First File Manager",
+        "description": "Install Strata on Omarchy: the free keyboard-first GTK4 file manager with Miller columns, fuzzy search, and sandboxed previews. Setup, keybinds, fixes, and Strata vs flea compared.",
+        "eyebrow": "Omarchy file manager guide",
+        "heading": "Strata on <span>Omarchy</span>",
+        "tagline": "Finder-style Miller columns with a preview engine that sandboxes everything.",
+        "answer": "Install Strata with omarchy pkg add strata. You get navigable Miller columns, Ctrl+K fuzzy filename search that streams results while indexing, and rich previews rendered inside a Bubblewrap sandbox so untrusted files can't touch your system.",
+        "faqs": [
+            ("Does Strata work on Omarchy?", "Yes — Arch Linux and Omarchy are the project's primary supported environments, and Strata is explicitly designed for Omarchy. Requirements: glibc 2.39+ and GTK 4.12+. It follows the active Omarchy theme live (including Quattro), and the README documents Hyprland keybind overrides, udiskie encrypted-volume unlock, and SMB support via gvfs-smb."),
+            ("Is Strata free?", "Yes. MIT-licensed, free and libre — no paid tiers, no feature gates. In-app updates are built in (on by default; disable in Settings → Updates)."),
+            ("Strata vs flea?", "Both keyboard-first, both free, both on omarchyapps.com. Strata = Rust + GTK4, Miller columns, the richest preview engine, sandboxed parsers. flea = Rust + Quickshell, built Omarchy-first, leans into raw speed and native theme integration. Same price (zero). Columns and previews → Strata; Omarchy-native speedster → flea."),
+            ("Why do some previews show 'Preview unavailable'?", "Almost always a missing sandbox dependency, not a Strata bug. Parser-backed previews require bubblewrap; video thumbnails need ffmpegthumbnailer/ffmpeg. Install the full runtime set (see the guide's first issue) and restart Strata. Strata fails closed by design — it will never run an untrusted parser unsandboxed just to show a thumbnail."),
+            ("Can Strata replace Nautilus as my default file manager?", "Yes, two layers: Settings → General → Desktop integration sets Strata as the inode/directory handler and installs the FileManager1 D-Bus service. Then, on Lua-based Omarchy releases, override the stock Nautilus shortcuts (Super+Shift+F, Super+Alt+Shift+F) in ~/.config/hypr/bindings.lua — those user overrides survive Omarchy updates."),
+        ],
+    },
+    {
+        "slug": "claude-desktop-omarchy",
+        "title": "Claude Desktop on Omarchy: Install & Setup Guide (2026)",
+        "description": "Install Anthropic's official Claude Desktop Linux app on Omarchy. Setup, MCP connectors, Cowork VM troubleshooting, and the Hyprland login fix.",
+        "eyebrow": "AI assistant guide",
+        "heading": "Claude Desktop on <span>Omarchy</span>",
+        "tagline": "Anthropic's official Linux app, repackaged for Arch — chat, MCP, and Cowork agents.",
+        "answer": "Install with omarchy pkg add claude-desktop. The package repackages Anthropic's official Linux .deb (beta); the app binary is Anthropic's, the Arch packaging is community-maintained. Sign in via the claude.ai redirect, connect MCP servers for local file access, and use Cowork for autonomous agent tasks.",
+        "faqs": [
+            ("Is there an official Claude desktop app for Linux?", "Yes — since June 30, 2026, Anthropic ships a first-party Linux beta as a .deb (amd64 + arm64) from its own signed APT repository at downloads.claude.ai. It's a beta and it doesn't auto-update itself, but it's Anthropic's code, not a third-party port."),
+            ("Is claude-desktop on Omarchy official?", "Half and half. The app binary is Anthropic's official Linux build, downloaded from Anthropic's own repository. But Anthropic doesn't ship an Arch package — the one omarchy pkg add installs is maintained by the Omarchy community in omarchy-pkgs, and Anthropic won't support issues with it. Report packaging problems to Omarchy, not Anthropic."),
+            ("Is it free?", "The app is free to install and free to use with a free Claude account (no signed-out mode — you need an account). Capability limits follow your Claude plan: Free, Pro ($20/mo), Max, etc."),
+            ("Does it work offline or run a model locally?", "No to both. Every message goes to Anthropic's servers. The virtual machine Cowork uses is a sandbox around what Claude can touch — it's not a local model."),
+            ("Where do MCP settings live?", "~/.config/Claude/claude_desktop_config.json. Quit the app before editing it by hand."),
+        ],
+    },
+    {
+        "slug": "1password-omarchy",
+        "title": "How to Install & Use 1Password on Omarchy (2026)",
+        "description": "Install 1Password on Omarchy with one command. Setup, browser integration, real Linux fixes, and how it compares to free Bitwarden.",
+        "eyebrow": "Password manager guide",
+        "heading": "1Password on <span>Omarchy</span>",
+        "tagline": "The polished commercial password manager — and the free Bitwarden alternative.",
+        "answer": "Install with omarchy pkg add 1password. Sign in with your sign-in address, email, Secret Key, and master password. 1Password is paid (14-day trial, then Individual from $2.99/mo billed annually) — Bitwarden's free tier covers ~90% of the same ground.",
+        "faqs": [
+            ("Does 1Password work on Omarchy/Linux?", "Yes. 1Password ships an official Linux app (Electron frontend, Rust crypto core), and the AUR packages are maintained by 1Password themselves. Install with omarchy pkg add 1password. The main Linux-specific gotchas are browser sandboxing (use a native browser, not Flatpak/Snap) and Wayland clipboard quirks — both covered in the guide."),
+            ("Is 1Password free?", "No. There is no free tier — just a 14-day trial. Individual starts at $2.99/mo billed annually (promotional rate for new signups; list price $3.99/mo after the March 2026 price increase), Families runs $4.99–$5.99/mo. If free matters, Bitwarden's free tier is the move."),
+            ("1Password vs Bitwarden — which should I pick?", "Pick Bitwarden if price is the deciding factor: free, open source, self-hostable, and ~90% of the functionality. Pick 1Password if you want the most polished experience — best-in-class browser extension, passkeys, Watchtower health reports, and an SSH agent that just works — and you're fine paying ~$36–$48/yr for it."),
+            ("Do I need the beta or the CLI?", "No. 1password (stable) is the right default. Grab 1password-beta if you're chasing a specific fix (clipboard and Wayland fixes often land there first). Grab 1password-cli if you want op in the terminal — pair it with the desktop app's CLI integration so you never manage session tokens by hand."),
+            ("Which browsers work with 1Password on Omarchy?", "Chromium and Firefox, installed natively (not Flatpak/Snap), work out of the box with the official extension. Anything else (Vivaldi, Zen, Floorp) needs the /etc/1password/custom_allowed_browsers allowlist entry described in the guide."),
         ],
     },
 ]
@@ -540,7 +701,7 @@ def leaderboard_row(p: dict) -> str:
 </article>"""
 
 
-def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
+def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: dict | None = None) -> str:
     canonical = f"{SITE_URL}/apps/{slug(p['name'])}.html"
     desc = description_for(p)
     project_url = p.get("url") or p.get("github") or f"https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/{urllib.parse.quote(p['dir'])}"
@@ -620,6 +781,7 @@ def render_app_page(template: str, css: str, p: dict, synced: str) -> str:
         "__AUTHOR__": author,
         "__REQUIREMENTS__": reqs or "<li>No special requirements documented.</li>",
         "__SCREENSHOT__": gallery,
+        "__APP_BANNER__": ads.render_app_banner(app_banners or {}, slug(p["name"])),
         "__VIDEO__": video,
         "__LINKS__": "".join(links),
         "__CLAIM_URL__": html.escape(claim_url(p["name"])),
@@ -639,7 +801,7 @@ def main() -> None:
     if missing_authors:
         print("missing public author attribution for: " + ", ".join(missing_authors))
     synced = datetime.date.today().isoformat()
-    functions_dir = ROOT / "netlify" / "functions"
+    functions_dir = ROOT / "src"
     functions_dir.mkdir(parents=True, exist_ok=True)
     (functions_dir / "app-names.mjs").write_text(
         "export default " + json.dumps([p["name"] for p in pkgs], ensure_ascii=False) + ";\n",
@@ -691,10 +853,11 @@ def main() -> None:
     }
     sponsor = ads.load()
     ad_slots = ads.render_homepage(sponsor)
+    app_banners = ads.active_banners((sponsor.get("app_banners") or {}).get("banners") or {})
     page = (body
             .replace("__AD_HEADER__", ad_slots["__AD_HEADER__"])
-            .replace("__AD_RAIL__", ad_slots["__AD_RAIL__"])
             .replace("__AD_FOOTER__", ad_slots["__AD_FOOTER__"])
+            .replace("__AD_LIFETIME__", ad_slots["__AD_LIFETIME__"])
             .replace("__NEW__", "\n".join(card(p, featured=True) for p in newest))
             .replace("__GROUPS__", groups)
             .replace("__CHIPS__", chips)
@@ -755,6 +918,7 @@ def main() -> None:
             (images / f.name).write_bytes(f.read_bytes())
     (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())
     (DIST / "newsletter.js").write_text((ROOT / "assets" / "newsletter.js").read_text(encoding="utf-8"), encoding="utf-8")
+    (DIST / "ads.js").write_text((ROOT / "assets" / "ads.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "home-leaders.js").write_text((ROOT / "assets" / "home-leaders.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "leaderboard.js").write_text((ROOT / "assets" / "leaderboard.js").read_text(encoding="utf-8"), encoding="utf-8")
@@ -774,7 +938,7 @@ def main() -> None:
         "@graph": [
             {"@type": "WebPage", "@id": SITE_URL + "/advertise.html", "url": SITE_URL + "/advertise.html",
              "name": "Advertise on Omarchy Apps", "isPartOf": {"@id": SITE_URL + "/#website"},
-             "description": "Sponsor slots on the Unofficial Omarchy App Store, sold by open bid. One lifetime slot never expires.",
+             "description": "Sponsor the Unofficial Omarchy App Store: header and footer rotations plus app profile banners. Flat monthly rates on 90-day terms, fair rotation for every sponsor.",
              "dateModified": synced},
             {"@type": "FAQPage", "@id": SITE_URL + "/advertise.html#faq", "mainEntity": [
                 {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in AD_FAQ
@@ -784,10 +948,8 @@ def main() -> None:
     advertise = ((ROOT / "parts" / "advertise.html").read_text(encoding="utf-8")
                  .replace("__AD_SLOTS__", ads.render_slot_cards(sponsor))
                  .replace("__AD_FAQ__", ad_faq_html)
-                 .replace("__AUCTION_DAYS__", str(sponsor["lifetime"]["auction_days"]))
-                 .replace("__EXTEND_HOURS__", str(sponsor["lifetime"]["extend_hours"]))
                  .replace("__STRUCTURED_DATA__", json_script(advertise_schema))
-                 .replace("__CONTACT_DM__", html.escape(ads.bid_url("sponsor", "any slot")))
+                 .replace("__CONTACT_DM__", html.escape(ads.dm_url("Hi! I have a question about sponsoring omarchyapps.com.")))
                  .replace("__COUNT__", str(len(pkgs)))
                  .replace("__SYNCED__", synced)
                  .replace("__CONTACT__", html.escape(CONTACT_URL))
@@ -858,7 +1020,7 @@ def main() -> None:
     resolved_css = css.replace("__CATVARS__", cat_vars).replace("url(fonts/", "url(../fonts/")
     for p in pkgs:
         (apps_dir / f"{slug(p['name'])}.html").write_text(
-            render_app_page(app_template, resolved_css, p, synced), encoding="utf-8"
+            render_app_page(app_template, resolved_css, p, synced, app_banners), encoding="utf-8"
         )
 
     sitemap_urls = [SITE_URL + "/", SITE_URL + "/leaderboard.html", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/advertise.html", SITE_URL + "/terms.html"]
@@ -898,10 +1060,10 @@ def main() -> None:
     print(f"dist/index.html  {len(page):,} bytes · {len(pkgs)} packages · synced {synced}")
     print(f"dist/leaderboard.html {len(leaderboard):,} bytes · live Top 25 community ranking")
     print(f"dist/develop.html {len(develop):,} bytes · public packaging checklist")
-    print(f"netlify/functions/checklist.mjs {len(develop_md):,} bytes · checklist emailed to subscribers")
+    print(f"src/checklist.mjs {len(develop_md):,} bytes · checklist emailed to subscribers")
     print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
     print(f"dist/about.html   {len(about):,} bytes · project and builder bio")
-    print(f"dist/advertise.html {len(advertise):,} bytes · sponsor slots and lifetime auction")
+    print(f"dist/advertise.html {len(advertise):,} bytes · sponsor products (rotations + app banners)")
     print(f"dist/guides       {len(GUIDES)} search-focused editorial guides")
     print(f"dist/apps/        {len(pkgs)} crawlable package pages")
     print(f"dist/sitemap.xml  {len(sitemap_urls)} canonical URLs")

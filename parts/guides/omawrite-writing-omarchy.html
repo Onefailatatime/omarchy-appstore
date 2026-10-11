@@ -1,0 +1,135 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist (source-verified, not live-verified — no Omarchy test box was available for this guide):
+- Install: `omarchy pkg add omawrite` — preinstalled on Quattro+ installs; confirm on a real box
+- First launch: blank draft, follows system dark/light mode, footer shows font button + word count
+- Draft recovery: type in unsaved doc, kill -9, relaunch — confirm draft restored
+- External-edit warning: edit an open .md in another editor, confirm Omawrite warns before overwriting
+- Issues below are real reports from the omacom/omawrite tracker; none reproduced live (#54, #53, #27, #47)
+- Screenshots needed: first-launch window, find/replace (Ctrl+H), shortcut reference (Ctrl+?), light + dark theme
+- License: MIT, bundled IBM Plex Mono under OFL. Free, no paid tier
+
+SEO notes:
+- URL: /guides/omawrite-writing-omarchy
+- Title tag: "Omawrite on Omarchy: Install, Shortcuts & Typora Alternative Guide"
+- Meta description: "Omawrite is Omarchy's free default Markdown editor — a distraction-free, open-source Typora alternative. Install guide, keyboard shortcuts, real GitHub issues, and how to switch from Typora."
+- Keywords: omawrite omarchy, omawrite vs typora, omawrite shortcuts, free typora alternative linux, markdown editor omarchy
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Typora</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Omawrite on Omarchy: the distraction-free Markdown editor</h2>
+      <p>Omawrite is a dead-simple, free, open-source Markdown editor built for Omarchy — open it, write, and the syntax stays out of your way.</p>
+      <h3>TL;DR install</h3>
+      <pre><code class="language-bash">omarchy pkg add omawrite</code></pre>
+      <p>Already installed? It ships by default with Omarchy 4.0 “Quattro” and newer. Launch with <code>omawrite</code> from the terminal or find “Omawrite” in the app launcher.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started in 5 minutes</h2>
+      <h3>1. First launch</h3>
+      <p>Omawrite opens to a blank document with zero chrome — no toolbar, no sidebar, no panels. The only visible furniture is a thin footer strip with a font button, word count, and save/open buttons. It’s designed to disappear.</p>
+      <h3>2. The 3 things you need to know</h3>
+      <ul>
+        <li><strong>Open and write.</strong> <code>Ctrl+O</code> opens a <code>.md</code> file through the native file picker; just start typing in the blank window for a new draft. <code>Ctrl+S</code> saves (a portal picker asks where the first time); <code>Ctrl+Shift+S</code> saves a copy. <code>Ctrl+N</code> opens a second window. Markdown markers stay visible but dim as you type — <code>#</code> headings stay readable but don’t shout, inline <code>**bold**</code> markers collapse so you’re looking at words, not syntax. This is not WYSIWYG (more on that in the Typora comparison below).</li>
+        <li><strong>Find and replace.</strong> <code>Ctrl+F</code> searches; hit <code>Enter</code> (or <code>Ctrl+G</code>) for the next match, <code>Shift+Enter</code> for the previous. <code>Ctrl+H</code> opens find-and-replace. Power-user extras: <code>Ctrl+B</code>/<code>Ctrl+I</code>/<code>Ctrl+K</code> wrap a selection in bold, italic, or link Markdown; <code>Super+F</code> toggles fullscreen; <code>Ctrl+?</code> shows the full shortcut reference.</li>
+        <li><strong>Where your drafts live.</strong> Unsaved drafts are recovered automatically after a crash — one of the app’s headline features. Omawrite also watches open files and warns you before an external edit can clobber your unsaved work (a real lifesaver if you edit the same file in <code>nvim</code> and Omawrite at once).</li>
+      </ul>
+      <h3>3. Config location</h3>
+      <p>Settings (writing font choice, window geometry) live under Qt’s standard user config path — check <code>~/.config/</code> for the <code>omawrite</code> directory after your first launch. The font button in the footer lets you pick any installed font; IBM Plex Mono is the bundled default, and the app remembers your choice. Text size follows the desktop text size (<code>omarchy display text size</code>), re-flowing live without a restart.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Real reports from the <a href="https://github.com/omacom/omawrite/issues" target="_blank" rel="noopener">Omawrite GitHub issue tracker</a> — paraphrased, with links. This is a young, actively-maintained project; check issue status before acting.</p>
+      <h3>No scrollbar feedback when navigating with the keyboard</h3>
+      <p><strong>Fix:</strong> Page Up/Down, Home/End, Ctrl+Home/End move the viewport but the scrollbar stays invisible. Fixed upstream in <a href="https://github.com/omacom/omawrite/pull/55" target="_blank" rel="noopener">PR #55</a> — update to the latest package and the bar now fades in on keyboard navigation, same as mouse scrolling. (<a href="https://github.com/omacom/omawrite/issues/54" target="_blank" rel="noopener">Issue #54</a>)</p>
+      <h3>Editor text renders noticeably larger than the rest of the system</h3>
+      <p><strong>Fix:</strong> This is an open feature request asking for a persisted, app-specific relative zoom (e.g. a 0.9× scale factor or zoom shortcuts). Tracked in <a href="https://github.com/omacom/omawrite/issues/27" target="_blank" rel="noopener">issue #27</a>; related PRs <a href="https://github.com/omacom/omawrite/pull/21" target="_blank" rel="noopener">#21</a> and <a href="https://github.com/omacom/omawrite/pull/25" target="_blank" rel="noopener">#25</a> propose zoom controls that may resolve it. Until then, the practical workaround is choosing a more compact writing font via the footer button. Honest framing: if text size feels off, it’s the app, not your eyes.</p>
+      <h3>Touchpad scrolling has no momentum</h3>
+      <p><strong>Fix:</strong> Lift your fingers mid-flick and the document stops dead, unlike browsers and GTK apps. Open issue as of writing, no fix landed — the reporter (Hyprland/Wayland, Qt 6.11.2) confirmed the Qt Quick <code>QT_QUICK_FLICKABLE_WHEEL_DECELERATION</code> env var has no effect. No user-side workaround yet — use Page Down / Ctrl+End for long jumps. (<a href="https://github.com/omacom/omawrite/issues/53" target="_blank" rel="noopener">Issue #53</a>)</p>
+      <h3>Inline code spans get emphasis applied inside them</h3>
+      <p><strong>Fix:</strong> Typing <code>`The_brown_fox`</code> renders “brown” in italics, <code>`foo**bar**baz`</code> bolds “bar”, even though backticks should make everything inert. Open issue, tracked at <a href="https://github.com/omacom/omawrite/issues/47" target="_blank" rel="noopener">#47</a>. Workaround: avoid <code>_</code> and <code>*</code> inside backtick spans if the misrendering bothers you.</p>
+      <h3>The editor column is capped at roughly 65 characters (feature request)</h3>
+      <p><strong>Fix:</strong> Word wrap is always on, leaving wide windows mostly empty with no way to disable wrapping. Proposed behavior — full-width editing with a <code>Ctrl+Shift+W</code> wrap toggle — is under discussion in <a href="https://github.com/omacom/omawrite/issues/91" target="_blank" rel="noopener">issue #91</a> (see also <a href="https://github.com/omacom/omawrite/issues/24" target="_blank" rel="noopener">#24</a>). If you write long lines (logs, tables), this is the issue to watch.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><strong>Pandoc</strong> (<a href="https://pandoc.org/" target="_blank" rel="noopener">pandoc.org</a>) for the exports Omawrite doesn’t do (<code>pandoc notes.md -o notes.pdf</code>). <strong>omacut</strong> when your notes turn into a video script. <strong>ripgrep</strong> (<code>rg "search term" ~/notes</code>) for searching a folder of drafts Omawrite can’t see.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><strong>MarkText</strong> — free, true WYSIWYG Markdown editing with a more conventional editor feel. <strong>Obsidian</strong> — free, and if you want backlinks, a graph, and a plugin ecosystem instead of minimalism.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Omawrite vs Typora vs Obsidian vs MarkText</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Omawrite</th><th>Typora</th><th>Obsidian</th><th>MarkText</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>$14.99 one-time</td><td>Free (personal)</td><td>Free (MIT)</td></tr>
+            <tr><td>Best for</td><td>Distraction-free drafting on Omarchy, zero config</td><td>Polished WYSIWYG writing + export</td><td>Connected notes, backlinks, plugins</td><td>Free WYSIWYG Markdown without a price tag</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omawrite</code> (preinstalled on Quattro+)</td><td><code>omarchy pkg add typora</code></td><td><code>omarchy pkg add obsidian</code></td><td><code>omarchy pkg add marktext</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>One-line verdict:</strong> If you want the cleanest possible place to put words down and never think about export pipelines, Omawrite is the one — and it’s already on your machine.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Omawrite is a free alternative to Typora ($14.99)</h2>
+      <p>This comparison has teeth because Omarchy itself made it: Omawrite was added in Omarchy 4.0 “Quattro” explicitly as the default Markdown editor <strong>replacing Typora</strong> (alongside Omacut for video and Omacalc for the calculator). The core use case — distraction-free Markdown drafting — is fully covered by Omawrite, for $0 instead of Typora’s $14.99 one-time license. <strong>Be honest about what Typora still has:</strong> export formats (PDF, HTML, Word, EPUB, LaTeX, RTF — Omawrite prints to PDF and that’s the story, so run Pandoc yourself), a mature theme ecosystem, and true WYSIWYG polish (Typora hides <em>all</em> syntax; Omawrite dims it instead).</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Typora (~15 minutes)</h2>
+      <ol>
+        <li><strong>Your files transfer natively.</strong> It’s just <code>.md</code> files — open them in Omawrite with <code>Ctrl+O</code>. No conversion step exists or is needed.</li>
+        <li><strong>What doesn’t transfer:</strong> Typora themes (Omawrite follows the system theme, no theme engine), snippets, and any Typora-specific export settings.</li>
+        <li><strong>Exports:</strong> install Pandoc once (<code>omarchy pkg add pandoc</code>) and <code>pandoc draft.md -o draft.docx</code> replaces Typora’s export menu for the formats most people need.</li>
+        <li><strong>Time estimate:</strong> under 15 minutes for a typical notes folder — open, glance, write. The only real adjustment is the syntax-dimming vs. full-WYSIWYG difference, which most people stop noticing within a day.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Omawrite package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omawrite.html">View Omawrite →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Omawrite work on Omarchy?</summary><p>Yes — it’s a first-class Omarchy citizen. It installs from the Omarchy package repository via <code>omarchy pkg add omawrite</code> and has been preinstalled on every fresh Omarchy install since version 4.0 “Quattro.” It’s also in the AUR for other Arch-based systems.</p></details>
+      <details><summary>Is Omawrite free?</summary><p>Yes, completely. It’s MIT-licensed open source (<a href="https://github.com/omacom/omawrite" target="_blank" rel="noopener">omacom/omawrite</a>), with the bundled IBM Plex Mono font under the SIL Open Font License. No trial, no paid tier, no account.</p></details>
+      <details><summary>Omawrite vs Typora — which should I use?</summary><p>If you write Markdown and want zero friction, Omawrite — free, lighter, already installed, and Omarchy’s chosen default. If you regularly export to Word/EPUB or live in custom themes, Typora’s $14.99 buys you that. Most people can cover the export gap with Pandoc and keep the $14.99.</p></details>
+      <details><summary>Does Omawrite have a preview mode?</summary><p>Not a side-by-side WYSIWYG preview — the editor <em>is</em> the view, with syntax dimmed rather than hidden. Print (<code>Ctrl+P</code>) renders real Markdown to PDF, which is the closest thing to a preview.</p></details>
+      <details><summary>Will I lose my draft if it crashes?</summary><p>No — unsaved drafts are recovered after an abnormal exit, and the app warns you before an external edit to an open file can overwrite your work.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/omacom/omawrite/blob/HEAD/README.md" target="_blank" rel="noopener">Omawrite README (install, shortcuts, draft recovery, font/theme behavior)</a></li>
+        <li><a href="https://linuxiac.com/arch-based-omarchy-4-0-quattro-is-here-with-its-biggest-desktop-overhaul-yet/" target="_blank" rel="noopener">Omarchy 4.0 “Quattro” release coverage (Omawrite replaces Typora)</a></li>
+        <li><a href="https://github.com/omacom/omawrite/issues/54" target="_blank" rel="noopener">Issue #54 — keyboard scrollbar</a> / <a href="https://github.com/omacom/omawrite/pull/55" target="_blank" rel="noopener">PR #55 — fix</a></li>
+        <li><a href="https://github.com/omacom/omawrite/issues/27" target="_blank" rel="noopener">Issue #27 — editor text size</a></li>
+        <li><a href="https://github.com/omacom/omawrite/issues/53" target="_blank" rel="noopener">Issue #53 — kinetic scrolling</a></li>
+        <li><a href="https://github.com/omacom/omawrite/issues/47" target="_blank" rel="noopener">Issue #47 — code-span emphasis</a></li>
+        <li><a href="https://aur.archlinux.org/packages/omawrite" target="_blank" rel="noopener">AUR package page (version 0.5.0, MIT/OFL-1.1)</a></li>
+        <li><a href="https://mdedit.ai/compare/mdedit-vs-typora" target="_blank" rel="noopener">Typora pricing ($14.99 one-time) and export formats</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

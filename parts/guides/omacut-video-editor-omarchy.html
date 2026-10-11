@@ -1,0 +1,149 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist (source-verified, not live-verified — no Omarchy test box was available for this guide):
+- Install: `omarchy pkg add omacut` — on Omarchy 4.x (Quattro)+ it ships by default; check the launcher first (Super+Space, type "omacut")
+- First launch: app opens, follows the Omarchy theme accent color, shows the open-video prompt
+- Open a real video (MP4 and AV1/webm): preview plays, timeline thumbnails render
+- Basic trim: drag start/end handles, preview, Ctrl+S export → file lands as *_trimmed.mp4 and plays
+- Middle-cut: double-click to split, drag handles apart, join a gap again — export plays pieces in order
+- Keyboard: Space plays, Z zooms into selection, S splits, Ctrl+Z undoes
+- AV1 preview on GPU without AV1 decode: confirm NOT black on packaged build (fixed Oct 2026)
+- File picker: open + export dialogs appear (stock Omarchy ships xdg-desktop-portal + backend)
+- `which ffmpeg ffprobe` — the app shells out to them at export time
+- Screenshots needed: app window with video + handles, zoomed timeline (Z), export dialog (Original/1080p/720p), app next to launcher
+
+SEO notes:
+- URL: /guides/omacut-video-editor-omarchy
+- Title tag: "How to Use omacut on Omarchy (2026): trim, split & export in minutes"
+- Meta description: "omacut is Omarchy's dead-simple video trimmer (preinstalled on Quattro+). Open, drag handles, split the middle, export MP4. Shortcuts, export options, and fixes for AV1 black preview and export failures."
+- Keywords: omacut omarchy, omacut vs losslesscut, video trimmer omarchy, omacut av1 black preview fix, free video trimmer linux
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Filmora</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>omacut on Omarchy: the 30-second video trimmer</h2>
+      <p>omacut is Omarchy’s own dead-simple video trimmer — open a video, drag the start/end handles, preview, export an MP4. It’s for anyone who records screen captures, camera clips, or phone video on Omarchy and just needs the boring parts cut off fast.</p>
+      <h3>TL;DR install</h3>
+      <pre><code class="language-bash">omarchy pkg add omacut</code></pre>
+      <p>On Omarchy 4.x (Quattro) and newer, omacut is installed by default — hit Super+Space, type “omacut”, and skip the install entirely.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started in 5 minutes</h2>
+      <h3>1. First launch</h3>
+      <p>Launch omacut from the app launcher (Super+Space → type <code>omacut</code>) or run <code>omacut</code> in a terminal. The window opens with a big “open video” prompt. The interface follows your Omarchy theme’s accent color automatically — there’s no theme setting to touch.</p>
+      <h3>2. The 3 things you need to know</h3>
+      <ul>
+        <li><strong>Open a video</strong> — <code>Ctrl+O</code> (or click the open prompt). The video loads as a timeline clip with a handle at each end. Almost any container works since ffmpeg does the decoding, but the export is always MP4.</li>
+        <li><strong>Set your handles</strong> — drag the left and right handles to pick start and end. The dimmed part outside the handles gets cut. For more than a plain trim: double-click a clip to <strong>split</strong> it, drag handles apart to <strong>cut ranges out of the middle</strong>, double-click a gap to <strong>join</strong> it back, hover a clip and hit its <strong>×</strong> to drop it. Playback plays the remaining clips in order and skips the gaps.</li>
+        <li><strong>Export</strong> — <code>Ctrl+S</code>. You get an export dialog with three quality options: <strong>Original</strong>, <strong>1080p</strong>, <strong>720p</strong>. Exports never upscale and always preserve aspect ratio. The file saves next to your source as <code>&lt;name&gt;_trimmed.mp4</code>.</li>
+      </ul>
+      <h3>3. Keyboard shortcuts that matter most</h3>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th>Key</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Space</strong></td><td>Play / pause</td></tr>
+            <tr><td><strong>Left / Right</strong></td><td>Jump 1s (Shift = 5s, Alt = 0.2s)</td></tr>
+            <tr><td><strong>S</strong></td><td>Split at playhead</td></tr>
+            <tr><td><strong>Z</strong></td><td>Zoom into the clip for fine tuning (again to zoom out)</td></tr>
+            <tr><td><strong>Ctrl+Z / Ctrl+Shift+Z</strong></td><td>Undo / redo</td></tr>
+            <tr><td><strong>?</strong></td><td>Full hotkey list in-app</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>4. Config location</h3>
+      <p>None documented. omacut keeps no config files in <code>~/.config</code> — the theme accent is read live from the Omarchy theme, and there’s no settings panel. That’s the point: one window, one job.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>No public user issue reports were found on the repo — the app is young (June 2026) and the real bugs surfaced in upstream’s own commit history, where DHH documented and fixed them. All of these are <strong>fixed in current builds</strong>; they’re here so you know what you’re looking at if you ever hit one on an old install.</p>
+      <h3>AV1 clips preview black while timeline thumbnails look fine</h3>
+      <p><strong>Fix:</strong> Fixed upstream on Oct 2, 2026 (<a href="https://github.com/omacom/omacut/commit/bbceafe1a9dbb6705b32509918013f1fa736d80a" target="_blank" rel="noopener">commit bbceafe</a>): Qt’s ffmpeg backend fell through to Vulkan video when VA-API was missing, and on GPUs without Vulkan decode queues it picked an hwaccel-only AV1 decoder and never fell back to software. Update omacut and the preview works. If you still see it on an exotic GPU, <code>QT_FFMPEG_DECODING_HW_DEVICE_TYPES=vaapi,cuda omacut</code> forces the supported backends.</p>
+      <h3>After dismissing the open dialog once, every later open/export dialog silently does nothing</h3>
+      <p><strong>Fix:</strong> Fixed upstream July 2026 (<a href="https://github.com/omacom/omacut/commit/54321b1f716f84fe6dab990062fa4c44e2a67404" target="_blank" rel="noopener">commit 54321b1</a>): omacut subscribed to the xdg-desktop-portal response <em>after</em> the async call returned, so a fast response arrived before the listener was installed — and nothing ever reset the pending state. Restart the app and update to the latest build; the bug no longer occurs.</p>
+      <h3>The app opens and previews play, but export fails</h3>
+      <p><strong>Fix:</strong> <code>ffmpeg</code> and <code>ffprobe</code> must be on your PATH at runtime — the app doesn’t link them, it shells out to them (<a href="https://github.com/olafkfreund/nixarchy/commit/75f0188b465434f8b4f22decf9143257758a1d70" target="_blank" rel="noopener">noted in nixarchy’s packaging</a>). On stock Omarchy this is a dependency, but if you installed oddly, check: <code>which ffmpeg ffprobe</code>. If missing, <code>omarchy pkg add ffmpeg</code>.</p>
+      <h3>The file picker never appears when opening or exporting</h3>
+      <p><strong>Fix:</strong> omacut requires <code>xdg-desktop-portal</code> plus a portal backend for its file picker (<a href="https://github.com/omacom/omacut" target="_blank" rel="noopener">README requirements</a>). This ships on Omarchy; if you run omacut on a non-Omarchy distro without it, install <code>xdg-desktop-portal</code> and a backend (e.g. <code>xdg-desktop-portal-hyprland</code> or <code>-gtk</code>) and restart.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><strong>Monologue</strong> (<a href="https://github.com/omacom/monologue" target="_blank" rel="noopener">omacom/monologue</a>) — Omarchy’s webcam recorder; it hands recordings straight to a built-in omacut-style trimmer. Record, trim, done — the two apps are siblings in DHH’s lineup. <strong>OBS Studio</strong> (<code>omarchy pkg add obs-studio</code>) — record your screen, then trim the dead air off in omacut. <strong>mpv</strong> (default on Omarchy) — quick preview of your trimmed exports without opening a heavy player.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><strong>LosslessCut</strong> — the closest free rival. It’s cross-platform, lossless (no re-encode, so exports finish in seconds with zero quality loss), and far more capable. What it isn’t: native-looking on Omarchy, and it’s Electron, so it’s heavyweight next to omacut’s single Qt binary.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: omacut vs LosslessCut vs Avidemux vs Pitivi</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omacut</th><th>LosslessCut</th><th>Avidemux</th><th>Pitivi</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free (GPL) — store versions are paid donations</td><td>Free (GPL)</td><td>Free (GPL)</td></tr>
+            <tr><td>Best for</td><td>30-second trims with a native Omarchy look</td><td>Fast lossless cuts, multi-segment, no re-encode</td><td>Frame-accurate cuts + filters, old-school UI</td><td>Actual multi-track editing with effects/titles</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omacut</code> (default on ≥ Quattro)</td><td>AUR / AppImage (not in Omarchy repo)</td><td><code>sudo pacman -S avidemux-qt</code></td><td><code>omarchy pkg add pitivi</code> or flatpak</td></tr>
+            <tr><td>Exports</td><td>Always MP4 (re-encoded, Original/1080p/720p)</td><td>Lossless by default (same container as source)</td><td>MP4/MKV/AVI, many codecs</td><td>MP4/WebM, full render pipeline</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>One-line verdict:</strong> pick omacut when you want the fastest possible trim that looks like it belongs on your desktop; pick LosslessCut when you care about zero quality loss and instant exports; pick Pitivi when you need actual editing.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>omacut is a free alternative to Filmora’s trim tool and Premiere’s in/out cutting</h2>
+      <p><strong>What you give up:</strong> no multi-track timeline, no effects or transitions, no titles, no color correction, MP4-only exports. <strong>What you keep:</strong> open video → cut the ends → cut the middle out → export. That’s the whole job omacut does, and it’s the part of paid editors most people use on 90% of their clips. Be honest about the limits: omacut re-encodes on export (unlike LosslessCut), so it’s not the tool for lossless workflows. And if you export at 720p/1080p you’re downscaling — use <strong>Original</strong> when quality matters.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Filmora (or Premiere) for simple trims (~5 minutes)</h2>
+      <ol>
+        <li><strong>Export from the paid app:</strong> you don’t need to — just grab the <em>source</em> video file. omacut reads almost any container via ffmpeg.</li>
+        <li><strong>Trim in omacut:</strong> open the file (<code>Ctrl+O</code>), drag the handles, split and cut middle sections as needed, preview with <code>Space</code>, export with <code>Ctrl+S</code> as Original-quality MP4.</li>
+        <li><strong>What doesn’t transfer:</strong> anything beyond cutting — effects, transitions, titles, audio tracks, project structure. If your “trim” needs any of that, you’re not a trimmer person, you’re an editor person: use Pitivi or Kdenlive instead.</li>
+        <li><strong>Time estimate:</strong> under 5 minutes for a basic end-trim, no render queue to babysit.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the omacut package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omacut.html">View omacut →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does omacut work on Omarchy?</summary><p>Yes — it’s <em>made</em> for Omarchy. Written by DHH/omacom, it follows your theme’s accent color, and it’s installed by default in Omarchy from Quattro (v4.x) onward. Install manually with <code>omarchy pkg add omacut</code> on older installs.</p></details>
+      <details><summary>Is omacut free?</summary><p>Yes, free and libre — MIT licensed, source on GitHub at <a href="https://github.com/omacom/omacut" target="_blank" rel="noopener">omacom/omacut</a>. No accounts, no watermarks, no upsells.</p></details>
+      <details><summary>omacut vs LosslessCut — which should I use?</summary><p>omacut for speed and native Omarchy looks; it re-encodes, so exports are fast but not instant. LosslessCut for lossless (no re-encode) cuts that finish in seconds with zero quality loss — at the cost of an Electron app that doesn’t match your theme. For cutting the dead air off a screen recording, omacut wins.</p></details>
+      <details><summary>Can omacut cut the middle out of a video, or just the ends?</summary><p>The middle too. Double-click a clip to split it, drag the handles apart to remove the section between them, double-click the gap to join it back. Playback skips the gaps and exports the clips in order.</p></details>
+      <details><summary>Why does my AV1 video show a black preview?</summary><p>That’s a known Qt/ffmpeg hardware-decode issue fixed in omacut (Oct 2026) — update to the latest build. If it persists on unusual GPUs, run <code>QT_FFMPEG_DECODING_HW_DEVICE_TYPES=vaapi,cuda omacut</code>.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/omacom/omacut" target="_blank" rel="noopener">omacom/omacut — README (upstream)</a></li>
+        <li><a href="https://github.com/omacom/omacut/commit/bbceafe1a9dbb6705b32509918013f1fa736d80a" target="_blank" rel="noopener">AV1 black-preview fix, Oct 2 2026 (commit bbceafe)</a></li>
+        <li><a href="https://github.com/omacom/omacut/commit/54321b1f716f84fe6dab990062fa4c44e2a67404" target="_blank" rel="noopener">Portal-response race fix, Jul 2026 (commit 54321b1)</a></li>
+        <li><a href="https://github.com/olafkfreund/nixarchy/commit/75f0188b465434f8b4f22decf9143257758a1d70" target="_blank" rel="noopener">ffmpeg runtime-dependency note (nixarchy packaging)</a></li>
+        <li><a href="https://github.com/omacom/omarchy/releases/tag/v4.0.0" target="_blank" rel="noopener">Omarchy v4.0.0 release notes (omacut added as default app)</a></li>
+        <li><a href="https://github.com/omacom/monologue" target="_blank" rel="noopener">omacom/monologue — sibling app with built-in trimmer</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

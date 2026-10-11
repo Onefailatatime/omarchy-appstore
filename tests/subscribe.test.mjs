@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
-import { handleSubscribeRequest } from "../netlify/functions/subscribe.mjs";
-import checklist from "../netlify/functions/checklist.mjs";
+import { handleSubscribeRequest } from "../src/subscribe.mjs";
+import checklist from "../src/checklist.mjs";
 
 const url = "https://omarchyapps.com/api/subscribe";
 const env = { RESEND_API_KEY: "re_test", RESEND_SEGMENT_ID: "seg_1", NEWSLETTER_FROM: "Omarchy App Store <hello@omarchyapps.com>" };

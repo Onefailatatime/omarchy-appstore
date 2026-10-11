@@ -1417,6 +1417,26 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
 
+
+/* =================== SPONSOR ROTATION =================== */
+/* Header and footer each rotate fairly through every active sponsor:
+   3 units shown at a time, the window advancing sequentially (assets/ads.js).
+   Padding-top leaves room for the .ad .tag which sits above the unit. */
+.ad-rotate { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; }
+.ad-header .ad-rotate { margin-bottom: var(--space-small); }
+.ad-footer .ad-rotate { margin-bottom: var(--space-x-large); }
+@media (max-width: 760px) { .ad-rotate { grid-template-columns: 1fr; } }
+
+/* App profile banner: one sponsor unit on the sponsor's own app page. */
+.ad-app-banner { margin: 0 0 var(--space-large); padding-top: 0.6em; }
+.ad-app-banner .ad { border-width: 2px; }
+
+/* Lifetime pin: one permanent sponsor unit at the top of the homepage.
+   Never rotates — the premium forever placement. */
+.ad-lifetime { max-width: var(--maxw); margin: 0 auto var(--space-medium); padding: 0.6em var(--space-neutral) 0; }
+.ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
+
+
 </style>
 </head>
 <body>
@@ -3147,7 +3167,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
         <a href="terms.html">Terms of Use</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Synced 2026-10-10 · unofficial community rankings</span>
+      <span>Synced 2026-10-11 · unofficial community rankings</span>
     </div>
   </div>
 </footer>

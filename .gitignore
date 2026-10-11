@@ -10,3 +10,12 @@ data/omarchy-pkgs/
 .vscode/
 node_modules/
 mockups/
+
+# Cloudflare: local secrets and local D1 state.
+.dev.vars
+.wrangler/
+.netlify/
+
+# Local Netlify folder
+.netlify
+data/refresh-launchd.log

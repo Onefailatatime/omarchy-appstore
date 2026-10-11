@@ -1,0 +1,152 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add rustdesk` (package slug `rustdesk`) — verify it resolves in the store index
+- First launch: RustDesk window opens, shows a 9-digit ID and a one-time password
+- ID/password flow: entering a remote ID and password connects to a live session
+- Wayland capture permissions: first share on Hyprland triggers the xdg-desktop-portal screen picker; choice is remembered via restore token
+- Claimed issues reproduced: (1) black screen when portal/PipeWire path is unsatisfied, (2) connection stuck on "Connecting" with wrong server key, (3) Hyprland Wayland window-close bug (#13260)
+- Screenshots needed: main window with ID, screen-picker dialog on Hyprland, Security settings → permanent password, session toolbar
+
+SEO notes:
+- URL: /guides/rustdesk-on-omarchy
+- Title tag: "How to Install & Use RustDesk on Omarchy (2026) — Free TeamViewer Alternative"
+- Meta description: "Install RustDesk on Omarchy with one command. Free, open-source remote desktop: ID/password flow, unattended access, self-hosting, and fixes for the Wayland black-screen issue on Hyprland."
+- Keywords: rustdesk omarchy, rustdesk linux, rustdesk wayland, rustdesk hyprland, free teamviewer alternative, rustdesk black screen wayland, rustdesk unattended access linux
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from TeamViewer</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>RustDesk on Omarchy</h2>
+      <p>RustDesk is the free, open-source (AGPL-3.0) TeamViewer alternative — remote into any machine from your Omarchy laptop over LAN or internet, with file transfer, unattended access, and an option to self-host the whole thing.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add rustdesk</code></pre>
+      <p>Launch RustDesk, read off your 9-digit ID and one-time password, type them into RustDesk on any other machine (Windows, macOS, Linux, Android, iOS) — you’re connected. No account, no signup, no payment.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and launch.</h3>
+      <p>Run the command above, then launch RustDesk from the app launcher or <code>rustdesk</code> in a terminal. The main window shows two things: <strong>your 9-digit ID</strong> and a <strong>one-time password</strong>.</p>
+      <h3>2. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Your RustDesk ID</strong> — this is the number someone types to reach your machine. It never changes for a given install (your machine’s fingerprint).</li>
+        <li><strong>Connecting to another machine</strong> — type their ID into the “Remote ID” field at the top, hit Connect, enter the password they read out to you. Done.</li>
+        <li><strong>The self-host option</strong> — out of the box RustDesk uses its free public relay/rendezvous servers. If you’d rather no third party handles your sessions, you can run <code>hbbs</code> (rendezvous) and <code>hbbr</code> (relay) yourself on any Linux box and point both clients at it. The server software is free and open source; Server Pro ($$) is only for teams that want address books and audit logs.</li>
+      </ul>
+      <h3>3. Config location.</h3>
+      <p>Per-user config lives at <code>~/.config/rustdesk/</code> (notably <code>RustDesk2.toml</code>). Peers you’ve connected to are saved there too, so back it up if you care about your address book.</p>
+      <p><strong>Practical notes:</strong> Remote sessions give you full keyboard/mouse control plus a toolbar with <strong>file transfer</strong>, <strong>clipboard sync</strong>, <strong>chat</strong>, and <strong>video quality/codec controls</strong> (VP8, VP9, AV1, H.264/H.265). Audio forwarding is supported from the controlled side.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Black screen when connecting to a Wayland/Hyprland machine</h3>
+      <p>On Wayland, RustDesk can’t just grab the screen the way it does on X11. Capture goes through PipeWire and <code>xdg-desktop-portal</code>: the first share triggers a system screen-picker prompt, and if the portal or PipeWire isn’t installed/running (or the restore token doesn’t exist yet), you get a black screen or an endless “waiting for image.” The RustDesk team documents this explicitly: <em>“If you get a blank screen on Wayland, the fix is usually to accept the portal’s screen-share prompt and confirm <code>xdg-desktop-portal</code> and PipeWire are installed and running”</em> (<a href="https://github.com/wc3d/doc.rustdesk.com/blob/HEAD/v3/src/content/post/en/rustdesk-connected-waiting-for-image.md" target="_blank" rel="noopener">RustDesk docs</a>). Unattended Wayland capture is still in active development (<a href="https://github.com/rustdesk/rustdesk/pull/15420" target="_blank" rel="noopener">PR #15420</a>).</p>
+      <p><strong>Fix:</strong> On Omarchy, make sure the Hyprland portal stack is installed:</p>
+      <pre><code class="language-bash">sudo pacman -S pipewire wireplumber xdg-desktop-portal-hyprland xdg-desktop-portal-gtk</code></pre>
+      <p>Then in Hyprland config, confirm the session env vars are set:</p>
+      <pre><code class="language-bash">env = XDG_SESSION_TYPE,wayland
+env = XDG_CURRENT_DESKTOP,Hyprland
+env = XDG_SESSION_DESKTOP,Hyprland</code></pre>
+      <p>Restart RustDesk, connect, and <strong>accept the screen-share prompt</strong> when it appears — the choice is remembered afterward (portal v4+ restore tokens). If you still get a black screen, try disabling <strong>Use hardware codec</strong> in the session toolbar/Settings to fall back to software encoding — NVIDIA setups are the classic culprit.</p>
+      <h3>RustDesk window won’t close on Hyprland (Flutter error)</h3>
+      <p>Running RustDesk natively under Wayland on Hyprland, closing any RustDesk window (titlebar X, Alt+F4) fails — the window stays open with a <code>LateInitializationError: Local 'position' has not been initialized</code> from the Flutter UI layer. Reported in <a href="https://github.com/rustdesk/rustdesk/issues/13260" target="_blank" rel="noopener">issue #13260</a> (Arch/Wayland/Hyprland).</p>
+      <p><strong>Fix:</strong> It’s cosmetic — the session itself closed. Kill the stuck window from the terminal (<code>pkill rustdesk</code> / <code>pkill -9 rustdesk</code>) or close it from your task manager. Upgrading to the latest release is worth trying first; the issue was reported against 1.3.4/1.4.3-era builds and upstream keeps fixing Wayland-specific window bugs in newer releases.</p>
+      <h3>Connection stuck on “Connecting” to a self-hosted server (key mismatch)</h3>
+      <p>Machine shows as online, everything else works, but one device fails with <code>invalid public key</code> or just spins. This is the most common self-hosted-server gotcha — the controlled client has a stale/wrong key for your relay. Documented in the <a href="https://github.com/rustdesk/rustdesk/wiki/FAQ" target="_blank" rel="noopener">official FAQ</a> (key-mismatch section).</p>
+      <p><strong>Fix:</strong> Set the correct public key from your <code>hbbs</code> server on the controlled client (Settings → Network → Key). Also verify the basics on a self-hosted box: <code>hbbr</code> must be running and ports <strong>21115–21119 (TCP)</strong> and <strong>21116 (UDP)</strong> open (<a href="https://linuxvox.com/blog/rustdesk-linux/" target="_blank" rel="noopener">source</a>). Quick test from the controlled side: <code>telnet server-ip 21116</code> and <code>telnet server-ip 21117</code>.</p>
+      <h3>Clipboard copy/paste doesn’t work on Wayland</h3>
+      <p>Copy on the client, paste on the host, nothing arrives — even with clipboard enabled. Wayland clipboard handling has been a recurring Linux bug; notably <a href="https://github.com/rustdesk/rustdesk/issues/7638" target="_blank" rel="noopener">issue #7638</a> (Flatpak client on Wayland, copy/paste broken), and a newer report where an Arch+Niri machine <strong>drops the connection right after password auth</strong> because the clipboard service times out trying to create a clipboard context on a non-mainstream compositor (<a href="https://github.com/rustdesk/rustdesk/issues/14967" target="_blank" rel="noopener">issue #14967</a>).</p>
+      <p><strong>Fix:</strong> First, update — upstream landed several Linux clipboard fixes in 2026 (e.g. waiting for Wayland selection readiness before initial sync, <a href="https://github.com/rustdesk/rustdesk/commit/bb924d2939aa7316fc5612e9d067720484289740" target="_blank" rel="noopener">commit <code>bb924d29</code></a>). Second, confirm both sides have <strong>Enable clipboard</strong> checked in session permissions. On Hyprland, ensure <code>wl-clipboard</code> is installed. If the connection still dies on exotic compositors, that’s a known upstream gap — file against rustdesk/rustdesk with your compositor name.</p>
+      <h3>No unattended access after reboot</h3>
+      <p>RustDesk only works when someone is logged in and launches it — you can’t reach the machine while nobody’s around.</p>
+      <p><strong>Fix:</strong> RustDesk needs its background service running. The official recipe: install so the systemd service is registered (the store package does this), or click <strong>Enable Service</strong> in the app. Then set a permanent password: <strong>⋮ menu → Settings → Security → Use permanent password</strong> → enter a strong password. For auto-start on boot, enable <strong>Start with system</strong> in General settings. Caveat for Wayland: capturing the <em>login greeter</em> itself isn’t supported yet (in active development), so for true pre-login access use RustDesk’s documented <a href="https://github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support" target="_blank" rel="noopener">headless virtual-display setup</a>.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>tailscale</code> (point RustDesk’s “Direct IP Access” at your Tailscale IP for a LAN-fast, zero-relay tunnel between your machines), <code>wayvnc</code> (native Hyprland VNC server if you want protocol-level fallback), and a cheap VPS running the free <code>hbbs</code>/<code>hbbr</code> server pair so your sessions never touch RustDesk’s public relay.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>remmina</code> — classic Linux remote-desktop client (RDP/VNC/SPICE) if you prefer talking to built-in OS servers instead of installing an agent; or <code>wayvnc</code> + any VNC viewer for a minimal, self-hosted-only Hyprland setup. Neither matches RustDesk’s NAT-traversal “just works” story, though.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: RustDesk vs TeamViewer vs AnyDesk</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>RustDesk</th><th>TeamViewer</th><th>AnyDesk</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free forever (AGPL-3.0). Self-hosted server also free. Server Pro is paid, teams-only</td><td>Business (single user): <strong>$50.90/mo</strong> billed annually, 200 devices. Remote Access: $24.90/mo, 3 devices (<a href="https://www.saasworthy.com/product/teamviewer" target="_blank" rel="noopener">source</a>)</td><td>Free for personal use. Paid plans from <strong>$32.31/mo</strong> (Standard, billed annually) (<a href="https://www.fahimai.com/anydesk-vs-remotepc" target="_blank" rel="noopener">source</a>)</td></tr>
+            <tr><td>Best for</td><td>People who want TeamViewer’s core features with zero cost and the option to self-host everything</td><td>Enterprises needing the admin console, compliance tooling, and integrations</td><td>Fast sessions (DeskRT codec); free tier fine for casual personal use, paid gets pricey fast</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add rustdesk</code></td><td>Not in the store; manual download from teamviewer.com</td><td>Not in the store; manual download from anydesk.com</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If all you need is remote control, file transfer, and unattended access — RustDesk does the job for $0 that costs $50.90/mo at TeamViewer. Pay TeamViewer only when you need its enterprise admin console, audit logging, or third-party integrations.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>RustDesk is a free alternative to TeamViewer ($50.90/mo)</h2>
+      <p><strong>RustDesk is a free alternative to TeamViewer ($50.90/mo).</strong> What you give up: the polished enterprise admin console, audit logs, and built-in meeting/GMeet integration. What you keep: remote control, file transfer, clipboard sync, unattended access — and you can self-host the rendezvous/relay server, so no third party ever sees your sessions. For a homelab or a solo dev fixing family PCs, that’s the entire value proposition of TeamViewer at zero recurring cost.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from TeamViewer (~20 minutes)</h2>
+      <ol>
+        <li><strong>Export what you can:</strong> In TeamViewer, export your contacts/computers list (Management Console → export, or copy IDs into a text file — TeamViewer has no clean bulk export, so a pasted list of IDs is the practical route).</li>
+        <li><strong>Install RustDesk on both ends:</strong> On Omarchy: <code>omarchy pkg add rustdesk</code>. On the remote machines: install RustDesk from rustdesk.com/download or the platform package manager.</li>
+        <li><strong>Set up unattended access:</strong> On each machine you want to reach: Settings → Security → <strong>Use permanent password</strong> (set it), General → <strong>Start with system</strong>. Write down each machine’s 9-digit RustDesk ID next to its name — this replaces your TeamViewer computer list.</li>
+        <li><strong>Re-create your address book:</strong> Enter each ID + password once; RustDesk saves them as peers.</li>
+        <li><strong>What doesn’t transfer:</strong> TeamViewer account login/integrations, meeting features, remote printing, and session recording. If you used those, that’s the actual cost of switching — the remote-control workflow itself maps 1:1.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the RustDesk package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/rustdesk.html">View RustDesk →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does RustDesk work on Omarchy/Wayland?</summary><p>Yes, with one caveat. Inside a logged-in Hyprland session, RustDesk captures via PipeWire + <code>xdg-desktop-portal-hyprland</code> — accept the screen-share prompt the first time and it works. What’s not supported yet: capturing the Wayland login greeter, and fully unattended capture without an active session (both in active upstream development, e.g. PR #15420).</p></details>
+      <details><summary>Is RustDesk really free?</summary><p>Yes. The client and the self-hostable server are AGPL-3.0 open source and free forever, including unlimited devices and sessions. The paid product is RustDesk Server Pro, which adds a web console, device groups, and a custom client generator for teams — the core remote-desktop functionality is not gated.</p></details>
+      <details><summary>RustDesk vs TeamViewer — which should I pick?</summary><p>Pick RustDesk if you want remote control, file transfer, and unattended access without a $50.90/mo bill — especially if you value self-hosting. Pick TeamViewer if you need the enterprise admin console, compliance/audit features, or integrations with tools like ServiceNow and Zendesk.</p></details>
+      <details><summary>Is RustDesk safe?</summary><p>Sessions are end-to-end encrypted, and the code is open source (auditable — the repo has ~125k stars and active security work). The biggest safety win is architectural: with a self-hosted server, your sessions never pass through anyone’s infrastructure. The biggest risk is user error: a strong permanent password (12+ chars) and keeping RustDesk updated are what actually keep unattended machines safe. (And never install it because a stranger on the phone told you to — RustDesk itself warns about tech-support scams.)</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/wc3d/doc.rustdesk.com/blob/HEAD/v3/src/content/post/en/rustdesk-for-linux.md" target="_blank" rel="noopener">RustDesk official docs (Linux guide, Wayland sections)</a></li>
+        <li><a href="https://github.com/wc3d/doc.rustdesk.com/blob/HEAD/v3/src/content/post/en/rustdesk-connected-waiting-for-image.md" target="_blank" rel="noopener">RustDesk “connected but waiting for image” (Wayland black-screen write-up)</a></li>
+        <li><a href="https://github.com/rustdesk/rustdesk/wiki/FAQ" target="_blank" rel="noopener">RustDesk GitHub FAQ (key mismatch, relay troubleshooting)</a></li>
+        <li><a href="https://github.com/rustdesk/rustdesk/issues/13260" target="_blank" rel="noopener">Issue #13260 — Hyprland Wayland window-close failure</a></li>
+        <li><a href="https://github.com/rustdesk/rustdesk/issues/14967" target="_blank" rel="noopener">Issue #14967 — Wayland/Arch+Niri clipboard context failure</a></li>
+        <li><a href="https://github.com/rustdesk/rustdesk/issues/7638" target="_blank" rel="noopener">Issue #7638 — Flatpak copy/paste broken on Wayland</a></li>
+        <li><a href="https://github.com/rustdesk/rustdesk/pull/15420" target="_blank" rel="noopener">PR #15420 — unattended Wayland capture (in development)</a></li>
+        <li><a href="https://github.com/rustdesk/rustdesk/pull/16451" target="_blank" rel="noopener">PR #16451 — xdph stream position fix (Hyprland multi-monitor)</a></li>
+        <li><a href="https://github.com/rustdesk/rustdesk/pull/15792" target="_blank" rel="noopener">PR #15792 — Wayland login-screen DRM backend</a></li>
+        <li><a href="https://github.com/mxoio/rustdesk-on-omarchy" target="_blank" rel="noopener">mxoio/rustdesk-on-omarchy — RustDesk tested on Omarchy/Hyprland</a></li>
+        <li><a href="https://linuxvox.com/blog/rustdesk-linux/" target="_blank" rel="noopener">RustDesk Linux guide (ports, SELinux, performance)</a></li>
+        <li><a href="https://andotech.net/taming-rustdesk-on-wayland-how-to-fix-screensharing-and-input-issues/" target="_blank" rel="noopener">RustDesk on Wayland fix guide (Hyprland portal packages)</a></li>
+        <li><a href="https://www.saasworthy.com/product/teamviewer" target="_blank" rel="noopener">TeamViewer pricing (Business $50.90/mo)</a></li>
+        <li><a href="https://www.fahimai.com/anydesk-vs-remotepc" target="_blank" rel="noopener">AnyDesk pricing (Standard $32.31/mo)</a></li>
+        <li><a href="https://aur.archlinux.org/packages/rustdesk-bin" target="_blank" rel="noopener">AUR rustdesk-bin package page</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>
