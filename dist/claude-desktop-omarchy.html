@@ -26,7 +26,7 @@
 <meta name="twitter:title" content="Claude Desktop on Omarchy: Install &amp; Setup Guide (2026)">
 <meta name="twitter:description" content="Install Anthropic&#x27;s official Claude Desktop Linux app on Omarchy. Setup, MCP connectors, Cowork VM troubleshooting, and the Hyprland login fix.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/claude-desktop-omarchy.html#article","headline":"Claude Desktop on Omarchy: Install & Setup Guide (2026)","description":"Install Anthropic's official Claude Desktop Linux app on Omarchy. Setup, MCP connectors, Cowork VM troubleshooting, and the Hyprland login fix.","url":"https://omarchyapps.com/claude-desktop-omarchy.html","dateModified":"2026-10-10","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Claude Desktop on Omarchy: Install & Setup Guide (2026)","item":"https://omarchyapps.com/claude-desktop-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is there an official Claude desktop app for Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes — since June 30, 2026, Anthropic ships a first-party Linux beta as a .deb (amd64 + arm64) from its own signed APT repository at downloads.claude.ai. It's a beta and it doesn't auto-update itself, but it's Anthropic's code, not a third-party port."}},{"@type":"Question","name":"Is claude-desktop on Omarchy official?","acceptedAnswer":{"@type":"Answer","text":"Half and half. The app binary is Anthropic's official Linux build, downloaded from Anthropic's own repository. But Anthropic doesn't ship an Arch package — the one omarchy pkg add installs is maintained by the Omarchy community in omarchy-pkgs, and Anthropic won't support issues with it. Report packaging problems to Omarchy, not Anthropic."}},{"@type":"Question","name":"Is it free?","acceptedAnswer":{"@type":"Answer","text":"The app is free to install and free to use with a free Claude account (no signed-out mode — you need an account). Capability limits follow your Claude plan: Free, Pro ($20/mo), Max, etc."}},{"@type":"Question","name":"Does it work offline or run a model locally?","acceptedAnswer":{"@type":"Answer","text":"No to both. Every message goes to Anthropic's servers. The virtual machine Cowork uses is a sandbox around what Claude can touch — it's not a local model."}},{"@type":"Question","name":"Where do MCP settings live?","acceptedAnswer":{"@type":"Answer","text":"~/.config/Claude/claude_desktop_config.json. Quit the app before editing it by hand."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/claude-desktop-omarchy.html#article","headline":"Claude Desktop on Omarchy: Install & Setup Guide (2026)","description":"Install Anthropic's official Claude Desktop Linux app on Omarchy. Setup, MCP connectors, Cowork VM troubleshooting, and the Hyprland login fix.","url":"https://omarchyapps.com/claude-desktop-omarchy.html","dateModified":"2026-10-11","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Claude Desktop on Omarchy: Install & Setup Guide (2026)","item":"https://omarchyapps.com/claude-desktop-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is there an official Claude desktop app for Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes — since June 30, 2026, Anthropic ships a first-party Linux beta as a .deb (amd64 + arm64) from its own signed APT repository at downloads.claude.ai. It's a beta and it doesn't auto-update itself, but it's Anthropic's code, not a third-party port."}},{"@type":"Question","name":"Is claude-desktop on Omarchy official?","acceptedAnswer":{"@type":"Answer","text":"Half and half. The app binary is Anthropic's official Linux build, downloaded from Anthropic's own repository. But Anthropic doesn't ship an Arch package — the one omarchy pkg add installs is maintained by the Omarchy community in omarchy-pkgs, and Anthropic won't support issues with it. Report packaging problems to Omarchy, not Anthropic."}},{"@type":"Question","name":"Is it free?","acceptedAnswer":{"@type":"Answer","text":"The app is free to install and free to use with a free Claude account (no signed-out mode — you need an account). Capability limits follow your Claude plan: Free, Pro ($20/mo), Max, etc."}},{"@type":"Question","name":"Does it work offline or run a model locally?","acceptedAnswer":{"@type":"Answer","text":"No to both. Every message goes to Anthropic's servers. The virtual machine Cowork uses is a sandbox around what Claude can touch — it's not a local model."}},{"@type":"Question","name":"Where do MCP settings live?","acceptedAnswer":{"@type":"Answer","text":"~/.config/Claude/claude_desktop_config.json. Quit the app before editing it by hand."}}]}]}</script>
 <style>
 /* =========================================================================
    Unofficial Omarchy App Store
@@ -1416,25 +1416,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
 
-/* bid forms on the advertise page */
-.bid-notice { margin: 0.5em 0 0; padding: 0.6em 0.9em; border: var(--border-width) solid rgba(var(--rgb-green), 0.5); border-radius: var(--radius); color: var(--color-green); font-size: 92%; }
-.bid-wrap { margin-top: auto; }
-.bid-wrap > summary { list-style: none; width: max-content; max-width: 100%; }
-.bid-wrap > summary::-webkit-details-marker { display: none; }
-.bid-wrap[open] > summary { margin-bottom: var(--space-medium); }
-.bid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-small) var(--space-medium); }
-.bid label { display: flex; flex-direction: column; gap: 0.25em; font-size: 88%; color: rgb(var(--rgb-terminal-blue) / 0.9); }
-.bid label small { color: rgb(var(--rgb-terminal-blue) / 0.6); }
-.bid input:not([type="checkbox"]) { padding: 0.55em 0.8em; background: var(--color-background-storm); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.45); border-radius: var(--radius); color: var(--color-terminal-white); font: inherit; }
-.bid input:focus { outline: 0; border-color: var(--color-terminal-blue); }
-.bid .trap { position: absolute; left: -9999px; }
-.bid .agree { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; gap: 0.6em; color: rgb(var(--rgb-terminal-white) / 0.85); }
-.bid .agree input { margin-top: 0.25em; accent-color: var(--color-green); }
-.bid .button { grid-column: 1 / -1; justify-self: start; }
-.bid .bid-status { grid-column: 1 / -1; margin: 0; min-height: 1.4em; color: var(--color-terminal-blue); font-size: 88%; }
-.bid.is-done > *:not(.bid-status) { display: none; }
-.bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
-@media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
 
 /* =================== SPONSOR ROTATION =================== */
 /* Header and footer each rotate fairly through every active sponsor:
@@ -1474,7 +1455,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <p class="eyebrow">AI assistant guide</p>
     <h1>Claude Desktop on <span>Omarchy</span></h1>
     <p class="tag">Anthropic&#x27;s official Linux app, repackaged for Arch — chat, MCP, and Cowork agents.</p>
-    <p class="facts">Reviewed 2026-10-10 · independent editorial guide</p>
+    <p class="facts">Reviewed 2026-10-11 · independent editorial guide</p>
   </div>
 </header>
 
@@ -1642,7 +1623,7 @@ SEO notes:
         <a href="/terms.html">Terms</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Reviewed 2026-10-10 · unofficial and independent</span>
+      <span>Reviewed 2026-10-11 · unofficial and independent</span>
     </div>
   </div>
 </footer>

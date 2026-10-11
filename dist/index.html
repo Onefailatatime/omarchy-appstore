@@ -1422,25 +1422,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
 
-/* bid forms on the advertise page */
-.bid-notice { margin: 0.5em 0 0; padding: 0.6em 0.9em; border: var(--border-width) solid rgba(var(--rgb-green), 0.5); border-radius: var(--radius); color: var(--color-green); font-size: 92%; }
-.bid-wrap { margin-top: auto; }
-.bid-wrap > summary { list-style: none; width: max-content; max-width: 100%; }
-.bid-wrap > summary::-webkit-details-marker { display: none; }
-.bid-wrap[open] > summary { margin-bottom: var(--space-medium); }
-.bid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-small) var(--space-medium); }
-.bid label { display: flex; flex-direction: column; gap: 0.25em; font-size: 88%; color: rgb(var(--rgb-terminal-blue) / 0.9); }
-.bid label small { color: rgb(var(--rgb-terminal-blue) / 0.6); }
-.bid input:not([type="checkbox"]) { padding: 0.55em 0.8em; background: var(--color-background-storm); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.45); border-radius: var(--radius); color: var(--color-terminal-white); font: inherit; }
-.bid input:focus { outline: 0; border-color: var(--color-terminal-blue); }
-.bid .trap { position: absolute; left: -9999px; }
-.bid .agree { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; gap: 0.6em; color: rgb(var(--rgb-terminal-white) / 0.85); }
-.bid .agree input { margin-top: 0.25em; accent-color: var(--color-green); }
-.bid .button { grid-column: 1 / -1; justify-self: start; }
-.bid .bid-status { grid-column: 1 / -1; margin: 0; min-height: 1.4em; color: var(--color-terminal-blue); font-size: 88%; }
-.bid.is-done > *:not(.bid-status) { display: none; }
-.bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
-@media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
 
 /* =================== SPONSOR ROTATION =================== */
 /* Header and footer each rotate fairly through every active sponsor:
@@ -1483,12 +1464,12 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 ▀▀▀▀▀▀▀▀▀</pre>
     <h1>Unofficial Omarchy <span>App Store</span></h1>
     <p class="tag">Every package in the official Omarchy repo, one command away.</p>
-    <p class="facts"><b>186</b> packages · <b>12</b> categories · synced 2026-10-10 · install with <code>omarchy pkg add &lt;name&gt;</code></p>
+    <p class="facts"><b>186</b> packages · <b>12</b> categories · synced 2026-10-11 · install with <code>omarchy pkg add &lt;name&gt;</code></p>
   </div>
 </header>
 
 
-<div class="ad-header"><a class="ad open" href="/advertise.html#header"><span class="tag">Ad · open slot</span><span class="mark" aria-hidden="true">+</span><span class="copy"><strong>Header rotation — your app here</strong><span class="sub">$55/mo · 90-day term · billed $165</span></span><span class="cta">Sponsor →</span></a></div>
+<div class="ad-header"><a class="ad open" href="/advertise.html#header"><span class="tag">Ad · open slot</span><span class="mark" aria-hidden="true">+</span><span class="copy"><strong>Header rotation: your app here</strong><span class="sub">$55/mo · 90 day term · billed $165</span></span><span class="cta">Sponsor →</span></a></div>
 <div class="bar">
   <div class="wrap bar-row">
     <label class="search">
@@ -3126,15 +3107,15 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">1.1 MB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/minecraft-launcher.html" data-share-app="minecraft-launcher" data-share-title="minecraft-launcher for Omarchy" data-share-url="https://omarchyapps.com/apps/minecraft-launcher.html" aria-label="Share minecraft-launcher">share</a><button class="app-vote" type="button" data-vote-app="minecraft-launcher" aria-pressed="false" aria-label="Upvote minecraft-launcher"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
 </article>
 <article class="card cat-gaming-emulation" data-detail-url="apps/omakade.html"
-  data-name="omakade" data-dir="omakade" data-version="1.16.0-1" data-desc="A beautiful, local-first game library for Omarchy"
-  data-url="https://btsouth.github.io/omakade/" data-github="https://github.com/btsouth/omakade" data-license="GPL-3.0-or-later, CC-BY-SA-3.0" data-csize="87.8 MB" data-isize="103.6 MB"
-  data-built="2026-10-10" data-built-ts="1791669586" data-added="2026-08-31" data-added-ts="1788240336"
+  data-name="omakade" data-dir="omakade" data-version="1.16.1-1" data-desc="A beautiful, local-first game library for Omarchy"
+  data-url="https://btsouth.github.io/omakade/" data-github="https://github.com/btsouth/omakade" data-license="GPL-3.0-or-later, CC-BY-SA-3.0" data-csize="87.8 MB" data-isize="103.7 MB"
+  data-built="2026-10-10" data-built-ts="1791698884" data-added="2026-08-31" data-added-ts="1788240336"
   data-deps="[&quot;glib2&quot;, &quot;hicolor-icon-theme&quot;, &quot;layer-shell-qt&quot;, &quot;libsecret&quot;, &quot;libzip&quot;, &quot;openssl&quot;, &quot;python&quot;, &quot;qt6-base&quot;, &quot;qt6-declarative&quot;, &quot;qt6-imageformats&quot;, &quot;qt6-svg&quot;, &quot;qt6-wayland&quot;, &quot;sdl3&quot;, &quot;wayland&quot;, &quot;zstd&quot;]" data-category="Gaming &amp; Emulation" data-cat="gaming-emulation"
   data-tagline="One local game library that pulls together every launcher you use." data-full-desc="Omakade is a local-first game library for the Omarchy desktop that aggregates games you&#x27;ve installed across Steam, Lutris, Heroic, Faugus, RetroArch, Battle.net, Epic, GOG, and Amazon into a single cover-art browsing interface. It&#x27;s built for keyboard and controller use, including a couch-mode layout, and stores everything locally rather than depending on a cloud service. It&#x27;s an independent community project, not an official Omarchy app." data-pricing="free-libre"
   data-pricing-note="" data-reqs="[&quot;At least one supported game launcher (Steam, Lutris, Heroic, etc.) with installed games to display&quot;]" data-gallery="[{&quot;url&quot;: &quot;https://github.com/tsouth89/omakade/raw/main/docs/assets/library-preview.webp&quot;, &quot;source_url&quot;: &quot;https://github.com/btsouth/omakade&quot;, &quot;alt&quot;: &quot;omakade app screenshot&quot;}, {&quot;alt&quot;: &quot;Omakade library showing installed games from multiple launchers&quot;, &quot;source_url&quot;: &quot;https://github.com/btsouth/omakade/blob/main/README.md&quot;, &quot;url&quot;: &quot;https://raw.githubusercontent.com/btsouth/omakade/main/docs/assets/library-preview.webp&quot;}, {&quot;alt&quot;: &quot;Omakade game details showing playtime, IGDB insights, and Steam achievements&quot;, &quot;source_url&quot;: &quot;https://github.com/btsouth/omakade/blob/main/README.md&quot;, &quot;url&quot;: &quot;https://raw.githubusercontent.com/btsouth/omakade/main/docs/assets/game-details.webp&quot;}]"
   data-indie-note=""
   data-yt="" data-yt-title="">
-  <header><h3><a href="apps/omakade.html">omakade</a></h3><span class="ver">1.16.0-1</span></header>
+  <header><h3><a href="apps/omakade.html">omakade</a></h3><span class="ver">1.16.1-1</span></header>
   <p class="byline">by <a href="https://github.com/btsouth" target="_blank" rel="author noopener">btsouth</a></p>
   <p class="card-description">A beautiful, local-first game library for Omarchy</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">87.8 MB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/omakade.html" data-share-app="omakade" data-share-title="omakade for Omarchy" data-share-url="https://omarchyapps.com/apps/omakade.html" aria-label="Share omakade">share</a><button class="app-vote" type="button" data-vote-app="omakade" aria-pressed="false" aria-label="Upvote omakade"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
@@ -4130,15 +4111,15 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">52.4 MB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/superwhisper-bin.html" data-share-app="superwhisper-bin" data-share-title="superwhisper-bin for Omarchy" data-share-url="https://omarchyapps.com/apps/superwhisper-bin.html" aria-label="Share superwhisper-bin">share</a><button class="app-vote" type="button" data-vote-app="superwhisper-bin" aria-pressed="false" aria-label="Upvote superwhisper-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
 </article>
 <article class="card cat-utilities" data-detail-url="apps/t3code-nightly-bin.html"
-  data-name="t3code-nightly-bin" data-dir="t3code-nightly-bin" data-version="0.0.46_nightly.20261010.2935-1" data-desc="Open-source control plane for coding agents (nightly)"
-  data-url="https://t3.codes" data-github="https://github.com/pingdotgg/t3code" data-license="MIT" data-csize="163.4 MB" data-isize="441.3 MB"
-  data-built="2026-10-10" data-built-ts="1791669564" data-added="2026-10-03" data-added-ts="1791095733"
+  data-name="t3code-nightly-bin" data-dir="t3code-nightly-bin" data-version="0.0.46_nightly.20261011.2955-1" data-desc="Open-source control plane for coding agents (nightly)"
+  data-url="https://t3.codes" data-github="https://github.com/pingdotgg/t3code" data-license="MIT" data-csize="163.4 MB" data-isize="441.4 MB"
+  data-built="2026-10-10" data-built-ts="1791698881" data-added="2026-10-03" data-added-ts="1791095733"
   data-deps="[&quot;alsa-lib&quot;, &quot;at-spi2-core&quot;, &quot;cairo&quot;, &quot;dbus&quot;, &quot;expat&quot;, &quot;gcc-libs&quot;, &quot;glib2&quot;, &quot;glibc&quot;, &quot;gtk3&quot;, &quot;hicolor-icon-theme&quot;, &quot;libcups&quot;, &quot;libnotify&quot;, &quot;libx11&quot;, &quot;libxcb&quot;, &quot;libxcomposite&quot;, &quot;libxdamage&quot;, &quot;libxext&quot;, &quot;libxfixes&quot;, &quot;libxkbcommon&quot;, &quot;libxrandr&quot;, &quot;mesa&quot;, &quot;nspr&quot;, &quot;nss&quot;, &quot;pango&quot;, &quot;systemd-libs&quot;, &quot;xdg-utils&quot;]" data-category="Utilities" data-cat="utilities"
   data-tagline="" data-full-desc="" data-pricing=""
   data-pricing-note="" data-reqs="[]" data-gallery="[]"
   data-indie-note=""
   data-yt="" data-yt-title="">
-  <header><h3><a href="apps/t3code-nightly-bin.html">t3code-nightly-bin</a></h3><span class="ver">0.0.46_nightly.20261010.2935-1</span></header>
+  <header><h3><a href="apps/t3code-nightly-bin.html">t3code-nightly-bin</a></h3><span class="ver">0.0.46_nightly.20261011.2955-1</span></header>
   <p class="byline">by <a href="https://ping.gg" target="_blank" rel="author noopener">Ping.gg</a></p>
   <p class="card-description">Open-source control plane for coding agents (nightly)</p>
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">163.4 MB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/t3code-nightly-bin.html" data-share-app="t3code-nightly-bin" data-share-title="t3code-nightly-bin for Omarchy" data-share-url="https://omarchyapps.com/apps/t3code-nightly-bin.html" aria-label="Share t3code-nightly-bin">share</a><button class="app-vote" type="button" data-vote-app="t3code-nightly-bin" aria-pressed="false" aria-label="Upvote t3code-nightly-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
@@ -4353,7 +4334,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   </div>
 </dialog>
 
-<div class="ad-footer"><h2 class="sec-label">Sponsors</h2><a class="ad open" href="/advertise.html#footer"><span class="tag">Ad · open slot</span><span class="mark" aria-hidden="true">+</span><span class="copy"><strong>Footer rotation — your app here</strong><span class="sub">$25/mo · 90-day term · billed $75</span></span><span class="cta">Sponsor →</span></a></div>
+<div class="ad-footer"><h2 class="sec-label">Sponsors</h2><a class="ad open" href="/advertise.html#footer"><span class="tag">Ad · open slot</span><span class="mark" aria-hidden="true">+</span><span class="copy"><strong>Footer rotation: your app here</strong><span class="sub">$25/mo · 90 day term · billed $75</span></span><span class="cta">Sponsor →</span></a></div>
 <footer class="site">
   <div class="wrap">
     <p>Unofficial Omarchy App Store is a community project by Jessyka at FunnelFix — not affiliated with Omacom or DHH. It serves no packages of its own: every entry above is read from the official repository at <a href="https://pkgs.omarchy.org/">pkgs.omarchy.org</a>, and the install command hands you to <code>omarchy</code> itself. Debug companion packages are hidden; categories are curated by hand and may not match any official grouping.</p>
@@ -4371,7 +4352,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
         <a href="advertise.html">Advertise</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Synced 2026-10-10 · no trackers · videos are click-to-play</span>
+      <span>Synced 2026-10-11 · no trackers · videos are click-to-play</span>
     </div>
     <div class="legend" aria-hidden="true"><span class="cat-ai-agents"><span class="dot" aria-hidden="true"></span>AI &amp; Agents</span> · <span class="cat-developer-tools"><span class="dot" aria-hidden="true"></span>Developer Tools</span> · <span class="cat-terminal-shell"><span class="dot" aria-hidden="true"></span>Terminal &amp; Shell</span> · <span class="cat-themes-desktop"><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop</span> · <span class="cat-system-drivers"><span class="dot" aria-hidden="true"></span>System &amp; Drivers</span> · <span class="cat-gaming-emulation"><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation</span> · <span class="cat-media-creative"><span class="dot" aria-hidden="true"></span>Media &amp; Creative</span> · <span class="cat-productivity-notes"><span class="dot" aria-hidden="true"></span>Productivity &amp; Notes</span> · <span class="cat-security-privacy"><span class="dot" aria-hidden="true"></span>Security &amp; Privacy</span> · <span class="cat-browsers-web"><span class="dot" aria-hidden="true"></span>Browsers &amp; Web</span> · <span class="cat-communication"><span class="dot" aria-hidden="true"></span>Communication</span> · <span class="cat-utilities"><span class="dot" aria-hidden="true"></span>Utilities</span></div>
   </div>

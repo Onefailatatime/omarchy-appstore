@@ -26,7 +26,7 @@
 <meta name="twitter:title" content="How to Use omacut on Omarchy (2026): trim, split &amp; export in minutes">
 <meta name="twitter:description" content="omacut is Omarchy&#x27;s dead-simple video trimmer (preinstalled on Quattro+). Open a video, drag the handles, split the middle, export an MP4 — plus shortcuts and fixes for AV1 black preview and export failures.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/omacut-video-editor-omarchy.html#article","headline":"How to Use omacut on Omarchy (2026): trim, split & export in minutes","description":"omacut is Omarchy's dead-simple video trimmer (preinstalled on Quattro+). Open a video, drag the handles, split the middle, export an MP4 — plus shortcuts and fixes for AV1 black preview and export failures.","url":"https://omarchyapps.com/omacut-video-editor-omarchy.html","dateModified":"2026-10-10","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"How to Use omacut on Omarchy (2026): trim, split & export in minutes","item":"https://omarchyapps.com/omacut-video-editor-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does omacut work on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Yes — it's made for Omarchy. Written by DHH/omacom, it follows your theme's accent color, and it's installed by default in Omarchy from Quattro (v4.x) onward. Install manually with omarchy pkg add omacut on older installs."}},{"@type":"Question","name":"Is omacut free?","acceptedAnswer":{"@type":"Answer","text":"Yes, free and libre — MIT licensed, source on GitHub at omacom/omacut. No accounts, no watermarks, no upsells."}},{"@type":"Question","name":"omacut vs LosslessCut — which should I use?","acceptedAnswer":{"@type":"Answer","text":"omacut for speed and native Omarchy looks; it re-encodes, so exports are fast but not instant. LosslessCut for lossless (no re-encode) cuts that finish in seconds with zero quality loss — at the cost of an Electron app that doesn't match your theme. For cutting the dead air off a screen recording, omacut wins."}},{"@type":"Question","name":"Can omacut cut the middle out of a video, or just the ends?","acceptedAnswer":{"@type":"Answer","text":"The middle too. Double-click a clip to split it, drag the handles apart to remove the section between them, double-click the gap to join it back. Playback skips the gaps and exports the clips in order."}},{"@type":"Question","name":"Why does my AV1 video show a black preview?","acceptedAnswer":{"@type":"Answer","text":"That's a known Qt/ffmpeg hardware-decode issue fixed in omacut (Oct 2026) — update to the latest build. If it persists on unusual GPUs, run QT_FFMPEG_DECODING_HW_DEVICE_TYPES=vaapi,cuda omacut."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/omacut-video-editor-omarchy.html#article","headline":"How to Use omacut on Omarchy (2026): trim, split & export in minutes","description":"omacut is Omarchy's dead-simple video trimmer (preinstalled on Quattro+). Open a video, drag the handles, split the middle, export an MP4 — plus shortcuts and fixes for AV1 black preview and export failures.","url":"https://omarchyapps.com/omacut-video-editor-omarchy.html","dateModified":"2026-10-11","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"How to Use omacut on Omarchy (2026): trim, split & export in minutes","item":"https://omarchyapps.com/omacut-video-editor-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does omacut work on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Yes — it's made for Omarchy. Written by DHH/omacom, it follows your theme's accent color, and it's installed by default in Omarchy from Quattro (v4.x) onward. Install manually with omarchy pkg add omacut on older installs."}},{"@type":"Question","name":"Is omacut free?","acceptedAnswer":{"@type":"Answer","text":"Yes, free and libre — MIT licensed, source on GitHub at omacom/omacut. No accounts, no watermarks, no upsells."}},{"@type":"Question","name":"omacut vs LosslessCut — which should I use?","acceptedAnswer":{"@type":"Answer","text":"omacut for speed and native Omarchy looks; it re-encodes, so exports are fast but not instant. LosslessCut for lossless (no re-encode) cuts that finish in seconds with zero quality loss — at the cost of an Electron app that doesn't match your theme. For cutting the dead air off a screen recording, omacut wins."}},{"@type":"Question","name":"Can omacut cut the middle out of a video, or just the ends?","acceptedAnswer":{"@type":"Answer","text":"The middle too. Double-click a clip to split it, drag the handles apart to remove the section between them, double-click the gap to join it back. Playback skips the gaps and exports the clips in order."}},{"@type":"Question","name":"Why does my AV1 video show a black preview?","acceptedAnswer":{"@type":"Answer","text":"That's a known Qt/ffmpeg hardware-decode issue fixed in omacut (Oct 2026) — update to the latest build. If it persists on unusual GPUs, run QT_FFMPEG_DECODING_HW_DEVICE_TYPES=vaapi,cuda omacut."}}]}]}</script>
 <style>
 /* =========================================================================
    Unofficial Omarchy App Store
@@ -1416,25 +1416,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
 
-/* bid forms on the advertise page */
-.bid-notice { margin: 0.5em 0 0; padding: 0.6em 0.9em; border: var(--border-width) solid rgba(var(--rgb-green), 0.5); border-radius: var(--radius); color: var(--color-green); font-size: 92%; }
-.bid-wrap { margin-top: auto; }
-.bid-wrap > summary { list-style: none; width: max-content; max-width: 100%; }
-.bid-wrap > summary::-webkit-details-marker { display: none; }
-.bid-wrap[open] > summary { margin-bottom: var(--space-medium); }
-.bid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-small) var(--space-medium); }
-.bid label { display: flex; flex-direction: column; gap: 0.25em; font-size: 88%; color: rgb(var(--rgb-terminal-blue) / 0.9); }
-.bid label small { color: rgb(var(--rgb-terminal-blue) / 0.6); }
-.bid input:not([type="checkbox"]) { padding: 0.55em 0.8em; background: var(--color-background-storm); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.45); border-radius: var(--radius); color: var(--color-terminal-white); font: inherit; }
-.bid input:focus { outline: 0; border-color: var(--color-terminal-blue); }
-.bid .trap { position: absolute; left: -9999px; }
-.bid .agree { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; gap: 0.6em; color: rgb(var(--rgb-terminal-white) / 0.85); }
-.bid .agree input { margin-top: 0.25em; accent-color: var(--color-green); }
-.bid .button { grid-column: 1 / -1; justify-self: start; }
-.bid .bid-status { grid-column: 1 / -1; margin: 0; min-height: 1.4em; color: var(--color-terminal-blue); font-size: 88%; }
-.bid.is-done > *:not(.bid-status) { display: none; }
-.bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
-@media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
 
 /* =================== SPONSOR ROTATION =================== */
 /* Header and footer each rotate fairly through every active sponsor:
@@ -1474,7 +1455,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <p class="eyebrow">Omarchy video trimmer guide</p>
     <h1>Use omacut on <span>Omarchy</span></h1>
     <p class="tag">Open a video, cut the boring parts, export an MP4. That&#x27;s the whole app.</p>
-    <p class="facts">Reviewed 2026-10-10 · independent editorial guide</p>
+    <p class="facts">Reviewed 2026-10-11 · independent editorial guide</p>
   </div>
 </header>
 
@@ -1670,7 +1651,7 @@ SEO notes:
         <a href="/terms.html">Terms</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Reviewed 2026-10-10 · unofficial and independent</span>
+      <span>Reviewed 2026-10-11 · unofficial and independent</span>
     </div>
   </div>
 </footer>

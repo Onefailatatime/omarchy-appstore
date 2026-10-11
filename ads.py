@@ -30,7 +30,7 @@ def money(cents_or_dollars) -> str:
 
 
 def dm_url(text: str) -> str:
-    return "https://x.com/messages/" + X_DM_RECIPIENT_ID + "-jessyka_boat?text=" + urllib.parse.quote(text)
+    return "https://x.com/messages/compose?" + urllib.parse.urlencode({"recipient_id": X_DM_RECIPIENT_ID, "text": text})
 
 
 def today_iso() -> str:
@@ -92,7 +92,7 @@ def _unit(sponsor: dict, tag: str, cls: str = "", image: bool = False) -> str:
     if image and sponsor.get("image"):
         cls += " stack"
         img = (f'<img class="shot" src="{html.escape(sponsor["image"], quote=True)}" '
-               f'alt="{html.escape(sponsor["name"], quote=True)} — sponsored" '
+               f'alt="{html.escape(sponsor["name"], quote=True)}, sponsored" '
                'width="300" height="180" loading="lazy">')
     return (
         f'<a class="{cls}" href="{html.escape(sponsor["url"], quote=True)}" '
@@ -111,8 +111,8 @@ def _open_card(label: str, anchor: str, price_month: int, term_days: int) -> str
         f'<a class="ad open" href="/advertise.html#{anchor}">'
         '<span class="tag">Ad · open slot</span>'
         '<span class="mark" aria-hidden="true">+</span>'
-        f'<span class="copy"><strong>{html.escape(label)} — your app here</strong>'
-        f'<span class="sub">{money(price_month)}/mo · {term_days}-day term · billed {money(per_term)}</span></span>'
+        f'<span class="copy"><strong>{html.escape(label)}: your app here</strong>'
+        f'<span class="sub">{money(price_month)}/mo · {term_days} day term · billed {money(per_term)}</span></span>'
         '<span class="cta">Sponsor →</span></a>'
     )
 
@@ -147,7 +147,7 @@ def active_lifetime(sponsors: list[dict], quiet: bool = False) -> list[dict]:
 
 def render_lifetime(ads: dict) -> str:
     """Pinned lifetime unit(s) for the top of the homepage, or '' if none.
-    Never rotates — the premium forever placement."""
+    Never rotates, the premium forever placement."""
     sponsors = active_lifetime((ads.get("lifetime") or {}).get("sponsors"))
     if not sponsors:
         return ""
@@ -211,13 +211,13 @@ def render_slot_cards(ads: dict) -> str:
     def term_price(slot: dict) -> str:
         per_term = slot["price_month"] * slot["term_days"] // 30
         return (f'<b>{money(slot["price_month"])}</b> / month'
-                f' · billed as <b>{money(per_term)}</b> per {slot["term_days"]}-day term')
+                f' · billed as <b>{money(per_term)}</b> per {slot["term_days"]} day term')
 
     h = ads["header"]
     n_h = len(active_sponsors(h.get("sponsors") or [], quiet=True))
     product_card(
         "header", "Header rotation", h["position"], term_price(h),
-        f"Three units under the hero, rotating fairly through every active sponsor — equal screen time, no bidding for position. "
+        f"Three units under the hero, rotating fairly through every active sponsor. Equal screen time, no bidding for position. "
         f"<b>{n_h}</b> sponsor{'s' if n_h != 1 else ''} active now; unlimited spots.",
         "Sponsor the header",
     )
@@ -235,7 +235,7 @@ def render_slot_cards(ads: dict) -> str:
     n_ab = len(active_banners((ab.get("banners") or {}), quiet=True))
     product_card(
         "app-banner", "App profile banner", ab["position"], term_price(ab),
-        f"Your banner on your app's own page — the highest-intent spot on the site, seen by everyone who looks up that app. "
+        f"Your banner on your app's own page, the highest intent spot on the site, seen by everyone who looks up that app. "
         f"<b>{n_ab}</b> app{'s' if n_ab != 1 else ''} sponsored now.",
         "Sponsor an app page",
     )
@@ -247,7 +247,7 @@ def render_slot_cards(ads: dict) -> str:
         f'<h3>{html.escape(lt.get("label", "Lifetime pin"))}</h3>'
         f'<p class="pos">{html.escape(lt.get("position", ""))}</p>'
         f'<p class="price"><b>{money(lt.get("price_once", 1000))}</b> one-time · yours forever</p>'
-        f'<p class="status">Inquiry only — no checkout, no auction. Message to talk it through; '
+        f'<p class="status">Inquiry only, no checkout, no auction. Message to talk it through; '
         f'one sponsor holds this spot permanently. '
         f"<b>{n_lt}</b> active now.</p>"
         f'<a class="button" href="{html.escape(dm_url("Hi! I want to inquire about the lifetime sponsor slot on omarchyapps.com."), quote=True)}" '

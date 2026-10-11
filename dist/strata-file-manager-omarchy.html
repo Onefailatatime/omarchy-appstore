@@ -26,7 +26,7 @@
 <meta name="twitter:title" content="Strata on Omarchy: Install the Keyboard-First File Manager">
 <meta name="twitter:description" content="Install Strata on Omarchy: the free keyboard-first GTK4 file manager with Miller columns, fuzzy search, and sandboxed previews. Setup, keybinds, fixes, and Strata vs flea compared.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/strata-file-manager-omarchy.html#article","headline":"Strata on Omarchy: Install the Keyboard-First File Manager","description":"Install Strata on Omarchy: the free keyboard-first GTK4 file manager with Miller columns, fuzzy search, and sandboxed previews. Setup, keybinds, fixes, and Strata vs flea compared.","url":"https://omarchyapps.com/strata-file-manager-omarchy.html","dateModified":"2026-10-10","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Strata on Omarchy: Install the Keyboard-First File Manager","item":"https://omarchyapps.com/strata-file-manager-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Strata work on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Yes — Arch Linux and Omarchy are the project's primary supported environments, and Strata is explicitly designed for Omarchy. Requirements: glibc 2.39+ and GTK 4.12+. It follows the active Omarchy theme live (including Quattro), and the README documents Hyprland keybind overrides, udiskie encrypted-volume unlock, and SMB support via gvfs-smb."}},{"@type":"Question","name":"Is Strata free?","acceptedAnswer":{"@type":"Answer","text":"Yes. MIT-licensed, free and libre — no paid tiers, no feature gates. In-app updates are built in (on by default; disable in Settings → Updates)."}},{"@type":"Question","name":"Strata vs flea?","acceptedAnswer":{"@type":"Answer","text":"Both keyboard-first, both free, both on omarchyapps.com. Strata = Rust + GTK4, Miller columns, the richest preview engine, sandboxed parsers. flea = Rust + Quickshell, built Omarchy-first, leans into raw speed and native theme integration. Same price (zero). Columns and previews → Strata; Omarchy-native speedster → flea."}},{"@type":"Question","name":"Why do some previews show 'Preview unavailable'?","acceptedAnswer":{"@type":"Answer","text":"Almost always a missing sandbox dependency, not a Strata bug. Parser-backed previews require bubblewrap; video thumbnails need ffmpegthumbnailer/ffmpeg. Install the full runtime set (see the guide's first issue) and restart Strata. Strata fails closed by design — it will never run an untrusted parser unsandboxed just to show a thumbnail."}},{"@type":"Question","name":"Can Strata replace Nautilus as my default file manager?","acceptedAnswer":{"@type":"Answer","text":"Yes, two layers: Settings → General → Desktop integration sets Strata as the inode/directory handler and installs the FileManager1 D-Bus service. Then, on Lua-based Omarchy releases, override the stock Nautilus shortcuts (Super+Shift+F, Super+Alt+Shift+F) in ~/.config/hypr/bindings.lua — those user overrides survive Omarchy updates."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/strata-file-manager-omarchy.html#article","headline":"Strata on Omarchy: Install the Keyboard-First File Manager","description":"Install Strata on Omarchy: the free keyboard-first GTK4 file manager with Miller columns, fuzzy search, and sandboxed previews. Setup, keybinds, fixes, and Strata vs flea compared.","url":"https://omarchyapps.com/strata-file-manager-omarchy.html","dateModified":"2026-10-11","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Strata on Omarchy: Install the Keyboard-First File Manager","item":"https://omarchyapps.com/strata-file-manager-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Strata work on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Yes — Arch Linux and Omarchy are the project's primary supported environments, and Strata is explicitly designed for Omarchy. Requirements: glibc 2.39+ and GTK 4.12+. It follows the active Omarchy theme live (including Quattro), and the README documents Hyprland keybind overrides, udiskie encrypted-volume unlock, and SMB support via gvfs-smb."}},{"@type":"Question","name":"Is Strata free?","acceptedAnswer":{"@type":"Answer","text":"Yes. MIT-licensed, free and libre — no paid tiers, no feature gates. In-app updates are built in (on by default; disable in Settings → Updates)."}},{"@type":"Question","name":"Strata vs flea?","acceptedAnswer":{"@type":"Answer","text":"Both keyboard-first, both free, both on omarchyapps.com. Strata = Rust + GTK4, Miller columns, the richest preview engine, sandboxed parsers. flea = Rust + Quickshell, built Omarchy-first, leans into raw speed and native theme integration. Same price (zero). Columns and previews → Strata; Omarchy-native speedster → flea."}},{"@type":"Question","name":"Why do some previews show 'Preview unavailable'?","acceptedAnswer":{"@type":"Answer","text":"Almost always a missing sandbox dependency, not a Strata bug. Parser-backed previews require bubblewrap; video thumbnails need ffmpegthumbnailer/ffmpeg. Install the full runtime set (see the guide's first issue) and restart Strata. Strata fails closed by design — it will never run an untrusted parser unsandboxed just to show a thumbnail."}},{"@type":"Question","name":"Can Strata replace Nautilus as my default file manager?","acceptedAnswer":{"@type":"Answer","text":"Yes, two layers: Settings → General → Desktop integration sets Strata as the inode/directory handler and installs the FileManager1 D-Bus service. Then, on Lua-based Omarchy releases, override the stock Nautilus shortcuts (Super+Shift+F, Super+Alt+Shift+F) in ~/.config/hypr/bindings.lua — those user overrides survive Omarchy updates."}}]}]}</script>
 <style>
 /* =========================================================================
    Unofficial Omarchy App Store
@@ -1416,25 +1416,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
 
-/* bid forms on the advertise page */
-.bid-notice { margin: 0.5em 0 0; padding: 0.6em 0.9em; border: var(--border-width) solid rgba(var(--rgb-green), 0.5); border-radius: var(--radius); color: var(--color-green); font-size: 92%; }
-.bid-wrap { margin-top: auto; }
-.bid-wrap > summary { list-style: none; width: max-content; max-width: 100%; }
-.bid-wrap > summary::-webkit-details-marker { display: none; }
-.bid-wrap[open] > summary { margin-bottom: var(--space-medium); }
-.bid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-small) var(--space-medium); }
-.bid label { display: flex; flex-direction: column; gap: 0.25em; font-size: 88%; color: rgb(var(--rgb-terminal-blue) / 0.9); }
-.bid label small { color: rgb(var(--rgb-terminal-blue) / 0.6); }
-.bid input:not([type="checkbox"]) { padding: 0.55em 0.8em; background: var(--color-background-storm); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.45); border-radius: var(--radius); color: var(--color-terminal-white); font: inherit; }
-.bid input:focus { outline: 0; border-color: var(--color-terminal-blue); }
-.bid .trap { position: absolute; left: -9999px; }
-.bid .agree { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; gap: 0.6em; color: rgb(var(--rgb-terminal-white) / 0.85); }
-.bid .agree input { margin-top: 0.25em; accent-color: var(--color-green); }
-.bid .button { grid-column: 1 / -1; justify-self: start; }
-.bid .bid-status { grid-column: 1 / -1; margin: 0; min-height: 1.4em; color: var(--color-terminal-blue); font-size: 88%; }
-.bid.is-done > *:not(.bid-status) { display: none; }
-.bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
-@media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
 
 /* =================== SPONSOR ROTATION =================== */
 /* Header and footer each rotate fairly through every active sponsor:
@@ -1474,7 +1455,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <p class="eyebrow">Omarchy file manager guide</p>
     <h1>Strata on <span>Omarchy</span></h1>
     <p class="tag">Finder-style Miller columns with a preview engine that sandboxes everything.</p>
-    <p class="facts">Reviewed 2026-10-10 · independent editorial guide</p>
+    <p class="facts">Reviewed 2026-10-11 · independent editorial guide</p>
   </div>
 </header>
 
@@ -1648,7 +1629,7 @@ SEO notes:
         <a href="/terms.html">Terms</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Reviewed 2026-10-10 · unofficial and independent</span>
+      <span>Reviewed 2026-10-11 · unofficial and independent</span>
     </div>
   </div>
 </footer>

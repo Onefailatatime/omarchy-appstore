@@ -26,7 +26,7 @@
 <meta name="twitter:title" content="omarchy-zsh on Omarchy: install, fzf keybindings, aliases &amp; the chsh trap">
 <meta name="twitter:description" content="Install omarchy-zsh on Omarchy the safe way (not chsh), learn the fzf keybindings and built-in aliases, and fix common issues like double inits and oh-my-zsh conflicts.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/how-to-use-omarchy-zsh.html#article","headline":"omarchy-zsh on Omarchy: install, fzf keybindings, aliases & the chsh trap","description":"Install omarchy-zsh on Omarchy the safe way (not chsh), learn the fzf keybindings and built-in aliases, and fix common issues like double inits and oh-my-zsh conflicts.","url":"https://omarchyapps.com/how-to-use-omarchy-zsh.html","dateModified":"2026-10-10","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"omarchy-zsh on Omarchy: install, fzf keybindings, aliases & the chsh trap","item":"https://omarchyapps.com/how-to-use-omarchy-zsh.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I switch to zsh on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Run omarchy pkg add omarchy-zsh, then omarchy-setup-zsh. Keep bash as your login shell — the setup makes zsh auto-launch from your ~/.bashrc. Do not use chsh; it breaks Omarchy's session startup."}},{"@type":"Question","name":"Will it overwrite my .zshrc?","acceptedAnswer":{"@type":"Answer","text":"The setup writes a small loader ~/.zshrc. If you already have one with real content, back it up first. Package updates never touch ~/.zshrc; everything system-owned lives under /usr/share/omarchy-zsh/."}},{"@type":"Question","name":"omarchy-zsh vs oh-my-zsh?","acceptedAnswer":{"@type":"Answer","text":"omarchy-zsh ports Omarchy's shared shell config to Zsh with fzf keybindings; it's small, fast, and Omarchy-aware. oh-my-zsh is a huge plugin framework — you can run it on Omarchy, but disable its duplicated inits and never define functions over omarchy's aliases."}},{"@type":"Question","name":"Do my bash habits carry over?","acceptedAnswer":{"@type":"Answer","text":"Mostly, yes. The aliases, functions, and env vars are the same ones Omarchy ships for bash, and the syntax is compatible. The prompt is starship in both."}},{"@type":"Question","name":"How do I go back to plain bash?","acceptedAnswer":{"@type":"Answer","text":"Remove the package with sudo pacman -R omarchy-zsh, then restore ~/.bashrc from a .bashrc.backup-* file or remove the exec zsh line."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/how-to-use-omarchy-zsh.html#article","headline":"omarchy-zsh on Omarchy: install, fzf keybindings, aliases & the chsh trap","description":"Install omarchy-zsh on Omarchy the safe way (not chsh), learn the fzf keybindings and built-in aliases, and fix common issues like double inits and oh-my-zsh conflicts.","url":"https://omarchyapps.com/how-to-use-omarchy-zsh.html","dateModified":"2026-10-11","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"omarchy-zsh on Omarchy: install, fzf keybindings, aliases & the chsh trap","item":"https://omarchyapps.com/how-to-use-omarchy-zsh.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I switch to zsh on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Run omarchy pkg add omarchy-zsh, then omarchy-setup-zsh. Keep bash as your login shell — the setup makes zsh auto-launch from your ~/.bashrc. Do not use chsh; it breaks Omarchy's session startup."}},{"@type":"Question","name":"Will it overwrite my .zshrc?","acceptedAnswer":{"@type":"Answer","text":"The setup writes a small loader ~/.zshrc. If you already have one with real content, back it up first. Package updates never touch ~/.zshrc; everything system-owned lives under /usr/share/omarchy-zsh/."}},{"@type":"Question","name":"omarchy-zsh vs oh-my-zsh?","acceptedAnswer":{"@type":"Answer","text":"omarchy-zsh ports Omarchy's shared shell config to Zsh with fzf keybindings; it's small, fast, and Omarchy-aware. oh-my-zsh is a huge plugin framework — you can run it on Omarchy, but disable its duplicated inits and never define functions over omarchy's aliases."}},{"@type":"Question","name":"Do my bash habits carry over?","acceptedAnswer":{"@type":"Answer","text":"Mostly, yes. The aliases, functions, and env vars are the same ones Omarchy ships for bash, and the syntax is compatible. The prompt is starship in both."}},{"@type":"Question","name":"How do I go back to plain bash?","acceptedAnswer":{"@type":"Answer","text":"Remove the package with sudo pacman -R omarchy-zsh, then restore ~/.bashrc from a .bashrc.backup-* file or remove the exec zsh line."}}]}]}</script>
 <style>
 /* =========================================================================
    Unofficial Omarchy App Store
@@ -1416,25 +1416,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
 
-/* bid forms on the advertise page */
-.bid-notice { margin: 0.5em 0 0; padding: 0.6em 0.9em; border: var(--border-width) solid rgba(var(--rgb-green), 0.5); border-radius: var(--radius); color: var(--color-green); font-size: 92%; }
-.bid-wrap { margin-top: auto; }
-.bid-wrap > summary { list-style: none; width: max-content; max-width: 100%; }
-.bid-wrap > summary::-webkit-details-marker { display: none; }
-.bid-wrap[open] > summary { margin-bottom: var(--space-medium); }
-.bid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-small) var(--space-medium); }
-.bid label { display: flex; flex-direction: column; gap: 0.25em; font-size: 88%; color: rgb(var(--rgb-terminal-blue) / 0.9); }
-.bid label small { color: rgb(var(--rgb-terminal-blue) / 0.6); }
-.bid input:not([type="checkbox"]) { padding: 0.55em 0.8em; background: var(--color-background-storm); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.45); border-radius: var(--radius); color: var(--color-terminal-white); font: inherit; }
-.bid input:focus { outline: 0; border-color: var(--color-terminal-blue); }
-.bid .trap { position: absolute; left: -9999px; }
-.bid .agree { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; gap: 0.6em; color: rgb(var(--rgb-terminal-white) / 0.85); }
-.bid .agree input { margin-top: 0.25em; accent-color: var(--color-green); }
-.bid .button { grid-column: 1 / -1; justify-self: start; }
-.bid .bid-status { grid-column: 1 / -1; margin: 0; min-height: 1.4em; color: var(--color-terminal-blue); font-size: 88%; }
-.bid.is-done > *:not(.bid-status) { display: none; }
-.bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
-@media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
 
 /* =================== SPONSOR ROTATION =================== */
 /* Header and footer each rotate fairly through every active sponsor:
@@ -1474,7 +1455,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <p class="eyebrow">Omarchy shell guide</p>
     <h1>omarchy-zsh on <span>Omarchy</span></h1>
     <p class="tag">Zero-config Zsh with Omarchy&#x27;s aliases — installed the safe way, not with chsh.</p>
-    <p class="facts">Reviewed 2026-10-10 · independent editorial guide</p>
+    <p class="facts">Reviewed 2026-10-11 · independent editorial guide</p>
   </div>
 </header>
 
@@ -1670,7 +1651,7 @@ omarchy-setup-zsh</code></pre>
         <a href="/terms.html">Terms</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Reviewed 2026-10-10 · unofficial and independent</span>
+      <span>Reviewed 2026-10-11 · unofficial and independent</span>
     </div>
   </div>
 </footer>

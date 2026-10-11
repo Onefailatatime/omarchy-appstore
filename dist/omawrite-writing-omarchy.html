@@ -26,7 +26,7 @@
 <meta name="twitter:title" content="Omawrite on Omarchy: Install, Shortcuts &amp; Typora Alternative Guide">
 <meta name="twitter:description" content="Omawrite is Omarchy&#x27;s free default Markdown editor — a distraction-free, open-source Typora alternative. Install guide, keyboard shortcuts, real GitHub issues, and how to switch from Typora.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/omawrite-writing-omarchy.html#article","headline":"Omawrite on Omarchy: Install, Shortcuts & Typora Alternative Guide","description":"Omawrite is Omarchy's free default Markdown editor — a distraction-free, open-source Typora alternative. Install guide, keyboard shortcuts, real GitHub issues, and how to switch from Typora.","url":"https://omarchyapps.com/omawrite-writing-omarchy.html","dateModified":"2026-10-10","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Omawrite on Omarchy: Install, Shortcuts & Typora Alternative Guide","item":"https://omarchyapps.com/omawrite-writing-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Omawrite work on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Yes — it's a first-class Omarchy citizen. It installs from the Omarchy package repository via omarchy pkg add omawrite and has been preinstalled on every fresh Omarchy install since version 4.0 Quattro. It's also in the AUR for other Arch-based systems."}},{"@type":"Question","name":"Is Omawrite free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely. It's MIT-licensed open source (omacom/omawrite), with the bundled IBM Plex Mono font under the SIL Open Font License. No trial, no paid tier, no account."}},{"@type":"Question","name":"Omawrite vs Typora — which should I use?","acceptedAnswer":{"@type":"Answer","text":"If you write Markdown and want zero friction, Omawrite — free, lighter, already installed, and Omarchy's chosen default. If you regularly export to Word/EPUB or live in custom themes, Typora's $14.99 buys you that. Most people can cover the export gap with Pandoc and keep the $14.99."}},{"@type":"Question","name":"Does Omawrite have a preview mode?","acceptedAnswer":{"@type":"Answer","text":"Not a side-by-side WYSIWYG preview — the editor is the view, with syntax dimmed rather than hidden. Print (Ctrl+P) renders real Markdown to PDF, which is the closest thing to a preview."}},{"@type":"Question","name":"Will I lose my draft if it crashes?","acceptedAnswer":{"@type":"Answer","text":"No — unsaved drafts are recovered after an abnormal exit, and the app warns you before an external edit to an open file can overwrite your work."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/omawrite-writing-omarchy.html#article","headline":"Omawrite on Omarchy: Install, Shortcuts & Typora Alternative Guide","description":"Omawrite is Omarchy's free default Markdown editor — a distraction-free, open-source Typora alternative. Install guide, keyboard shortcuts, real GitHub issues, and how to switch from Typora.","url":"https://omarchyapps.com/omawrite-writing-omarchy.html","dateModified":"2026-10-11","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Omawrite on Omarchy: Install, Shortcuts & Typora Alternative Guide","item":"https://omarchyapps.com/omawrite-writing-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Omawrite work on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Yes — it's a first-class Omarchy citizen. It installs from the Omarchy package repository via omarchy pkg add omawrite and has been preinstalled on every fresh Omarchy install since version 4.0 Quattro. It's also in the AUR for other Arch-based systems."}},{"@type":"Question","name":"Is Omawrite free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely. It's MIT-licensed open source (omacom/omawrite), with the bundled IBM Plex Mono font under the SIL Open Font License. No trial, no paid tier, no account."}},{"@type":"Question","name":"Omawrite vs Typora — which should I use?","acceptedAnswer":{"@type":"Answer","text":"If you write Markdown and want zero friction, Omawrite — free, lighter, already installed, and Omarchy's chosen default. If you regularly export to Word/EPUB or live in custom themes, Typora's $14.99 buys you that. Most people can cover the export gap with Pandoc and keep the $14.99."}},{"@type":"Question","name":"Does Omawrite have a preview mode?","acceptedAnswer":{"@type":"Answer","text":"Not a side-by-side WYSIWYG preview — the editor is the view, with syntax dimmed rather than hidden. Print (Ctrl+P) renders real Markdown to PDF, which is the closest thing to a preview."}},{"@type":"Question","name":"Will I lose my draft if it crashes?","acceptedAnswer":{"@type":"Answer","text":"No — unsaved drafts are recovered after an abnormal exit, and the app warns you before an external edit to an open file can overwrite your work."}}]}]}</script>
 <style>
 /* =========================================================================
    Unofficial Omarchy App Store
@@ -1416,25 +1416,6 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .slot-map figcaption { margin-top: 0.5em; color: rgb(var(--rgb-terminal-blue) / 0.7); white-space: normal; }
 @media (max-width: 760px) { .steps, .slots, .slots-head { grid-template-columns: 1fr; } .slot-map { max-width: 20em; } }
 
-/* bid forms on the advertise page */
-.bid-notice { margin: 0.5em 0 0; padding: 0.6em 0.9em; border: var(--border-width) solid rgba(var(--rgb-green), 0.5); border-radius: var(--radius); color: var(--color-green); font-size: 92%; }
-.bid-wrap { margin-top: auto; }
-.bid-wrap > summary { list-style: none; width: max-content; max-width: 100%; }
-.bid-wrap > summary::-webkit-details-marker { display: none; }
-.bid-wrap[open] > summary { margin-bottom: var(--space-medium); }
-.bid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-small) var(--space-medium); }
-.bid label { display: flex; flex-direction: column; gap: 0.25em; font-size: 88%; color: rgb(var(--rgb-terminal-blue) / 0.9); }
-.bid label small { color: rgb(var(--rgb-terminal-blue) / 0.6); }
-.bid input:not([type="checkbox"]) { padding: 0.55em 0.8em; background: var(--color-background-storm); border: var(--border-width) solid rgba(var(--rgb-terminal-blue), 0.45); border-radius: var(--radius); color: var(--color-terminal-white); font: inherit; }
-.bid input:focus { outline: 0; border-color: var(--color-terminal-blue); }
-.bid .trap { position: absolute; left: -9999px; }
-.bid .agree { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; gap: 0.6em; color: rgb(var(--rgb-terminal-white) / 0.85); }
-.bid .agree input { margin-top: 0.25em; accent-color: var(--color-green); }
-.bid .button { grid-column: 1 / -1; justify-self: start; }
-.bid .bid-status { grid-column: 1 / -1; margin: 0; min-height: 1.4em; color: var(--color-terminal-blue); font-size: 88%; }
-.bid.is-done > *:not(.bid-status) { display: none; }
-.bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
-@media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
 
 /* =================== SPONSOR ROTATION =================== */
 /* Header and footer each rotate fairly through every active sponsor:
@@ -1474,7 +1455,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <p class="eyebrow">Omarchy writing guide</p>
     <h1>Omawrite on <span>Omarchy</span></h1>
     <p class="tag">The cleanest place to put words down on Omarchy — already installed.</p>
-    <p class="facts">Reviewed 2026-10-10 · independent editorial guide</p>
+    <p class="facts">Reviewed 2026-10-11 · independent editorial guide</p>
   </div>
 </header>
 
@@ -1656,7 +1637,7 @@ SEO notes:
         <a href="/terms.html">Terms</a>
         <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact @jessyka_boat on X</a>
       </nav>
-      <span>Reviewed 2026-10-10 · unofficial and independent</span>
+      <span>Reviewed 2026-10-11 · unofficial and independent</span>
     </div>
   </div>
 </footer>
