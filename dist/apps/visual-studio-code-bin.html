@@ -1436,6 +1436,25 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .bid.is-done > *:not(.bid-status) { display: none; }
 .bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
 @media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
+
+/* =================== SPONSOR ROTATION =================== */
+/* Header and footer each rotate fairly through every active sponsor:
+   3 units shown at a time, the window advancing sequentially (assets/ads.js).
+   Padding-top leaves room for the .ad .tag which sits above the unit. */
+.ad-rotate { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; }
+.ad-header .ad-rotate { margin-bottom: var(--space-small); }
+.ad-footer .ad-rotate { margin-bottom: var(--space-x-large); }
+@media (max-width: 760px) { .ad-rotate { grid-template-columns: 1fr; } }
+
+/* App profile banner: one sponsor unit on the sponsor's own app page. */
+.ad-app-banner { margin: 0 0 var(--space-large); padding-top: 0.6em; }
+.ad-app-banner .ad { border-width: 2px; }
+
+/* Lifetime pin: one permanent sponsor unit at the top of the homepage.
+   Never rotates — the premium forever placement. */
+.ad-lifetime { max-width: var(--maxw); margin: 0 auto var(--space-medium); padding: 0.6em var(--space-neutral) 0; }
+.ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
+
 </style>
 </head>
 <body>
@@ -1454,6 +1473,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <div><p class="eyebrow">Developer Tools · version 1.141.0-1</p><h1>visual-studio-code-bin</h1><p class="app-byline">by <a href="https://www.microsoft.com" target="_blank" rel="author noopener">Microsoft</a></p><p class="app-lead">Visual Studio Code is a free code editor from Microsoft with built-in debugging, Git integration, an integrated terminal, and IntelliSense completions,…</p></div>
       <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="visual-studio-code-bin" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/visual-studio-code-bin.html" data-share-app="visual-studio-code-bin" data-share-title="visual-studio-code-bin for Omarchy" data-share-url="https://omarchyapps.com/apps/visual-studio-code-bin.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+visual-studio-code-bin+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
+
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://code.visualstudio.com/assets/docs/agents/getting-started/explorer-and-chat-view.png" target="_blank" rel="noopener" aria-label="Open full-size visual-studio-code-bin app screenshot"><img src="https://code.visualstudio.com/assets/docs/agents/getting-started/explorer-and-chat-view.png" alt="visual-studio-code-bin app screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is visual-studio-code-bin?</h2><p>Visual Studio Code is a free code editor from Microsoft with built-in debugging, Git integration, an integrated terminal, and IntelliSense completions, extendable through a marketplace of tens of thousands of extensions covering nearly every language and framework. Recent versions add AI coding agents that can plan and carry out multi-step edits, run commands, and iterate, on top of the traditional editing experience.</p></section>
     <section><h2>Install visual-studio-code-bin on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add visual-studio-code-bin</pre></div></section>

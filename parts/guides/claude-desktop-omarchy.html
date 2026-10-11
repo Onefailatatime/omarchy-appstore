@@ -1,0 +1,121 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist (source-verified, not live-verified — no Omarchy test box was available for this guide):
+- Install: `omarchy pkg add claude-desktop` on a clean system — confirm version (~179 MB download / ~605 MB installed)
+- Nature of package: Omarchy's PKGBUILD repackages Anthropic's official Linux .deb (beta) from downloads.claude.ai, with a custom Wayland/Hyprland launcher and symlinks mapping Cowork VM paths onto Arch locations — confirm launcher handles Ozone/Wayland on Hyprland
+- Login flow: sign in via claude.ai redirect; Hyprland warning — on desktops Chromium doesn't recognize, tokens stored insecurely and switching DEs logs you out; verify whether Omarchy's build inherits this
+- Cowork tab: works out of the box or needs qemu-system-x86, edk2-ovmf, virtiofsd + kvm group membership; x86_64-only in this package
+- Issues below documented upstream (AUR maintainer notes, claude-desktop-debian docs, press) — NOT personally reproduced; verify at least the Hyprland login one live
+- Screenshots needed: install screen, login, chat, Cowork tab, MCP/connector settings
+- Free to install; needs a Claude account (free tier works)
+
+SEO notes:
+- URL: /guides/claude-desktop-omarchy
+- Title tag: "Claude Desktop on Omarchy: Install & Setup Guide (2026)"
+- Meta description: "Install Anthropic's official Claude Desktop Linux app on Omarchy. Setup, MCP connectors, Cowork VM troubleshooting, and the Hyprland login fix."
+- Keywords: claude desktop omarchy, claude desktop linux, claude desktop hyprland login, claude mcp linux, claude cowork vm
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Claude Desktop on Omarchy: Anthropic’s official Linux app, repackaged for Arch</h2>
+      <p>Claude Desktop on Omarchy is Anthropic’s official Linux app (beta), repackaged for Arch — full chat, Projects, MCP connectors, Claude Code, and the Cowork agent mode, all from your desktop instead of a browser tab.</p>
+      <h3>TL;DR install</h3>
+      <pre><code class="language-bash">omarchy pkg add claude-desktop</code></pre>
+      <p>That pulls Omarchy’s <code>claude-desktop</code> package (~179 MB download, ~605 MB installed), which repackages Anthropic’s official Linux <code>.deb</code> verbatim. It’s the real app — not a web wrapper. But remember: <strong>the app binary is Anthropic’s, the Arch package is community-built and unsupported by Anthropic.</strong> Free to install; you need a Claude account (free tier works).</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started in 5 minutes</h2>
+      <h3>1. Launch and sign in</h3>
+      <p>Find “Claude” in the Omarchy launcher (app icon is <code>com.anthropic.Claude</code>). First launch opens a browser-based sign-in: log in with your Claude account and the <code>claude://</code> redirect hands the token back to the app. If the redirect stalls on Hyprland, see Issue #1 below.</p>
+      <h3>2. Start a new chat</h3>
+      <p>The chat interface is identical to claude.ai — same models, same context windows (up to 1M tokens on paid plans). Pick a model, type, go.</p>
+      <h3>3. Three things worth doing in the first session</h3>
+      <ul>
+        <li><strong>Connect a folder (MCP).</strong> Claude Desktop’s signature feature over the browser is MCP servers — local file access, databases, and tools Claude can actually use. Config lives at <code>~/.config/Claude/claude_desktop_config.json</code> (quit the app <em>before</em> hand-editing it; the app overwrites edits made while running).</li>
+        <li><strong>Open the Claude Code tab.</strong> This build ships with Claude Code integration — use the system-installed Claude Code CLI from inside the app, with changes shown as diffs you approve.</li>
+        <li><strong>Try a Cowork task.</strong> Cowork is the autonomous agent mode: it can work on your files, organize folders, and create documents without you approving each step. First use downloads a ~1.3 GB VM image that expands to roughly 12 GB under <code>~/.config/Claude/vm_bundles/</code>, and it runs Cowork inside a KVM virtual machine (x86_64 only).</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Login doesn’t stick on Hyprland, or credentials are stored insecurely</h3>
+      <p><strong>Fix:</strong> This is upstream Chromium behavior on desktops it doesn’t recognize (Hyprland, Sway) — not a packaging bug. Workaround: copy the <code>.desktop</code> file to <code>~/.local/share/applications/</code>, add <code>--password-store=kwallet6</code> (or <code>--password-store=gnome-libsecret</code>) to its <code>Exec=</code> lines, then run <code>update-desktop-database ~/.local/share/applications</code>. (<a href="https://aur.archlinux.org/packages/claude-desktop" target="_blank" rel="noopener">AUR claude-desktop maintainer notes</a>)</p>
+      <h3>The Cowork tab fails to start or the VM won’t boot</h3>
+      <p><strong>Fix:</strong> Cowork needs KVM access and its VM stack. Check your user can reach <code>/dev/kvm</code> (some setups need you added to the <code>kvm</code> group). Install the optional dependencies the package declares: <code>qemu-system-x86</code>, <code>edk2-ovmf</code>, and <code>virtiofsd</code> — Omarchy’s PKGBUILD already maps the app’s Debian-hardcoded VM paths onto Arch locations via symlinks, so you only need the packages themselves. Cowork is x86_64-only; there’s no UEFI firmware package on Arch Linux ARM. (<a href="https://aur.archlinux.org/packages/claude-desktop" target="_blank" rel="noopener">AUR maintainer notes</a>; <a href="https://github.com/omacom/omarchy-pkgs" target="_blank" rel="noopener">omarchy-pkgs PKGBUILD</a>)</p>
+      <h3>The app never auto-updates itself</h3>
+      <p><strong>Fix:</strong> Expected on Linux — the app has no self-updater here. New versions arrive through system package updates. On Omarchy, <code>omarchy update</code> picks up new builds (Omarchy’s package tracks Anthropic’s Debian repo, which ships frequent releases). (<a href="https://itbrief.co.nz/story/anthropic-launches-claude-desktop-beta-for-linux-users" target="_blank" rel="noopener">itbrief.co.nz</a>)</p>
+      <h3>MCP servers you added by editing <code>claude_desktop_config.json</code> disappear</h3>
+      <p><strong>Fix:</strong> Quit Claude Desktop <em>before</em> hand-editing <code>~/.config/Claude/claude_desktop_config.json</code>, then relaunch. The app rewrites its own config while running, so edits made against a live app get overwritten on the next write. (<a href="https://github.com/aaddrick/claude-desktop-debian" target="_blank" rel="noopener">claude-desktop-debian README</a>)</p>
+      <h3>Features you saw on a Mac/Windows demo — Computer Use, dictation — are missing</h3>
+      <p><strong>Fix:</strong> Not a bug: the Linux beta doesn’t have Computer Use or dictation, and the Ctrl+Alt+Space Quick Entry shortcut needs extra portal help on Wayland. Chat, Projects, Claude Code, MCP, and Cowork all work. (<a href="https://www.ubuntufree.com/claude-desktop-for-ubuntu/" target="_blank" rel="noopener">ubuntufree.com Linux FAQ</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><strong>Claude Code</strong> (terminal agent — same subscription, already integrated into Omarchy 4.0’s AI menu), a secrets manager or <code>gnome-keyring</code> for the login issue above, and <code>qemu</code>/<code>virtiofsd</code> if you plan to use Cowork.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Just use <strong>claude.ai</strong> in the browser — same models, zero install, and the only things you lose are MCP local-file access and Cowork. Heavy terminal users often prefer Claude Code alone.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Claude Desktop vs browser vs CLI vs the rest</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>claude-desktop</th><th>claude.ai (browser)</th><th>Claude Code (CLI)</th><th>ChatGPT desktop</th><th>LM Studio</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free app; Claude Free / Pro $20/mo</td><td>Free / Pro $20/mo</td><td>Requires Pro $20/mo+</td><td>Free / Plus $20/mo</td><td>Free app; models free</td></tr>
+            <tr><td>Best for</td><td>Desktop chat + MCP local-file access + Cowork agents</td><td>Zero-install chat; identical models</td><td>Terminal coding agent workflows</td><td>If your work lives in OpenAI’s ecosystem</td><td>Running open models locally, fully offline</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add claude-desktop</code></td><td>Just open it</td><td>Omarchy 4.0 AI menu</td><td>Omarchy Install → AI menu</td><td>Omarchy AI menu</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>One-line verdict:</strong> If you want Claude with local file access and Cowork agents outside a browser tab, this is the only way to get it on Linux — the official .deb, just repackaged. If you only chat, the browser gives you the same thing for free.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>The software is free, the intelligence is freemium</h2>
+      <p>The app itself costs nothing — it’s free to install and free to run on a free Claude account. What you can <em>do</em> inside it follows your plan: Free ($0) covers chat on web, desktop, and mobile; Pro ($20/month, or $200/year) adds at least 5× usage per session, the biggest context windows, Claude Code, and (on higher tiers) Cowork. So the honest pitch: <strong>the software is free, the intelligence is freemium</strong> — and a free account is enough to decide whether the desktop extras (MCP, Cowork) are worth paying for.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Claude Desktop package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/claude-desktop.html">View Claude Desktop →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is there an official Claude desktop app for Linux?</summary><p>Yes — since June 30, 2026, Anthropic ships a first-party Linux beta as a <code>.deb</code> (amd64 + arm64) from its own signed APT repository at <code>downloads.claude.ai</code>. It’s a beta and it doesn’t auto-update itself, but it’s Anthropic’s code, not a third-party port.</p></details>
+      <details><summary>Is claude-desktop on Omarchy official?</summary><p>Half and half. The app binary is Anthropic’s official Linux build, downloaded from Anthropic’s own repository. But Anthropic doesn’t ship an Arch package — the one <code>omarchy pkg add</code> installs is maintained by the Omarchy community in <code>omarchy-pkgs</code>, and Anthropic won’t support issues with it. Report packaging problems to Omarchy, not Anthropic.</p></details>
+      <details><summary>Is it free?</summary><p>The app is free to install and free to use with a free Claude account (no signed-out mode — you need an account). Capability limits follow your Claude plan: Free, Pro ($20/mo), Max, etc.</p></details>
+      <details><summary>Does it work offline or run a model locally?</summary><p>No to both. Every message goes to Anthropic’s servers. The virtual machine Cowork uses is a sandbox around what Claude can touch — it’s not a local model.</p></details>
+      <details><summary>Where do MCP settings live?</summary><p><code>~/.config/Claude/claude_desktop_config.json</code>. Quit the app before editing it by hand.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://raw.githubusercontent.com/omacom/omarchy-pkgs/master/pkgbuilds/claude-desktop/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs PKGBUILD (official-.deb repackage, Wayland launcher, Cowork symlinks)</a></li>
+        <li><a href="https://aur.archlinux.org/packages/claude-desktop" target="_blank" rel="noopener">AUR claude-desktop maintainer notes (Hyprland login, Cowork /dev/kvm)</a></li>
+        <li><a href="https://itbrief.co.nz/story/anthropic-launches-claude-desktop-beta-for-linux-users" target="_blank" rel="noopener">Anthropic Linux beta launch, June 30 2026</a></li>
+        <li><a href="https://github.com/aaddrick/claude-desktop-debian" target="_blank" rel="noopener">claude-desktop-debian README (MCP config edit rule)</a></li>
+        <li><a href="https://www.ubuntufree.com/claude-desktop-for-ubuntu/" target="_blank" rel="noopener">Linux feature gaps (no Computer Use/dictation)</a></li>
+        <li><a href="https://www.ssdnodes.com/learn/claude-pro-price-and-limits" target="_blank" rel="noopener">Claude pricing tiers (Free $0, Pro $20/mo)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

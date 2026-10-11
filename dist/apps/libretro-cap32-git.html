@@ -1436,6 +1436,25 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .bid.is-done > *:not(.bid-status) { display: none; }
 .bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
 @media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
+
+/* =================== SPONSOR ROTATION =================== */
+/* Header and footer each rotate fairly through every active sponsor:
+   3 units shown at a time, the window advancing sequentially (assets/ads.js).
+   Padding-top leaves room for the .ad .tag which sits above the unit. */
+.ad-rotate { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; }
+.ad-header .ad-rotate { margin-bottom: var(--space-small); }
+.ad-footer .ad-rotate { margin-bottom: var(--space-x-large); }
+@media (max-width: 760px) { .ad-rotate { grid-template-columns: 1fr; } }
+
+/* App profile banner: one sponsor unit on the sponsor's own app page. */
+.ad-app-banner { margin: 0 0 var(--space-large); padding-top: 0.6em; }
+.ad-app-banner .ad { border-width: 2px; }
+
+/* Lifetime pin: one permanent sponsor unit at the top of the homepage.
+   Never rotates — the premium forever placement. */
+.ad-lifetime { max-width: var(--maxw); margin: 0 auto var(--space-medium); padding: 0.6em var(--space-neutral) 0; }
+.ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
+
 </style>
 </head>
 <body>
@@ -1454,6 +1473,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <div><p class="eyebrow">Gaming &amp; Emulation · version 1:4.5.4.r51.g4abfb8b-1</p><h1>libretro-cap32-git</h1><p class="app-byline">by <a href="https://www.libretro.com" target="_blank" rel="author noopener">Libretro</a></p><p class="app-lead">This is Caprice32 packaged as a libretro core, letting RetroArch emulate the 1980s Amstrad CPC line of home computers, including the CPC 464, 464+, 6128,…</p></div>
       <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="libretro-cap32-git" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/libretro-cap32-git.html" data-share-app="libretro-cap32-git" data-share-title="libretro-cap32-git for Omarchy" data-share-url="https://omarchyapps.com/apps/libretro-cap32-git.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+libretro-cap32-git+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
+
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://user-images.githubusercontent.com/560310/172238790-09ca924a-099c-4c45-a0be-1738b8d6fa6f.png" target="_blank" rel="noopener" aria-label="Open full-size imagen"><img src="https://user-images.githubusercontent.com/560310/172238790-09ca924a-099c-4c45-a0be-1738b8d6fa6f.png" alt="imagen" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://user-images.githubusercontent.com/560310/172237853-0a18ebee-be5e-4dec-90fa-e4ca7b77a2d7.png" target="_blank" rel="noopener" aria-label="Open full-size imagen"><img src="https://user-images.githubusercontent.com/560310/172237853-0a18ebee-be5e-4dec-90fa-e4ca7b77a2d7.png" alt="imagen" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://user-images.githubusercontent.com/560310/54316312-abdeb180-45e0-11e9-9063-faf78fec9d6d.png" target="_blank" rel="noopener" aria-label="Open full-size keyb_en"><img src="https://user-images.githubusercontent.com/560310/54316312-abdeb180-45e0-11e9-9063-faf78fec9d6d.png" alt="keyb_en" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://user-images.githubusercontent.com/560310/54316295-9ff2ef80-45e0-11e9-9ae4-a2e3fb064600.png" target="_blank" rel="noopener" aria-label="Open full-size keyb_es"><img src="https://user-images.githubusercontent.com/560310/54316295-9ff2ef80-45e0-11e9-9ae4-a2e3fb064600.png" alt="keyb_es" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/libretro/libretro-cap32/blob/master/README.md" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is libretro-cap32-git?</h2><p>This is Caprice32 packaged as a libretro core, letting RetroArch emulate the 1980s Amstrad CPC line of home computers, including the CPC 464, 464+, 6128, 6128+ and the GX4000 console variant. It plays original tape (CDT) and disk (DSK) images with autostart support, supports period keyboard layouts and joystick/lightgun input, and can use RetroArch&#x27;s shaders for CRT-style visual effects. On its own it has no interface; it&#x27;s a plugin loaded by RetroArch, which provides the actual on-screen menus.</p></section>
     <section><h2>Install libretro-cap32-git on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add libretro-cap32-git</pre></div></section>

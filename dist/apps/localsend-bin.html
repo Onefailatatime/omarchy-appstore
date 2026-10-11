@@ -1436,6 +1436,25 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .bid.is-done > *:not(.bid-status) { display: none; }
 .bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
 @media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
+
+/* =================== SPONSOR ROTATION =================== */
+/* Header and footer each rotate fairly through every active sponsor:
+   3 units shown at a time, the window advancing sequentially (assets/ads.js).
+   Padding-top leaves room for the .ad .tag which sits above the unit. */
+.ad-rotate { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; }
+.ad-header .ad-rotate { margin-bottom: var(--space-small); }
+.ad-footer .ad-rotate { margin-bottom: var(--space-x-large); }
+@media (max-width: 760px) { .ad-rotate { grid-template-columns: 1fr; } }
+
+/* App profile banner: one sponsor unit on the sponsor's own app page. */
+.ad-app-banner { margin: 0 0 var(--space-large); padding-top: 0.6em; }
+.ad-app-banner .ad { border-width: 2px; }
+
+/* Lifetime pin: one permanent sponsor unit at the top of the homepage.
+   Never rotates — the premium forever placement. */
+.ad-lifetime { max-width: var(--maxw); margin: 0 auto var(--space-medium); padding: 0.6em var(--space-neutral) 0; }
+.ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
+
 </style>
 </head>
 <body>
@@ -1454,6 +1473,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <div><p class="eyebrow">Utilities · version 1.18.2-1</p><h1>localsend-bin</h1><p class="app-byline">by <a href="https://localsend.org" target="_blank" rel="author noopener">LocalSend</a></p><p class="app-lead">Same app as the localsend source package: a free, open-source, cross-platform tool for beaming files and messages between nearby devices over a local…</p></div>
       <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="localsend-bin" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/localsend-bin.html" data-share-app="localsend-bin" data-share-title="localsend-bin for Omarchy" data-share-url="https://omarchyapps.com/apps/localsend-bin.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+localsend-bin+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
+
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://localsend.org/img/screenshot-pc.webp" target="_blank" rel="noopener" aria-label="Open full-size localsend-bin app screenshot"><img src="https://localsend.org/img/screenshot-pc.webp" alt="localsend-bin app screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/localsend/localsend" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is localsend-bin?</h2><p>Same app as the localsend source package: a free, open-source, cross-platform tool for beaming files and messages between nearby devices over a local network, with no cloud account or internet connection required. This variant is packaged as a precompiled binary for a faster install.</p></section>
     <section><h2>Install localsend-bin on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add localsend-bin</pre></div></section>

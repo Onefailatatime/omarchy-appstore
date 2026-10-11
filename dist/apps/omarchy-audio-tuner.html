@@ -1436,6 +1436,25 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .bid.is-done > *:not(.bid-status) { display: none; }
 .bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
 @media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
+
+/* =================== SPONSOR ROTATION =================== */
+/* Header and footer each rotate fairly through every active sponsor:
+   3 units shown at a time, the window advancing sequentially (assets/ads.js).
+   Padding-top leaves room for the .ad .tag which sits above the unit. */
+.ad-rotate { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; }
+.ad-header .ad-rotate { margin-bottom: var(--space-small); }
+.ad-footer .ad-rotate { margin-bottom: var(--space-x-large); }
+@media (max-width: 760px) { .ad-rotate { grid-template-columns: 1fr; } }
+
+/* App profile banner: one sponsor unit on the sponsor's own app page. */
+.ad-app-banner { margin: 0 0 var(--space-large); padding-top: 0.6em; }
+.ad-app-banner .ad { border-width: 2px; }
+
+/* Lifetime pin: one permanent sponsor unit at the top of the homepage.
+   Never rotates — the premium forever placement. */
+.ad-lifetime { max-width: var(--maxw); margin: 0 auto var(--space-medium); padding: 0.6em var(--space-neutral) 0; }
+.ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
+
 </style>
 </head>
 <body>
@@ -1454,6 +1473,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <div><p class="eyebrow">System &amp; Drivers · version 0.1.0-1</p><h1>omarchy-audio-tuner</h1><p class="app-byline">by <a href="https://omacom.io" target="_blank" rel="author noopener">Omacom</a></p><p class="app-lead">Omarchy Audio Tuner is a command-line toolkit for authoring speaker tuning profiles that restore the vendor sound signature Linux normally strips away on…</p></div>
       <div class="app-header-actions"><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="omarchy-audio-tuner" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/omarchy-audio-tuner.html" data-share-app="omarchy-audio-tuner" data-share-title="omarchy-audio-tuner for Omarchy" data-share-url="https://omarchyapps.com/apps/omarchy-audio-tuner.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+omarchy-audio-tuner+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
+
 
     <section><h2>What is omarchy-audio-tuner?</h2><p>Omarchy Audio Tuner is a command-line toolkit for authoring speaker tuning profiles that restore the vendor sound signature Linux normally strips away on laptops. It walks through capturing microphone measurements, analyzing frequency response, fitting a correction curve, and generating a PipeWire filter chain, with A/B auditioning to check the result. It&#x27;s explicitly for advanced users building a tuning for a laptop model Omarchy doesn&#x27;t already cover — most people never need it.</p></section>
     <section><h2>Install omarchy-audio-tuner on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add omarchy-audio-tuner</pre></div></section>

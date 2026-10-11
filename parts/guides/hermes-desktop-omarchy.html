@@ -1,0 +1,121 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist (source-verified, not live-verified — no Omarchy test box was available for this guide):
+- Install: `omarchy pkg add hermes-desktop` — does the package exist under this slug? What upstream artifact does it wrap (AppImage / .deb / built from source)?
+- First launch: confirm the first-run flow (local vs remote mode, installer runs install.sh with --skip-setup, dependency check for Git/uv/Python 3.11+)
+- Provider setup: confirm OpenRouter key entry in the GUI, and that chat reaches http://127.0.0.1:8642 locally
+- Claim check: Nous Portal "free tier available" — what does the free tier actually include?
+- Issues below are real reports from the fathah/hermes-desktop issue tracker; none reproduced live (esp. #996, #998 on Hyprland/Wayland)
+- Screenshots needed: first-run provider picker, chat UI with tool progress, Skills screen, Sessions screen, Settings → backup/log viewer
+- License: MIT. Free app — but you need an LLM provider behind it (own key, Nous Portal free tier, or local model)
+
+SEO notes:
+- URL: /guides/hermes-desktop-omarchy
+- Title tag: "How to Install & Use Hermes Desktop on Omarchy (2026)"
+- Meta description: "Install Hermes Desktop on Omarchy: the native GUI for Hermes Agent with memory, skills, scheduled tasks, and messaging integrations. Bring your own key, use Nous Portal's free tier, or run local models."
+- Keywords: hermes desktop omarchy, hermes agent desktop linux, nous research hermes, ai agent desktop linux, openrouter linux gui
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Hermes Desktop on Omarchy: the self-improving AI agent, in a chat window</h2>
+      <p>Hermes Desktop is the native desktop GUI for Hermes Agent, Nous Research’s self-improving AI agent — it installs and configures the agent for you, then gives you a chat window with memory, skills, scheduled tasks, and messaging integrations, no terminal required.</p>
+      <h3>TL;DR install</h3>
+      <pre><code class="language-bash">omarchy pkg add hermes-desktop</code></pre>
+      <p>Takes ~5 minutes including the first-run wizard. <strong>Honest caveat:</strong> the app itself is free and MIT-licensed, but it is not a chatbot on its own — you need an LLM provider behind it. Bring your own API key (OpenRouter is the one-click path), use Nous Portal’s free tier, or point it at a local model (Ollama/LM Studio/llama.cpp) and pay nothing at all.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started in 5 minutes</h2>
+      <h3>1. First launch — local or remote?</h3>
+      <p>The app’s first-run wizard asks one question: run Hermes <em>locally</em> on this machine, or connect to a <em>remote</em> Hermes API server. Pick <strong>Local</strong> unless you already run a Hermes dashboard on a VPS. In local mode it checks for an existing install in <code>~/.hermes</code> and, if missing, runs the official Hermes install script with dependency resolution (Git, uv, Python 3.11+). In remote mode it asks for the API URL + API key and validates the connection.</p>
+      <h3>2. The 3 things you need to know</h3>
+      <ul>
+        <li><strong>Connect a provider.</strong> OpenRouter is the recommended path — 200+ models through a single key, per the README. Add credit (~$5 goes a long way), paste the key, and you’re chatting. Alternatives: Anthropic, OpenAI, Google, xAI, Qwen, MiniMax, Hugging Face, Groq, Nous Portal (free tier available), or any OpenAI-compatible local endpoint. Pick your model per profile from the model picker.</li>
+        <li><strong>Start a session.</strong> Chat requests go through <code>http://127.0.0.1:8642</code> with SSE streaming — you get live tool progress indicators, markdown rendering, and real-time token/cost tracking in the chat footer. Try the slash commands: <code>/web</code> for web-enabled chat, <code>/shell</code> to run shell commands, <code>/skills</code>, <code>/memory</code>, <code>/model</code> to switch models mid-session, <code>/usage</code> to see spend.</li>
+        <li><strong>The learning loop is the point.</strong> Hermes Agent’s differentiator is that it creates and improves its own <em>skills</em> from experience, keeps persistent memory across sessions, and searches its past conversations. Open the <strong>Skills</strong> screen to browse/install skills, <strong>Memory</strong> to view and edit what it remembers about you, and <strong>Sessions</strong> to full-text search every conversation you’ve had (SQLite FTS5). Edit its personality on the <strong>Soul</strong> screen (a <code>SOUL.md</code> editor). Set up recurring work under <strong>Schedules</strong> (cron jobs delivered to 15 targets, including Telegram/Discord via 16 messaging gateways).</li>
+      </ul>
+      <h3>3. Config location</h3>
+      <p>Everything is under <code>~/.hermes</code> — <code>.env</code>, <code>config.yaml</code>, <code>profiles/</code> (per-profile isolated configs), <code>state.db</code> (session history), <code>cron/jobs.json</code>. The Settings screen has full backup/restore and a log viewer, so you can move machines without losing your agent’s memory.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Real reports from the <a href="https://github.com/fathah/hermes-desktop" target="_blank" rel="noopener">fathah/hermes-desktop</a> issue tracker (the community-maintained app). The project is in active development — check issue status before hitting any of these.</p>
+      <h3>Remote mode over HTTPS: sign-in “succeeds” but the app never connects</h3>
+      <p><strong>Fix:</strong> Root cause is a cookie-name mismatch: the HTTPS dashboard sets a <code>__Host-hermes_session_at</code> session cookie, but the app only looks for the bare <code>hermes_session_at</code> name, so the 750 ms session poll never fires (<a href="https://github.com/fathah/hermes-desktop/issues/996" target="_blank" rel="noopener">issue #996</a>). Until upstream strips the <code>__Host-</code>/<code>__Secure-</code> prefix, work around it by connecting to the <em>loopback HTTP</em> gateway instead (works fine per the report), or use the SSH connection kind. A fix snippet was offered in the issue — if you’re technical, you can patch <code>src/main/remote-oauth.ts</code>.</p>
+      <h3>Model picker shows only the current model for non-default profiles</h3>
+      <p><strong>Fix:</strong> This appeared after a failed model selection in one profile; the desktop’s per-profile model state appears to corrupt while the backend stays healthy (<a href="https://github.com/fathah/hermes-desktop/issues/998" target="_blank" rel="noopener">issue #998</a>). Workaround: change models via the CLI, which works correctly for every profile (<code>hermes -p &lt;profile&gt; model</code>). Only affects non-default profiles in the desktop UI; the default profile is unaffected.</p>
+      <h3>In Remote mode, Schedules/MCP screens come up empty</h3>
+      <p><strong>Fix:</strong> The app’s remote calls don’t carry OAuth credentials (session lives in a separate cookie partition), so the server returns 401 and the app silently renders empty lists (<a href="https://github.com/fathah/hermes-desktop/issues/1002" target="_blank" rel="noopener">issue #1002</a>). The reporter proposed PRs routing calls through the authenticated boundary. Until those land: prefer <strong>local mode</strong>, or manage schedules/skills/gateways directly in the dashboard or CLI, and use the desktop only for chat in remote mode.</p>
+      <h3>A custom vision model (Gemma 4 E4B in llama.cpp) isn’t recognized</h3>
+      <p><strong>Fix:</strong> The app’s llama.cpp preset management strips manual <code>mmproj</code> lines from <code>presets.ini</code> before load, so there’s no reliable manual fix reported (<a href="https://github.com/fathah/hermes-desktop/issues/988" target="_blank" rel="noopener">issue #988</a>). Workarounds that users have had success with: stick to the app’s suggested/known-good models (a Qwen3 variant loaded fine for the same reporter), or run your model behind <strong>Ollama</strong>/<strong>LM Studio</strong> and add it as an OpenAI-compatible local endpoint — local presets for both are built in, and vision works through the standard OpenAI-compatible image path.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><strong>Ollama</strong> (<a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>) — free local inference makes Hermes Desktop 100% free and offline on the model side. <strong>Telegram/Discord gateways</strong> — talk to your agent from your phone while it works. A <strong>cron schedule</strong> for morning briefings.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>The official agent directly — Nous Research now ships its own desktop app inside the <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">hermes-agent</a> repo (<code>apps/desktop</code>), and the <code>hermes</code> CLI is the full-featured original. The community app is the nicer onboarding path; the CLI is the power path.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Hermes Desktop vs Jan vs OpenCode</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Hermes Desktop</th><th>Jan</th><th>OpenCode</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT) — bring your own provider key</td><td>Free (open source) — local models free, cloud keys optional</td><td>Free (open source) — bring your own key or OpenCode Zen subscription</td></tr>
+            <tr><td>Best for</td><td>A self-improving AI <em>agent</em> with memory, skills, scheduled tasks, and messaging integrations</td><td>Offline-first ChatGPT replacement: download open models and chat privately on your machine</td><td>Terminal-first agentic coding: reads, edits, and runs code with 75+ provider options</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add hermes-desktop</code></td><td>AppImage / .deb from jan.ai</td><td><code>curl -fsSL https://opencode.ai/install | bash</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>One-line verdict:</strong> pick Hermes Desktop if you want an agent that <em>acts and remembers</em> (tool use, cron, Telegram gateway, skills that improve themselves). Pick Jan if you just want a private chat UI with local models. Pick OpenCode if you live in the terminal and want a coding agent.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Free app, bring your own key</h2>
+      <p>This is not a “free alternative to $20/mo ChatGPT Plus” in the usual sense — Hermes Desktop is the <em>free half</em> of a stack. The honest math: <strong>$0 option</strong> — local models via Ollama/LM Studio presets, fully offline, no API key, no subscription. <strong>Near-$0 option</strong> — Nous Portal’s free tier or OpenRouter’s free models. <strong>Pay-as-you-go</strong> — OpenRouter with a few dollars of credit, far cheaper than any all-in-one AI subscription for casual use. What you give up vs. a $20/mo ChatGPT/Claude subscription: the polished flagship models and vendor-hosted convenience — you’re responsible for your own keys and config. What you keep: a tool-using agent with persistent memory, scheduled jobs, and 16 messaging gateways that no chat subscription gives you at all.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Hermes Desktop package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/hermes-desktop.html">View Hermes Desktop →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Hermes Desktop work on Omarchy?</summary><p>Yes — install with <code>omarchy pkg add hermes-desktop</code>. It’s an Electron app (Linux AppImage/.deb/.rpm builds ship upstream), and the underlying Hermes Agent is a Unix-native Python tool, so Arch/Linux is its home turf.</p></details>
+      <details><summary>Is Hermes Desktop free?</summary><p>Yes. The app is open-source under the MIT License. But it’s a <em>client</em>, not a model — you supply the intelligence via your own provider key, a local model, or Nous Portal’s free tier.</p></details>
+      <details><summary>Do I need an API key?</summary><p>Not necessarily. You need <em>a provider</em>, but that can be a free one: Ollama or LM Studio running locally (no key at all), Nous Portal’s free tier, or OpenRouter’s free models. A paid key (OpenRouter/Anthropic/OpenAI/etc.) just buys you stronger models.</p></details>
+      <details><summary>Can I run it against a remote Hermes server?</summary><p>Yes — the first-run wizard offers Remote mode (API URL + key). But know the caveat: in Remote mode several screens (Schedules, Skills, Gateway, Providers, Memory) are degraded or unavailable, and HTTPS remote sign-in has a known cookie bug (#996). Local mode is the smooth path.</p></details>
+      <details><summary>Does it remember me across sessions?</summary><p>Yes — that’s the headline feature. Persistent memory, session history with full-text search, and a skill system that distills repeated tasks into reusable knowledge. Check the Memory screen to see what it knows, and back it up from Settings before migrating machines.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/fathah/hermes-desktop" target="_blank" rel="noopener">fathah/hermes-desktop — README (features, providers, first-run flow, config paths, license)</a></li>
+        <li><a href="https://github.com/fathah/hermes-desktop/issues/1002" target="_blank" rel="noopener">Issue #1002 — remote mode empty screens</a></li>
+        <li><a href="https://github.com/fathah/hermes-desktop/issues/998" target="_blank" rel="noopener">Issue #998 — model picker per-profile bug</a></li>
+        <li><a href="https://github.com/fathah/hermes-desktop/issues/996" target="_blank" rel="noopener">Issue #996 — HTTPS remote sign-in never completes</a></li>
+        <li><a href="https://github.com/fathah/hermes-desktop/issues/988" target="_blank" rel="noopener">Issue #988 — custom vision model not recognized</a></li>
+        <li><a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">NousResearch/hermes-agent — upstream agent (MIT)</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Hermes_Agent" target="_blank" rel="noopener">Wikipedia — Hermes Agent</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

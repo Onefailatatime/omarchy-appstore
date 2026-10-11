@@ -1,0 +1,136 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist (source-verified, not live-verified — no Omarchy test box was available for this guide):
+- Install: `omarchy pkg add flea` (store slug `flea`); maintainer-recommended faster alternative: `omarchy pkg aur add flea-bin` — install only one, both own /usr/bin/flea
+- First launch: what actually appears (empty window? home dir? onboarding/welcome screen?)
+- Config: `~/.config/flea/` holds ui.json and view.json — confirm after launch and settings changes
+- `flea --default`: Super+Shift+F and Super+Alt+Shift+F open Flea; "Show in folder" from browsers opens Flea
+- `flea --picker`: Flatpak Open/Save dialogs use Flea; confirm `systemctl --user restart xdg-desktop-portal` still required
+- Issues below sourced from real release notes, issue tracker, and packaging commits; none reproduced live
+- Screenshots needed: list view, columns view with preview column, grid view, Quick Look on a PDF, the shelf card, Settings window with key presets
+- License: MIT (confirmed in repo). Free, no paid tier exists. Drafted against v0.3.8 (early Oct 2026)
+
+SEO notes:
+- URL: /guides/flea-file-manager-omarchy
+- Title tag: "How to Install & Use Flea on Omarchy (2026)"
+- Meta description: "Install Flea on Omarchy with one command. Keyboard-first file manager with Quick Look, undoable operations, and network shares. Setup, shortcuts, and real fixes from the issue tracker."
+- Keywords: flea omarchy, flea file manager install, flea --default, flea omarchy keyboard shortcuts, best file manager omarchy
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Flea on Omarchy: install &amp; use the keyboard-first file manager</h2>
+      <p>Flea is a keyboard-first GUI file manager built specifically for Omarchy — a Rust backend with a Quickshell front end that follows your Omarchy theme. Vim-style navigation, macOS-style Quick Look previews, and Finder-style views, all in Hyprland’s aesthetic.</p>
+      <h3>TL;DR install</h3>
+      <pre><code class="language-bash"># From Omarchy's repo (reviewed builds)
+omarchy pkg add flea
+
+# Or the faster-updating AUR prebuilt (releases ship minutes after upstream)
+omarchy pkg aur add flea-bin</code></pre>
+      <p>Install only one of the two — both own <code>/usr/bin/flea</code> and pacman refuses to install the pair together.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started in 5 minutes</h2>
+      <h3>1. First launch</h3>
+      <p>Launch Flea from the app launcher or run <code>flea</code> in a terminal. Switch views with <code>Ctrl+1</code> (list), <code>Ctrl+2</code> (columns), <code>Ctrl+3</code> (grid). Tabs work like a browser: <code>t</code> for a new tab, <code>w</code> to close, <code>1</code>–<code>9</code> to switch.</p>
+      <h3>2. The 3 things you need to know</h3>
+      <ul>
+        <li><strong>Navigate with Vim keys.</strong> <code>j</code>/<code>k</code> move up/down, <code>h</code> goes to the parent folder, <code>l</code> enters a folder. Press <code>?</code> inside Flea for the full keymap. Copy/cut/paste are <code>y</code>/<code>x</code>/<code>p</code> or the usual <code>Ctrl+C/X/V</code>.</li>
+        <li><strong>Space is Quick Look.</strong> Select any file and press <code>Space</code> to preview it — images, PDFs (page through them), video, text, code, even archive contents — without opening an app.</li>
+        <li><strong>Every file operation is undoable.</strong> Copy, move, rename, trash, compress, extract — press <code>z</code> to undo a write. The undo journal is the safety net; use it.</li>
+      </ul>
+      <h3>3. Make it your default</h3>
+      <p>Flea doesn’t take over by default — you opt in. In a terminal inside your Omarchy session:</p>
+      <pre><code class="language-bash">flea --default</code></pre>
+      <p>This sets Flea as the <code>inode/directory</code> handler, routes “Show in folder” requests from browsers to Flea, and makes Super+Shift+F / Super+Alt+Shift+F open Flea instead of Nautilus. To also make Flea the file chooser (the Open/Save dialogs every app raises):</p>
+      <pre><code class="language-bash">flea --picker
+systemctl --user restart xdg-desktop-portal</code></pre>
+      <p>Changed your mind? <code>flea --default off</code> (and <code>flea --picker off</code>) hand everything back. Always run those before uninstalling (<code>omarchy pkg drop flea</code>).</p>
+      <h3>4. Config location</h3>
+      <p>Settings live in <code>~/.config/flea/</code>: <code>ui.json</code> (text size, menus, key preset — edited through the Settings window at <code>,</code>) and <code>view.json</code> (view state). The Settings window has three sections: Keys (Default, Vim, Mac, or Windows preset), Display (text size, spacing, corner radius), and Menus (hide context-menu rows you never touch).</p>
+      <h3>5. Network and devices</h3>
+      <p>The sidebar rail mounts USB drives, phones and cameras over MTP/PTP/AFC (iPhones need to be unlocked and trusted once), and the Network dialog connects to SMB, SFTP, FTPS, WebDAV, NFS, Dropbox, and Taildrop shares — with password prompts for shares that require them.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Writable SMB shares report “That directory could not be read”</h3>
+      <p><strong>Fix:</strong> Fixed upstream in 0.3.6 — update (<code>omarchy update</code>, or <code>omarchy pkg aur add flea-bin</code> for the faster-moving AUR build). (<a href="https://github.com/thisisgm/flea/releases/tag/v0.3.6" target="_blank" rel="noopener">v0.3.6 release notes</a>, issue #194)</p>
+      <h3>Flea exits with “the shell config is missing,” or fails silently</h3>
+      <p><strong>Fix:</strong> This was a packaging bug: 0.3.2 moved the Quickshell entries into <code>ui/boot</code> and the Omarchy repo package didn’t install them. Fixed in 0.3.5+ on both packages — update, don’t hand-install the missing files. The missing UI file is now named in an error instead of failing silently. (<a href="https://github.com/omacom/omarchy-pkgs/commit/f234bfffc6ff7946f6cd2d7ae7749571715fe9b2" target="_blank" rel="noopener">omacom/omarchy-pkgs packaging fix</a>)</p>
+      <h3>PDF and media previews don’t render on a fresh install</h3>
+      <p><strong>Fix:</strong> Root cause: <code>qt6-webengine</code> and <code>qt6-multimedia</code> were missing from the package’s declared Qt dependencies, so a clean box (one where no other package had already pulled them in) couldn’t load the PDF/media preview modules. Fixed in the PKGBUILD — update to a current build. (<a href="https://github.com/thisisgm/flea/commit/8f192d178d2805d3138d038df20fce9e7c84cbba" target="_blank" rel="noopener">upstream commit</a>)</p>
+      <h3>Uncontrolled memory growth (~5 GB) then a crash in long sessions</h3>
+      <p><strong>Fix:</strong> Still open as of v0.3.8 (<a href="https://github.com/thisisgm/flea/releases/tag/v0.3.8" target="_blank" rel="noopener">issue #151</a>): the maintainer couldn’t reproduce it in a one-hour soak, so it remains unresolved. If it hits you, add your reproduction details to the issue and restart Flea as a workaround — it’s not a config problem you can fix.</p>
+      <h3>NFS mounts misbehave, or folder renames fail on some NFS servers</h3>
+      <p><strong>Fix:</strong> Renames on NFS servers that refuse no-replace renames were fixed in 0.3.8. But an unexplained NFS problem remains open as a known issue on v0.3.8 — if NFS is central to your workflow, keep a backup file manager handy for that share. (<a href="https://github.com/thisisgm/flea/releases/tag/v0.3.8" target="_blank" rel="noopener">v0.3.8 release notes</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>omasend</code> (send files you just found to nearby devices over the LAN), <code>tailscale</code> (Taildrop shares mount directly in Flea’s Network dialog), and Flea’s own shelf — send files there from any menu, then drag them into any app.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><strong>Strata</strong> — the other Omarchy-native file manager (same niche, different trade-offs; in the maintainer’s own benchmarks Strata wins memory on media folders, Flea wins speed on huge listings). <strong>Thunar</strong> for something lighter with no keyboard-first pretense. <strong>Ranger</strong> if you’d rather live in the terminal anyway.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Flea vs Strata vs Nautilus vs Thunar</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Flea</th><th>Strata</th><th>Nautilus</th><th>Thunar</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Omarchy-native, keyboard-first users; huge folders; Quick Look previews; network shares and phones</td><td>The other Omarchy-built file manager; slightly leaner on media-folder memory in third-party benchmarks</td><td>The Omarchy default; GNOME-integrated, but slowest in Flea’s 100k-file benchmark (84 s to settle vs Flea’s 0.92 s)</td><td>Lightweight XFCE classic; simple, fast on small folders, no theme integration</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add flea</code></td><td><code>omarchy pkg add strata</code></td><td>Pre-installed</td><td><code>omarchy pkg add thunar</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>One-line verdict:</strong> If you want a file manager that looks and feels like it belongs on Omarchy and you prefer the keyboard, Flea is the pick; Strata is the alternative in the same lane, and Nautilus is fine if you never open it.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>The honest free-alternative framing</h2>
+      <p>There is no paid Linux file manager worth replacing — Flea’s competitors (Strata, Nautilus, Thunar, Dolphin, Nemo, PCManFM) are all free too. The paid file managers live on other platforms: <strong>Path Finder ($36)</strong> and <strong>ForkLift ($19.95)</strong> on macOS, <strong>Directory Opus (~$50+)</strong> on Windows. If you’re coming to Omarchy from a Mac and paying for Path Finder, Flea’s columns view + Quick Look + undo journal is the native-Linux answer to most of that feature set — free and MIT-licensed, with a public benchmark suite you can re-run yourself. But nobody is saving money by switching away from a paid Linux file manager, because there basically isn’t one.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Flea package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/flea.html">View Flea →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Flea work on Omarchy?</summary><p>Yes — it’s built exclusively for Omarchy. <code>omarchy</code> and <code>quickshell</code> are hard dependencies, and per the install docs it will not install on a plain Arch box. The Omarchy repo carries it as <code>flea</code>, and the AUR carries the faster-updating <code>flea-bin</code>.</p></details>
+      <details><summary>Is Flea free?</summary><p>Yes. It’s MIT-licensed open source. There’s an optional GitHub Sponsors link and a Buy Me a Coffee page, but no paid tier, no trial, no feature gates.</p></details>
+      <details><summary>How do I make Flea my default file manager?</summary><p>Run <code>flea --default</code> in a terminal inside your Omarchy session. It sets the <code>inode/directory</code> handler, routes “Show in folder” to Flea, and binds Super+Shift+F to it. Undo with <code>flea --default off</code>.</p></details>
+      <details><summary>Can Flea replace the file Open/Save dialogs?</summary><p>Yes. <code>flea --picker</code> makes Flea answer the <code>org.freedesktop.impl.portal.FileChooser</code> contract, replacing the GTK Open/Save dialog in every portal-using app (including Flatpaks), then restart the portal: <code>systemctl --user restart xdg-desktop-portal</code>. Revert with <code>flea --picker off</code>.</p></details>
+      <details><summary>How do I uninstall Flea cleanly?</summary><p>Run the integration undo first, then drop the package: <code>flea --default off</code> then <code>omarchy pkg drop flea</code>. Skipping the undo leaves stale per-user state (a D-Bus service file naming the removed binary, <code>inode/directory</code> handler lines, Hyprland keybinds).</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/thisisgm/flea" target="_blank" rel="noopener">thisisgm/flea — README (features, keymap, install, performance)</a></li>
+        <li><a href="https://github.com/thisisgm/flea/blob/HEAD/docs/install.md" target="_blank" rel="noopener">docs/install.md — packages, flea --default, flea --picker, removal</a></li>
+        <li><a href="https://github.com/thisisgm/flea/releases/tag/v0.3.6" target="_blank" rel="noopener">v0.3.6 release notes</a></li>
+        <li><a href="https://github.com/thisisgm/flea/releases/tag/v0.3.8" target="_blank" rel="noopener">v0.3.8 release notes (known issues incl. #151)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/commit/f234bfffc6ff7946f6cd2d7ae7749571715fe9b2" target="_blank" rel="noopener">Omarchy packaging commit — “shell config is missing” fix</a></li>
+        <li><a href="https://github.com/thisisgm/flea/commit/8f192d178d2805d3138d038df20fce9e7c84cbba" target="_blank" rel="noopener">PKGBUILD Qt modules fix commit</a></li>
+        <li><a href="https://github.com/ruegen/omarchy-awesome/blob/HEAD/README.md" target="_blank" rel="noopener">ruegen/omarchy-awesome — Flea listing</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

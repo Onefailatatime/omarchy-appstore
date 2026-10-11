@@ -1,0 +1,149 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist (source-verified, not live-verified — no Omarchy test box was available for this guide):
+- Install command: `omarchy pkg add omarchy-zsh` — Omarchy's `pkg add` delegates to pacman; the repo README uses `sudo pacman -S omarchy-zsh`. Both install the same package.
+- Shell switch flow is NOT `chsh -s $(which zsh)`. Verified from repo README + Omarchy docs discussion: the correct second step is `omarchy-setup-zsh`, which keeps bash as the login shell and auto-launches zsh from it. `chsh` on Omarchy breaks the session boot chain (black screen after LUKS decrypt for some users).
+- What's included (from repo README + omadots docs + omarchy.org manual): shared aliases/functions/env/init from omadots; zsh-specific options and fzf keybindings; starship prompt; `_omarchy` zsh completions.
+- Claimed issues reproduced: issues below are sourced from real public reports (repo issue tracker, basecamp/omarchy discussion, third-party docs). None were reproduced live on an Omarchy machine — stated explicitly.
+
+SEO notes:
+- URL: /guides/omarchy-zsh-on-omarchy
+- Title tag: "omarchy-zsh on Omarchy: install, fzf keybindings, aliases & the chsh trap"
+- Meta description: "Install omarchy-zsh on Omarchy the safe way (not chsh), learn the fzf keybindings and built-in aliases, and fix common issues like double inits and oh-my-zsh conflicts."
+- Keywords: omarchy zsh, omarchy-setup-zsh, omarchy chsh zsh broken, zsh omarchy fzf keybindings, omadots aliases.
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>omarchy-zsh: How to use Omarchy’s Zsh setup (install, keybindings, aliases)</h2>
+      <p>omarchy-zsh is Omarchy’s zero-config Zsh — it layers the distro’s shared shell config (aliases, functions, env, tool inits) onto Zsh plus fzf-powered keybindings, so you get Omarchy’s terminal experience in a better shell without hand-editing dotfiles.</p>
+      <h3>TL;DR install</h3>
+      <pre><code class="language-bash"># Install the package (omarchy pkg add is the distro's pacman wrapper)
+omarchy pkg add omarchy-zsh
+
+# Set up zsh (keeps bash as the login shell; zsh auto-launches from it)
+omarchy-setup-zsh</code></pre>
+      <p>Open a new terminal (Super+Enter). You’re now in zsh with Omarchy’s config.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Do not run <code>chsh -s /usr/bin/zsh</code></h2>
+      <p>Omarchy’s entire session chain (SDDM → <code>/usr/share/sddm/scripts/wayland-session</code> → <code>/etc/profile</code> → <code>~/.bash_profile</code> → <code>~/.bashrc</code> → Omarchy’s rc) expects a bash-compatible login shell. Changing it can leave you with broken session startup or, for some setups, a black screen after LUKS decrypt. The package’s <code>omarchy-setup-zsh</code> exists specifically to avoid this: your <code>~/.bashrc</code> execs zsh, and <code>~/.zshrc</code> then loads everything.</p>
+    </aside>
+
+    <section id="getting-started">
+      <h2>Getting started in 5 minutes</h2>
+      <h3>1. The fzf keybindings you’ll actually use daily</h3>
+      <p>These come from the package’s zsh-specific config (documented in the <a href="https://github.com/omacom/omarchy-zsh" target="_blank" rel="noopener">repo README</a>):</p>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th>Key</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Ctrl+R</strong></td><td>Fuzzy-search command history</td></tr>
+            <tr><td><strong>Ctrl+T</strong></td><td>Fuzzy-search files in the current directory</td></tr>
+            <tr><td><strong>Alt+C</strong></td><td><code>cd</code> into a fuzzy-picked directory</td></tr>
+            <tr><td><strong>Ctrl+Alt+F</strong></td><td>Search files and directories</td></tr>
+            <tr><td><strong>Ctrl+Alt+L</strong></td><td>Search your git log</td></tr>
+            <tr><td><strong>Ctrl+Alt+V</strong></td><td>Search shell variables</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Ctrl+R alone will change how you feel about the terminal. Type a fragment of a command you ran three days ago, hit Ctrl+R, pick it.</p>
+      <h3>2. The aliases worth knowing (from omadots)</h3>
+      <p>Shared config is pulled from the <a href="https://github.com/omacom-io/omarchy-zsh" target="_blank" rel="noopener">omadots</a> dotfiles project at package build time and sourced from <code>/usr/share/omarchy-zsh/shell/</code>, so package updates apply immediately. The key aliases to learn (same set Omarchy ships for bash, syntax-compatible with zsh):</p>
+      <ul>
+        <li><code>ls</code> → eza with icons, dirs-first; <code>lt</code> → eza tree (level 2, git status); <code>lsa</code> / <code>lta</code> are their <code>-a</code> variants</li>
+        <li><code>..</code>, <code>...</code>, <code>....</code> → up one, two, three directories</li>
+        <li><code>g</code> → git; <code>gcm</code> → <code>git commit -m</code>; <code>gcam</code> → <code>git commit -a -m</code>; <code>gcad</code> → <code>git commit -a --amend</code></li>
+        <li><code>d</code> → docker; <code>r</code> → rails; <code>ff</code> → fzf with a bat preview of each file</li>
+        <li><code>open</code> → xdg-open; <code>n</code> → nvim (opens current dir with no args)</li>
+        <li><code>cc</code> / <code>cdx</code> → Claude Code / Codex; <code>ccx</code> / <code>cdxx</code> → the same with permission checks bypassed (intentional — the <code>x</code> suffix means dangerous mode)</li>
+        <li><code>z</code> → zoxide smart-jump (the <code>cd</code> function itself is zoxide-backed)</li>
+      </ul>
+      <h3>3. Where your personal config goes</h3>
+      <pre><code class="language-bash">nvim ~/.zshrc</code></pre>
+      <p><code>omarchy-setup-zsh</code> generates your <code>~/.zshrc</code> as a small loader. Add your own config at the bottom, after the omarchy-zsh loading — user customizations there take precedence over system defaults. This is the designed split: the package owns <code>/usr/share/omarchy-zsh/</code>; you own <code>~/.zshrc</code>; updates never touch your file.</p>
+      <p>Shell functions are also shared with Omarchy’s bash defaults and documented in the <a href="https://omarchy.org/manual/shell-functions/" target="_blank" rel="noopener">Omarchy manual’s shell-functions page</a>: <code>compress</code>/<code>decompress</code>, <code>iso2sd</code>, <code>format-drive</code>, tmux dev layouts (<code>tdl</code>, <code>tds</code>, <code>tdlm</code>, <code>tsl</code> — <code>tdl c</code> opens a layout with your editor + opencode + terminal), <code>ga</code>/<code>gd</code> for git worktrees, <code>rsw</code>/<code>lsw</code>/<code>dsw</code> rsync watchers, and <code>fip</code>/<code>dip</code>/<code>lip</code> SSH port forwards.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>You ran <code>chsh -s /usr/bin/zsh</code> and now things break — or nothing works after reboot</h3>
+      <p><strong>Fix:</strong> That’s the known trap on Omarchy: the display manager and session init chain expect bash, so a zsh login shell breaks session startup (<a href="https://github.com/basecamp/omarchy/discussions/2495" target="_blank" rel="noopener">basecamp/omarchy discussion #2495</a> documents the whole chain; one user reports the black-screen-after-decrypt symptom). Fix: <code>chsh -s /usr/bin/bash</code> to restore bash, then use the supported flow — install the package and run <code>omarchy-setup-zsh</code>, which auto-launches zsh from bash instead.</p>
+      <h3>You want to remove starship, but pacman refuses</h3>
+      <p><strong>Fix:</strong> This is a real open issue on the <a href="https://github.com/omacom/omarchy-zsh" target="_blank" rel="noopener">omarchy-zsh tracker</a> (“Support to turn starship off”): starship is a hard package dependency because the prompt init lives in the shared <code>inits</code> file. Until the maintainer makes it optional, the workarounds are: edit your <code>~/.zshrc</code> to neutralize the prompt (e.g. don’t source the starship init, or set <code>STARSHIP_CONFIG</code> to a minimal config — your <code>~/.zshrc</code> runs last so it wins), or use <code>STARSHIP</code> env overrides rather than uninstalling.</p>
+      <h3>Your own <code>~/.zshrc</code> additions (or another dotfiles framework) die silently</h3>
+      <p><strong>Fix:</strong> zsh expands aliases at parse time, so if your rc defines a <em>function</em> whose name is already a live <em>alias</em> (omarchy-zsh defines single-letter aliases like <code>c</code> and <code>cy</code>), that’s a parse error and zsh abandons the rest of the file (<a href="https://github.com/martybytes/terminal-stack/blob/HEAD/docs/omarchy.md" target="_blank" rel="noopener">documented real-world case</a>, measured at line 470 of a <code>~/.zshrc</code>). Fix: don’t define functions named after omarchy aliases; if a framework defines them, escape the name (<code>\cy() { ... }</code>) to suppress alias expansion.</p>
+      <h3>Double prompts, doubled-up completions, or hooks firing twice after layering oh-my-zsh or another rc on top</h3>
+      <p><strong>Fix:</strong> omarchy-zsh’s <code>inits</code> initializes starship, zoxide, mise, and fzf. If your rc initializes them again, you get duplicate precmd hooks and two inits for one prompt (<a href="https://github.com/martybytes/terminal-stack/blob/HEAD/docs/omarchy.md" target="_blank" rel="noopener">same source</a>). Either let omarchy-zsh own those inits (it’s already doing them) or skip them in your <code>~/.zshrc</code>. Same goes for <code>zsh-syntax-highlighting</code>: the package sources it last by design, so don’t source it twice.</p>
+      <h3>Completions for <code>omarchy</code> subcommands feel thin</h3>
+      <p><strong>Fix:</strong> This was a real gap fixed by PR <a href="https://github.com/omacom/omarchy-zsh/pull/10" target="_blank" rel="noopener">omacom/omarchy-zsh#10</a>, which brought the zsh <code>_omarchy</code> completion in line with the bash completer (arg enums, alternatives, file fallback). Update the package (<code>omarchy pkg add omarchy-zsh</code> on an already-installed package, or <code>sudo pacman -Syu omarchy-zsh</code>) and open a new shell. The completer ships to <code>/usr/share/zsh/site-functions/_omarchy</code>, so it works even in a custom <code>~/.zshrc</code> that never ran <code>omarchy-setup-zsh</code>, as long as <code>compinit</code> runs.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>omarchy-nvim</code> (Omarchy’s editor config — <code>EDITOR=nvim</code> is already set for you), <code>fzf</code> and <code>zoxide</code> (their keybindings/inits are wired in automatically), <code>starship</code> (the default prompt), <code>tmux</code> (the <code>tdl</code>/<code>tds</code> dev-layout functions), <code>eza</code> + <code>bat</code> (the <code>ls</code>/<code>lt</code>/<code>ff</code> aliases assume them).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Stay on <strong>Omarchy’s bash defaults</strong> — same aliases and functions, zero setup. Want a different shell philosophy: <code>omarchy-fish</code> is the sibling package for Fish. Want the plugin ecosystem: oh-my-zsh works on Omarchy, but see the parse-conflict and double-init issues above before stacking it on top of omarchy-zsh.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omarchy-zsh</th><th>bash + Omarchy defaults</th><th>oh-my-zsh</th><th>fish (+ omarchy-fish)</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free (ships with Omarchy)</td><td>Free (MIT)</td><td>Free (MIT/GPL)</td></tr>
+            <tr><td>Best for</td><td>Omarchy users who want Zsh with zero config work</td><td>People who just want Omarchy to work as designed</td><td>Zsh plugin/theme explorers</td><td>People who prefer fish’s syntax and autosuggestions</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omarchy-zsh</code> + <code>omarchy-setup-zsh</code></td><td>Already installed</td><td>Manual install script (watch for conflicts with Omarchy aliases/inits)</td><td><code>omarchy-fish</code> package (same setup flow)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>One-line verdict:</strong> if you’re on Omarchy and want Zsh, install omarchy-zsh — it’s the only Zsh option built to carry Omarchy’s exact shell config, and it’s the only one that keeps your session boot chain intact.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>The zero-config Zsh for Omarchy</h2>
+      <p>There’s no paid product to replace here — omarchy-zsh is free and MIT-licensed, and so is everything it pulls in (zsh, fzf, starship, zoxide, eza). The honest frame: <strong>the zero-config Zsh for Omarchy.</strong> The alternatives aren’t paid tools; they’re <em>time</em>: hand-wiring Omarchy’s aliases, functions, and tool inits into a custom zsh config yourself (and debugging the <code>chsh</code> footgun and double-init problems above along the way). This package is the maintainer-tested version of that afternoon.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the omarchy-zsh package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omarchy-zsh.html">View omarchy-zsh →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>How do I switch to zsh on Omarchy?</summary><p><code>omarchy pkg add omarchy-zsh</code>, then run <code>omarchy-setup-zsh</code>. Keep bash as your login shell — the setup makes zsh auto-launch from your <code>~/.bashrc</code>. Do not use <code>chsh</code>; it breaks Omarchy’s session startup.</p></details>
+      <details><summary>Will it overwrite my .zshrc?</summary><p>The setup writes a small loader <code>~/.zshrc</code>. If you already have one with real content, back it up first — the supported workflow is one loader file that you extend at the bottom. Package updates never touch <code>~/.zshrc</code>; everything system-owned lives under <code>/usr/share/omarchy-zsh/</code>.</p></details>
+      <details><summary>omarchy-zsh vs oh-my-zsh?</summary><p>Different jobs. omarchy-zsh ports Omarchy’s shared shell config to Zsh and adds fzf keybindings; it’s small, fast, and Omarchy-aware. oh-my-zsh is a huge plugin/theme framework with hundreds of community plugins. You <em>can</em> run oh-my-zsh on Omarchy, but disable its duplicated inits (starship, zoxide, mise, fzf) and never define functions over omarchy’s aliases (<code>c</code>, <code>cy</code>) or your rc will silently break.</p></details>
+      <details><summary>Do my bash habits carry over?</summary><p>Mostly, yes. The aliases, functions, and env vars are the same ones Omarchy ships for bash (pulled from omadots at build time), and the syntax is compatible. The prompt is starship in both.</p></details>
+      <details><summary>How do I go back to plain bash?</summary><p><code>sudo pacman -R omarchy-zsh</code>, then restore your <code>~/.bashrc</code> from one of the <code>.bashrc.backup-*</code> files the setup saved, or just remove the <code>exec zsh</code> line.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/omacom/omarchy-zsh" target="_blank" rel="noopener">omacom/omarchy-zsh repo + README</a></li>
+        <li><a href="https://github.com/basecamp/omarchy/discussions/2495" target="_blank" rel="noopener">basecamp/omarchy discussion #2495 — why chsh breaks Omarchy</a></li>
+        <li><a href="https://omarchy.org/manual/shell-functions/" target="_blank" rel="noopener">Omarchy manual: shell functions</a></li>
+        <li><a href="https://github.com/omacom/omarchy-zsh/pull/10" target="_blank" rel="noopener">omacom/omarchy-zsh PR #10 — _omarchy completion fix</a></li>
+        <li><a href="https://github.com/martybytes/terminal-stack/blob/HEAD/docs/omarchy.md" target="_blank" rel="noopener">terminal-stack omarchy docs — alias collisions, double-inits</a></li>
+        <li><a href="https://github.com/malik-na/omarchy-mac/issues/94" target="_blank" rel="noopener">omarchy-mac issue #94 — omarchy-zsh on Omarchy-Mac</a></li>
+        <li>omarchy-zsh tracker — open issue: “Support to turn starship off” (starship is a hard dependency)</li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

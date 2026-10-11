@@ -1,0 +1,127 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist (source-verified, not live-verified — no Omarchy test box was available for this guide):
+- Install: `omarchy pkg add strata` (package slug `strata`) — verify it resolves in the store index
+- First launch: window opens on home directory with Columns view, places sidebar, preview pane
+- Keyboard shortcuts under Hyprland: Ctrl+K recursive search, Ctrl+L location entry, Space quick preview, F2 rename, Alt+arrows history
+- Issues below are real reports from the lgse/strata tracker; none reproduced live (bubblewrap-missing previews, 12MP+ photo SIGXFSZ, ARW RAW, GIF sandbox crash, network-share search limitation)
+- Config file location unverified at draft time — check ~/.config/strata or similar and update before publishing
+- Screenshots needed: Columns view with Miller-column navigation, Icons grid, sortable List table, fuzzy search results, preview pane (code + video), Settings → Updates, Quattro theme following
+- Requirements: glibc 2.39+, GTK 4.12+. License: MIT, free, no paid tiers
+
+SEO notes:
+- URL: /guides/strata-file-manager-omarchy
+- Title tag: "Strata on Omarchy: Install the Keyboard-First File Manager"
+- Meta description: "Install Strata on Omarchy: the free keyboard-first GTK4 file manager with Miller columns, fuzzy search, and sandboxed previews. Setup, keybinds, fixes, and Strata vs flea compared."
+- Keywords: strata file manager omarchy, strata vs flea, omarchy file manager miller columns, install strata linux, strata keyboard shortcuts
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Strata on Omarchy: the keyboard-first file manager with Miller columns</h2>
+      <p>Strata is a free, keyboard-first file manager for Linux (Rust + GTK4) — Finder-style Miller columns, instant fuzzy filename search, and rich previews that render inside a Bubblewrap sandbox so untrusted files can’t touch your system.</p>
+      <h3>TL;DR install</h3>
+      <pre><code class="language-bash">omarchy pkg add strata</code></pre>
+      <p>Launch it from your app launcher (or type <code>strata</code> in a terminal). You get three browse modes — navigable Miller columns, a thumbnail grid, and a sortable table — plus <code>Ctrl</code>+<code>K</code> fuzzy search that works while the tree is still being indexed.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started in 5 minutes</h2>
+      <h3>1. Install and launch</h3>
+      <p>Run the install command above, then launch Strata from the app launcher or a terminal. It opens on your home directory. On Omarchy, Strata follows your active Omarchy theme — if you use the Quattro theme, it follows that live (six bundled themes plus custom themes are also available in Settings).</p>
+      <h3>2. The 3 things you need to know</h3>
+      <ul>
+        <li><strong>Miller columns navigation.</strong> The default Columns view works like macOS Finder: arrow keys move within a column, <code>→</code>/<code>l</code> descends into the selected folder (opening a new column), <code>←</code>/<code>h</code> goes back up. Each column filters independently, and folders peek on hover. If columns feel weird, switch to the Icons grid or the sortable List table — the mode buttons are in the header.</li>
+        <li><strong>Fuzzy search with <code>Ctrl</code>+<code>K</code>.</strong> This is the killer feature. Press <code>Ctrl</code>+<code>K</code> anywhere and start typing a filename or path; results stream in while the tree is still being indexed. Global search covers Home and all mounted local drives, regardless of which folder you’re in. (Deliberate tradeoff, straight from the docs: this is fast <em>filename/path</em> search, not file-content search.)</li>
+        <li><strong>Preview pane with <code>Space</code>.</strong> Select a file and hit <code>Space</code> (or just select it in Columns view) to get a bounded preview: source code with syntax highlighting, images, camera RAW, PDFs, audio with a now-playing view, video with a keyframe storyboard while scrubbing, and natively rendered Markdown/static HTML. Everything backed by a native parser runs in an isolated Bubblewrap sandbox, not in the app process — if something can’t be sandboxed, Strata shows “Preview unavailable” instead of risking it.</li>
+      </ul>
+      <h3>3. Config location</h3>
+      <p>Strata keeps user preferences and custom themes under the XDG configuration directories (check <code>~/.config/strata</code> after your first launch — early releases had no user config file at all). Current releases expose Settings → Updates (automatic update checks are on by default; turn them off there), Settings → Actions for custom context-menu scripts, and Settings → General for desktop integration options.</p>
+      <h3>4. Make it your default file manager</h3>
+      <p>In-app: <strong>Settings → General → Desktop integration</strong> sets Strata as the <code>inode/directory</code> handler and installs the FileManager1 D-Bus service, so “Reveal in File Manager” from other apps uses Strata. On Lua-based Omarchy, also rebind the stock Nautilus shortcuts (<code>Super</code>+<code>Shift</code>+<code>F</code>, <code>Super</code>+<code>Alt</code>+<code>Shift</code>+<code>F</code>) in <code>~/.config/hypr/bindings.lua</code> per the upstream README, then <code>hyprctl reload</code>. These user overrides survive Omarchy updates.</p>
+      <h3>5. Other useful shortcuts</h3>
+      <p>Default map; press <code>F1</code> for the full reference: <code>Ctrl</code>+<code>L</code> for path/URI entry (type <code>smb://...</code> for network shares), <code>Ctrl</code>+<code>F</code> to filter the current pane, <code>Ctrl</code>+<code>Z</code> / <code>Ctrl</code>+<code>Shift</code>+<code>Z</code> to undo/redo file operations, <code>F2</code> to rename, <code>Alt</code>+arrows for history and parent navigation.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Previews show “Preview unavailable” — Bubblewrap missing</h3>
+      <p>Strata refuses to run image, RAW, PDF, thumbnail, or media parsers without a sandbox. From the README: <em>“Bubblewrap is required: preview parsing fails closed rather than running untrusted native parsers without a sandbox.”</em> So if <code>bubblewrap</code> isn’t installed, every parser-backed preview quietly degrades to “Preview unavailable” while the app otherwise works fine — which looks like a Strata bug but is really a missing dependency.</p>
+      <p><strong>Fix:</strong> Install the runtime dependency set and restart Strata (<code>bubblewrap</code> fixes parser-backed previews; <code>ffmpegthumbnailer</code>/<code>ffmpeg</code> fix video thumbnails, which otherwise fall back to a generic icon):</p>
+      <pre><code class="language-bash">sudo pacman -S --needed bubblewrap ffmpeg ffmpegthumbnailer fontconfig gst-libav gst-plugins-good gtk4 gtksourceview5 poppler-glib</code></pre>
+      <h3>Phone photos (12MP+) fail to preview or thumbnail, possible core dump</h3>
+      <p><strong>Fix:</strong> Real reported issue (<a href="https://github.com/lgse/strata/pull/55" target="_blank" rel="noopener">lgse/strata#54, fixed</a>): the sandbox’s file-size limit mirrored the output cap, and since gdk-pixbuf decodes through glycin to <code>width × height × channels</code>, any image over roughly 11MP exceeded the limit and the loader was killed with SIGXFSZ. Update to a current release — the fix decoupled the sandbox file-size cap (now 512 MiB) from the output-byte cap. In-app: <strong>Settings → Updates</strong>, or reinstall the latest release.</p>
+      <h3>Sony <code>.ARW</code> (and some other RAW) previews fail</h3>
+      <p><strong>Fix:</strong> Real reported issue (<a href="https://github.com/lgse/strata/pull/166" target="_blank" rel="noopener">lgse/strata#165, fixed</a>): the sandbox bind-mounted every file as extensionless <code>/input</code>, so ImageMagick treated Sony <code>.ARW</code> (a TIFF-container RAW) as plain TIFF and failed. Update to a current release; the fix keeps a sanitized original extension across the sandbox boundary. For broader camera RAW support also install <code>sudo pacman -S --needed imagemagick libraw dcraw</code>.</p>
+      <h3>Animated GIF previews crash or hang</h3>
+      <p><strong>Fix:</strong> Real reported issue (<a href="https://github.com/lgse/strata/issues/128" target="_blank" rel="noopener">lgse/strata#128</a>): GIF playback hit a hardware-preview sandbox issue — FFmpeg’s retained output stream wasn’t bounded, and applying guessed memory limits to opaque GPU driver internals crashed the preview. Update to a release containing the bounded-media-streaming fix (<a href="https://github.com/lgse/strata/pull/119" target="_blank" rel="noopener">lgse/strata#119</a>): GIFs now play with bounded media streaming, hardware acceleration treated as best-effort with reliable software fallback.</p>
+      <h3><code>Ctrl</code>+<code>K</code> search doesn’t find files on network shares</h3>
+      <p><strong>Fix:</strong> Not a bug — a documented limitation. Global search covers Home and all mounted local drives; <em>“URI-native remote shares are not yet included”</em> (README). So <code>smb://</code> and <code>sftp://</code> locations (reachable via <code>Ctrl</code>+<code>L</code>) simply don’t appear in global search results. Navigate to the share first (<code>Ctrl</code>+<code>L</code>, enter the URI, authenticate), then use pane-scoped filtering (<code>Ctrl</code>+<code>F</code>) inside that location.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Omarchy’s launcher for apps, <code>yazi</code> or <code>ranger</code> for the times you’re already in the shell, and <code>udiskie</code> for encrypted-volume unlock — Strata can take over udiskie’s unlock dialog on Omarchy 3/4 via <strong>Settings → General → Desktop integration</strong>.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><strong>flea</strong> (<a href="https://github.com/thisisgm/flea" target="_blank" rel="noopener">thisisgm/flea</a>) — same keyboard-first idea, but a Quickshell front end instead of GTK4, built Omarchy-first. Or stick with <strong>Nautilus</strong> if you don’t care about keyboard-first. If Miller columns are the thing you hate, <strong>Thunar</strong> gives you a classic tree+list layout with near-zero overhead.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Strata vs flea vs Nautilus vs Thunar</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Strata</th><th>flea</th><th>Nautilus</th><th>Thunar</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free</td><td>Free (GNOME)</td><td>Free (Xfce)</td></tr>
+            <tr><td>Best for</td><td>Keyboard-first Finder-style browsing: Miller columns, fuzzy search, rich sandboxed previews, live Omarchy theme following</td><td>Omarchy-native speed: Rust backend + Quickshell UI that follows your Omarchy theme, Mac/Vim/Windows key presets</td><td>Default GNOME workflow; Omarchy’s stock file manager, zero setup</td><td>Minimal, fast, low-resource classic file management (tree + list)</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add strata</code></td><td><code>omarchy pkg add flea</code> (or <code>omarchy pkg aur add flea-bin</code> for fastest updates)</td><td>Pre-installed</td><td><code>omarchy pkg add thunar</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>One-line verdict:</strong> Both are free and keyboard-first — but they’re different philosophies. Strata is the GTK4 route: Finder-style Miller columns, the deepest preview engine of the bunch (parsers sandboxed via Bubblewrap), live theme following. flea is the Omarchy-native route: Rust backend + Quickshell front end, built for Omarchy from day one, leaning into speed and theme integration. Columns and previews → Strata; Omarchy-native speed → flea.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>The honest free-alternative framing</h2>
+      <p>Everything in this comparison is free and open source — there is no paid file manager being displaced here. This guide isn’t “replace your $X app with free Strata”; it’s a workflow choice. Strata vs flea vs Nautilus vs Thunar is about <em>how</em> you browse: columns vs speed vs stock-GNOME vs minimal. If you currently use Nautilus on Omarchy, Strata costs you nothing and buys you Miller columns, <code>Ctrl</code>+<code>K</code> fuzzy search, undoable file operations, and previews that don’t run untrusted parsers in your process. The reason to switch is the workflow, not the price.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Strata package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/strata.html">View Strata →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Strata work on Omarchy?</summary><p>Yes — Arch Linux and Omarchy are the project’s primary supported environments, and Strata is explicitly “designed for Omarchy.” Requirements: glibc 2.39+ and GTK 4.12+. It follows the active Omarchy theme live (including Quattro), and the README documents Hyprland keybind overrides, udiskie encrypted-volume unlock, and SMB support via <code>gvfs-smb</code>.</p></details>
+      <details><summary>Is Strata free?</summary><p>Yes. MIT-licensed, free and libre — no paid tiers, no feature gates. In-app updates are built in (on by default; disable in Settings → Updates).</p></details>
+      <details><summary>Strata vs flea?</summary><p>Both keyboard-first, both free, both on omarchyapps.com. Strata = Rust + GTK4, Miller columns, the richest preview engine, sandboxed parsers. flea = Rust + Quickshell, built Omarchy-first, leans into raw speed and native theme integration. Same price (zero). Columns and previews → Strata; Omarchy-native speedster → flea.</p></details>
+      <details><summary>Why do some previews show “Preview unavailable”?</summary><p>Almost always a missing sandbox dependency, not a Strata bug. Parser-backed previews require <code>bubblewrap</code>; video thumbnails need <code>ffmpegthumbnailer</code>/<code>ffmpeg</code>. Install the full runtime set (see the first issue above) and restart Strata. Strata fails closed by design — it will never run an untrusted parser unsandboxed just to show a thumbnail.</p></details>
+      <details><summary>Can Strata replace Nautilus as my default file manager?</summary><p>Yes, two layers: <strong>Settings → General → Desktop integration</strong> sets Strata as the <code>inode/directory</code> handler and installs the FileManager1 D-Bus service. Then, on Lua-based Omarchy releases, override the stock Nautilus shortcuts (<code>Super</code>+<code>Shift</code>+<code>F</code>, <code>Super</code>+<code>Alt</code>+<code>Shift</code>+<code>F</code>) in <code>~/.config/hypr/bindings.lua</code> — those user overrides survive Omarchy updates.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/lgse/strata" target="_blank" rel="noopener">lgse/strata — official repo &amp; docs (features, install, Omarchy keybind integration, preview sandbox, dependencies)</a></li>
+        <li><a href="https://github.com/lgse/strata/pull/55" target="_blank" rel="noopener">lgse/strata#55 — phone-photo preview fix (issue #54)</a></li>
+        <li><a href="https://github.com/lgse/strata/pull/166" target="_blank" rel="noopener">lgse/strata#166 — Sony .ARW RAW preview fix (issue #165)</a></li>
+        <li><a href="https://github.com/lgse/strata/issues/128" target="_blank" rel="noopener">lgse/strata#128 — GIF preview sandbox crash</a> / <a href="https://github.com/lgse/strata/pull/119" target="_blank" rel="noopener">#119 — fix</a></li>
+        <li><a href="https://github.com/thisisgm/flea" target="_blank" rel="noopener">thisisgm/flea — comparison</a></li>
+        <li><a href="https://github.com/avdrav1/omarchy-supplement/blob/HEAD/WARP.md" target="_blank" rel="noopener">omarchy-supplement WARP.md — Strata runtime deps, MIME handler setup</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

@@ -1,0 +1,144 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist (source-verified, not live-verified — no Omarchy test box was available for this guide):
+- Install: `omarchy pkg add sunshine` — confirm the package slug installs cleanly
+- Launch, open https://localhost:47990, confirm first-run username/password prompt
+- Pair with Moonlight on another device: PIN flow works (PIN in Moonlight → web UI PIN page)
+- GPU encoding detection: check web UI logs for `Found H.264 encoder:` lines (NVENC / VAAPI / x264)
+- Hyprland capture test: which capture method works (KMS may need `sudo setcap cap_sys_admin+p $(readlink -f $(which sunshine))`; wlroots had regressions — #5018)
+- Firewall: does Omarchy ship one blocking ports? Test with ufw open vs closed
+- Issues below sourced from real upstream issues/docs; none reproduced live
+- Screenshots needed: first-run credential screen, web UI dashboard, Configuration → Applications, PIN entry page, Moonlight mid-stream
+
+SEO notes:
+- URL: /guides/sunshine-game-streaming-omarchy
+- Title tag: "How to Install & Use Sunshine on Omarchy (2026)"
+- Meta description: "Install Sunshine on Omarchy and stream your games to any device with Moonlight. Pairing walkthrough, Hyprland capture-method fixes, and how it replaces NVIDIA GameStream."
+- Keywords: sunshine on omarchy, sunshine moonlight linux, free parsec alternative, nvidia gamestream replacement 2026, sunshine hyprland black screen
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Parsec</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Sunshine on Omarchy: your own personal cloud-gaming server</h2>
+      <p>Sunshine is a free, open-source game-stream host that turns your Omarchy PC into your own personal cloud-gaming server — you stream your games to your phone, laptop, Steam Deck, or TV with Moonlight as the client.</p>
+      <h3>TL;DR install</h3>
+      <pre><code class="language-bash">omarchy pkg add sunshine</code></pre>
+      <p>Sunshine runs on your Omarchy PC (the host). Install it, then grab Moonlight on the device you’ll play on. That’s the whole install — about a minute.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started in 5 minutes</h2>
+      <h3>1. Launch it and set credentials</h3>
+      <p>Open <code>https://localhost:47990</code> and accept the self-signed certificate warning (it’s generated locally on your machine). Set a username and password — you’ll use these to log into the web UI. Enable the user service so it starts with your session:</p>
+      <pre><code class="language-bash">systemctl --user enable --now sunshine</code></pre>
+      <h3>2. Pair a Moonlight client</h3>
+      <p>This is the only fiddly part, and it’s a one-time thing:</p>
+      <ol>
+        <li><strong>Open Moonlight on your other device</strong> (phone, laptop, Steam Deck, TV — apps at <a href="https://moonlight-stream.org" target="_blank" rel="noopener">moonlight-stream.org</a>). If your Omarchy PC doesn’t appear automatically, tap the <strong>+</strong> / “Add Host Manually” and enter your PC’s LAN IP.</li>
+        <li><strong>Moonlight shows you a PIN.</strong> Four digits, right on the screen.</li>
+        <li><strong>Go back to the Sunshine web UI</strong> (<code>https://localhost:47990</code>), click the <strong>PIN</strong> button in the top bar, type in the PIN and a name for the device (e.g. “iPhone”), and confirm.</li>
+      </ol>
+      <p>Done — the client is paired permanently and you’ll see your Omarchy PC listed in Moonlight from now on.</p>
+      <h3>3. Add a game and stream</h3>
+      <p>In the web UI, go to <strong>Configuration → Applications</strong>. Sunshine detects Steam and Steam Big Picture automatically; add anything else with a name and a launch command (e.g. name <code>Steam</code>, command <code>steam steam://open/bigpicture</code>). Tap that entry in Moonlight and you’re playing — your host’s GPU encodes the video in hardware.</p>
+      <h3>4. Config location</h3>
+      <p><code>~/.config/Sunshine/</code> — <code>Sunshine.conf</code> (all the settings you change in the web UI), <code>apps.json</code> (your app/game list). Everything you need to tweak is in the web UI; the files are for backups or diffing settings.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>On Hyprland/Wayland, the stream fails the moment Moonlight connects (Error Code -1)</h3>
+      <p><strong>Fix:</strong> This is a known recent regression (<a href="https://github.com/lizardbyte/sunshine/issues/5038" target="_blank" rel="noopener">issue #5038</a> — Arch, Hyprland 0.54.3, RTX 4070; bisect points to builds after <code>v2026.323.224448</code>). Until it’s fixed upstream, downgrade to the last working version and follow the issue thread — regression reports with exact bisects get developer attention fast.</p>
+      <h3>Black screen with error code -1 using the wlroots capture method on Hyprland</h3>
+      <p><strong>Fix:</strong> Another Hyprland-specific report (<a href="https://github.com/lizardbyte/sunshine/issues/5018" target="_blank" rel="noopener">issue #5018</a> — Arch, Hyprland, RTX 3060; last working was <code>sunshine-git 2026.330.150440-1</code>). In the web UI, go to <strong>Configuration → Advanced → Force a Specific Capture Method</strong> and switch from <code>wlroots</code> to <strong>KMS</strong> or <strong>PipeWire</strong>. KMS needs a capability bit set first: <code>sudo setcap cap_sys_admin+p $(readlink -f $(which sunshine))</code> (<a href="https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2getting__started.html#archlinux" target="_blank" rel="noopener">official docs</a>). If one capture method blacks out, the others usually don’t — cycle through them before assuming it’s broken.</p>
+      <h3>Moonlight pairs and video works, but there’s no audio in the stream</h3>
+      <p><strong>Fix:</strong> Sunshine captures audio from the <em>user’s</em> audio session — if you run it as root, it can’t reach PulseAudio/PipeWire and the logs say <code>Couldn't connect to pulseaudio: Access denied ... There will be no audio</code> (<a href="https://github.com/lizardbyte/sunshine/issues/4660" target="_blank" rel="noopener">issue #4660</a>). Always run Sunshine as your user (the <code>systemctl --user</code> service), never as root or with <code>sudo</code>. If audio still doesn’t come through, check the web UI logs for the <code>Audio capture format</code> line and make sure your default sink in <code>pavucontrol</code>/<code>wpctl</code> is the one actually playing game audio.</p>
+      <h3>HDR looks extremely dark / black-crushed on the client</h3>
+      <p><strong>Fix:</strong> HDR capture on Linux is still experimental and sensitive to compositor updates — <a href="https://github.com/LizardByte/Sunshine/issues/3298" target="_blank" rel="noopener">issue #3298</a> documents the stream going near-black after a Plasma 6.2 update. Workaround: disable HDR in your Moonlight client settings and stream SDR until compositor-side behavior stabilizes. HDR needs HEVC Main 10 or AV1 10-bit on your encoder plus HDR enabled in the OS <em>and</em> the client — if any link is off, you get the dark image.</p>
+      <h3>Moonlight can’t see your Omarchy PC, or pairing fails from outside your house</h3>
+      <p><strong>Fix:</strong> On your LAN, Sunshine needs these ports reachable — <strong>TCP 47984, 47989, 48010</strong> and <strong>UDP 47998–48000, 48002, 48010</strong> (current as of Oct 2026). If you run a firewall, open them. Also check your router isn’t blocking mDNS discovery via AP/client isolation — entering the host IP manually in Moonlight bypasses discovery. For playing away from home, skip forwarding your router to the open internet and pair Moonlight over <strong>Tailscale</strong> instead: install it on both machines, then add your host to Moonlight using its 100.x.x.x Tailscale IP.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><strong>Moonlight</strong> (<a href="https://moonlight-stream.org" target="_blank" rel="noopener">moonlight-stream.org</a>) — the client. You need it; this is the other half. <strong>Steam</strong> — its Big Picture mode is the best thing to stream for controller games.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><strong>Steam Link</strong> — zero-config but Steam-only, no encoder tuning, no out-of-home without a VPN. <strong>Parsec</strong> — easier internet connectivity, but proprietary and paid tiers gate features.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Sunshine vs Steam Link vs Parsec</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Sunshine</th><th>Steam Link</th><th>Parsec</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free forever, no tiers</td><td>Free</td><td>Free for personal use; Warp $9.99/mo; Teams $30/mo</td></tr>
+            <tr><td>Best for</td><td>Any-game streaming to any device, with full encoder control</td><td>Quick sessions inside the Steam ecosystem</td><td>Streaming over the internet with zero network config</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add sunshine</code></td><td><code>omarchy pkg add steam</code> (Remote Play built in)</td><td>Flatpak/AppImage from parsec.app</td></tr>
+            <tr><td>Remote (away from home)</td><td>Manual port forward or Tailscale</td><td>Needs VPN / Steam’s relay</td><td>Built-in relay, works out of the box</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>One-line verdict:</strong> If you want to stream <em>your</em> games on <em>your</em> hardware with zero feature gates and full control, Sunshine wins — it only asks you to handle networking, and Tailscale makes that a 5-minute job.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Sunshine is a free alternative to Parsec Warp ($9.99/mo)</h2>
+      <p><strong>What you give up:</strong> Parsec’s built-in internet relay (works anywhere with no setup), its Team Admin panel, enforced SSO, and audit logs. <strong>What you keep:</strong> 60+ FPS low-latency streaming, hardware encoding (NVENC/VAAPI/QuickSync), gamepad emulation, multi-monitor support, virtual displays, 4:4:4 color — every feature that actually matters for playing games remotely. And this is the important one for old NVIDIA users: NVIDIA killed <strong>GameStream</strong> (GeForce Experience / Shield) in <strong>February 2023</strong>. Sunshine is the open-source GameStream-protocol host that took its place — it speaks the same protocol Moonlight clients were built for and works with AMD/Intel/NVIDIA GPUs (GameStream was NVIDIA-only).</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Parsec (~20 minutes)</h2>
+      <ol>
+        <li><strong>Leave Parsec:</strong> nothing to export — Parsec free is tied to your login; sign out on each device. On the host, keep Parsec installed as backup or uninstall it.</li>
+        <li><strong>Set up Sunshine:</strong> <code>omarchy pkg add sunshine</code> → <code>https://localhost:47990</code> → set credentials → enable the user service → add your games under Configuration → Applications.</li>
+        <li><strong>Set up Moonlight</strong> on each client (iOS, Android, Windows, macOS, Linux, TV boxes — all free) and pair each with the PIN flow above.</li>
+        <li><strong>Recreate remote access:</strong> install Tailscale on host and clients (<code>tailscale up</code> each), then in Moonlight use “Add Host Manually” with the host’s 100.x.x.x IP instead of its LAN IP.</li>
+        <li><strong>What doesn’t transfer:</strong> friend-sharing links and Arcade (Parsec-only social features), out-of-the-box drawing-tablet passthrough, and team management tooling. Latency and image quality should be as good or better.</li>
+        <li><strong>Time estimate:</strong> ~20 minutes, most of it waiting on Tailscale installs.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Sunshine package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/sunshine.html">View Sunshine →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Sunshine work on Omarchy/Hyprland?</summary><p>Yes — Omarchy is Arch-based, and the official docs cover Arch installs directly. On Hyprland (Wayland) prefer the KMS or PipeWire capture method; there are recent wlroots capture regressions (#5018), so if you get a black screen, switch capture methods in Configuration → Advanced first.</p></details>
+      <details><summary>Is Sunshine free?</summary><p>Completely. It’s free and open-source (LizardByte, GPL-licensed), with no paid tiers, no feature gates, no accounts, and no telemetry. Everything — hardware encoding, multi-client streaming, virtual displays, HDR — is in the same free build.</p></details>
+      <details><summary>Sunshine vs Parsec — which should I use?</summary><p>For playing your own games remotely, Sunshine + Moonlight is free forever and matches Parsec’s paid tiers on the features that matter (encoders, latency, gamepads). Pick Parsec if you want zero-config internet connectivity and session sharing — its $9.99/mo Warp buys convenience and relay infrastructure, not better streaming quality.</p></details>
+      <details><summary>Do I need an NVIDIA GPU?</summary><p>No. Sunshine uses hardware encoding on AMD (VAAPI), Intel (VAAPI/QuickSync), and NVIDIA (NVENC) GPUs, with software x264/x265 as a fallback. This was NVIDIA GameStream’s biggest limitation; Sunshine removed it.</p></details>
+      <details><summary>Can I stream outside my home?</summary><p>Yes, two ways: forward the streaming ports on your router (TCP 47984, 47989, 48010; UDP 47998–48000, 48002, 48010), or install Tailscale on host and client and connect Moonlight to the host’s Tailscale IP — no port forwarding, works behind CGNAT.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://docs.lizardbyte.dev/projects/sunshine/v0.22.1/about/setup.html" target="_blank" rel="noopener">Sunshine official docs — setup (Arch/Linux)</a></li>
+        <li><a href="https://docs.lizardbyte.dev/projects/sunshine/v0.21.0/about/usage.html" target="_blank" rel="noopener">Sunshine official docs — usage</a></li>
+        <li><a href="https://github.com/lizardbyte/sunshine/issues/5038" target="_blank" rel="noopener">Issue #5038 — Wayland/NVIDIA regression (Hyprland 0.54.3, RTX 4070)</a></li>
+        <li><a href="https://github.com/lizardbyte/sunshine/issues/5018" target="_blank" rel="noopener">Issue #5018 — broken wlroots capture on Hyprland (RTX 3060)</a></li>
+        <li><a href="https://github.com/lizardbyte/sunshine/issues/4660" target="_blank" rel="noopener">Issue #4660 — no audio as root (RX 9070XT)</a></li>
+        <li><a href="https://github.com/LizardByte/Sunshine/issues/3298" target="_blank" rel="noopener">Issue #3298 — HDR very dark after Plasma 6.2 update</a></li>
+        <li><a href="https://techdows.com/download-parsec-for-pc-windows-11-10-mac.html" target="_blank" rel="noopener">Parsec pricing — free vs Warp vs Teams</a></li>
+        <li><a href="https://www.indiekings.com/2022/12/hello-sunshine-for-moonlight-goodbye.html?m=1" target="_blank" rel="noopener">NVIDIA GameStream discontinued Feb 2023</a></li>
+        <li><a href="https://moonlight-stream.org" target="_blank" rel="noopener">Moonlight — the client apps</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

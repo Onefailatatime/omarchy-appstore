@@ -1436,6 +1436,25 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .bid.is-done > *:not(.bid-status) { display: none; }
 .bid.is-done .bid-status { color: var(--color-green); font-size: 100%; }
 @media (max-width: 640px) { .bid { grid-template-columns: 1fr; } .bid-wrap > summary { width: 100%; justify-content: center; } }
+
+/* =================== SPONSOR ROTATION =================== */
+/* Header and footer each rotate fairly through every active sponsor:
+   3 units shown at a time, the window advancing sequentially (assets/ads.js).
+   Padding-top leaves room for the .ad .tag which sits above the unit. */
+.ad-rotate { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; }
+.ad-header .ad-rotate { margin-bottom: var(--space-small); }
+.ad-footer .ad-rotate { margin-bottom: var(--space-x-large); }
+@media (max-width: 760px) { .ad-rotate { grid-template-columns: 1fr; } }
+
+/* App profile banner: one sponsor unit on the sponsor's own app page. */
+.ad-app-banner { margin: 0 0 var(--space-large); padding-top: 0.6em; }
+.ad-app-banner .ad { border-width: 2px; }
+
+/* Lifetime pin: one permanent sponsor unit at the top of the homepage.
+   Never rotates — the premium forever placement. */
+.ad-lifetime { max-width: var(--maxw); margin: 0 auto var(--space-medium); padding: 0.6em var(--space-neutral) 0; }
+.ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
+
 </style>
 </head>
 <body>
@@ -1454,6 +1473,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
       <div><p class="eyebrow">Utilities · version 0.3.8-1</p><h1>flea</h1><p class="app-byline">by <a href="https://x.com/thisisgm" target="_blank" rel="author noopener">GM</a></p><p class="app-lead">Flea is a native file manager built specifically for the Omarchy Hyprland desktop, pairing a Rust backend with a Quickshell frontend rather than extending…</p></div>
       <div class="app-header-actions"><span class="indie-sticker" title="Individual-maintained upstream project">Indie app</span><button class="button ghost app-vote app-vote-large" type="button" data-vote-app="flea" aria-pressed="false"><span aria-hidden="true">▲</span> <span data-vote-count>0</span> upvotes</button><a class="button ghost" href="https://omarchyapps.com/apps/flea.html" data-share-app="flea" data-share-title="flea for Omarchy" data-share-url="https://omarchyapps.com/apps/flea.html">Share</a><a class="button" href="https://x.com/messages/compose?recipient_id=1400492097082327040&amp;text=Hi%21+I%27d+like+to+claim+the+flea+listing+on+the+Unofficial+Omarchy+App+Store.%0A%0AI+can+provide%3A%0A-+a+correction+or+edit%0A-+screenshots+of+the+app%0A-+a+demo+video%0A%0AProject+URL%3A+%0AMy+role+with+the+app%3A+" target="_blank" rel="noopener">Claim this app ↗</a></div>
     </header>
+
 <section class="project-media"><h2>Project screenshots</h2><div class="shot-gallery"><a class="shot-wrap" href="https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/list.png" target="_blank" rel="noopener" aria-label="Open full-size flea app screenshot"><img src="https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/list.png" alt="flea app screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/grid.png" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/grid.png" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/columns.png" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/columns.png" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><a class="shot-wrap" href="https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/pdf.png" target="_blank" rel="noopener" aria-label="Open full-size Project screenshot"><img src="https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/pdf.png" alt="Project screenshot" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a></div><p class="media-source">Loaded from the upstream project · <a href="https://github.com/thisisgm/flea" target="_blank" rel="noopener">View upstream source ↗</a></p></section>
     <section><h2>What is flea?</h2><p>Flea is a native file manager built specifically for the Omarchy Hyprland desktop, pairing a Rust backend with a Quickshell frontend rather than extending an existing manager like Nautilus. It supports vim-style keyboard navigation, list/columns/grid views, rich previews (images, video, PDFs, archives), undoable file operations, and network mounts (SMB/NFS, Taildrop, Dropbox), all styled to match Omarchy&#x27;s live color palette.</p></section>
     <section><h2>Install flea on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add flea</pre></div></section>

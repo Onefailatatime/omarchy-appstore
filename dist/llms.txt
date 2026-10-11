@@ -20,5 +20,15 @@ This site is unofficial and is not affiliated with or endorsed by Omarchy, Omaco
 - [Free Video Editor for Linux: Omacut vs DaVinci Resolve](https://omarchyapps.com/free-video-editor-linux-omarchy.html)
 - [Best Omarchy Apps to Install First: 12 Useful Picks](https://omarchyapps.com/best-apps-for-omarchy.html)
 - [How to Install Apps on Omarchy Safely](https://omarchyapps.com/how-to-install-apps-on-omarchy.html)
+- [omarchy-zsh on Omarchy: install, fzf keybindings, aliases & the chsh trap](https://omarchyapps.com/how-to-use-omarchy-zsh.html)
+- [How to Install & Use RustDesk on Omarchy (2026) — Free TeamViewer Alternative](https://omarchyapps.com/rustdesk-on-omarchy.html)
+- [How to Install & Use Flea on Omarchy (2026)](https://omarchyapps.com/flea-file-manager-omarchy.html)
+- [How to Use omacut on Omarchy (2026): trim, split & export in minutes](https://omarchyapps.com/omacut-video-editor-omarchy.html)
+- [How to Install & Use Sunshine on Omarchy (2026)](https://omarchyapps.com/sunshine-game-streaming-omarchy.html)
+- [How to Install & Use Hermes Desktop on Omarchy (2026)](https://omarchyapps.com/hermes-desktop-omarchy.html)
+- [Omawrite on Omarchy: Install, Shortcuts & Typora Alternative Guide](https://omarchyapps.com/omawrite-writing-omarchy.html)
+- [Strata on Omarchy: Install the Keyboard-First File Manager](https://omarchyapps.com/strata-file-manager-omarchy.html)
+- [Claude Desktop on Omarchy: Install & Setup Guide (2026)](https://omarchyapps.com/claude-desktop-omarchy.html)
+- [How to Install & Use 1Password on Omarchy (2026)](https://omarchyapps.com/1password-omarchy.html)
 
 Contact: https://x.com/jessyka_boat
