@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "omarchyapps",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-28",
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": { "directory": "./dist", "binding": "ASSETS", "run_worker_first": ["/api/*", "/"], "html_handling": "none", "not_found_handling": "404-page" },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "omarchyapps", "database_id": "3e95124f-4c0b-41ef-8e3c-5aaf329f1713", "migrations_dir": "migrations" }
+  ],
+  "observability": { "enabled": true, "traces": { "enabled": true } }
+}

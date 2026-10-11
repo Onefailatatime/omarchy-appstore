@@ -801,7 +801,7 @@ def main() -> None:
     if missing_authors:
         print("missing public author attribution for: " + ", ".join(missing_authors))
     synced = datetime.date.today().isoformat()
-    functions_dir = ROOT / "netlify" / "functions"
+    functions_dir = ROOT / "src"
     functions_dir.mkdir(parents=True, exist_ok=True)
     (functions_dir / "app-names.mjs").write_text(
         "export default " + json.dumps([p["name"] for p in pkgs], ensure_ascii=False) + ";\n",
@@ -1060,7 +1060,7 @@ def main() -> None:
     print(f"dist/index.html  {len(page):,} bytes · {len(pkgs)} packages · synced {synced}")
     print(f"dist/leaderboard.html {len(leaderboard):,} bytes · live Top 25 community ranking")
     print(f"dist/develop.html {len(develop):,} bytes · public packaging checklist")
-    print(f"netlify/functions/checklist.mjs {len(develop_md):,} bytes · checklist emailed to subscribers")
+    print(f"src/checklist.mjs {len(develop_md):,} bytes · checklist emailed to subscribers")
     print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
     print(f"dist/about.html   {len(about):,} bytes · project and builder bio")
     print(f"dist/advertise.html {len(advertise):,} bytes · sponsor products (rotations + app banners)")

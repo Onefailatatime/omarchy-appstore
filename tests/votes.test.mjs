@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { handleVoteRequest } from "../netlify/functions/votes.mjs";
+import { handleVoteRequest } from "../src/votes.mjs";
 
 class MemoryStore {
   constructor() { this.values = new Map(); }

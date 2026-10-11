@@ -1,9 +1,28 @@
-import { randomUUID } from "node:crypto";
-import { getStore } from "@netlify/blobs";
 import appNames from "./app-names.mjs";
 
 const COOKIE = "__Host-omarchy_voter";
-const STORE_NAME = "omarchy-app-votes";
+const randomUUID = () => crypto.randomUUID();
+
+// Votes live in D1 as (app, voter) rows. The store keeps the old blob-style
+// interface (keys vote/<app>/<voter>) so the handler and its test are unchanged.
+export class D1VoteStore {
+  constructor(db) { this.db = db; }
+  async getMetadata(key) {
+    const [, app, voter] = key.split("/");
+    return (await this.db.prepare("SELECT 1 AS one FROM votes WHERE app = ? AND voter = ?").bind(app, voter).first()) ? { etag: "d1" } : null;
+  }
+  async set(key, value) {
+    const [, app, voter] = key.split("/");
+    await this.db.prepare("INSERT OR IGNORE INTO votes (app, voter, at) VALUES (?, ?, ?)").bind(app, voter, value).run();
+  }
+  async list({ prefix }) {
+    const parts = prefix.split("/");
+    const rows = parts[1]
+      ? (await this.db.prepare("SELECT app, voter FROM votes WHERE app = ?").bind(parts[1]).all()).results
+      : (await this.db.prepare("SELECT app, voter FROM votes").all()).results;
+    return { blobs: rows.map((r) => ({ key: `vote/${r.app}/${r.voter}` })) };
+  }
+}
 const allowedApps = new Set(appNames);
 const jsonHeaders = {
   "cache-control": "no-store",
@@ -78,22 +97,3 @@ export async function handleVoteRequest(request, store, makeID = randomUUID) {
   const { blobs } = await store.list({ prefix: `vote/${app}/` });
   return response({ app, count: blobs.length, voted: true }, 200, setCookie);
 }
-
-export default async function votes(request) {
-  try {
-    const store = getStore({ name: STORE_NAME, consistency: "strong" });
-    return await handleVoteRequest(request, store);
-  } catch (error) {
-    console.error("vote function failed", error);
-    return response({ error: "Votes are temporarily unavailable" }, 500);
-  }
-}
-
-export const config = {
-  path: "/api/votes",
-  rateLimit: {
-    windowLimit: 60,
-    windowSize: 60,
-    aggregateBy: ["ip", "domain"],
-  },
-};

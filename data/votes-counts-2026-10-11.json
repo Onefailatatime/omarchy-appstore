@@ -1,0 +1,21 @@
+{
+  "exported_at": "2026-10-11T07:26:00.924048+00:00",
+  "source": "GET https://omarchyapps.com/api/votes (public counts)",
+  "counts": {
+    "1password": 1,
+    "aether": 1,
+    "brave-bin": 1,
+    "crush-bin": 1,
+    "flea": 18,
+    "hermes-desktop": 5,
+    "omakade": 3,
+    "omarchy-task-manager": 1,
+    "omarchy-zsh": 11,
+    "omawrite": 1,
+    "schist-bin": 3,
+    "slap-notes-bin": 19,
+    "strata": 7,
+    "tobi-try": 1,
+    "visual-studio-code-bin": 1
+  }
+}

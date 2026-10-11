@@ -29,8 +29,9 @@ The last command serves the built site at http://localhost:8000 until Ctrl-C.
 The first build also clones `omacom/omarchy-pkgs` into `data/omarchy-pkgs`
 (gitignored) for the first-added dates, so it needs git and network access.
 
-The static server serves the pages. Upvotes and the newsletter form call the
-Netlify Functions, which it does not run; `npx netlify dev` serves those.
+The static server serves the pages only. For the upvote and newsletter APIs
+run the real thing locally: `npm run migrate:local` once, then `npm run dev`
+(Cloudflare Workers on http://localhost:8787, serving `dist/` plus `/api/*`).
 
 The tests need Node 22.12+ and the one dependency:
 
@@ -58,14 +59,13 @@ there, the Omarchy maintainers merge and publish it to `pkgs.omarchy.org`, and
 the next scheduled build here picks it up. Point people at `/develop.html`,
 which covers the checklist, package size expectations, and the pull request.
 
-## Automated builds
+## Automated builds and deploys
 
-`.github/workflows/deploy.yml` rebuilds the site at 06:00 and 18:00 UTC, and
-can be run on demand from the Actions tab. It runs `build.py` and the tests,
-then commits the refreshed `dist/`, `data/omarchy.db`, and vote allow-list.
-Netlify is connected to this repository and publishes every push to `main`,
-so that commit is the deploy. GitHub only runs schedules from the default
-branch. No secrets are needed.
+`scripts/refresh.sh` rebuilds the site, runs the tests, deploys to Cloudflare
+with Wrangler, and commits the refreshed `dist/` and catalogue. The launchd job
+`com.omarchyapps.refresh` on the Mac mini runs it at 06:00 and 18:00 local
+time; its log is `data/refresh-launchd.log`. GitHub only runs the tests
+(`.github/workflows/ci.yml`); nothing deploys from GitHub.
 
 ## Layout
 
@@ -84,7 +84,7 @@ dist/         generated site, package pages, sitemap, crawler files, and assets
 ```
 
 The icon set includes SVG, ICO, 32px PNG, and 180px Apple-touch variants. The
-The generated Netlify `_headers` file adds a restrictive content policy and standard browser
+The generated `_headers` file (honored by Workers static assets) adds a restrictive content policy and standard browser
 security headers while allowing upstream HTTPS screenshots and click-to-play
 YouTube embeds.
 
@@ -103,13 +103,11 @@ account system, or request database on the site.
 
 ## Persistent package upvotes
 
-Every package card and profile has a first-party upvote control backed by the
-Netlify Function at `/api/votes` and the site-wide `omarchy-app-votes` Blob
-store. Vote records survive deploys. A secure HTTP-only random browser cookie
+Every package card and profile has a first-party upvote control backed by
+`/api/votes` in the Worker and the `votes` table in D1. Vote records survive deploys. A secure HTTP-only random browser cookie
 prevents ordinary duplicate votes without storing an IP address or asking for
-an account. The function uses one immutable Blob key per app/browser pair,
-strong consistency, package allow-listing, same-origin POST checks, and Netlify
-rate limiting. `data/indie.json` controls the curated Indie app stickers.
+an account. The handler keeps one row per app and browser, package allow-listing,
+same-origin POST checks, and a per-address rate limit in D1. `data/indie.json` controls the curated Indie app stickers.
 
 Each vote button doubles as a meter: `votes.js` fills it in proportion to the
 most-voted app, so a full bar is the current leader and the hover title reads
@@ -117,11 +115,11 @@ most-voted app, so a full bar is the current leader and the hover title reads
 
 ## Newsletter
 
-Both the homepage and `/develop.html` carry a signup form posting to the
-Netlify Function at `/api/subscribe`. It adds the address to the Resend
+Both the homepage and `/develop.html` carry a signup form posting to
+`/api/subscribe` in the Worker. It adds the address to the Resend
 contacts (and a segment when one is configured) and emails the Develop for Omarchy checklist as a Markdown attachment; the
 checklist is no longer published as a public file. `build.py` bakes
-`resources/develop-for-omarchy.md` into `netlify/functions/checklist.mjs` on
+`resources/develop-for-omarchy.md` into `src/checklist.mjs` on
 every build. The function checks for an existing contact first, ignores
 honeypot submissions, requires a same-origin POST, and is rate limited to five
 requests per minute per IP.
@@ -134,19 +132,14 @@ Setup, once, in Resend (`resend.com`):
    store subscribers apart from other contacts, and copy its ID.
 3. Create an API key with full access.
 
-Then set these environment variables on the Netlify site:
+Then set them as Worker secrets with `npx wrangler secret put NAME`:
 
-| Variable | Value |
+| Secret | Value |
 | --- | --- |
 | `RESEND_API_KEY` | the API key |
 | `RESEND_SEGMENT_ID` | optional; the segment ID |
 | `NEWSLETTER_FROM` | e.g. `Omarchy App Store <hello@omarchyapps.com>` |
 | `NEWSLETTER_REPLY_TO` | optional; a mailbox you read, defaults to the from address |
-
-Netlify applies environment variables at deploy time, so trigger a redeploy
-after adding them — until it finishes the deployed function still runs with the
-old values. Where the plan exposes variable scopes, include Functions: a
-build-only variable never reaches `/api/subscribe`.
 
 Until they are set the form reports that signup is not configured yet.
 
@@ -222,5 +215,10 @@ source attribution only. It never saves the upstream image files.
 
 ## Deploy
 
-Static folder: publish `dist/`. Netlify publishes `main` on push; the Netlify
-CLI remains the house rule for any manual deploy.
+Cloudflare Workers with static assets: `wrangler.jsonc` serves `dist/` and
+routes `/api/*` to `src/worker.js`. D1 database `omarchyapps` holds upvotes
+and rate limits (`migrations/`). Deploy by hand with `npm run deploy`; apply a
+new migration with `npm run migrate:remote`. Secrets: `IP_SALT` (rate limit
+hashing), and for the newsletter `RESEND_API_KEY`, `NEWSLETTER_FROM`,
+optional `RESEND_SEGMENT_ID` and `NEWSLETTER_REPLY_TO`, all via
+`npx wrangler secret put NAME`.

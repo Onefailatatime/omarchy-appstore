@@ -16,6 +16,13 @@ function response(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: jsonHeaders });
 }
 
+function base64(text) {
+  const bytes = new TextEncoder().encode(text);
+  let binary = "";
+  for (const b of bytes) binary += String.fromCharCode(b);
+  return btoa(binary);
+}
+
 function welcome(siteUrl) {
   return [
     "Thanks for joining the Unofficial Omarchy App Store newsletter.",
@@ -83,7 +90,7 @@ export async function handleSubscribeRequest(request, env, fetchImpl = fetch) {
     reply_to: env.NEWSLETTER_REPLY_TO || from,
     subject: "Your Develop for Omarchy checklist",
     text: welcome(siteUrl),
-    attachments: [{ filename: "develop-for-omarchy.md", content: Buffer.from(checklist, "utf8").toString("base64") }],
+    attachments: [{ filename: "develop-for-omarchy.md", content: base64(checklist) }],
   });
   if (!sent.ok) {
     console.error("resend email failed", sent.status, sent.data);
@@ -91,21 +98,3 @@ export async function handleSubscribeRequest(request, env, fetchImpl = fetch) {
   }
   return response({ status: "subscribed" });
 }
-
-export default async function subscribe(request) {
-  try {
-    return await handleSubscribeRequest(request, process.env);
-  } catch (error) {
-    console.error("subscribe function failed", error);
-    return response({ error: "Signup is temporarily unavailable" }, 500);
-  }
-}
-
-export const config = {
-  path: "/api/subscribe",
-  rateLimit: {
-    windowLimit: 5,
-    windowSize: 60,
-    aggregateBy: ["ip", "domain"],
-  },
-};
