@@ -7,7 +7,7 @@
     "term_days": 90,
     "visible_units": 3,
     "sponsors": [],
-    "checkout_url": "",
+    "checkout_url": "https://buy.stripe.com/00w9AV2Bx4003Wc0LQdEs00",
     "_checkout_note": "Paste the live Stripe Payment Link here (subscription, renews every 90 days). Empty renders the DM button only."
   },
   "footer": {
@@ -17,7 +17,7 @@
     "term_days": 90,
     "visible_units": 3,
     "sponsors": [],
-    "checkout_url": "",
+    "checkout_url": "https://buy.stripe.com/bJe7sNdgb1RSeAQ8eidEs01",
     "_checkout_note": "Paste the live Stripe Payment Link here (subscription, renews every 90 days). Empty renders the DM button only."
   },
   "app_banners": {
@@ -27,7 +27,7 @@
     "term_days": 90,
     "_price_note": "FLAG: $25/mo was picked for footer parity — Jessyka did not set this price. Confirm the price before selling any app banner.",
     "banners": {},
-    "checkout_url": "",
+    "checkout_url": "https://buy.stripe.com/cNi7sNb838gg64kamqdEs02",
     "_checkout_note": "Paste the live Stripe Payment Link here (subscription, renews every 90 days). Empty renders the DM button only."
   },
   "lifetime": {
