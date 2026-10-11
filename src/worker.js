@@ -28,8 +28,14 @@ const tooMany = () => new Response(JSON.stringify({ error: "Too many requests. T
 
 export default {
   async fetch(request, env) {
-    const { pathname } = new URL(request.url);
+    const url = new URL(request.url);
+    const { pathname } = url;
     try {
+      // One canonical host: www redirects to the apex.
+      if (url.hostname.startsWith("www.")) {
+        url.hostname = url.hostname.slice(4);
+        return Response.redirect(url.toString(), 301);
+      }
       if (pathname === "/api/votes" || pathname === "/api/subscribe") {
         if (request.method === "POST") {
           const ip = request.headers.get("cf-connecting-ip") || "0.0.0.0";
