@@ -188,7 +188,7 @@ b, strong { font-weight: 700; }
 .topbar-cta { margin-left: auto; height: 2.3em; min-height: 36px; padding-inline: var(--space-medium); font-size: 88%; }
 @media (max-width: 760px) {
   .topbar-in { gap: var(--space-small); }
-  .brand-name { display: none; }
+  .topbar .brand-name { display: none; }
   .topbar-links { margin-left: 0; }
   .topbar-links a { padding: 0.5em 0.55em; }
 }
@@ -890,7 +890,7 @@ b, strong { font-weight: 700; }
   color: var(--color-terminal-white);
 }
 .chip[data-cat][aria-pressed="true"] b { color: var(--cat); }
-.chip[data-cat] .dot, .group h2 .dot, footer.site .legend .dot {
+.chip[data-cat] .dot, .group h2 .dot {
   width: 0.55em;
   height: 0.55em;
   border-radius: 50%;
@@ -1283,29 +1283,22 @@ dialog::backdrop { background: rgb(var(--rgb-black) / 0.6); backdrop-filter: blu
   .detail .close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; }
   .detail .actions .button { min-height: 44px; }
   .term .bar-line .button { min-height: 44px; }
-  footer.site nav { gap: 0.25em 1em; }
-  footer.site nav a { display: inline-flex; align-items: center; min-height: 36px; }
 }
 
 /* =================== FOOTER =================== */
-footer.site {
-  border-top: var(--border-width) solid var(--border-color);
-  padding: var(--space-large) 0 var(--space-x-large);
-  color: rgb(var(--rgb-terminal-blue) / 0.75);
-  font-size: 90%;
+footer.site { margin-top: var(--space-xx-large); border-top: var(--border-width) solid var(--border-color); background: rgba(var(--rgb-background-storm), 0.35); font-size: 92%; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-large); padding-top: var(--space-x-large); padding-bottom: var(--space-large); }
+.footer-brand p { margin: var(--space-medium) 0 0; max-width: 28em; color: rgb(var(--rgb-terminal-blue) / 0.85); }
+footer.site nav { display: flex; flex-direction: column; gap: 0.5em; }
+footer.site nav h3 { margin: 0 0 0.3em; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-terminal-white); }
+footer.site nav a { color: rgb(var(--rgb-terminal-blue) / 0.9); text-decoration: none; }
+footer.site nav a:hover { color: var(--color-turquoise); }
+.footer-base { display: flex; flex-wrap: wrap; gap: 0.5em var(--space-large); padding-top: var(--space-medium); padding-bottom: var(--space-large); border-top: var(--border-width) solid var(--border-color); color: rgb(var(--rgb-terminal-blue) / 0.6); font-size: 85%; }
+@media (max-width: 760px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+  footer.site nav a { display: inline-flex; align-items: center; min-height: 36px; }
 }
-footer.site .row { display: flex; flex-wrap: wrap; gap: var(--space-medium) var(--space-large); justify-content: space-between; margin-bottom: var(--space-medium); }
-footer.site nav { display: flex; flex-wrap: wrap; gap: var(--space-medium); }
-footer.site p { margin: 0 0 var(--space-small); max-width: 60em; }
-footer.site .legend {
-  display: flex; flex-wrap: wrap; gap: 0.5em 1.4em;
-  padding-top: var(--space-medium);
-  border-top: var(--border-width) solid var(--border-color);
-  font-size: 85%;
-  color: rgb(var(--rgb-terminal-blue) / 0.6);
-}
-footer.site .legend span { display: inline-flex; align-items: center; gap: 0.6ch; }
-footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 
 @media (max-width: 600px) {
   .hero { padding-top: var(--space-large); }
@@ -1502,6 +1495,17 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
     <div class="actions"><a class="button ghost" href="https://github.com/basecamp/omarchy" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/omarchy-settings-dev" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
-<footer class="site"><div class="wrap"><div class="row"><nav><a href="../index.html">App Store</a><a href="../leaderboard.html">Top Apps</a><a href="../develop.html">Develop for Omarchy</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav><span>Synced 2026-10-11 · unofficial directory</span></div></div></footer>
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
+      <p>Every package in the official Omarchy repo, searchable and ranked by readers. A community project by Jessyka, not affiliated with Omacom or DHH.</p>
+    </div>
+    <nav aria-label="Site"><h3>Site</h3><a href="../index.html">Apps</a><a href="../leaderboard.html">Top apps</a><a href="../guides.html">Guides</a><a href="../develop.html">Develop</a><a href="../advertise.html">Advertise</a><a href="../about.html">About</a><a href="../terms.html">Terms</a></nav>
+    <nav aria-label="Omarchy"><h3>Omarchy</h3><a href="https://omarchy.org/">omarchy.org</a><a href="https://omarchy.org/manual/">Manual</a><a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs</a><a href="https://omarchyplugins.com/">Plugins</a></nav>
+    <nav aria-label="Contact"><h3>Say hello</h3><a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">@jessyka_boat on X</a><a href="../develop.html#newsletter">Newsletter</a></nav>
+  </div>
+  <div class="wrap footer-base"><span>Synced 2026-10-11</span><span>No trackers, videos play on click</span><span>Packages come from pkgs.omarchy.org</span></div>
+</footer>
 </body>
 </html>
