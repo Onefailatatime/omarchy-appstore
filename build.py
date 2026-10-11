@@ -287,6 +287,22 @@ GUIDES = [
             ("Which browsers work with 1Password on Omarchy?", "Chromium and Firefox, installed natively (not Flatpak/Snap), work out of the box with the official extension. Anything else (Vivaldi, Zen, Floorp) needs the /etc/1password/custom_allowed_browsers allowlist entry described in the guide."),
         ],
     },
+    {
+        "slug": "omadesign-omarchy",
+        "title": "Omadesign on Omarchy: Install & Setup Guide (2026)",
+        "description": "Install Omadesign, the free Linux design, paint, photo and motion app, on Omarchy. One-line install, theme integration, fixes, and why there is no package yet.",
+        "eyebrow": "Creative suite guide",
+        "heading": "Omadesign on <span>Omarchy</span>",
+        "tagline": "A free, native, Omarchy-themed design, paint, photo and motion app. Alpha, and not in the package repo yet.",
+        "answer": "Install with curl -fsSL https://omadesign.app/install | sh. There is no omarchy pkg add omadesign yet: the package PR to omarchy-pkgs has sat unmerged since September 2026 and the maintainer declined an AUR package. Omadesign is free (MIT), follows your Omarchy theme and font, and updates itself from About > Update.",
+        "faqs": [
+            ("Does Omadesign work on Omarchy?", "Yes, it was built for it. The UI reads your Omarchy theme colors and font on launch and repaints when you switch themes. It runs natively on Wayland under Hyprland, on both x86_64 and Apple Silicon via Asahi. Expect a 4-core or sub-8 GB machine to feel slow."),
+            ("Is Omadesign free?", "Completely, under the MIT license. No trial, no paid tier, no account for local work. The cloud sharing features need a sign-in but there is no published pricing for them."),
+            ("Why isn't Omadesign in the Omarchy app store?", "Because it is not in the Omarchy package repo. The maintainer distributes only through the home-directory installer and declined an AUR package. A community PR to omarchy-pkgs exists but is stale. Until a package lands, omarchy pkg add omadesign will fail."),
+            ("Omadesign vs Inkscape, which should I pick?", "Inkscape if you need a specific SVG feature or you ship files to people on other tools. Omadesign if you want raster, photo and motion in the same window and prefer a native GUI over GTK3. Many people will keep both installed."),
+            ("How do I update Omadesign?", "Omadesign > About > Update, which reruns the official installer and restarts with your documents open. Rerunning the curl one-liner does the same thing from a terminal. There is no pacman path."),
+        ],
+    },
 ]
 FAQ = [
     ("What is the Unofficial Omarchy App Store?", "It is an independent, searchable directory of packages published by the official Omarchy package repository. It is not affiliated with or endorsed by Omarchy or Omacom."),

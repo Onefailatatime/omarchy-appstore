@@ -31,5 +31,6 @@ This site is unofficial and is not affiliated with or endorsed by Omarchy, Omaco
 - [Strata on Omarchy: Install the Keyboard-First File Manager](https://omarchyapps.com/strata-file-manager-omarchy.html)
 - [Claude Desktop on Omarchy: Install & Setup Guide (2026)](https://omarchyapps.com/claude-desktop-omarchy.html)
 - [How to Install & Use 1Password on Omarchy (2026)](https://omarchyapps.com/1password-omarchy.html)
+- [Omadesign on Omarchy: Install & Setup Guide (2026)](https://omarchyapps.com/omadesign-omarchy.html)
 
 Contact: https://x.com/jessyka_boat
