@@ -197,21 +197,23 @@ def render_slot_cards(ads: dict) -> str:
     no bidding."""
     cards: list[str] = []
 
-    def product_card(key: str, label: str, position: str, price_line: str, blurb: str, cta_label: str) -> None:
+    def product_card(key: str, label: str, position: str, price_line: str, blurb: str, cta_label: str, checkout_url: str = "") -> None:
+        dm = html.escape(dm_url(f"Hi! I want to sponsor omarchyapps.com ({label})."), quote=True)
+        if checkout_url:
+            actions = (f'<p class="slot-actions"><a class="button" href="{html.escape(checkout_url, quote=True)}" rel="noopener">{html.escape(cta_label)} \u2197</a>'
+                       f'<a class="button ghost" href="{dm}" target="_blank" rel="noopener">Ask first \u2197</a></p>')
+        else:
+            actions = f'<a class="button" href="{dm}" target="_blank" rel="noopener">{html.escape(cta_label)} \u2197</a>'
         cards.append(
             f'<article class="slot" id="{html.escape(key, quote=True)}">'
             f'<h3>{html.escape(label)}</h3><p class="pos">{html.escape(position)}</p>'
-            f'<p class="price">{price_line}</p><p class="status">{blurb}</p>'
-            f'<a class="button" href="{html.escape(dm_url(f"Hi! I want to sponsor omarchyapps.com ({label})."), quote=True)}" '
-            'target="_blank" rel="noopener">'
-            f'{html.escape(cta_label)} \u2197</a>'
-            "</article>"
+            f'<p class="price">{price_line}</p><p class="status">{blurb}</p>{actions}</article>'
         )
 
     def term_price(slot: dict) -> str:
         per_term = slot["price_month"] * slot["term_days"] // 30
         return (f'<b>{money(slot["price_month"])}</b> / month'
-                f' · billed as <b>{money(per_term)}</b> per {slot["term_days"]} day term')
+                f' · billed as <b>{money(per_term)}</b> every {slot["term_days"]} days, cancel any time')
 
     h = ads["header"]
     n_h = len(active_sponsors(h.get("sponsors") or [], quiet=True))
@@ -219,7 +221,7 @@ def render_slot_cards(ads: dict) -> str:
         "header", "Header rotation", h["position"], term_price(h),
         f"Three units under the hero, rotating fairly through every active sponsor. Equal screen time, no bidding for position. "
         f"<b>{n_h}</b> sponsor{'s' if n_h != 1 else ''} active now; unlimited spots.",
-        "Sponsor the header",
+        "Sponsor the header", h.get("checkout_url", ""),
     )
 
     f = ads["footer"]
@@ -228,7 +230,7 @@ def render_slot_cards(ads: dict) -> str:
         "footer", "Footer rotation", f["position"], term_price(f),
         f"Sponsor units above the site footer, rotating fairly through every active sponsor. "
         f"<b>{n_f}</b> sponsor{'s' if n_f != 1 else ''} active now; unlimited spots.",
-        "Sponsor the footer",
+        "Sponsor the footer", f.get("checkout_url", ""),
     )
 
     ab = ads["app_banners"]
@@ -237,7 +239,7 @@ def render_slot_cards(ads: dict) -> str:
         "app-banner", "App profile banner", ab["position"], term_price(ab),
         f"Your banner on your app's own page, the highest intent spot on the site, seen by everyone who looks up that app. "
         f"<b>{n_ab}</b> app{'s' if n_ab != 1 else ''} sponsored now.",
-        "Sponsor an app page",
+        "Sponsor an app page", ab.get("checkout_url", ""),
     )
 
     lt = ads.get("lifetime") or {}
@@ -246,12 +248,12 @@ def render_slot_cards(ads: dict) -> str:
         f'<article class="slot" id="lifetime">'
         f'<h3>{html.escape(lt.get("label", "Lifetime pin"))}</h3>'
         f'<p class="pos">{html.escape(lt.get("position", ""))}</p>'
-        f'<p class="price"><b>{money(lt.get("price_once", 1000))}</b> one-time · yours forever</p>'
-        f'<p class="status">Inquiry only, no checkout, no auction. Message to talk it through; '
+        f'<p class="price"><b>Make an offer</b> · one payment · yours forever</p>'
+        f'<p class="status">No listed price and no checkout. Message with the amount you have in mind and we talk it through; '
         f'one sponsor holds this spot permanently. '
         f"<b>{n_lt}</b> active now.</p>"
-        f'<a class="button" href="{html.escape(dm_url("Hi! I want to inquire about the lifetime sponsor slot on omarchyapps.com."), quote=True)}" '
-        'target="_blank" rel="noopener">Inquire about lifetime \u2197</a>'
+        f'<a class="button" href="{html.escape(dm_url("Hi! I would like to make an offer for the lifetime sponsor pin on omarchyapps.com. My offer: $"), quote=True)}" '
+        'target="_blank" rel="noopener">Make an offer \u2197</a>'
         "</article>"
     )
     return "\n".join(cards)

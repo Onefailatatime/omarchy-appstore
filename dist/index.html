@@ -1442,6 +1442,13 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
 
 
+/* Category groups open with a handful of cards; the rest wait behind a button
+   until the reader asks, picks that category, or searches. */
+.group.collapsed .grid > .card:nth-of-type(n + 7) { display: none; }
+.group-more { margin-top: var(--space-medium); }
+.group:not(.collapsed) .group-more { display: none; }
+@media (max-width: 760px) { .group.collapsed .grid > .card:nth-of-type(n + 4) { display: none; } .group-more { width: 100%; justify-content: center; } }
+
 </style>
 </head>
 <body>
@@ -1613,7 +1620,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <p class="count"><b id="shown">186</b> of <b>186</b> packages shown</p>
 
   <div id="catalogue">
-<section class="group cat-ai-agents" data-cat="ai-agents">
+<section class="group cat-ai-agents collapsed" data-cat="ai-agents" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>AI &amp; Agents <b>15</b></h2>
   <div class="grid">
 <article class="card cat-ai-agents" data-detail-url="apps/claude-code.html"
@@ -1827,8 +1834,9 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">149.7 MB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/t3code-bin.html" data-share-app="t3code-bin" data-share-title="t3code-bin for Omarchy" data-share-url="https://omarchyapps.com/apps/t3code-bin.html" aria-label="Share t3code-bin">share</a><button class="app-vote" type="button" data-vote-app="t3code-bin" aria-pressed="false" aria-label="Upvote t3code-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
 </article>
   </div>
+  <button class="button ghost group-more" type="button" data-group-more aria-expanded="false">Show all 15 AI &amp; Agents apps</button>
 </section>
-<section class="group cat-developer-tools" data-cat="developer-tools">
+<section class="group cat-developer-tools collapsed" data-cat="developer-tools" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>Developer Tools <b>13</b></h2>
   <div class="grid">
 <article class="card cat-developer-tools" data-detail-url="apps/bun-bin.html"
@@ -2017,8 +2025,9 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">341 MB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/visual-studio-code-bin.html" data-share-app="visual-studio-code-bin" data-share-title="visual-studio-code-bin for Omarchy" data-share-url="https://omarchyapps.com/apps/visual-studio-code-bin.html" aria-label="Share visual-studio-code-bin">share</a><button class="app-vote" type="button" data-vote-app="visual-studio-code-bin" aria-pressed="false" aria-label="Upvote visual-studio-code-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
 </article>
   </div>
+  <button class="button ghost group-more" type="button" data-group-more aria-expanded="false">Show all 13 Developer Tools apps</button>
 </section>
-<section class="group cat-terminal-shell" data-cat="terminal-shell">
+<section class="group cat-terminal-shell collapsed" data-cat="terminal-shell" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>Terminal &amp; Shell <b>7</b></h2>
   <div class="grid">
 <article class="card cat-terminal-shell indie-app" data-detail-url="apps/caja-open-any-terminal.html"
@@ -2122,8 +2131,9 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">22 KB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/xdg-terminal-exec.html" data-share-app="xdg-terminal-exec" data-share-title="xdg-terminal-exec for Omarchy" data-share-url="https://omarchyapps.com/apps/xdg-terminal-exec.html" aria-label="Share xdg-terminal-exec">share</a><button class="app-vote" type="button" data-vote-app="xdg-terminal-exec" aria-pressed="false" aria-label="Upvote xdg-terminal-exec"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
 </article>
   </div>
+  <button class="button ghost group-more" type="button" data-group-more aria-expanded="false">Show all 7 Terminal &amp; Shell apps</button>
 </section>
-<section class="group cat-themes-desktop" data-cat="themes-desktop">
+<section class="group cat-themes-desktop collapsed" data-cat="themes-desktop" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>Themes &amp; Desktop <b>19</b></h2>
   <div class="grid">
 <article class="card cat-themes-desktop" data-detail-url="apps/aether.html"
@@ -2397,8 +2407,9 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">97.9 KB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/yaru-xfwm4-theme.html" data-share-app="yaru-xfwm4-theme" data-share-title="yaru-xfwm4-theme for Omarchy" data-share-url="https://omarchyapps.com/apps/yaru-xfwm4-theme.html" aria-label="Share yaru-xfwm4-theme">share</a><button class="app-vote" type="button" data-vote-app="yaru-xfwm4-theme" aria-pressed="false" aria-label="Upvote yaru-xfwm4-theme"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
 </article>
   </div>
+  <button class="button ghost group-more" type="button" data-group-more aria-expanded="false">Show all 19 Themes &amp; Desktop apps</button>
 </section>
-<section class="group cat-system-drivers" data-cat="system-drivers">
+<section class="group cat-system-drivers collapsed" data-cat="system-drivers" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>System &amp; Drivers <b>34</b></h2>
   <div class="grid">
 <article class="card cat-system-drivers" data-detail-url="apps/asdcontrol.html"
@@ -2878,8 +2889,9 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">140 KB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/yt6801-dkms.html" data-share-app="yt6801-dkms" data-share-title="yt6801-dkms for Omarchy" data-share-url="https://omarchyapps.com/apps/yt6801-dkms.html" aria-label="Share yt6801-dkms">share</a><button class="app-vote" type="button" data-vote-app="yt6801-dkms" aria-pressed="false" aria-label="Upvote yt6801-dkms"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
 </article>
   </div>
+  <button class="button ghost group-more" type="button" data-group-more aria-expanded="false">Show all 34 System &amp; Drivers apps</button>
 </section>
-<section class="group cat-gaming-emulation" data-cat="gaming-emulation">
+<section class="group cat-gaming-emulation collapsed" data-cat="gaming-emulation" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>Gaming &amp; Emulation <b>20</b></h2>
   <div class="grid">
 <article class="card cat-gaming-emulation" data-detail-url="apps/heroic-games-launcher-bin.html"
@@ -3163,8 +3175,9 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">98.7 KB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/umu-launcher.html" data-share-app="umu-launcher" data-share-title="umu-launcher for Omarchy" data-share-url="https://omarchyapps.com/apps/umu-launcher.html" aria-label="Share umu-launcher">share</a><button class="app-vote" type="button" data-vote-app="umu-launcher" aria-pressed="false" aria-label="Upvote umu-launcher"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
 </article>
   </div>
+  <button class="button ghost group-more" type="button" data-group-more aria-expanded="false">Show all 20 Gaming &amp; Emulation apps</button>
 </section>
-<section class="group cat-media-creative" data-cat="media-creative">
+<section class="group cat-media-creative collapsed" data-cat="media-creative" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>Media &amp; Creative <b>9</b></h2>
   <div class="grid">
 <article class="card cat-media-creative indie-app" data-detail-url="apps/cliamp.html"
@@ -3297,8 +3310,9 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">3.4 MB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/tensaku.html" data-share-app="tensaku" data-share-title="tensaku for Omarchy" data-share-url="https://omarchyapps.com/apps/tensaku.html" aria-label="Share tensaku">share</a><button class="app-vote" type="button" data-vote-app="tensaku" aria-pressed="false" aria-label="Upvote tensaku"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
 </article>
   </div>
+  <button class="button ghost group-more" type="button" data-group-more aria-expanded="false">Show all 9 Media &amp; Creative apps</button>
 </section>
-<section class="group cat-productivity-notes" data-cat="productivity-notes">
+<section class="group cat-productivity-notes" data-cat="productivity-notes" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>Productivity &amp; Notes <b>5</b></h2>
   <div class="grid">
 <article class="card cat-productivity-notes" data-detail-url="apps/basecamp-cli.html"
@@ -3375,7 +3389,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 </article>
   </div>
 </section>
-<section class="group cat-security-privacy" data-cat="security-privacy">
+<section class="group cat-security-privacy" data-cat="security-privacy" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>Security &amp; Privacy <b>5</b></h2>
   <div class="grid">
 <article class="card cat-security-privacy" data-detail-url="apps/1password.html"
@@ -3451,7 +3465,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 </article>
   </div>
 </section>
-<section class="group cat-browsers-web" data-cat="browsers-web">
+<section class="group cat-browsers-web" data-cat="browsers-web" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>Browsers &amp; Web <b>2</b></h2>
   <div class="grid">
 <article class="card cat-browsers-web" data-detail-url="apps/omarchy-chromium.html"
@@ -3484,7 +3498,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 </article>
   </div>
 </section>
-<section class="group cat-communication" data-cat="communication">
+<section class="group cat-communication" data-cat="communication" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>Communication <b>1</b></h2>
   <div class="grid">
 <article class="card cat-communication" data-detail-url="apps/hey-cli.html"
@@ -3503,7 +3517,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 </article>
   </div>
 </section>
-<section class="group cat-utilities" data-cat="utilities">
+<section class="group cat-utilities collapsed" data-cat="utilities" data-preview="6">
   <h2><span class="dot" aria-hidden="true"></span>Utilities <b>52</b></h2>
   <div class="grid">
 <article class="card cat-utilities" data-detail-url="apps/bambustudio-bin.html"
@@ -4240,6 +4254,7 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   <footer><span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">148 MB</span></span><span class="card-actions"><a class="app-share" href="https://omarchyapps.com/apps/zen-browser-bin.html" data-share-app="zen-browser-bin" data-share-title="zen-browser-bin for Omarchy" data-share-url="https://omarchyapps.com/apps/zen-browser-bin.html" aria-label="Share zen-browser-bin">share</a><button class="app-vote" type="button" data-vote-app="zen-browser-bin" aria-pressed="false" aria-label="Upvote zen-browser-bin"><span aria-hidden="true">▲</span> <span data-vote-count>0</span></button></span></footer>
 </article>
   </div>
+  <button class="button ghost group-more" type="button" data-group-more aria-expanded="false">Show all 52 Utilities apps</button>
 </section>
   </div>
 
@@ -4376,7 +4391,9 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   function apply() {
     var terms = q.value.toLowerCase().split(/\s+/).filter(Boolean);
     var n = 0;
+    var browsing = terms.length === 0 && !activeCat;
     groups.forEach(function (g) {
+      g.classList.toggle("collapsed", browsing && g.dataset.preview && !g.dataset.opened);
       var catOk = !activeCat || g.dataset.cat === activeCat;
       var visibleInGroup = 0;
       if (catOk) {
@@ -4400,6 +4417,15 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
   document.addEventListener("keydown", function (e) {
     if (e.key === "/" && document.activeElement !== q && !dlg.open) { e.preventDefault(); q.focus(); }
     if (e.key === "Escape" && document.activeElement === q) { q.value = ""; apply(); q.blur(); }
+  });
+
+  document.querySelectorAll("[data-group-more]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var g = button.closest(".group");
+      g.dataset.opened = "1";
+      g.classList.remove("collapsed");
+      button.setAttribute("aria-expanded", "true");
+    });
   });
 
   /* ---------- sort (within each visible group) ---------- */

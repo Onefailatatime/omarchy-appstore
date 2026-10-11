@@ -268,7 +268,9 @@ __AD_FOOTER__
   function apply() {
     var terms = q.value.toLowerCase().split(/\s+/).filter(Boolean);
     var n = 0;
+    var browsing = terms.length === 0 && !activeCat;
     groups.forEach(function (g) {
+      g.classList.toggle("collapsed", browsing && g.dataset.preview && !g.dataset.opened);
       var catOk = !activeCat || g.dataset.cat === activeCat;
       var visibleInGroup = 0;
       if (catOk) {
@@ -292,6 +294,15 @@ __AD_FOOTER__
   document.addEventListener("keydown", function (e) {
     if (e.key === "/" && document.activeElement !== q && !dlg.open) { e.preventDefault(); q.focus(); }
     if (e.key === "Escape" && document.activeElement === q) { q.value = ""; apply(); q.blur(); }
+  });
+
+  document.querySelectorAll("[data-group-more]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var g = button.closest(".group");
+      g.dataset.opened = "1";
+      g.classList.remove("collapsed");
+      button.setAttribute("aria-expanded", "true");
+    });
   });
 
   /* ---------- sort (within each visible group) ---------- */

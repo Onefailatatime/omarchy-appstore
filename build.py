@@ -50,10 +50,10 @@ SUGGEST_APP_URL = "https://x.com/messages/compose?" + urllib.parse.urlencode({
 SITE_URL = "https://omarchyapps.com"
 AD_FAQ = [
     ("How does the rotation work?", "The header and footer each show three sponsors at a time and rotate through every active sponsor in order, on a fixed timer. Every sponsor gets exactly the same screen time, there is no bidding for position. The starting order changes daily so nobody is permanently first or last."),
-    ("How long does a sponsorship last?", "Every sponsorship is a 90 day term, billed up front. Your ad appears only inside your contract dates and drops out automatically when the term ends. Renew before it ends to keep your spot."),
-    ("How do I pay?", "Message @jessyka_boat on X about the slot you want. You get an invoice by email and the ad goes live once it is paid. Invoices are due within 3 days."),
+    ("How long does a sponsorship last?", "Paid spots bill every 90 days and renew until you cancel, so your ad stays up as long as you want it. Cancel from the Stripe receipt email and the ad runs to the end of the paid term."),
+    ("How do I pay?", "By card through Stripe, from the button on each spot. It is a subscription that renews every 90 days. After paying, send your ad details and it goes live within one business day."),
     ("What is an app profile banner?", "Your banner on your app's own page, the highest intent spot on the site, seen by everyone who looks up that app. Only the app's own sponsor can buy it."),
-    ("What is the lifetime pin?", "One sponsor, pinned permanently at the top of the homepage. It never rotates out and never expires. $1,000 one time. It is inquiry only: message @jessyka_boat on X and we'll talk it through."),
+    ("What is the lifetime pin?", "One sponsor, pinned permanently at the top of the homepage. It never rotates out and never expires. There is no listed price: message @jessyka_boat on X with your offer and we talk it through."),
     ("Does sponsoring affect my package's listing or rank?", "No. Listings come from the official repository and rankings come from reader votes. A sponsor unit is a separate, labelled ad."),
 ]
 SITE_NAME = "Unofficial Omarchy App Store"
@@ -668,15 +668,21 @@ def card(p: dict, featured: bool = False) -> str:
 </article>"""
 
 
+GROUP_PREVIEW = 6  # cards shown per category until the reader asks for the rest
+
+
 def group_section(category: str, pkgs: list[dict]) -> str:
     cat_slug = slug(category)
     cards = "\n".join(card(p) for p in pkgs)
-    return f"""<section class="group cat-{cat_slug}" data-cat="{cat_slug}">
+    collapsed = len(pkgs) > GROUP_PREVIEW
+    more = (f'  <button class="button ghost group-more" type="button" data-group-more aria-expanded="false">'
+            f'Show all {len(pkgs)} {html.escape(category)} apps</button>\n') if collapsed else ""
+    return f"""<section class="group cat-{cat_slug}{' collapsed' if collapsed else ''}" data-cat="{cat_slug}" data-preview="{GROUP_PREVIEW}">
   <h2><span class="dot" aria-hidden="true"></span>{html.escape(category)} <b>{len(pkgs)}</b></h2>
   <div class="grid">
 {cards}
   </div>
-</section>"""
+{more}</section>"""
 
 
 def leaderboard_row(p: dict) -> str:

@@ -1451,6 +1451,13 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .ad-lifetime .ad { border: 3px double rgb(var(--rgb-terminal-white) / 0.45); }
 
 
+/* Category groups open with a handful of cards; the rest wait behind a button
+   until the reader asks, picks that category, or searches. */
+.group.collapsed .grid > .card:nth-of-type(n + 7) { display: none; }
+.group-more { margin-top: var(--space-medium); }
+.group:not(.collapsed) .group-more { display: none; }
+@media (max-width: 760px) { .group.collapsed .grid > .card:nth-of-type(n + 4) { display: none; } .group-more { width: 100%; justify-content: center; } }
+
 </style>
 </head>
 <body>
