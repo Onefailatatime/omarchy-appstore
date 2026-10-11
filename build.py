@@ -671,6 +671,14 @@ def card(p: dict, featured: bool = False) -> str:
 GROUP_PREVIEW = 6  # cards shown per category until the reader asks for the rest
 
 
+def nav_html(current_href: str) -> str:
+    """The shared top bar, read from body.html so every page has one source."""
+    body = (ROOT / "parts" / "body.html").read_text(encoding="utf-8")
+    start = body.index('<header class="topbar">')
+    bar = body[start:body.index("</header>", start) + len("</header>")].replace(' aria-current="page"', "")
+    return bar.replace(f'href="{current_href}"', f'href="{current_href}" aria-current="page"', 1)
+
+
 def group_section(category: str, pkgs: list[dict]) -> str:
     cat_slug = slug(category)
     cards = "\n".join(card(p) for p in pkgs)
@@ -865,6 +873,7 @@ def main() -> None:
             .replace("__AD_FOOTER__", ad_slots["__AD_FOOTER__"])
             .replace("__AD_LIFETIME__", ad_slots["__AD_LIFETIME__"])
             .replace("__NEW__", "\n".join(card(p, featured=True) for p in newest))
+            .replace("__TICKER__", html.escape(("Just landed: " + ", ".join(p["name"] for p in newest[:3])) if newest else f"{len(pkgs)} packages, synced {synced}"))
             .replace("__GROUPS__", groups)
             .replace("__CHIPS__", chips)
             .replace("__LEGEND__", legend)
@@ -963,6 +972,25 @@ def main() -> None:
                  .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     (DIST / "advertise.html").write_text(advertise, encoding="utf-8")
 
+    guide_cards = "\n".join(
+        f'<a class="guide-card" href="/{g["slug"]}.html"><p class="eyebrow">{html.escape(g["eyebrow"])}</p>'
+        f'<strong>{html.escape(g["title"])}</strong><span>{html.escape(g["description"])}</span></a>'
+        for g in GUIDES
+    )
+    guides_schema = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Omarchy Guides",
+                     "url": SITE_URL + "/guides.html", "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/"},
+                     "hasPart": [{"@type": "Article", "name": g["title"], "url": f"{SITE_URL}/{g['slug']}.html"} for g in GUIDES]}
+    guides_index = ((ROOT / "parts" / "guides.html").read_text(encoding="utf-8")
+                    .replace("__NAV__", nav_html("guides.html"))
+                    .replace("__GUIDE_CARDS__", guide_cards)
+                    .replace("__GUIDE_COUNT__", str(len(GUIDES)))
+                    .replace("__STRUCTURED_DATA__", json_script(guides_schema))
+                    .replace("__SYNCED__", synced)
+                    .replace("__CONTACT__", html.escape(CONTACT_URL))
+                    .replace("__SITE_URL__", SITE_URL)
+                    .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
+    (DIST / "guides.html").write_text(guides_index, encoding="utf-8")
+
     guide_template = (ROOT / "parts" / "guide.html").read_text(encoding="utf-8")
     for guide in GUIDES:
         guide_url = f"{SITE_URL}/{guide['slug']}.html"
@@ -1029,7 +1057,7 @@ def main() -> None:
             render_app_page(app_template, resolved_css, p, synced, app_banners), encoding="utf-8"
         )
 
-    sitemap_urls = [SITE_URL + "/", SITE_URL + "/leaderboard.html", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/advertise.html", SITE_URL + "/terms.html"]
+    sitemap_urls = [SITE_URL + "/", SITE_URL + "/leaderboard.html", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/advertise.html", SITE_URL + "/guides.html", SITE_URL + "/terms.html"]
     sitemap_urls.extend(f"{SITE_URL}/{guide['slug']}.html" for guide in GUIDES)
     sitemap_urls.extend(f"{SITE_URL}/apps/{slug(p['name'])}.html" for p in pkgs)
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -1053,6 +1081,7 @@ def main() -> None:
         f"- [Top apps leaderboard]({SITE_URL}/leaderboard.html)\n"
         f"- [Develop for Omarchy]({SITE_URL}/develop.html)\n"
         f"- [About]({SITE_URL}/about.html)\n"
+        f"- [Guides]({SITE_URL}/guides.html)\n"
         f"- [Advertise]({SITE_URL}/advertise.html)\n"
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
         "## Guides and comparisons\n"

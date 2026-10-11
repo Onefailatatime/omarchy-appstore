@@ -39,14 +39,19 @@ __STYLE__
 </head>
 <body>
 
-<nav class="notification" aria-label="Primary">
-  <a href="/" aria-current="page">Home</a><span aria-hidden="true">·</span>
-  <a href="/leaderboard.html">Top Apps</a><span aria-hidden="true">·</span>
-  <a href="/develop.html">Develop Checklist</a><span aria-hidden="true">·</span>
-  <a href="/about.html">About</a><span aria-hidden="true">·</span>
-  <a href="/terms.html">TOS</a><span aria-hidden="true">·</span>
-  <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact</a>
-</nav>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="index.html" aria-label="Unofficial Omarchy App Store home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
+    <nav class="topbar-links" aria-label="Primary">
+      <a href="index.html" aria-current="page">Apps</a>
+      <a href="leaderboard.html">Top apps</a>
+      <a href="guides.html">Guides</a>
+      <a href="develop.html">Develop</a>
+      <a href="advertise.html">Advertise</a>
+    </nav>
+    <a class="button topbar-cta" href="advertise.html">Sponsor</a>
+  </div>
+</header>
 
 <header class="hero">
   <div class="wrap">
@@ -55,9 +60,11 @@ __STYLE__
 █ <b>█   █</b> █
 █ <b>▀▀▀▀▀</b> █
 ▀▀▀▀▀▀▀▀▀</pre>
+    <a class="ticker" href="#arrivals-h">__TICKER__ <span aria-hidden="true">→</span></a>
     <h1>Unofficial Omarchy <span>App Store</span></h1>
     <p class="tag">Every package in the official Omarchy repo, one command away.</p>
     <p class="facts"><b>__COUNT__</b> packages · <b>__CATCOUNT__</b> categories · synced __SYNCED__ · install with <code>omarchy pkg add &lt;name&gt;</code></p>
+    <p class="hero-actions"><a class="button" href="#catalogue">Browse the apps</a><a class="button ghost" href="leaderboard.html">Top apps</a></p>
   </div>
 </header>
 

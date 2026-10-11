@@ -63,6 +63,13 @@
    ========================================================================= */
 
 @font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(../fonts/geist-latin-wght-normal.woff2) format("woff2-variations");
+}
+@font-face {
   font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: 400;
@@ -103,6 +110,7 @@
   --border-width: max(1px, 0.0625em);
 
   --font-family: "JetBrains Mono", monospace;
+  --font-sans: "Geist", system-ui, sans-serif;
   --font-size: clamp(0.875rem, 0.84rem + 0.2vw, 0.95rem);
   --line-height: 1.45;
 
@@ -165,20 +173,25 @@ b, strong { font-weight: 700; }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--space-neutral); }
 
 /* =================== NOTIFICATION STRIP =================== */
-.notification {
-  background: var(--color-terminal-blue);
-  color: var(--color-background-night);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.4em 1em;
-  text-align: center;
-  padding: 0.55em var(--space-medium);
-  font-weight: 700;
+/* Top bar: the slim sticky bar omarchy.org uses, brand left, links, one solid action. */
+.topbar { position: sticky; top: 0; z-index: 30; background: rgba(var(--rgb-background-night), 0.92); backdrop-filter: blur(8px); border-bottom: var(--border-width) solid var(--border-color); }
+.topbar-in { display: flex; align-items: center; gap: var(--space-medium); min-height: 3.5rem; }
+.brand { display: inline-flex; align-items: center; gap: 0.6em; color: var(--color-terminal-white); text-decoration: none; font-weight: 700; white-space: nowrap; }
+.brand:hover { color: var(--color-turquoise); }
+.brand-mark { width: 1.35em; height: 1.35em; border: 0.2em solid var(--color-terminal-blue); border-radius: 0.15em; box-shadow: inset 0 0 0 0.2em var(--color-background-night), inset 0 0 0 0.4em var(--color-turquoise); }
+.brand-name b { color: var(--color-terminal-blue); font-weight: 700; }
+.topbar-links { display: flex; gap: 0.25em; margin-left: var(--space-small); overflow-x: auto; scrollbar-width: none; }
+.topbar-links::-webkit-scrollbar { display: none; }
+.topbar-links a { padding: 0.45em 0.7em; border-radius: var(--radius); color: rgb(var(--rgb-terminal-white) / 0.8); text-decoration: none; white-space: nowrap; font-size: 92%; }
+.topbar-links a:hover { color: var(--color-turquoise); background: rgba(var(--rgb-background-storm), 0.9); }
+.topbar-links a[aria-current="page"] { color: var(--color-terminal-white); background: var(--color-background-storm); }
+.topbar-cta { margin-left: auto; height: 2.3em; min-height: 36px; padding-inline: var(--space-medium); font-size: 88%; }
+@media (max-width: 760px) {
+  .topbar-in { gap: var(--space-small); }
+  .brand-name { display: none; }
+  .topbar-links { margin-left: 0; }
+  .topbar-links a { padding: 0.5em 0.55em; }
 }
-.notification a { color: inherit; text-decoration: none; }
-.notification a:hover { text-decoration: underline; }
-.notification a[aria-current="page"] { text-decoration: underline; text-underline-offset: 0.2em; }
 
 /* =================== DEVELOPMENT GUIDE =================== */
 .guide-hero { padding-bottom: var(--space-medium); }
@@ -522,7 +535,7 @@ b, strong { font-weight: 700; }
 .app-page article { display: grid; min-width: 0; gap: var(--space-large); }
 .app-page article > *, .app-header > div:first-child { min-width: 0; }
 .app-header { display: flex; justify-content: space-between; align-items: end; gap: var(--space-large); }
-.app-header h1 { margin: 0; color: var(--color-terminal-white); font-size: clamp(1.8rem, 5vw, 3rem); overflow-wrap: anywhere; }
+.app-header h1 { margin: 0; font-family: var(--font-sans); letter-spacing: -0.02em; color: var(--color-terminal-white); font-size: clamp(1.8rem, 5vw, 3rem); overflow-wrap: anywhere; }
 .app-header .eyebrow { margin: 0 0 0.5em; color: var(--color-green); text-transform: uppercase; font-size: 82%; }
 .app-header .app-byline { margin: 0.35em 0 0; color: rgb(var(--rgb-terminal-blue) / 0.72); font-size: 88%; }
 .app-header .app-byline a { color: var(--color-turquoise); }
@@ -543,9 +556,6 @@ b, strong { font-weight: 700; }
     --space-xx-large: 3em;
     --bar-h: 8.5em;
   }
-  .notification { gap: 0; padding: 0.2em 0.35em; }
-  .notification > span { display: none; }
-  .notification a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.5em; }
   .guide-progress {
     display: grid;
     grid-template-areas: "label reset" "bar bar";
@@ -580,7 +590,9 @@ b, strong { font-weight: 700; }
 .hero pre b { color: var(--color-turquoise); font-weight: 400; }
 .hero h1 {
   margin: 0 0 var(--space-small);
-  font-size: 180%;
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  letter-spacing: -0.02em;
   font-weight: 700;
   color: var(--color-terminal-white);
   letter-spacing: -0.01em;
@@ -1443,17 +1455,37 @@ footer.site .legend .dot { width: 0.5em; height: 0.5em; }
 .group-more { margin-top: var(--space-medium); }
 .group:not(.collapsed) .group-more { display: none; }
 @media (max-width: 760px) { .group.collapsed .grid > .card:nth-of-type(n + 4) { display: none; } .group-more { width: 100%; justify-content: center; } }
+
+/* Hero extras in the spirit of omarchy.org: an announcement ticker above the title, two actions below. */
+.ticker { display: inline-flex; align-items: center; gap: 0.5em; margin-bottom: var(--space-medium); padding: 0.35em 0.9em; border: var(--border-width) solid var(--border-color); border-radius: 2em; background: rgba(var(--rgb-background-storm), 0.7); color: rgb(var(--rgb-terminal-white) / 0.85); font-size: 82%; text-decoration: none; }
+.ticker:hover { border-color: var(--color-terminal-blue); color: var(--color-turquoise); }
+.hero-actions { display: flex; justify-content: center; gap: var(--space-small); margin: var(--space-medium) 0 0; }
+.guide-hero h1, .advertise-main h2, .home-top-head h2, .slots-head h2, .steps h3, .slot h3, .group h2 { font-family: var(--font-sans); letter-spacing: -0.01em; }
+.guides-main { padding-bottom: var(--space-xx-large); }
+.guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: var(--space-medium); margin-top: var(--space-large); }
+.guide-card { display: flex; flex-direction: column; gap: 0.4em; padding: var(--space-neutral); border: var(--border-width) solid var(--border-color); border-radius: var(--radius); background: var(--color-background-storm); color: var(--color-terminal-blue); text-decoration: none; }
+.guide-card:hover { border-color: var(--color-terminal-blue); }
+.guide-card .eyebrow { margin: 0; color: var(--color-green); font-size: 72%; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.guide-card strong { font-family: var(--font-sans); font-size: 115%; color: var(--color-terminal-white); }
+.guide-card span { font-size: 90%; color: rgb(var(--rgb-terminal-blue) / 0.85); }
+@media (max-width: 760px) { .hero-actions { flex-direction: column; } .hero-actions .button { width: 100%; justify-content: center; } }
+@media (max-width: 760px) { .topbar-links { mask-image: linear-gradient(to right, #000 88%, transparent); -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); padding-right: 1.5em; } }
 </style>
 </head>
 <body>
-<nav class="notification" aria-label="Primary">
-  <a href="/">Home</a><span aria-hidden="true">·</span>
-  <a href="/leaderboard.html">Top Apps</a><span aria-hidden="true">·</span>
-  <a href="/develop.html">Develop Checklist</a><span aria-hidden="true">·</span>
-  <a href="/about.html">About</a><span aria-hidden="true">·</span>
-  <a href="/terms.html">TOS</a><span aria-hidden="true">·</span>
-  <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">Contact</a>
-</nav>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../index.html" aria-label="Unofficial Omarchy App Store home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
+    <nav class="topbar-links" aria-label="Primary">
+      <a href="../index.html">Apps</a>
+      <a href="../leaderboard.html">Top apps</a>
+      <a href="../guides.html">Guides</a>
+      <a href="../develop.html">Develop</a>
+      <a href="../advertise.html">Advertise</a>
+    </nav>
+    <a class="button topbar-cta" href="../advertise.html">Sponsor</a>
+  </div>
+</header>
 <main class="wrap app-page">
   <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../index.html">App Store</a><span aria-hidden="true">/</span><span>wayfreeze</span></nav>
   <article>

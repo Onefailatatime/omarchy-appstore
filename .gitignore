@@ -19,3 +19,4 @@ mockups/
 # Local Netlify folder
 .netlify
 data/refresh-launchd.log
+dist/_preview/
