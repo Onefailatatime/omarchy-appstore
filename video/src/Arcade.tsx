@@ -94,13 +94,14 @@ const Lane: React.FC<{ y: number; start: number; len: number; names: string[]; g
   const p = clamp01((f - start) / len);
   if (f < start - 10 || f > start + len + 30) return null;
   const x0 = 140, x1 = W - 140, px = x0 + (x1 - x0) * p;
-  const slots = 18;
+  const slots = 16;
   return (
     <>
       {Array.from({ length: slots }, (_, i) => {
         const sx = x0 + 60 + ((x1 - x0 - 120) * i) / (slots - 1);
         if (sx < px) return null;
-        const name = i % 3 === 1 ? names[Math.floor(i / 3) % names.length] : null;
+        if (i % 4 === 1 || i % 4 === 3) return null;             // breathing room either side of a name
+        const name = i % 4 === 2 ? names[Math.floor(i / 4) % names.length] : null;
         return name
           ? <Arc key={i} size={32} color={C.white} style={{ position: "absolute", left: sx, top: y - 20, transform: "translateX(-50%)", letterSpacing: "0.04em", textTransform: "none" }}>{name}</Arc>
           : <div key={i} style={{ position: "absolute", left: sx - 6, top: y - 6, width: 14, height: 14, borderRadius: 7, background: C.white, opacity: 0.85 }} />;

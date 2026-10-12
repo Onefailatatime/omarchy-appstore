@@ -19,7 +19,7 @@ const ease = Easing.out(Easing.cubic);
 const prog = (f: number, a: number, len: number) => ease(clamp01((f - a) / len));
 function rng(seed: number) { return () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
 
-type Pkg = { n: string; d: string; c: string };
+type Pkg = { n: string; d: string; c: string; s?: string };
 const ALL = cat as Pkg[];
 const COLS = 6, CW = 286, CH = 150, GX = 16, GY = 16, GRID_X = (W - (COLS * CW + (COLS - 1) * GX)) / 2, GRID_Y = 150;
 const cell = (i: number) => ({ x: GRID_X + (i % COLS) * (CW + GX), y: GRID_Y + Math.floor(i / COLS) * (CH + GY) });
@@ -32,7 +32,7 @@ const Card: React.FC<{ p: Pkg; x: number; y: number; w?: number; scale?: number;
     fontFamily: MONO, fontSize: big ? 26 : 17, color: C.blue, display: "flex", flexDirection: "column", gap: big ? 12 : 7 }}>
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 10 }}>
       <b style={{ color: hi ? C.turq : C.white, fontSize: big ? 34 : 18, overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}>{p.n}</b>
-      {isNew ? <span style={{ color: C.orange, fontSize: big ? 20 : 13, whiteSpace: "nowrap" }}>new</span> : <span style={{ color: C.green, fontSize: big ? 20 : 13, opacity: 0.9 }}>1.0.0</span>}
+      {isNew ? <span style={{ color: C.orange, fontSize: big ? 20 : 13, whiteSpace: "nowrap" }}>new</span> : <span style={{ color: DIM, fontSize: big ? 20 : 13 }}>{p.s ?? ""}</span>}
     </div>
     <div style={{ color: "rgba(122,162,247,0.85)", lineHeight: 1.4, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>{p.d}</div>
     <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: big ? 20 : 13, color: DIM }}>
@@ -200,7 +200,7 @@ export const Catalogue = () => {
                 <span style={{ color: DIM }}>{r}</span><b style={{ color: j === 2 && f >= K.panels[1] + 30 ? C.turq : C.white, flex: 1 }}>{j === 2 ? lone.n : [ALL[5].n, ALL[9].n][j]}</b><span style={{ color: C.blue }}>▲</span>
               </div>))}</div>}
             {i === 2 && <div style={{ background: C.night, border: "1px solid rgba(65,72,104,0.8)", borderRadius: 7, padding: "18px 20px", fontSize: 24, color: C.white, lineHeight: 1.6 }}>
-              <span style={{ color: C.green }}>~ $</span> omarchy pkg add {lone.n}<br /><span style={{ color: DIM }}>installing</span> <span style={{ color: C.blue }}>{"█".repeat(Math.min(12, Math.floor((f - K.panels[2]) / 4)))}</span><br /><span style={{ color: C.green }}>✓</span> done</div>}
+              <span style={{ color: C.green }}>~ $</span> omarchy pkg add {lone.n}<br /><span style={{ color: DIM }}>installing</span> <span style={{ color: C.blue }}>{"█".repeat(Math.max(0, Math.min(12, Math.floor((f - K.panels[2]) / 4))))}</span><br /><span style={{ color: C.green }}>✓</span> done</div>}
             <div style={{ marginTop: 22, color: DIM, fontSize: 18, lineHeight: 1.5 }}>
               {["Synced from the official repo. No form, no gatekeeper.", "Readers vote. Rank comes from them, never from ads.", "Readers come to install, not to browse."][i]}
             </div>

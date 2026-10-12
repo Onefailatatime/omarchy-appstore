@@ -8,7 +8,7 @@ Colour values marked "computed" were read from computed CSS on the page; others 
 
 House rule: no em or en dashes anywhere in this file. Two competitor headlines contain one in the original; the dash is replaced with a colon and flagged inline.
 
----
+***
 
 ## 1. senja.io
 
@@ -60,7 +60,7 @@ Every section is punctuated by a single highlighted testimonial quote between bl
 - Gated: branding removal (Starter), custom domain (Starter), HD video (Starter), API (Starter), seats and rich snippets (Pro). Imports and unlimited widgets are free.
 - Layout: Free plan as a full-width feature grid first, then two paid cards side by side, FAQ, purple CTA band.
 
----
+***
 
 ## 2. testimonial.to
 
@@ -107,7 +107,7 @@ Every section is punctuated by a single highlighted testimonial quote between bl
 - Gated: video count (free 2, unlimited only at Ultimate), custom domain (Starter), API/MCP (Ultimate), case studies and NPS (Ultimate +). White-label widgets are free, which is unusual.
 - Layout: four cards in a row with the recommended one outlined in indigo, Enterprise as a slim full-width bar, logo strip, then a long comparison table grouped by product area.
 
----
+***
 
 ## 3. famewall.io
 
@@ -157,7 +157,7 @@ Every section is punctuated by a single highlighted testimonial quote between bl
 - Gated: custom domain, branding removal, HD video, API and integrations (all Standard); video count (6 on Standard, unlimited from Professional); team seats; white label and client workspaces (Agency).
 - Layout: five cards, "Trusted by" logo strip, then a full comparison table.
 
----
+***
 
 ## 4. shoutout.io
 
@@ -204,7 +204,7 @@ Every section is punctuated by a single highlighted testimonial quote between bl
 - Gated: nothing by feature except branding removal on lifetime (+$50); the limit is 3 projects. No free tier.
 - Layout: two cards, five-question FAQ, one testimonial, footer. Shortest pricing page of the six.
 
----
+***
 
 ## 5. trustmary.com (Wayback snapshots, live site down)
 
@@ -256,7 +256,7 @@ Eyebrow: "AI VISIBILITY THROUGH CUSTOMER EXPERIENCE"
 - Gated: metered on widget views and survey responses rather than features; whitelabel, imports (connections), and translations are paid add-ons. Video is not a headline feature.
 - Layout: free Solo as a slim bar on top, three cards with the middle one raised, "View add-ons" expander into a 4x3 add-on grid, FAQ.
 
----
+***
 
 ## 6. vouchfor.com
 
@@ -298,7 +298,7 @@ Note: Vouch has pivoted away from customer testimonials. The site now sells empl
 - Gated: everything beyond the base is sales-led; branding is sold as "Custom Brand Kits".
 - Layout: one wide slate-blue header card, three add-on cards with coloured top-left glyphs, a brand-kit bar, FAQ, three customer quotes, CTA.
 
----
+***
 
 ## Cross-competitor patterns worth knowing
 
@@ -309,7 +309,7 @@ Note: Vouch has pivoted away from customer testimonials. The site now sells empl
 - Free tiers cap testimonials (Senja 15, testimonial.to 10 text + 2 video, Famewall 10, Trustmary 5 responses/month). Branding removal is the universal paid gate ($12 to $29/month, or Shoutout +$50 once). Custom domain is the second gate. Video count is the third.
 - Embed story is told with a dark code card (testimonial.to) or logo tile grids (testimonial.to, Shoutout, Famewall). Nobody shows the widget in multiple visual themes side by side.
 
----
+***
 
 ## Mash-up design brief: Kudowall
 
