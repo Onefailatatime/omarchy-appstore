@@ -22,7 +22,7 @@ curl -fsSL https://omadesign.app/install | sh
 
 That is the only supported install route as of October 2026. The script picks your architecture, downloads the 0.6.3 release tarball from GitHub, verifies its SHA-256 and unpacks into `~/.local`. Nothing touches `/usr` and no sudo is needed. Omadesign is free and MIT-licensed with no paid tier. Cloud features (shared projects, team review) need an account, but every editing feature works offline without one.
 
-The honest caveat up front: there is no `omarchy pkg add omadesign` yet. A package was submitted to the Omarchy repo in September 2026 but it is still open and pinned to an old alpha, and the maintainer has said no to an AUR package. So the install line above is a `curl | sh`, with everything that implies. Read the script first if you want; it is 62 lines, and the SHA-256 check happens before anything is extracted. The second caveat: the project calls itself alpha. It moves fast (0.6.0 to 0.6.3 in one month) and the guide below is written against 0.6.3.
+The honest caveat up front: `omarchy pkg add omadesign-bin` only works on the edge channel for now. The package was merged into the official Omarchy repo on October 11, 2026, but new packages land on the edge ring first and only reach stable when the next Omarchy release train promotes them. Until then the curl one-liner is the route for everyone on stable. Read the script first if you want; it is 62 lines, and the SHA-256 check happens before anything is extracted. Second caveat: the project moves fast (0.6.0 to 0.6.3 in one month) and this guide is written against 0.6.3.
 
 ## Getting started (5 minutes)
 

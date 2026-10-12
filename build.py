@@ -300,11 +300,11 @@ GUIDES = [
         },
         "heading": "Omadesign on <span>Omarchy</span>",
         "tagline": "A free, native, Omarchy-themed design, paint, photo and motion app. Alpha, and not in the package repo yet.",
-        "answer": "Install with curl -fsSL https://omadesign.app/install | sh. There is no omarchy pkg add omadesign yet: the package PR to omarchy-pkgs has sat unmerged since September 2026 and the maintainer declined an AUR package. Omadesign is free (MIT), follows your Omarchy theme and font, and updates itself from About > Update.",
+        "answer": "Install with curl -fsSL https://omadesign.app/install | sh. The omadesign-bin package was merged into the Omarchy repo on October 11, 2026 but is on the edge ring only until the next release train promotes it to stable. Omadesign is free (MIT), follows your Omarchy theme and font, and updates itself from About > Update.",
         "faqs": [
             ("Does Omadesign work on Omarchy?", "Yes, it was built for it. The UI reads your Omarchy theme colors and font on launch and repaints when you switch themes. It runs natively on Wayland under Hyprland, on both x86_64 and Apple Silicon via Asahi. Expect a 4-core or sub-8 GB machine to feel slow."),
             ("Is Omadesign free?", "Completely, under the MIT license. No trial, no paid tier, no account for local work. The cloud sharing features need a sign-in but there is no published pricing for them."),
-            ("Why isn't Omadesign in the Omarchy app store?", "Because it is not in the Omarchy package repo. The maintainer distributes only through the home-directory installer and declined an AUR package. A community PR to omarchy-pkgs exists but is stale. Until a package lands, omarchy pkg add omadesign will fail."),
+            ("Why isn't Omadesign in the Omarchy app store?", "Because it is not on the stable channel yet. The omadesign-bin package was merged into the official repo on October 11, 2026 and is live on the edge ring. Stable gets it with the next Omarchy release train, and this site lists stable."),
             ("Omadesign vs Inkscape, which should I pick?", "Inkscape if you need a specific SVG feature or you ship files to people on other tools. Omadesign if you want raster, photo and motion in the same window and prefer a native GUI over GTK3. Many people will keep both installed."),
             ("How do I update Omadesign?", "Omadesign > About > Update, which reruns the official installer and restarts with your documents open. Rerunning the curl one-liner does the same thing from a terminal. There is no pacman path."),
         ],
