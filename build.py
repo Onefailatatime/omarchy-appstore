@@ -987,6 +987,7 @@ def main() -> None:
     (DIST / "ads.js").write_text((ROOT / "assets" / "ads.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "home-leaders.js").write_text((ROOT / "assets" / "home-leaders.js").read_text(encoding="utf-8"), encoding="utf-8")
+    (DIST / "hero-field.js").write_text((ROOT / "assets" / "hero-field.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "leaderboard.js").write_text((ROOT / "assets" / "leaderboard.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "share.js").write_text((ROOT / "assets" / "share.js").read_text(encoding="utf-8"), encoding="utf-8")
     about = ((ROOT / "parts" / "about.html").read_text(encoding="utf-8")

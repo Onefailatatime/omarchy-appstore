@@ -29,6 +29,7 @@
 <meta name="twitter:image" content="__SITE_URL__/images/social-card.png">
 <script src="/votes.js" defer></script>
 <script src="/home-leaders.js" defer></script>
+<script src="/hero-field.js" defer></script>
 <script src="/share.js" defer></script>
 <script src="/newsletter.js" defer></script>
 <script src="/ads.js" defer></script>
@@ -54,7 +55,7 @@ __STYLE__
 </header>
 
 <header class="hero">
-  <canvas class="hero-pixels" id="hero-pixels" aria-hidden="true"></canvas>
+  <canvas class="hero-pixels" data-mode="random" aria-hidden="true"></canvas>
   <div class="wrap hero-in">
 <pre aria-hidden="true">▄▄▄▄▄▄▄▄▄
 █ <b>▄▄▄▄▄</b> █
@@ -373,38 +374,6 @@ __AD_FOOTER__
   }
   q.addEventListener("input", apply);
 
-  /* ---------- hero pixel field (omarchy.org-style dither, seeded so it never flickers between loads) ---------- */
-  (function () {
-    var cv = document.getElementById("hero-pixels");
-    if (!cv || !cv.getContext) return;
-    var ctx = cv.getContext("2d");
-    function draw() {
-      var hero = cv.parentElement;
-      var w = hero.clientWidth, h = hero.clientHeight;
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      cv.width = w * dpr; cv.height = h * dpr; cv.style.width = w + "px"; cv.style.height = h + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
-      var cell = 12, gap = 2, seed = 1337;
-      function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
-      var cols = Math.ceil(w / cell), rows = Math.ceil(h / cell);
-      var cx = cols / 2, cy = rows * 0.42;
-      for (var y = 0; y < rows; y++) {
-        for (var x = 0; x < cols; x++) {
-          var dx = (x - cx) / cols * 2, dy = (y - cy) / rows * 2.2;
-          var d = Math.sqrt(dx * dx + dy * dy);
-          var p = Math.max(0, 0.55 - d * 0.5) * (0.65 + rnd() * 0.7);
-          var r = rnd();
-          if (r > p) continue;
-          var tone = rnd();
-          ctx.fillStyle = tone < 0.72 ? "rgba(65,72,104,0.55)" : tone < 0.92 ? "rgba(122,162,247,0.32)" : "rgba(125,207,255,0.45)";
-          ctx.fillRect(x * cell, y * cell, cell - gap, cell - gap);
-        }
-      }
-    }
-    draw();
-    var t; window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(draw, 120); });
-  })();
   document.addEventListener("keydown", function (e) {
     if (e.key === "/" && document.activeElement !== q && !dlg.open) { e.preventDefault(); q.focus(); }
     if (e.key === "Escape" && document.activeElement === q) { q.value = ""; apply(); q.blur(); }

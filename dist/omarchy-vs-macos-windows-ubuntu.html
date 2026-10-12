@@ -1538,6 +1538,7 @@ footer.site nav a:hover { color: var(--color-turquoise); }
   pointer-events: none;
 }
 .hero::after { z-index: 0; }
+.hero[data-mode="matrix"]::after, .hero[data-mode="pacman"]::after { opacity: 0.5; }
 
 @media (max-width: 760px) {
   .band { padding: var(--space-x-large) 0; }
