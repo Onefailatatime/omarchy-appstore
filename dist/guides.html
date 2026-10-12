@@ -1044,6 +1044,7 @@ b, strong { font-weight: 700; }
 .app-vote[aria-busy="true"] { cursor: wait; opacity: 0.55; }
 .app-vote.vote-error { border-color: #f7768e; }
 .app-vote.vote-unavailable { opacity: 0.5; }
+.app-vote [data-vote-count]:empty { display: none; }
 .app-vote-large { margin-left: 0; min-width: 8em; justify-content: center; }
 
 @media (max-width: 600px) {
@@ -1453,7 +1454,11 @@ footer.site nav a:hover { color: var(--color-turquoise); }
 .guide-card strong { font-family: var(--font-sans); font-size: 115%; color: var(--color-terminal-white); }
 .guide-card span { font-size: 90%; color: rgb(var(--rgb-terminal-blue) / 0.85); }
 @media (max-width: 760px) { .hero-actions { flex-direction: column; } .hero-actions .button { width: 100%; justify-content: center; } }
-@media (max-width: 760px) { .topbar-links { mask-image: linear-gradient(to right, #000 88%, transparent); -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); padding-right: 1.5em; } }
+@media (max-width: 600px) {
+  .topbar-in { flex-wrap: wrap; row-gap: 0; padding-bottom: 0.35em; }
+  .topbar-links { order: 3; flex: 1 1 100%; margin: 0 calc(-1 * var(--space-neutral)); padding: 0 var(--space-neutral) 0.2em; }
+  .topbar-links a { padding: 0.45em 0.6em; }
+}
 
 /* =================== HOMEPAGE BANDS (omarchy.org-style section rhythm) =================== */
 /* Full-bleed alternating surfaces with a hairline rule between them. Each band

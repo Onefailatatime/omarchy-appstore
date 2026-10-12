@@ -1,0 +1,223 @@
+{
+  "fps": 30,
+  "boot": {
+    "frames": 1620,
+    "acts": {
+      "problem": 0,
+      "card1": 240,
+      "resolve": 330,
+      "card2": 690,
+      "builders": 780,
+      "card3": 1020,
+      "build": 1110,
+      "endCard": 1500
+    },
+    "typing": [
+      {
+        "cmd": "git push origin main",
+        "start": 22,
+        "end": 68
+      },
+      {
+        "cmd": "watch stars",
+        "start": 104,
+        "end": 130
+      },
+      {
+        "cmd": "omarchy pkg upgrade appstore",
+        "start": 342,
+        "end": 398
+      },
+      {
+        "cmd": "omarchyapps --for builders",
+        "start": 792,
+        "end": 846
+      },
+      {
+        "cmd": "omarchy pkg upgrade appstore --apply",
+        "start": 1116,
+        "end": 1176
+      }
+    ],
+    "lines": {
+      "pushed": 80,
+      "stars1": 142,
+      "stars7": 166,
+      "stars30": 190,
+      "hoping": 216,
+      "resolving": 410,
+      "found": 426,
+      "synced": 440,
+      "ranked": 456,
+      "guides": 472,
+      "checklist": 488,
+      "trackers": 504,
+      "install": 520,
+      "dependsStart": 548,
+      "dependsStep": 4,
+      "listed": 858,
+      "noticed": 884,
+      "foundBy": 910,
+      "paid": 936,
+      "readers": 966,
+      "stat1": 986,
+      "stat2": 1004,
+      "buildStart": 1186,
+      "buildEnd": 1322,
+      "unpackAt": [
+        1216,
+        1246,
+        1276,
+        1306
+      ],
+      "tick1": 1350,
+      "tick2": 1382,
+      "prompt": 1408
+    },
+    "bassHit": 1382
+  },
+  "signal": {
+    "frames": 1560,
+    "lone": {
+      "t1": 20,
+      "t2": 80,
+      "t3": 150,
+      "end": 300
+    },
+    "hoping": 270,
+    "ignite": 300,
+    "pullStart": 390,
+    "lockAt": 465,
+    "logoCopy": 480,
+    "burstStart": 560,
+    "different": [
+      640,
+      682,
+      724
+    ],
+    "builders": 766,
+    "builderLines": [
+      766,
+      810,
+      854
+    ],
+    "grow": 906,
+    "stats": 960,
+    "dim": 1076,
+    "nextWeek": 1136,
+    "biggest": 1181,
+    "hints": 1228,
+    "every": 1272,
+    "upgrade": 1316,
+    "bassHit": 1316,
+    "endCard": 1380
+  },
+  "arcade": {
+    "frames": 1480,
+    "rainEnd": 60,
+    "ready": 60,
+    "lone": 90,
+    "lines": [
+      90,
+      150,
+      210
+    ],
+    "gameOver": 270,
+    "insertCoin": 300,
+    "coin": 318,
+    "stage1": 330,
+    "lanes": 420,
+    "laneLen": 80,
+    "ticker": [
+      480,
+      540,
+      600
+    ],
+    "levelUp": 660,
+    "stage2": 690,
+    "pellets": [
+      740,
+      800,
+      860
+    ],
+    "paid": 900,
+    "scores": 930,
+    "dark": 1050,
+    "nextWeek": 1062,
+    "hints": 1096,
+    "player2": 1118,
+    "every": 1140,
+    "upgrade": 1200,
+    "bassHit": 1200,
+    "endCard": 1300
+  },
+  "catalogue": {
+    "frames": 1470,
+    "lone": 0,
+    "hoped": [
+      10,
+      55,
+      100
+    ],
+    "hoping": 120,
+    "assemble": 150,
+    "chrome": 170,
+    "counters": 200,
+    "scroll": 250,
+    "search": 330,
+    "searchKeys": [
+      346,
+      353,
+      361,
+      368,
+      376
+    ],
+    "filtered": 392,
+    "zoom": 450,
+    "cmdKeys": [
+      470,
+      476,
+      482,
+      488,
+      494,
+      500,
+      506,
+      512,
+      518,
+      524,
+      530,
+      536,
+      542,
+      548,
+      554,
+      560,
+      566,
+      572,
+      578,
+      584,
+      590,
+      596
+    ],
+    "copied": 610,
+    "oneCommand": 620,
+    "leaderboard": 660,
+    "climb": 700,
+    "ranked": 720,
+    "builders": 790,
+    "panels": [
+      790,
+      840,
+      890
+    ],
+    "sponsor": 930,
+    "grow": 950,
+    "stats": 990,
+    "dim": 1080,
+    "nextWeek": 1100,
+    "biggest": 1140,
+    "every": 1200,
+    "upgrade": 1250,
+    "bassHit": 1250,
+    "endCard": 1300
+  }
+}

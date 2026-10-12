@@ -1,0 +1,6 @@
+{
+  "_note": "Fill these from Cloudflare or PostHog before the final render. Null fields are skipped, nothing is invented.",
+  "visitorsLastMonth": null,
+  "growthPct": null,
+  "projectionNextMonth": null
+}

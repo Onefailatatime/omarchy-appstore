@@ -48,6 +48,14 @@ export default {
       }
       // html_handling is off so every canonical .html URL serves as-is; only the root needs a hand.
       if (pathname === "/") return env.ASSETS.fetch(new Request(new URL("/index.html", request.url), request));
+      if (!pathname.includes(".") && pathname !== "/") {
+        const clean = pathname.replace(/\/+$/, "");
+        const probe = await env.ASSETS.fetch(new Request(new URL(clean + ".html", request.url), { method: "HEAD" }));
+        if (probe.ok) {
+          url.pathname = clean + ".html";
+          return Response.redirect(url.toString(), 301);
+        }
+      }
       return env.ASSETS.fetch(request);
     } catch (error) {
       console.error(JSON.stringify({ event: "request_failed", path: pathname, error: String(error && error.stack || error) }));

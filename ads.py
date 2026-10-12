@@ -162,9 +162,9 @@ def render_homepage(ads: dict) -> dict[str, str]:
         hunits = [_unit(s, "Ad", "text") for s in hsponsors]
         header = f'<div class="ad-header">{_rotation(hunits, h.get("visible_units", 3), "header")}</div>'
     else:
-        header = (f'<div class="ad-header">'
-                  f'{_open_card(h["label"], "header", h["price_month"], h["term_days"])}'
-                  "</div>")
+        # An empty "your app here" card above the fold reads as an empty store;
+        # the footer open card and the Sponsor button already sell the slot.
+        header = ""
 
     f = ads["footer"]
     fsponsors = active_sponsors(f.get("sponsors") or [])

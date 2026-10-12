@@ -49,7 +49,7 @@
     });
     podium.replaceChildren(fragment);
     podium.hidden = false;
-    status.textContent = "Live community rankings · updates with every vote";
+    status.textContent = "Reader upvotes · one vote per app, per browser";
   }
 
   window.addEventListener("omarchy:votes", function (event) {

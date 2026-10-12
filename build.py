@@ -648,9 +648,6 @@ def card(p: dict, featured: bool = False) -> str:
     built = datetime.date.fromtimestamp(p["built"]).isoformat()
     added_date = datetime.date.fromtimestamp(p["added"]) if p["added"] else None
     added = added_date.isoformat() if added_date else ""
-    deps = html.escape(json.dumps(p["deps"]))
-    reqs = html.escape(json.dumps(p["requirements"]))
-    gallery = html.escape(json.dumps(profile_images(p)), quote=True)
     cat_slug = slug(p["category"])
     cls = f"card cat-{cat_slug} featured" if featured else f"card cat-{cat_slug}"
     if p.get("indie_note"):
@@ -678,16 +675,33 @@ def card(p: dict, featured: bool = False) -> str:
   data-name="{e['name']}" data-dir="{e['dir']}" data-version="{e['version']}" data-desc="{e['desc']}"
   data-url="{e['url']}" data-github="{e['github']}" data-license="{e['license']}" data-csize="{e['csize']}" data-isize="{e['isize']}"
   data-built="{built}" data-built-ts="{p['built']}" data-added="{added}" data-added-ts="{p['added']}"
-  data-deps="{deps}" data-category="{e['category']}" data-cat="{cat_slug}"
-  data-tagline="{e['tagline']}" data-full-desc="{e['full_desc']}" data-pricing="{e['pricing']}"
-  data-pricing-note="{e['pricing_note']}" data-reqs="{reqs}" data-gallery="{gallery}"
-  data-indie-note="{e['indie_note']}"
+  data-category="{e['category']}" data-cat="{cat_slug}" data-pricing="{e['pricing']}"
   data-yt="{e['youtube_id']}" data-yt-title="{e['youtube_title']}">
   <header><h3><a href="{detail_url}">{e['name']}</a></h3><span class="ver">{e['version']}</span></header>
 {indie_line}  {byline}
   <p class="card-description">{e['desc'] or '<em>No description provided.</em>'}</p>
   <footer>{footer}<span class="card-actions">{share_link}{vote_button}</span></footer>
 </article>"""
+
+
+def package_details(pkgs: list[dict]) -> dict:
+    """Drawer-only fields, fetched by the homepage on the first card click so the
+    catalogue HTML stays small. Empty values are dropped."""
+    out: dict[str, dict] = {}
+    for p in pkgs:
+        d = {
+            "tagline": p.get("tagline") or "",
+            "full_desc": p.get("full_desc") or "",
+            "pricing_note": p.get("pricing_note") or "",
+            "indie_note": p.get("indie_note") or "",
+            "reqs": p.get("requirements") or [],
+            "deps": p.get("deps") or [],
+            "gallery": profile_images(p),
+        }
+        d = {k: v for k, v in d.items() if v}
+        if d:
+            out[p["name"]] = d
+    return out
 
 
 GROUP_PREVIEW = 6  # cards shown per category until the reader asks for the rest
@@ -986,6 +1000,7 @@ def main() -> None:
     (DIST / "newsletter.js").write_text((ROOT / "assets" / "newsletter.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "ads.js").write_text((ROOT / "assets" / "ads.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
+    (DIST / "package-details.json").write_text(json.dumps(package_details(pkgs), separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
     (DIST / "home-leaders.js").write_text((ROOT / "assets" / "home-leaders.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "hero-field.js").write_text((ROOT / "assets" / "hero-field.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "leaderboard.js").write_text((ROOT / "assets" / "leaderboard.js").read_text(encoding="utf-8"), encoding="utf-8")

@@ -95,7 +95,7 @@ __AD_HEADER__
       <div>
         <p class="eyebrow"><svg class="px" viewBox="0 0 7 7" aria-hidden="true"><path d="M1 0h5v1H1zM0 1h1v2H0zM6 1h1v2H6zM1 1h5v3H1zM2 4h3v1H2zM3 5h1v1H3zM2 6h3v1H2z"/></svg>Community favorites</p>
         <h2 id="home-top-h">Top 3 apps</h2>
-        <p class="band-sub">Live community rankings, updated with every vote.</p>
+        <p class="band-sub">Ranked by reader upvotes. The store is young, so every vote still moves the board.</p>
       </div>
       <a class="band-link" href="leaderboard.html">View Top 25 <span aria-hidden="true">→</span></a>
     </div>
@@ -435,21 +435,26 @@ __AD_FOOTER__
     "paid": "Paid", "subscription": "Subscription",
   };
   function text(id, v) { document.getElementById(id).textContent = v; }
-  function open(c) {
-    var d = c.dataset;
-    text("d-name", d.name);
-    text("d-ver", d.version);
-    text("d-cat-name", d.category);
-    document.getElementById("d-cat").style.setProperty("--cat", getComputedStyle(c).getPropertyValue("--cat"));
-
+  // Drawer-only fields (full description, deps, gallery...) live in one JSON
+  // file fetched on the first click, so the catalogue HTML stays light.
+  var detailsPromise = null;
+  function loadDetails() {
+    if (!detailsPromise) {
+      detailsPromise = fetch("/package-details.json")
+        .then(function (r) { return r.ok ? r.json() : {}; })
+        .catch(function () { return {}; });
+    }
+    return detailsPromise;
+  }
+  function fillDetails(d, x) {
     var taglineEl = document.getElementById("d-tagline");
-    taglineEl.hidden = !d.tagline;
-    if (d.tagline) text("d-tagline", d.tagline);
+    taglineEl.hidden = !x.tagline;
+    if (x.tagline) text("d-tagline", x.tagline);
 
     var galleryWrap = document.getElementById("d-gallery-wrap");
     var gallery = document.getElementById("d-gallery");
     var gallerySource = document.getElementById("d-gallery-source");
-    var images = JSON.parse(d.gallery || "[]");
+    var images = (x.gallery || []);
     gallery.textContent = "";
     images.forEach(function (image) {
       var link = document.createElement("a");
@@ -480,29 +485,46 @@ __AD_FOOTER__
     }
     galleryWrap.hidden = images.length === 0;
 
-    text("d-desc", d.fullDesc || d.desc || "No description provided.");
+    text("d-desc", x.full_desc || d.desc || "No description provided.");
 
     var pricingEl = document.getElementById("d-pricing");
     if (d.pricing && PRICING_LABEL[d.pricing]) {
-      pricingEl.textContent = PRICING_LABEL[d.pricing] + (d.pricingNote ? " · " + d.pricingNote : "");
+      pricingEl.textContent = PRICING_LABEL[d.pricing] + (x.pricing_note ? " · " + x.pricing_note : "");
       pricingEl.className = "badge pricing p-" + d.pricing;
       pricingEl.hidden = false;
     } else {
       pricingEl.hidden = true;
     }
     var indieEl = document.getElementById("d-indie");
-    indieEl.hidden = !d.indieNote;
-    indieEl.title = d.indieNote || "";
-    var appVote = document.getElementById("d-vote");
-    appVote.dataset.voteApp = d.name;
-    if (window.omarchyVotes) window.omarchyVotes.refresh(appVote);
-
-    var reqs = JSON.parse(d.reqs || "[]");
+    indieEl.hidden = !x.indie_note;
+    indieEl.title = x.indie_note || "";
+    var reqs = (x.reqs || []);
     var reqsWrap = document.getElementById("d-reqs-wrap");
     var reqsList = document.getElementById("d-reqs");
     reqsList.textContent = "";
     reqs.forEach(function (r) { var li = document.createElement("li"); li.textContent = r; reqsList.appendChild(li); });
     reqsWrap.hidden = reqs.length === 0;
+
+    var deps = (x.deps || []);
+    var wrap = document.getElementById("d-deps-wrap");
+    var list = document.getElementById("d-deps");
+    list.textContent = "";
+    deps.forEach(function (name) { var s = document.createElement("span"); s.textContent = name; list.appendChild(s); });
+    wrap.hidden = deps.length === 0;
+  }
+  function open(c) {
+    var d = c.dataset;
+    text("d-name", d.name);
+    text("d-ver", d.version);
+    text("d-cat-name", d.category);
+    document.getElementById("d-cat").style.setProperty("--cat", getComputedStyle(c).getPropertyValue("--cat"));
+
+    var appVote = document.getElementById("d-vote");
+    appVote.dataset.voteApp = d.name;
+    if (window.omarchyVotes) window.omarchyVotes.refresh(appVote);
+
+    fillDetails(d, {});
+    loadDetails().then(function (all) { if (document.getElementById("d-name").textContent === d.name) fillDetails(d, all[d.name] || {}); });
 
     text("d-cmd", "omarchy pkg add " + d.name);
     text("d-csize", d.csize);
@@ -511,13 +533,6 @@ __AD_FOOTER__
     text("d-built", d.built);
     var addedWrap = document.getElementById("d-added-wrap");
     if (d.added) { text("d-added", d.added); addedWrap.hidden = false; } else { addedWrap.hidden = true; }
-    var deps = JSON.parse(d.deps || "[]");
-    var wrap = document.getElementById("d-deps-wrap");
-    var list = document.getElementById("d-deps");
-    list.textContent = "";
-    deps.forEach(function (name) { var s = document.createElement("span"); s.textContent = name; list.appendChild(s); });
-    wrap.hidden = deps.length === 0;
-
     /* Click-to-play: nothing is fetched from YouTube until this button is
        pressed, so opening a dialog never makes a third-party request. */
     var videoWrap = document.getElementById("d-video-wrap");
