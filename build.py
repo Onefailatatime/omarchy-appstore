@@ -292,6 +292,7 @@ GUIDES = [
         "title": "Omadesign on Omarchy: Install & Setup Guide (2026)",
         "description": "Install Omadesign, the free Linux design, paint, photo and motion app, on Omarchy. One-line install, theme integration, fixes, and why there is no package yet.",
         "eyebrow": "Creative suite guide",
+        "search_terms": ["omadesign", "oma design", "affinity", "photoshop", "illustrator", "figma", "inkscape", "gimp", "krita"],
         "package_watch": {
             "app": "Omadesign",
             "names": ["omadesign", "omadesign-bin"],
@@ -912,6 +913,11 @@ def main() -> None:
     sponsor = ads.load()
     ad_slots = ads.render_homepage(sponsor)
     app_banners = ads.active_banners((sponsor.get("app_banners") or {}).get("banners") or {})
+    guide_results = "\n".join(
+        f'<a href="/{g["slug"]}.html" hidden data-hay="{html.escape(" ".join([g["title"], g["description"], g["eyebrow"], g["slug"].replace("-", " "), " ".join(g.get("search_terms", []))]))}">'
+        f'<strong>{html.escape(g["title"])}</strong><span>{html.escape(g["eyebrow"])}</span></a>'
+        for g in GUIDES
+    )
     page = (body
             .replace("__AD_HEADER__", ad_slots["__AD_HEADER__"])
             .replace("__AD_FOOTER__", ad_slots["__AD_FOOTER__"])
@@ -919,6 +925,7 @@ def main() -> None:
             .replace("__NEW__", "\n".join(card(p, featured=True) for p in newest))
             .replace("__TICKER__", html.escape(("Just landed: " + ", ".join(p["name"] for p in newest[:3])) if newest else f"{len(pkgs)} packages, synced {synced}"))
             .replace("__GROUPS__", groups)
+            .replace("__GUIDE_RESULTS__", guide_results)
             .replace("__CHIPS__", chips)
             .replace("__LEGEND__", legend)
             .replace("__COUNT__", str(len(pkgs)))
