@@ -230,17 +230,16 @@ for at in r["pellets"]: arp_up(arc, sec(at), ["E4", "A4", "C5"], 0.05, 0.2)
 chip_section(arc, sc, dark, lead=False, drums=True, gain=0.9)
 place(arc, dark, riser(1.0, 0.2)); descend(arc, dark + 0.2)
 chip_section(arc, sec(r["nextWeek"]) + 0.2, hitS, lead=False, drums=False, gain=0.7)  # bare bass under the tease
-for i in range(6): place(arc, sec(r["player2"]) + i * 0.33, square(1046.5 if i % 2 else 880, int(0.06 * SR), 0.5, 0.12) * env_ad(int(0.06 * SR), 0.002, 30))
 place(arc, hitS - 1.2, riser(1.2, 0.25)); place(arc, hitS, hit(0.9))
 chip_section(arc, hitS + 0.1, sec(r["endCard"]), lead=True, drums=True, gain=1.0)
 write(ROOT / "public/audio/arcade.wav", reverb(arc, wet=0.12))
 
-# ================================================================== catalogue.wav
-c = T["catalogue"]; n = int(sec(c["frames"]) * SR); cat = np.zeros(n); t = t_axis(n)
-asm, srch, lead_, bld, sts, dim_, nxt, hitS, end = (sec(c[k]) for k in ("assemble", "search", "leaderboard", "builders", "stats", "dim", "nextWeek", "bassHit", "frames"))
+# ================================================================== desktop.wav
+c = T["desktop"]; n = int(sec(c["frames"]) * SR); cat = np.zeros(n); t = t_axis(n)
+asm, srch, lead_, bld, sts, dim_, nxt, hitS, end = (sec(c[k]) for k in ("ws2", "focusBrowser", "focusLeader", "ws3", "stats", "ws4", "nextWeek", "bassHit", "frames"))
 BPM = 120; beat = 60 / BPM
 def four_floor(buf, a, z, gain_pts, hats=True, bass_root=None):
-    tt = a; k = 0
+    tt = a
     while tt < z:
         g = np.interp(tt, *zip(*gain_pts))
         place(buf, tt, thump(0.6 * g, 90, 46, 12)[: int(0.3 * SR)])
@@ -250,15 +249,15 @@ def four_floor(buf, a, z, gain_pts, hats=True, bass_root=None):
             for j in range(2):
                 v = sum(np.sin(2 * np.pi * fq * (j + 1) * h * t_axis(ln)) / h for h in range(1, 6)) / 3
                 place(buf, tt + j * beat / 2, v * env_ad(ln, 0.004, 5) * 0.16 * g)
-        tt += beat; k += 1
-chords = [((sec(c["hoped"][0]), asm + 0.3), (146.83, 220.0, 293.66)),                      # Dm, lonely
-          ((asm, srch + 0.3), (174.61, 261.63, 349.23, 440.0)),                             # F
-          ((srch, lead_ + 0.3), (130.81, 196.0, 261.63, 329.63, 392.0)),                     # C
-          ((lead_, bld + 0.3), (116.54, 174.61, 233.08, 349.23)),                            # Bb
-          ((bld, sts + 0.3), (174.61, 261.63, 349.23, 440.0, 523.25)),                       # F bright
-          ((sts, dim_ + 0.3), (130.81, 196.0, 261.63, 392.0)),                               # C
-          ((dim_, hitS), (110.0, 164.81, 220.0)),                                            # Am, hollow
-          ((hitS, end), (146.83, 220.0, 293.66, 329.63, 440.0, 587.33))]                     # Dm add9
+        tt += beat
+chords = [((sec(c["hoped"][0]), asm + 0.3), (146.83, 220.0, 293.66)),
+          ((asm, srch + 0.3), (174.61, 261.63, 349.23, 440.0)),
+          ((srch, lead_ + 0.3), (130.81, 196.0, 261.63, 329.63, 392.0)),
+          ((lead_, bld + 0.3), (116.54, 174.61, 233.08, 349.23)),
+          ((bld, sts + 0.3), (174.61, 261.63, 349.23, 440.0, 523.25)),
+          ((sts, dim_ + 0.3), (130.81, 196.0, 261.63, 392.0)),
+          ((dim_, hitS), (110.0, 164.81, 220.0)),
+          ((hitS, end), (146.83, 220.0, 293.66, 329.63, 440.0, 587.33))]
 bright = ramp(n, [(0, 0.08), (asm, 0.3), (srch, 0.5), (bld, 0.65), (dim_, 0.5), (dim_ + 1, 0.15), (hitS, 0.8), (end, 0.3)])
 master = ramp(n, [(0, 0), (1, 0.14), (sec(c["hoping"]), 0.2), (asm, 0.34), (srch, 0.38), (bld, 0.42), (dim_ - 0.3, 0.42), (dim_ + 1, 0.12), (hitS - 0.01, 0.14), (hitS, 0.5), (end - 2, 0.4), (end, 0)])
 chord_bed(cat, chords, bright, master)
@@ -266,13 +265,15 @@ roots = [(asm, 87.31), (srch, 65.41), (lead_, 58.27), (bld, 87.31), (sts, 65.41)
 def root_at(tt): return [fq for a, fq in roots if tt >= a][-1] if tt >= asm else 73.42
 four_floor(cat, asm, dim_ - 0.2, [(asm, 0.5), (srch, 0.8), (bld, 1.0), (dim_, 1.0)], bass_root=root_at)
 place(cat, sec(c["hoping"]), hit(0.5)[: int(1.0 * SR)])
-for k in c["searchKeys"] + c["cmdKeys"]:                              # keystrokes in search and the install command
+for k in c["searchKeys"] + c["cmdKeys"]:
     place(cat, sec(k), noise_burst(0.018) * 0.3); m = int(0.014 * SR); place(cat, sec(k), np.sin(2 * np.pi * rng.uniform(1700, 2500) * t_axis(m)) * np.linspace(0.12, 0, m))
-for k in ("assemble", "chrome", "filtered", "zoom", "copied", "leaderboard", "climb", "builders", "sponsor", "grow", "stats"):
+for k in ("ws2", "facts", "focusBrowser", "filtered", "focusTerm", "installed", "focusLeader", "climb", "ws3", "grow", "stats"):
     place(cat, sec(c[k]), hit(0.3)[: int(0.5 * SR)])
-for i in range(3): place(cat, sec(c["panels"][i]), hit(0.28)[: int(0.4 * SR)])
-ln = int(0.12 * SR); place(cat, sec(c["copied"]), np.sin(2 * np.pi * 1760 * t_axis(ln)) * env_ad(ln, 0.002, 25) * 0.15)
+for at in c["open"] + c["panels"]:                                    # window open: a soft click
+    ln = int(0.05 * SR); place(cat, sec(at), np.sin(2 * np.pi * 660 * t_axis(ln)) * env_ad(ln, 0.002, 40) * 0.12)
+for at in c["notes"] + [c["facts"]]:                                  # notification chime
+    ln = int(0.3 * SR); place(cat, sec(at), (np.sin(2 * np.pi * 1318.5 * t_axis(ln)) + 0.5 * np.sin(2 * np.pi * 1975.5 * t_axis(ln))) * env_ad(ln, 0.003, 12) * 0.08)
 place(cat, dim_ - 1.0, riser(1.0, 0.2)); place(cat, nxt, hit(0.4)[: int(1.2 * SR)])
 place(cat, hitS - 1.4, riser(1.4, 0.26)); place(cat, hitS, hit(0.85))
-write(ROOT / "public/audio/catalogue.wav", reverb(cat, wet=0.2))
-print("wrote arcade.wav", round(len(arc) / SR, 1), "s; catalogue.wav", round(len(cat) / SR, 1), "s")
+write(ROOT / "public/audio/desktop.wav", reverb(cat, wet=0.2))
+print("wrote arcade.wav", round(len(arc) / SR, 1), "s; desktop.wav", round(len(cat) / SR, 1), "s")

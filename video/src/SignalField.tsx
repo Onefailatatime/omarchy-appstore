@@ -164,7 +164,7 @@ export const SignalField = () => {
       <Big at={S.logoCopy} until={S.burstStart} size={58} color={C.white} y={330}>Every package in the official Omarchy repo. One place.</Big>
       <Big at={S.logoCopy + 24} until={S.burstStart} size={38} mono color={C.cyan} y={410}>{FACTS.packages} packages · {FACTS.categories} categories · omarchy pkg add &lt;name&gt;</Big>
       {f >= S.burstStart && f < S.burstStart + 140 && <Cards />}
-      <Big at={d[0]} until={d[1]} size={108}>Ranked by readers, not ads.</Big>
+      <Big at={d[0]} until={d[1]} size={108}>Ranked by readers.</Big>
       <Big at={d[1]} until={d[2]} size={108}>Guides that get people installing.</Big>
       <Big at={d[2]} until={S.builders} size={108}>No trackers. Ever.</Big>
       {/* act 3: builders */}
@@ -186,7 +186,7 @@ export const SignalField = () => {
       {/* act 5: the tease */}
       <Big at={S.nextWeek} until={S.every} size={132} color={C.orange} y={-70}>Next week,</Big>
       <Big at={S.biggest} until={S.every} size={88} y={70}>the store gets its biggest upgrade yet.</Big>
-      <Big at={S.hints} until={S.every} size={34} mono color={"rgba(122,162,247,0.62)"} y={200}>./guides   ./support   ./sponsors</Big>
+      <Big at={S.hints} until={S.every} size={34} mono color={"rgba(122,162,247,0.62)"} y={200}>./guides   ./support</Big>
       <Stack until={S.endCard} size={118} lines={[{ text: "Every app.", at: S.every }, { text: "Every maker.", at: S.every + 16 }, { text: "One big upgrade.", at: S.upgrade, color: C.blue }]} />
       {f >= S.endCard && <EndCard from={S.endCard} fade />}
     </AbsoluteFill>

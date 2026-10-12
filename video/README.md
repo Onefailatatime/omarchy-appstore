@@ -7,7 +7,7 @@ Four Remotion cuts of the "next week" teaser, all 1920x1080, all ending on the s
 | BootSequence | out/boot-sequence.mp4 | One terminal, package-manager narrative |
 | SignalField | out/signal-from-the-field.mp4 | Homepage star field, cinematic typography |
 | Arcade | out/insert-coin.mp4 | CRT attract mode, Pac-Man lanes, chiptune |
-| Catalogue | out/live-catalogue.mp4 | The site's own catalogue UI in motion |
+| Desktop | out/the-desktop.mp4 | An Omarchy desktop: tiling windows under a waybar, statements as notifications |
 
 - `src/timeline.json` holds every beat as a frame number. The soundtracks are synthesised from the same file by `scripts/make_audio.py`, so moving a beat and re-running the script keeps picture and sound in step.
 - `src/stats.json` holds the traffic figures. Null fields are skipped in every cut.

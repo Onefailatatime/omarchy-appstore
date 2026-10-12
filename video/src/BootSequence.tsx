@@ -52,8 +52,7 @@ export const BootSequence = () => {
         <Line at={L.buildStart}><Label>building</Label><span style={{ color: C.blue }}>{"█".repeat(filled)}</span><span style={{ color: C.tblack }}>{"░".repeat(cells - filled)}</span> {String(pct).padStart(3)}%</Line>
         <Line at={L.unpackAt[0]}><Label>unpacking</Label>./guides/*</Line>
         <Line at={L.unpackAt[1]}><Label>unpacking</Label>./support/*</Line>
-        <Line at={L.unpackAt[2]}><Label>unpacking</Label>./sponsors/*</Line>
-        <Line at={L.unpackAt[3]}><Label>linking</Label>developers → users</Line>
+        <Line at={L.unpackAt[2]}><Label>linking</Label>developers → users</Line>
         <Line at={L.tick1}>{"\n"}<span style={{ color: C.green }}>✓</span> upgraded <span style={{ color: C.cyan }}>omarchyapps</span>  1.x → <span style={{ color: C.cyan }}>2.0</span></Line>
         <Line at={L.tick2}><span style={{ color: C.green }}>✓</span> scheduled for <span style={{ color: C.orange }}>next week</span></Line>
         <Line at={L.prompt}>{"\n"}<span style={{ color: C.green }}>~ $</span> {Math.floor(f / 14) % 2 === 0 && <Cursor />}</Line>
@@ -71,7 +70,7 @@ export const BootSequence = () => {
         <Line at={L.listed}><Label>listed</Label>the day you ship   <span style={{ color: DIM }}># synced from the official repo</span></Line>
         <Line at={L.noticed}><Label>noticed</Label>readers vote you up the Top {FACTS.top}</Line>
         <Line at={L.foundBy}><Label>found</Label>by people who actually install</Line>
-        <Line at={L.paid}><Label>paid</Label>sponsor spots, users who stick around</Line>
+        <Line at={L.paid}><Label>paid</Label>by users who stick around</Line>
         <Line at={L.readers}>{"\n"}<Label>readers</Label><span style={{ color: C.cyan }}>growing fast</span>{s.visitorsLastMonth ? `   ${fmt(s.visitorsLastMonth)} last month` : ""}</Line>
         {s.growthPct ? <Line at={L.stat1}><Label>growth</Label><span style={{ color: C.cyan }}>+{s.growthPct}%</span> month over month</Line> : null}
         {s.projectionNextMonth ? <Line at={L.stat2}><Label>projected</Label>{fmt(s.projectionNextMonth)} next month</Line> : null}
@@ -89,7 +88,7 @@ export const BootSequence = () => {
         <Line at={L.resolving}><Label>resolving</Label>omarchyapps.com</Line>
         <Line at={L.found}><Label>found</Label><span style={{ color: C.cyan }}>{FACTS.packages}</span> packages · <span style={{ color: C.cyan }}>{FACTS.categories}</span> categories · one place</Line>
         <Line at={L.synced}><Label>synced</Label>from pkgs.omarchy.org, the official repo</Line>
-        <Line at={L.ranked}><Label>ranked by</Label>readers, not ads   <span style={{ color: DIM }}># the Top {FACTS.top}</span></Line>
+        <Line at={L.ranked}><Label>ranked by</Label>readers   <span style={{ color: DIM }}># the Top {FACTS.top}</span></Line>
         <Line at={L.guides}><Label>guides</Label>that get people installing</Line>
         <Line at={L.checklist}><Label>checklist</Label>{FACTS.checklist} checks for packagers</Line>
         <Line at={L.trackers}><Label>trackers</Label>none</Line>

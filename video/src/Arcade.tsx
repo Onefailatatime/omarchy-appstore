@@ -175,7 +175,7 @@ export const Arcade = () => {
             <Lane y={H / 2 - 220} start={R.lanes} len={R.laneLen} names={names.slice(0, 6)} ghost={GHOSTS[0]} />
             <Lane y={H / 2} start={R.lanes + R.laneLen} len={R.laneLen} names={names.slice(6, 12)} ghost={GHOSTS[1]} />
             <Lane y={H / 2 + 220} start={R.lanes + 2 * R.laneLen} len={R.laneLen} names={names.slice(12, 18)} ghost={GHOSTS[2]} />
-            <Big at={R.ticker[0]} until={R.ticker[1]} mono upper size={44} color={C.turq} y={400}>Ranked by readers, not ads</Big>
+            <Big at={R.ticker[0]} until={R.ticker[1]} mono upper size={44} color={C.turq} y={400}>Ranked by readers</Big>
             <Big at={R.ticker[1]} until={R.ticker[2]} mono upper size={44} color={C.turq} y={400}>Guides that get people installing</Big>
             <Big at={R.ticker[2]} until={R.levelUp} mono upper size={44} color={C.turq} y={400}>No trackers. Ever.</Big>
           </>
@@ -222,9 +222,8 @@ export const Arcade = () => {
       {/* stage 3: dark, the tease */}
       <Big at={R.nextWeek} until={R.every} mono upper size={110} color={C.orange} y={-120}>Next week,</Big>
       <Big at={R.nextWeek + 20} until={R.every} mono upper size={58} y={10}>Stage 3 unlocks</Big>
-      {f >= R.hints && f < R.every && <Big at={R.hints} mono size={34} color={DIM} y={120}>{hintWord("./guides")}   {hintWord("./support")}   {hintWord("./sponsors")}</Big>}
-      {f >= R.player2 && f < R.every && blink(f, 10) && <Big at={R.player2} mono upper size={44} color={C.pink} y={230}>Player 2 wanted</Big>}
-      <Stack until={R.endCard} mono upper size={88} lines={[{ text: "Every app.", at: R.every }, { text: "Every maker.", at: R.every + 16 }, { text: "One big upgrade.", at: R.upgrade, color: C.orange }]} />
+      {f >= R.hints && f < R.every && <Big at={R.hints} mono size={34} color={DIM} y={120}>{hintWord("./guides")}   {hintWord("./support")}</Big>}
+            <Stack until={R.endCard} mono upper size={88} lines={[{ text: "Every app.", at: R.every }, { text: "Every maker.", at: R.every + 16 }, { text: "One big upgrade.", at: R.upgrade, color: C.orange }]} />
       <CRT />
     </AbsoluteFill>
   );

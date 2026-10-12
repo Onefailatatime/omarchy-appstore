@@ -7,8 +7,8 @@
     "render:boot": "remotion render BootSequence out/boot-sequence.mp4",
     "render:signal": "remotion render SignalField out/signal-from-the-field.mp4",
     "render:arcade": "remotion render Arcade out/insert-coin.mp4",
-    "render:catalogue": "remotion render Catalogue out/live-catalogue.mp4",
-    "render:all": "npm run render:boot && npm run render:signal && npm run render:arcade && npm run render:catalogue"
+    "render:all": "npm run render:boot && npm run render:signal && npm run render:arcade && npm run render:desktop",
+    "render:desktop": "remotion render Desktop out/the-desktop.mp4"
   },
   "dependencies": {
     "@remotion/cli": "4.0.290",
