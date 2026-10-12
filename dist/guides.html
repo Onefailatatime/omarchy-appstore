@@ -1455,6 +1455,89 @@ footer.site nav a:hover { color: var(--color-turquoise); }
 @media (max-width: 760px) { .hero-actions { flex-direction: column; } .hero-actions .button { width: 100%; justify-content: center; } }
 @media (max-width: 760px) { .topbar-links { mask-image: linear-gradient(to right, #000 88%, transparent); -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); padding-right: 1.5em; } }
 
+/* =================== HOMEPAGE BANDS (omarchy.org-style section rhythm) =================== */
+/* Full-bleed alternating surfaces with a hairline rule between them. Each band
+   carries its own --accent (an rgb triple) for the eyebrow, glyph and glow, so
+   sections read as different places on the page instead of one long column. */
+.home { display: block; }
+.band {
+  position: relative;
+  --accent: var(--rgb-terminal-blue);
+  padding: var(--space-xx-large) 0;
+  border-top: var(--border-width) solid var(--border-color);
+  scroll-margin-top: calc(var(--bar-h) + 1em);
+  overflow: hidden;
+}
+.band-a { background: var(--color-background-night); }
+.band-b { background: var(--color-background-storm); }
+.band::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(var(--accent), 0.9), rgba(var(--accent), 0.15) 40%, transparent 70%);
+  pointer-events: none;
+}
+.band::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 46%;
+  height: 90%;
+  background: radial-gradient(closest-side, rgba(var(--accent), 0.085), transparent 70%);
+  pointer-events: none;
+}
+.band > .wrap { position: relative; z-index: 1; }
+
+.band-head { display: flex; align-items: end; justify-content: space-between; gap: var(--space-large); margin-bottom: var(--space-large); }
+.band-head .eyebrow { display: inline-flex; align-items: center; gap: 0.6em; margin: 0 0 0.5em; color: rgb(var(--accent)); font-size: 76%; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.band-head h2 { margin: 0; font-family: var(--font-sans); font-size: clamp(1.5rem, 2.6vw, 1.85rem); font-weight: 600; letter-spacing: -0.015em; color: var(--color-terminal-white); }
+.band-head .band-sub { margin: 0.45em 0 0; max-width: 40em; color: rgb(var(--rgb-terminal-blue) / 0.75); }
+.band-head .band-sub:empty { display: none; }
+.band-head .band-sub b { color: var(--color-terminal-white); }
+.band-head .band-sub kbd { padding: 0.05em 0.4em; border: var(--border-width) solid var(--border-color); border-radius: 0.3em; color: var(--color-terminal-white); font-family: inherit; font-size: 90%; }
+.band-link { flex: none; align-self: end; color: rgb(var(--rgb-terminal-white) / 0.9); text-decoration: underline; text-underline-offset: 0.25em; white-space: nowrap; }
+.band-link:hover { color: rgb(var(--accent)); }
+.px { width: 0.95em; height: 0.95em; fill: rgb(var(--accent)); shape-rendering: crispEdges; }
+
+/* Section surfaces the bands replace */
+.home-top { margin-top: 0; }
+.home-leader-status { margin: -0.75em 0 0.75em; }
+.home-leaders { margin-top: 0; }
+.suggestion-bar { margin-top: var(--space-large); }
+.arrivals-section,
+.category-browser,
+.guide-strip,
+.faq { margin-top: 0; padding: var(--space-xx-large) 0; border: 0; border-top: var(--border-width) solid var(--border-color); border-radius: 0; background: none; box-shadow: none; }
+.band-a.arrivals-section, .band-a.guide-strip, .band-a.faq { background: var(--color-background-night); }
+.band-b.category-browser { background: var(--color-background-storm); }
+.cats { margin-top: 0; }
+.catalogue-band .band-head { margin-bottom: var(--space-medium); }
+.catalogue-band .count { display: none; }
+.guide-download { margin: 0; }
+
+/* Hero: generative pixel field under the headline, like omarchy.org */
+.hero { position: relative; overflow: hidden; padding: var(--space-xx-large) 0 var(--space-x-large); }
+.hero-pixels { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero-in { position: relative; z-index: 1; }
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 60% at 50% 48%, rgba(var(--rgb-background-night), 0.92), rgba(var(--rgb-background-night), 0.55) 55%, transparent 80%);
+  pointer-events: none;
+}
+.hero::after { z-index: 0; }
+
+@media (max-width: 760px) {
+  .band { padding: var(--space-x-large) 0; }
+  .band-head { align-items: stretch; flex-direction: column; gap: var(--space-small); }
+  .band-link { align-self: start; }
+  .arrivals-section, .category-browser, .guide-strip, .faq { padding: var(--space-x-large) 0; }
+}
+
 </style>
 </head>
 <body>
