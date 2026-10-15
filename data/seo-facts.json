@@ -1,0 +1,88 @@
+{
+  "_comment": "Every claim here is quoted or closely paraphrased from the source URL next to it, checked 2026-10-15. Add nothing without a source. See data/seo-sources.md.",
+  "omarchy": {
+    "base":      {"text": "Built on Arch Linux, the Hyprland tiling window manager and the Quickshell desktop kit.", "src": "https://omarchy.org/manual/"},
+    "release":   {"text": "Rolling release. New installs start on the stable channel, which follows an Omarchy Arch mirror kept one month behind the latest packages.", "src": "https://omarchy.org/manual/updates/"},
+    "install":   {"text": "Installs from an ISO, either full-disk or into free space next to another OS. Encryption is on by default.", "src": "https://omarchy.org/manual/getting-started/"},
+    "secureboot":{"text": "Secure Boot and/or TPM must be turned off in the BIOS to install.", "src": "https://omarchy.org/manual/getting-started/"},
+    "firewall":  {"text": "Firewall on by default: all incoming traffic is blocked except LocalSend's port 53317, and SSH stays off until you enable it.", "src": "https://omarchy.org/manual/security/"},
+    "packages":  {"text": "Software comes from Arch's core, extra and multilib repos plus the Omarchy Package Repository; the AUR is optional. Install with omarchy pkg add <package>.", "src": "https://omarchy.org/manual/security/"},
+    "snapshots": {"text": "Takes a system snapshot automatically on every Omarchy update, bootable from the Limine boot menu.", "src": "https://omarchy.org/manual/system-snapshots/"},
+    "desktop":   {"text": "Keyboard-driven Hyprland tiling desktop. Neovim is the default editor and Foot the default terminal.", "src": "https://omarchy.org/"}
+  },
+  "distros": {
+    "ubuntu": {
+      "name": "Ubuntu", "site": "https://ubuntu.com/",
+      "rows": [
+        ["Release model", "release", {"text": "A new version every six months; LTS releases every two years with 5 years of standard security maintenance.", "src": "https://ubuntu.com/about/release-cycle"}],
+        ["Packages", "packages", {"text": "Built on deb packages, with snap packages also supported.", "src": "https://ubuntu.com/about/release-cycle"}],
+        ["Support offer", null, {"text": "Ubuntu Pro is free on up to 5 machines.", "src": "https://ubuntu.com/desktop"}]
+      ]
+    },
+    "cachyos": {
+      "name": "CachyOS", "site": "https://cachyos.org/",
+      "rows": [
+        ["Base", "base", {"text": "Built on Arch Linux with the same rolling-release model.", "src": "https://cachyos.org/"}],
+        ["Packages", "packages", {"text": "Every package compiled for x86-64-v3, x86-64-v4 and Zen4 with LTO; core packages also get PGO and BOLT.", "src": "https://cachyos.org/"}],
+        ["Kernel", null, {"text": "linux-cachyos kernel with a tuned scheduler, plus BORE, sched-ext, BMQ and RT options.", "src": "https://cachyos.org/"}],
+        ["Installer", "install", {"text": "A graphical Calamares-based installer or a CLI installer.", "src": "https://cachyos.org/"}],
+        ["Desktop", "desktop", {"text": "17+ desktops and window managers to pick at install, including KDE Plasma, GNOME, COSMIC and Hyprland.", "src": "https://cachyos.org/"}]
+      ]
+    },
+    "arch": {
+      "name": "Arch Linux", "site": "https://archlinux.org/",
+      "rows": [
+        ["Base", "base", {"text": "An independently developed x86-64 general-purpose distribution.", "src": "https://wiki.archlinux.org/title/Arch_Linux"}],
+        ["Release model", "release", {"text": "Rolling release that aims to ship the latest stable versions of most software.", "src": "https://wiki.archlinux.org/title/Arch_Linux"}],
+        ["Packages", "packages", {"text": "The pacman package manager, official repos for x86-64, and the community-operated AUR.", "src": "https://archlinux.org/"}]
+      ]
+    },
+    "fedora": {
+      "name": "Fedora", "site": "https://fedoraproject.org/",
+      "rows": [
+        ["Desktop", "desktop", {"text": "Fedora Workstation features the GNOME desktop; a separate edition ships KDE Plasma.", "src": "https://fedoraproject.org/workstation/"}],
+        ["Variants", null, {"text": "Atomic desktops such as Silverblue (GNOME) and Kinoite (KDE Plasma) add an extra layer of security and reliability.", "src": "https://fedoraproject.org/workstation/"}],
+        ["Packages", "packages", {"text": "Fedora's software is built as RPM packages by its Koji build system.", "src": "https://fedoraproject.org/workstation/"}]
+      ]
+    },
+    "mint": {
+      "name": "Linux Mint", "site": "https://linuxmint.com/",
+      "rows": [
+        ["Base", "base", {"text": "Based on Debian and Ubuntu, with about 30,000 packages.", "src": "https://linuxmint.com/about.php"}],
+        ["Release model", "release", {"text": "Conservative software updates; since 2014 Mint only builds on long-term support releases.", "src": "https://linuxmint.com/about.php"}],
+        ["Desktop", "desktop", {"text": "Three desktop editions: Cinnamon, MATE and Xfce.", "src": "https://linuxmint.com/about.php"}]
+      ]
+    },
+    "popos": {
+      "name": "Pop!_OS", "site": "https://system76.com/pop/",
+      "rows": [
+        ["Maker", null, {"text": "Engineered and designed in-house by System76, the US computer maker.", "src": "https://system76.com/pop/"}],
+        ["Desktop", "desktop", {"text": "Auto-tiling: windows arrange themselves, adjustable by mouse or keyboard.", "src": "https://system76.com/pop/"}],
+        ["Security", "install", {"text": "Full-disk encryption where only you hold the key.", "src": "https://system76.com/pop/"}],
+        ["Packages", "packages", {"text": "Any tools compatible with Ubuntu can run on Pop!_OS.", "src": "https://system76.com/pop/"}]
+      ]
+    },
+    "bazzite": {
+      "name": "Bazzite", "site": "https://bazzite.gg/",
+      "rows": [
+        ["Base", "base", {"text": "Built with Universal Blue; the KDE version is built from Fedora Kinoite and the GNOME version from Fedora Silverblue.", "src": "https://bazzite.gg/"}],
+        ["Updates", "snapshots", {"text": "Image based: the previous OS version is kept after every update so you can roll back.", "src": "https://bazzite.gg/"}],
+        ["Secure Boot", "secureboot", {"text": "Secure Boot is supported, alongside SELinux and LUKS full-disk encryption.", "src": "https://bazzite.gg/"}],
+        ["Gaming", null, {"text": "Steam and Lutris come pre-installed, with HDR and VRR support.", "src": "https://bazzite.gg/"}]
+      ]
+    }
+  },
+  "install": [
+    {"slug": "steam", "app": "Steam", "menu": "Install > Gaming > Steam", "steps": ["Open the Omarchy menu with Super + Space.", "Choose Install > Gaming > Steam.", "Launch Steam from the app launcher (Super + Space). It can take 10 to 20 seconds to start with no visual feedback."], "note": "Valve's Proton compatibility layer runs tens of thousands of modern Windows games on Linux.", "src": "https://omarchy.org/manual/gaming/"},
+    {"slug": "lutris", "app": "Lutris", "menu": "Install > Gaming > Lutris", "steps": ["Open the Omarchy menu with Super + Space.", "Choose Install > Gaming > Lutris.", "Be patient: the install can look like nothing is happening while it works in the background."], "note": "Lutris is how Omarchy plays Windows games from stores like EA and Ubisoft Connect.", "src": "https://omarchy.org/manual/gaming/"},
+    {"slug": "battle-net", "app": "Battle.net", "menu": "Install > Gaming > Battle.net", "steps": ["Open the Omarchy menu with Super + Space.", "Choose Install > Gaming > Battle.net."], "note": "It installs standalone under GE-Proton for titles like Diablo, StarCraft and World of Warcraft, with no Steam, Lutris or Heroic needed.", "src": "https://omarchy.org/manual/gaming/"},
+    {"slug": "heroic-epic-games", "app": "Heroic (Epic Games)", "menu": "Install > Gaming > Heroic (Epic Games)", "steps": ["Open the Omarchy menu with Super + Space.", "Choose Install > Gaming > Heroic (Epic Games)."], "note": "Heroic runs Epic Games titles that don't rely on anti-cheat, plus games from GOG and Amazon Prime Gaming.", "src": "https://omarchy.org/manual/gaming/"},
+    {"slug": "docker", "app": "Docker", "menu": "Setup > Security > Sudoless Docker (optional)", "steps": ["Docker and Docker Compose come set up on Omarchy.", "Run it with sudo, for example sudo docker ps or sudo docker compose up. Your user is not in the docker group by default.", "Open the Docker TUI with Super + Shift + D.", "Optional: Setup > Security > Sudoless Docker adds you to the docker group after a warning, so plain docker works without sudo."], "note": "The docker group is effectively passwordless root, which is why Omarchy leaves you out of it by default.", "src": "https://omarchy.org/manual/development-tools/"},
+    {"slug": "tailscale", "app": "Tailscale", "menu": "Install > Service > Tailscale", "steps": ["Open the Omarchy menu with Super + Space.", "Choose Install > Service > Tailscale."], "note": "You get a Tailscale panel in the bar, a web app for the admin console, and Taildrop for sending files between your machines.", "src": "https://omarchy.org/manual/commercial-apps-services/"},
+    {"slug": "bitwarden", "app": "Bitwarden", "menu": "Install > Service > Bitwarden", "steps": ["Open the Omarchy menu with Super + Space.", "Choose Install > Service > Bitwarden. The Bitwarden command line tool comes along too."], "note": "Bitwarden is an open source password manager with a free tier.", "src": "https://omarchy.org/manual/commercial-apps-services/"},
+    {"slug": "firefox", "app": "Firefox", "menu": "Install > Browser", "steps": ["Open the Omarchy menu with Super + Space.", "Choose Install > Browser and pick Firefox. Omarchy installs it, sets up its policy directory and applies your theme.", "To make it the default, go to Setup > Defaults > Browser, or run omarchy default browser firefox."], "note": "Installing a browser doesn't make it the default; you choose that separately.", "src": "https://omarchy.org/manual/browsers/"},
+    {"slug": "zed", "app": "Zed", "menu": "Install > Editor", "steps": ["Open the Omarchy menu with Super + Space.", "Choose Install > Editor and pick Zed.", "To make it the system-wide default editor, use Setup > Defaults > Editor."], "note": "Neovim is Omarchy's default editor; Install > Editor also lists VSCode, Cursor, Sublime Text, Helix, Vim and Emacs.", "src": "https://omarchy.org/manual/development-tools/"},
+    {"slug": "zoom", "app": "Zoom", "menu": "App launcher (preinstalled web app)", "steps": ["Zoom ships with Omarchy as a web app wrapping Zoom's web client.", "Start it from the app launcher (Super + Space). Zoom meeting links open straight into it."], "note": "Remove it, like any web app, with Remove > Web App in the Omarchy menu.", "src": "https://omarchy.org/manual/web-apps/"},
+    {"slug": "discord", "app": "Discord", "menu": "App launcher (preinstalled web app)", "steps": ["Discord ships with Omarchy as a web app.", "Start it from the app launcher (Super + Space)."], "note": "Add your own web apps with Install > Web App in the Omarchy menu.", "src": "https://omarchy.org/manual/web-apps/"}
+  ]
+}
