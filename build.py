@@ -1157,7 +1157,7 @@ def main() -> None:
             ("Guides", "/#guides"), f"Reviewed {synced} · independent editorial guide"), encoding="utf-8")
 
     guided = {n for names in GUIDE_PACKAGES.values() for n in names}
-    tuts = tutorials.build(pkgs, guided, SITE_URL, profile_images)
+    tuts = tutorials.build(pkgs, guided, {g["slug"] for g in GUIDES}, SITE_URL, profile_images)
     for t in tuts:
         p = t["pkg"]
         canonical = f"{SITE_URL}/{t['slug']}.html"

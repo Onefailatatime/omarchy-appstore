@@ -179,12 +179,14 @@ def _media(p: dict, images: list[dict]) -> str:
     return out
 
 
-def build(pkgs: list[dict], guided: set[str], site_url: str, images_fn=lambda p: []) -> list[dict]:
-    """Return one page record per package that has no hand-written guide."""
+def build(pkgs: list[dict], guided: set[str], reserved: set[str], site_url: str, images_fn=lambda p: []) -> list[dict]:
+    """Return one page record per package that has no hand-written guide.
+
+    `reserved` holds slugs of existing guides; a generated page never takes one of them."""
     entries = []
     shown = [display_name(p["name"]) for p in pkgs]
     for p in pkgs:
-        if p["name"] in guided:
+        if p["name"] in guided or f"{slug(p['name'])}-on-omarchy" in reserved:
             continue
         d = display_name(p["name"])
         if shown.count(d) > 1:  # foo and foo-bin would share a title; keep the full package name
