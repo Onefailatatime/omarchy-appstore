@@ -22,6 +22,7 @@ import urllib.request
 from compression import zstd  # stdlib since Python 3.14
 
 import ads
+import tutorials
 
 ROOT = pathlib.Path(__file__).parent
 DIST = ROOT / "dist"
@@ -576,6 +577,7 @@ def load_packages() -> list[dict]:
                 "pricing": prof.get("pricing", ""),
                 "pricing_note": prof.get("pricing_note", ""),
                 "requirements": prof.get("requirements", []),
+                "has_gui": prof.get("has_gui"),
                 "screenshot_url": prof.get("screenshot_url", ""),
                 "readme_screenshots": prof.get("readme_screenshots", []),
                 "youtube_id": prof.get("youtube_id", ""),
@@ -774,6 +776,34 @@ def fill_package_watch(guide, body, pkgs):
         note = ""
     return body.replace("__PKG_CTA__", cta).replace("__PKG_NOTE__", note)
 
+# Guide slug -> packages it teaches. Those apps keep their hand-written guide;
+# every other package gets a generated tutorial page (tutorials.py).
+GUIDE_PACKAGES = {
+    "rustdesk-on-omarchy": ["rustdesk"],
+    "flea-file-manager-omarchy": ["flea"],
+    "omacut-video-editor-omarchy": ["omacut"],
+    "free-video-editor-linux-omarchy": ["omacut"],
+    "sunshine-game-streaming-omarchy": ["sunshine"],
+    "hermes-desktop-omarchy": ["hermes-desktop"],
+    "omawrite-writing-omarchy": ["omawrite"],
+    "strata-file-manager-omarchy": ["strata"],
+    "claude-desktop-omarchy": ["claude-desktop"],
+    "1password-omarchy": ["1password"],
+    "how-to-use-omarchy-zsh": ["omarchy-zsh"],
+    "free-notion-alternative-linux-slap-notes": ["slap-notes-bin"],
+}
+PRIMARY_GUIDE = {  # apps taught by more than one guide: the one the profile links to
+    "omacut": "omacut-video-editor-omarchy",
+}
+
+
+def tutorial_url(name: str) -> str:
+    for guide_slug, names in GUIDE_PACKAGES.items():
+        if name in names and PRIMARY_GUIDE.get(name, guide_slug) == guide_slug:
+            return f"/{guide_slug}.html"
+    return f"/{slug(name)}-on-omarchy.html"
+
+
 def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: dict | None = None) -> str:
     canonical = f"{SITE_URL}/apps/{slug(p['name'])}.html"
     desc = description_for(p)
@@ -814,6 +844,7 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
     if p.get("github"):
         links.append(f'<a class="button ghost" href="{html.escape(p["github"])}" target="_blank" rel="noopener">GitHub ↗</a>')
     links.append(f'<a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/{urllib.parse.quote(p["dir"])}" target="_blank" rel="noopener">PKGBUILD ↗</a>')
+    links.insert(0, f'<a class="button" href="{tutorial_url(p["name"])}">Tutorial: how to use {html.escape(tutorials.display_name(p["name"]))} on Omarchy</a>')
     gallery = ""
     if images:
         tiles = "".join(
@@ -865,6 +896,60 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
     for key, value in replacements.items():
         page = page.replace(key, value)
     return page
+
+
+def render_seo_page(template: str, css: str, guide: dict, body: str, related: str, synced: str,
+                    crumb: tuple[str, str], facts: str, extra_graph: list | None = None) -> str:
+    """Render one guide-style page: Article + Breadcrumb + FAQ schema, answer box, body."""
+    guide_url = f"{SITE_URL}/{guide['slug']}.html"
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Article",
+                "@id": guide_url + "#article",
+                "headline": guide["title"],
+                "description": guide["description"],
+                "url": guide_url,
+                "dateModified": synced,
+                "author": {"@type": "Person", "name": "Jessyka", "url": SITE_URL + "/about.html"},
+                "publisher": {"@type": "Organization", "name": SITE_NAME, "url": SITE_URL + "/"},
+                "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/"},
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": crumb[0], "item": SITE_URL + crumb[1]},
+                    {"@type": "ListItem", "position": 3, "name": guide["title"], "item": guide_url},
+                ],
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
+                    for question, answer in guide["faqs"]
+                ],
+            },
+            *(extra_graph or []),
+        ],
+    }
+    return (template
+            .replace("__TITLE__", html.escape(guide["title"]))
+            .replace("__DESCRIPTION__", html.escape(guide["description"]))
+            .replace("__SLUG__", guide["slug"])
+            .replace("__EYEBROW__", html.escape(guide["eyebrow"]))
+            .replace("__CRUMB__", f'<a href="{crumb[1]}">{crumb[0]}</a>')
+            .replace("__FACTS__", facts)
+            .replace("__HEADING__", guide["heading"])
+            .replace("__TAGLINE__", html.escape(guide["tagline"]))
+            .replace("__ANSWER__", html.escape(guide["answer"]))
+            .replace("__BODY__", body)
+            .replace("__RELATED_GUIDES__", related)
+            .replace("__STRUCTURED_DATA__", json_script(schema))
+            .replace("__SYNCED__", synced)
+            .replace("__SITE_URL__", SITE_URL)
+            .replace("__STYLE__", css))
 
 
 def main() -> None:
@@ -1059,60 +1144,69 @@ def main() -> None:
     (DIST / "guides.html").write_text(guides_index, encoding="utf-8")
 
     guide_template = (ROOT / "parts" / "guide.html").read_text(encoding="utf-8")
+    page_css = css.replace("__CATVARS__", cat_vars)
     for guide in GUIDES:
-        guide_url = f"{SITE_URL}/{guide['slug']}.html"
         related = "\n".join(
             f'<a class="related-guide" href="/{item["slug"]}.html"><strong>{html.escape(item["title"])}</strong><span>{html.escape(item["description"])}</span></a>'
             for item in GUIDES if item["slug"] != guide["slug"]
         )
-        guide_schema = {
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "Article",
-                    "@id": guide_url + "#article",
-                    "headline": guide["title"],
-                    "description": guide["description"],
-                    "url": guide_url,
-                    "dateModified": synced,
-                    "author": {"@type": "Person", "name": "Jessyka", "url": SITE_URL + "/about.html"},
-                    "publisher": {"@type": "Organization", "name": SITE_NAME, "url": SITE_URL + "/"},
-                    "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/"},
-                },
-                {
-                    "@type": "BreadcrumbList",
-                    "itemListElement": [
-                        {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL + "/"},
-                        {"@type": "ListItem", "position": 2, "name": "Guides", "item": SITE_URL + "/#guides"},
-                        {"@type": "ListItem", "position": 3, "name": guide["title"], "item": guide_url},
-                    ],
-                },
-                {
-                    "@type": "FAQPage",
-                    "mainEntity": [
-                        {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
-                        for question, answer in guide["faqs"]
-                    ],
-                },
-            ],
-        }
         guide_body = (ROOT / "parts" / "guides" / f"{guide['slug']}.html").read_text(encoding="utf-8")
         guide_body = fill_package_watch(guide, guide_body, pkgs)
-        guide_page = (guide_template
-                      .replace("__TITLE__", html.escape(guide["title"]))
-                      .replace("__DESCRIPTION__", html.escape(guide["description"]))
-                      .replace("__SLUG__", guide["slug"])
-                      .replace("__EYEBROW__", html.escape(guide["eyebrow"]))
-                      .replace("__HEADING__", guide["heading"])
-                      .replace("__TAGLINE__", html.escape(guide["tagline"]))
-                      .replace("__ANSWER__", html.escape(guide["answer"]))
-                      .replace("__BODY__", guide_body)
-                      .replace("__RELATED_GUIDES__", related)
-                      .replace("__STRUCTURED_DATA__", json_script(guide_schema))
-                      .replace("__SYNCED__", synced)
-                      .replace("__SITE_URL__", SITE_URL)
-                      .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
-        (DIST / f"{guide['slug']}.html").write_text(guide_page, encoding="utf-8")
+        (DIST / f"{guide['slug']}.html").write_text(render_seo_page(
+            guide_template, page_css, guide, guide_body, related, synced,
+            ("Guides", "/#guides"), f"Reviewed {synced} · independent editorial guide"), encoding="utf-8")
+
+    guided = {n for names in GUIDE_PACKAGES.values() for n in names}
+    tuts = tutorials.build(pkgs, guided, SITE_URL, profile_images)
+    for t in tuts:
+        p = t["pkg"]
+        canonical = f"{SITE_URL}/{t['slug']}.html"
+        howto = {
+            "@type": "HowTo", "@id": canonical + "#howto", "name": f"How to install {t['display']} on Omarchy",
+            "step": [
+                {"@type": "HowToStep", "position": 1, "name": "Open a terminal", "text": "Open a terminal in your Omarchy session."},
+                {"@type": "HowToStep", "position": 2, "name": "Install the package", "text": f"Run omarchy pkg add {p['name']}."},
+                {"@type": "HowToStep", "position": 3, "name": "Check the install", "text": f"Run pacman -Qi {p['name']} and confirm version {p['version']}."},
+            ],
+        }
+        app = {
+            "@type": "SoftwareApplication", "@id": canonical + "#app", "name": p["name"],
+            "description": p.get("full_desc") or p.get("desc"), "applicationCategory": p["category"],
+            "operatingSystem": "Omarchy Linux", "softwareVersion": p["version"], "license": p["license"],
+            "url": f"{SITE_URL}/apps/{slug(p['name'])}.html",
+        }
+        if p.get("pricing") in ("free", "free-libre"):
+            app["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+        sibs = [x for x in re.findall(r'href="(/[a-z0-9-]+-on-omarchy\.html)"[^>]*>([^<]+)<', t["body"])]
+        related = "\n".join(
+            f'<a class="related-guide" href="{href}"><strong>{label} on Omarchy</strong><span>Tutorial</span></a>'
+            for href, label in sibs[:3]
+        ) + f'\n<a class="related-guide" href="{t["profile"]}"><strong>{html.escape(t["display"])} package page</strong><span>Version, size, license and install command</span></a>'
+        (DIST / f"{t['slug']}.html").write_text(render_seo_page(
+            guide_template, page_css, t, t["body"], related, synced, ("Tutorials", "/tutorials.html"),
+            f"Package data synced {synced} · generated from the official Omarchy package repo", [howto, app]), encoding="utf-8")
+
+    by_cat_t: dict[str, list[dict]] = {}
+    for t in tuts:
+        by_cat_t.setdefault(t["category"], []).append(t)
+    tut_sections = "\n".join(
+        f'<section class="tutorial-group"><h2>{html.escape(c)}</h2><div class="guide-grid">'
+        + "".join(f'<a class="guide-card" href="/{t["slug"]}.html"><strong>{html.escape(t["display"])}</strong>'
+                  f'<span>{html.escape(t["pkg"]["desc"])}</span></a>' for t in by_cat_t[c])
+        + "</div></section>"
+        for c in CATEGORY_ORDER if c in by_cat_t
+    )
+    tut_schema = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Omarchy app tutorials",
+                  "url": SITE_URL + "/tutorials.html", "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/"},
+                  "hasPart": [{"@type": "Article", "name": t["title"], "url": f"{SITE_URL}/{t['slug']}.html"} for t in tuts]}
+    (DIST / "tutorials.html").write_text(
+        (ROOT / "parts" / "tutorials.html").read_text(encoding="utf-8")
+        .replace("__NAV__", nav_html("guides.html"))
+        .replace("__TUTORIAL_SECTIONS__", tut_sections)
+        .replace("__TUTORIAL_COUNT__", str(len(tuts)))
+        .replace("__STRUCTURED_DATA__", json_script(tut_schema))
+        .replace("__SYNCED__", synced).replace("__CONTACT__", html.escape(CONTACT_URL))
+        .replace("__SITE_URL__", SITE_URL).replace("__STYLE__", page_css), encoding="utf-8")
 
     apps_dir = DIST / "apps"
     apps_dir.mkdir(exist_ok=True)
@@ -1127,6 +1221,8 @@ def main() -> None:
 
     sitemap_urls = [SITE_URL + "/", SITE_URL + "/leaderboard.html", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/advertise.html", SITE_URL + "/guides.html", SITE_URL + "/terms.html"]
     sitemap_urls.extend(f"{SITE_URL}/{guide['slug']}.html" for guide in GUIDES)
+    sitemap_urls.append(SITE_URL + "/tutorials.html")
+    sitemap_urls.extend(f"{SITE_URL}/{t['slug']}.html" for t in tuts)
     sitemap_urls.extend(f"{SITE_URL}/apps/{slug(p['name'])}.html" for p in pkgs)
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     sitemap.extend(f"  <url><loc>{url}</loc><lastmod>{synced}</lastmod></url>" for url in sitemap_urls)
@@ -1150,10 +1246,13 @@ def main() -> None:
         f"- [Develop for Omarchy]({SITE_URL}/develop.html)\n"
         f"- [About]({SITE_URL}/about.html)\n"
         f"- [Guides]({SITE_URL}/guides.html)\n"
+        f"- [App tutorials]({SITE_URL}/tutorials.html)\n"
         f"- [Advertise]({SITE_URL}/advertise.html)\n"
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
         "## Guides and comparisons\n"
         + "".join(f"- [{guide['title']}]({SITE_URL}/{guide['slug']}.html)\n" for guide in GUIDES)
+        + "\n## App tutorials\n"
+        + "".join(f"- [{t['title']}]({SITE_URL}/{t['slug']}.html)\n" for t in tuts)
         + "\n"
         "Contact: https://x.com/jessyka_boat\n", encoding="utf-8"
     )
