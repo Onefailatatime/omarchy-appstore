@@ -16,6 +16,9 @@ import json
 import pathlib
 import re
 import subprocess
+import hashlib
+
+import seo
 import tarfile
 import urllib.parse
 import urllib.request
@@ -804,6 +807,13 @@ def tutorial_url(name: str) -> str:
     return f"/{slug(name)}-on-omarchy.html"
 
 
+def app_title(p: dict) -> str:
+    """'Install <name> on Omarchy', plus the real one-line tagline when it fits."""
+    base = f"Install {p['name']} on Omarchy"
+    line = (p.get("tagline") or "").strip().rstrip(".")
+    return f"{base} | {line}" if line and len(base) + 3 + len(line) <= 65 else base
+
+
 def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: dict | None = None) -> str:
     canonical = f"{SITE_URL}/apps/{slug(p['name'])}.html"
     desc = description_for(p)
@@ -822,16 +832,24 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
                 "license": p["license"],
                 "url": canonical,
                 "sameAs": project_url,
+                "fileSize": p["csize"],
+                "installUrl": canonical,
+                "dateModified": datetime.date.fromtimestamp(p["built"]).isoformat(),
             },
             {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": SITE_NAME, "item": SITE_URL + "/"},
-                    {"@type": "ListItem", "position": 2, "name": p["name"], "item": canonical},
+                    {"@type": "ListItem", "position": 2, "name": p["category"], "item": f"{SITE_URL}/category/{slug(p['category'])}.html"},
+                    {"@type": "ListItem", "position": 3, "name": p["name"], "item": canonical},
                 ],
             },
         ],
     }
+    if p.get("author_name") and p.get("author_url"):
+        schema["@graph"][0]["author"] = {"@type": "Person" if "github.com/" in p["author_url"] else "Organization", "name": p["author_name"], "url": p["author_url"]}
+    if p.get("tagline") and p.get("full_desc"):
+        schema["@graph"][0]["abstract"] = p["tagline"]
     images = profile_images(p)
     if images:
         schema["@graph"][0]["screenshot"] = [image["url"] for image in images]
@@ -868,6 +886,7 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
               if p.get("author_name") and p.get("author_url") else "")
     replacements = {
         "__STYLE__": css,
+        "__TITLE__": html.escape(app_title(p)),
         "__SITE_URL__": SITE_URL,
         "__CANONICAL__": canonical,
         "__SHARE_URL__": canonical,
@@ -1081,6 +1100,8 @@ def main() -> None:
     for f in (ROOT / "assets" / "images").glob("*"):
         if f.is_file():
             (images / f.name).write_bytes(f.read_bytes())
+    for f in (ROOT / "assets" / "indexnow").glob("*.txt"):
+        (DIST / f.name).write_bytes(f.read_bytes())  # IndexNow key file (public by design)
     (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())
     (DIST / "newsletter.js").write_text((ROOT / "assets" / "newsletter.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "ads.js").write_text((ROOT / "assets" / "ads.js").read_text(encoding="utf-8"), encoding="utf-8")
@@ -1219,13 +1240,40 @@ def main() -> None:
             render_app_page(app_template, resolved_css, p, synced, app_banners), encoding="utf-8"
         )
 
-    sitemap_urls = [SITE_URL + "/", SITE_URL + "/leaderboard.html", SITE_URL + "/develop.html", SITE_URL + "/about.html", SITE_URL + "/advertise.html", SITE_URL + "/guides.html", SITE_URL + "/terms.html"]
-    sitemap_urls.extend(f"{SITE_URL}/{guide['slug']}.html" for guide in GUIDES)
-    sitemap_urls.append(SITE_URL + "/tutorials.html")
-    sitemap_urls.extend(f"{SITE_URL}/{t['slug']}.html" for t in tuts)
-    sitemap_urls.extend(f"{SITE_URL}/apps/{slug(p['name'])}.html" for p in pkgs)
+    for d in ("category", "vs", "install"):
+        for old in (DIST / d).glob("*.html") if (DIST / d).exists() else []:
+            old.unlink()
+    seo_pages = seo.build(root=ROOT, dist=DIST, pkgs=pkgs, categories=CATEGORY_ORDER, slug=slug,
+                          display_name=lambda p: p["name"], guide_template=guide_template,
+                          site=SITE_URL, site_name=SITE_NAME, synced=synced)
+
+    # lastmod is the real last change: the package's build date for app pages,
+    # and the last git commit touching a page's sources for everything else.
+    def git_date(*paths: str) -> str:
+        dirty = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain", "--", *paths], capture_output=True, text=True).stdout.strip()
+        if dirty:
+            return synced
+        out = subprocess.run(["git", "-C", str(ROOT), "log", "-1", "--format=%cs", "--", *paths], capture_output=True, text=True).stdout.strip()
+        return out or synced
+    pkg_date = {p["name"]: datetime.date.fromtimestamp(p["built"]).isoformat() for p in pkgs}
+    newest_pkg = max(pkg_date.values()) if pkg_date else synced
+    shared = ["parts/style.css"]
+    sitemap_entries = [(SITE_URL + "/", max(newest_pkg, git_date("parts/body.html", *shared)))]
+    for name in ("leaderboard", "develop", "about", "advertise", "guides", "terms"):
+        sitemap_entries.append((f"{SITE_URL}/{name}.html", git_date(f"parts/{name}.html", *shared)))
+    sitemap_entries.extend((f"{SITE_URL}/{guide['slug']}.html", git_date(f"parts/guides/{guide['slug']}.html", "parts/guide.html")) for guide in GUIDES)
+    sitemap_entries.extend((f"{SITE_URL}/apps/{slug(p['name'])}.html", max(pkg_date[p["name"]], git_date("parts/app.html"))) for p in pkgs)
+    for path, sources in seo_pages:
+        date = git_date(*sources, "parts/guide.html")
+        if "data/omarchy.db" in sources:
+            date = max(date, newest_pkg)
+        sitemap_entries.append((SITE_URL + path, min(date, synced)))
+    sitemap_entries.append((SITE_URL + "/tutorials.html", synced))
+    sitemap_entries.extend((f"{SITE_URL}/{t['slug']}.html", synced) for t in tuts)
+    sitemap_entries = [(u, min(d, synced)) for u, d in sitemap_entries]
+    sitemap_urls = [u for u, _ in sitemap_entries]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    sitemap.extend(f"  <url><loc>{url}</loc><lastmod>{synced}</lastmod></url>" for url in sitemap_urls)
+    sitemap.extend(f"  <url><loc>{url}</loc><lastmod>{date}</lastmod></url>" for url, date in sitemap_entries)
     sitemap.append("</urlset>")
     (DIST / "sitemap.xml").write_text("\n".join(sitemap) + "\n", encoding="utf-8")
     (DIST / "robots.txt").write_text(
@@ -1251,11 +1299,34 @@ def main() -> None:
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
         "## Guides and comparisons\n"
         + "".join(f"- [{guide['title']}]({SITE_URL}/{guide['slug']}.html)\n" for guide in GUIDES)
+        + f"- [Omarchy apps list (all packages)]({SITE_URL}/omarchy-apps-list.html)\n"
+        + "".join(f"- [{SITE_URL}{path}]({SITE_URL}{path})\n" for path, _ in seo_pages if not path.startswith("/omarchy-apps-list"))
         + "\n## App tutorials\n"
         + "".join(f"- [{t['title']}]({SITE_URL}/{t['slug']}.html)\n" for t in tuts)
         + "\n"
         "Contact: https://x.com/jessyka_boat\n", encoding="utf-8"
     )
+
+    # One cached, content-hashed stylesheet instead of the same CSS inlined in
+    # every page. Pages were rendered with the full block; swap it for a link.
+    full_css = css.replace("__CATVARS__", cat_vars)
+    css_name = f"style.{hashlib.sha256(full_css.encode()).hexdigest()[:10]}.css"
+    for old in DIST.glob("style.*.css"):
+        old.unlink()
+    (DIST / css_name).write_text(full_css, encoding="utf-8")
+    link = f'<link rel="stylesheet" href="/{css_name}">'
+    variants = ["<style>\n__STYLE__\n</style>", f"<style>\n{full_css}\n</style>", f"<style>{full_css}</style>", f"<style>{resolved_css}</style>", f"<style>\n{resolved_css}\n</style>"]
+    inlined = 0
+    for page_file in DIST.rglob("*.html"):
+        text = page_file.read_text(encoding="utf-8")
+        new = text
+        for v in variants:
+            new = new.replace(v, link)
+        if new != text:
+            inlined += 1
+            page_file.write_text(new, encoding="utf-8")
+    print(f"dist/{css_name} {len(full_css):,} bytes · linked from {inlined} pages")
+    print(f"seo pages:        {len(seo_pages)} (categories, apps list, comparisons, install guides)")
 
     unresolved = [p["name"] for p in pkgs if not p["added"]]
     uncategorized = [p["name"] for p in pkgs if p["category"] == FALLBACK_CATEGORY and p["name"] not in json.loads(CATEGORIES_FILE.read_text() or "{}")]

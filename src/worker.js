@@ -22,6 +22,31 @@ export async function rateLimited(db, key, limit, windowMs, at = new Date().toIS
   return false;
 }
 
+// First-party Umami: the tracker and its collector are served from
+// omarchyapps.com/stats/* and forwarded to the self-hosted edge, whose origin
+// lives only in the UMAMI_UPSTREAM Worker secret. No secret, no proxy (404).
+
+export async function proxyStats(request, pathname, origin, fetchImpl = fetch) {
+  if (!origin) return new Response("Not found", { status: 404 });
+  origin = origin.replace(/\/+$/, "");
+  if (pathname === "/stats/script.js" && (request.method === "GET" || request.method === "HEAD")) {
+    const res = await fetchImpl(origin + "/script.js", { cf: { cacheTtl: 3600, cacheEverything: true } });
+    return new Response(request.method === "HEAD" ? null : res.body, {
+      status: res.status,
+      headers: { "content-type": "application/javascript; charset=utf-8", "cache-control": "public, max-age=3600" },
+    });
+  }
+  if (pathname === "/stats/api/send" && request.method === "POST") {
+    const headers = new Headers({ "content-type": "application/json" });
+    for (const h of ["user-agent", "accept-language", "x-umami-cache", "x-umami-website-id", "x-umami-hostname"]) if (request.headers.get(h)) headers.set(h, request.headers.get(h));
+    const ip = request.headers.get("cf-connecting-ip");
+    if (ip) headers.set("x-forwarded-for", ip);
+    const res = await fetchImpl(origin + "/api/send", { method: "POST", headers, body: await request.text() });
+    return new Response(res.body, { status: res.status, headers: { "content-type": res.headers.get("content-type") || "application/json", "cache-control": "no-store" } });
+  }
+  return new Response("Not found", { status: 404 });
+}
+
 const tooMany = () => new Response(JSON.stringify({ error: "Too many requests. Try again in a minute." }), {
   status: 429, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
 });
@@ -36,6 +61,7 @@ export default {
         url.hostname = url.hostname.slice(4);
         return Response.redirect(url.toString(), 301);
       }
+      if (pathname.startsWith("/stats/")) return await proxyStats(request, pathname, env.UMAMI_UPSTREAM);
       if (pathname === "/api/votes" || pathname === "/api/subscribe") {
         if (request.method === "POST") {
           const ip = request.headers.get("cf-connecting-ip") || "0.0.0.0";
