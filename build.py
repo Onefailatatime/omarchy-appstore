@@ -24,7 +24,7 @@ import urllib.parse
 import urllib.request
 from compression import zstd  # stdlib since Python 3.14
 
-import ads
+import sponsors as ads
 import tutorials
 
 ROOT = pathlib.Path(__file__).parent
@@ -54,11 +54,11 @@ SUGGEST_APP_URL = "https://x.com/messages/compose?" + urllib.parse.urlencode({
 SITE_URL = "https://omarchyapps.com"
 AD_FAQ = [
     ("How does the rotation work?", "The header and footer each show three sponsors at a time and rotate through every active sponsor in order, on a fixed timer. Every sponsor gets exactly the same screen time, there is no bidding for position. The starting order changes daily so nobody is permanently first or last."),
-    ("How long does a sponsorship last?", "Paid spots bill every 90 days and renew until you cancel, so your ad stays up as long as you want it. Cancel from the Stripe receipt email and the ad runs to the end of the paid term."),
-    ("How do I pay?", "By card through Stripe, from the button on each spot. It is a subscription that renews every 90 days. After paying, send your ad details and it goes live within one business day."),
+    ("How long does a sponsorship last?", "Paid spots bill every 90 days and renew until you cancel, so your sponsor unit stays up as long as you want it. Cancel from the Stripe receipt email and it runs to the end of the term."),
+    ("How do I pay?", "By card through Stripe, from the button on each spot. It is a subscription that renews every 90 days. After paying, send your sponsor details and it goes live within one business day."),
     ("What is an app profile banner?", "Your banner on your app's own page, the highest intent spot on the site, seen by everyone who looks up that app. Only the app's own sponsor can buy it."),
-    ("What is the lifetime pin?", "One sponsor, pinned permanently at the top of the homepage. It never rotates out and never expires. There is no listed price: message @jessyka_boat on X with your offer and we talk it through."),
-    ("Does sponsoring affect my package's listing or rank?", "No. Listings come from the official repository and rankings come from reader votes. A sponsor unit is a separate, labelled ad."),
+    ("What is the lifetime pin?", "One sponsor, pinned permanently at the top of the homepage. It never rotates out and never expires. Message @jessyka_boat on X and we talk it through."),
+    ("Does sponsoring affect my package's listing or rank?", "No. Listings come from the official repository and rankings come from reader votes. A sponsor unit is separate and clearly labelled."),
 ]
 SITE_NAME = "Unofficial Omarchy App Store"
 GUIDES = [
@@ -1104,7 +1104,7 @@ def main() -> None:
         (DIST / f.name).write_bytes(f.read_bytes())  # IndexNow key file (public by design)
     (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())
     (DIST / "newsletter.js").write_text((ROOT / "assets" / "newsletter.js").read_text(encoding="utf-8"), encoding="utf-8")
-    (DIST / "ads.js").write_text((ROOT / "assets" / "ads.js").read_text(encoding="utf-8"), encoding="utf-8")
+    (DIST / "sponsors.js").write_text((ROOT / "assets" / "sponsors.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "package-details.json").write_text(json.dumps(package_details(pkgs), separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
     (DIST / "home-leaders.js").write_text((ROOT / "assets" / "home-leaders.js").read_text(encoding="utf-8"), encoding="utf-8")
@@ -1124,18 +1124,19 @@ def main() -> None:
     advertise_schema = {
         "@context": "https://schema.org",
         "@graph": [
-            {"@type": "WebPage", "@id": SITE_URL + "/advertise.html", "url": SITE_URL + "/advertise.html",
-             "name": "Advertise on Omarchy Apps", "isPartOf": {"@id": SITE_URL + "/#website"},
-             "description": "Sponsor the Unofficial Omarchy App Store: header and footer rotations plus app profile banners. Flat monthly rates on 90-day terms, fair rotation for every sponsor.",
+            {"@type": "WebPage", "@id": SITE_URL + "/sponsor.html", "url": SITE_URL + "/sponsor.html",
+             "name": "Sponsor Omarchy Apps", "isPartOf": {"@id": SITE_URL + "/#website"},
+             "description": "Sponsor the Unofficial Omarchy App Store: header and footer rotations plus app profile banners. 90-day terms, fair rotation for every sponsor.",
              "dateModified": synced},
-            {"@type": "FAQPage", "@id": SITE_URL + "/advertise.html#faq", "mainEntity": [
+            {"@type": "FAQPage", "@id": SITE_URL + "/sponsor.html#faq", "mainEntity": [
                 {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in AD_FAQ
             ]},
         ],
     }
-    advertise = ((ROOT / "parts" / "advertise.html").read_text(encoding="utf-8")
+    advertise = ((ROOT / "parts" / "sponsor.html").read_text(encoding="utf-8")
                  .replace("__AD_SLOTS__", ads.render_slot_cards(sponsor))
                  .replace("__AD_FAQ__", ad_faq_html)
+                 .replace("__SUPPORT_CARDS__", ads.render_support_cards())
                  .replace("__STRUCTURED_DATA__", json_script(advertise_schema))
                  .replace("__CONTACT_DM__", html.escape(ads.dm_url("Hi! I have a question about sponsoring omarchyapps.com.")))
                  .replace("__COUNT__", str(len(pkgs)))
@@ -1143,7 +1144,7 @@ def main() -> None:
                  .replace("__CONTACT__", html.escape(CONTACT_URL))
                  .replace("__SITE_URL__", SITE_URL)
                  .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
-    (DIST / "advertise.html").write_text(advertise, encoding="utf-8")
+    (DIST / "sponsor.html").write_text(advertise, encoding="utf-8")
 
     guide_cards = "\n".join(
         f'<a class="guide-card" href="/{g["slug"]}.html"><p class="eyebrow">{html.escape(g["eyebrow"])}</p>'
@@ -1259,7 +1260,7 @@ def main() -> None:
     newest_pkg = max(pkg_date.values()) if pkg_date else synced
     shared = ["parts/style.css"]
     sitemap_entries = [(SITE_URL + "/", max(newest_pkg, git_date("parts/body.html", *shared)))]
-    for name in ("leaderboard", "develop", "about", "advertise", "guides", "terms"):
+    for name in ("leaderboard", "develop", "about", "sponsor", "guides", "terms"):
         sitemap_entries.append((f"{SITE_URL}/{name}.html", git_date(f"parts/{name}.html", *shared)))
     sitemap_entries.extend((f"{SITE_URL}/{guide['slug']}.html", git_date(f"parts/guides/{guide['slug']}.html", "parts/guide.html")) for guide in GUIDES)
     sitemap_entries.extend((f"{SITE_URL}/apps/{slug(p['name'])}.html", max(pkg_date[p["name"]], git_date("parts/app.html"))) for p in pkgs)
@@ -1295,7 +1296,7 @@ def main() -> None:
         f"- [About]({SITE_URL}/about.html)\n"
         f"- [Guides]({SITE_URL}/guides.html)\n"
         f"- [App tutorials]({SITE_URL}/tutorials.html)\n"
-        f"- [Advertise]({SITE_URL}/advertise.html)\n"
+        f"- [Sponsor]({SITE_URL}/sponsor.html)\n"
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
         "## Guides and comparisons\n"
         + "".join(f"- [{guide['title']}]({SITE_URL}/{guide['slug']}.html)\n" for guide in GUIDES)
@@ -1336,7 +1337,7 @@ def main() -> None:
     print(f"src/checklist.mjs {len(develop_md):,} bytes · checklist emailed to subscribers")
     print(f"dist/terms.html   {len(terms):,} bytes · terms of use")
     print(f"dist/about.html   {len(about):,} bytes · project and builder bio")
-    print(f"dist/advertise.html {len(advertise):,} bytes · sponsor products (rotations + app banners)")
+    print(f"dist/sponsor.html {len(advertise):,} bytes · sponsor products (rotations + app banners)")
     print(f"dist/guides       {len(GUIDES)} search-focused editorial guides")
     print(f"dist/apps/        {len(pkgs)} crawlable package pages")
     print(f"dist/sitemap.xml  {len(sitemap_urls)} canonical URLs")

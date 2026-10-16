@@ -13,7 +13,7 @@ This site is unofficial and is not affiliated with or endorsed by Omarchy, Omaco
 - [About](https://omarchyapps.com/about.html)
 - [Guides](https://omarchyapps.com/guides.html)
 - [App tutorials](https://omarchyapps.com/tutorials.html)
-- [Advertise](https://omarchyapps.com/advertise.html)
+- [Sponsor](https://omarchyapps.com/sponsor.html)
 - [Terms of Use](https://omarchyapps.com/terms.html)
 
 ## Guides and comparisons

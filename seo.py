@@ -27,6 +27,8 @@ def _render(template, *, site, path, title, description, eyebrow, crumb_label, c
     page = (_abs_links(template)
             .replace("__SITE_URL__/__SLUG__.html", site + path)
             .replace('<a href="/#guides">Guides</a>', f'<a href="{crumb_href}">{html.escape(crumb_label)}</a>')
+            .replace("__CRUMB__", f'<a href="{crumb_href}">{html.escape(crumb_label)}</a>')
+            .replace("__FACTS__", "Reviewed __SYNCED__ · independent editorial guide")
             .replace("__TITLE__", html.escape(title))
             .replace("__DESCRIPTION__", html.escape(description))
             .replace("__EYEBROW__", html.escape(eyebrow))
