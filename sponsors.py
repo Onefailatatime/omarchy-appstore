@@ -250,24 +250,33 @@ def render_slot_cards(ads: dict) -> str:
     return "\n".join(cards)
 
 
+# (key, title, blurb, DM ask, stripe key or None). Stripe keys render a
+# placeholder pay-what-you-want button: href="#stripe-<key>" data-stripe="<key>".
+# Replace each href with the live Stripe Payment Link once it exists.
 SUPPORT_OFFERS = [
-    ("hosting", "Hosting", "Keep the store online for everyone. Cover a stretch of hosting and the whole community benefits.", "help cover hosting for omarchyapps.com"),
-    ("ai-subscriptions", "LLM and AI subscriptions", "The monthly AI tools behind the guides, tutorials, and package research.", "help cover an LLM/AI subscription for omarchyapps.com"),
-    ("api-credits", "API credits", "Credits for the APIs that keep listings, screenshots, and data fresh.", "offer API credits for omarchyapps.com"),
-    ("domain", "Domain renewal", "Keep omarchyapps.com pointing home, year after year.", "help with the omarchyapps.com domain renewal"),
-    ("test-hardware", "Test hardware", "Devices to test Omarchy apps on, so guides work on real machines and not just one laptop.", "offer test hardware for testing Omarchy apps"),
+    ("hosting", "Hosting", "Keep the store online for everyone. Cover a stretch of hosting and the whole community benefits.", "help cover hosting for omarchyapps.com", "hosting"),
+    ("ai-subscriptions", "LLM and AI subscriptions", "The monthly AI tools behind the guides, tutorials, and package research.", "help cover an LLM/AI subscription for omarchyapps.com", "ai-subscription"),
+    ("api-credits", "API credits", "Credits for the APIs that keep listings, screenshots, and data fresh.", "offer API credits for omarchyapps.com", "api-credits"),
+    ("domain", "Domain renewal", "Keep omarchyapps.com pointing home, year after year.", "help with the omarchyapps.com domain renewal", None),
+    ("test-hardware", "Test hardware", "Devices to test Omarchy apps on, so guides work on real machines and not just one laptop.", "offer test hardware for testing Omarchy apps", None),
+    ("say-thanks", "Say thanks", "Just enjoy the store? A thank-you of any size keeps the lights on and the coffee flowing.", "say thanks for omarchyapps.com", "say-thanks"),
 ]
 
 
 def render_support_cards() -> str:
-    """'Support the store' offers for the sponsor page. Each is a contact
-    action (X DM), no amounts."""
+    """'Support the store' offers for the sponsor page: a pay-what-you-want
+    Stripe button (placeholder href) where one exists, plus an X DM to
+    arrange directly. No amounts."""
     cards = []
-    for key, title, blurb, ask in SUPPORT_OFFERS:
+    for key, title, blurb, ask, stripe in SUPPORT_OFFERS:
         dm = html.escape(dm_url(f"Hi! I would like to {ask}."), quote=True)
+        if stripe:
+            actions = (f'<p class="slot-actions"><a class="button" href="#stripe-{stripe}" data-stripe="{stripe}" rel="noopener">Chip in \u2197</a>'
+                       f'<a class="button ghost" href="{dm}" target="_blank" rel="noopener">Arrange directly \u2197</a></p>')
+        else:
+            actions = f'<a class="button ghost" href="{dm}" target="_blank" rel="noopener">Offer to help \u2197</a>'
         cards.append(
             f'<article class="slot" id="support-{key}"><h3>{html.escape(title)}</h3>'
-            f'<p class="status">{html.escape(blurb)}</p>'
-            f'<a class="button ghost" href="{dm}" target="_blank" rel="noopener">Offer to help \u2197</a></article>'
+            f'<p class="status">{html.escape(blurb)}</p>{actions}</article>'
         )
     return "\n".join(cards)
