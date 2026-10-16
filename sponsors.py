@@ -252,7 +252,13 @@ def render_slot_cards(ads: dict) -> str:
 
 # (key, title, blurb, DM ask, stripe key or None). Stripe keys render a
 # placeholder pay-what-you-want button: href="#stripe-<key>" data-stripe="<key>".
-# Replace each href with the live Stripe Payment Link once it exists.
+# Live pay-what-you-want Stripe Payment Links, keyed by stripe key.
+STRIPE_LINKS = {
+    "hosting": "https://buy.stripe.com/dRm8wRfoj9kkcsI2TYdEs03",
+    "ai-subscription": "https://buy.stripe.com/6oU7sN6RN2VW9gwgKOdEs04",
+    "api-credits": "https://buy.stripe.com/5kQcN7b8368878o0LQdEs05",
+    "say-thanks": "https://buy.stripe.com/4gMdRbgsn400dwM2TYdEs06",
+}
 SUPPORT_OFFERS = [
     ("hosting", "Hosting", "Keep the store online for everyone. Cover a stretch of hosting and the whole community benefits.", "help cover hosting for omarchyapps.com", "hosting"),
     ("ai-subscriptions", "LLM and AI subscriptions", "The monthly AI tools behind the guides, tutorials, and package research.", "help cover an LLM/AI subscription for omarchyapps.com", "ai-subscription"),
@@ -271,7 +277,7 @@ def render_support_cards() -> str:
     for key, title, blurb, ask, stripe in SUPPORT_OFFERS:
         dm = html.escape(dm_url(f"Hi! I would like to {ask}."), quote=True)
         if stripe:
-            actions = (f'<p class="slot-actions"><a class="button" href="#stripe-{stripe}" data-stripe="{stripe}" rel="noopener">Chip in \u2197</a>'
+            actions = (f'<p class="slot-actions"><a class="button" href="{html.escape(STRIPE_LINKS.get(stripe, "#stripe-" + stripe), quote=True)}" data-stripe="{stripe}" target="_blank" rel="noopener">Chip in \u2197</a>'
                        f'<a class="button ghost" href="{dm}" target="_blank" rel="noopener">Arrange directly \u2197</a></p>')
         else:
             actions = f'<a class="button ghost" href="{dm}" target="_blank" rel="noopener">Offer to help \u2197</a>'
