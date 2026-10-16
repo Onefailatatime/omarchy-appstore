@@ -1,14 +1,14 @@
 """Sponsor slots for the build: reads data/ads.json (direct placement) and
-renders the homepage rotation units, the advertise page's product cards,
+renders the homepage rotation units, the sponsor page's product cards,
 and per-app banners.
 
 Model: header and footer each hold an unlimited list of sponsors and rotate
-them fairly (client-side, assets/ads.js): 3 shown at a time, advancing
+them fairly (client-side, assets/sponsors.js): 3 shown at a time, advancing
 sequentially, every active sponsor getting equal screen time. App banners
 appear on the sponsor's own app page. Only sponsors inside their contract
 dates [start, end] are rendered.
 
-Every unit is static HTML, tagged "Ad", and links carry rel="sponsored".
+Every unit is static HTML, tagged "Sponsor", and links carry rel="sponsored".
 """
 
 import datetime
@@ -21,12 +21,6 @@ ROOT = pathlib.Path(__file__).parent
 ADS_FILE = ROOT / "data" / "ads.json"
 
 X_DM_RECIPIENT_ID = "1400492097082327040"
-
-
-def money(cents_or_dollars) -> str:
-    if isinstance(cents_or_dollars, int):
-        return f"${cents_or_dollars:,}"
-    return f"${cents_or_dollars:,.2f}"
 
 
 def dm_url(text: str) -> str:
@@ -60,7 +54,7 @@ def active_sponsors(sponsors: list[dict], quiet: bool = False) -> list[dict]:
         if is_active(s, today):
             active.append(s)
         elif not quiet:
-            print(f"ads: sponsor '{s.get('name')}' not active "
+            print(f"sponsors: sponsor '{s.get('name')}' not active "
                   f"(start={s.get('start')} end={s.get('end')}); skipped")
     return active
 
@@ -75,7 +69,7 @@ def active_banners(banners: dict, quiet: bool = False) -> dict:
         if is_active(s, today):
             out[slug] = s
         elif not quiet:
-            print(f"ads: app banner '{slug}' ({s.get('name')}) not active "
+            print(f"sponsors: app banner '{slug}' ({s.get('name')}) not active "
                   f"(start={s.get('start')} end={s.get('end')}); skipped")
     return out
 
@@ -104,22 +98,21 @@ def _unit(sponsor: dict, tag: str, cls: str = "", image: bool = False) -> str:
     )
 
 
-def _open_card(label: str, anchor: str, price_month: int, term_days: int) -> str:
+def _open_card(label: str, anchor: str) -> str:
     """Placeholder card shown while a slot has no active sponsors."""
-    per_term = price_month * term_days // 30
     return (
-        f'<a class="ad open" href="/advertise.html#{anchor}">'
-        '<span class="tag">Ad · open slot</span>'
+        f'<a class="ad open" href="/sponsor.html#{anchor}">'
+        '<span class="tag">Sponsor · open spot</span>'
         '<span class="mark" aria-hidden="true">+</span>'
-        f'<span class="copy"><strong>{html.escape(label)}: your app here</strong>'
-        f'<span class="sub">{money(price_month)}/mo · {term_days} day term · billed {money(per_term)}</span></span>'
+        '<span class="copy"><strong>Sponsor this spot</strong>'
+        f'<span class="sub">{html.escape(label)}: your app here</span></span>'
         '<span class="cta">Sponsor →</span></a>'
     )
 
 
 def _rotation(units: list[str], visible: int, slot_id: str) -> str:
     """Wrap sponsor units in a fair sequential rotation container.
-    assets/ads.js shows `visible` at a time and advances one position on a
+    assets/sponsors.js shows `visible` at a time and advances one position on a
     fixed timer, so every active sponsor gets equal screen time."""
     return (
         f'<div class="ad-rotate" data-rotate="{visible}" data-slot-id="{html.escape(slot_id, quote=True)}">'
@@ -140,7 +133,7 @@ def active_lifetime(sponsors: list[dict], quiet: bool = False) -> list[dict]:
         if start and start <= today and (not end or today <= end):
             active.append(s)
         elif not quiet:
-            print(f"ads: lifetime sponsor '{s.get('name')}' not active "
+            print(f"sponsors: lifetime sponsor '{s.get('name')}' not active "
                   f"(start={start} end={end or 'forever'}); skipped")
     return active
 
@@ -151,7 +144,7 @@ def render_lifetime(ads: dict) -> str:
     sponsors = active_lifetime((ads.get("lifetime") or {}).get("sponsors"))
     if not sponsors:
         return ""
-    units = [_unit(s, "Ad", "text", image=True) for s in sponsors]
+    units = [_unit(s, "Sponsor", "text", image=True) for s in sponsors]
     return '<div class="ad-lifetime">' + "".join(units) + "</div>"
 
 
@@ -159,22 +152,22 @@ def render_homepage(ads: dict) -> dict[str, str]:
     h = ads["header"]
     hsponsors = active_sponsors(h.get("sponsors") or [])
     if hsponsors:
-        hunits = [_unit(s, "Ad", "text") for s in hsponsors]
+        hunits = [_unit(s, "Sponsor", "text") for s in hsponsors]
         header = f'<div class="ad-header">{_rotation(hunits, h.get("visible_units", 3), "header")}</div>'
     else:
         header = (f'<div class="ad-header">'
-                  f'{_open_card(h["label"], "header", h["price_month"], h["term_days"])}'
+                  f'{_open_card(h["label"], "header")}'
                   "</div>")
 
     f = ads["footer"]
     fsponsors = active_sponsors(f.get("sponsors") or [])
     if fsponsors:
-        funits = [_unit(s, "Ad") for s in fsponsors]
+        funits = [_unit(s, "Sponsor") for s in fsponsors]
         footer = ('<div class="ad-footer"><h2 class="sec-label">Sponsors</h2>'
                   f'{_rotation(funits, f.get("visible_units", 3), "footer")}</div>')
     else:
         footer = ('<div class="ad-footer"><h2 class="sec-label">Sponsors</h2>'
-                  f'{_open_card(f["label"], "footer", f["price_month"], f["term_days"])}'
+                  f'{_open_card(f["label"], "footer")}'
                   "</div>")
     return {"__AD_HEADER__": header, "__AD_FOOTER__": footer,
             "__AD_LIFETIME__": render_lifetime(ads)}
@@ -193,7 +186,7 @@ def render_app_banner(banners: dict, app_slug: str) -> str:
 
 
 def render_slot_cards(ads: dict) -> str:
-    """Product cards for the advertise page: fixed prices, contact CTA,
+    """Product cards for the sponsor page: contact CTA,
     no bidding."""
     cards: list[str] = []
 
@@ -211,9 +204,7 @@ def render_slot_cards(ads: dict) -> str:
         )
 
     def term_price(slot: dict) -> str:
-        per_term = slot["price_month"] * slot["term_days"] // 30
-        return (f'<b>{money(slot["price_month"])}</b> / month'
-                f' · billed as <b>{money(per_term)}</b> every {slot["term_days"]} days, cancel any time')
+        return f'<b>{slot["term_days"]} day term</b> · renews until you cancel'
 
     h = ads["header"]
     n_h = len(active_sponsors(h.get("sponsors") or [], quiet=True))
@@ -248,12 +239,35 @@ def render_slot_cards(ads: dict) -> str:
         f'<article class="slot" id="lifetime">'
         f'<h3>{html.escape(lt.get("label", "Lifetime pin"))}</h3>'
         f'<p class="pos">{html.escape(lt.get("position", ""))}</p>'
-        f'<p class="price"><b>Make an offer</b> · one payment · yours forever</p>'
-        f'<p class="status">No listed price and no checkout. Message with the amount you have in mind and we talk it through; '
+        f'<p class="price"><b>One sponsor</b> · yours forever</p>'
+        f'<p class="status">Message to get in touch and we talk it through; '
         f'one sponsor holds this spot permanently. '
         f"<b>{n_lt}</b> active now.</p>"
-        f'<a class="button" href="{html.escape(dm_url("Hi! I would like to make an offer for the lifetime sponsor pin on omarchyapps.com. My offer: $"), quote=True)}" '
-        'target="_blank" rel="noopener">Make an offer \u2197</a>'
+        f'<a class="button" href="{html.escape(dm_url("Hi! I would like to ask about the lifetime sponsor pin on omarchyapps.com. "), quote=True)}" '
+        'target="_blank" rel="noopener">Get in touch \u2197</a>'
         "</article>"
     )
+    return "\n".join(cards)
+
+
+SUPPORT_OFFERS = [
+    ("hosting", "Hosting", "Keep the store online for everyone. Cover a stretch of hosting and the whole community benefits.", "help cover hosting for omarchyapps.com"),
+    ("ai-subscriptions", "LLM and AI subscriptions", "The monthly AI tools behind the guides, tutorials, and package research.", "help cover an LLM/AI subscription for omarchyapps.com"),
+    ("api-credits", "API credits", "Credits for the APIs that keep listings, screenshots, and data fresh.", "offer API credits for omarchyapps.com"),
+    ("domain", "Domain renewal", "Keep omarchyapps.com pointing home, year after year.", "help with the omarchyapps.com domain renewal"),
+    ("test-hardware", "Test hardware", "Devices to test Omarchy apps on, so guides work on real machines and not just one laptop.", "offer test hardware for testing Omarchy apps"),
+]
+
+
+def render_support_cards() -> str:
+    """'Support the store' offers for the sponsor page. Each is a contact
+    action (X DM), no amounts."""
+    cards = []
+    for key, title, blurb, ask in SUPPORT_OFFERS:
+        dm = html.escape(dm_url(f"Hi! I would like to {ask}."), quote=True)
+        cards.append(
+            f'<article class="slot" id="support-{key}"><h3>{html.escape(title)}</h3>'
+            f'<p class="status">{html.escape(blurb)}</p>'
+            f'<a class="button ghost" href="{dm}" target="_blank" rel="noopener">Offer to help \u2197</a></article>'
+        )
     return "\n".join(cards)

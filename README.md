@@ -147,7 +147,7 @@ Until they are set the form reports that signup is not configured yet.
 
 `data/ads.json` defines the four slots (lifetime, header, rail, footer) with
 their reserves, bid increments, caps, and clocks. `ads.py` renders them into
-the homepage units and the `/advertise.html` slot cards, each with a bid form.
+the homepage units and the `/sponsor.html` slot cards, each with a bid form.
 
 Bidding runs on a Cloudflare Worker in `worker/` (D1 database
 `omarchy-auction`, live at `https://omarchy-auction.modecandsllc.workers.dev`).
@@ -157,7 +157,7 @@ It bundles `data/ads.json`, so redeploy it after changing a figure:
 cd worker && npm ci && npx wrangler deploy
 ```
 
-How a bid moves: a visitor posts it from the advertise page (`POST /api/bid`,
+How a bid moves: a visitor posts it from the sponsor page (`POST /api/bid`,
 same-origin only, rate limited, honeypot) and it lands as `submitted`. In
 review mode, the default, Jessyka approves or voids it at `/admin` on the
 Worker (token in the macOS Keychain, item `omarchy-auction-admin`). The first
@@ -190,7 +190,7 @@ documented exception to the workspace's shared-account rule. Products in that
 account: Header rotation sponsorship ($165 every 3 months), Footer rotation
 sponsorship ($75 every 3 months), App profile banner sponsorship ($75 every 3
 months). Each paid slot in `data/ads.json` has a `checkout_url`; paste the
-live Stripe Payment Link there and the advertise page shows a pay button beside
+live Stripe Payment Link there and the sponsor page shows a pay button beside
 the DM button. When a sponsor pays, add their entry to `data/ads.json` with
 start and end dates and let the next refresh publish it.
 

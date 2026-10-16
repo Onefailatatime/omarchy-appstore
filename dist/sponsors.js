@@ -1,7 +1,7 @@
 /* Fair sequential rotation for sponsor units (omarchyapps.com).
  *
  * Each [data-rotate] container holds every ACTIVE sponsor for one slot
- * (server-rendered by ads.py) and shows `visible` units at a time. The
+ * (server-rendered by sponsors.py) and shows `visible` units at a time. The
  * window advances one position every INTERVAL_MS and wraps around, so
  * every sponsor gets exactly equal screen time — no randomness, no
  * bidding for position.

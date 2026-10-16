@@ -46,6 +46,10 @@ export default {
         if (pathname === "/api/votes") return await handleVoteRequest(request, new D1VoteStore(env.DB));
         return await handleSubscribeRequest(request, env);
       }
+      // The advertise page was renamed to sponsor.html; keep old links working.
+      if (pathname === "/advertise.html" || pathname === "/advertise") {
+        return Response.redirect(new URL("/sponsor.html" + url.search + url.hash, request.url).toString(), 301);
+      }
       // html_handling is off so every canonical .html URL serves as-is; only the root needs a hand.
       if (pathname === "/") return env.ASSETS.fetch(new Request(new URL("/index.html", request.url), request));
       if (!pathname.includes(".") && pathname !== "/") {

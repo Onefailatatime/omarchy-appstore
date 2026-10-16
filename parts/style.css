@@ -1313,7 +1313,7 @@ footer.site nav a:hover { color: var(--color-turquoise); }
   .ad .sub { font-size: 82%; }
 }
 
-/* advertise page: each section gets its own surface so the page reads as
+/* sponsor page: each section gets its own surface so the page reads as
    a sequence of panels, not one column of blue text. */
 .advertise-main { max-width: 64rem; padding-bottom: var(--space-xx-large); }
 .advertise-main h2 { margin: 0 0 var(--space-medium); color: var(--color-terminal-white); font-size: clamp(1.3rem, 2.8vw, 1.7rem); }
@@ -1373,7 +1373,7 @@ footer.site nav a:hover { color: var(--color-turquoise); }
 
 /* =================== SPONSOR ROTATION =================== */
 /* Header and footer each rotate fairly through every active sponsor:
-   3 units shown at a time, the window advancing sequentially (assets/ads.js).
+   3 units shown at a time, the window advancing sequentially (assets/sponsors.js).
    Padding-top leaves room for the .ad .tag which sits above the unit. */
 .ad-rotate { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-medium); padding-top: 0.6em; }
 .ad-header .ad-rotate { margin-bottom: var(--space-small); }
