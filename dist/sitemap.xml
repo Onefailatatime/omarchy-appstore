@@ -23,6 +23,12 @@
   <url><loc>https://omarchyapps.com/claude-desktop-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/1password-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/omadesign-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/disktree-bin-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/dingtalk-bin-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/gliff-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/linuxqq-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/wechat-bin-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/wps-office-cn-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/1password.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/1password-beta.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/1password-cli.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -268,8 +274,6 @@
   <url><loc>https://omarchyapps.com/dbxcli-bin-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/dell-xps-touchpad-haptics-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/dell-xps13-sidecar-amps-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://omarchyapps.com/dingtalk-bin-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://omarchyapps.com/disktree-bin-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/dropbox-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/dropbox-cli-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/elsewhen-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -280,7 +284,6 @@
   <url><loc>https://omarchyapps.com/ghostty-shell-integration-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/ghostty-terminfo-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/github-copilot-cli-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://omarchyapps.com/gliff-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/google-chrome-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/gpu-screen-recorder-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/grok-bot-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -327,7 +330,6 @@
   <url><loc>https://omarchyapps.com/linux-ptl-audio-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/linux-ptl-audio-headers-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/linux-ptl-headers-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://omarchyapps.com/linuxqq-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/lmstudio-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/lmstudio-bin-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/localsend-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -412,8 +414,6 @@
   <url><loc>https://omarchyapps.com/voxtype-bin-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/walker-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/wayfreeze-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://omarchyapps.com/wechat-bin-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://omarchyapps.com/wps-office-cn-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/xdg-terminal-exec-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/xpadneo-dkms-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/yaru-gnome-shell-theme-on-omarchy.html</loc><lastmod>2026-10-16</lastmod></url>
