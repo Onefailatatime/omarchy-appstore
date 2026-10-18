@@ -106,6 +106,7 @@ This site is unofficial and is not affiliated with or endorsed by Omarchy, Omaco
 - [How to Install & Use google-chrome on Omarchy (2026)](https://omarchyapps.com/google-chrome-on-omarchy.html)
 - [How to Install & Use gpu-screen-recorder on Omarchy (2026)](https://omarchyapps.com/gpu-screen-recorder-on-omarchy.html)
 - [How to Install & Use grok-bot on Omarchy (2026)](https://omarchyapps.com/grok-bot-on-omarchy.html)
+- [How to Install & Use helium-browser on Omarchy (2026)](https://omarchyapps.com/helium-browser-bin-on-omarchy.html)
 - [How to Install & Use herdr on Omarchy (2026)](https://omarchyapps.com/herdr-on-omarchy.html)
 - [How to Install & Use heroic-games-launcher on Omarchy (2026)](https://omarchyapps.com/heroic-games-launcher-bin-on-omarchy.html)
 - [How to Install & Use hey-cli on Omarchy (2026)](https://omarchyapps.com/hey-cli-on-omarchy.html)

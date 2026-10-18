@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://omarchyapps.com/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://omarchyapps.com/leaderboard.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/develop.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/about.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -69,6 +69,7 @@
   <url><loc>https://omarchyapps.com/apps/google-chrome.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/gpu-screen-recorder.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/grok-bot.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/helium-browser-bin.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/herdr.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/hermes-desktop.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/heroic-games-launcher-bin.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -123,7 +124,7 @@
   <url><loc>https://omarchyapps.com/apps/makima-bin.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/microsoft-edge-stable-bin.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/minecraft-launcher.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/mise-bin.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/mise-bin.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/nautilus-dropbox.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/nautilus-open-any-terminal.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/nordvpn-bin.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -170,7 +171,7 @@
   <url><loc>https://omarchyapps.com/apps/python-terminaltexteffects.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/qmk-hid.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/quickshell-git.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/rawmakase-bin.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/rawmakase-bin.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/retroarch-joypad-autoconfig-git.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/rog-control-center.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/rustdesk.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -186,7 +187,7 @@
   <url><loc>https://omarchyapps.com/apps/superwhisper-bin.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/symfony-cli.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-bin.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/t3code-nightly-bin.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/t3code-nightly-bin.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-patched-bin.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tensaku.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tmog-bin.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -287,6 +288,7 @@
   <url><loc>https://omarchyapps.com/google-chrome-on-omarchy.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://omarchyapps.com/gpu-screen-recorder-on-omarchy.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://omarchyapps.com/grok-bot-on-omarchy.html</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://omarchyapps.com/helium-browser-bin-on-omarchy.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://omarchyapps.com/herdr-on-omarchy.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://omarchyapps.com/heroic-games-launcher-bin-on-omarchy.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://omarchyapps.com/hey-cli-on-omarchy.html</loc><lastmod>2026-10-17</lastmod></url>
