@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>power-profiles-daemon on Omarchy: Install &amp; Switch Power Profiles (2026)</title>
+<meta name="description" content="Omarchy&#x27;s power-profiles-daemon adds NVIDIA RTX Spark, Apple Silicon, and Snapdragon X power profiles to the standard Linux power daemon. Install, check, and switch profiles from the terminal.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#1a1b26">
+<link rel="canonical" href="https://omarchyapps.com/power-profiles-daemon-on-omarchy.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/images/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" sizes="180x180">
+<meta property="og:title" content="power-profiles-daemon on Omarchy: Install &amp; Switch Power Profiles (2026)">
+<meta property="og:description" content="Omarchy&#x27;s power-profiles-daemon adds NVIDIA RTX Spark, Apple Silicon, and Snapdragon X power profiles to the standard Linux power daemon. Install, check, and switch profiles from the terminal.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://omarchyapps.com/power-profiles-daemon-on-omarchy.html">
+<meta property="og:site_name" content="Unofficial Omarchy App Store">
+<meta property="og:image" content="https://omarchyapps.com/images/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jessyka_boat">
+<meta name="twitter:title" content="power-profiles-daemon on Omarchy: Install &amp; Switch Power Profiles (2026)">
+<meta name="twitter:description" content="Omarchy&#x27;s power-profiles-daemon adds NVIDIA RTX Spark, Apple Silicon, and Snapdragon X power profiles to the standard Linux power daemon. Install, check, and switch profiles from the terminal.">
+<meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/power-profiles-daemon-on-omarchy.html#article","headline":"power-profiles-daemon on Omarchy: Install & Switch Power Profiles (2026)","description":"Omarchy's power-profiles-daemon adds NVIDIA RTX Spark, Apple Silicon, and Snapdragon X power profiles to the standard Linux power daemon. Install, check, and switch profiles from the terminal.","url":"https://omarchyapps.com/power-profiles-daemon-on-omarchy.html","dateModified":"2026-10-18","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"power-profiles-daemon on Omarchy: Install & Switch Power Profiles (2026)","item":"https://omarchyapps.com/power-profiles-daemon-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this a GUI app?","acceptedAnswer":{"@type":"Answer","text":"No — it's a system daemon with no window. You talk to it with `powerprofilesctl` in a terminal, or through apps that read its D-Bus interface. The Omarchy installer configures it for you, so many users will never type a command."}},{"@type":"Question","name":"Does it replace the normal power-profiles-daemon?","acceptedAnswer":{"@type":"Answer","text":"Yes, by design. The package declares `provides=(power-profiles-daemon)` and `conflicts=(power-profiles-daemon)` — installing it swaps out Arch's stock build for Omarchy's patched 0.30. Anything that depended on the stock package keeps working."}},{"@type":"Question","name":"How do I see which profile is active right now?","acceptedAnswer":{"@type":"Answer","text":"Run `powerprofilesctl` with no arguments. For scripts, query the D-Bus interface `org.freedesktop.UPower.PowerProfiles`."}}]}]}</script>
+<link rel="stylesheet" href="/style.d5ce941b05.css">
+  <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="index.html" aria-label="Unofficial Omarchy App Store home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
+    <nav class="topbar-links" aria-label="Primary">
+      <a href="index.html">Apps</a>
+      <a href="leaderboard.html">Top apps</a>
+      <a href="guides.html" aria-current="page">Guides</a>
+      <a href="develop.html">Develop</a>
+      <a href="sponsor.html">Sponsor</a>
+    </nav>
+    <a class="button topbar-cta" href="sponsor.html">Sponsor</a>
+  </div>
+</header>
+
+<header class="hero guide-hero seo-hero">
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">System guide</span></nav>
+    <p class="eyebrow">System guide</p>
+    <h1>power-profiles-daemon on <span>Omarchy</span></h1>
+    <p class="tag">Omarchy&#x27;s patched power daemon — exposes CPU power profiles over D-Bus, with new-hardware patches for RTX Spark, Apple Silicon, Snapdragon X.</p>
+    <p class="facts">Reviewed 2026-10-18 · independent editorial guide</p>
+  </div>
+</header>
+
+<main class="wrap seo-guide-main">
+  <article class="seo-article">
+    <div class="guide-answer">
+      <p class="answer-label">Short answer</p>
+      <p>Install Omarchy&#x27;s power-profiles-daemon with `omarchy pkg add omarchy-power-profiles-daemon` — a patched build of the standard Linux power daemon with profiles for NVIDIA RTX Spark, Apple Silicon, and Snapdragon X hardware. It exposes performance, balanced, and power-saver over D-Bus so apps and scripts can read and switch them. It&#x27;s plumbing: no GUI, and Omarchy&#x27;s installer already picks a sane default.</p>
+    </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install command: confirm `omarchy pkg add omarchy-power-profiles-daemon` installs 0.30-3 and that it replaces/conflicts with stock `power-profiles-daemon`.
+- Service state: confirm `systemctl status power-profiles-daemon` is active after install; check whether the service is enabled by default or needs `sudo systemctl enable --now`.
+- CLI works: confirm `powerprofilesctl` runs (needs python-gobject — check it's pulled in or whether the user must install it) and `powerprofilesctl list` shows the available profiles.
+- Omarchy integration: confirm install/config/power.sh behavior — desktop/plugged sets `performance`, laptop-on-battery sets `balanced` + enables `omarchy-battery-monitor.timer`.
+- Patch evidence: on Apple Silicon confirm the cpufreq boost driver patch is active; on Snapdragon X confirm the 60/75% frequency caps behave as described. (Needs the hardware — mark "not tested" if unavailable.)
+- Shebang note: confirm `head -1 /usr/bin/powerprofilesctl` is `#!/usr/bin/python3` (the mise/venv workaround).
+- TLP conflict: confirm installing `tlp` conflicts/errors as expected, and document which one Omarchy recommends.
+- Issue/forum URLs: confirm the bbs.archlinux.org tlp conflict thread, the Mint TLP conflict post, and the Fedora Changes page links work.
+- Screenshots needed: this is a daemon — no GUI. Screenshot candidates: `powerprofilesctl list` output, `systemctl status`, battery-monitor notification.
+
+SEO notes:
+- URL: /guides/power-profiles-daemon-on-omarchy
+- Title tag: "power-profiles-daemon on Omarchy: Install & Switch Power Profiles (2026)"
+- Meta description: "Omarchy's power-profiles-daemon adds NVIDIA RTX Spark, Apple Silicon, and Snapdragon X power profiles to the standard Linux power daemon. Install, check, and switch profiles from the terminal."
+- Keywords: power-profiles-daemon omarchy, powerprofilesctl arch, power-profiles-daemon vs tlp, snapdragon x linux power profiles, omarchy battery balanced performance
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>power-profiles-daemon on Omarchy</h2>
+      <p>Omarchy's power-profiles-daemon (0.30, rebuilt by Omarchy with patches for NVIDIA RTX Spark, Apple Silicon, and Snapdragon X hardware) is the background service that exposes your CPU power profiles — performance, balanced, power-saver — over D-Bus so apps and scripts can read and switch them.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omarchy-power-profiles-daemon</code></pre>
+      <p>Takes seconds — it's a 69.9 KB daemon, installed in 169.4 KB, and it <strong>replaces</strong> Arch's stock <code>power-profiles-daemon</code> (the package declares <code>provides</code> + <code>conflicts</code>, so it's a drop-in swap, not a second copy). Then check it's alive: <code>systemctl status power-profiles-daemon</code>, and read your profiles with <code>powerprofilesctl list</code>.</p>
+      <p>This is plumbing, not an app. There's no window, no launcher icon — it just runs, and your desktop, your battery monitor, and your scripts talk to it. If your Omarchy machine came from the installer, it's very likely already running; this package is how you get Omarchy's patched 0.30 build with the new-hardware profiles.</p>
+      <p><strong>What the Omarchy build adds over stock 0.30:</strong> four documented patches — NVIDIA RTX Spark (N1X) per-core energy-preference profiles (proposed upstream as merge request !236), acceptance of the kernel's <code>balanced-performance</code> spelling, a generic cpufreq driver that uses the boost switch on Apple Silicon, and frequency caps for Snapdragon X (60% max in power-saver, 75% in balanced, uncapped in performance; proposed as !239). If you're on an RTX Spark, Snapdragon X, or Apple Silicon machine, this is the version you want. On plain x86_64 it behaves like stock.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and verify the service.</h3>
+      <p>Run the command above, then:</p>
+      <pre><code class="language-bash">systemctl status power-profiles-daemon   # should be active (running)
+powerprofilesctl list                    # the profiles your hardware offers</code></pre>
+      <h3>2. Switch profiles from the terminal.</h3>
+      <pre><code class="language-bash">powerprofilesctl set performance    # plugged in / full speed
+powerprofilesctl set balanced       # the everyday default
+powerprofilesctl set power-saver    # stretch the battery</code></pre>
+      <p>(<code>powerprofilesctl</code> needs <code>python-gobject</code> — it's an optdepends, so if the command errors on an import, install that first.)</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Profiles come from your hardware's drivers, not from the daemon's generosity</strong> — The daemon exposes what the kernel offers: on most Intel/AMD laptops that's all three profiles; on some hardware the <code>performance</code> profile simply doesn't exist and you'll only see <code>balanced</code> and <code>power-saver</code>. That's normal — the Omarchy patches exist precisely to teach the daemon about newer chips (RTX Spark, Snapdragon X, Apple Silicon) whose drivers upstream 0.30 doesn't fully understand yet.</li>
+        <li><strong>Omarchy picks a sane default at install</strong> — Omarchy's installer (<code>install/config/power.sh</code>) checks <code>/sys/class/power_supply</code> for a battery: no battery (desktop) → profile set to <code>performance</code>; battery present → <code>balanced</code>, plus the <code>omarchy-battery-monitor.timer</code> systemd user service for low-battery notifications. You don't need to touch anything unless you want different behavior.</li>
+        <li><strong>Pick this OR tlp, never both</strong> — They fight over the same CPU frequency controls. Omarchy ships the daemon; if you install <code>tlp</code> from the Arch repos, expect a package conflict — that's the system protecting you from two drivers steering the same wheel.</li>
+      </ul>
+      <h3>4. Where its config lives.</h3>
+      <p>Almost nowhere user-facing — that's the point of a D-Bus service. The daemon binary and its systemd unit live under <code>/usr</code>; per-user behavior (like which profile Omarchy chose for you) is whatever the install script set via <code>powerprofilesctl</code>. There is no <code>~/.config</code> file to edit; you drive it with <code>powerprofilesctl</code> or any app that speaks its D-Bus interface.</p>
+      <h3>5. Script it.</h3>
+      <p>Because it's D-Bus, anything can read the active profile — e.g., show it in your Omarchy bar, or auto-switch on AC/battery events with a udev rule or a small systemd path unit watching <code>/sys/class/power_supply/</code>. <code>powerprofilesctl</code> is the friendly wrapper; the raw interface is <code>org.freedesktop.UPower.PowerProfiles</code> (renamed from the old <code>net.hadess.PowerProfiles</code> back in 0.20, so if an old script references the old name, that's why it broke).</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Installing <code>tlp</code> (or <code>tlp-rdw</code>) errors out: "tlp and power-profiles-daemon are in conflict"</h3>
+      <p>This is intentional and well-documented (see the long-running Arch forum thread <a href="https://bbs.archlinux.org/viewtopic.php?id=273068" target="_blank" rel="noopener">"tlp-rdw and power-profiles-daemon are in conflict"</a>, and Mint's note that "the power-profiles-daemon package conflicts with tlp so they can't both be installed").</p>
+      <p><strong>Fix:</strong> Decide which power manager you want. To go with TLP: remove this package (check the exact remove command on-machine), install <code>tlp</code>, then <code>sudo systemctl enable --now tlp</code>. To stay with the daemon (Omarchy's default): don't install TLP. Running both means two daemons fighting over CPU governors — whichever you choose, mask or remove the other.</p>
+      <h3><code>powerprofilesctl</code> fails with a Python import error (e.g., <code>No module named 'gi'</code>)</h3>
+      <p>The tool needs PyGObject. The Omarchy PKGBUILD lists <code>python-gobject</code> as an optdepends ("for powerprofilesctl") and even rewrites the script's shebang to <code>#!/usr/bin/python3</code> so it uses the system Python instead of whatever a mise or venv puts first on PATH — because a venv Python lacks PyGObject. (Sourced directly from the package recipe.)</p>
+      <p><strong>Fix:</strong> Install <code>python-gobject</code> and run it with the system Python.</p>
+      <h3><code>powerprofilesctl list</code> shows only <code>balanced</code> — no <code>performance</code> profile</h3>
+      <p>Usually not a bug: the performance profile only appears when your hardware's drivers expose the knobs for it (upstream documents this; a Manjaro forum thread from the GNOME 41 era confirms "if you don't have a Performance mode available, it's not technically supported out of the box").</p>
+      <p><strong>Fix:</strong> On Snapdragon X / RTX Spark / Apple Silicon, this Omarchy build's patches are what teach the daemon those knobs — make sure you're actually running the Omarchy package (<code>pacman -Q omarchy-power-profiles-daemon</code> should show 0.30-3), not a stale stock install. If the hardware genuinely lacks the controls, no software will conjure them.</p>
+      <h3>The profile you set doesn't stick, or your laptop doesn't switch profiles when you unplug</h3>
+      <p>The daemon itself doesn't auto-switch on AC/battery events — that's the desktop's or a script's job. On Omarchy, the <em>installer</em> sets the profile once based on battery presence; there is no built-in "performance on AC, saver on battery" rule after that.</p>
+      <p><strong>Fix:</strong> If you want automatic switching, that's a small script watching <code>/sys/class/power_supply/</code> and calling <code>powerprofilesctl set ...</code> — or use TLP, which does exactly this kind of policy out of the box.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>The <code>omarchy-battery-monitor.timer</code> user service (low-battery notifications on laptops — enabled by the Omarchy installer alongside the <code>balanced</code> profile). Any bar widget that reads the D-Bus interface to show the current profile. <code>upower</code> (already a dependency) for the battery data underneath.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><strong>TLP</strong> (<code>tlp</code> from the Arch repos) — the veteran power manager with far more knobs (charge thresholds, USB autosuspend, Wi-Fi power saving) and real AC/battery policies, at the cost of editing config files in <code>/etc/tlp.d/</code>. Or <strong>auto-cpufreq</strong> — automatic, laptop-focused CPU frequency scaling with a TUI. Both replace the daemon; both conflict with it. Rule of thumb: want profiles apps understand (GNOME-style)? Keep the daemon. Want aggressive battery tuning with one config file? TLP.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: power profiles options</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omarchy-power-profiles-daemon</th><th>stock power-profiles-daemon</th><th>TLP</th><th>auto-cpufreq</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, GPL-3.0</td><td>Free, GPL-3.0</td><td>Free, GPL-3.0</td><td>Free, LGPL</td></tr>
+            <tr><td>Best for</td><td>Standard profiles over D-Bus; patched for RTX Spark, Apple Silicon, Snapdragon X</td><td>Same daemon without Omarchy's new-hardware patches</td><td>Deep battery tuning, charge thresholds, AC/battery policies</td><td>Set-and-forget automatic CPU scaling on laptops</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omarchy-power-profiles-daemon</code></td><td><code>pacman -S power-profiles-daemon</code> (replaced by the Omarchy build)</td><td><code>omarchy pkg add tlp</code> (conflicts — pick one)</td><td>AUR / manual</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Stay on Omarchy's build if you want the standard profile interface and own newer ARM/Apple hardware; switch to TLP if your priority is squeezing hours out of a battery with fine-grained control.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>One daemon for every power profile — patched for new hardware</h2>
+      <p><strong>Omarchy's power-profiles-daemon is the standard Linux power interface, rebuilt with patches for the newest hardware.</strong> There's no paid rival to undercut — the value is correctness on modern chips. What the Omarchy build adds over stock 0.30: NVIDIA RTX Spark per-core energy-preference profiles, the kernel's <code>balanced-performance</code> spelling, an Apple Silicon cpufreq-boost driver, and Snapdragon X frequency caps (60% power-saver, 75% balanced, uncapped performance). On plain x86_64 it behaves like stock — free forever, GPL-3.0, and Omarchy's installer already picks a sane default for you.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the power-profiles-daemon package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omarchy-power-profiles-daemon.html">View power-profiles-daemon →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is this a GUI app?</summary><p>No — it's a system daemon with no window. You talk to it with <code>powerprofilesctl</code> in a terminal, or through apps that read its D-Bus interface. The Omarchy installer configures it for you, so many users will never type a command.</p></details>
+      <details><summary>Does it replace the normal power-profiles-daemon?</summary><p>Yes, by design. The package declares <code>provides=(power-profiles-daemon)</code> and <code>conflicts=(power-profiles-daemon)</code> — installing it swaps out Arch's stock build for Omarchy's patched 0.30. Anything that depended on the stock package keeps working.</p></details>
+      <details><summary>Why does Omarchy ship its own build instead of Arch's?</summary><p>Because upstream 0.30 doesn't yet know about the newest hardware. The four Omarchy patches add NVIDIA RTX Spark power profiles, the kernel's <code>balanced-performance</code> spelling, an Apple Silicon cpufreq-boost driver, and Snapdragon X frequency caps — several are proposed upstream (MRs !236/!237/!238/!239) and the package comments say to drop them once merged. When upstream catches up, Omarchy's build converges back to stock.</p></details>
+      <details><summary>How do I see which profile is active right now?</summary><p>Run <code>powerprofilesctl</code> with no arguments. For scripts, query the D-Bus interface <code>org.freedesktop.UPower.PowerProfiles</code>.</p></details>
+      <details><summary>Will it make my battery last longer by itself?</summary><p>Only if you switch to <code>power-saver</code>. The daemon exposes the profiles; it doesn't choose for you (beyond Omarchy's one-time installer default). Automatic AC/battery switching is a TLP-style feature — if you want that, that's the sign to evaluate TLP.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/omarchy-power-profiles-daemon.html" target="_blank" rel="noopener">omarchyapps.com — omarchy-power-profiles-daemon package page (0.30-3, GPL-3.0-only, updated 2026-10-14, <code>omarchy pkg add omarchy-power-profiles-daemon</code>)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/blob/master/pkgbuilds/omarchy-power-profiles-daemon/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs PKGBUILD — omarchy-power-profiles-daemon (4 patches with MR references, python-gobject optdepends, shebang fix)</a></li>
+        <li><a href="https://gitlab.freedesktop.org/upower/power-profiles-daemon" target="_blank" rel="noopener">Upstream project: gitlab.freedesktop.org/upower/power-profiles-daemon (MR !236 referenced in package)</a></li>
+        <li><a href="https://bbs.archlinux.org/viewtopic.php?id=273068" target="_blank" rel="noopener">Arch forums — "tlp-rdw and power-profiles-daemon are in conflict" (tlp vs ppd conflict)</a></li>
+        <li><a href="https://forums.linuxmint.com/viewtopic.php?t=451434&sid=e1b076aa0a1ddf68c935b26467a162d&view=print" target="_blank" rel="noopener">Mint forums — TLP/power-profiles-daemon conflict note</a></li>
+        <li><a href="https://fedoraproject.org/wiki/Changes/Power_Profiles_Daemon" target="_blank" rel="noopener">Fedora Changes — Power Profiles Daemon (profiles, D-Bus rename history)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>
+
+  </article>
+
+  <aside class="related-guides" aria-labelledby="related-guides-h">
+    <h2 id="related-guides-h">Keep exploring</h2>
+    <div class="related-guide-grid">
+<a class="related-guide" href="/omarchy-vs-macos-windows-ubuntu.html"><strong>Omarchy vs macOS, Windows 11 and Ubuntu: Which Fits You?</strong><span>Compare Omarchy with macOS, Windows 11 and Ubuntu for development, gaming, creative work, hardware support, privacy and daily use.</span></a>
+<a class="related-guide" href="/free-notion-alternative-linux-slap-notes.html"><strong>Free Notion Alternative for Linux: Slap Notes Compared</strong><span>Looking for a free Notion alternative on Linux? Compare Slap Notes with Notion, Obsidian and AppFlowy for local notes, blocks, links and privacy.</span></a>
+<a class="related-guide" href="/free-video-editor-linux-omarchy.html"><strong>Free Video Editor for Linux: Omacut vs DaVinci Resolve</strong><span>Need a free video editor on Linux? Learn when Omarchy-native Omacut is faster than DaVinci Resolve, Kdenlive or Final Cut Pro for simple video trimming.</span></a>
+<a class="related-guide" href="/best-apps-for-omarchy.html"><strong>Best Omarchy Apps to Install First: 12 Useful Picks</strong><span>Start a new Omarchy setup with 12 useful apps for notes, files, themes, video, screenshots, gaming, remote access and developer work.</span></a>
+<a class="related-guide" href="/how-to-install-apps-on-omarchy.html"><strong>How to Install Apps on Omarchy Safely</strong><span>Learn how to install, inspect, update and remove apps on Omarchy using the official package repository, Arch packages and the AUR.</span></a>
+<a class="related-guide" href="/how-to-use-omarchy-zsh.html"><strong>omarchy-zsh on Omarchy: install, fzf keybindings, aliases &amp; the chsh trap</strong><span>Install omarchy-zsh on Omarchy the safe way (not chsh), learn the fzf keybindings and built-in aliases, and fix common issues like double inits and oh-my-zsh conflicts.</span></a>
+<a class="related-guide" href="/rustdesk-on-omarchy.html"><strong>How to Install &amp; Use RustDesk on Omarchy (2026) — Free TeamViewer Alternative</strong><span>Install RustDesk on Omarchy with one command. Free, open-source remote desktop: ID/password flow, unattended access, self-hosting, and fixes for the Wayland black-screen issue on Hyprland.</span></a>
+<a class="related-guide" href="/flea-file-manager-omarchy.html"><strong>How to Install &amp; Use Flea on Omarchy (2026)</strong><span>Install Flea on Omarchy with one command. Keyboard-first file manager with Quick Look, undoable operations, and network shares. Setup, shortcuts, and real fixes from the issue tracker.</span></a>
+<a class="related-guide" href="/omacut-video-editor-omarchy.html"><strong>How to Use omacut on Omarchy (2026): trim, split &amp; export in minutes</strong><span>omacut is Omarchy&#x27;s dead-simple video trimmer (preinstalled on Quattro+). Open a video, drag the handles, split the middle, export an MP4 — plus shortcuts and fixes for AV1 black preview and export failures.</span></a>
+<a class="related-guide" href="/sunshine-game-streaming-omarchy.html"><strong>How to Install &amp; Use Sunshine on Omarchy (2026)</strong><span>Install Sunshine on Omarchy and stream your games to any device with Moonlight. Pairing walkthrough, Hyprland capture-method fixes, and how it replaces NVIDIA GameStream.</span></a>
+<a class="related-guide" href="/hermes-desktop-omarchy.html"><strong>How to Install &amp; Use Hermes Desktop on Omarchy (2026)</strong><span>Install Hermes Desktop on Omarchy: the native GUI for Hermes Agent with memory, skills, scheduled tasks, and messaging integrations. Bring your own key, use Nous Portal&#x27;s free tier, or run local models.</span></a>
+<a class="related-guide" href="/omawrite-writing-omarchy.html"><strong>Omawrite on Omarchy: Install, Shortcuts &amp; Typora Alternative Guide</strong><span>Omawrite is Omarchy&#x27;s free default Markdown editor — a distraction-free, open-source Typora alternative. Install guide, keyboard shortcuts, real GitHub issues, and how to switch from Typora.</span></a>
+<a class="related-guide" href="/strata-file-manager-omarchy.html"><strong>Strata on Omarchy: Install the Keyboard-First File Manager</strong><span>Install Strata on Omarchy: the free keyboard-first GTK4 file manager with Miller columns, fuzzy search, and sandboxed previews. Setup, keybinds, fixes, and Strata vs flea compared.</span></a>
+<a class="related-guide" href="/claude-desktop-omarchy.html"><strong>Claude Desktop on Omarchy: Install &amp; Setup Guide (2026)</strong><span>Install Anthropic&#x27;s official Claude Desktop Linux app on Omarchy. Setup, MCP connectors, Cowork VM troubleshooting, and the Hyprland login fix.</span></a>
+<a class="related-guide" href="/1password-omarchy.html"><strong>How to Install &amp; Use 1Password on Omarchy (2026)</strong><span>Install 1Password on Omarchy with one command. Setup, browser integration, real Linux fixes, and how it compares to free Bitwarden.</span></a>
+<a class="related-guide" href="/omadesign-omarchy.html"><strong>Omadesign on Omarchy: Install &amp; Setup Guide (2026)</strong><span>Install Omadesign, the free Linux design, paint, photo and motion app, on Omarchy. One-line install, theme integration, fixes, and why there is no package yet.</span></a>
+<a class="related-guide" href="/disktree-bin-on-omarchy.html"><strong>How to Install &amp; Use disktree-bin on Omarchy (2026)</strong><span>Install disktree-bin on Omarchy with one command. Disk-space treemap that scans home or the whole disk, marks what should go, and deletes with a two-step review. Setup, keys, and real fixes from the issue tracker.</span></a>
+<a class="related-guide" href="/dingtalk-bin-on-omarchy.html"><strong>How to Install &amp; Use DingTalk on Omarchy Linux (2026)</strong><span>Install Alibaba&#x27;s official DingTalk Linux client on Omarchy with one command. Fix the blank-window-after-update bug, login requirements, and real Linux issues. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/gliff-on-omarchy.html"><strong>How to Install &amp; Use gliff on Omarchy (2026)</strong><span>Install gliff on Omarchy with one command. Hyprland remote desktop over SSH with 4:4:4 crisp text and GPU H.264 end to end. Setup, gliff-probe diagnostics, and real fixes.</span></a>
+<a class="related-guide" href="/linuxqq-on-omarchy.html"><strong>How to Install &amp; Use QQ on Omarchy Linux (2026)</strong><span>Install Tencent&#x27;s official QQ Linux client on Omarchy with one command. Fix the Wayland clipboard, screenshot crashes, screen sharing, and fcitx5 input. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/wechat-bin-on-omarchy.html"><strong>How to Install &amp; Use WeChat on Omarchy Linux (2026)</strong><span>Install Tencent&#x27;s official WeChat Linux client on Omarchy with one command. QR-code login, input-method and HiDPI fixes, real Wayland issues. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/wps-office-cn-on-omarchy.html"><strong>How to Install &amp; Use WPS Office on Omarchy Linux (2026)</strong><span>Install Kingsoft WPS Office (China edition) on Omarchy with one command. Fix the silent-exit launch bug, fonts, PDF support, and fcitx5 input. Free Microsoft 365 alternative.</span></a>
+<a class="related-guide" href="/collie-on-omarchy.html"><strong>How to Install &amp; Use Collie on Omarchy (2026)</strong><span>Install Collie, the self-hosted phone UI for terminal AI agents, on Omarchy with one command. Watch and approve Claude Code from your phone over Tailscale — plus real fixes for pairing, refused sends, and the update race.</span></a>
+<a class="related-guide" href="/cua-hyprland-plugin-on-omarchy.html"><strong>How to Install &amp; Use the Cua Hyprland Plugin on Omarchy (2026)</strong><span>Install the Cua Hyprland plugin on Omarchy with one command. Compositor-native multi-cursor AI agent input: agents work in background windows while your pointer stays free — plus the ABI rule and real fixes for Super shortcuts and AT-SPI.</span></a>
+<a class="related-guide" href="/helium-on-omarchy.html"><strong>How to Install &amp; Use Helium on Omarchy (2026)</strong><span>Install Helium, the private Chromium browser, on Omarchy with one command. Google stripped out, built-in uBlock with CNAME uncloaking, MV2 extensions — plus honest beta caveats: no sync, no DRM, real open bugs.</span></a>
+<a class="related-guide" href="/hype-on-omarchy.html"><strong>How to Install &amp; Use Hype on Omarchy (2026)</strong><span>Install Hype, the Markdown presentation app for Omarchy, with one command. Visual slide editor, Omarchy-theme styling, one-key PDF/PowerPoint export, and a headless CLI for AI-built decks.</span></a>
+<a class="related-guide" href="/linux-omarchy-eevdf-on-omarchy.html"><strong>Omarchy EEVDF Kernel: Install linux-omarchy-eevdf (2026)</strong><span>linux-omarchy-eevdf is Omarchy&#x27;s plain-EEVDF kernel flavor: same Omarchy patchset as the default, without the BORE scheduler. Install it alongside your current kernel, pick it at boot, and add the headers package for DKMS modules.</span></a>
+<a class="related-guide" href="/monologue-on-omarchy.html"><strong>How to Install &amp; Use Monologue on Omarchy (2026)</strong><span>Install Monologue, the theme-synced webcam recorder for Omarchy, with one command. Space-to-record takes, built-in trim editor, MP4 output — plus real fixes for 4K encoding stops and the auto-deleting takes folder.</span></a>
+<a class="related-guide" href="/omacharts-on-omarchy.html"><strong>How to Install &amp; Use Omacharts on Omarchy (2026)</strong><span>Install Omacharts on Omarchy with one command. Fast native stock charts with free Yahoo data, thinkorswim streaming, indicators, drawings, and a full CLI — plus fixes for the fullscreen right-click issue and ToS sign-in.</span></a>
+<a class="related-guide" href="/omairc-on-omarchy.html"><strong>How to Install &amp; Use Omairc on Omarchy (2026)</strong><span>Install Omairc on Omarchy with one command. Dead-simple native IRC with a keyboard-first Qt UI, a local CLI, an AI agent skill, and a terminal companion — plus real limits on bouncers, DCC, and ARM.</span></a>
+<a class="related-guide" href="/omakeyboard-on-omarchy.html"><strong>How to Install &amp; Use OmaKeyboard on Omarchy (2026)</strong><span>Install OmaKeyboard on Omarchy with one command. Visual keyboard remapping, layers, and shortcuts with snapshot rollback — what it can and can&#x27;t do (tap-vs-hold, sequences, per-app maps), plus real fixes.</span></a>
+<a class="related-guide" href="/omarchy-hyprland-titlebars-on-omarchy.html"><strong>How to Install &amp; Use Hyprland Titlebars on Omarchy (2026)</strong><span>Install Omarchy&#x27;s Hyprland titlebar plugin with one command. Titlebars for floating workspaces — drag, double-click maximize, smart titles, custom buttons — plus the Hyprland version-pin gotcha explained.</span></a>
+<a class="related-guide" href="/meeting-recorder-on-omarchy.html"><strong>How to Install &amp; Use Meeting Recorder on Omarchy (2026)</strong><span>Install Meeting Recorder on Omarchy with one command: record mic + computer audio as two tracks and transcribe locally with speakers and chapters. No bot, no cloud, free.</span></a>
+<a class="related-guide" href="/omarchy-theme-intros.html"><strong>Omarchy Theme Intros: What the 96 MB Package Does (2026)</strong><span>omarchy-themes-intros is Omarchy&#x27;s package of background intro videos that play when you switch themes. What it is, why it&#x27;s versioned by date, and whether you need it.</span></a>
+<a class="related-guide" href="/qcom-firmware-extract-snapdragon-omarchy.html"><strong>qcom-firmware-extract on Omarchy: Snapdragon Firmware from Windows (2026)</strong><span>qcom-firmware-extract copies vendor-signed Qualcomm firmware from your Windows install for Snapdragon X laptops on Omarchy. How it works, BitLocker gotchas, and when you don&#x27;t need it.</span></a>
+<a class="related-guide" href="/quickshell-on-omarchy.html"><strong>Quickshell on Omarchy: Install &amp; Build Your Own Wayland Shell (2026)</strong><span>Quickshell is the QtQuick toolkit behind Omarchy&#x27;s shell. Install the pinned package, learn the quickshell vs quickshell-git difference, and run your first QML bar in minutes.</span></a>
+<a class="related-guide" href="/signed-on-omarchy.html"><strong>How to Sign PDFs on Omarchy with Signed (2026)</strong><span>Signed is Omacom&#x27;s free PDF signing app for Omarchy: drop your signature, text, or today&#x27;s date on any page, save a sealed copy, or sign headless from the CLI. Install with one command.</span></a>
+<a class="related-guide" href="/thinkpad-t14-amd-touchpad-on-omarchy.html"><strong>Fix the ThinkPad T14 AMD Touchpad on Omarchy (RMI4/SMBus DKMS)</strong><span>The ThinkPad T14/P14s AMD touchpad runs on the slow PS/2 fallback in the stock kernel. This DKMS package switches it to RMI4 over SMBus: 15 ms reports, working taps and gestures, TrackPoint intact. One install command, one check after kernel updates.</span></a>
+    </div>
+  </aside>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
+      <p>Every package in the official Omarchy repo, searchable and ranked by readers. A community project by Jessyka, not affiliated with Omacom or DHH.</p>
+    </div>
+    <nav aria-label="Site"><h3>Site</h3><a href="index.html">Apps</a><a href="omarchy-apps-list.html">All apps list</a><a href="leaderboard.html">Top apps</a><a href="guides.html">Guides</a><a href="develop.html">Develop</a><a href="sponsor.html">Sponsor</a><a href="about.html">About</a><a href="terms.html">Terms</a></nav>
+    <nav aria-label="Omarchy"><h3>Omarchy</h3><a href="https://omarchy.org/">omarchy.org</a><a href="https://omarchy.org/manual/">Manual</a><a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs</a><a href="https://omarchyplugins.com/">Plugins</a></nav>
+    <nav aria-label="Contact"><h3>Say hello</h3><a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">@jessyka_boat on X</a><a href="develop.html#newsletter">Newsletter</a></nav>
+  </div>
+  <div class="wrap footer-base"><span>Synced 2026-10-18</span><span>No trackers, videos play on click</span><span>Packages come from pkgs.omarchy.org</span></div>
+</footer>
+</body>
+</html>

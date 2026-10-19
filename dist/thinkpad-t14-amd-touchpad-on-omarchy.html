@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fix the ThinkPad T14 AMD Touchpad on Omarchy (RMI4/SMBus DKMS)</title>
+<meta name="description" content="The ThinkPad T14/P14s AMD touchpad runs on the slow PS/2 fallback in the stock kernel. This DKMS package switches it to RMI4 over SMBus: 15 ms reports, working taps and gestures, TrackPoint intact. One install command, one check after kernel updates.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#1a1b26">
+<link rel="canonical" href="https://omarchyapps.com/thinkpad-t14-amd-touchpad-on-omarchy.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/images/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" sizes="180x180">
+<meta property="og:title" content="Fix the ThinkPad T14 AMD Touchpad on Omarchy (RMI4/SMBus DKMS)">
+<meta property="og:description" content="The ThinkPad T14/P14s AMD touchpad runs on the slow PS/2 fallback in the stock kernel. This DKMS package switches it to RMI4 over SMBus: 15 ms reports, working taps and gestures, TrackPoint intact. One install command, one check after kernel updates.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://omarchyapps.com/thinkpad-t14-amd-touchpad-on-omarchy.html">
+<meta property="og:site_name" content="Unofficial Omarchy App Store">
+<meta property="og:image" content="https://omarchyapps.com/images/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jessyka_boat">
+<meta name="twitter:title" content="Fix the ThinkPad T14 AMD Touchpad on Omarchy (RMI4/SMBus DKMS)">
+<meta name="twitter:description" content="The ThinkPad T14/P14s AMD touchpad runs on the slow PS/2 fallback in the stock kernel. This DKMS package switches it to RMI4 over SMBus: 15 ms reports, working taps and gestures, TrackPoint intact. One install command, one check after kernel updates.">
+<meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/thinkpad-t14-amd-touchpad-on-omarchy.html#article","headline":"Fix the ThinkPad T14 AMD Touchpad on Omarchy (RMI4/SMBus DKMS)","description":"The ThinkPad T14/P14s AMD touchpad runs on the slow PS/2 fallback in the stock kernel. This DKMS package switches it to RMI4 over SMBus: 15 ms reports, working taps and gestures, TrackPoint intact. One install command, one check after kernel updates.","url":"https://omarchyapps.com/thinkpad-t14-amd-touchpad-on-omarchy.html","dateModified":"2026-10-18","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Fix the ThinkPad T14 AMD Touchpad on Omarchy (RMI4/SMBus DKMS)","item":"https://omarchyapps.com/thinkpad-t14-amd-touchpad-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which machines does this work on?","acceptedAnswer":{"@type":"Answer","text":"ThinkPad T14 Gen 2a / Gen 2 AMD, T14 Gen 1 AMD, and P14s Gen 1 / Gen 2 AMD with a Synaptics pad (TM3471-030, PnP LEN2073 / LEN2064). The maintainer tested three Gen 2a units; a Gen 1 unit is independently reported working."}},{"@type":"Question","name":"Do I need to do anything after a kernel update?","acceptedAnswer":{"@type":"Answer","text":"Run thinkpad-t14-amd-touchpad-check. DKMS rebuilds the modules automatically on kernel install; if the build fails, the pad silently falls back to PS/2 and the check command is how you notice."}},{"@type":"Question","name":"Does it work with Secure Boot?","acceptedAnswer":{"@type":"Answer","text":"The DKMS modules are unsigned and taint the kernel. A kernel enforcing module signatures won't load them — sign them yourself via MOK or the package can't run on your setup."}}]}]}</script>
+<link rel="stylesheet" href="/style.d5ce941b05.css">
+  <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="index.html" aria-label="Unofficial Omarchy App Store home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
+    <nav class="topbar-links" aria-label="Primary">
+      <a href="index.html">Apps</a>
+      <a href="leaderboard.html">Top apps</a>
+      <a href="guides.html" aria-current="page">Guides</a>
+      <a href="develop.html">Develop</a>
+      <a href="sponsor.html">Sponsor</a>
+    </nav>
+    <a class="button topbar-cta" href="sponsor.html">Sponsor</a>
+  </div>
+</header>
+
+<header class="hero guide-hero seo-hero">
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">Hardware fix guide</span></nav>
+    <p class="eyebrow">Hardware fix guide</p>
+    <h1>Fixing the ThinkPad T14 AMD touchpad on <span>Omarchy</span></h1>
+    <p class="tag">A DKMS package that moves T14/P14s Gen 1-2 AMD touchpads from the sluggish PS/2 fallback to RMI4 over SMBus.</p>
+    <p class="facts">Reviewed 2026-10-18 · independent editorial guide</p>
+  </div>
+</header>
+
+<main class="wrap seo-guide-main">
+  <article class="seo-article">
+    <div class="guide-answer">
+      <p class="answer-label">Short answer</p>
+      <p>thinkpad-t14-amd-touchpad-dkms rebuilds three in-tree kernel modules with patches that enable SMBus Host Notify and add the pad to the SMBus allowlist, moving affected ThinkPad T14/P14s Gen 1-2 AMD touchpads from the 80 Hz PS/2 fallback to RMI4 over SMBus. The result is ~15 ms reports, intact two-finger gestures, and the TrackPoint still working on its PS/2 pass-through. It installs with one command, rebuilds automatically on kernel updates, and uninstalls cleanly.</p>
+    </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: `omarchy pkg add thinkpad-t14-amd-touchpad-dkms` (app-store page, version 0.2.3-1). Confirm it declares a dependency on the matching kernel headers (linux-omarchy-headers) or whether the user must install them first.
+- `thinkpad-t14-amd-touchpad-check` exists after install; confirm its output shows the three modules as DKMS-built and the touchpad on the RMI4 transport.
+- Touchpad device rename: confirm the device changes from `SynPS/2 Synaptics TouchPad` to `Synaptics TM3471-030` (check `grep Phys /proc/bus/input/devices` and Hyprland's device name `synaptics-tm3471-030`).
+- Omarchy touchpad toggle: confirm `omarchy-hw-touchpad` and the XF86TouchpadOn/Off binds still find the renamed pad (fallback to ID_INPUT_TOUCHPAD per omacom/omarchy#14431) on the current Omarchy release.
+- Report interval: confirm the pad reports every ~15 ms over RMI4/SMBus vs 80 Hz single-finger / ~40 Hz two-finger on PS/2 (from the README's three tested machines; confirm on one machine).
+- Suspend/resume: confirm pad survives S3 or s2idle resume (the 300 ms settle patch); report which sleep mode the machine uses.
+- Removal: `sudo pacman -Rns thinkpad-t14-amd-touchpad-dkms` (or omarchy pkg remove) then reboot — confirm stock modules return and the pad falls back to PS/2.
+- DKMS-after-kernel-update behavior: after a kernel update, confirm the DKMS hook rebuilds the modules and `thinkpad-t14-amd-touchpad-check` still passes; record what a failed build looks like.
+- Screenshots needed: `thinkpad-t14-amd-touchpad-check` output, dmesg lines showing RMI4 attach, before/after libinput device name.
+
+SEO notes:
+- URL: /guides/thinkpad-t14-amd-touchpad-on-omarchy
+- Title tag: "Fix the ThinkPad T14 AMD Touchpad on Omarchy (RMI4/SMBus DKMS)"
+- Meta description: "The ThinkPad T14/P14s AMD touchpad runs on the slow PS/2 fallback in the stock kernel. This DKMS package switches it to RMI4 over SMBus: 15 ms reports, working taps and gestures, TrackPoint intact. One install command, one check after kernel updates."
+- Keywords: thinkpad t14 amd touchpad linux, t14 gen 2 touchpad not working linux, synaptics rmi4 smbus thinkpad, thinkpad touchpad ps/2 fallback fix
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>The ThinkPad T14 AMD Touchpad Fix on Omarchy</h2>
+      <p>thinkpad-t14-amd-touchpad-dkms is a DKMS package (version 0.2.3-1, by orospakr, packaged for Omarchy) that fixes the ThinkPad T14/P14s Gen 1 and Gen 2 AMD touchpad by switching it from the sluggish PS/2 fallback to RMI4 over SMBus — with the TrackPoint still working on its pass-through.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add thinkpad-t14-amd-touchpad-dkms</code></pre>
+      <p>Reboot, then run <code>thinkpad-t14-amd-touchpad-check</code> to confirm the pad is on the RMI4 transport. This is for one specific family of machines: <strong>ThinkPad T14 Gen 2a/Gen 2 AMD and T14/P14s Gen 1 AMD with a Synaptics pad (TM3471-030, PnP IDs <code>LEN2073</code> / <code>LEN2064</code>)</strong>. If that’s not your machine, this package does nothing for you. Free and open (GPL-2.0-only). Honest framing from the repo itself: this is a <strong>carry, not a fork</strong> — every patch is aimed at a specific upstream tree, and the package exists only until stock Omarchy/Arch kernels drive the pad over SMBus on their own.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes — plus a reboot)</h2>
+      <h3>1. Check you have the right hardware.</h3>
+      <p>This is only for ThinkPad T14 Gen 2a / Gen 2 AMD, T14 Gen 1 AMD, and P14s Gen 1/Gen 2 AMD with a Synaptics pad. The shape that matters: an AMD FCH SMBus controller (<code>1022:790b</code>) and a Synaptics pad that supports RMI4 over SMBus. If your touchpad currently shows as <code>SynPS/2 Synaptics TouchPad</code> in <code>libinput list-devices</code> on one of these machines, you’re the target audience. The maintainer tested on three T14 Gen 2a AMD units (Ryzen 7 PRO 5850U, pad firmware ids 3942087 and 3418235), and there’s an independent report on a T14 Gen 1 AMD (Ryzen 7 PRO 4750U, <code>LEN2064</code>, Fedora 44, kernel 7.2.9).</p>
+      <h3>2. Install with headers present.</h3>
+      <p><code>omarchy pkg add thinkpad-t14-amd-touchpad-dkms</code>. The README’s upstream install path says to have the headers for your kernel installed (<code>linux-omarchy-headers</code> on Omarchy) — confirm during verification whether the Omarchy package declares that dependency or whether you need <code>omarchy pkg add linux-omarchy-headers</code> first. The install triggers an initramfs rebuild (mkinitcpio’s hook fires on <code>usr/src/*/dkms.conf</code>; on a UKI setup that’s a new image), so expect it to take a little while.</p>
+      <h3>3. Reboot and check.</h3>
+      <p>Run <code>thinkpad-t14-amd-touchpad-check</code>. It reports whether the three modules are installed, loaded from the DKMS copies, and whether the touchpad is on the RMI4 transport. The pad’s input device is renamed from <code>SynPS/2 Synaptics TouchPad</code> to <code>Synaptics TM3471-030</code> (<code>synaptics-tm3471-030</code> in Hyprland) — anything keyed on the old name has to follow it (see issues below).</p>
+      <h3>4. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>DKMS means “rebuilt on every kernel update” — automatically, until it can’t.</strong> On each kernel install DKMS reapplies the patches and recompiles. If a build fails (e.g. a kernel series bump the patches don’t apply to), the stock modules silently load and your pad drops back to PS/2. The check command makes that visible. <strong>Run it after every kernel update</strong> — that’s the whole maintenance routine.</li>
+        <li><strong>The modules are unsigned.</strong> Installing them sets the kernel’s <code>O</code> (out-of-tree) and <code>E</code> (unsigned module) taint flags. On a kernel that enforces module signatures (typical with locked-down Secure Boot), they won’t load at all. See the issues section.</li>
+        <li><strong>Removal is clean.</strong> <code>sudo pacman -Rns thinkpad-t14-amd-touchpad-dkms</code> (or <code>dkms remove thinkpad-t14-amd-touchpad/&lt;version&gt; --all</code>), reboot, and DKMS restores the stock modules — the pad returns to PS/2 exactly as before.</li>
+      </ul>
+      <h3>5. What the patches actually do (the short version).</h3>
+      <p><code>i2c-piix4</code> gains SMBus Host Notify through the AMD FCH’s ASF target block (ACPI <code>SMB0001</code>) — without this, psmouse can’t use the SMBus path at all. <code>rmi_smbus</code> gets a 300 ms settle after the PS/2 reset psmouse sends at resume — without it the pad reconfigured too soon and came back at 80 Hz or jumped on first touch after suspend. <code>psmouse</code> sets the F01 doze interval Lenovo’s Windows driver uses (short taps and two-finger touches were missed at the default) and adds <code>LEN2073</code> (Gen 2) and <code>LEN2064</code> (Gen 1) to the SMBus allowlist. Two mainline backports ride along so installing the package doesn’t drop fixes Omarchy’s <code>linux-omarchy</code> already ships (a psmouse use-after-free and signed coordinates in <code>focaltech.c</code>).</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Sourced from the project’s README (orospakr/thinkpad-t14-amd-touchpad, 0.2.3) — the maintainer documents behavior thoroughly, so these are maintainer-documented, cited where possible. Not reproduced by the draft author.</p>
+      <h3>After a kernel update the touchpad feels bad again — taps missed, gestures gone</h3>
+      <p><strong>Fix:</strong> The DKMS build probably failed on the new kernel and the stock modules silently loaded, dropping the pad back to PS/2. Run <code>thinkpad-t14-amd-touchpad-check</code> — it’s designed to make this visible. If it reports the stock modules, reinstall the package (<code>omarchy pkg add thinkpad-t14-amd-touchpad-dkms</code>) to trigger a rebuild, and check the DKMS log for the failure. The repo’s kernel policy: <code>tools/pre-build.sh</code> warns in the DKMS log when the running kernel is from a different series than the pristine sources, and CI tests patch application weekly against current Arch <code>linux-headers</code>, <code>linux-omarchy-headers</code>, and mainline master — so a series bump shows up as a known failure before a refresh release lands.</p>
+      <h3>Omarchy’s touchpad toggle (and the XF86TouchpadOn/Off keybinds) stop finding the touchpad</h3>
+      <p><strong>Fix:</strong> Expected side effect: the device is renamed from <code>SynPS/2 Synaptics TouchPad</code> to <code>Synaptics TM3471-030</code>, and Omarchy’s <code>omarchy-hw-touchpad</code> used to match on the name alone. Fixed in <code>omacom/omarchy#14431</code>, which added a fallback to udev’s <code>ID_INPUT_TOUCHPAD</code> — so the toggle works again on Omarchy releases that include that fix. If your toggle still can’t find the pad, update Omarchy first. Anything else keyed on the old device name (Hyprland input config, scripts) needs updating to the new name manually.</p>
+      <h3>The modules won’t load — dmesg complains about signatures, or the check shows stock modules</h3>
+      <p><strong>Fix:</strong> The three DKMS modules are unsigned, so the kernel taints (<code>O</code> and <code>E</code> flags) and a kernel enforcing module signatures refuses to load them. If you run Secure Boot in enforcing mode, either sign the modules yourself (MOK workflow) or accept that this package can’t load on your setup. The stock modules then load and the pad stays on PS/2.</p>
+      <h3>On a kernel with psmouse built in (not a module), nothing improves</h3>
+      <p><strong>Fix:</strong> This is documented for Fedora (which builds psmouse into the kernel): the DKMS copy of psmouse is unused, patches 0003–0005 and the backports don’t take effect, and the pad needs <code>psmouse.synaptics_intertouch=1</code> on the kernel command line — with only the <code>i2c-piix4</code> and <code>rmi_smbus</code> patches applying. Omarchy builds psmouse as a module, so this shouldn’t apply to Omarchy users; it’s here for completeness because the same package is installable on other distros.</p>
+      <h3>You bought a T14 Gen 1 AMD and wonder if it’s covered</h3>
+      <p><strong>Fix:</strong> Yes, since 0.2.3: <code>LEN2064</code> (Gen 1 AMD) joined the SMBus allowlist via patch 0005. An independent report confirms a T14 Gen 1 AMD (20UD001AMH, Ryzen 7 PRO 4750U, TM3471-020) attached over RMI4 at 15 ms reports with working taps across three suspend cycles. Note that run was on Fedora and needed <code>psmouse.synaptics_intertouch=1</code> on the kernel command line — on Omarchy the module build should apply the allowlist directly.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>linux-omarchy-eevdf-headers</code> if you’re also trying the EEVDF kernel flavor — DKMS needs the headers matching the kernel you’re actually booted into. Any ThinkPad power-management setup you already run is unaffected (this package touches only input modules).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Living with the PS/2 fallback — no package, taps and two-finger gestures as the stock kernel leaves them (80 Hz / ~40 Hz reports). Or wait: the patches are all aimed upstream, and the package retires itself once a stock Omarchy or Arch kernel drives the pad over SMBus on its own (check with <code>grep Phys /proc/bus/input/devices</code> showing the Synaptics device on an <code>rmi4-</code> path, package removed).</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: touchpad driver options for the T14 AMD</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>This DKMS package</th><th>Stock kernel (PS/2)</th><th>Windows driver</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, GPL-2.0</td><td>Free (built in)</td><td>Free (came with the machine)</td></tr>
+            <tr><td>Report rate</td><td>every 15 ms, two-finger intact</td><td>80 Hz 1-finger / ~40 Hz 2-finger</td><td>full rate, all gestures</td></tr>
+            <tr><td>Taps / two-finger</td><td>fixed (doze interval + allowlist)</td><td>missed taps documented</td><td>works</td></tr>
+            <tr><td>TrackPoint</td><td>still works on PS/2 pass-through, 7–8 ms reports</td><td>works</td><td>works</td></tr>
+            <tr><td>Maintenance</td><td>run the check tool after every kernel update</td><td>none</td><td>none</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Install this if your T14/P14s Gen 1–2 AMD touchpad misses taps and feels laggy on Linux — it’s the only path to the SMBus transport the pad was designed for, and it uninstalls cleanly if upstream ever catches up.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>A carry, not a fork — it uninstalls cleanly when upstream catches up</h2>
+      <p>Every patch in this package is aimed at a specific upstream tree (linux-i2c, linux-input), and the package exists only until stock Omarchy/Arch kernels drive the pad over SMBus on their own — at which point it retires itself. That means there’s no lock-in to evaluate: <code>sudo pacman -Rns thinkpad-t14-amd-touchpad-dkms</code>, reboot, and DKMS restores the stock modules, with the pad back on PS/2 exactly as before. Free (GPL-2.0-only), and the check tool makes it visible when a failed kernel-update rebuild drops you back to the stock path.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the ThinkPad T14 AMD Touchpad package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/thinkpad-t14-amd-touchpad-dkms.html">View ThinkPad T14 AMD Touchpad →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Which machines does this work on?</summary><p>ThinkPad T14 Gen 2a / Gen 2 AMD, T14 Gen 1 AMD, and P14s Gen 1 / Gen 2 AMD with a Synaptics pad (TM3471-030, PnP <code>LEN2073</code> / <code>LEN2064</code>). The maintainer tested three Gen 2a units; a Gen 1 unit is independently reported working. Anything with the same shape (AMD FCH SMBus <code>1022:790b</code>, Synaptics pad with RMI4-over-SMBus) should work.</p></details>
+      <details><summary>How do I know it’s working?</summary><p>Run <code>thinkpad-t14-amd-touchpad-check</code>. It tells you whether the three modules are the DKMS copies and whether the pad is on the RMI4 transport. The device name also changes from <code>SynPS/2 Synaptics TouchPad</code> to <code>Synaptics TM3471-030</code>.</p></details>
+      <details><summary>Do I need to do anything after a kernel update?</summary><p>Run the check command. DKMS rebuilds automatically on kernel install; if the build fails, the pad silently falls back to PS/2 and the check is how you notice.</p></details>
+      <details><summary>Will this break my TrackPoint?</summary><p>No — the TrackPoint stays on its PS/2 pass-through and keeps working; on the reported machines it actually got faster (7–8 ms reports instead of 23–40 ms).</p></details>
+      <details><summary>Is this permanent, or will upstream fix it?</summary><p>Temporary by design. The README calls it “a carry, not a fork”: every patch is aimed at a specific upstream tree (linux-i2c, linux-input), and the package retires once a stock Omarchy or Arch kernel drives the pad over SMBus by itself. A table in the README tracks each patch’s upstream status.</p></details>
+      <details><summary>Does it work with Secure Boot?</summary><p>The modules are unsigned and taint the kernel (<code>O</code>/<code>E</code> flags). A kernel enforcing module signatures won’t load them — sign them yourself via MOK or this package can’t run on your setup.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/thinkpad-t14-amd-touchpad-dkms.html" target="_blank" rel="noopener">omarchyapps.com/apps/thinkpad-t14-amd-touchpad-dkms.html — app page: description, install command, version 0.2.3-1, GPL-2.0, synced 2026-10-18</a></li>
+        <li><a href="https://github.com/orospakr/thinkpad-t14-amd-touchpad" target="_blank" rel="noopener">orospakr/thinkpad-t14-amd-touchpad README — hardware table, module/patch table, install/remove, DKMS behavior, check tool, carried-patches contract, kernel policy, known gap (read 2026-10-18)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/thinkpad-t14-amd-touchpad-dkms" target="_blank" rel="noopener">omacom/omarchy-pkgs — the package this guide’s install path uses (PKGBUILD fetch was rate-limited 2026-10-18; dependency details marked unverified above)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>
+
+  </article>
+
+  <aside class="related-guides" aria-labelledby="related-guides-h">
+    <h2 id="related-guides-h">Keep exploring</h2>
+    <div class="related-guide-grid">
+<a class="related-guide" href="/omarchy-vs-macos-windows-ubuntu.html"><strong>Omarchy vs macOS, Windows 11 and Ubuntu: Which Fits You?</strong><span>Compare Omarchy with macOS, Windows 11 and Ubuntu for development, gaming, creative work, hardware support, privacy and daily use.</span></a>
+<a class="related-guide" href="/free-notion-alternative-linux-slap-notes.html"><strong>Free Notion Alternative for Linux: Slap Notes Compared</strong><span>Looking for a free Notion alternative on Linux? Compare Slap Notes with Notion, Obsidian and AppFlowy for local notes, blocks, links and privacy.</span></a>
+<a class="related-guide" href="/free-video-editor-linux-omarchy.html"><strong>Free Video Editor for Linux: Omacut vs DaVinci Resolve</strong><span>Need a free video editor on Linux? Learn when Omarchy-native Omacut is faster than DaVinci Resolve, Kdenlive or Final Cut Pro for simple video trimming.</span></a>
+<a class="related-guide" href="/best-apps-for-omarchy.html"><strong>Best Omarchy Apps to Install First: 12 Useful Picks</strong><span>Start a new Omarchy setup with 12 useful apps for notes, files, themes, video, screenshots, gaming, remote access and developer work.</span></a>
+<a class="related-guide" href="/how-to-install-apps-on-omarchy.html"><strong>How to Install Apps on Omarchy Safely</strong><span>Learn how to install, inspect, update and remove apps on Omarchy using the official package repository, Arch packages and the AUR.</span></a>
+<a class="related-guide" href="/how-to-use-omarchy-zsh.html"><strong>omarchy-zsh on Omarchy: install, fzf keybindings, aliases &amp; the chsh trap</strong><span>Install omarchy-zsh on Omarchy the safe way (not chsh), learn the fzf keybindings and built-in aliases, and fix common issues like double inits and oh-my-zsh conflicts.</span></a>
+<a class="related-guide" href="/rustdesk-on-omarchy.html"><strong>How to Install &amp; Use RustDesk on Omarchy (2026) — Free TeamViewer Alternative</strong><span>Install RustDesk on Omarchy with one command. Free, open-source remote desktop: ID/password flow, unattended access, self-hosting, and fixes for the Wayland black-screen issue on Hyprland.</span></a>
+<a class="related-guide" href="/flea-file-manager-omarchy.html"><strong>How to Install &amp; Use Flea on Omarchy (2026)</strong><span>Install Flea on Omarchy with one command. Keyboard-first file manager with Quick Look, undoable operations, and network shares. Setup, shortcuts, and real fixes from the issue tracker.</span></a>
+<a class="related-guide" href="/omacut-video-editor-omarchy.html"><strong>How to Use omacut on Omarchy (2026): trim, split &amp; export in minutes</strong><span>omacut is Omarchy&#x27;s dead-simple video trimmer (preinstalled on Quattro+). Open a video, drag the handles, split the middle, export an MP4 — plus shortcuts and fixes for AV1 black preview and export failures.</span></a>
+<a class="related-guide" href="/sunshine-game-streaming-omarchy.html"><strong>How to Install &amp; Use Sunshine on Omarchy (2026)</strong><span>Install Sunshine on Omarchy and stream your games to any device with Moonlight. Pairing walkthrough, Hyprland capture-method fixes, and how it replaces NVIDIA GameStream.</span></a>
+<a class="related-guide" href="/hermes-desktop-omarchy.html"><strong>How to Install &amp; Use Hermes Desktop on Omarchy (2026)</strong><span>Install Hermes Desktop on Omarchy: the native GUI for Hermes Agent with memory, skills, scheduled tasks, and messaging integrations. Bring your own key, use Nous Portal&#x27;s free tier, or run local models.</span></a>
+<a class="related-guide" href="/omawrite-writing-omarchy.html"><strong>Omawrite on Omarchy: Install, Shortcuts &amp; Typora Alternative Guide</strong><span>Omawrite is Omarchy&#x27;s free default Markdown editor — a distraction-free, open-source Typora alternative. Install guide, keyboard shortcuts, real GitHub issues, and how to switch from Typora.</span></a>
+<a class="related-guide" href="/strata-file-manager-omarchy.html"><strong>Strata on Omarchy: Install the Keyboard-First File Manager</strong><span>Install Strata on Omarchy: the free keyboard-first GTK4 file manager with Miller columns, fuzzy search, and sandboxed previews. Setup, keybinds, fixes, and Strata vs flea compared.</span></a>
+<a class="related-guide" href="/claude-desktop-omarchy.html"><strong>Claude Desktop on Omarchy: Install &amp; Setup Guide (2026)</strong><span>Install Anthropic&#x27;s official Claude Desktop Linux app on Omarchy. Setup, MCP connectors, Cowork VM troubleshooting, and the Hyprland login fix.</span></a>
+<a class="related-guide" href="/1password-omarchy.html"><strong>How to Install &amp; Use 1Password on Omarchy (2026)</strong><span>Install 1Password on Omarchy with one command. Setup, browser integration, real Linux fixes, and how it compares to free Bitwarden.</span></a>
+<a class="related-guide" href="/omadesign-omarchy.html"><strong>Omadesign on Omarchy: Install &amp; Setup Guide (2026)</strong><span>Install Omadesign, the free Linux design, paint, photo and motion app, on Omarchy. One-line install, theme integration, fixes, and why there is no package yet.</span></a>
+<a class="related-guide" href="/disktree-bin-on-omarchy.html"><strong>How to Install &amp; Use disktree-bin on Omarchy (2026)</strong><span>Install disktree-bin on Omarchy with one command. Disk-space treemap that scans home or the whole disk, marks what should go, and deletes with a two-step review. Setup, keys, and real fixes from the issue tracker.</span></a>
+<a class="related-guide" href="/dingtalk-bin-on-omarchy.html"><strong>How to Install &amp; Use DingTalk on Omarchy Linux (2026)</strong><span>Install Alibaba&#x27;s official DingTalk Linux client on Omarchy with one command. Fix the blank-window-after-update bug, login requirements, and real Linux issues. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/gliff-on-omarchy.html"><strong>How to Install &amp; Use gliff on Omarchy (2026)</strong><span>Install gliff on Omarchy with one command. Hyprland remote desktop over SSH with 4:4:4 crisp text and GPU H.264 end to end. Setup, gliff-probe diagnostics, and real fixes.</span></a>
+<a class="related-guide" href="/linuxqq-on-omarchy.html"><strong>How to Install &amp; Use QQ on Omarchy Linux (2026)</strong><span>Install Tencent&#x27;s official QQ Linux client on Omarchy with one command. Fix the Wayland clipboard, screenshot crashes, screen sharing, and fcitx5 input. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/wechat-bin-on-omarchy.html"><strong>How to Install &amp; Use WeChat on Omarchy Linux (2026)</strong><span>Install Tencent&#x27;s official WeChat Linux client on Omarchy with one command. QR-code login, input-method and HiDPI fixes, real Wayland issues. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/wps-office-cn-on-omarchy.html"><strong>How to Install &amp; Use WPS Office on Omarchy Linux (2026)</strong><span>Install Kingsoft WPS Office (China edition) on Omarchy with one command. Fix the silent-exit launch bug, fonts, PDF support, and fcitx5 input. Free Microsoft 365 alternative.</span></a>
+<a class="related-guide" href="/collie-on-omarchy.html"><strong>How to Install &amp; Use Collie on Omarchy (2026)</strong><span>Install Collie, the self-hosted phone UI for terminal AI agents, on Omarchy with one command. Watch and approve Claude Code from your phone over Tailscale — plus real fixes for pairing, refused sends, and the update race.</span></a>
+<a class="related-guide" href="/cua-hyprland-plugin-on-omarchy.html"><strong>How to Install &amp; Use the Cua Hyprland Plugin on Omarchy (2026)</strong><span>Install the Cua Hyprland plugin on Omarchy with one command. Compositor-native multi-cursor AI agent input: agents work in background windows while your pointer stays free — plus the ABI rule and real fixes for Super shortcuts and AT-SPI.</span></a>
+<a class="related-guide" href="/helium-on-omarchy.html"><strong>How to Install &amp; Use Helium on Omarchy (2026)</strong><span>Install Helium, the private Chromium browser, on Omarchy with one command. Google stripped out, built-in uBlock with CNAME uncloaking, MV2 extensions — plus honest beta caveats: no sync, no DRM, real open bugs.</span></a>
+<a class="related-guide" href="/hype-on-omarchy.html"><strong>How to Install &amp; Use Hype on Omarchy (2026)</strong><span>Install Hype, the Markdown presentation app for Omarchy, with one command. Visual slide editor, Omarchy-theme styling, one-key PDF/PowerPoint export, and a headless CLI for AI-built decks.</span></a>
+<a class="related-guide" href="/linux-omarchy-eevdf-on-omarchy.html"><strong>Omarchy EEVDF Kernel: Install linux-omarchy-eevdf (2026)</strong><span>linux-omarchy-eevdf is Omarchy&#x27;s plain-EEVDF kernel flavor: same Omarchy patchset as the default, without the BORE scheduler. Install it alongside your current kernel, pick it at boot, and add the headers package for DKMS modules.</span></a>
+<a class="related-guide" href="/monologue-on-omarchy.html"><strong>How to Install &amp; Use Monologue on Omarchy (2026)</strong><span>Install Monologue, the theme-synced webcam recorder for Omarchy, with one command. Space-to-record takes, built-in trim editor, MP4 output — plus real fixes for 4K encoding stops and the auto-deleting takes folder.</span></a>
+<a class="related-guide" href="/omacharts-on-omarchy.html"><strong>How to Install &amp; Use Omacharts on Omarchy (2026)</strong><span>Install Omacharts on Omarchy with one command. Fast native stock charts with free Yahoo data, thinkorswim streaming, indicators, drawings, and a full CLI — plus fixes for the fullscreen right-click issue and ToS sign-in.</span></a>
+<a class="related-guide" href="/omairc-on-omarchy.html"><strong>How to Install &amp; Use Omairc on Omarchy (2026)</strong><span>Install Omairc on Omarchy with one command. Dead-simple native IRC with a keyboard-first Qt UI, a local CLI, an AI agent skill, and a terminal companion — plus real limits on bouncers, DCC, and ARM.</span></a>
+<a class="related-guide" href="/omakeyboard-on-omarchy.html"><strong>How to Install &amp; Use OmaKeyboard on Omarchy (2026)</strong><span>Install OmaKeyboard on Omarchy with one command. Visual keyboard remapping, layers, and shortcuts with snapshot rollback — what it can and can&#x27;t do (tap-vs-hold, sequences, per-app maps), plus real fixes.</span></a>
+<a class="related-guide" href="/omarchy-hyprland-titlebars-on-omarchy.html"><strong>How to Install &amp; Use Hyprland Titlebars on Omarchy (2026)</strong><span>Install Omarchy&#x27;s Hyprland titlebar plugin with one command. Titlebars for floating workspaces — drag, double-click maximize, smart titles, custom buttons — plus the Hyprland version-pin gotcha explained.</span></a>
+<a class="related-guide" href="/meeting-recorder-on-omarchy.html"><strong>How to Install &amp; Use Meeting Recorder on Omarchy (2026)</strong><span>Install Meeting Recorder on Omarchy with one command: record mic + computer audio as two tracks and transcribe locally with speakers and chapters. No bot, no cloud, free.</span></a>
+<a class="related-guide" href="/power-profiles-daemon-on-omarchy.html"><strong>power-profiles-daemon on Omarchy: Install &amp; Switch Power Profiles (2026)</strong><span>Omarchy&#x27;s power-profiles-daemon adds NVIDIA RTX Spark, Apple Silicon, and Snapdragon X power profiles to the standard Linux power daemon. Install, check, and switch profiles from the terminal.</span></a>
+<a class="related-guide" href="/omarchy-theme-intros.html"><strong>Omarchy Theme Intros: What the 96 MB Package Does (2026)</strong><span>omarchy-themes-intros is Omarchy&#x27;s package of background intro videos that play when you switch themes. What it is, why it&#x27;s versioned by date, and whether you need it.</span></a>
+<a class="related-guide" href="/qcom-firmware-extract-snapdragon-omarchy.html"><strong>qcom-firmware-extract on Omarchy: Snapdragon Firmware from Windows (2026)</strong><span>qcom-firmware-extract copies vendor-signed Qualcomm firmware from your Windows install for Snapdragon X laptops on Omarchy. How it works, BitLocker gotchas, and when you don&#x27;t need it.</span></a>
+<a class="related-guide" href="/quickshell-on-omarchy.html"><strong>Quickshell on Omarchy: Install &amp; Build Your Own Wayland Shell (2026)</strong><span>Quickshell is the QtQuick toolkit behind Omarchy&#x27;s shell. Install the pinned package, learn the quickshell vs quickshell-git difference, and run your first QML bar in minutes.</span></a>
+<a class="related-guide" href="/signed-on-omarchy.html"><strong>How to Sign PDFs on Omarchy with Signed (2026)</strong><span>Signed is Omacom&#x27;s free PDF signing app for Omarchy: drop your signature, text, or today&#x27;s date on any page, save a sealed copy, or sign headless from the CLI. Install with one command.</span></a>
+    </div>
+  </aside>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
+      <p>Every package in the official Omarchy repo, searchable and ranked by readers. A community project by Jessyka, not affiliated with Omacom or DHH.</p>
+    </div>
+    <nav aria-label="Site"><h3>Site</h3><a href="index.html">Apps</a><a href="omarchy-apps-list.html">All apps list</a><a href="leaderboard.html">Top apps</a><a href="guides.html">Guides</a><a href="develop.html">Develop</a><a href="sponsor.html">Sponsor</a><a href="about.html">About</a><a href="terms.html">Terms</a></nav>
+    <nav aria-label="Omarchy"><h3>Omarchy</h3><a href="https://omarchy.org/">omarchy.org</a><a href="https://omarchy.org/manual/">Manual</a><a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs</a><a href="https://omarchyplugins.com/">Plugins</a></nav>
+    <nav aria-label="Contact"><h3>Say hello</h3><a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">@jessyka_boat on X</a><a href="develop.html#newsletter">Newsletter</a></nav>
+  </div>
+  <div class="wrap footer-base"><span>Synced 2026-10-18</span><span>No trackers, videos play on click</span><span>Packages come from pkgs.omarchy.org</span></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Install &amp; Use Meeting Recorder on Omarchy (2026)</title>
+<meta name="description" content="Install Meeting Recorder on Omarchy with one command: record mic + computer audio as two tracks and transcribe locally with speakers and chapters. No bot, no cloud, free.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#1a1b26">
+<link rel="canonical" href="https://omarchyapps.com/meeting-recorder-on-omarchy.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/images/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" sizes="180x180">
+<meta property="og:title" content="How to Install &amp; Use Meeting Recorder on Omarchy (2026)">
+<meta property="og:description" content="Install Meeting Recorder on Omarchy with one command: record mic + computer audio as two tracks and transcribe locally with speakers and chapters. No bot, no cloud, free.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://omarchyapps.com/meeting-recorder-on-omarchy.html">
+<meta property="og:site_name" content="Unofficial Omarchy App Store">
+<meta property="og:image" content="https://omarchyapps.com/images/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jessyka_boat">
+<meta name="twitter:title" content="How to Install &amp; Use Meeting Recorder on Omarchy (2026)">
+<meta name="twitter:description" content="Install Meeting Recorder on Omarchy with one command: record mic + computer audio as two tracks and transcribe locally with speakers and chapters. No bot, no cloud, free.">
+<meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/meeting-recorder-on-omarchy.html#article","headline":"How to Install & Use Meeting Recorder on Omarchy (2026)","description":"Install Meeting Recorder on Omarchy with one command: record mic + computer audio as two tracks and transcribe locally with speakers and chapters. No bot, no cloud, free.","url":"https://omarchyapps.com/meeting-recorder-on-omarchy.html","dateModified":"2026-10-18","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"How to Install & Use Meeting Recorder on Omarchy (2026)","item":"https://omarchyapps.com/meeting-recorder-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Meeting Recorder work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes for recording and transcription — whisper runs entirely on your machine. Chapters are the one online piece: they send transcript text to whatever default agent you've configured. No agent configured, nothing sent, ever."}},{"@type":"Question","name":"Where do my meetings go?","acceptedAnswer":{"@type":"Answer","text":"`~/Documents/Meetings/<YYYYMMDDHHMM> <name>/` — plain folders with the audio, `transcript.md`, and a `.meeting-recorder` file that reopens the meeting in the app."}},{"@type":"Question","name":"Can it transcribe a recording I already have?","acceptedAnswer":{"@type":"Answer","text":"Yes — drop any audio file ffmpeg can read onto the window (or use the Import button). Pick the language and speaker count (or leave Automatic). Voices are told apart with local NVIDIA Nemotron diarization, up to eight speakers."}}]}]}</script>
+<link rel="stylesheet" href="/style.d5ce941b05.css">
+  <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="index.html" aria-label="Unofficial Omarchy App Store home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
+    <nav class="topbar-links" aria-label="Primary">
+      <a href="index.html">Apps</a>
+      <a href="leaderboard.html">Top apps</a>
+      <a href="guides.html" aria-current="page">Guides</a>
+      <a href="develop.html">Develop</a>
+      <a href="sponsor.html">Sponsor</a>
+    </nav>
+    <a class="button topbar-cta" href="sponsor.html">Sponsor</a>
+  </div>
+</header>
+
+<header class="hero guide-hero seo-hero">
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">Productivity guide</span></nav>
+    <p class="eyebrow">Productivity guide</p>
+    <h1>Meeting Recorder on <span>Omarchy</span></h1>
+    <p class="tag">Records mic + computer audio as two tracks, transcribes locally with speakers and chapters — no bot, no cloud, free.</p>
+    <p class="facts">Reviewed 2026-10-18 · independent editorial guide</p>
+  </div>
+</header>
+
+<main class="wrap seo-guide-main">
+  <article class="seo-article">
+    <div class="guide-answer">
+      <p class="answer-label">Short answer</p>
+      <p>Install Meeting Recorder on Omarchy with `omarchy pkg add omarchy-meeting-recorder-bin` — it records your mic and computer audio as two separate tracks, then transcribes locally with whisper (speakers, chapters, a player). No bot joins your call and nothing leaves your machine; it&#x27;s MIT licensed and free. Budget ~1.6 GB for the first-run speech model download.</p>
+    </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install command: confirm `omarchy pkg add omarchy-meeting-recorder-bin` installs 1.8.0-1 and drops `/usr/bin/omarchy-meeting-recorder` on PATH.
+- First transcription: confirm the first-run model download banner (~1.6 GB for large-v3-turbo) appears, downloads to `~/.local/share/omarchy-meeting-recorder/models/`, and the 90s transcribing animation plays.
+- Pre-record check: confirm both live meters (mic + computer audio) move before pressing Start, on PipeWire.
+- Done screen: confirm transcript with speakers, chapters (needs `omarchy default agent` set and a 3+ min meeting), player, and theme colors (Tokyo Night vs a light theme).
+- Bar widget offer: confirm first launch offers the quickshell bar widget; if declined/broken, confirm the manual recovery (`omarchy-shell shell listPlugins` then `omarchy plugin enable jankeesvw.meeting-recorder --section right`).
+- Config paths: confirm `~/.config/omarchy-meeting-recorder/config.toml` exists (model/languages/actions) and meetings land in `~/Documents/Meetings/<YYYYMMDDHHMM> <name>/`.
+- CLI: confirm `omarchy-meeting-recorder --version` reports build support (vulkan vs CPU-only), and `start/pause/stop` work against a running window.
+- Issue URLs: confirm #55 (parec 100% CPU), #39 (whisper DTW abort), #32 (headset leak), #20 (hallucinations), #17 (feature req) are still open and links work.
+- x86_64-only: confirm the package refuses/is absent on aarch64 (PKGBUILD arch=('x86_64')).
+- Screenshots needed: ready page with live meters, recording strip, done screen with chapters, transcribing animation, import dialog.
+
+SEO notes:
+- URL: /guides/meeting-recorder-on-omarchy
+- Title tag: "How to Install & Use Meeting Recorder on Omarchy (2026)"
+- Meta description: "Install Meeting Recorder on Omarchy with one command: record mic + computer audio as two tracks and transcribe locally with speakers and chapters. No bot, no cloud, free."
+- Keywords: meeting recorder omarchy, omarchy meeting recorder install, local meeting transcription linux, whisper meeting recorder hyprland, free otter.ai alternative linux
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Granola/Fathom</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Meeting Recorder on Omarchy</h2>
+      <p>Meeting Recorder is a free (MIT), Rust-built GTK4 app for Omarchy that records your mic and your computer audio as two separate tracks, then transcribes everything locally on your machine with speakers, chapters, and a player — no bot joins your call, nothing leaves your computer.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omarchy-meeting-recorder-bin</code></pre>
+      <p>Takes ~2 minutes; the <code>-bin</code> package is the prebuilt binary (version 1.8.0, x86_64 only) from the upstream GitHub releases, and the install drops <code>/usr/bin/omarchy-meeting-recorder</code> plus a quickshell bar widget you link into your Omarchy plugins. Heads up before your first transcription: it downloads the whisper speech model once (~1.6 GB for the default <code>large-v3-turbo</code>), with a progress banner — do that on Wi-Fi, not a tethered connection.</p>
+      <p>Free forever (MIT). No account, no subscription, no cloud. The only thing that ever leaves your machine is transcript text sent to your own coding agent for chapters — and only if you've set a default agent (<code>omarchy default agent</code>); without one, chapters are simply absent and everything else works the same.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and launch.</h3>
+      <p>Run the command above. The package (17.2 MB download, 67.1 MB installed) also pulls GTK4, libadwaita, libpulse, and ffmpeg. When you first open <strong>Meeting Recorder</strong> from the launcher, it offers to put a live waveform widget in your Omarchy bar — say yes if you want recording status in the top bar while you record.</p>
+      <h3>2. Check your levels before the meeting.</h3>
+      <p>The app opens "ready, not recording": two live meters, one for your microphone (<code>@DEFAULT_SOURCE@</code>) and one for the computer audio (the monitor of your default output). Both move before you press anything — if a meter is dead, fix your PipeWire sources before the call starts, not after. Type a meeting name (or leave it; it becomes "Meeting 14:30"), pick the audio format and transcript language, then press <strong>Start recording</strong>.</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Two tracks, always</strong> — Your mic and the computer audio are captured separately with <code>parec</code> and encoded to Opus with <code>ffmpeg</code> when you stop. The format choice matters later: <strong>Mono</strong> mixes both sides into <code>audio.ogg</code>, <strong>Stereo</strong> puts your mic left and the call right, <strong>Separate files</strong> writes <code>mic.ogg</code> + <code>computer.ogg</code>. A hidden <code>.tracks/</code> folder keeps both tracks in mono regardless, which is what "Transcribe again" uses — delete it if you don't need re-transcription. Both tracks are levelled to the same speech loudness on save, so a quiet mic and a loud call come out equally audible.</li>
+        <li><strong>Transcription is local whisper, and speakers are real</strong> — After you stop, whisper-rs transcribes the meeting in one pass with the <code>large-v3-turbo</code> model (long silences are skipped so whisper doesn't invent text in them). Speaker identity comes from the track each line was on: your side vs. the remote side, with multiple voices per side split as "You 1/You 2" and "Remote 1/Remote 2" — each with its own renameable name field. Imported single files (drop any ffmpeg-readable audio on the window) use NVIDIA's Nemotron 3 Diarization locally (~120 MB speaker model, first use only) and follow up to eight speakers. Chapters come from your default coding agent (Claude Code, Codex, etc.) run headless with every tool switched off — only for meetings of 3+ minutes.</li>
+        <li><strong>Everything is a plain folder</strong> — Each meeting lives in <code>~/Documents/Meetings/&lt;YYYYMMDDHHMM&gt; &lt;name&gt;/</code>: the audio, <code>transcript.md</code> (speaker + timestamp per line, chapters at the top), a <code>&lt;name&gt;.meeting-recorder</code> JSON file that opens the meeting in the app when double-clicked, optional <code>notes.md</code> and <code>webcam.mp4</code>. Rename a speaker on the done page and the folder, transcript, and manifest follow.</li>
+      </ul>
+      <h3>4. Config location.</h3>
+      <p><code>~/.config/omarchy-meeting-recorder/config.toml</code> — whisper model (<code>model = "small"</code>, or tiny/base/medium/large-v3/large-v3-turbo, or a path to a <code>.bin</code>), extra languages, and your custom <strong>Actions</strong>. Models download to <code>~/.local/share/omarchy-meeting-recorder/models/</code>. If you already use voxtype and it downloaded the same whisper model to <code>~/.local/share/voxtype/models/</code>, the recorder reuses that copy instead of downloading again.</p>
+      <h3>5. The power-user moves.</h3>
+      <p><code>Ctrl+M</code> collapses the window to a clock-and-waves strip; drag it anywhere. <code>omarchy-meeting-recorder start/pause/stop/compact</code> drive the running app from a keybinding. <code>omarchy-meeting-recorder transcribe &lt;mic&gt; &lt;computer&gt;</code> and <code>transcribe-file &lt;audio&gt;</code> turn it into a CLI transcription tool that prints Markdown. Put scripts under <strong>Actions</strong> on the done page and one marked <code>auto = true</code> runs every time a transcript finishes — file the meeting in your notes, mail it, publish it — with zero clicks. And the <strong>a</strong> button in the corner opens meeting notes beside the recorder (paragraph-at-cursor stays centered, everything saves instantly); a recording made with notes open keeps them as <code>notes.md</code>.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Sourced from the upstream repo's open GitHub issues and its README — nothing invented. Fixes marked <em>(suggested)</em> are user-side workarounds, not maintainer-confirmed repairs.</p>
+      <h3>After closing the app, <code>parec</code> processes keep running and pin a CPU at 100%</h3>
+      <p>Issue <a href="https://github.com/jankeesvw/omarchy-meeting-recorder/issues/55" target="_blank" rel="noopener">#55</a>, opened Oct 17, 2026, open. This is a real, open bug in the current 1.8.0 build — the <code>parec</code> capture children can outlive the window.</p>
+      <p><strong>Fix:</strong> <em>(Suggested)</em> Until it's fixed upstream, run <code>pkill -f parec</code> (or <code>pkill parec</code>) after a recording session and confirm with <code>ps aux | grep parec</code> that they're gone. If this still reproduces on the latest version, add your report to #55 — the maintainer is actively triaging it.</p>
+      <h3>Transcription aborts mid-way in whisper.cpp's word-timing code (a DTW median filter assertion)</h3>
+      <p>Issue <a href="https://github.com/jankeesvw/omarchy-meeting-recorder/issues/39" target="_blank" rel="noopener">#39</a>, opened Oct 2, 2026, open. No published fix yet.</p>
+      <p><strong>Fix:</strong> <em>(Suggested)</em> Re-run the transcription from the done page ("Transcribe again"); the <code>.tracks/</code> mono copies are kept precisely so a retry costs you nothing. Meetings with clean audio and minimal dead air hit this less — the app already skips long silences to avoid this failure class.</p>
+      <h3>The remote side's sentences get transcribed as "You" — the other side leaks through your mic</h3>
+      <p>Issue <a href="https://github.com/jankeesvw/omarchy-meeting-recorder/issues/32" target="_blank" rel="noopener">#32</a>, opened Sep 30, 2026, 5 comments, open. Partly expected: the README explains the app drops what is only mic echo, but a loud leak can be mistaken for your own voice.</p>
+      <p><strong>Fix:</strong> Wear closed headphones for important calls — that kills the leak at the source. To repair an already-transcribed meeting, hover the misattributed line and use the <strong>swap speaker</strong> button; do it per line, no re-transcription needed.</p>
+      <h3>Whisper hallucinates on the mic track: repeating loops, fake subtitle credits, room noise transcribed as speech</h3>
+      <p>Issue <a href="https://github.com/jankeesvw/omarchy-meeting-recorder/issues/20" target="_blank" rel="noopener">#20</a>, opened Sep 25, 2026, 2 comments, open. Worse in non-English. This is whisper doing whisper things on noisy audio.</p>
+      <p><strong>Fix:</strong> <em>(Suggested)</em> Give it a bigger model in <code>~/.config/omarchy-meeting-recorder/config.toml</code> (<code>model = "medium"</code> or <code>"large-v3"</code> — the default is <code>large-v3-turbo</code>, which is smaller and faster), or a <code>.en</code> model if the meeting is English. Record somewhere quiet; room noise is the trigger more than the language is.</p>
+      <h3>Double-clicking a <code>.meeting-recorder</code> file opens it in a text editor instead of the app</h3>
+      <p>From the README: the package registers a MIME type (<code>application/x-omarchy-meeting</code>) and Nautilus picks it up right away (restart Nautilus if it still shows text), but <code>xdg-open</code> — which most Hyprland launchers and terminals use — sniffs the file's <em>contents</em>, sees JSON, and opens your editor.</p>
+      <p><strong>Fix:</strong> Install <code>perl-file-mimeinfo</code> and <code>xdg-open</code> goes by the registered type too. The Omarchy package already lists this as an optdepends for exactly this reason.</p>
+      <h3>The first-start "Add to Bar" widget offer failed silently and never asks again</h3>
+      <p>From the README (a known 1.0.2 failure mode): the widget gets linked into <code>~/.config/omarchy/plugins</code> but never enables.</p>
+      <p><strong>Fix:</strong> Wait until <code>omarchy-shell shell listPlugins</code> includes <code>jankeesvw.meeting-recorder</code>, then run <code>omarchy plugin enable jankeesvw.meeting-recorder --section right</code> — or move it with <code>omarchy bar move jankeesvw.meeting-recorder --section right</code>. You need quickshell installed (it's part of every Omarchy install, and the package's other optdepends).</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><strong>voxtype</strong> — if it already downloaded a whisper model, Meeting Recorder reuses it and skips the 1.6 GB download. Your Omarchy <strong>default agent</strong> (<code>omarchy default agent</code>) — that's what writes the chapters; no agent, no chapters. The quickshell bar widget, for a recording indicator you can see from any workspace.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><a href="https://github.com/0x2e73/sayback-app" target="_blank" rel="noopener">SayBack</a> (MIT) — another open-source, local-first meeting recorder (whisper.cpp + a small local model for notes), and the only one that also records what was on screen. It isn't packaged for Omarchy, so you'd build it yourself. Or a cloud notetaker like Granola/Fathom — but then a bot joins your calls and your audio lives on someone else's servers, which is the exact tradeoff this app exists to avoid.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Meeting Recorder vs SayBack vs Granola/Fathom</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Meeting Recorder</th><th>SayBack</th><th>Granola / Fathom</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free, MIT</td><td>~$20/mo</td></tr>
+            <tr><td>Best for</td><td>Local mic+system capture with real speaker tracks, no bot, themed native UI</td><td>Local capture that also records the shared screen; newer, less proven</td><td>Polished AI notes, CRM sync, zero setup</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omarchy-meeting-recorder-bin</code></td><td>Build from source (not packaged)</td><td>Web app — a visible bot joins your calls</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use Meeting Recorder if you want meeting notes without a notetaker bot and without your audio leaving the machine; use SayBack if screen capture matters more than polish; pay for a cloud notetaker only if you need CRM sync and don't mind the bot.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Meeting Recorder is a free alternative to Granola/Fathom/Otter (~$16–20/mo)</h2>
+      <p><strong>Meeting Recorder is a free alternative to Granola/Fathom/Otter (~$16–20/mo).</strong> What you give up, honestly: the cloud conveniences — no CRM sync, no calendar auto-join, no web dashboard, and your transcripts live in <code>~/Documents</code>, not a search cloud. Transcription speed is your hardware's problem: the default model is ~1.6 GB and a long meeting on a weak CPU can take a while (a Vulkan GPU accelerates it). What you keep: the core job — record both sides of any call with no bot anyone can see, get speakers, chapters, and a player, all local, free forever, MIT.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Granola/Fathom (~20 minutes)</h2>
+      <ol>
+        <li><strong>Export from your paid notetaker:</strong> most let you export meeting transcripts as Markdown/PDF from their web dashboard — grab the ones you care about.</li>
+        <li><strong>Import into Meeting Recorder:</strong> it can't import transcripts, only audio — but it <em>can</em> transcribe any audio file you have. If you have the raw recordings, drop them on the window; if you only have transcripts, file them in <code>~/Documents/Meetings/</code> next to your new recordings and they'll live in the same place.</li>
+        <li><strong>What doesn't transfer:</strong> your cloud history, CRM links, and calendar integrations. Chapters need you to set <code>omarchy default agent</code> once.</li>
+        <li><strong>Time estimate:</strong> ~20 minutes — install, one 1.6 GB model download, one test recording.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Meeting Recorder package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omarchy-meeting-recorder-bin.html">View Meeting Recorder →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Meeting Recorder work offline?</summary><p>Yes for recording and transcription — whisper runs entirely on your machine. Chapters are the one online piece: they send transcript text to whatever default agent you've configured. No agent configured, nothing sent, ever.</p></details>
+      <details><summary>Is it really x86_64 only?</summary><p>The <code>-bin</code> package ships a prebuilt x86_64 binary (the PKGBUILD declares <code>arch=('x86_64')</code>). On an ARM machine (Asahi/Apple Silicon), your path is building from source — see "Build from source" in the upstream README (needs Rust, CMake, Vulkan headers, <code>glslc</code>).</p></details>
+      <details><summary>Where do my meetings go?</summary><p><code>~/Documents/Meetings/&lt;YYYYMMDDHHMM&gt; &lt;name&gt;/</code> — plain folders with the audio, <code>transcript.md</code>, and a <code>.meeting-recorder</code> file that reopens the meeting in the app. Back them up like any other documents.</p></details>
+      <details><summary>How much disk does it need?</summary><p>The package itself is 67 MB installed, but budget ~1.7 GB for the default speech model plus ~120 MB the first time you use speaker separation on an imported file. Meetings are small (Opus audio).</p></details>
+      <details><summary>Can it transcribe a recording I already have?</summary><p>Yes — drop any audio file ffmpeg can read onto the window (or use the Import button). Pick the language and speaker count (or leave Automatic). Voices are told apart with local NVIDIA Nemotron diarization, up to eight speakers.</p></details>
+      <details><summary>Does anyone on the call know I'm recording?</summary><p>No bot joins the call — it just listens to your own mic and system audio like any screen recorder. The legal and workplace question of whether you must <em>tell</em> people is yours to answer for your jurisdiction; the app deliberately stays out of it.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/omarchy-meeting-recorder-bin.html" target="_blank" rel="noopener">omarchyapps.com — omarchy-meeting-recorder-bin package page (1.8.0-1, MIT, updated 2026-10-15, <code>omarchy pkg add omarchy-meeting-recorder-bin</code>)</a></li>
+        <li><a href="https://github.com/jankeesvw/omarchy-meeting-recorder" target="_blank" rel="noopener">jankeesvw/omarchy-meeting-recorder — upstream README (features, how it works, CLI, actions, requirements, bar widget recovery)</a></li>
+        <li><a href="https://github.com/jankeesvw/omarchy-meeting-recorder/issues" target="_blank" rel="noopener">Upstream open issues: #55 parec CPU spin, #39 whisper DTW abort, #32 headset leak, #20 hallucinations, #17 languages/Vulkan</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/blob/master/pkgbuilds/omarchy-meeting-recorder-bin/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs PKGBUILD — omarchy-meeting-recorder-bin (maintainer Jankees van Woezik, x86_64, v1.8.0 tarball, optdepends quickshell + perl-file-mimeinfo)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>
+
+  </article>
+
+  <aside class="related-guides" aria-labelledby="related-guides-h">
+    <h2 id="related-guides-h">Keep exploring</h2>
+    <div class="related-guide-grid">
+<a class="related-guide" href="/omarchy-vs-macos-windows-ubuntu.html"><strong>Omarchy vs macOS, Windows 11 and Ubuntu: Which Fits You?</strong><span>Compare Omarchy with macOS, Windows 11 and Ubuntu for development, gaming, creative work, hardware support, privacy and daily use.</span></a>
+<a class="related-guide" href="/free-notion-alternative-linux-slap-notes.html"><strong>Free Notion Alternative for Linux: Slap Notes Compared</strong><span>Looking for a free Notion alternative on Linux? Compare Slap Notes with Notion, Obsidian and AppFlowy for local notes, blocks, links and privacy.</span></a>
+<a class="related-guide" href="/free-video-editor-linux-omarchy.html"><strong>Free Video Editor for Linux: Omacut vs DaVinci Resolve</strong><span>Need a free video editor on Linux? Learn when Omarchy-native Omacut is faster than DaVinci Resolve, Kdenlive or Final Cut Pro for simple video trimming.</span></a>
+<a class="related-guide" href="/best-apps-for-omarchy.html"><strong>Best Omarchy Apps to Install First: 12 Useful Picks</strong><span>Start a new Omarchy setup with 12 useful apps for notes, files, themes, video, screenshots, gaming, remote access and developer work.</span></a>
+<a class="related-guide" href="/how-to-install-apps-on-omarchy.html"><strong>How to Install Apps on Omarchy Safely</strong><span>Learn how to install, inspect, update and remove apps on Omarchy using the official package repository, Arch packages and the AUR.</span></a>
+<a class="related-guide" href="/how-to-use-omarchy-zsh.html"><strong>omarchy-zsh on Omarchy: install, fzf keybindings, aliases &amp; the chsh trap</strong><span>Install omarchy-zsh on Omarchy the safe way (not chsh), learn the fzf keybindings and built-in aliases, and fix common issues like double inits and oh-my-zsh conflicts.</span></a>
+<a class="related-guide" href="/rustdesk-on-omarchy.html"><strong>How to Install &amp; Use RustDesk on Omarchy (2026) — Free TeamViewer Alternative</strong><span>Install RustDesk on Omarchy with one command. Free, open-source remote desktop: ID/password flow, unattended access, self-hosting, and fixes for the Wayland black-screen issue on Hyprland.</span></a>
+<a class="related-guide" href="/flea-file-manager-omarchy.html"><strong>How to Install &amp; Use Flea on Omarchy (2026)</strong><span>Install Flea on Omarchy with one command. Keyboard-first file manager with Quick Look, undoable operations, and network shares. Setup, shortcuts, and real fixes from the issue tracker.</span></a>
+<a class="related-guide" href="/omacut-video-editor-omarchy.html"><strong>How to Use omacut on Omarchy (2026): trim, split &amp; export in minutes</strong><span>omacut is Omarchy&#x27;s dead-simple video trimmer (preinstalled on Quattro+). Open a video, drag the handles, split the middle, export an MP4 — plus shortcuts and fixes for AV1 black preview and export failures.</span></a>
+<a class="related-guide" href="/sunshine-game-streaming-omarchy.html"><strong>How to Install &amp; Use Sunshine on Omarchy (2026)</strong><span>Install Sunshine on Omarchy and stream your games to any device with Moonlight. Pairing walkthrough, Hyprland capture-method fixes, and how it replaces NVIDIA GameStream.</span></a>
+<a class="related-guide" href="/hermes-desktop-omarchy.html"><strong>How to Install &amp; Use Hermes Desktop on Omarchy (2026)</strong><span>Install Hermes Desktop on Omarchy: the native GUI for Hermes Agent with memory, skills, scheduled tasks, and messaging integrations. Bring your own key, use Nous Portal&#x27;s free tier, or run local models.</span></a>
+<a class="related-guide" href="/omawrite-writing-omarchy.html"><strong>Omawrite on Omarchy: Install, Shortcuts &amp; Typora Alternative Guide</strong><span>Omawrite is Omarchy&#x27;s free default Markdown editor — a distraction-free, open-source Typora alternative. Install guide, keyboard shortcuts, real GitHub issues, and how to switch from Typora.</span></a>
+<a class="related-guide" href="/strata-file-manager-omarchy.html"><strong>Strata on Omarchy: Install the Keyboard-First File Manager</strong><span>Install Strata on Omarchy: the free keyboard-first GTK4 file manager with Miller columns, fuzzy search, and sandboxed previews. Setup, keybinds, fixes, and Strata vs flea compared.</span></a>
+<a class="related-guide" href="/claude-desktop-omarchy.html"><strong>Claude Desktop on Omarchy: Install &amp; Setup Guide (2026)</strong><span>Install Anthropic&#x27;s official Claude Desktop Linux app on Omarchy. Setup, MCP connectors, Cowork VM troubleshooting, and the Hyprland login fix.</span></a>
+<a class="related-guide" href="/1password-omarchy.html"><strong>How to Install &amp; Use 1Password on Omarchy (2026)</strong><span>Install 1Password on Omarchy with one command. Setup, browser integration, real Linux fixes, and how it compares to free Bitwarden.</span></a>
+<a class="related-guide" href="/omadesign-omarchy.html"><strong>Omadesign on Omarchy: Install &amp; Setup Guide (2026)</strong><span>Install Omadesign, the free Linux design, paint, photo and motion app, on Omarchy. One-line install, theme integration, fixes, and why there is no package yet.</span></a>
+<a class="related-guide" href="/disktree-bin-on-omarchy.html"><strong>How to Install &amp; Use disktree-bin on Omarchy (2026)</strong><span>Install disktree-bin on Omarchy with one command. Disk-space treemap that scans home or the whole disk, marks what should go, and deletes with a two-step review. Setup, keys, and real fixes from the issue tracker.</span></a>
+<a class="related-guide" href="/dingtalk-bin-on-omarchy.html"><strong>How to Install &amp; Use DingTalk on Omarchy Linux (2026)</strong><span>Install Alibaba&#x27;s official DingTalk Linux client on Omarchy with one command. Fix the blank-window-after-update bug, login requirements, and real Linux issues. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/gliff-on-omarchy.html"><strong>How to Install &amp; Use gliff on Omarchy (2026)</strong><span>Install gliff on Omarchy with one command. Hyprland remote desktop over SSH with 4:4:4 crisp text and GPU H.264 end to end. Setup, gliff-probe diagnostics, and real fixes.</span></a>
+<a class="related-guide" href="/linuxqq-on-omarchy.html"><strong>How to Install &amp; Use QQ on Omarchy Linux (2026)</strong><span>Install Tencent&#x27;s official QQ Linux client on Omarchy with one command. Fix the Wayland clipboard, screenshot crashes, screen sharing, and fcitx5 input. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/wechat-bin-on-omarchy.html"><strong>How to Install &amp; Use WeChat on Omarchy Linux (2026)</strong><span>Install Tencent&#x27;s official WeChat Linux client on Omarchy with one command. QR-code login, input-method and HiDPI fixes, real Wayland issues. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/wps-office-cn-on-omarchy.html"><strong>How to Install &amp; Use WPS Office on Omarchy Linux (2026)</strong><span>Install Kingsoft WPS Office (China edition) on Omarchy with one command. Fix the silent-exit launch bug, fonts, PDF support, and fcitx5 input. Free Microsoft 365 alternative.</span></a>
+<a class="related-guide" href="/collie-on-omarchy.html"><strong>How to Install &amp; Use Collie on Omarchy (2026)</strong><span>Install Collie, the self-hosted phone UI for terminal AI agents, on Omarchy with one command. Watch and approve Claude Code from your phone over Tailscale — plus real fixes for pairing, refused sends, and the update race.</span></a>
+<a class="related-guide" href="/cua-hyprland-plugin-on-omarchy.html"><strong>How to Install &amp; Use the Cua Hyprland Plugin on Omarchy (2026)</strong><span>Install the Cua Hyprland plugin on Omarchy with one command. Compositor-native multi-cursor AI agent input: agents work in background windows while your pointer stays free — plus the ABI rule and real fixes for Super shortcuts and AT-SPI.</span></a>
+<a class="related-guide" href="/helium-on-omarchy.html"><strong>How to Install &amp; Use Helium on Omarchy (2026)</strong><span>Install Helium, the private Chromium browser, on Omarchy with one command. Google stripped out, built-in uBlock with CNAME uncloaking, MV2 extensions — plus honest beta caveats: no sync, no DRM, real open bugs.</span></a>
+<a class="related-guide" href="/hype-on-omarchy.html"><strong>How to Install &amp; Use Hype on Omarchy (2026)</strong><span>Install Hype, the Markdown presentation app for Omarchy, with one command. Visual slide editor, Omarchy-theme styling, one-key PDF/PowerPoint export, and a headless CLI for AI-built decks.</span></a>
+<a class="related-guide" href="/linux-omarchy-eevdf-on-omarchy.html"><strong>Omarchy EEVDF Kernel: Install linux-omarchy-eevdf (2026)</strong><span>linux-omarchy-eevdf is Omarchy&#x27;s plain-EEVDF kernel flavor: same Omarchy patchset as the default, without the BORE scheduler. Install it alongside your current kernel, pick it at boot, and add the headers package for DKMS modules.</span></a>
+<a class="related-guide" href="/monologue-on-omarchy.html"><strong>How to Install &amp; Use Monologue on Omarchy (2026)</strong><span>Install Monologue, the theme-synced webcam recorder for Omarchy, with one command. Space-to-record takes, built-in trim editor, MP4 output — plus real fixes for 4K encoding stops and the auto-deleting takes folder.</span></a>
+<a class="related-guide" href="/omacharts-on-omarchy.html"><strong>How to Install &amp; Use Omacharts on Omarchy (2026)</strong><span>Install Omacharts on Omarchy with one command. Fast native stock charts with free Yahoo data, thinkorswim streaming, indicators, drawings, and a full CLI — plus fixes for the fullscreen right-click issue and ToS sign-in.</span></a>
+<a class="related-guide" href="/omairc-on-omarchy.html"><strong>How to Install &amp; Use Omairc on Omarchy (2026)</strong><span>Install Omairc on Omarchy with one command. Dead-simple native IRC with a keyboard-first Qt UI, a local CLI, an AI agent skill, and a terminal companion — plus real limits on bouncers, DCC, and ARM.</span></a>
+<a class="related-guide" href="/omakeyboard-on-omarchy.html"><strong>How to Install &amp; Use OmaKeyboard on Omarchy (2026)</strong><span>Install OmaKeyboard on Omarchy with one command. Visual keyboard remapping, layers, and shortcuts with snapshot rollback — what it can and can&#x27;t do (tap-vs-hold, sequences, per-app maps), plus real fixes.</span></a>
+<a class="related-guide" href="/omarchy-hyprland-titlebars-on-omarchy.html"><strong>How to Install &amp; Use Hyprland Titlebars on Omarchy (2026)</strong><span>Install Omarchy&#x27;s Hyprland titlebar plugin with one command. Titlebars for floating workspaces — drag, double-click maximize, smart titles, custom buttons — plus the Hyprland version-pin gotcha explained.</span></a>
+<a class="related-guide" href="/power-profiles-daemon-on-omarchy.html"><strong>power-profiles-daemon on Omarchy: Install &amp; Switch Power Profiles (2026)</strong><span>Omarchy&#x27;s power-profiles-daemon adds NVIDIA RTX Spark, Apple Silicon, and Snapdragon X power profiles to the standard Linux power daemon. Install, check, and switch profiles from the terminal.</span></a>
+<a class="related-guide" href="/omarchy-theme-intros.html"><strong>Omarchy Theme Intros: What the 96 MB Package Does (2026)</strong><span>omarchy-themes-intros is Omarchy&#x27;s package of background intro videos that play when you switch themes. What it is, why it&#x27;s versioned by date, and whether you need it.</span></a>
+<a class="related-guide" href="/qcom-firmware-extract-snapdragon-omarchy.html"><strong>qcom-firmware-extract on Omarchy: Snapdragon Firmware from Windows (2026)</strong><span>qcom-firmware-extract copies vendor-signed Qualcomm firmware from your Windows install for Snapdragon X laptops on Omarchy. How it works, BitLocker gotchas, and when you don&#x27;t need it.</span></a>
+<a class="related-guide" href="/quickshell-on-omarchy.html"><strong>Quickshell on Omarchy: Install &amp; Build Your Own Wayland Shell (2026)</strong><span>Quickshell is the QtQuick toolkit behind Omarchy&#x27;s shell. Install the pinned package, learn the quickshell vs quickshell-git difference, and run your first QML bar in minutes.</span></a>
+<a class="related-guide" href="/signed-on-omarchy.html"><strong>How to Sign PDFs on Omarchy with Signed (2026)</strong><span>Signed is Omacom&#x27;s free PDF signing app for Omarchy: drop your signature, text, or today&#x27;s date on any page, save a sealed copy, or sign headless from the CLI. Install with one command.</span></a>
+<a class="related-guide" href="/thinkpad-t14-amd-touchpad-on-omarchy.html"><strong>Fix the ThinkPad T14 AMD Touchpad on Omarchy (RMI4/SMBus DKMS)</strong><span>The ThinkPad T14/P14s AMD touchpad runs on the slow PS/2 fallback in the stock kernel. This DKMS package switches it to RMI4 over SMBus: 15 ms reports, working taps and gestures, TrackPoint intact. One install command, one check after kernel updates.</span></a>
+    </div>
+  </aside>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
+      <p>Every package in the official Omarchy repo, searchable and ranked by readers. A community project by Jessyka, not affiliated with Omacom or DHH.</p>
+    </div>
+    <nav aria-label="Site"><h3>Site</h3><a href="index.html">Apps</a><a href="omarchy-apps-list.html">All apps list</a><a href="leaderboard.html">Top apps</a><a href="guides.html">Guides</a><a href="develop.html">Develop</a><a href="sponsor.html">Sponsor</a><a href="about.html">About</a><a href="terms.html">Terms</a></nav>
+    <nav aria-label="Omarchy"><h3>Omarchy</h3><a href="https://omarchy.org/">omarchy.org</a><a href="https://omarchy.org/manual/">Manual</a><a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs</a><a href="https://omarchyplugins.com/">Plugins</a></nav>
+    <nav aria-label="Contact"><h3>Say hello</h3><a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">@jessyka_boat on X</a><a href="develop.html#newsletter">Newsletter</a></nav>
+  </div>
+  <div class="wrap footer-base"><span>Synced 2026-10-18</span><span>No trackers, videos play on click</span><span>Packages come from pkgs.omarchy.org</span></div>
+</footer>
+</body>
+</html>
