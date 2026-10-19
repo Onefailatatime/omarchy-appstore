@@ -25,6 +25,7 @@ import urllib.request
 from compression import zstd  # stdlib since Python 3.14
 
 import sponsors as ads
+import press
 import tutorials
 
 ROOT = pathlib.Path(__file__).parent
@@ -1145,6 +1146,7 @@ def main() -> None:
                  .replace("__SITE_URL__", SITE_URL)
                  .replace("__STYLE__", css.replace("__CATVARS__", cat_vars)))
     (DIST / "sponsor.html").write_text(advertise, encoding="utf-8")
+    press.build(root=ROOT, dist=DIST, site=SITE_URL, site_name=SITE_NAME, synced=synced, css=css.replace("__CATVARS__", cat_vars))
 
     guide_cards = "\n".join(
         f'<a class="guide-card" href="/{g["slug"]}.html"><p class="eyebrow">{html.escape(g["eyebrow"])}</p>'
@@ -1260,7 +1262,7 @@ def main() -> None:
     newest_pkg = max(pkg_date.values()) if pkg_date else synced
     shared = ["parts/style.css"]
     sitemap_entries = [(SITE_URL + "/", max(newest_pkg, git_date("parts/body.html", *shared)))]
-    for name in ("leaderboard", "develop", "about", "sponsor", "guides", "terms"):
+    for name in ("leaderboard", "develop", "about", "press", "faq", "sponsor", "guides", "terms"):
         sitemap_entries.append((f"{SITE_URL}/{name}.html", git_date(f"parts/{name}.html", *shared)))
     sitemap_entries.extend((f"{SITE_URL}/{guide['slug']}.html", git_date(f"parts/guides/{guide['slug']}.html", "parts/guide.html")) for guide in GUIDES)
     sitemap_entries.extend((f"{SITE_URL}/apps/{slug(p['name'])}.html", max(pkg_date[p["name"]], git_date("parts/app.html"))) for p in pkgs)
@@ -1297,6 +1299,8 @@ def main() -> None:
         f"- [Guides]({SITE_URL}/guides.html)\n"
         f"- [App tutorials]({SITE_URL}/tutorials.html)\n"
         f"- [Sponsor]({SITE_URL}/sponsor.html)\n"
+        f"- [Press and press kit]({SITE_URL}/press.html)\n"
+        f"- [Q&A]({SITE_URL}/faq.html)\n"
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
         "## Guides and comparisons\n"
         + "".join(f"- [{guide['title']}]({SITE_URL}/{guide['slug']}.html)\n" for guide in GUIDES)

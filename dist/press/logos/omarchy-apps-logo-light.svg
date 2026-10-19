@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" width="1280" height="320">
+  <rect width="640" height="160" rx="16" fill="#ffffff"/>
+  <g transform="translate(32 32) scale(1.5)">
+    <path d="M14 12h30l6 6v34H14z" fill="none" stroke="#2e7de9" stroke-width="4"/>
+    <path d="M22 12v15h21V12M22 40h20" fill="none" stroke="#1a1b26" stroke-width="4"/>
+    <circle cx="39" cy="20" r="2.5" fill="#587539"/>
+  </g>
+  <text x="150" y="98" font-family="JetBrains Mono, ui-monospace, monospace" font-size="52" font-weight="700" fill="#1a1b26">Omarchy <tspan fill="#2e7de9">Apps</tspan></text>
+  <text x="152" y="128" font-family="JetBrains Mono, ui-monospace, monospace" font-size="17" fill="#3760bf">The Unofficial Omarchy App Store</text>
+</svg>
