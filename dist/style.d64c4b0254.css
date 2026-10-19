@@ -557,6 +557,7 @@ b, strong { font-weight: 700; }
   user-select: none;
 }
 .hero pre b { color: var(--color-turquoise); font-weight: 400; }
+.hero-logo { display: block; width: 102px; height: 102px; margin: 0 auto var(--space-medium); image-rendering: crisp-edges; image-rendering: pixelated; }
 .hero h1 {
   margin: 0 0 var(--space-small);
   font-family: var(--font-sans);
