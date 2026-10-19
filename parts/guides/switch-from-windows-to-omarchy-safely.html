@@ -1,0 +1,68 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#try">Try first</a><a href="#backup">Back up</a><a href="#dual">Keep Windows</a><a href="#import">Import</a><a href="#apps">App map</a><a href="#rollback">Rollback</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="try">
+      <h2>1. Try it in a window</h2>
+<p>Try Omarchy for Windows runs Omarchy in a virtual machine on your PC, so you can explore apps, themes and the keyboard flow without repartitioning. Per its README you need 64-bit Windows 10 or 11 with hardware virtualization; ARM64 Windows PCs are not supported. The launcher is about 10 MB, and setup downloads about 2 GB. Your Linux files persist between sessions.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-repo-try-windows.webp" alt="Try Omarchy showing the Omarchy desktop in a window on Windows 11" width="960" height="540" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Image from the <a href="https://github.com/omacom/try-omarchy-windows" target="_blank" rel="noopener">omacom/try-omarchy-windows</a> README (MIT).</p>
+    </section>
+    <section id="backup">
+      <h2>2. Back up and write things down</h2>
+<ul><li><strong>Copy your files</strong> to an external drive: Documents, Desktop, Pictures, Downloads, game saves you care about.</li><li><strong>Note your license keys.</strong> If your PC shipped with Windows, <code>omarchy windows key</code> can print the OEM key from firmware later.</li><li><strong>Check your password manager</strong> works on another device.</li></ul>
+    </section>
+    <section id="dual">
+      <h2>3. Install next to Windows</h2>
+<p>The safest move keeps Windows on the disk. In short: turn off BitLocker and Fast Startup, shrink C: in Disk Management, then choose <strong>Free space install</strong> in the Omarchy installer and run <code>limine-scan</code> afterward. The <a href="/dual-boot-windows-and-omarchy.html">dual boot guide</a> has every click.</p>
+    </section>
+    <section id="import">
+      <h2>4. Bring your trial setup over</h2>
+<p>If you used Try Omarchy, the project's migration guide says one command in your new Omarchy install reads the trial straight off the Windows drive. Open a terminal with <kbd>Super</kbd> + <kbd>Return</kbd>:</p>
+<pre><code class="language-bash">curl -fsSL https://tryomarchy.com/import | bash</code></pre>
+<p>It asks for your password, finds the trial, and lets you pick what comes over: settings, themes, keybindings, apps, files and projects. The guide says nothing on the Windows drive is changed. Keep Try Omarchy installed until the import is done, because uninstalling it deletes the trial.</p>
+    </section>
+    <section id="apps">
+      <h2>5. Map your apps</h2>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>On Windows</th><th>On Omarchy</th></tr></thead><tbody><tr><td>File Explorer</td><td>Nautilus (<kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd>), <a href="/apps/strata.html">Strata</a> or <a href="/apps/flea.html">flea</a></td></tr><tr><td>Snipping Tool</td><td><kbd>Print Screen</kbd></td></tr><tr><td>Nearby Share to phone</td><td><a href="/apps/localsend.html">LocalSend</a></td></tr><tr><td>Microsoft Office</td><td>LibreOffice, web apps, or the <a href="/run-windows-apps-on-omarchy.html">Windows 11 VM</a></td></tr><tr><td>Zoom, WhatsApp</td><td>Preinstalled web apps</td></tr><tr><td>Steam, Battle.net, Epic</td><td><a href="/gaming-on-omarchy-after-windows.html">Install &gt; Gaming</a></td></tr><tr><td>TeamViewer</td><td><a href="/apps/rustdesk.html">RustDesk</a>, see <a href="/free-teamviewer-alternatives-omarchy.html">TeamViewer alternatives</a></td></tr></tbody></table></div><p>Shortcuts are covered in <a href="/windows-shortcuts-on-omarchy.html">Windows shortcuts on Omarchy</a>.</p>
+    </section>
+    <section id="rollback">
+      <h2>6. Your way back</h2>
+<ul><li><strong>Windows is still there.</strong> Pick Windows Boot Manager in the Limine menu.</li><li><strong>A bad Omarchy update:</strong> boot the previous snapshot from Limine. Snapshots cover the system, not your files.</li><li><strong>Help:</strong> run <code>omarchy-debug</code> and share it in #omarchy-help on the Omarchy Discord.</li></ul>
+<div class="yt-embed" data-yt="Z_TCoRGdaYw" data-title="I Installed Omarchy 4... and I Get the Hype Now"><button type="button" class="video-ph" aria-label="Play video: I Installed Omarchy 4... and I Get the Hype Now"><span class="play-icon" aria-hidden="true">&#9654;</span><span>Watch: I Installed Omarchy 4... and I Get the Hype Now</span></button></div>
+<p class="media-source">Video by Tech Enthusiast on <a href="https://www.youtube.com/watch?v=Z_TCoRGdaYw" target="_blank" rel="noopener">YouTube</a>. It loads from youtube-nocookie.com only after you press play.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/dual-boot-windows-and-omarchy.html">Dual Boot Windows and Omarchy: Try Linux Without Giving Up Windows</a></li><li><a href="/windows-shortcuts-on-omarchy.html">Windows Shortcuts on Omarchy: Your Muscle Memory, Translated</a></li><li><a href="/run-windows-apps-on-omarchy.html">Still Need a Windows App? Run Windows 11 Inside Omarchy</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>Can I try Omarchy without leaving Windows?</summary><p>Yes. Try Omarchy for Windows runs Omarchy in a window on 64-bit Windows 10 or 11 with hardware virtualization. ARM64 Windows PCs are not supported.</p></details>
+<details><summary>Will I lose Windows if I install Omarchy?</summary><p>Not if you choose Free space install. Windows stays on the disk and you add it to the Limine boot menu with limine-scan.</p></details>
+<details><summary>How do I move my Try Omarchy setup to a real install?</summary><p>After installing next to Windows, run curl -fsSL https://tryomarchy.com/import | bash in Omarchy. It reads the trial from the Windows drive and lets you pick what to bring.</p></details>
+<details><summary>Why turn off Fast Startup before installing?</summary><p>Omacom&#x27;s migration guide says that with Fast Startup on, Windows never fully shuts down, so Omarchy would only see an out-of-date copy of your files.</p></details>
+<details><summary>How do I get back to Windows?</summary><p>Choose Windows Boot Manager in the Limine boot menu. Run limine-scan in Omarchy if it is missing.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://github.com/omacom/try-omarchy-windows" target="_blank" rel="noopener">omacom/try-omarchy-windows README</a></li><li><a href="https://github.com/omacom/try-omarchy-windows/blob/master/docs/MIGRATION.md" target="_blank" rel="noopener">Try Omarchy for Windows: moving to a real install</a></li><li><a href="https://omarchy.org/manual/dual-boot-install/" target="_blank" rel="noopener">Omarchy manual: Dual boot install</a></li><li><a href="https://omarchy.org/manual/troubleshooting/" target="_blank" rel="noopener">Omarchy manual: Troubleshooting (omarchy-debug)</a></li><li><a href="https://omarchy.org/manual/windows-vm/" target="_blank" rel="noopener">Omarchy manual: Windows VM (omarchy windows key)</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>
+<script>
+document.querySelectorAll('.yt-embed[data-yt]').forEach(function (w) {
+  var b = w.querySelector('button');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(w.dataset.yt) + '?autoplay=1' + (w.dataset.start ? '&start=' + encodeURIComponent(w.dataset.start) : '');
+    f.title = w.dataset.title || 'Video';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius);display:block';
+    w.textContent = '';
+    w.appendChild(f);
+  });
+});
+</script>

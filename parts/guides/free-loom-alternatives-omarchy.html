@@ -1,0 +1,48 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#why">Why switch</a><a href="#record">Record</a><a href="#monologue">Monologue</a><a href="#trim">Trim</a><a href="#more">More</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="why">
+      <h2>What Loom&#x27;s free plan limits</h2>
+<p>Loom's free Starter plan, per its pricing page, allows 25 videos per person and 5-minute screen recordings. Paid plans remove those limits. On Omarchy you can record as long as you like and keep the files on your own disk. Then upload the MP4 anywhere you already share files.</p>
+    </section>
+    <section id="record">
+      <h2>1. The built-in recorder: Alt+Print Screen</h2>
+<p>Omarchy's manual says <kbd>Alt</kbd> + <kbd>Print Screen</kbd> starts a screen recording through gpu-screen-recorder. You get a 60 fps MP4 in <code>~/Videos</code>, and you can turn on a webcam overlay, which is the Loom look.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-repo-omasnap.webp" alt="Omasnap capture and markup overlay on Omarchy" width="960" height="540" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Animation frame from the <a href="https://github.com/omacom/omasnap" target="_blank" rel="noopener">omacom/omasnap</a> README (MIT). Omasnap handles stills; Alt+Print Screen handles video.</p>
+    </section>
+    <section id="monologue">
+      <h2>2. Monologue: webcam takes with an editor</h2>
+<p>Monologue is a simple webcam recorder for Omarchy. Choose your camera and mic once, then press <kbd>Space</kbd> to record and again to pause. Stop, and it opens in a built-in editor where you can trim ends and cut out the middle. It saves H.264 MP4 and never touches the original take.</p>
+<pre><code class="language-bash">omarchy pkg add monologue</code></pre>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-store-monologue.webp" alt="The Monologue listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshots: the <a href="/apps/monologue.html">monologue</a> page on this store.</p>
+    </section>
+    <section id="trim">
+      <h2>3. Omacut: trim before you send</h2>
+<p>Omacut is a bare-bones video trimmer. Drag start and end handles, preview, and export as MP4 at the original resolution, 1080p or 720p. It is the fastest way to cut the first awkward seconds off a recording.</p>
+<pre><code class="language-bash">omarchy pkg add omacut</code></pre>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-repo-omacut.webp" alt="The Omacut trimmer with a video loaded and trim handles" width="1200" height="1200" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshot from the <a href="https://github.com/omacom/omacut" target="_blank" rel="noopener">omacom/omacut</a> README (MIT).</p>
+    </section>
+    <section id="more">
+      <h2>4 and 5. OBS Studio and Kdenlive</h2>
+<p>Omarchy's manual lists OBS Studio for scenes and streaming and Kdenlive for full editing. Reach for them when a quick recording turns into a real video. Our <a href="/free-video-editor-linux-omarchy.html">free video editor guide</a> compares the editors.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/free-powerpoint-alternatives-omarchy.html">Free PowerPoint Alternatives on Omarchy: Hype, Omapresent, Impress</a></li><li><a href="/free-photoshop-alternatives-omarchy.html">Best Free and Open Source Photoshop Alternatives on Omarchy</a></li><li><a href="/windows-shortcuts-on-omarchy.html">Windows Shortcuts on Omarchy: Your Muscle Memory, Translated</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>How do I record my screen on Omarchy?</summary><p>Press Alt+Print Screen. Omarchy records with gpu-screen-recorder and saves a 60 fps MP4 in ~/Videos. You can add a webcam overlay.</p></details>
+<details><summary>Is there a free Loom alternative for Linux?</summary><p>Yes. Omarchy&#x27;s built-in recorder plus Monologue and Omacut cover record, trim and export for free, with no length limit from the app.</p></details>
+<details><summary>What are the limits of Loom&#x27;s free plan?</summary><p>Loom&#x27;s pricing page lists 25 videos per person and 5-minute screen recordings on the free Starter plan.</p></details>
+<details><summary>How do I record only my webcam?</summary><p>Install Monologue with omarchy pkg add monologue. Press Space to record or pause, then trim in its built-in editor.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://omarchy.org/manual/screenshots-recording/" target="_blank" rel="noopener">Omarchy manual: Screenshots and recording</a></li><li><a href="https://omarchy.org/manual/guis/" target="_blank" rel="noopener">Omarchy manual: GUIs (OBS Studio, Kdenlive, Monologue)</a></li><li><a href="https://github.com/omacom/monologue" target="_blank" rel="noopener">omacom/monologue README</a></li><li><a href="https://github.com/omacom/omacut" target="_blank" rel="noopener">omacom/omacut README</a></li><li><a href="https://www.loom.com/pricing" target="_blank" rel="noopener">Loom pricing</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>

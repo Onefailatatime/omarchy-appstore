@@ -1,0 +1,62 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#why">Why bother</a><a href="#bios">BIOS</a><a href="#install">Install</a><a href="#tune">Tune</a><a href="#giveaway">Pass it on</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="why">
+      <h2>Will it run on my old machine?</h2>
+<p>omarchy.org puts it plainly: even a 2011 ThinkPad X220 with 2GB of RAM can run Omarchy, with room to spare. Omarchy has a page called <em>Runs great on ancient hardware</em> that shows it on that laptop. NVIDIA drivers are set up during install if you have an NVIDIA card.</p>
+    </section>
+    <section id="bios">
+      <h2>Prepare the BIOS</h2>
+<ul><li><strong>Turn off Secure Boot and/or TPM.</strong> Getting Started says you have to.</li><li><strong>Turn on virtualization (often called VT-x, AMD-V or SVM)</strong> if you want the Windows VM later. The Windows VM installer tells you if KVM is off.</li><li><strong>Use a wired or 2.4GHz keyboard</strong> for setup so you can type the encryption password at boot.</li></ul>
+    </section>
+    <section id="install">
+      <h2>Install</h2>
+<ol><li>Write the ISO with balenaEtcher (Mac or Windows) or caligula (Linux).</li><li>Boot from the stick using your PC's boot menu key.</li><li>Answer the questions, pick the drive, and wait. Getting Started says it should not take more than 5 minutes even on an older computer.</li></ol>
+<p>Full-disk install wipes the drive. To keep Windows on it, use the <a href="/dual-boot-windows-and-omarchy.html">dual boot guide</a> instead.</p>
+<div class="yt-embed" data-yt="qBKMe8AatY0" data-title="I Didn&#x27;t Expect Omarchy 4 to Be This Good"><button type="button" class="video-ph" aria-label="Play video: I Didn&#x27;t Expect Omarchy 4 to Be This Good"><span class="play-icon" aria-hidden="true">&#9654;</span><span>Watch: I Didn&#x27;t Expect Omarchy 4 to Be This Good</span></button></div>
+<p class="media-source">Video by LinuxBTW on <a href="https://www.youtube.com/watch?v=qBKMe8AatY0" target="_blank" rel="noopener">YouTube</a>. It loads from youtube-nocookie.com only after you press play.</p>
+    </section>
+    <section id="tune">
+      <h2>Make it pleasant</h2>
+<p>Most older laptop screens are 1x, so set <code>local omarchy_gdk_scale = 1</code> in <code>~/.config/hypr/monitors.lua</code>. Clear extras with <strong>Remove > Preinstalls</strong>. Find space hogs with <a href="/apps/disktree-bin.html">disktree</a>. Prefer light apps like <a href="/apps/flea.html">flea</a> for files and <a href="/apps/cliamp.html">cliamp</a> for music. More in the <a href="/speed-up-old-mac-with-omarchy.html">tune-up checklist</a>.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-store-flea.webp" alt="The flea file manager listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure><figure class="shot-wrap"><img src="/images/guide-store-cliamp.webp" alt="The cliamp listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshots: the <a href="/apps/flea.html">flea</a> page on this store, the <a href="/apps/cliamp.html">cliamp</a> page on this store.</p>
+    </section>
+    <section id="giveaway">
+      <h2>Giving the laptop away?</h2>
+<p>The Getting Started guide has a neat trick: press <kbd>Ctrl</kbd> + <kbd>C</kbd> on the installer's first screen to prepare the machine for another owner, so they answer the setup questions themselves.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/speed-up-old-mac-with-omarchy.html">Make an Old Mac Feel Fast Again: An Omarchy Tune-Up Checklist</a></li><li><a href="/dual-boot-windows-and-omarchy.html">Dual Boot Windows and Omarchy: Try Linux Without Giving Up Windows</a></li><li><a href="/install-omarchy-on-intel-mac.html">How to Install Omarchy on an Old Intel Mac, Step by Step</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>Can Omarchy run on 2GB of RAM?</summary><p>omarchy.org says even a 2011 ThinkPad X220 with 2GB of RAM can run Omarchy with room to spare.</p></details>
+<details><summary>Do I need to change BIOS settings?</summary><p>Yes. Turn off Secure Boot and/or TPM. Getting Started says you have to do this to install Omarchy.</p></details>
+<details><summary>How long does Omarchy take to install on an old PC?</summary><p>The Getting Started guide says it should not take more than 5 minutes even on an older computer.</p></details>
+<details><summary>Can I set up an old laptop for someone else?</summary><p>Yes. Press Ctrl+C on the installer&#x27;s first screen to prepare the machine for another owner.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://omarchy.org/" target="_blank" rel="noopener">omarchy.org (Potato PCs, NVIDIA drivers)</a></li><li><a href="https://omarchy.org/potato/" target="_blank" rel="noopener">omarchy.org/potato: Runs great on ancient hardware</a></li><li><a href="https://omarchy.org/manual/getting-started/" target="_blank" rel="noopener">Omarchy manual: Getting started</a></li><li><a href="https://omarchy.org/manual/windows-vm/" target="_blank" rel="noopener">Omarchy manual: Windows VM (KVM)</a></li><li><a href="https://omarchy.org/manual/troubleshooting/" target="_blank" rel="noopener">Omarchy manual: Troubleshooting (scaling)</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>
+<script>
+document.querySelectorAll('.yt-embed[data-yt]').forEach(function (w) {
+  var b = w.querySelector('button');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(w.dataset.yt) + '?autoplay=1' + (w.dataset.start ? '&start=' + encodeURIComponent(w.dataset.start) : '');
+    f.title = w.dataset.title || 'Video';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius);display:block';
+    w.textContent = '';
+    w.appendChild(f);
+  });
+});
+</script>

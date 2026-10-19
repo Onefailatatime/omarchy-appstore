@@ -27,6 +27,7 @@ from compression import zstd  # stdlib since Python 3.14
 import sponsors as ads
 import press
 import tutorials
+import seo_guides
 
 ROOT = pathlib.Path(__file__).parent
 DIST = ROOT / "dist"
@@ -315,6 +316,8 @@ GUIDES = [
         ],
     },
 ]
+GUIDES += seo_guides.GUIDES
+
 FAQ = [
     ("What is the Unofficial Omarchy App Store?", "It is a searchable directory of packages published by the official Omarchy package repository. It is an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing."),
     ("How do I install an app on Omarchy?", "Open a package, review its requirements, then copy the displayed omarchy pkg add command into a terminal. Packages are downloaded from the official Omarchy repository, not from this site."),
@@ -968,6 +971,7 @@ def render_seo_page(template: str, css: str, guide: dict, body: str, related: st
             .replace("__RELATED_GUIDES__", related)
             .replace("__STRUCTURED_DATA__", json_script(schema))
             .replace("__SYNCED__", synced)
+            .replace("__SITE_URL__/images/social-card.png?v=2", guide.get("og_image", "__SITE_URL__/images/social-card.png?v=2"))
             .replace("__SITE_URL__", SITE_URL)
             .replace("__STYLE__", css))
 
@@ -1178,7 +1182,8 @@ def main() -> None:
         guide_body = fill_package_watch(guide, guide_body, pkgs)
         (DIST / f"{guide['slug']}.html").write_text(render_seo_page(
             guide_template, page_css, guide, guide_body, related, synced,
-            ("Guides", "/#guides"), f"Reviewed {synced} · independent editorial guide"), encoding="utf-8")
+            ("Guides", "/#guides"), f"Reviewed {synced} · independent editorial guide",
+            extra_graph=guide.get("extra_graph")), encoding="utf-8")
 
     guided = {n for names in GUIDE_PACKAGES.values() for n in names}
     tuts = tutorials.build(pkgs, guided, {g["slug"] for g in GUIDES}, SITE_URL, profile_images)

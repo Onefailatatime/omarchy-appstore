@@ -1,0 +1,55 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#table">Cheat sheet</a><a href="#careful">Watch out</a><a href="#learn">Learn fast</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="table">
+      <h2>The translation table</h2>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>On Windows you press</th><th>On Omarchy press</th><th>What happens</th></tr></thead><tbody><tr><td>Windows key (Start)</td><td><kbd>Super</kbd> + <kbd>Space</kbd></td><td>Omarchy menu: apps, settings, install, capture. Type to filter.</td></tr><tr><td>Start, apps only</td><td><kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd></td><td>Apps-only menu</td></tr><tr><td><kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd></td><td><kbd>Print Screen</kbd></td><td>Screenshot with markup tools (Omasnap)</td></tr><tr><td><kbd>Win</kbd> + <kbd>V</kbd></td><td><kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>V</kbd></td><td>Clipboard history, images included</td></tr><tr><td><kbd>Ctrl</kbd> + <kbd>C</kbd> / <kbd>V</kbd></td><td><kbd>Super</kbd> + <kbd>C</kbd> / <kbd>X</kbd> / <kbd>V</kbd></td><td>Copy, cut, paste everywhere, terminal included</td></tr><tr><td><kbd>Alt</kbd> + <kbd>F4</kbd></td><td><kbd>Super</kbd> + <kbd>W</kbd> (or <kbd>Super</kbd> + <kbd>Q</kbd>)</td><td>Close the window. The app really quits.</td></tr><tr><td><kbd>Win</kbd> + <kbd>L</kbd></td><td><kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>L</kbd></td><td>Lock the computer</td></tr><tr><td>Virtual desktops</td><td><kbd>Super</kbd> + <kbd>1</kbd> to <kbd>4</kbd></td><td>Jump to a workspace. Add <kbd>Shift</kbd> to move the window there.</td></tr><tr><td><kbd>Alt</kbd> + <kbd>Tab</kbd></td><td><kbd>Alt</kbd> + <kbd>Tab</kbd></td><td>Cycle windows on the current workspace</td></tr><tr><td>Snap to half screen</td><td>Nothing to press</td><td>Windows tile on their own. <kbd>Super</kbd> + <kbd>T</kbd> floats one.</td></tr><tr><td>Notification center</td><td><kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>,</kbd></td><td>Notification history</td></tr><tr><td>Control Panel</td><td>Setup in the Omarchy menu</td><td>Opens the right config file and restarts what needs it</td></tr><tr><td>Power menu</td><td><kbd>Super</kbd> + <kbd>Escape</kbd></td><td>Suspend, restart, shut down</td></tr></tbody></table></div>
+    </section>
+    <section id="careful">
+      <h2>Three keys that behave differently</h2>
+<ul><li><strong><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Del</kbd> closes all windows</strong> on Omarchy. It is not a task manager. Save first.</li><li><strong>Caps Lock is a compose key</strong> for quick emoji and symbols. If you want Caps Lock back, set <code>kb_options = "compose:ralt"</code> in <code>~/.config/hypr/input.lua</code> (Setup, then Input, in the menu).</li><li><strong>Quick panels</strong> live on <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>A</kbd> (audio), <kbd>B</kbd> (Bluetooth) and <kbd>W</kbd> (Wi-Fi).</li></ul>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-repo-omasnap.webp" alt="Omasnap capturing a region of the screen and adding markup" width="960" height="540" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Animation frame from the <a href="https://github.com/omacom/omasnap" target="_blank" rel="noopener">omacom/omasnap</a> README (MIT).</p>
+    </section>
+    <section id="learn">
+      <h2>How to learn the rest in two weeks</h2>
+<p>The Omarchy manual's advice for switchers is to give it two weeks. Skim the hotkeys once, and whenever you blank, press <kbd>Super</kbd> + <kbd>K</kbd> to see every binding. If the Windows key is awkward on your keyboard, the manual shows how to swap Alt and Super with <code>altwin:swap_alt_win</code>.</p>
+<div class="yt-embed" data-yt="5JPYJfN7HY0" data-title="They finally fixed linux"><button type="button" class="video-ph" aria-label="Play video: They finally fixed linux"><span class="play-icon" aria-hidden="true">&#9654;</span><span>Watch: They finally fixed linux</span></button></div>
+<p class="media-source">Video by typecraft on <a href="https://www.youtube.com/watch?v=5JPYJfN7HY0" target="_blank" rel="noopener">YouTube</a>. It loads from youtube-nocookie.com only after you press play.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/switch-from-windows-to-omarchy-safely.html">Move from Windows to Omarchy Safely: Backup, Data, Apps, Rollback</a></li><li><a href="/omarchy-for-windows-developers.html">Omarchy for Windows Developers: Languages, Docker and Editors</a></li><li><a href="/gaming-on-omarchy-after-windows.html">Gaming on Omarchy After Windows: Steam, Battle.net, Epic, Game Pass</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>What is the Super key on Omarchy?</summary><p>It is the Windows key on a PC keyboard, and the Command key on a Mac. Nearly every Omarchy hotkey starts with it.</p></details>
+<details><summary>What replaces the Windows Start menu?</summary><p>Super+Space opens the Omarchy menu, which launches apps, opens settings and installs software. Start typing to filter.</p></details>
+<details><summary>How do I take a screenshot like Win+Shift+S?</summary><p>Press Print Screen. Omasnap opens so you can select an area and add arrows, text or blur.</p></details>
+<details><summary>Where is clipboard history like Win+V?</summary><p>Super+Ctrl+V. It holds images as well as text.</p></details>
+<details><summary>How do I see all the keyboard shortcuts?</summary><p>Press Super+K. It lists every binding Omarchy has set up.</p></details>
+<details><summary>What does Ctrl+Alt+Del do on Omarchy?</summary><p>It closes all windows. Use Super+Escape for the power menu instead.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://omarchy.org/manual/coming-from-mac-or-windows/" target="_blank" rel="noopener">Omarchy manual: Coming from Mac or Windows</a></li><li><a href="https://omarchy.org/manual/hotkeys/" target="_blank" rel="noopener">Omarchy manual: Hotkeys</a></li><li><a href="https://omarchy.org/manual/keyboard-mouse-trackpad/" target="_blank" rel="noopener">Omarchy manual: Keyboard, mouse, trackpad</a></li><li><a href="https://omarchy.org/manual/troubleshooting/" target="_blank" rel="noopener">Omarchy manual: Troubleshooting (Caps Lock)</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>
+<script>
+document.querySelectorAll('.yt-embed[data-yt]').forEach(function (w) {
+  var b = w.querySelector('button');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(w.dataset.yt) + '?autoplay=1' + (w.dataset.start ? '&start=' + encodeURIComponent(w.dataset.start) : '');
+    f.title = w.dataset.title || 'Video';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius);display:block';
+    w.textContent = '';
+    w.appendChild(f);
+  });
+});
+</script>

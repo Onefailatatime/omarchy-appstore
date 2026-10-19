@@ -1,0 +1,65 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#scale">Scaling</a><a href="#trim">Trim</a><a href="#disk">Disk</a><a href="#watch">Watch</a><a href="#keep">Keep it fast</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="scale">
+      <h2>1. Fix scaling on non-Retina screens</h2>
+<p>Omarchy assumes a 2x high-resolution display. Older MacBook Airs and many external monitors are 1x, so apps can look oversized. The troubleshooting page has the fix: in <code>~/.config/hypr/monitors.lua</code> change <code>local omarchy_gdk_scale = 2</code> to <code>1</code>, then restart the oversized apps. <kbd>Super</kbd> + <kbd>/</kbd> steps through monitor scaling options.</p>
+    </section>
+    <section id="trim">
+      <h2>2. Remove what you will not use</h2>
+<p>Omarchy ships extras like Obsidian, LibreOffice, web apps and TUIs. To sweep them all out at once, run <strong>Remove > Preinstalls</strong>. To pick one by one, run <strong>Remove > Package</strong>, mark with <kbd>Tab</kbd> and confirm with <kbd>Return</kbd>. The hotkeys for removed apps go away too.</p>
+    </section>
+    <section id="disk">
+      <h2>3. Check the disk and free space</h2>
+<pre><code class="language-bash">omarchy disk speedtest</code></pre>
+<p>Then see what fills the drive with <a href="/apps/disktree-bin.html">disktree</a>, a disk space treemap for Omarchy that lets you mark what should go and remove it.</p>
+<pre><code class="language-bash">omarchy pkg add disktree-bin</code></pre>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-store-disktree-bin.webp" alt="The disktree listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshots: the <a href="/apps/disktree-bin.html">disktree-bin</a> page on this store.</p>
+    </section>
+    <section id="watch">
+      <h2>4. See what is using the CPU</h2>
+<p><a href="/apps/omarchy-task-manager.html">Omarchy Task Manager</a> is a floating native task manager. <a href="/apps/tmog-bin.html">TMOG</a> shows CPU, GPU, memory, storage and network. Pick lighter tools where they fit, such as <a href="/apps/cliamp.html">cliamp</a> for music in the terminal, or <a href="/apps/flea.html">flea</a> as a fast file manager.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-store-omarchy-task-manager.webp" alt="The Omarchy Task Manager listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure><figure class="shot-wrap"><img src="/images/guide-store-cliamp.webp" alt="The cliamp terminal music player listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshots: the <a href="/apps/omarchy-task-manager.html">omarchy-task-manager</a> page on this store, the <a href="/apps/cliamp.html">cliamp</a> page on this store.</p>
+    </section>
+    <section id="keep">
+      <h2>5. Keep it healthy</h2>
+<p>Update through <strong>Update > Omarchy</strong>, which takes a snapshot first, rather than running <code>pacman -Syu</code> directly. If an update ever breaks something, boot the previous snapshot from the Limine menu. If something glitches after sleep, <strong>Update > Hardware</strong> restarts Wi-Fi, Bluetooth, audio or the trackpad on its own.</p>
+<div class="yt-embed" data-yt="MsIp_tPGt1o" data-title="Omarchy Quattro Linux Review"><button type="button" class="video-ph" aria-label="Play video: Omarchy Quattro Linux Review"><span class="play-icon" aria-hidden="true">&#9654;</span><span>Watch: Omarchy Quattro Linux Review</span></button></div>
+<p class="media-source">Video by Midnight Linux on <a href="https://www.youtube.com/watch?v=MsIp_tPGt1o" target="_blank" rel="noopener">YouTube</a>. It loads from youtube-nocookie.com only after you press play.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/revive-old-laptop-with-omarchy.html">Revive an Old Laptop or PC with Omarchy: A Practical Guide</a></li><li><a href="/omarchy-on-t2-macbook.html">Omarchy on T2 Macs (2017 to 2020): What Works and What to Expect</a></li><li><a href="/install-omarchy-on-intel-mac.html">How to Install Omarchy on an Old Intel Mac, Step by Step</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>Why do apps look huge on my old Mac?</summary><p>Omarchy assumes a 2x display. On a 1x screen, change local omarchy_gdk_scale = 2 to 1 in ~/.config/hypr/monitors.lua and restart the app.</p></details>
+<details><summary>How do I remove preinstalled apps on Omarchy?</summary><p>Run Remove &gt; Preinstalls from the Omarchy menu to clear all extras at once, or Remove &gt; Package to pick individual packages.</p></details>
+<details><summary>How do I test my disk speed?</summary><p>Run omarchy disk speedtest in a terminal, or use Trigger &gt; Speed Test &gt; Disk Speed Test in the menu.</p></details>
+<details><summary>Is Omarchy faster than macOS on an old Mac?</summary><p>The Omarchy manual reports a 36% performance gain on a 2019 MacBook Pro in a simple test. Results depend on the machine.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://omarchy.org/manual/troubleshooting/" target="_blank" rel="noopener">Omarchy manual: Troubleshooting (scaling, hardware restarts)</a></li><li><a href="https://omarchy.org/manual/faq/" target="_blank" rel="noopener">Omarchy manual: FAQ (Remove &gt; Preinstalls, disk speed test)</a></li><li><a href="https://omarchy.org/manual/updates/" target="_blank" rel="noopener">Omarchy manual: Updates</a></li><li><a href="https://omarchy.org/manual/mac-support/" target="_blank" rel="noopener">Omarchy manual: Mac support</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>
+<script>
+document.querySelectorAll('.yt-embed[data-yt]').forEach(function (w) {
+  var b = w.querySelector('button');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(w.dataset.yt) + '?autoplay=1' + (w.dataset.start ? '&start=' + encodeURIComponent(w.dataset.start) : '');
+    f.title = w.dataset.title || 'Video';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius);display:block';
+    w.textContent = '';
+    w.appendChild(f);
+  });
+});
+</script>

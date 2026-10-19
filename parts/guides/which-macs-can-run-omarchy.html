@@ -1,0 +1,36 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#check">Check</a><a href="#intel">Intel</a><a href="#silicon">Apple Silicon</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="check">
+      <h2>Check your Mac in 10 seconds</h2>
+<p>Open the Apple menu and choose <strong>About This Mac</strong>. If you see <em>Processor</em> with Intel in the name, you have an Intel Mac. If you see <em>Chip</em> with Apple M1 or newer, you have Apple Silicon.</p>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>Your Mac</th><th>What you can do</th><th>Source</th></tr></thead><tbody><tr><td>Intel Mac, 2016 T1 MacBook Pro</td><td>Install, but Touch Bar and sound do not work yet</td><td>Mac support manual</td></tr><tr><td>Intel Mac with T2 (2017 to 2020)</td><td>Install. Kernel, audio, Wi-Fi and fans set up for you</td><td>Mac support manual</td></tr><tr><td>Other Intel Macs</td><td>Install. Wi-Fi, keyboard and suspend fixes applied automatically</td><td>Mac support manual</td></tr><tr><td>Apple Silicon (M-series)</td><td>Try Omarchy app (VM). Install is not directly supported.</td><td>omarchy.org, try-omarchy README</td></tr><tr><td>Apple M1 or M2</td><td>Asahi Alarm route, with some effort (community guide)</td><td>Omarchy on... manual</td></tr></tbody></table></div>
+    </section>
+    <section id="intel">
+      <h2>Intel Macs: install it</h2>
+<p>Follow <a href="/install-omarchy-on-intel-mac.html">the Intel Mac install guide</a>. Omarchy's own Mac support page reports that in a simple test, a 2019 MacBook Pro got a 36% performance gain just by installing Omarchy. That is their test on one machine, so treat it as a hint, not a promise.</p>
+    </section>
+    <section id="silicon">
+      <h2>Apple Silicon: try it in a window</h2>
+<p>The Try Omarchy app from Omacom runs a stock Omarchy install as a native, hardware-accelerated app on Apple Silicon. Per its README: download the signed DMG from the releases page, drag it to Applications and launch. The first launch downloads about 3 GB and needs about 15 GB of free space. It shares the clipboard and one folder with macOS. A current limit: video decoding is CPU-only, so playback can be slow.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-repo-try-mac.webp" alt="Try Omarchy running the Omarchy desktop on a MacBook Pro" width="1200" height="733" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshot from the <a href="https://github.com/omacom/try-omarchy" target="_blank" rel="noopener">omacom/try-omarchy</a> README (MIT). The Omarchy mark is subject to Omarchy's trademark rights.</p>
+<p>For M1 and M2 there is also Asahi Alarm, a version of Arch built on Asahi Linux. The manual says you can get Omarchy running on it with some effort, through a user-driven guide. A Parallels VM guide exists too. Ask in the #omarchy-on-other channel on the Omarchy Discord.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/install-omarchy-on-intel-mac.html">How to Install Omarchy on an Old Intel Mac, Step by Step</a></li><li><a href="/omarchy-on-t2-macbook.html">Omarchy on T2 Macs (2017 to 2020): What Works and What to Expect</a></li><li><a href="/switch-from-mac-to-omarchy-safely.html">How to Move from Mac to Omarchy Safely: Backup, Apps, Rollback</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>Can Omarchy run on an M1 Mac?</summary><p>Not as a direct install. You can try it in the Try Omarchy app, which runs it in a VM on Apple Silicon. For M1 and M2 there is also a community route through Asahi Alarm, which takes some effort.</p></details>
+<details><summary>Which Intel Macs are supported?</summary><p>Omarchy has built-in support for Intel Macs. T2 models from 2017 to 2020 get extra setup automatically. The 2016 T1 MacBook Pros install, but Touch Bar and sound do not work yet.</p></details>
+<details><summary>How do I know if my Mac is Intel or Apple Silicon?</summary><p>Open the Apple menu, choose About This Mac. Intel Macs show a Processor line with Intel. Apple Silicon Macs show a Chip line with Apple M1 or newer.</p></details>
+<details><summary>How much space does Try Omarchy need on a Mac?</summary><p>Its README says the first launch downloads about 3 GB and needs about 15 GB of room for the image and the prepared disk.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://omarchy.org/manual/mac-support/" target="_blank" rel="noopener">Omarchy manual: Mac support</a></li><li><a href="https://omarchy.org/manual/omarchy-on/" target="_blank" rel="noopener">Omarchy manual: Omarchy on...</a></li><li><a href="https://github.com/omacom/try-omarchy" target="_blank" rel="noopener">omacom/try-omarchy README</a></li><li><a href="https://omarchy.org/" target="_blank" rel="noopener">omarchy.org (Try it first)</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>

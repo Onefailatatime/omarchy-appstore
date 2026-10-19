@@ -1,0 +1,62 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#first">First</a><a href="#setup">Set up</a><a href="#files">Files</a><a href="#license">Licensing</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="first">
+      <h2>Before you set up a VM</h2>
+<p>Check if you need Windows at all. Many apps have a web version, and Omarchy can turn any site into an app window with Install, then Web App. Microsoft says PowerPoint for the web is free, and Omarchy already ships Zoom and WhatsApp as web apps. For desktop Office files, LibreOffice comes preinstalled. If you still have a Windows PC, you can also just remote into it with <a href="/apps/rustdesk.html">RustDesk</a>.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-repo-rustdesk-win.webp" alt="RustDesk connected to a Windows PC from another computer" width="1200" height="782" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshot from the <a href="https://github.com/rustdesk/rustdesk" target="_blank" rel="noopener">rustdesk/rustdesk</a> README (AGPL-3.0).</p>
+    </section>
+    <section id="setup">
+      <h2>Set up the Windows VM</h2>
+<ol><li>Press <kbd>Super</kbd> + <kbd>Space</kbd> and choose <strong>Install</strong>, then <strong>Windows</strong>. Your machine needs KVM virtualization. If it is off in the BIOS, the installer tells you.</li><li>Pick RAM, CPU cores and disk. Plan for the disk you give Windows plus about 10GB for the image. The manual calls 64GB the sensible floor.</li><li>Set a Windows username and password, or leave them blank for <code>docker</code> / <code>admin</code>.</li><li>Wait. The download takes 10 to 15 minutes. You can watch at <code>http://127.0.0.1:8006</code>.</li><li>Open <strong>Windows</strong> from the app launcher. Give it 15 to 30 seconds on a cold start.</li></ol>
+<pre><code class="language-bash">omarchy windows vm status   # is it running?
+omarchy windows vm stop     # shut it down
+omarchy windows vm launch   # start and connect</code></pre>
+<p>Closing the RDP window shuts the VM down. To leave it running, launch with <code>omarchy windows vm launch --keep-alive</code>.</p>
+    </section>
+    <section id="files">
+      <h2>Moving files in and out</h2>
+<p>The <code>~/Windows</code> folder in your home is shared with the VM. Windows cannot see any other part of your files. The VM's ports listen on localhost only, so nothing on your network can reach it.</p>
+    </section>
+    <section id="license">
+      <h2>Licensing and limits</h2>
+<ul><li>It installs <strong>Windows 11 Pro, unactivated</strong>. You need your own license key for the gated features.</li><li><code>omarchy windows key</code> prints the OEM key from your PC's firmware. The manual says that key is bound to the machine and usually will not activate the VM.</li><li><strong>No GPU passthrough</strong>, so not for gaming or video editing. For games, see <a href="/gaming-on-omarchy-after-windows.html">gaming after Windows</a>.</li><li><strong>Remove > Windows</strong> deletes the VM and its disk. Copy anything you need out of <code>~/Windows</code> first.</li></ul>
+<div class="yt-embed" data-yt="9SDkU5VDQEQ" data-start="1389" data-title="You need to switch to Linux RIGHT NOW!!"><button type="button" class="video-ph" aria-label="Play video: You need to switch to Linux RIGHT NOW!!"><span class="play-icon" aria-hidden="true">&#9654;</span><span>Watch: You need to switch to Linux RIGHT NOW!!</span></button></div>
+<p class="media-source">Video by NetworkChuck on <a href="https://www.youtube.com/watch?v=9SDkU5VDQEQ" target="_blank" rel="noopener">YouTube</a>. Starts at the Windows-in-Docker chapter (23:09). It loads from youtube-nocookie.com only after you press play.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/switch-from-windows-to-omarchy-safely.html">Move from Windows to Omarchy Safely: Backup, Data, Apps, Rollback</a></li><li><a href="/dual-boot-windows-and-omarchy.html">Dual Boot Windows and Omarchy: Try Linux Without Giving Up Windows</a></li><li><a href="/free-powerpoint-alternatives-omarchy.html">Free PowerPoint Alternatives on Omarchy: Hype, Omapresent, Impress</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>Can I run Microsoft Office on Omarchy?</summary><p>Yes, inside the Windows 11 VM from Install &gt; Windows. The manual calls it a great way to run Office. For many files, LibreOffice or the free web versions are enough.</p></details>
+<details><summary>Does the Windows VM need a license?</summary><p>It installs Windows 11 Pro unactivated. You need your own key for the gated features. Your PC&#x27;s OEM key usually will not activate the VM.</p></details>
+<details><summary>Can I play games in the Windows VM?</summary><p>No. There is no GPU passthrough. Use Steam with Proton, cloud gaming or Moonlight streaming instead.</p></details>
+<details><summary>How do I share files with the Windows VM?</summary><p>Put them in ~/Windows in your home folder. That is the only folder Windows can see.</p></details>
+<details><summary>How much disk does the Windows VM need?</summary><p>The disk you allocate plus about 10GB for the image. The manual suggests 64GB or more for the VM disk.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://omarchy.org/manual/windows-vm/" target="_blank" rel="noopener">Omarchy manual: Windows VM</a></li><li><a href="https://omarchy.org/manual/web-apps/" target="_blank" rel="noopener">Omarchy manual: Web apps</a></li><li><a href="https://omarchy.org/" target="_blank" rel="noopener">omarchy.org (Windows section)</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>
+<script>
+document.querySelectorAll('.yt-embed[data-yt]').forEach(function (w) {
+  var b = w.querySelector('button');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(w.dataset.yt) + '?autoplay=1' + (w.dataset.start ? '&start=' + encodeURIComponent(w.dataset.start) : '');
+    f.title = w.dataset.title || 'Video';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius);display:block';
+    w.textContent = '';
+    w.appendChild(f);
+  });
+});
+</script>

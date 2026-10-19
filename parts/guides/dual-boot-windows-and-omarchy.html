@@ -1,0 +1,42 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#before">Before you start</a><a href="#space">Make space</a><a href="#install">Install</a><a href="#after">After</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="before">
+      <h2>Before you start</h2>
+<ul><li><strong>Back up.</strong> Shrinking partitions is routine, but you want a copy of anything you cannot lose.</li><li><strong>Turn off BitLocker.</strong> The manual says the free space install is not compatible with BitLocker. Go to Settings > Privacy & security > Device encryption. Decrypting can take a while.</li><li><strong>Turn off Fast Startup.</strong> Omacom's Try Omarchy guide explains that with it on, Windows never fully shuts down. Control Panel > Power Options > Choose what the power buttons do > Change settings that are currently unavailable, then clear <em>Turn on fast startup</em>.</li><li><strong>Turn off Secure Boot</strong> (and TPM if needed) in the BIOS. The Getting Started guide says you must.</li></ul>
+    </section>
+    <section id="space">
+      <h2>Make space for Omarchy</h2>
+<ol><li>In Windows, type <em>disk management</em> in Start and open <strong>Create and format hard disk partitions</strong>.</li><li>Right-click your Windows partition and choose <strong>Shrink Volume</strong>.</li><li>Enter how much to free up. That becomes your whole Omarchy install, boot partition included.</li></ol>
+    </section>
+    <section id="install">
+      <h2>Install to the free space</h2>
+<ol><li>Write the Omarchy ISO to a USB stick with balenaEtcher and boot from it.</li><li>Answer the setup questions. Use a wired or 2.4GHz keyboard so you can type the encryption password.</li><li>After you pick the disk, choose <strong>Free space install</strong> so the rest of the disk is left alone. The Omarchy partition is still encrypted with LUKS by default.</li><li>When it finishes, Limine is the default boot menu. Open a terminal and add Windows:</li></ol>
+<pre><code class="language-bash">limine-scan</code></pre>
+<p>Follow the prompts, and Windows Boot Manager shows up next to Omarchy when you boot.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-store-disktree-bin.webp" alt="The disktree listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Running low on space later? <a href="/apps/disktree-bin.html">disktree</a> shows what fills a disk. Screenshot: its page on this store.</p>
+    </section>
+    <section id="after">
+      <h2>Living with two systems</h2>
+<p>Keep the Limine menu if you want snapshots. Omarchy takes a system snapshot on every update and you boot them from Limine. There is a <strong>Setup > Direct Boot</strong> option that skips the menu, but then you have to pick Limine from your BIOS boot menu to reach a snapshot. The manual says it refuses to run on American Megatrends and Apple firmware.</p>
+<p>Moving over for good? Read <a href="/switch-from-windows-to-omarchy-safely.html">how to move from Windows to Omarchy safely</a>.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/switch-from-windows-to-omarchy-safely.html">Move from Windows to Omarchy Safely: Backup, Data, Apps, Rollback</a></li><li><a href="/run-windows-apps-on-omarchy.html">Still Need a Windows App? Run Windows 11 Inside Omarchy</a></li><li><a href="/windows-shortcuts-on-omarchy.html">Windows Shortcuts on Omarchy: Your Muscle Memory, Translated</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>Can I dual boot Windows and Omarchy?</summary><p>Yes. Shrink your Windows partition, then choose Free space install in the Omarchy installer. Run limine-scan afterward to add Windows to the boot menu.</p></details>
+<details><summary>Do I need to turn off BitLocker?</summary><p>Yes. The Omarchy manual says the free space install is not compatible with BitLocker. Turn it off in Settings &gt; Privacy &amp; security &gt; Device encryption and wait for it to decrypt.</p></details>
+<details><summary>Is the Omarchy partition encrypted when dual booting?</summary><p>Yes. The free space install uses LUKS encryption by default, the same as a full-disk install.</p></details>
+<details><summary>Windows is missing from the boot menu. What now?</summary><p>Boot Omarchy, open a terminal and run limine-scan. Pick Windows Boot Manager from the prompts.</p></details>
+<details><summary>How big should the Omarchy partition be?</summary><p>The manual does not set a minimum; its example uses 50GB. Whatever you shrink becomes the whole Omarchy install, boot partition included.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://omarchy.org/manual/dual-boot-install/" target="_blank" rel="noopener">Omarchy manual: Dual boot install</a></li><li><a href="https://omarchy.org/manual/getting-started/" target="_blank" rel="noopener">Omarchy manual: Getting started</a></li><li><a href="https://omarchy.org/manual/system-snapshots/" target="_blank" rel="noopener">Omarchy manual: System snapshots</a></li><li><a href="https://github.com/omacom/try-omarchy-windows/blob/master/docs/MIGRATION.md" target="_blank" rel="noopener">Try Omarchy for Windows: moving to a real install (Fast Startup)</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>

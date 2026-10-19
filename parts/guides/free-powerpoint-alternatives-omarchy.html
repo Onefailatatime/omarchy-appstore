@@ -1,0 +1,44 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#pick">Pick one</a><a href="#hype">Hype</a><a href="#omapresent">Omapresent</a><a href="#impress">Impress</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="pick">
+      <h2>Which one fits</h2>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>You need to</th><th>Use</th><th>License</th></tr></thead><tbody><tr><td>Write a talk fast and send a .pptx or PDF</td><td><a href="/apps/hype.html">Hype</a></td><td>MIT</td></tr><tr><td>Present with notes, timer and next-slide preview</td><td><a href="/apps/omapresent.html">Omapresent</a></td><td>MIT</td></tr><tr><td>Edit a .pptx someone sent you</td><td>LibreOffice Impress (comes with Omarchy)</td><td>Open source</td></tr><tr><td>Co-edit in PowerPoint itself</td><td>PowerPoint for the web (free, in the browser)</td><td>Proprietary</td></tr></tbody></table></div><p>Microsoft offers the PowerPoint desktop app for Windows and macOS, and more features with a Microsoft 365 subscription. Microsoft also says PowerPoint for the web is free for anyone.</p>
+    </section>
+    <section id="hype">
+      <h2>1. Hype: slides from a Markdown file</h2>
+<p>Hype is an Omacom app for Omarchy. Your presentation is a Markdown file with its media next to it. Separate slides with <code>---</code>, pick an installed Omarchy theme and a font, and export. <kbd>Ctrl</kbd> + <kbd>E</kbd> exports a PDF and <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>E</kbd> exports PowerPoint. Exported slides keep their look, but text is not editable in PowerPoint.</p>
+<pre><code class="language-bash">omarchy pkg add hype</code></pre>
+<p>Hype saves every version to a <code>.hype-backups/</code> folder next to your file, so a bad edit is never final.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-store-hype.webp" alt="The Hype listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshots: the <a href="/apps/hype.html">hype</a> page on this store.</p>
+    </section>
+    <section id="omapresent">
+      <h2>2. Omapresent: a real presenter view</h2>
+<p>Omapresent turns a plain Markdown file into a deck. Paragraph text becomes speaker notes. Its present mode sends the audience view full screen to an external monitor and gives you a presenter screen with notes, a timer, a clock and the next slide. It exports PDFs with <kbd>Ctrl</kbd> + <kbd>E</kbd>.</p>
+<pre><code class="language-bash">omarchy pkg add omapresent</code></pre>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-repo-omapresent.webp" alt="Omapresent with its welcome deck open" width="1200" height="640" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshot from the <a href="https://github.com/jethrojones/omapresent" target="_blank" rel="noopener">jethrojones/omapresent</a> repository (MIT).</p>
+    </section>
+    <section id="impress">
+      <h2>3. LibreOffice Impress: for .pptx files</h2>
+<p>Omarchy preinstalls LibreOffice, which the manual describes as compatible with Microsoft Office files. When a coworker sends a deck to fix, open it in Impress. When you need PowerPoint itself, PowerPoint for the web runs in your browser, and you can save it as an Omarchy web app with Install, then Web App, in the menu.</p>
+<div class="guide-cta"><div><h2>Open the Hype package</h2><p>Current version, license and the exact install command.</p></div><a class="button" href="/apps/hype.html">View Hype &rarr;</a></div>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/free-photoshop-alternatives-omarchy.html">Best Free and Open Source Photoshop Alternatives on Omarchy</a></li><li><a href="/free-loom-alternatives-omarchy.html">Free Loom Alternatives on Omarchy: Record, Trim and Share Video</a></li><li><a href="/run-windows-apps-on-omarchy.html">Still Need a Windows App? Run Windows 11 Inside Omarchy</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>Is there a free PowerPoint for Linux?</summary><p>Microsoft says PowerPoint for the web is free for anyone in a browser. On Omarchy you also have Hype, Omapresent and LibreOffice Impress, all free.</p></details>
+<details><summary>Can I export a PowerPoint file from Hype?</summary><p>Yes. Press Ctrl+Shift+E or choose Export as PowerPoint. The slides keep their look but are stored as images, so text is not editable in PowerPoint.</p></details>
+<details><summary>How do I open a .pptx file on Omarchy?</summary><p>Use LibreOffice Impress, which Omarchy preinstalls. The Omarchy manual describes LibreOffice as compatible with Microsoft Office files.</p></details>
+<details><summary>Which app gives me speaker notes and a timer?</summary><p>Omapresent. Its present mode shows notes, a timer, a clock and the next slide on your screen while the audience sees the slides.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://github.com/omacom/hype" target="_blank" rel="noopener">omacom/hype README</a></li><li><a href="https://github.com/jethrojones/omapresent" target="_blank" rel="noopener">jethrojones/omapresent README</a></li><li><a href="https://omarchy.org/manual/guis/" target="_blank" rel="noopener">Omarchy manual: GUIs (LibreOffice, Hype)</a></li><li><a href="https://omarchy.org/manual/web-apps/" target="_blank" rel="noopener">Omarchy manual: Web apps</a></li><li><a href="https://www.microsoft.com/en-us/microsoft-365/powerpoint" target="_blank" rel="noopener">Microsoft PowerPoint page</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Still Need a Windows App? Run Windows 11 Inside Omarchy</title>
+<meta name="description" content="Keep Office or a Windows-only app after switching. How Omarchy&#x27;s built-in Windows 11 VM works: setup, sharing files via ~/Windows, licensing, limits.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#1a1b26">
+<link rel="canonical" href="https://omarchyapps.com/run-windows-apps-on-omarchy.html">
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="icon" href="/images/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
+<link rel="manifest" href="/images/site.webmanifest?v=2">
+<meta property="og:title" content="Still Need a Windows App? Run Windows 11 Inside Omarchy">
+<meta property="og:description" content="Keep Office or a Windows-only app after switching. How Omarchy&#x27;s built-in Windows 11 VM works: setup, sharing files via ~/Windows, licensing, limits.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://omarchyapps.com/run-windows-apps-on-omarchy.html">
+<meta property="og:site_name" content="Unofficial Omarchy App Store">
+<meta property="og:image" content="https://omarchyapps.com/images/og-run-windows-apps-on-omarchy.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jessyka_boat">
+<meta name="twitter:title" content="Still Need a Windows App? Run Windows 11 Inside Omarchy">
+<meta name="twitter:description" content="Keep Office or a Windows-only app after switching. How Omarchy&#x27;s built-in Windows 11 VM works: setup, sharing files via ~/Windows, licensing, limits.">
+<meta name="twitter:image" content="https://omarchyapps.com/images/og-run-windows-apps-on-omarchy.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/run-windows-apps-on-omarchy.html#article","headline":"Still Need a Windows App? Run Windows 11 Inside Omarchy","description":"Keep Office or a Windows-only app after switching. How Omarchy's built-in Windows 11 VM works: setup, sharing files via ~/Windows, licensing, limits.","url":"https://omarchyapps.com/run-windows-apps-on-omarchy.html","dateModified":"2026-10-19","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Still Need a Windows App? Run Windows 11 Inside Omarchy","item":"https://omarchyapps.com/run-windows-apps-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I run Microsoft Office on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Yes, inside the Windows 11 VM from Install > Windows. The manual calls it a great way to run Office. For many files, LibreOffice or the free web versions are enough."}},{"@type":"Question","name":"Does the Windows VM need a license?","acceptedAnswer":{"@type":"Answer","text":"It installs Windows 11 Pro unactivated. You need your own key for the gated features. Your PC's OEM key usually will not activate the VM."}},{"@type":"Question","name":"Can I play games in the Windows VM?","acceptedAnswer":{"@type":"Answer","text":"No. There is no GPU passthrough. Use Steam with Proton, cloud gaming or Moonlight streaming instead."}},{"@type":"Question","name":"How do I share files with the Windows VM?","acceptedAnswer":{"@type":"Answer","text":"Put them in ~/Windows in your home folder. That is the only folder Windows can see."}},{"@type":"Question","name":"How much disk does the Windows VM need?","acceptedAnswer":{"@type":"Answer","text":"The disk you allocate plus about 10GB for the image. The manual suggests 64GB or more for the VM disk."}}]},{"@type":"HowTo","@id":"https://omarchyapps.com/run-windows-apps-on-omarchy.html#howto","name":"Still Need a Windows App? Run Windows 11 Inside Omarchy","step":[{"@type":"HowToStep","position":1,"name":"Open the installer","text":"Press Super+Space, choose Install, then Windows."},{"@type":"HowToStep","position":2,"name":"Pick resources","text":"Choose RAM, CPU cores and disk. 64GB or more is the sensible floor."},{"@type":"HowToStep","position":3,"name":"Wait for the download","text":"10 to 15 minutes is normal. Watch progress at http://127.0.0.1:8006."},{"@type":"HowToStep","position":4,"name":"Launch Windows","text":"Open Windows from the app launcher. It connects over RDP, full screen."},{"@type":"HowToStep","position":5,"name":"Share files","text":"Put files in ~/Windows to reach them from Windows."}]}]}</script>
+<link rel="stylesheet" href="/style.d64c4b0254.css">
+  <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="index.html" aria-label="Unofficial Omarchy App Store home"><img class="brand-mark" src="/images/logo-floppy-68.png?v=2" width="34" height="34" alt=""><span class="brand-name">Omarchy <b>Apps</b></span></a>
+    <nav class="topbar-links" aria-label="Primary">
+      <a href="index.html">Apps</a>
+      <a href="leaderboard.html">Top apps</a>
+      <a href="guides.html" aria-current="page">Guides</a>
+      <a href="develop.html">Develop</a>
+      <a href="sponsor.html">Sponsor</a>
+    </nav>
+    <a class="button topbar-cta" href="sponsor.html">Sponsor</a>
+  </div>
+</header>
+
+<header class="hero guide-hero seo-hero">
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">Windows to Omarchy: Windows apps</span></nav>
+    <p class="eyebrow">Windows to Omarchy: Windows apps</p>
+    <h1>Run <span>Windows apps</span> on Omarchy</h1>
+    <p class="tag">A Windows 11 VM for the one or two apps you cannot replace.</p>
+    <p class="facts">Reviewed 2026-10-19 · independent editorial guide</p>
+  </div>
+</header>
+
+<main class="wrap seo-guide-main">
+  <article class="seo-article">
+    <div class="guide-answer">
+      <p class="answer-label">Short answer</p>
+      <p>Choose Install &gt; Windows from the Omarchy menu. Omarchy sets up Windows 11 Pro in a Docker VM and connects to it over RDP with sound, microphone and a shared clipboard. Files go through the ~/Windows folder. It needs KVM, about 10GB plus the disk you give it, and your own license key. There is no GPU passthrough, so it is for work apps, not games.</p>
+    </div>
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#first">First</a><a href="#setup">Set up</a><a href="#files">Files</a><a href="#license">Licensing</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="first">
+      <h2>Before you set up a VM</h2>
+<p>Check if you need Windows at all. Many apps have a web version, and Omarchy can turn any site into an app window with Install, then Web App. Microsoft says PowerPoint for the web is free, and Omarchy already ships Zoom and WhatsApp as web apps. For desktop Office files, LibreOffice comes preinstalled. If you still have a Windows PC, you can also just remote into it with <a href="/apps/rustdesk.html">RustDesk</a>.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-repo-rustdesk-win.webp" alt="RustDesk connected to a Windows PC from another computer" width="1200" height="782" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshot from the <a href="https://github.com/rustdesk/rustdesk" target="_blank" rel="noopener">rustdesk/rustdesk</a> README (AGPL-3.0).</p>
+    </section>
+    <section id="setup">
+      <h2>Set up the Windows VM</h2>
+<ol><li>Press <kbd>Super</kbd> + <kbd>Space</kbd> and choose <strong>Install</strong>, then <strong>Windows</strong>. Your machine needs KVM virtualization. If it is off in the BIOS, the installer tells you.</li><li>Pick RAM, CPU cores and disk. Plan for the disk you give Windows plus about 10GB for the image. The manual calls 64GB the sensible floor.</li><li>Set a Windows username and password, or leave them blank for <code>docker</code> / <code>admin</code>.</li><li>Wait. The download takes 10 to 15 minutes. You can watch at <code>http://127.0.0.1:8006</code>.</li><li>Open <strong>Windows</strong> from the app launcher. Give it 15 to 30 seconds on a cold start.</li></ol>
+<pre><code class="language-bash">omarchy windows vm status   # is it running?
+omarchy windows vm stop     # shut it down
+omarchy windows vm launch   # start and connect</code></pre>
+<p>Closing the RDP window shuts the VM down. To leave it running, launch with <code>omarchy windows vm launch --keep-alive</code>.</p>
+    </section>
+    <section id="files">
+      <h2>Moving files in and out</h2>
+<p>The <code>~/Windows</code> folder in your home is shared with the VM. Windows cannot see any other part of your files. The VM's ports listen on localhost only, so nothing on your network can reach it.</p>
+    </section>
+    <section id="license">
+      <h2>Licensing and limits</h2>
+<ul><li>It installs <strong>Windows 11 Pro, unactivated</strong>. You need your own license key for the gated features.</li><li><code>omarchy windows key</code> prints the OEM key from your PC's firmware. The manual says that key is bound to the machine and usually will not activate the VM.</li><li><strong>No GPU passthrough</strong>, so not for gaming or video editing. For games, see <a href="/gaming-on-omarchy-after-windows.html">gaming after Windows</a>.</li><li><strong>Remove > Windows</strong> deletes the VM and its disk. Copy anything you need out of <code>~/Windows</code> first.</li></ul>
+<div class="yt-embed" data-yt="9SDkU5VDQEQ" data-start="1389" data-title="You need to switch to Linux RIGHT NOW!!"><button type="button" class="video-ph" aria-label="Play video: You need to switch to Linux RIGHT NOW!!"><span class="play-icon" aria-hidden="true">&#9654;</span><span>Watch: You need to switch to Linux RIGHT NOW!!</span></button></div>
+<p class="media-source">Video by NetworkChuck on <a href="https://www.youtube.com/watch?v=9SDkU5VDQEQ" target="_blank" rel="noopener">YouTube</a>. Starts at the Windows-in-Docker chapter (23:09). It loads from youtube-nocookie.com only after you press play.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/switch-from-windows-to-omarchy-safely.html">Move from Windows to Omarchy Safely: Backup, Data, Apps, Rollback</a></li><li><a href="/dual-boot-windows-and-omarchy.html">Dual Boot Windows and Omarchy: Try Linux Without Giving Up Windows</a></li><li><a href="/free-powerpoint-alternatives-omarchy.html">Free PowerPoint Alternatives on Omarchy: Hype, Omapresent, Impress</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>Can I run Microsoft Office on Omarchy?</summary><p>Yes, inside the Windows 11 VM from Install &gt; Windows. The manual calls it a great way to run Office. For many files, LibreOffice or the free web versions are enough.</p></details>
+<details><summary>Does the Windows VM need a license?</summary><p>It installs Windows 11 Pro unactivated. You need your own key for the gated features. Your PC&#x27;s OEM key usually will not activate the VM.</p></details>
+<details><summary>Can I play games in the Windows VM?</summary><p>No. There is no GPU passthrough. Use Steam with Proton, cloud gaming or Moonlight streaming instead.</p></details>
+<details><summary>How do I share files with the Windows VM?</summary><p>Put them in ~/Windows in your home folder. That is the only folder Windows can see.</p></details>
+<details><summary>How much disk does the Windows VM need?</summary><p>The disk you allocate plus about 10GB for the image. The manual suggests 64GB or more for the VM disk.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://omarchy.org/manual/windows-vm/" target="_blank" rel="noopener">Omarchy manual: Windows VM</a></li><li><a href="https://omarchy.org/manual/web-apps/" target="_blank" rel="noopener">Omarchy manual: Web apps</a></li><li><a href="https://omarchy.org/" target="_blank" rel="noopener">omarchy.org (Windows section)</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>
+<script>
+document.querySelectorAll('.yt-embed[data-yt]').forEach(function (w) {
+  var b = w.querySelector('button');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(w.dataset.yt) + '?autoplay=1' + (w.dataset.start ? '&start=' + encodeURIComponent(w.dataset.start) : '');
+    f.title = w.dataset.title || 'Video';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius);display:block';
+    w.textContent = '';
+    w.appendChild(f);
+  });
+});
+</script>
+
+  </article>
+
+  <aside class="related-guides" aria-labelledby="related-guides-h">
+    <h2 id="related-guides-h">Keep exploring</h2>
+    <div class="related-guide-grid">
+<a class="related-guide" href="/omarchy-vs-macos-windows-ubuntu.html"><strong>Omarchy vs macOS, Windows 11 and Ubuntu: Which Fits You?</strong><span>Compare Omarchy with macOS, Windows 11 and Ubuntu for development, gaming, creative work, hardware support, privacy and daily use.</span></a>
+<a class="related-guide" href="/free-notion-alternative-linux-slap-notes.html"><strong>Free Notion Alternative for Linux: Slap Notes Compared</strong><span>Looking for a free Notion alternative on Linux? Compare Slap Notes with Notion, Obsidian and AppFlowy for local notes, blocks, links and privacy.</span></a>
+<a class="related-guide" href="/free-video-editor-linux-omarchy.html"><strong>Free Video Editor for Linux: Omacut vs DaVinci Resolve</strong><span>Need a free video editor on Linux? Learn when Omarchy-native Omacut is faster than DaVinci Resolve, Kdenlive or Final Cut Pro for simple video trimming.</span></a>
+<a class="related-guide" href="/best-apps-for-omarchy.html"><strong>Best Omarchy Apps to Install First: 12 Useful Picks</strong><span>Start a new Omarchy setup with 12 useful apps for notes, files, themes, video, screenshots, gaming, remote access and developer work.</span></a>
+<a class="related-guide" href="/how-to-install-apps-on-omarchy.html"><strong>How to Install Apps on Omarchy Safely</strong><span>Learn how to install, inspect, update and remove apps on Omarchy using the official package repository, Arch packages and the AUR.</span></a>
+<a class="related-guide" href="/how-to-use-omarchy-zsh.html"><strong>omarchy-zsh on Omarchy: install, fzf keybindings, aliases &amp; the chsh trap</strong><span>Install omarchy-zsh on Omarchy the safe way (not chsh), learn the fzf keybindings and built-in aliases, and fix common issues like double inits and oh-my-zsh conflicts.</span></a>
+<a class="related-guide" href="/rustdesk-on-omarchy.html"><strong>How to Install &amp; Use RustDesk on Omarchy (2026) — Free TeamViewer Alternative</strong><span>Install RustDesk on Omarchy with one command. Free, open-source remote desktop: ID/password flow, unattended access, self-hosting, and fixes for the Wayland black-screen issue on Hyprland.</span></a>
+<a class="related-guide" href="/flea-file-manager-omarchy.html"><strong>How to Install &amp; Use Flea on Omarchy (2026)</strong><span>Install Flea on Omarchy with one command. Keyboard-first file manager with Quick Look, undoable operations, and network shares. Setup, shortcuts, and real fixes from the issue tracker.</span></a>
+<a class="related-guide" href="/omacut-video-editor-omarchy.html"><strong>How to Use omacut on Omarchy (2026): trim, split &amp; export in minutes</strong><span>omacut is Omarchy&#x27;s dead-simple video trimmer (preinstalled on Quattro+). Open a video, drag the handles, split the middle, export an MP4 — plus shortcuts and fixes for AV1 black preview and export failures.</span></a>
+<a class="related-guide" href="/sunshine-game-streaming-omarchy.html"><strong>How to Install &amp; Use Sunshine on Omarchy (2026)</strong><span>Install Sunshine on Omarchy and stream your games to any device with Moonlight. Pairing walkthrough, Hyprland capture-method fixes, and how it replaces NVIDIA GameStream.</span></a>
+<a class="related-guide" href="/hermes-desktop-omarchy.html"><strong>How to Install &amp; Use Hermes Desktop on Omarchy (2026)</strong><span>Install Hermes Desktop on Omarchy: the native GUI for Hermes Agent with memory, skills, scheduled tasks, and messaging integrations. Bring your own key, use Nous Portal&#x27;s free tier, or run local models.</span></a>
+<a class="related-guide" href="/omawrite-writing-omarchy.html"><strong>Omawrite on Omarchy: Install, Shortcuts &amp; Typora Alternative Guide</strong><span>Omawrite is Omarchy&#x27;s free default Markdown editor — a distraction-free, open-source Typora alternative. Install guide, keyboard shortcuts, real GitHub issues, and how to switch from Typora.</span></a>
+<a class="related-guide" href="/strata-file-manager-omarchy.html"><strong>Strata on Omarchy: Install the Keyboard-First File Manager</strong><span>Install Strata on Omarchy: the free keyboard-first GTK4 file manager with Miller columns, fuzzy search, and sandboxed previews. Setup, keybinds, fixes, and Strata vs flea compared.</span></a>
+<a class="related-guide" href="/claude-desktop-omarchy.html"><strong>Claude Desktop on Omarchy: Install &amp; Setup Guide (2026)</strong><span>Install Anthropic&#x27;s official Claude Desktop Linux app on Omarchy. Setup, MCP connectors, Cowork VM troubleshooting, and the Hyprland login fix.</span></a>
+<a class="related-guide" href="/1password-omarchy.html"><strong>How to Install &amp; Use 1Password on Omarchy (2026)</strong><span>Install 1Password on Omarchy with one command. Setup, browser integration, real Linux fixes, and how it compares to free Bitwarden.</span></a>
+<a class="related-guide" href="/omadesign-omarchy.html"><strong>Omadesign on Omarchy: Install &amp; Setup Guide (2026)</strong><span>Install Omadesign, the free Linux design, paint, photo and motion app, on Omarchy. One-line install, theme integration, fixes, and why there is no package yet.</span></a>
+<a class="related-guide" href="/disktree-bin-on-omarchy.html"><strong>How to Install &amp; Use disktree-bin on Omarchy (2026)</strong><span>Install disktree-bin on Omarchy with one command. Disk-space treemap that scans home or the whole disk, marks what should go, and deletes with a two-step review. Setup, keys, and real fixes from the issue tracker.</span></a>
+<a class="related-guide" href="/dingtalk-bin-on-omarchy.html"><strong>How to Install &amp; Use DingTalk on Omarchy Linux (2026)</strong><span>Install Alibaba&#x27;s official DingTalk Linux client on Omarchy with one command. Fix the blank-window-after-update bug, login requirements, and real Linux issues. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/gliff-on-omarchy.html"><strong>How to Install &amp; Use gliff on Omarchy (2026)</strong><span>Install gliff on Omarchy with one command. Hyprland remote desktop over SSH with 4:4:4 crisp text and GPU H.264 end to end. Setup, gliff-probe diagnostics, and real fixes.</span></a>
+<a class="related-guide" href="/linuxqq-on-omarchy.html"><strong>How to Install &amp; Use QQ on Omarchy Linux (2026)</strong><span>Install Tencent&#x27;s official QQ Linux client on Omarchy with one command. Fix the Wayland clipboard, screenshot crashes, screen sharing, and fcitx5 input. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/wechat-bin-on-omarchy.html"><strong>How to Install &amp; Use WeChat on Omarchy Linux (2026)</strong><span>Install Tencent&#x27;s official WeChat Linux client on Omarchy with one command. QR-code login, input-method and HiDPI fixes, real Wayland issues. Setup, FAQ, and alternatives.</span></a>
+<a class="related-guide" href="/wps-office-cn-on-omarchy.html"><strong>How to Install &amp; Use WPS Office on Omarchy Linux (2026)</strong><span>Install Kingsoft WPS Office (China edition) on Omarchy with one command. Fix the silent-exit launch bug, fonts, PDF support, and fcitx5 input. Free Microsoft 365 alternative.</span></a>
+<a class="related-guide" href="/collie-on-omarchy.html"><strong>How to Install &amp; Use Collie on Omarchy (2026)</strong><span>Install Collie, the self-hosted phone UI for terminal AI agents, on Omarchy with one command. Watch and approve Claude Code from your phone over Tailscale — plus real fixes for pairing, refused sends, and the update race.</span></a>
+<a class="related-guide" href="/cua-hyprland-plugin-on-omarchy.html"><strong>How to Install &amp; Use the Cua Hyprland Plugin on Omarchy (2026)</strong><span>Install the Cua Hyprland plugin on Omarchy with one command. Compositor-native multi-cursor AI agent input: agents work in background windows while your pointer stays free — plus the ABI rule and real fixes for Super shortcuts and AT-SPI.</span></a>
+<a class="related-guide" href="/helium-on-omarchy.html"><strong>How to Install &amp; Use Helium on Omarchy (2026)</strong><span>Install Helium, the private Chromium browser, on Omarchy with one command. Google stripped out, built-in uBlock with CNAME uncloaking, MV2 extensions — plus honest beta caveats: no sync, no DRM, real open bugs.</span></a>
+<a class="related-guide" href="/hype-on-omarchy.html"><strong>How to Install &amp; Use Hype on Omarchy (2026)</strong><span>Install Hype, the Markdown presentation app for Omarchy, with one command. Visual slide editor, Omarchy-theme styling, one-key PDF/PowerPoint export, and a headless CLI for AI-built decks.</span></a>
+<a class="related-guide" href="/linux-omarchy-eevdf-on-omarchy.html"><strong>Omarchy EEVDF Kernel: Install linux-omarchy-eevdf (2026)</strong><span>linux-omarchy-eevdf is Omarchy&#x27;s plain-EEVDF kernel flavor: same Omarchy patchset as the default, without the BORE scheduler. Install it alongside your current kernel, pick it at boot, and add the headers package for DKMS modules.</span></a>
+<a class="related-guide" href="/monologue-on-omarchy.html"><strong>How to Install &amp; Use Monologue on Omarchy (2026)</strong><span>Install Monologue, the theme-synced webcam recorder for Omarchy, with one command. Space-to-record takes, built-in trim editor, MP4 output — plus real fixes for 4K encoding stops and the auto-deleting takes folder.</span></a>
+<a class="related-guide" href="/omacharts-on-omarchy.html"><strong>How to Install &amp; Use Omacharts on Omarchy (2026)</strong><span>Install Omacharts on Omarchy with one command. Fast native stock charts with free Yahoo data, thinkorswim streaming, indicators, drawings, and a full CLI — plus fixes for the fullscreen right-click issue and ToS sign-in.</span></a>
+<a class="related-guide" href="/omairc-on-omarchy.html"><strong>How to Install &amp; Use Omairc on Omarchy (2026)</strong><span>Install Omairc on Omarchy with one command. Dead-simple native IRC with a keyboard-first Qt UI, a local CLI, an AI agent skill, and a terminal companion — plus real limits on bouncers, DCC, and ARM.</span></a>
+<a class="related-guide" href="/omakeyboard-on-omarchy.html"><strong>How to Install &amp; Use OmaKeyboard on Omarchy (2026)</strong><span>Install OmaKeyboard on Omarchy with one command. Visual keyboard remapping, layers, and shortcuts with snapshot rollback — what it can and can&#x27;t do (tap-vs-hold, sequences, per-app maps), plus real fixes.</span></a>
+<a class="related-guide" href="/omarchy-hyprland-titlebars-on-omarchy.html"><strong>How to Install &amp; Use Hyprland Titlebars on Omarchy (2026)</strong><span>Install Omarchy&#x27;s Hyprland titlebar plugin with one command. Titlebars for floating workspaces — drag, double-click maximize, smart titles, custom buttons — plus the Hyprland version-pin gotcha explained.</span></a>
+<a class="related-guide" href="/meeting-recorder-on-omarchy.html"><strong>How to Install &amp; Use Meeting Recorder on Omarchy (2026)</strong><span>Install Meeting Recorder on Omarchy with one command: record mic + computer audio as two tracks and transcribe locally with speakers and chapters. No bot, no cloud, free.</span></a>
+<a class="related-guide" href="/power-profiles-daemon-on-omarchy.html"><strong>power-profiles-daemon on Omarchy: Install &amp; Switch Power Profiles (2026)</strong><span>Omarchy&#x27;s power-profiles-daemon adds NVIDIA RTX Spark, Apple Silicon, and Snapdragon X power profiles to the standard Linux power daemon. Install, check, and switch profiles from the terminal.</span></a>
+<a class="related-guide" href="/omarchy-theme-intros.html"><strong>Omarchy Theme Intros: What the 96 MB Package Does (2026)</strong><span>omarchy-themes-intros is Omarchy&#x27;s package of background intro videos that play when you switch themes. What it is, why it&#x27;s versioned by date, and whether you need it.</span></a>
+<a class="related-guide" href="/qcom-firmware-extract-snapdragon-omarchy.html"><strong>qcom-firmware-extract on Omarchy: Snapdragon Firmware from Windows (2026)</strong><span>qcom-firmware-extract copies vendor-signed Qualcomm firmware from your Windows install for Snapdragon X laptops on Omarchy. How it works, BitLocker gotchas, and when you don&#x27;t need it.</span></a>
+<a class="related-guide" href="/quickshell-on-omarchy.html"><strong>Quickshell on Omarchy: Install &amp; Build Your Own Wayland Shell (2026)</strong><span>Quickshell is the QtQuick toolkit behind Omarchy&#x27;s shell. Install the pinned package, learn the quickshell vs quickshell-git difference, and run your first QML bar in minutes.</span></a>
+<a class="related-guide" href="/signed-on-omarchy.html"><strong>How to Sign PDFs on Omarchy with Signed (2026)</strong><span>Signed is Omacom&#x27;s free PDF signing app for Omarchy: drop your signature, text, or today&#x27;s date on any page, save a sealed copy, or sign headless from the CLI. Install with one command.</span></a>
+<a class="related-guide" href="/thinkpad-t14-amd-touchpad-on-omarchy.html"><strong>Fix the ThinkPad T14 AMD Touchpad on Omarchy (RMI4/SMBus DKMS)</strong><span>The ThinkPad T14/P14s AMD touchpad runs on the slow PS/2 fallback in the stock kernel. This DKMS package switches it to RMI4 over SMBus: 15 ms reports, working taps and gestures, TrackPoint intact. One install command, one check after kernel updates.</span></a>
+<a class="related-guide" href="/strata-file-manager-faq.html"><strong>Strata File Manager FAQ: Straight Answers for Omarchy Users</strong><span>Is Strata free? What does it need? How do you make Super+Shift+F open it? Short, sourced answers about the Strata file manager on Omarchy.</span></a>
+<a class="related-guide" href="/what-is-strata-file-manager-open-source.html"><strong>What Is Strata and Is It Open Source? Strata vs Paid File Managers</strong><span>Strata is a free, MIT-licensed file manager for Omarchy. How it compares with ForkLift, Total Commander and Directory Opus, with vendor prices.</span></a>
+<a class="related-guide" href="/free-photoshop-alternatives-omarchy.html"><strong>Best Free and Open Source Photoshop Alternatives on Omarchy</strong><span>Free Photoshop alternatives on Omarchy: Schist for layered PSD files, Omadesign for design and layout, Pinta for quick edits, Omasnap for markup.</span></a>
+<a class="related-guide" href="/free-sublime-text-alternatives-omarchy.html"><strong>Free Sublime Text Alternatives on Omarchy: Neovim, Zed, Helix</strong><span>Sublime Text costs $99 for a personal license. These free editors run on Omarchy: Neovim with LazyVim, Zed with Omazed theme sync, Helix, Emacs and VS Code.</span></a>
+<a class="related-guide" href="/free-teamviewer-alternatives-omarchy.html"><strong>Free TeamViewer Alternatives on Omarchy: RustDesk, gliff, Sunshine</strong><span>Free, open source TeamViewer alternatives on Omarchy: RustDesk for remote support, gliff for Hyprland over SSH, Sunshine and Moonlight for streaming.</span></a>
+<a class="related-guide" href="/free-powerpoint-alternatives-omarchy.html"><strong>Free PowerPoint Alternatives on Omarchy: Hype, Omapresent, Impress</strong><span>Make slides on Omarchy for free: Hype writes decks in Markdown and exports .pptx, Omapresent has a presenter view, LibreOffice Impress opens .pptx.</span></a>
+<a class="related-guide" href="/free-loom-alternatives-omarchy.html"><strong>Free Loom Alternatives on Omarchy: Record, Trim and Share Video</strong><span>Record your screen and webcam on Omarchy for free: the built-in recorder with webcam overlay, Monologue, Omacut to trim, OBS Studio and Kdenlive.</span></a>
+<a class="related-guide" href="/windows-shortcuts-on-omarchy.html"><strong>Windows Shortcuts on Omarchy: Your Muscle Memory, Translated</strong><span>Coming from Windows? Here is where Win+Shift+S, Win+V, Alt+F4, the Start menu and virtual desktops live in Omarchy, plus the one key that shows every hotkey.</span></a>
+<a class="related-guide" href="/gaming-on-omarchy-after-windows.html"><strong>Gaming on Omarchy After Windows: Steam, Battle.net, Epic, Game Pass</strong><span>Your Windows game library on Omarchy: Steam with Proton, Battle.net, Heroic for Epic and GOG, Lutris, Xbox Cloud Gaming, GeForce NOW, Moonlight.</span></a>
+<a class="related-guide" href="/dual-boot-windows-and-omarchy.html"><strong>Dual Boot Windows and Omarchy: Try Linux Without Giving Up Windows</strong><span>Step by step: shrink your Windows partition, turn off BitLocker and Fast Startup, run Omarchy&#x27;s free space install, then add Windows to the Limine boot menu.</span></a>
+<a class="related-guide" href="/omarchy-for-windows-developers.html"><strong>Omarchy for Windows Developers: Languages, Docker and Editors</strong><span>Set up a dev machine on Omarchy: mise for Node, Python, Go, Rust, .NET and more, Docker with Lazydocker, lazygit, and editors from Neovim to VS Code and Cursor.</span></a>
+<a class="related-guide" href="/install-omarchy-on-intel-mac.html"><strong>How to Install Omarchy on an Old Intel Mac, Step by Step</strong><span>Give an old Intel MacBook, iMac or Mac mini a second life. Back up, write the USB, turn off Secure Boot, boot with Option and install Omarchy.</span></a>
+<a class="related-guide" href="/omarchy-on-t2-macbook.html"><strong>Omarchy on T2 Macs (2017 to 2020): What Works and What to Expect</strong><span>Which T2 and T1 Macs run Omarchy, what the installer sets up for you (linux-t2 kernel, audio, Wi-Fi firmware, fan control, Touch Bar) and the known T1 limits.</span></a>
+<a class="related-guide" href="/which-macs-can-run-omarchy.html"><strong>Which Macs Can Run Omarchy? Intel vs Apple Silicon, Explained</strong><span>Can your Mac run Omarchy? Intel Macs install it natively. Apple Silicon Macs can try it in the Try Omarchy app or use community guides.</span></a>
+<a class="related-guide" href="/speed-up-old-mac-with-omarchy.html"><strong>Make an Old Mac Feel Fast Again: An Omarchy Tune-Up Checklist</strong><span>Just installed Omarchy on an old Intel Mac? Fix scaling on non-Retina screens, remove extras you will not use, check your disk, see what eats CPU and free up space.</span></a>
+<a class="related-guide" href="/revive-old-laptop-with-omarchy.html"><strong>Revive an Old Laptop or PC with Omarchy: A Practical Guide</strong><span>Omarchy runs on a 2011 ThinkPad X220 with 2GB of RAM. How to prepare an old PC or laptop, the BIOS settings to change, and how to hand it to its next owner.</span></a>
+<a class="related-guide" href="/switch-from-mac-to-omarchy-safely.html"><strong>How to Move from Mac to Omarchy Safely: Backup, Apps, Rollback</strong><span>A safe Mac to Omarchy plan: try it first, back up with Time Machine, move files with an external drive or LocalSend, find app equivalents, and know how to roll back.</span></a>
+<a class="related-guide" href="/switch-from-windows-to-omarchy-safely.html"><strong>Move from Windows to Omarchy Safely: Backup, Data, Apps, Rollback</strong><span>A safe Windows to Omarchy plan: try it in Try Omarchy for Windows, back up, keep Windows with a dual boot, import your trial setup, map your apps and keep a way back.</span></a>
+    </div>
+  </aside>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="index.html"><img class="brand-mark" src="/images/logo-floppy-68.png?v=2" width="34" height="34" alt=""><span class="brand-name">Omarchy <b>Apps</b></span></a>
+      <p>Every package in the official Omarchy repo, searchable and ranked by readers. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing.</p>
+    </div>
+    <nav aria-label="Site"><h3>Site</h3><a href="index.html">Apps</a><a href="omarchy-apps-list.html">All apps list</a><a href="leaderboard.html">Top apps</a><a href="guides.html">Guides</a><a href="develop.html">Develop</a><a href="sponsor.html">Sponsor</a><a href="about.html">About</a><a href="press.html">Press</a><a href="faq.html">FAQ</a><a href="terms.html">Terms</a></nav>
+    <nav aria-label="Omarchy"><h3>Omarchy</h3><a href="https://omarchy.org/">omarchy.org</a><a href="https://omarchy.org/manual/">Manual</a><a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs</a><a href="https://omarchyplugins.com/">Plugins</a></nav>
+    <nav aria-label="Contact"><h3>Say hello</h3><a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">@jessyka_boat on X</a><a href="develop.html#newsletter">Newsletter</a></nav>
+  </div>
+  <div class="wrap footer-base"><span>Synced 2026-10-19</span><span>No trackers, videos play on click</span><span>Packages come from pkgs.omarchy.org</span></div>
+</footer>
+</body>
+</html>

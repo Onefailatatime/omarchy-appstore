@@ -1,0 +1,41 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#langs">Languages</a><a href="#docker">Docker</a><a href="#editors">Editors</a><a href="#windows">Windows-only</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="langs">
+      <h2>Languages with mise</h2>
+<p>Omarchy's manual lists Rails, Node, Bun, Deno, Laravel, Symfony, Go, Rust, Python, Java, Elixir and .NET under <strong>Install > Development</strong>. Versions are handled by mise, so each project can pin its own:</p>
+<pre><code class="language-bash">mise use -g ruby   # install Ruby and make it the global default
+mise i             # in a project with a .ruby-version file</code></pre>
+    </section>
+    <section id="docker">
+      <h2>Docker and Git</h2>
+<p>Omarchy installs Docker and Docker Compose for you. Your user is not in the docker group by default, so you run <code>sudo docker ps</code>. The manual explains why: that group is effectively passwordless root. If you want it anyway, enable <strong>Setup > Security > Sudoless Docker</strong>. For local databases, use <strong>Install > Development > Docker DB</strong>. Lazydocker opens on <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>D</kbd>. lazygit is preinstalled, and the GitHub CLI <code>gh</code> installs itself the first time you use it.</p>
+    </section>
+    <section id="editors">
+      <h2>Editors and terminals</h2>
+<p>Neovim with LazyVim is the default. VS Code, Cursor, Zed, Sublime Text, Helix, Vim and Emacs are ready to install from <strong>Install > Editor</strong>. Store pages: <a href="/apps/visual-studio-code-bin.html">VS Code</a>, <a href="/apps/cursor-bin.html">Cursor</a>, <a href="/apps/omarchy-nvim.html">Omarchy Neovim</a>. Theme matching is offered for VS Code, Cursor, VSCodium and Helix, and <strong>Setup > Defaults > Editor</strong> sets the system default. For terminals, Foot is the default, with Alacritty, Ghostty and Kitty available.</p>
+<p>One small win: <kbd>Super</kbd> + <kbd>C</kbd> and <kbd>Super</kbd> + <kbd>V</kbd> copy and paste in the terminal too, so <kbd>Ctrl</kbd> + <kbd>C</kbd> stays free to stop a process.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-store-visual-studio-code-bin.webp" alt="The Visual Studio Code listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure><figure class="shot-wrap"><img src="/images/guide-store-cursor-bin.webp" alt="The Cursor listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshots: the <a href="/apps/visual-studio-code-bin.html">visual-studio-code-bin</a> page on this store, the <a href="/apps/cursor-bin.html">cursor-bin</a> page on this store.</p>
+    </section>
+    <section id="windows">
+      <h2>When a tool only runs on Windows</h2>
+<p>Keep it in the built-in Windows 11 VM. See <a href="/run-windows-apps-on-omarchy.html">run Windows apps on Omarchy</a>. Editors without a license fee are compared in <a href="/free-sublime-text-alternatives-omarchy.html">free Sublime Text alternatives</a>.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/free-sublime-text-alternatives-omarchy.html">Free Sublime Text Alternatives on Omarchy: Neovim, Zed, Helix</a></li><li><a href="/windows-shortcuts-on-omarchy.html">Windows Shortcuts on Omarchy: Your Muscle Memory, Translated</a></li><li><a href="/run-windows-apps-on-omarchy.html">Still Need a Windows App? Run Windows 11 Inside Omarchy</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>How do I install Node or Python on Omarchy?</summary><p>Open Install &gt; Development from the Omarchy menu and pick the language. mise manages the versions, for example mise use -g node.</p></details>
+<details><summary>Does Docker work on Omarchy?</summary><p>Yes. Omarchy installs Docker and Docker Compose. You run it with sudo by default, and Setup &gt; Security &gt; Sudoless Docker changes that. Lazydocker opens with Super+Shift+D.</p></details>
+<details><summary>Can I use VS Code on Omarchy?</summary><p>Yes. VS Code is ready to install from Install &gt; Editor, and it has a page on this store. Cursor and Zed are there too.</p></details>
+<details><summary>Which terminal does Omarchy use?</summary><p>Foot is the default. Alacritty, Ghostty and Kitty are available too.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://omarchy.org/manual/development-tools/" target="_blank" rel="noopener">Omarchy manual: Development tools</a></li><li><a href="https://omarchy.org/" target="_blank" rel="noopener">omarchy.org (editors and terminals)</a></li><li><a href="https://omarchy.org/manual/coming-from-mac-or-windows/" target="_blank" rel="noopener">Omarchy manual: Coming from Mac or Windows</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>

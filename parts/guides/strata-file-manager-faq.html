@@ -1,0 +1,63 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#start">Quick start</a><a href="#video">Video</a><a href="#keys">Keys</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="start">
+      <h2>Install Strata in one line</h2>
+<p>If you only read one thing: Strata is in the Omarchy package repository, so one command installs it and keeps it updated with the rest of your system.</p>
+<pre><code class="language-bash">omarchy pkg add strata</code></pre>
+<p>Open it from the app launcher (<kbd>Super</kbd> + <kbd>Space</kbd>, type <em>Strata</em>) or run <code>strata</code> in a terminal. The <a href="/apps/strata.html">Strata page on this store</a> shows the current version, size and source.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-store-strata.webp" alt="The Strata listing on the Unofficial Omarchy App Store, with version, install command and project screenshots" width="1200" height="806" loading="lazy" decoding="async"></figure><figure class="shot-wrap"><img src="/images/guide-repo-strata-columns.webp" alt="Strata showing Miller columns with a file preview on the right" width="1200" height="659" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshots: the <a href="/apps/strata.html">Strata page</a> on this store, and the Columns view from the <a href="https://github.com/lgse/strata" target="_blank" rel="noopener">lgse/strata</a> README (MIT).</p>
+    </section>
+    <section id="video">
+      <h2>See it running</h2>
+<div class="yt-embed" data-yt="hK4LvyczBkQ" data-title="Strata 1.0 Released, a New Linux File Manager Built for Omarchy"><button type="button" class="video-ph" aria-label="Play video: Strata 1.0 Released, a New Linux File Manager Built for Omarchy"><span class="play-icon" aria-hidden="true">&#9654;</span><span>Watch: Strata 1.0 Released, a New Linux File Manager Built for Omarchy</span></button></div>
+<p class="media-source">Video by DistroTester on <a href="https://www.youtube.com/watch?v=hK4LvyczBkQ" target="_blank" rel="noopener">YouTube</a>. It loads from youtube-nocookie.com only after you press play.</p>
+    </section>
+    <section id="keys">
+      <h2>The five keys worth learning first</h2>
+<p>These come from the default key map in the Strata README. Press <kbd>F1</kbd> inside the app for the full reference.</p>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>Key</th><th>What it does</th></tr></thead><tbody><tr><td><kbd>Ctrl</kbd> + <kbd>K</kbd></td><td>Recursive search by file name or path across Home and mounted local drives</td></tr><tr><td><kbd>Ctrl</kbd> + <kbd>L</kbd></td><td>Type a path, or an address like <code>smb://server/share</code> or <code>sftp://user@host/path</code></td></tr><tr><td><kbd>Ctrl</kbd> + <kbd>F</kbd></td><td>Filter the current pane</td></tr><tr><td><kbd>Space</kbd></td><td>Quick preview</td></tr><tr><td><kbd>F2</kbd></td><td>Rename</td></tr><tr><td><kbd>Ctrl</kbd> + <kbd>Z</kbd></td><td>Undo the latest reversible file operation</td></tr><tr><td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd></td><td>Toggle 10xer mode with Yazi-style keys (<kbd>q</kbd> returns)</td></tr></tbody></table></div>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/what-is-strata-file-manager-open-source.html">What Is Strata and Is It Open Source? Strata vs Paid File Managers</a></li><li><a href="/strata-file-manager-omarchy.html">Strata on Omarchy: Install the Keyboard-First File Manager</a></li><li><a href="/switch-from-mac-to-omarchy-safely.html">How to Move from Mac to Omarchy Safely: Backup, Apps, Rollback</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>What is Strata?</summary><p>Strata is a keyboard-first file manager for modern Linux desktops, made by LGSE. It has three views: navigable Miller columns, an icon grid and a sortable list. It adds fast filename search, rich previews and Omarchy theme following.</p></details>
+<details><summary>Is Strata free and open source?</summary><p>Yes. The LICENSE file in the lgse/strata repository is MIT, and there is no paid tier. The project switched to MIT in September 2026, so older pages may still mention GPL-3.0-or-later.</p></details>
+<details><summary>How do I install Strata on Omarchy?</summary><p>Run omarchy pkg add strata in a terminal. It comes from the Omarchy package repository and updates with the rest of your system. The project also has its own interactive installer for Arch Linux.</p></details>
+<details><summary>What does Strata need to run?</summary><p>64-bit Linux with glibc 2.39 or newer and GTK 4.12 or newer. Release builds exist for x86_64 and aarch64. Arch Linux and Omarchy are the primary supported environments, and it is designed for Wayland.</p></details>
+<details><summary>How do I make Super+Shift+F open Strata instead of Nautilus?</summary><p>On current Lua-based Omarchy releases, back up ~/.config/hypr/bindings.lua, then append overrides that unbind SUPER + SHIFT + F and bind it to launch strata. Run hyprctl reload and hyprctl configerrors to check. These user overrides survive Omarchy updates.</p></details>
+<details><summary>Does Strata search inside files?</summary><p>No. Ctrl+K is fast filename and path search, not file-content search. The README calls this a deliberate tradeoff. By default each search walk stops at 10 seconds and 200,000 entries, and you can raise or remove those limits in Settings.</p></details>
+<details><summary>Why does a preview say Preview unavailable?</summary><p>Image, RAW, PDF, thumbnail and media previews run in a separate Bubblewrap sandbox. If the sandbox is missing, a parser crashes or a limit is hit, Strata shows a normal icon or Preview unavailable instead of running the parser unprotected. Make sure bubblewrap is installed. Video thumbnails also need ffmpegthumbnailer or ffmpeg.</p></details>
+<details><summary>Is it safe to preview files I downloaded?</summary><p>Strata treats files as untrusted. Native parsers run out of process with no network, no capabilities, a read-only runtime and resource limits. Plain text and source previews stay in process but are capped at 1 MiB.</p></details>
+<details><summary>Can Strata follow my Omarchy theme?</summary><p>Yes, on Omarchy Quattro. Open Settings, then Appearance, and turn on Follow Omarchy. Strata then updates live when you change the Omarchy theme. You can also pick a bundled theme or build your own, saved as TOML in ~/.config/strata/themes/.</p></details>
+<details><summary>Can it open network shares?</summary><p>Yes. Press Ctrl+L and enter an smb:// or sftp:// address. Strata uses GIO/GVfs and asks for credentials when needed. SMB needs the gvfs-smb backend on Arch.</p></details>
+<details><summary>How does Strata update?</summary><p>It checks for updates by default and never downloads or installs one without your confirmation. If you installed it from the Omarchy package repository, it checks that repository. You can choose Stable, Preview or Nightly channels in Settings, then Updates.</p></details>
+<details><summary>Strata or flea?</summary><p>Both are free, keyboard-first file managers listed on this store. Strata is Rust and GTK4 with Miller columns and sandboxed previews. flea is Rust with a Quickshell front end built for Omarchy. Our Strata install guide compares them side by side.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://github.com/lgse/strata" target="_blank" rel="noopener">lgse/strata on GitHub: README, features, technical specifications, preview sandbox</a></li><li><a href="https://github.com/lgse/strata/blob/main/LICENSE" target="_blank" rel="noopener">Strata LICENSE file (MIT)</a></li><li><a href="https://stratafiles.io/" target="_blank" rel="noopener">stratafiles.io, the project site</a></li><li><a href="https://omarchyapps.com/apps/strata.html" target="_blank" rel="noopener">Strata listing on this store</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>
+<script>
+document.querySelectorAll('.yt-embed[data-yt]').forEach(function (w) {
+  var b = w.querySelector('button');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(w.dataset.yt) + '?autoplay=1' + (w.dataset.start ? '&start=' + encodeURIComponent(w.dataset.start) : '');
+    f.title = w.dataset.title || 'Video';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius);display:block';
+    w.textContent = '';
+    w.appendChild(f);
+  });
+});
+</script>

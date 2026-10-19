@@ -1,0 +1,69 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#pick">Pick one</a><a href="#rustdesk">RustDesk</a><a href="#gliff">gliff</a><a href="#sunshine">Sunshine</a><a href="#faq">Questions</a><a href="#sources">Sources</a>
+    </nav>
+    <section id="pick">
+      <h2>Pick by the session you need</h2>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>You want to</th><th>Use</th><th>License</th><th>Needs</th></tr></thead><tbody><tr><td>Help family or clients on any OS</td><td><a href="/apps/rustdesk.html">RustDesk</a></td><td>AGPL-3.0 (Server Pro is a paid add-on)</td><td>RustDesk on both ends</td></tr><tr><td>Reach your other Omarchy box</td><td><a href="/apps/gliff.html">gliff</a></td><td>MIT</td><td>Hyprland on both machines, SSH access</td></tr><tr><td>Play games or watch video remotely</td><td><a href="/apps/sunshine.html">Sunshine</a> + Moonlight</td><td>GPL-3.0</td><td>Sunshine on the host, Moonlight client</td></tr></tbody></table></div><p>TeamViewer sells annual subscriptions that renew every 12 months, and only the person giving support needs a license. If that is you, here is what you can use for free.</p>
+    </section>
+    <section id="rustdesk">
+      <h2>1. RustDesk: the closest match</h2>
+<p>RustDesk lets you view and control another computer over the internet or your local network. It works out of the box with RustDesk's public relay servers, or you can run your own server. The store page notes the core app and self-hosted server are free under AGPL-3.0, and RustDesk Server Pro is a paid add-on for teams.</p>
+<pre><code class="language-bash">omarchy pkg add rustdesk</code></pre>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-repo-rustdesk-cm.webp" alt="The RustDesk connection manager window" width="930" height="605" loading="lazy" decoding="async"></figure><figure class="shot-wrap"><img src="/images/guide-repo-rustdesk-win.webp" alt="RustDesk connected to a Windows PC" width="1200" height="782" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshots from the <a href="https://github.com/rustdesk/rustdesk" target="_blank" rel="noopener">rustdesk/rustdesk</a> README (AGPL-3.0).</p>
+<div class="yt-embed" data-yt="rqgiJZ5Wt6M" data-title="FREE Remote Desktop Solution: RustDesk Complete Tutorial for Windows, Linux &amp; Mac (Self-Host Guide)"><button type="button" class="video-ph" aria-label="Play video: FREE Remote Desktop Solution: RustDesk Complete Tutorial for Windows, Linux &amp; Mac (Self-Host Guide)"><span class="play-icon" aria-hidden="true">&#9654;</span><span>Watch: FREE Remote Desktop Solution: RustDesk Complete Tutorial for Windows, Linux &amp; Mac (Self-Host Guide)</span></button></div>
+<p class="media-source">Video by MediaTech on <a href="https://www.youtube.com/watch?v=rqgiJZ5Wt6M" target="_blank" rel="noopener">YouTube</a>. It loads from youtube-nocookie.com only after you press play.</p>
+<p>Our <a href="/rustdesk-on-omarchy.html">RustDesk on Omarchy guide</a> covers setup step by step.</p>
+    </section>
+    <section id="gliff">
+      <h2>2. gliff: Hyprland to Hyprland over SSH</h2>
+<p>gliff is a remote desktop for Hyprland from Omacom. It shows another machine's Hyprland session in a window, and the only thing it needs between the two is SSH: no open ports, no accounts, no relay. It sends full-resolution color so text stays sharp, and the clipboard works both ways.</p>
+<pre><code class="language-bash">omarchy pkg add gliff
+gliff user@host</code></pre>
+<p>The README says gliff is on the edge channel of the Omarchy package repository for now. If your channel says <code>target not found: gliff</code>, the README shows how to build it from source.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-repo-gliff.webp" alt="A gliff window showing a terminal on a remote machine" width="1200" height="659" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshot from the <a href="https://github.com/omacom/gliff" target="_blank" rel="noopener">omacom/gliff</a> README (MIT).</p>
+    </section>
+    <section id="sunshine">
+      <h2>3. Sunshine and Moonlight: smooth streaming</h2>
+<p>Sunshine is a self-hosted game stream host that pairs with the Moonlight client. Omarchy preinstalls Moonlight, and the manual installs Sunshine with one command:</p>
+<pre><code class="language-bash">omarchy install service sunshine</code></pre>
+<p>See the <a href="/sunshine-game-streaming-omarchy.html">Sunshine streaming guide</a> for pairing.</p>
+<div class="shot-gallery"><figure class="shot-wrap"><img src="/images/guide-store-sunshine.webp" alt="The Sunshine listing on the Unofficial Omarchy App Store" width="1200" height="806" loading="lazy" decoding="async"></figure></div>
+<p class="media-source">Screenshots: the <a href="/apps/sunshine.html">sunshine</a> page on this store.</p>
+    </section>
+    <section id="next">
+      <h2>Read next</h2>
+      <ul><li><a href="/run-windows-apps-on-omarchy.html">Still Need a Windows App? Run Windows 11 Inside Omarchy</a></li><li><a href="/free-sublime-text-alternatives-omarchy.html">Free Sublime Text Alternatives on Omarchy: Neovim, Zed, Helix</a></li><li><a href="/gaming-on-omarchy-after-windows.html">Gaming on Omarchy After Windows: Steam, Battle.net, Epic, Game Pass</a></li></ul>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+<details><summary>What is the best free TeamViewer alternative for Linux?</summary><p>RustDesk. The app and self-hosted server are free and open source under AGPL-3.0, it runs on Linux, Windows and macOS, and it is one command on Omarchy: omarchy pkg add rustdesk.</p></details>
+<details><summary>Can I self-host RustDesk?</summary><p>Yes. The open source RustDesk server is free to self-host. RustDesk Server Pro is a paid add-on aimed at teams.</p></details>
+<details><summary>How do I control one Omarchy computer from another?</summary><p>Use gliff. Install it on both machines, then run gliff user@host. It only needs SSH and Hyprland on both ends.</p></details>
+<details><summary>Is TeamViewer free?</summary><p>TeamViewer&#x27;s pricing page lists annual subscriptions that renew every 12 months, with a free trial. Only the person providing support needs a license.</p></details>
+<details><summary>What should I use for remote gaming?</summary><p>Sunshine on the host plus the Moonlight client. Omarchy preinstalls Moonlight and installs Sunshine with omarchy install service sunshine.</p></details>
+    </section>
+    <section class="sources" id="sources">
+      <h2>Sources</h2>
+      <ul><li><a href="https://github.com/rustdesk/rustdesk" target="_blank" rel="noopener">rustdesk/rustdesk on GitHub</a></li><li><a href="https://github.com/omacom/gliff" target="_blank" rel="noopener">omacom/gliff README</a></li><li><a href="https://omarchy.org/manual/gaming/" target="_blank" rel="noopener">Omarchy manual: Gaming (Moonlight, Sunshine)</a></li><li><a href="https://www.teamviewer.com/en-us/pricing/overview/" target="_blank" rel="noopener">TeamViewer pricing overview</a></li></ul>
+      <p class="editorial-note">Facts, prices and requirements checked against the sources above on October 19, 2026. Vendor prices can change. Store screenshots were taken from this site; project screenshots are credited to their repositories. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p>
+    </section>
+<script>
+document.querySelectorAll('.yt-embed[data-yt]').forEach(function (w) {
+  var b = w.querySelector('button');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(w.dataset.yt) + '?autoplay=1' + (w.dataset.start ? '&start=' + encodeURIComponent(w.dataset.start) : '');
+    f.title = w.dataset.title || 'Video';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius);display:block';
+    w.textContent = '';
+    w.appendChild(f);
+  });
+});
+</script>
