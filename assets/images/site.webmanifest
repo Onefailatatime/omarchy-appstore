@@ -1,0 +1,13 @@
+{
+  "name": "Omarchy Apps, The Unofficial Omarchy App Store",
+  "short_name": "Omarchy Apps",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#1a1b26",
+  "theme_color": "#1a1b26",
+  "icons": [
+    {"src": "/images/android-chrome-192x192.png?v=2", "sizes": "192x192", "type": "image/png"},
+    {"src": "/images/android-chrome-512x512.png?v=2", "sizes": "512x512", "type": "image/png"},
+    {"src": "/images/favicon.svg?v=2", "sizes": "any", "type": "image/svg+xml"}
+  ]
+}

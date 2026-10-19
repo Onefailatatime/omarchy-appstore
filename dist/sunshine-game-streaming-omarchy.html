@@ -8,16 +8,17 @@
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/sunshine-game-streaming-omarchy.html">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/images/favicon-32x32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="icon" href="/images/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
+<link rel="manifest" href="/images/site.webmanifest?v=2">
 <meta property="og:title" content="How to Install &amp; Use Sunshine on Omarchy (2026)">
 <meta property="og:description" content="Install Sunshine on Omarchy and stream your games to any device with Moonlight. Pairing walkthrough, Hyprland capture-method fixes, and how it replaces NVIDIA GameStream.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://omarchyapps.com/sunshine-game-streaming-omarchy.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
-<meta property="og:image" content="https://omarchyapps.com/images/social-card.png">
+<meta property="og:image" content="https://omarchyapps.com/images/social-card.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
@@ -25,16 +26,16 @@
 <meta name="twitter:creator" content="@jessyka_boat">
 <meta name="twitter:title" content="How to Install &amp; Use Sunshine on Omarchy (2026)">
 <meta name="twitter:description" content="Install Sunshine on Omarchy and stream your games to any device with Moonlight. Pairing walkthrough, Hyprland capture-method fixes, and how it replaces NVIDIA GameStream.">
-<meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png">
+<meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/sunshine-game-streaming-omarchy.html#article","headline":"How to Install & Use Sunshine on Omarchy (2026)","description":"Install Sunshine on Omarchy and stream your games to any device with Moonlight. Pairing walkthrough, Hyprland capture-method fixes, and how it replaces NVIDIA GameStream.","url":"https://omarchyapps.com/sunshine-game-streaming-omarchy.html","dateModified":"2026-10-19","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"How to Install & Use Sunshine on Omarchy (2026)","item":"https://omarchyapps.com/sunshine-game-streaming-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Sunshine work on Omarchy/Hyprland?","acceptedAnswer":{"@type":"Answer","text":"Yes — Omarchy is Arch-based, and the official docs cover Arch installs directly. On Hyprland (Wayland) prefer the KMS or PipeWire capture method; there are recent wlroots capture regressions (#5018), so if you get a black screen, switch capture methods in Configuration → Advanced first."}},{"@type":"Question","name":"Is Sunshine free?","acceptedAnswer":{"@type":"Answer","text":"Completely. It's free and open-source (LizardByte, GPL-licensed), with no paid tiers, no feature gates, no accounts, and no telemetry. Everything — hardware encoding, multi-client streaming, virtual displays, HDR — is in the same free build."}},{"@type":"Question","name":"Sunshine vs Parsec — which should I use?","acceptedAnswer":{"@type":"Answer","text":"For playing your own games remotely, Sunshine + Moonlight is free forever and matches Parsec's paid tiers on the features that matter (encoders, latency, gamepads). Pick Parsec if you want zero-config internet connectivity and session sharing — its $9.99/mo Warp buys convenience and relay infrastructure, not better streaming quality."}},{"@type":"Question","name":"Do I need an NVIDIA GPU?","acceptedAnswer":{"@type":"Answer","text":"No. Sunshine uses hardware encoding on AMD (VAAPI), Intel (VAAPI/QuickSync), and NVIDIA (NVENC) GPUs, with software x264/x265 as a fallback. This was NVIDIA GameStream's biggest limitation; Sunshine removed it."}},{"@type":"Question","name":"Can I stream outside my home?","acceptedAnswer":{"@type":"Answer","text":"Yes, two ways: forward the streaming ports on your router (TCP 47984, 47989, 48010; UDP 47998–48000, 48002, 48010), or install Tailscale on host and client and connect Moonlight to the host's Tailscale IP — no port forwarding, works behind CGNAT."}}]}]}</script>
-<link rel="stylesheet" href="/style.d5ce941b05.css">
+<link rel="stylesheet" href="/style.a240a86641.css">
   <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
 </head>
 <body>
 
 <header class="topbar">
   <div class="wrap topbar-in">
-    <a class="brand" href="index.html" aria-label="Unofficial Omarchy App Store home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
+    <a class="brand" href="index.html" aria-label="Unofficial Omarchy App Store home"><img class="brand-mark" src="/images/logo-floppy-68.png?v=2" width="34" height="34" alt=""><span class="brand-name">Omarchy <b>Apps</b></span></a>
     <nav class="topbar-links" aria-label="Primary">
       <a href="index.html">Apps</a>
       <a href="leaderboard.html">Top apps</a>
@@ -257,8 +258,8 @@ SEO notes:
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Omarchy <b>Apps</b></span></a>
-      <p>Every package in the official Omarchy repo, searchable and ranked by readers. A community project by Jessyka, not affiliated with Omacom or DHH.</p>
+      <a class="brand" href="index.html"><img class="brand-mark" src="/images/logo-floppy-68.png?v=2" width="34" height="34" alt=""><span class="brand-name">Omarchy <b>Apps</b></span></a>
+      <p>Every package in the official Omarchy repo, searchable and ranked by readers. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing.</p>
     </div>
     <nav aria-label="Site"><h3>Site</h3><a href="index.html">Apps</a><a href="omarchy-apps-list.html">All apps list</a><a href="leaderboard.html">Top apps</a><a href="guides.html">Guides</a><a href="develop.html">Develop</a><a href="sponsor.html">Sponsor</a><a href="about.html">About</a><a href="press.html">Press</a><a href="faq.html">FAQ</a><a href="terms.html">Terms</a></nav>
     <nav aria-label="Omarchy"><h3>Omarchy</h3><a href="https://omarchy.org/">omarchy.org</a><a href="https://omarchy.org/manual/">Manual</a><a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs</a><a href="https://omarchyplugins.com/">Plugins</a></nav>

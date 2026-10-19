@@ -17,13 +17,15 @@ APP_COUNT = 194  # from https://omarchyapps.com/ ItemList numberOfItems, synced 
 CREATOR_TITLE = "Creator of The Unofficial Omarchy App Store"
 CONTACT_EMAIL = "modecandsllc@gmail.com"
 CONTACT_X = "https://x.com/jessyka_boat"
+AFFILIATION = ("An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier "
+               "Hansson. Built with David's blessing.")
 
 HEADLINE = "Omarchy Apps launches an unofficial app store for every app in the official Omarchy package repo"
 SUBHEAD = ("Built with the blessing of Omarchy's creator, David Heinemeier Hansson, the store rebuilds itself "
            "from pkgs.omarchy.org every day and gives each app its own profile.")
 LEDE = (f"Omarchy Apps (omarchyapps.com), The Unofficial Omarchy App Store, is a free, searchable home for every app "
-        "in the official Omarchy package repository. Built and curated by Jessyka Mathews with the blessing and "
-        "approval of Omarchy's creator, David Heinemeier Hansson, it turns the official repo into app profiles that "
+        "in the official Omarchy package repository. Built and curated by Jessyka Mathews with the blessing "
+        "of Omarchy's creator, David Heinemeier Hansson, it turns the official repo into app profiles that "
         "people can browse, compare and install with one command.")
 BODY = [
     (f"The store is tied directly to the official Omarchy package repo. Its catalog is rebuilt from pkgs.omarchy.org "
@@ -46,8 +48,8 @@ QUOTE = ("I wanted a friendly front door for everything Omarchy can install. The
 BOILERPLATE = ("Omarchy Apps (omarchyapps.com) is The Unofficial Omarchy App Store: an independent, searchable "
                "directory of every app in the official Omarchy package repository, rebuilt daily from "
                "pkgs.omarchy.org. It hosts no packages itself and links every install back to the official repo. "
-               "It is a community project, not affiliated with Omacom, and was built with the blessing of "
-               "Omarchy's creator, David Heinemeier Hansson.")
+               "It is an independent community project, not affiliated with or endorsed by Omacom or David "
+               "Heinemeier Hansson. Built with David's blessing.")
 
 SNIPPETS = [
     ("one-line", "One-line description",
@@ -59,7 +61,7 @@ SNIPPETS = [
      "tutorials where available."),
     ("hundred", "100-word description",
      "Omarchy Apps (omarchyapps.com) is The Unofficial Omarchy App Store, built and curated by Jessyka Mathews with "
-     "the blessing and approval of Omarchy's creator, David Heinemeier Hansson. It is tied directly to the official "
+     "the blessing of Omarchy's creator, David Heinemeier Hansson. It is tied directly to the official "
      "Omarchy package repo and rebuilds its catalog every day from pkgs.omarchy.org, so it stays current on its own. "
      "Every app gets a profile with the exact install command, and many include screenshots from the app's README, "
      "click-to-play YouTube demos and tutorials. Developers can claim their profile to add their own images and "
@@ -76,7 +78,7 @@ FACTS = [
     ("Name", "Omarchy Apps, The Unofficial Omarchy App Store"),
     ("Website", "https://omarchyapps.com"),
     ("Creator", f"Jessyka Mathews, {CREATOR_TITLE}"),
-    ("Status", "Unofficial and independent, built with the blessing of Omarchy's creator, David Heinemeier Hansson"),
+    ("Status", "Unofficial. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing."),
     ("Catalog source", "The official Omarchy package repo, rebuilt daily from pkgs.omarchy.org"),
     ("Apps listed", f"{APP_COUNT} (as of {COUNT_DATE_LONG})"),
     ("Install", "omarchy pkg add <name>, straight from the official repo"),
@@ -90,6 +92,10 @@ KIT_FILES = [
     ("logos/omarchy-apps-logo-light.svg", "Logo, light (SVG)"), ("logos/omarchy-apps-logo-light.png", "Logo, light (PNG)"),
     ("logos/omarchy-apps-icon-dark.svg", "Icon, dark (SVG)"), ("logos/omarchy-apps-icon-dark.png", "Icon, dark (PNG)"),
     ("logos/omarchy-apps-icon-light.svg", "Icon, light (SVG)"), ("logos/omarchy-apps-icon-light.png", "Icon, light (PNG)"),
+    ("logos/omarchy-apps-floppy-256.png", "Floppy mark, 256 px, transparent (PNG)"), ("logos/omarchy-apps-floppy-256-dark.png", "Floppy mark, 256 px, dark (PNG)"), ("logos/omarchy-apps-floppy-256-light.png", "Floppy mark, 256 px, light (PNG)"),
+    ("logos/omarchy-apps-floppy-512.png", "Floppy mark, 512 px, transparent (PNG)"), ("logos/omarchy-apps-floppy-512-dark.png", "Floppy mark, 512 px, dark (PNG)"), ("logos/omarchy-apps-floppy-512-light.png", "Floppy mark, 512 px, light (PNG)"),
+    ("logos/omarchy-apps-floppy-1024.png", "Floppy mark, 1024 px, transparent (PNG)"), ("logos/omarchy-apps-floppy-1024-dark.png", "Floppy mark, 1024 px, dark (PNG)"), ("logos/omarchy-apps-floppy-1024-light.png", "Floppy mark, 1024 px, light (PNG)"),
+    ("logos/omarchy-apps-floppy-source-33x35.png", "Floppy mark, original pixel art, 33×35 (PNG)"),
 ]
 SHOTS = [
     ("desktop-home.png", "Desktop: the Omarchy Apps homepage with search and the community favorites"),
@@ -105,8 +111,8 @@ FAQ_PAGE = [
      "Omarchy Apps (omarchyapps.com) is The Unofficial Omarchy App Store. It is a free, searchable directory of every "
      "app in the official Omarchy package repository, with a profile and a one-line install command for each app."),
     ("Is Omarchy Apps official?",
-     "No. It is an unofficial, independent community project and is not affiliated with Omacom. It was built with the "
-     "blessing and approval of Omarchy's creator, David Heinemeier Hansson."),
+     "No. Omarchy Apps is unofficial. It is an independent community project, not affiliated with or endorsed by "
+     "Omacom or David Heinemeier Hansson. Built with David's blessing."),
     ("Where does the app catalog come from?",
      "Straight from the official Omarchy package repo. The store reads the package database published at "
      "pkgs.omarchy.org and hosts no packages of its own."),
@@ -204,8 +210,8 @@ def build(*, root: pathlib.Path, dist: pathlib.Path, site: str, site_name: str, 
     zip_mb = round((out / "press-kit.zip").stat().st_size / 1024 / 1024, 1)
 
     org = {"@type": "Organization", "@id": site + "/#organization", "name": "Omarchy Apps",
-           "alternateName": site_name, "url": site + "/", "logo": site + "/press/logos/omarchy-apps-icon-dark.png",
-           "sameAs": [CONTACT_X], "email": CONTACT_EMAIL}
+           "alternateName": site_name, "url": site + "/", "logo": site + "/press/logos/omarchy-apps-floppy-512.png",
+           "description": AFFILIATION, "sameAs": [CONTACT_X], "email": CONTACT_EMAIL}
     person = {"@type": "Person", "@id": site + "/#jessyka", "name": "Jessyka Mathews", "jobTitle": CREATOR_TITLE,
               "url": site + "/about.html", "sameAs": [CONTACT_X]}
 
@@ -228,12 +234,12 @@ def build(*, root: pathlib.Path, dist: pathlib.Path, site: str, site_name: str, 
         org, person,
         {"@type": "NewsArticle", "@id": site + "/press.html#release", "headline": HEADLINE, "description": SUBHEAD,
          "datePublished": PRESS_DATE, "dateModified": PRESS_DATE, "articleSection": "Press release",
-         "url": site + "/press.html", "mainEntityOfPage": site + "/press.html", "image": [site + "/images/og-press.png"],
+         "url": site + "/press.html", "mainEntityOfPage": site + "/press.html", "image": [site + "/images/og-press.png?v=2"],
          "author": {"@id": site + "/#jessyka"}, "publisher": {"@id": site + "/#organization"},
          "about": {"@type": "WebSite", "name": site_name, "url": site + "/"}},
         {"@type": "WebPage", "@id": site + "/press.html", "url": site + "/press.html",
          "name": "Press and press kit: Omarchy Apps", "isPartOf": {"@type": "WebSite", "name": site_name, "url": site + "/"},
-         "primaryImageOfPage": site + "/images/og-press.png", "dateModified": synced},
+         "primaryImageOfPage": site + "/images/og-press.png?v=2", "dateModified": synced},
     ]}
     press = ((root / "parts" / "press.html").read_text(encoding="utf-8")
              .replace("__HEADLINE__", _e(HEADLINE)).replace("__SUBHEAD__", _e(SUBHEAD))

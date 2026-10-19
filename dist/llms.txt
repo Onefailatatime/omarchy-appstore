@@ -4,7 +4,7 @@
 
 Canonical site: https://omarchyapps.com/
 
-This site is unofficial and is not affiliated with or endorsed by Omarchy, Omacom, or DHH. It does not host packages. Package facts are refreshed from pkgs.omarchy.org, and official upstream sources take precedence.
+This site is unofficial. It is an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing. It does not host packages. Package facts are refreshed from pkgs.omarchy.org, and official upstream sources take precedence.
 
 ## Main pages
 - [Browse packages](https://omarchyapps.com/)

@@ -147,7 +147,7 @@ b, strong { font-weight: 700; }
 .topbar-in { display: flex; align-items: center; gap: var(--space-medium); min-height: 3.5rem; }
 .brand { display: inline-flex; align-items: center; gap: 0.6em; color: var(--color-terminal-white); text-decoration: none; font-weight: 700; white-space: nowrap; }
 .brand:hover { color: var(--color-turquoise); }
-.brand-mark { width: 1.35em; height: 1.35em; border: 0.2em solid var(--color-terminal-blue); border-radius: 0.15em; box-shadow: inset 0 0 0 0.2em var(--color-background-night), inset 0 0 0 0.4em var(--color-turquoise); }
+.brand-mark { display: block; flex: none; width: 34px; height: 34px; image-rendering: crisp-edges; image-rendering: pixelated; }
 .brand-name b { color: var(--color-terminal-blue); font-weight: 700; }
 .topbar-links { display: flex; gap: 0.25em; margin-left: var(--space-small); overflow-x: auto; scrollbar-width: none; }
 .topbar-links::-webkit-scrollbar { display: none; }

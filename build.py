@@ -316,7 +316,7 @@ GUIDES = [
     },
 ]
 FAQ = [
-    ("What is the Unofficial Omarchy App Store?", "It is an independent, searchable directory of packages published by the official Omarchy package repository. It is not affiliated with or endorsed by Omarchy or Omacom."),
+    ("What is the Unofficial Omarchy App Store?", "It is a searchable directory of packages published by the official Omarchy package repository. It is an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing."),
     ("How do I install an app on Omarchy?", "Open a package, review its requirements, then copy the displayed omarchy pkg add command into a terminal. Packages are downloaded from the official Omarchy repository, not from this site."),
     ("Does this site host or sell apps?", "No. The site hosts no packages and sells no software. It organizes public package information and links visitors to upstream projects and official PKGBUILDs."),
     ("How can a developer update or claim an app listing?", "Open the package and choose Claim this app. The X direct-message form asks for the developer's role, project URL, corrections, screenshots, and an optional demo video."),
@@ -1018,7 +1018,7 @@ def main() -> None:
     homepage_schema = {
         "@context": "https://schema.org",
         "@graph": [
-            {"@type": "WebSite", "@id": SITE_URL + "/#website", "url": SITE_URL + "/", "name": SITE_NAME, "alternateName": "Omarchy Apps", "description": "Searchable community directory of packages in the official Omarchy repository."},
+            {"@type": "WebSite", "@id": SITE_URL + "/#website", "url": SITE_URL + "/", "name": SITE_NAME, "alternateName": "Omarchy Apps", "description": "Searchable directory of packages in the official Omarchy repository. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing."},
             {"@type": "CollectionPage", "@id": SITE_URL + "/#webpage", "url": SITE_URL + "/", "name": SITE_NAME, "isPartOf": {"@id": SITE_URL + "/#website"}, "mainEntity": {"@type": "ItemList", "numberOfItems": len(pkgs), "itemListElement": [
                 {"@type": "ListItem", "position": i, "url": f"{SITE_URL}/apps/{slug(p['name'])}.html", "name": p["name"]}
                 for i, p in enumerate(pkgs, 1)
@@ -1289,7 +1289,7 @@ def main() -> None:
         f"# {SITE_NAME}\n\n"
         "> An independent directory of packages published by the official Omarchy package repository.\n\n"
         f"Canonical site: {SITE_URL}/\n\n"
-        "This site is unofficial and is not affiliated with or endorsed by Omarchy, Omacom, or DHH. "
+        "This site is unofficial. It is an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing. "
         "It does not host packages. Package facts are refreshed from pkgs.omarchy.org, and official upstream sources take precedence.\n\n"
         "## Main pages\n"
         f"- [Browse packages]({SITE_URL}/)\n"

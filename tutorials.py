@@ -68,7 +68,7 @@ def _faqs(p: dict, d: str) -> list[tuple[str, str]]:
     where = f"Project site: {p['url']}. " if p.get("url") else (f"Source: {p['github']}. " if p.get("github") else "")
     faqs.append((f"Is {d} in the official Omarchy repo?",
                  f"Yes. It is published as {n} (version {p['version']}) in the official Omarchy package repository. {who}{where}"
-                 f"This site is unofficial and not affiliated with Omarchy or Omacom."))
+                 f"This site is unofficial: an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing."))
     return faqs
 
 
