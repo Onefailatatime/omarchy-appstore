@@ -150,7 +150,7 @@ def press_release_text() -> str:
     parts = [HEADLINE, "", SUBHEAD, "", f"{PRESS_DATE_LONG}. {LEDE}", ""]
     for p in BODY:
         parts += [p, ""]
-    parts += [f"\"{QUOTE}\" said Jessyka Mathews, {CREATOR_TITLE}.", "", "About Omarchy Apps", BOILERPLATE, "",
+    parts += [f"\"{QUOTE.rstrip('.')},\" said Jessyka Mathews, {CREATOR_TITLE}.", "", "About Omarchy Apps", BOILERPLATE, "",
               "Media contact", f"Jessyka Mathews, {CREATOR_TITLE}", CONTACT_EMAIL, "@jessyka_boat on X",
               "https://omarchyapps.com/press.html", ""]
     return "\n".join(parts)
