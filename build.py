@@ -28,6 +28,7 @@ import sponsors as ads
 import press
 import tutorials
 import seo_guides
+import catalog
 
 ROOT = pathlib.Path(__file__).parent
 DIST = ROOT / "dist"
@@ -1254,6 +1255,16 @@ def main() -> None:
     seo_pages = seo.build(root=ROOT, dist=DIST, pkgs=pkgs, categories=CATEGORY_ORDER, slug=slug,
                           display_name=lambda p: p["name"], guide_template=guide_template,
                           site=SITE_URL, site_name=SITE_NAME, synced=synced)
+    # Public JSON catalog feed + its docs page. All feed logic lives in catalog.py.
+    catalog_related = (
+        '<a class="related-guide" href="/develop.html"><strong>Develop for Omarchy</strong><span>Package your app for the official Omarchy repository so it shows up here and in the feed.</span></a>\n'
+        '<a class="related-guide" href="/guides.html"><strong>Guides</strong><span>Install guides, comparisons and tutorials for Omarchy apps.</span></a>'
+    )
+    catalog_pages = catalog.build(
+        DIST, pkgs, SITE_URL, slug,
+        lambda name: tutorial_url(name) if (DIST / tutorial_url(name).lstrip("/")).exists() else "",
+        lambda guide, body: render_seo_page(guide_template, page_css, guide, body, catalog_related, synced,
+                                            ("Develop", "/develop.html"), f"Updated {synced} · early preview"))
 
     # lastmod is the real last change: the package's build date for app pages,
     # and the last git commit touching a page's sources for everything else.
@@ -1276,6 +1287,7 @@ def main() -> None:
         if "data/omarchy.db" in sources:
             date = max(date, newest_pkg)
         sitemap_entries.append((SITE_URL + path, min(date, synced)))
+    sitemap_entries.extend((SITE_URL + path, git_date(*sources, "parts/guide.html")) for path, sources in catalog_pages)
     sitemap_entries.append((SITE_URL + "/tutorials.html", synced))
     sitemap_entries.extend((f"{SITE_URL}/{t['slug']}.html", synced) for t in tuts)
     sitemap_entries = [(u, min(d, synced)) for u, d in sitemap_entries]

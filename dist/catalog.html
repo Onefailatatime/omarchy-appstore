@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Omarchy App Catalog Feed (JSON) | Unofficial Omarchy App Store</title>
+<meta name="description" content="A free JSON feed of every app in the Unofficial Omarchy App Store, 196 apps, for anyone building an Omarchy store client. Early preview.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#1a1b26">
+<link rel="canonical" href="https://omarchyapps.com/catalog.html">
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="icon" href="/images/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
+<link rel="manifest" href="/images/site.webmanifest?v=2">
+<meta property="og:title" content="Omarchy App Catalog Feed (JSON) | Unofficial Omarchy App Store">
+<meta property="og:description" content="A free JSON feed of every app in the Unofficial Omarchy App Store, 196 apps, for anyone building an Omarchy store client. Early preview.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://omarchyapps.com/catalog.html">
+<meta property="og:site_name" content="Unofficial Omarchy App Store">
+<meta property="og:image" content="https://omarchyapps.com/images/social-card.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jessyka_boat">
+<meta name="twitter:title" content="Omarchy App Catalog Feed (JSON) | Unofficial Omarchy App Store">
+<meta name="twitter:description" content="A free JSON feed of every app in the Unofficial Omarchy App Store, 196 apps, for anyone building an Omarchy store client. Early preview.">
+<meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/catalog.html#article","headline":"Omarchy App Catalog Feed (JSON) | Unofficial Omarchy App Store","description":"A free JSON feed of every app in the Unofficial Omarchy App Store, 196 apps, for anyone building an Omarchy store client. Early preview.","url":"https://omarchyapps.com/catalog.html","dateModified":"2026-10-20","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Develop","item":"https://omarchyapps.com/develop.html"},{"@type":"ListItem","position":3,"name":"Omarchy App Catalog Feed (JSON) | Unofficial Omarchy App Store","item":"https://omarchyapps.com/catalog.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the catalog feed free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Anyone can use it, as long as the client shows \"Catalog by omarchyapps.com\" and links each app to its omarchyapps.com page."}},{"@type":"Question","name":"How often does the feed update?","acceptedAnswer":{"@type":"Answer","text":"It is rebuilt every time the store refreshes from the official Omarchy package repository, which happens twice a day."}},{"@type":"Question","name":"Will the format change?","acceptedAnswer":{"@type":"Answer","text":"It might. The feed is an early preview. Breaking changes will ship under a new version number (v2.json), and the version you use keeps its shape."}},{"@type":"Question","name":"Is this an official Omarchy feed?","acceptedAnswer":{"@type":"Answer","text":"No. The Unofficial Omarchy App Store is an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Package facts come from pkgs.omarchy.org."}}]}]}</script>
+<link rel="stylesheet" href="/style.d64c4b0254.css">
+  <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="index.html" aria-label="Unofficial Omarchy App Store home"><img class="brand-mark" src="/images/logo-floppy-68.png?v=2" width="34" height="34" alt=""><span class="brand-name">Omarchy <b>Apps</b></span></a>
+    <nav class="topbar-links" aria-label="Primary">
+      <a href="index.html">Apps</a>
+      <a href="leaderboard.html">Top apps</a>
+      <a href="guides.html" aria-current="page">Guides</a>
+      <a href="develop.html">Develop</a>
+      <a href="sponsor.html">Sponsor</a>
+    </nav>
+    <a class="button topbar-cta" href="sponsor.html">Sponsor</a>
+  </div>
+</header>
+
+<header class="hero guide-hero seo-hero">
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/develop.html">Develop</a><span>›</span><span aria-current="page">Catalog feed</span></nav>
+    <p class="eyebrow">Catalog feed</p>
+    <h1>The Omarchy app <span>catalog feed</span></h1>
+    <p class="tag">One free JSON file with every app this store lists, for anyone building an Omarchy app store client.</p>
+    <p class="facts">Updated 2026-10-20 · early preview</p>
+  </div>
+</header>
+
+<main class="wrap seo-guide-main">
+  <article class="seo-article">
+    <div class="guide-answer">
+      <p class="answer-label">Short answer</p>
+      <p>Fetch https://omarchyapps.com/catalog/v1.json. It lists all 196 apps with install commands, categories, links and the omarchyapps.com page for each. It is free to use: show &quot;Catalog by omarchyapps.com&quot; and link each app to its omarchyapps.com page. This is an early preview, so fields and terms may change.</p>
+    </div>
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#url">Feed URL</a><a href="#fields">Fields</a><a href="#example">Example</a><a href="#terms">Terms</a><a href="#faq">Questions</a>
+    </nav>
+    <section id="preview">
+      <h2>An early preview</h2>
+<p>This feed is new. Its fields and terms may change while people start building on it. When a change would break existing clients, it ships as a new version number, so code written for <code>v1</code> keeps working. Right now the feed reports <code>"status": "preview"</code>.</p>
+    </section>
+    <section id="url">
+      <h2>Feed URL</h2>
+<p>The versioned feed, best for clients:</p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere"><code>https://omarchyapps.com/catalog/v1.json</code></pre>
+<p>A short alias that always points at the current version:</p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere"><code>https://omarchyapps.com/catalog.json</code></pre>
+<p>Both are plain JSON, can be read from any website or app (cross-origin requests are allowed), and are rebuilt each time the store syncs with the official Omarchy package repository, twice a day. Today the feed lists 196 apps, the same apps you can browse on the <a href="/">home page</a>.</p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere"><code class="language-bash">curl -s https://omarchyapps.com/catalog/v1.json</code></pre>
+    </section>
+    <section id="fields">
+      <h2>Fields</h2>
+<p>The top of the file has <code>schema_version</code>, <code>status</code>, <code>generated_at</code> (ISO 8601 with offset), <code>source</code> and <code>attribution</code> (both "Catalog by omarchyapps.com"), <code>terms_url</code>, <code>app_count</code>, and the <code>apps</code> array. Each app has these fields. A field is left out when the store has no real value for it, so check before you use it.</p>
+<ul><li><code>id</code>: Stable id, the same slug used in the app&#x27;s omarchyapps.com URL.</li><li><code>name</code>: The app name as the store shows it (the package name).</li><li><code>package</code>: Package name in the official Omarchy package repository.</li><li><code>install_command</code>: The install command exactly as the store shows it.</li><li><code>category</code>: The store&#x27;s category for the app.</li><li><code>description</code>: One-line description from the package.</li><li><code>homepage</code>: The project&#x27;s own site, when the package lists one.</li><li><code>repository</code>: The project&#x27;s source repository, when it is known and differs from the homepage.</li><li><code>tutorial_url</code>: The store&#x27;s tutorial or guide for the app, when one exists.</li><li><code>url</code>: The app&#x27;s canonical page on omarchyapps.com. Link each app here.</li></ul>
+    </section>
+    <section id="example">
+      <h2>Example</h2>
+<p>The start of the current feed, cut down to one app:</p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere"><code class="language-json">{
+  &quot;schema_version&quot;: &quot;1&quot;,
+  &quot;status&quot;: &quot;preview&quot;,
+  &quot;generated_at&quot;: &quot;2026-10-21T06:11:22+00:00&quot;,
+  &quot;source&quot;: &quot;Catalog by omarchyapps.com&quot;,
+  &quot;attribution&quot;: &quot;Catalog by omarchyapps.com&quot;,
+  &quot;site&quot;: &quot;https://omarchyapps.com/&quot;,
+  &quot;terms_url&quot;: &quot;https://omarchyapps.com/catalog.html#terms&quot;,
+  &quot;docs_url&quot;: &quot;https://omarchyapps.com/catalog.html&quot;,
+  &quot;app_count&quot;: 196,
+  &quot;apps&quot;: [
+    {
+      &quot;id&quot;: &quot;1password&quot;,
+      &quot;name&quot;: &quot;1password&quot;,
+      &quot;package&quot;: &quot;1password&quot;,
+      &quot;install_command&quot;: &quot;omarchy pkg add 1password&quot;,
+      &quot;category&quot;: &quot;Security &amp; Privacy&quot;,
+      &quot;description&quot;: &quot;Password manager and secure wallet&quot;,
+      &quot;homepage&quot;: &quot;https://1password.com&quot;,
+      &quot;tutorial_url&quot;: &quot;https://omarchyapps.com/1password-omarchy.html&quot;,
+      &quot;url&quot;: &quot;https://omarchyapps.com/apps/1password.html&quot;
+    }
+  ]
+}</code></pre>
+    </section>
+    <section id="terms">
+      <h2>Terms</h2>
+<ul>
+<li>The feed is free for anyone to use, in open source and commercial clients alike.</li>
+<li>Show "Catalog by omarchyapps.com" somewhere people can see it in your client.</li>
+<li>Link each app to its omarchyapps.com page (the <code>url</code> field).</li>
+<li>Votes, ratings and reviews belong on omarchyapps.com: send people to the app's page to leave them.</li>
+<li>The store is unofficial and the feed comes with no guarantee. Package facts come from pkgs.omarchy.org (the official <a href="https://github.com/omacom/omarchy-pkgs" target="_blank" rel="noopener">omarchy-pkgs</a> repository), and official upstream sources take precedence. The site's general <a href="/terms.html">Terms of Use</a> also apply.</li>
+</ul>
+<p>Building a client on the feed? Say hello to Jessyka, Creator of The Unofficial Omarchy App Store, on <a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">X</a>.</p>
+    </section>
+    <section class="guide-faq" id="faq">
+      <h2>Questions</h2>
+<details><summary>Is the catalog feed free?</summary><p>Yes. Anyone can use it, as long as the client shows &quot;Catalog by omarchyapps.com&quot; and links each app to its omarchyapps.com page.</p></details><details><summary>How often does the feed update?</summary><p>It is rebuilt every time the store refreshes from the official Omarchy package repository, which happens twice a day.</p></details><details><summary>Will the format change?</summary><p>It might. The feed is an early preview. Breaking changes will ship under a new version number (v2.json), and the version you use keeps its shape.</p></details><details><summary>Is this an official Omarchy feed?</summary><p>No. The Unofficial Omarchy App Store is an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Package facts come from pkgs.omarchy.org.</p></details>
+    </section>
+
+  </article>
+
+  <aside class="related-guides" aria-labelledby="related-guides-h">
+    <h2 id="related-guides-h">Keep exploring</h2>
+    <div class="related-guide-grid">
+<a class="related-guide" href="/develop.html"><strong>Develop for Omarchy</strong><span>Package your app for the official Omarchy repository so it shows up here and in the feed.</span></a>
+<a class="related-guide" href="/guides.html"><strong>Guides</strong><span>Install guides, comparisons and tutorials for Omarchy apps.</span></a>
+    </div>
+  </aside>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="index.html"><img class="brand-mark" src="/images/logo-floppy-68.png?v=2" width="34" height="34" alt=""><span class="brand-name">Omarchy <b>Apps</b></span></a>
+      <p>Every package in the official Omarchy repo, searchable and ranked by readers. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing.</p>
+    </div>
+    <nav aria-label="Site"><h3>Site</h3><a href="index.html">Apps</a><a href="omarchy-apps-list.html">All apps list</a><a href="leaderboard.html">Top apps</a><a href="guides.html">Guides</a><a href="develop.html">Develop</a><a href="sponsor.html">Sponsor</a><a href="about.html">About</a><a href="press.html">Press</a><a href="faq.html">FAQ</a><a href="catalog.html">Catalog feed</a><a href="terms.html">Terms</a></nav>
+    <nav aria-label="Omarchy"><h3>Omarchy</h3><a href="https://omarchy.org/">omarchy.org</a><a href="https://omarchy.org/manual/">Manual</a><a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs</a><a href="https://omarchyplugins.com/">Plugins</a></nav>
+    <nav aria-label="Contact"><h3>Say hello</h3><a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">@jessyka_boat on X</a><a href="develop.html#newsletter">Newsletter</a></nav>
+  </div>
+  <div class="wrap footer-base"><span>Synced 2026-10-20</span><span>No trackers, videos play on click</span><span>Packages come from pkgs.omarchy.org</span></div>
+</footer>
+</body>
+</html>
