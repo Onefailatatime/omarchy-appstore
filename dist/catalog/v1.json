@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-10-21T13:00:15+00:00",
+ "generated_at": "2026-10-22T01:00:14+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 196,
+ "app_count": 197,
  "apps": [
   {
    "id": "1password",
@@ -1640,6 +1640,17 @@
    "homepage": "https://github.com/libretro/retroarch-joypad-autoconfig",
    "tutorial_url": "https://omarchyapps.com/retroarch-joypad-autoconfig-git-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/retroarch-joypad-autoconfig-git.html"
+  },
+  {
+   "id": "rumb",
+   "name": "rumb",
+   "package": "rumb",
+   "install_command": "omarchy pkg add rumb",
+   "category": "Utilities",
+   "description": "Read-only dashboard of pending updates and current problems on Arch and Omarchy",
+   "homepage": "https://github.com/HANCORE-linux/rumb",
+   "tutorial_url": "https://omarchyapps.com/rumb-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/rumb.html"
   },
   {
    "id": "rustdesk",
