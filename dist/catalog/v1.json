@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-10-26T01:00:13+00:00",
+ "generated_at": "2026-10-26T13:00:14+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 197,
+ "app_count": 198,
  "apps": [
   {
    "id": "1password",
@@ -1344,6 +1344,17 @@
    "homepage": "https://github.com/basecamp/omarchy",
    "tutorial_url": "https://omarchyapps.com/omarchy-settings-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/omarchy-settings.html"
+  },
+  {
+   "id": "omarchy-speedtest",
+   "name": "omarchy-speedtest",
+   "package": "omarchy-speedtest",
+   "install_command": "omarchy pkg add omarchy-speedtest",
+   "category": "Utilities",
+   "description": "Omarchy's network speed test client",
+   "homepage": "https://github.com/omacom/omarchy-speedtest",
+   "tutorial_url": "https://omarchyapps.com/omarchy-speedtest-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/omarchy-speedtest.html"
   },
   {
    "id": "omarchy-task-manager",

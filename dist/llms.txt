@@ -215,6 +215,7 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [How to Install & Use omarchy-nvim on Omarchy (2026)](https://omarchyapps.com/omarchy-nvim-on-omarchy.html)
 - [omarchy-power-profiles-daemon on Omarchy: Install & Use](https://omarchyapps.com/omarchy-power-profiles-daemon-on-omarchy.html)
 - [How to Install & Use omarchy-settings on Omarchy (2026)](https://omarchyapps.com/omarchy-settings-on-omarchy.html)
+- [How to Install & Use omarchy-speedtest on Omarchy (2026)](https://omarchyapps.com/omarchy-speedtest-on-omarchy.html)
 - [How to Install & Use omarchy-task-manager on Omarchy (2026)](https://omarchyapps.com/omarchy-task-manager-on-omarchy.html)
 - [How to Install & Use omarchy-themes-intros on Omarchy (2026)](https://omarchyapps.com/omarchy-themes-intros-on-omarchy.html)
 - [How to Install & Use omareel on Omarchy (2026)](https://omarchyapps.com/omareel-on-omarchy.html)
