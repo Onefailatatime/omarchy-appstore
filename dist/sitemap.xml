@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://omarchyapps.com/</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://omarchyapps.com/</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://omarchyapps.com/leaderboard.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://omarchyapps.com/develop.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/about.html</loc><lastmod>2026-10-20</lastmod></url>
@@ -102,8 +102,8 @@
   <url><loc>https://omarchyapps.com/apps/elsewhen.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/feishu-bin.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/flea.html</loc><lastmod>2026-10-20</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/ghost.html</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/ghost-runtime.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/ghost.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/ghost-runtime.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/ghostty.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/ghostty-nautilus.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/ghostty-shell-integration.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -237,7 +237,7 @@
   <url><loc>https://omarchyapps.com/apps/superwhisper-bin.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/symfony-cli.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-bin.html</loc><lastmod>2026-10-27</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/t3code-nightly-bin.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/t3code-nightly-bin.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-patched-bin.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tensaku.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/thinkpad-t14-amd-touchpad-dkms.html</loc><lastmod>2026-10-20</lastmod></url>
@@ -321,8 +321,8 @@
   <url><loc>https://omarchyapps.com/dell-xps-touchpad-haptics-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/dropbox-on-omarchy.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://omarchyapps.com/elsewhen-on-omarchy.html</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://omarchyapps.com/ghost-on-omarchy.html</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://omarchyapps.com/ghost-runtime-on-omarchy.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/ghost-on-omarchy.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://omarchyapps.com/ghost-runtime-on-omarchy.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://omarchyapps.com/ghostty-nautilus-on-omarchy.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://omarchyapps.com/ghostty-shell-integration-on-omarchy.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://omarchyapps.com/github-copilot-cli-on-omarchy.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -380,7 +380,7 @@
   <url><loc>https://omarchyapps.com/supergfxctl-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/superwhisper-bin-on-omarchy.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://omarchyapps.com/t3code-bin-on-omarchy.html</loc><lastmod>2026-10-27</lastmod></url>
-  <url><loc>https://omarchyapps.com/t3code-nightly-bin-on-omarchy.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://omarchyapps.com/t3code-nightly-bin-on-omarchy.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://omarchyapps.com/t3code-patched-bin-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/tensaku-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/thinkpad-t14-amd-touchpad-dkms-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>

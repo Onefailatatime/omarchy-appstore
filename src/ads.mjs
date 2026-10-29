@@ -4,7 +4,8 @@
 import ADS from "./ad-catalog.mjs";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const PAGE_TYPES = new Set(["home", "app", "category", "tutorial", "guide", "other", "mini"]);
+// Plain page types plus the sponsor slots the house ads fill (page_slot).
+const PAGE_TYPES = new Set(["home", "app", "category", "tutorial", "guide", "other", "mini", "home_header", "home_footer", "app_banner"]);
 const EVENTS = { impression: "impressions", click: "clicks", view: "views" };
 const headers = { "cache-control": "no-store", "content-type": "application/json; charset=utf-8", "x-content-type-options": "nosniff" };
 const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers });

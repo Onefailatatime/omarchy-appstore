@@ -261,80 +261,107 @@ def mini_page(ad: dict) -> str:
 def ads_js() -> str:
     data = [{"r": a["rank"], "n": a["name"], "l": a["line"]} for a in ADS]
     return ("/* In house ads for omarchyapps.com, built by inhouse_ads.py.\n"
+            " * They fill the site's own sponsor slots only while no paid sponsor holds them:\n"
+            " * the homepage header and footer rotations and the app profile banner.\n"
             " * Fair rotation: each browser starts at a random ad and then steps to the\n"
-            " * next one on every page view, so all twenty get equal exposure on every\n"
-            " * page type. Impressions count once per page view when the ad is half\n"
-            " * visible; clicks open /adN in a new tab. */\n"
+            " * next one for every slot it fills, so all twenty get equal exposure.\n"
+            " * Impressions count once per slot when the ad is half visible; clicks\n"
+            " * open /adN in a new tab. */\n"
             + ADS_RUNTIME.replace("__ADS__", json.dumps(data, separators=(",", ":"), ensure_ascii=False)))
 
 
+# Each copy of the script fills the slots placed above it, so a slot is drawn
+# as soon as it is parsed. The unit reuses the sponsor unit markup and classes
+# (.ad, .ad.text, .mark, .copy, .sub, .cta) so it has the slot's size and look.
 ADS_RUNTIME = r"""(function(){"use strict";
 var ADS=__ADS__,N=ADS.length,KEY="oa_ad_next";
-var slot=document.querySelector("[data-oa-slot]");if(!slot)return;
-var type=slot.getAttribute("data-oa-slot")||"other",i;
-try{var s=localStorage.getItem(KEY);i=s===null?Math.floor(Math.random()*N):(parseInt(s,10)%N+N)%N;localStorage.setItem(KEY,String((i+1)%N))}catch(e){i=Math.floor(Math.random()*N)}
-var ad=ADS[i];
-function send(t){var b=JSON.stringify({ad:ad.r,type:t,page:type});try{if(navigator.sendBeacon&&navigator.sendBeacon("/api/ads/event",new Blob([b],{type:"application/json"})))return}catch(e){}try{fetch("/api/ads/event",{method:"POST",headers:{"content-type":"application/json"},body:b,keepalive:true})}catch(e){}}
-if(!document.getElementById("oa-ad-css")){var st=document.createElement("style");st.id="oa-ad-css";st.textContent=
-".oa-house{max-width:var(--maxw,76rem);margin:.6rem auto 0;padding:0 var(--space-medium,1rem)}"+
-".oa-house a{display:flex;align-items:center;gap:.65em;padding:.5em .8em;border:var(--border-width,1px) solid var(--border-color,rgba(65,72,104,.8));border-radius:var(--radius,.4em);background:rgba(36,40,59,.55);color:rgb(192,202,245);text-decoration:none;font-size:.86rem;line-height:1.35;transition:border-color .15s}"+
-".oa-house a:hover,.oa-house a:focus-visible{border-color:rgb(122,162,247)}"+
-".oa-house .t{flex:none;padding:.05em .45em;border:1px solid rgba(255,158,100,.6);border-radius:.3em;color:rgb(255,158,100);font:700 .7rem/1.5 var(--font-family,monospace);letter-spacing:.03em}"+
-".oa-house .c{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}"+
-".oa-house .c b{color:rgb(125,207,255);font-weight:600;margin-right:.45em}"+
-".oa-house .g{flex:none;color:rgb(122,162,247);font:700 .78rem/1.3 var(--font-family,monospace)}"+
-"@media (max-width:40rem){.oa-house .c{white-space:normal}.oa-house .g .x{display:none}}";
-document.head.appendChild(st)}
-var a=document.createElement("a");a.href="/ad"+ad.r+"?from="+encodeURIComponent(type);a.target="_blank";a.rel="noopener";
+var slots=document.querySelectorAll("[data-oa-slot]:not([data-oa-done])");
+function next(){var i;try{var s=localStorage.getItem(KEY);i=s===null?Math.floor(Math.random()*N):(parseInt(s,10)%N+N)%N;localStorage.setItem(KEY,String((i+1)%N))}catch(e){i=Math.floor(Math.random()*N)}return ADS[i]}
+function send(ad,t,page){var b=JSON.stringify({ad:ad.r,type:t,page:page});try{if(navigator.sendBeacon&&navigator.sendBeacon("/api/ads/event",new Blob([b],{type:"application/json"})))return}catch(e){}try{fetch("/api/ads/event",{method:"POST",headers:{"content-type":"application/json"},body:b,keepalive:true})}catch(e){}}
+function fill(slot){
+slot.setAttribute("data-oa-done","1");
+var type=slot.getAttribute("data-oa-slot")||"other",pos=slot.getAttribute("data-oa-pos")||"",page=pos?type+"_"+pos:type,ad=next();
+var a=document.createElement("a");a.className=slot.getAttribute("data-oa-class")||"ad";
+a.href="/ad"+ad.r+"?from="+encodeURIComponent(type)+(pos?"&slot="+encodeURIComponent(pos):"");a.target="_blank";a.rel="noopener";
 a.setAttribute("data-oa-ad",String(ad.r));
-a.innerHTML='<span class="t">FROM US</span><span class="c"><b></b><span></span></span><span class="g"><span class="x">Join the waitlist </span>↗</span>';
-a.querySelector(".c b").textContent=ad.n;a.querySelector(".c span").textContent=ad.l;
+a.innerHTML='<span class="mark" aria-hidden="true"></span><span class="copy"><strong></strong><span class="sub"></span></span><span class="cta">Join the waitlist ↗</span>';
+a.querySelector(".mark").textContent=ad.n.charAt(0);a.querySelector("strong").textContent=ad.n;a.querySelector(".sub").textContent=ad.l;
 a.setAttribute("aria-label",ad.n+": "+ad.l+" Opens the waitlist in a new tab.");
-a.addEventListener("click",function(){send("click");if(window.umami)try{umami.track("house_ad_click",{ad:ad.r,page:type})}catch(e){}});
-slot.appendChild(a);slot.hidden=false;
-var seen=false;function imp(){if(seen)return;seen=true;send("impression")}
-if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){for(var k=0;k<es.length;k++){if(es[k].isIntersecting){imp();io.disconnect()}}},{threshold:.5});io.observe(slot)}else imp();
+a.addEventListener("click",function(){send(ad,"click",page);if(window.umami)try{umami.track("house_ad_click",{ad:ad.r,page:type,slot:pos})}catch(e){}});
+slot.appendChild(a);
+var seen=false;function imp(){if(seen)return;seen=true;send(ad,"impression",page)}
+if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){for(var k=0;k<es.length;k++){if(es[k].isIntersecting){imp();io.disconnect()}}},{threshold:.5});io.observe(a)}else imp()}
+for(var j=0;j<slots.length;j++)fill(slots[j]);
 })();"""
 
-SLOT_RE = re.compile(r'(<header class="topbar">.*?</header>)', re.S)
+
+def slot_html(kind: str, pos: str, unit_class: str) -> str:
+    return (f'<div class="oa-house" data-oa-slot="{kind}" data-oa-pos="{pos}" data-oa-class="{unit_class}"></div>'
+            '<script src="/oa-ads.js"></script>')
 
 
-SLOT_STRIP = re.compile(r'\n<div class="oa-house" data-oa-slot="[a-z]+" hidden></div><script src="/oa-ads.js"></script>')
+# The site's designated sponsor slots (sponsors.py) and how an empty one looks
+# in the built page. A slot held by a paid sponsor never matches, so it is left alone.
+OPEN_CARD = r'<a class="ad open" href="/sponsor\.html#{anchor}">.*?</a>'
+HOME_SLOTS = [
+    ("header", re.compile(r'(<div class="ad-header">)' + OPEN_CARD.format(anchor="header") + r'(</div>)', re.S), "ad text"),
+    ("footer", re.compile(r'(<div class="ad-footer"><h2 class="sec-label">Sponsors</h2>)' + OPEN_CARD.format(anchor="footer") + r'(</div>)', re.S), "ad"),
+]
+APP_HEADER_RE = re.compile(r'(<header class="app-header">.*?</header>\n)', re.S)
+
+# Markup from earlier builds that must come out before pages are hashed:
+# the old bar under the top bar (v1), plus anything this module adds now.
+SLOT_STRIP = [
+    re.compile(r'\n<div class="oa-house" data-oa-slot="[a-z]+" hidden></div><script src="/oa-ads.js"></script>'),
+    re.compile(r'<div class="ad-app-banner"><div class="oa-house"[^>]*></div><script src="/oa-ads.js"></script></div>\n'),
+]
 
 
 def clean(dist: pathlib.Path) -> None:
     """Undo the last build's ads before pages are hashed for their dates.
 
     build.py does not rewrite every file in dist/ (old tutorial pages stay put),
-    so strip the slot from those too; otherwise their hash, and date, would move."""
+    so strip ad markup from those too; otherwise their hash, and date, would move.
+    The homepage is always rebuilt, so its open cards come back on their own."""
     for a in ADS:
         (dist / f"ad{a['rank']}.html").unlink(missing_ok=True)
     for page in dist.rglob("*.html"):
         text = page.read_text(encoding="utf-8")
         if "data-oa-slot" in text:
-            page.write_text(SLOT_STRIP.sub("", text), encoding="utf-8")
+            for rx in SLOT_STRIP:
+                text = rx.sub("", text)
+            page.write_text(text, encoding="utf-8")
 
 
 def build(dist: pathlib.Path, tutorials: set[str], guides: set[str]) -> dict:
+    """Write the twenty ad pages and the runtime, then fill the empty sponsor
+    slots: homepage header and footer, and the banner spot on each app page
+    without a paid banner. Returns how many slots were filled per slot name."""
     bad = copy_problems()
     if bad:
         raise SystemExit("inhouse ads copy has dashes:\n" + "\n".join(bad))
-    mini = {f"ad{a['rank']}.html" for a in ADS}
     for a in ADS:
         (dist / f"ad{a['rank']}.html").write_text(mini_page(a), encoding="utf-8")
     (dist / "oa-ads.js").write_text(ads_js(), encoding="utf-8")
-    counts = {t: 0 for t in PAGE_TYPES}
-    for page in dist.rglob("*.html"):
-        rel = page.relative_to(dist).as_posix()
-        if rel in mini or rel.startswith("_preview/"):
-            continue
+    counts = {"home_header": 0, "home_footer": 0, "app_banner": 0, "sponsor_held": 0}
+
+    home = dist / "index.html"
+    text = home.read_text(encoding="utf-8")
+    for pos, rx, cls in HOME_SLOTS:
+        text, n = rx.subn(lambda m, pos=pos, cls=cls: m.group(1) + slot_html("home", pos, cls) + m.group(2), text, count=1)
+        counts[f"home_{pos}"] += n
+        counts["sponsor_held"] += 1 - n
+    home.write_text(text, encoding="utf-8")
+
+    for page in sorted((dist / "apps").glob("*.html")):
         text = page.read_text(encoding="utf-8")
-        if "data-oa-slot" in text:
+        if 'class="ad-app-banner"' in text:
+            counts["sponsor_held"] += 1
             continue
-        kind = page_type(rel, tutorials, guides)
-        slot = f'<div class="oa-house" data-oa-slot="{kind}" hidden></div><script src="/oa-ads.js"></script>'
-        new, n = SLOT_RE.subn(lambda m: m.group(1) + "\n" + slot, text, count=1)
+        new, n = APP_HEADER_RE.subn(
+            lambda m: m.group(1) + '<div class="ad-app-banner">' + slot_html("app", "banner", "ad text") + "</div>\n",
+            text, count=1)
         if n:
             page.write_text(new, encoding="utf-8")
-            counts[kind] += 1
+            counts["app_banner"] += 1
     return counts

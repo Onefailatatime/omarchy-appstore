@@ -81,7 +81,7 @@ assert.equal(stats.top_ideas[0].ad, 3);
 assert.equal(stats.signups.length, 2);
 assert.equal((await handleStats(new Request(ORIGIN + "/api/ads/stats"), { ...env, ADS_STATS_TOKEN: "" }, now)).status, 401, "no token configured means closed");
 
-// Built site: twenty noindex pages with no way back, one slot on every other page, sitemap clean.
+// Built site: twenty noindex pages with no way back, house ads only in empty sponsor slots, sitemap clean.
 const dist = new URL("../dist/", import.meta.url).pathname;
 const sitemap = readFileSync(join(dist, "sitemap.xml"), "utf8");
 assert.doesNotMatch(sitemap, /\/ad\d+/);
@@ -96,7 +96,27 @@ for (let n = 1; n <= 20; n++) {
 }
 const walk = (d) => readdirSync(d).flatMap((f) => statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]);
 const pages = walk(dist).filter((f) => f.endsWith(".html") && !/\/ad\d+\.html$/.test(f) && !f.includes("/_preview/"));
-for (const f of pages) assert.equal((readFileSync(f, "utf8").match(/data-oa-slot=/g) || []).length, 1, `one ad slot in ${f}`);
+// House ads only fill the site's own empty sponsor slots: homepage header and
+// footer, and the app profile banner. No bar under the top bar, no new placements.
+const slotsIn = (html) => [...html.matchAll(/data-oa-slot="([a-z]+)" data-oa-pos="([a-z]+)"/g)].map((m) => m[1] + "_" + m[2]);
+for (const f of pages) {
+  const html = readFileSync(f, "utf8");
+  const rel = f.slice(dist.length);
+  const slots = slotsIn(html);
+  assert.equal((html.match(/data-oa-slot=/g) || []).length, slots.length, `well formed slots in ${rel}`);
+  assert.doesNotMatch(html, /<header class="topbar">[\s\S]*?<\/header>\s*<div class="oa-house"/, `no bar under the top bar in ${rel}`);
+  if (rel === "index.html") {
+    assert.deepEqual(slots, ["home_header", "home_footer"]);
+    assert.match(html, /<div class="ad-header"><div class="oa-house" data-oa-slot="home" data-oa-pos="header" data-oa-class="ad text"><\/div><script src="\/oa-ads.js"><\/script><\/div>/);
+    assert.doesNotMatch(html, /href="\/sponsor\.html#(header|footer)"/, "open cards replaced");
+  } else if (rel.startsWith("apps/")) {
+    assert.deepEqual(slots, ["app_banner"], rel);
+    assert.match(html, /<\/header>\n<div class="ad-app-banner"><div class="oa-house"/);
+  } else {
+    assert.deepEqual(slots, [], `no house ad in ${rel}`);
+  }
+}
 const js = readFileSync(join(dist, "oa-ads.js"), "utf8");
 assert.match(js, /a\.target="_blank";a\.rel="noopener"/);
+assert.doesNotMatch(js, /FROM US/i);
 console.log("ads-tests-ok");
