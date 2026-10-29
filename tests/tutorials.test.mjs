@@ -13,7 +13,14 @@ for (const file of apps) {
   const link = page.match(/<a class="button" href="(\/[a-z0-9-]+\.html)">Tutorial:/);
   assert.ok(link, `${file} links to its tutorial`);
   const tutorial = await readFile(new URL(link[1].slice(1), dist), "utf8");
-  assert.match(sitemap, new RegExp(`omarchyapps\\.com${link[1].replace(".", "\\.")}`), `${link[1]} in sitemap`);
+  // A tutorial is either in the sitemap, or it points its canonical at this profile and stays out of it.
+  const canonical = tutorial.match(/<link rel="canonical" href="([^"]+)">/)[1];
+  if (canonical === `https://omarchyapps.com/apps/${file}`) {
+    assert.doesNotMatch(sitemap, new RegExp(`omarchyapps\\.com${link[1].replace(".", "\\.")}<`), `${link[1]} left out of sitemap`);
+  } else {
+    assert.equal(canonical, `https://omarchyapps.com${link[1]}`, `${link[1]} is self canonical`);
+    assert.match(sitemap, new RegExp(`omarchyapps\\.com${link[1].replace(".", "\\.")}`), `${link[1]} in sitemap`);
+  }
   assert.equal((tutorial.match(/<h1/g) || []).length, 1, `${link[1]} has one h1`);
   assert.match(tutorial, /"@type":\s*"FAQPage"/, `${link[1]} has FAQ schema`);
   assert.match(tutorial, new RegExp(`href="/apps/${file.replace(".", "\\.")}"`), `${link[1]} links back to its profile`);

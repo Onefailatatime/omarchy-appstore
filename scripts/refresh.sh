@@ -10,7 +10,7 @@ git pull -q --ff-only origin main
 python3 build.py
 npm test
 npx wrangler deploy
-git add dist data/omarchy.db src/app-names.mjs src/checklist.mjs
+git add dist data/omarchy.db data/page-dates.json src/app-names.mjs src/checklist.mjs
 git diff --cached --quiet || git commit -qm "Refresh package catalogue from pkgs.omarchy.org"
 git push -q origin main
 echo "== $(date -u +%FT%TZ) refresh done"

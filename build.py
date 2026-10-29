@@ -32,6 +32,14 @@ import catalog
 
 ROOT = pathlib.Path(__file__).parent
 DIST = ROOT / "dist"
+# Each page shows the date its own content last changed, not the build date.
+# Pages render with DATE_TOKEN; after the build, every page is hashed and the
+# token is swapped for the stored date, which only moves when the hash does.
+PAGE_DATES_FILE = ROOT / "data" / "page-dates.json"
+DATE_TOKEN = "9999-12-31"
+# Generated tutorials that repeat their app page and earn no search traffic of
+# their own point their canonical at the app page and stay out of the sitemap.
+TUTORIAL_CANONICALS_FILE = ROOT / "data" / "tutorial-canonicals.json"
 DB_URL = "https://pkgs.omarchy.org/stable/x86_64/omarchy.db"
 DB_CACHE = ROOT / "data" / "omarchy.db"
 PKGS_REMOTE = "https://github.com/omacom/omarchy-pkgs"
@@ -1324,6 +1332,10 @@ def render_seo_page(template: str, css: str, guide: dict, body: str, related: st
                     crumb: tuple[str, str], facts: str, extra_graph: list | None = None) -> str:
     """Render one guide-style page: Article + Breadcrumb + FAQ schema, answer box, body."""
     guide_url = f"{SITE_URL}/{guide['slug']}.html"
+    if guide.get("canonical"):
+        template = (template
+                    .replace('<link rel="canonical" href="__SITE_URL__/__SLUG__.html">', f'<link rel="canonical" href="{guide["canonical"]}">')
+                    .replace('<meta property="og:url" content="__SITE_URL__/__SLUG__.html">', f'<meta property="og:url" content="{guide["canonical"]}">'))
     schema = {
         "@context": "https://schema.org",
         "@graph": [
@@ -1375,13 +1387,44 @@ def render_seo_page(template: str, css: str, guide: dict, body: str, related: st
             .replace("__STYLE__", css))
 
 
+def stamp_page_dates(today: str, fixed: dict[str, str]) -> dict[str, str]:
+    """Swap DATE_TOKEN in every built page for the date that page last changed.
+
+    A page's date moves to today only when its content hash changes. Pages in
+    `fixed` (hand-written guides) use the given date. Returns {path: date}."""
+    ledger = json.loads(PAGE_DATES_FILE.read_text(encoding="utf-8")) if PAGE_DATES_FILE.exists() else {}
+    fresh, dates = {}, {}
+    for page in sorted(DIST.rglob("*.html")):
+        rel = page.relative_to(DIST).as_posix()
+        text = page.read_text(encoding="utf-8")
+        # The stylesheet name and the feed sample's generated_at timestamp change every build; neither is page content.
+        stable = re.sub(r"/style\.[0-9a-f]{10}\.css", "/style.css", text)
+        stable = re.sub(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[+-]\d\d:\d\d", "", stable)
+        digest = hashlib.sha256(stable.encode()).hexdigest()
+        old = ledger.get(rel) or {}
+        if rel in fixed:
+            date = fixed[rel]
+        elif old.get("date") and old.get("hash") in (None, digest):  # no hash yet: a seeded date
+            date = old["date"]
+        else:
+            date = today
+        date = min(date, today)
+        fresh[rel] = {"date": date, "hash": digest}
+        dates[rel] = date
+        if DATE_TOKEN in text:
+            page.write_text(text.replace(DATE_TOKEN, date), encoding="utf-8")
+    PAGE_DATES_FILE.write_text(json.dumps(fresh, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    return dates
+
+
 def main() -> None:
     sync_pkgbuilds()
     pkgs = load_packages()
     missing_authors = [p["name"] for p in pkgs if not p.get("author_name") or not p.get("author_url")]
     if missing_authors:
         print("missing public author attribution for: " + ", ".join(missing_authors))
-    synced = datetime.date.today().isoformat()
+    today = datetime.date.today().isoformat()
+    synced = DATE_TOKEN  # swapped for each page's own last-changed date in stamp_page_dates()
     functions_dir = ROOT / "src"
     functions_dir.mkdir(parents=True, exist_ok=True)
     (functions_dir / "app-names.mjs").write_text(
@@ -1586,8 +1629,11 @@ def main() -> None:
 
     guided = {n for names in GUIDE_PACKAGES.values() for n in names}
     tuts = tutorials.build(pkgs, guided, {g["slug"] for g in GUIDES}, SITE_URL, profile_images)
+    canonical_to_app = set(json.loads(TUTORIAL_CANONICALS_FILE.read_text())["pages"]) if TUTORIAL_CANONICALS_FILE.exists() else set()
     for t in tuts:
         p = t["pkg"]
+        if t["slug"] in canonical_to_app:
+            t["canonical"] = SITE_URL + t["profile"]
         canonical = f"{SITE_URL}/{t['slug']}.html"
         howto = {
             "@type": "HowTo", "@id": canonical + "#howto", "name": f"How to install {t['display']} on Omarchy",
@@ -1664,31 +1710,50 @@ def main() -> None:
         lambda guide, body: render_seo_page(guide_template, page_css, guide, body, catalog_related, synced,
                                             ("Develop", "/develop.html"), f"Updated {synced} · early preview"))
 
-    # lastmod is the real last change: the package's build date for app pages,
-    # and the last git commit touching a page's sources for everything else.
+    # One cached, content-hashed stylesheet instead of the same CSS inlined in
+    # every page. Pages were rendered with the full block; swap it for a link.
+    full_css = css.replace("__CATVARS__", cat_vars)
+    css_name = f"style.{hashlib.sha256(full_css.encode()).hexdigest()[:10]}.css"
+    for old in DIST.glob("style.*.css"):
+        old.unlink()
+    (DIST / css_name).write_text(full_css, encoding="utf-8")
+    link = f'<link rel="stylesheet" href="/{css_name}">'
+    variants = ["<style>\n__STYLE__\n</style>", f"<style>\n{full_css}\n</style>", f"<style>{full_css}</style>", f"<style>{resolved_css}</style>", f"<style>\n{resolved_css}\n</style>"]
+    inlined = 0
+    for page_file in DIST.rglob("*.html"):
+        text = page_file.read_text(encoding="utf-8")
+        new = text
+        for v in variants:
+            new = new.replace(v, link)
+        if new != text:
+            inlined += 1
+            page_file.write_text(new, encoding="utf-8")
+    print(f"dist/{css_name} {len(full_css):,} bytes · linked from {inlined} pages")
+
+    # Guides show their real edit date (last commit to their source). Every
+    # other page keeps its stored date until its rendered content changes.
     def git_date(*paths: str) -> str:
         dirty = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain", "--", *paths], capture_output=True, text=True).stdout.strip()
         if dirty:
-            return synced
+            return today
         out = subprocess.run(["git", "-C", str(ROOT), "log", "-1", "--format=%cs", "--", *paths], capture_output=True, text=True).stdout.strip()
-        return out or synced
-    pkg_date = {p["name"]: datetime.date.fromtimestamp(p["built"]).isoformat() for p in pkgs}
-    newest_pkg = max(pkg_date.values()) if pkg_date else synced
-    shared = ["parts/style.css"]
-    sitemap_entries = [(SITE_URL + "/", max(newest_pkg, git_date("parts/body.html", *shared)))]
-    for name in ("leaderboard", "develop", "about", "press", "faq", "sponsor", "guides", "terms"):
-        sitemap_entries.append((f"{SITE_URL}/{name}.html", git_date(f"parts/{name}.html", *shared)))
-    sitemap_entries.extend((f"{SITE_URL}/{guide['slug']}.html", git_date(f"parts/guides/{guide['slug']}.html", "parts/guide.html")) for guide in GUIDES)
-    sitemap_entries.extend((f"{SITE_URL}/apps/{slug(p['name'])}.html", max(pkg_date[p["name"]], git_date("parts/app.html"))) for p in pkgs)
-    for path, sources in seo_pages:
-        date = git_date(*sources, "parts/guide.html")
-        if "data/omarchy.db" in sources:
-            date = max(date, newest_pkg)
-        sitemap_entries.append((SITE_URL + path, min(date, synced)))
-    sitemap_entries.extend((SITE_URL + path, git_date(*sources, "parts/guide.html")) for path, sources in catalog_pages)
-    sitemap_entries.append((SITE_URL + "/tutorials.html", synced))
-    sitemap_entries.extend((f"{SITE_URL}/{t['slug']}.html", synced) for t in tuts)
-    sitemap_entries = [(u, min(d, synced)) for u, d in sitemap_entries]
+        return min(out or today, today)
+    def edit_date(part: pathlib.Path) -> str:  # a guide written before it was committed keeps its edit day
+        return min(git_date(str(part.relative_to(ROOT)), "parts/guide.html"),
+                   datetime.date.fromtimestamp(part.stat().st_mtime).isoformat())
+    fixed = {f"{guide['slug']}.html": edit_date(ROOT / "parts" / "guides" / f"{guide['slug']}.html") for guide in GUIDES}
+    page_dates = stamp_page_dates(today, fixed)
+    checklist = functions_dir / "checklist.mjs"
+    checklist.write_text(checklist.read_text(encoding="utf-8").replace(DATE_TOKEN, page_dates.get("develop.html", today)), encoding="utf-8")
+
+    def lastmod(path: str) -> str:
+        return page_dates[(path.lstrip("/") or "index.html")]
+    paths = ["/"] + [f"/{name}.html" for name in ("leaderboard", "develop", "about", "press", "faq", "sponsor", "guides", "terms")]
+    paths += [f"/{guide['slug']}.html" for guide in GUIDES]
+    paths += [f"/apps/{slug(p['name'])}.html" for p in pkgs]
+    paths += [path for path, _ in seo_pages] + [path for path, _ in catalog_pages]
+    paths += ["/tutorials.html"] + [f"/{t['slug']}.html" for t in tuts if not t.get("canonical")]
+    sitemap_entries = [(SITE_URL + path, lastmod(path)) for path in paths]
     sitemap_urls = [u for u, _ in sitemap_entries]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     sitemap.extend(f"  <url><loc>{url}</loc><lastmod>{date}</lastmod></url>" for url, date in sitemap_entries)
@@ -1727,30 +1792,11 @@ def main() -> None:
         "Contact: https://x.com/jessyka_boat\n", encoding="utf-8"
     )
 
-    # One cached, content-hashed stylesheet instead of the same CSS inlined in
-    # every page. Pages were rendered with the full block; swap it for a link.
-    full_css = css.replace("__CATVARS__", cat_vars)
-    css_name = f"style.{hashlib.sha256(full_css.encode()).hexdigest()[:10]}.css"
-    for old in DIST.glob("style.*.css"):
-        old.unlink()
-    (DIST / css_name).write_text(full_css, encoding="utf-8")
-    link = f'<link rel="stylesheet" href="/{css_name}">'
-    variants = ["<style>\n__STYLE__\n</style>", f"<style>\n{full_css}\n</style>", f"<style>{full_css}</style>", f"<style>{resolved_css}</style>", f"<style>\n{resolved_css}\n</style>"]
-    inlined = 0
-    for page_file in DIST.rglob("*.html"):
-        text = page_file.read_text(encoding="utf-8")
-        new = text
-        for v in variants:
-            new = new.replace(v, link)
-        if new != text:
-            inlined += 1
-            page_file.write_text(new, encoding="utf-8")
-    print(f"dist/{css_name} {len(full_css):,} bytes · linked from {inlined} pages")
     print(f"seo pages:        {len(seo_pages)} (categories, apps list, comparisons, install guides)")
 
     unresolved = [p["name"] for p in pkgs if not p["added"]]
     uncategorized = [p["name"] for p in pkgs if p["category"] == FALLBACK_CATEGORY and p["name"] not in json.loads(CATEGORIES_FILE.read_text() or "{}")]
-    print(f"dist/index.html  {len(page):,} bytes · {len(pkgs)} packages · synced {synced}")
+    print(f"dist/index.html  {len(page):,} bytes · {len(pkgs)} packages · content last changed {page_dates['index.html']}")
     print(f"dist/leaderboard.html {len(leaderboard):,} bytes · live Top 25 community ranking")
     print(f"dist/develop.html {len(develop):,} bytes · public packaging checklist")
     print(f"src/checklist.mjs {len(develop_md):,} bytes · checklist emailed to subscribers")
@@ -1759,7 +1805,7 @@ def main() -> None:
     print(f"dist/sponsor.html {len(advertise):,} bytes · sponsor products (rotations + app banners)")
     print(f"dist/guides       {len(GUIDES)} search-focused editorial guides")
     print(f"dist/apps/        {len(pkgs)} crawlable package pages")
-    print(f"dist/sitemap.xml  {len(sitemap_urls)} canonical URLs")
+    print(f"dist/sitemap.xml  {len(sitemap_urls)} canonical URLs · {sum(1 for t in tuts if t.get('canonical'))} tutorials point their canonical at the app page")
     print("new arrivals:    " + ", ".join(f"{p['name']} ({datetime.date.fromtimestamp(p['added'])})" for p in newest))
     if unresolved:
         print(f"no git history for {len(unresolved)}: {', '.join(unresolved)}")
