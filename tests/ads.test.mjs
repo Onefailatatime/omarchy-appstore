@@ -109,6 +109,7 @@ for (const f of pages) {
     assert.deepEqual(slots, ["home_header", "home_footer"]);
     assert.match(html, /<div class="ad-header"><div class="oa-house" data-oa-slot="home" data-oa-pos="header" data-oa-class="ad text"><\/div><script src="\/oa-ads.js"><\/script><\/div>/);
     assert.doesNotMatch(html, /href="\/sponsor\.html#(header|footer)"/, "open cards replaced");
+    assert.match(html, /<div class="ad-footer"><div class="oa-house" data-oa-slot="home" data-oa-pos="footer" data-oa-class="ad"><\/div><script src="\/oa-ads.js"><\/script><\/div>/, "no Sponsors heading over a house ad");
   } else if (rel.startsWith("apps/")) {
     assert.deepEqual(slots, ["app_banner"], rel);
     assert.match(html, /<\/header>\n<div class="ad-app-banner"><div class="oa-house"/);

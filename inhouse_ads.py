@@ -305,8 +305,10 @@ def slot_html(kind: str, pos: str, unit_class: str) -> str:
 OPEN_CARD = r'<a class="ad open" href="/sponsor\.html#{anchor}">.*?</a>'
 HOME_SLOTS = [
     ("header", re.compile(r'(<div class="ad-header">)' + OPEN_CARD.format(anchor="header") + r'(</div>)', re.S), "ad text"),
-    ("footer", re.compile(r'(<div class="ad-footer"><h2 class="sec-label">Sponsors</h2>)' + OPEN_CARD.format(anchor="footer") + r'(</div>)', re.S), "ad"),
+    ("footer", re.compile(r'(<div class="ad-footer">)<h2 class="sec-label">Sponsors</h2>' + OPEN_CARD.format(anchor="footer") + r'(</div>)', re.S), "ad"),
 ]
+# The footer's "Sponsors" heading is dropped only while a house ad fills the
+# slot. A paid footer sponsor never matches the pattern, so its heading stays.
 APP_HEADER_RE = re.compile(r'(<header class="app-header">.*?</header>\n)', re.S)
 
 # Markup from earlier builds that must come out before pages are hashed:
