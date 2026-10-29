@@ -4,6 +4,7 @@
 
 import { handleVoteRequest, D1VoteStore } from "./votes.mjs";
 import { handleSubscribeRequest } from "./subscribe.mjs";
+import { handleAdEvent, handleWaitlist, handleStats } from "./ads.mjs";
 
 async function sha256Hex(text) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
@@ -52,7 +53,7 @@ const tooMany = () => new Response(JSON.stringify({ error: "Too many requests. T
 });
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const { pathname } = url;
     try {
@@ -72,6 +73,25 @@ export default {
         if (pathname === "/api/votes") return await handleVoteRequest(request, new D1VoteStore(env.DB));
         return await handleSubscribeRequest(request, env);
       }
+      // In house ads: /ad1 to /ad20 are noindex waitlist pages; /adN.html folds into /adN.
+      const adPage = pathname.match(/^\/ad([1-9]|1[0-9]|20)(\.html)?\/?$/);
+      if (adPage) {
+        if (adPage[2] || pathname.endsWith("/")) return Response.redirect(new URL(`/ad${adPage[1]}${url.search}`, request.url).toString(), 301);
+        const res = await env.ASSETS.fetch(new Request(new URL(`/ad${adPage[1]}.html`, request.url), request));
+        const out = new Response(res.body, res);
+        out.headers.set("x-robots-tag", "noindex, nofollow");
+        out.headers.set("cache-control", "public, max-age=300");
+        return out;
+      }
+      if (pathname === "/api/ads/event" || pathname === "/api/waitlist") {
+        if (request.method === "POST") {
+          const ip = request.headers.get("cf-connecting-ip") || "0.0.0.0";
+          const key = `${pathname}:${(await sha256Hex(`${ip}|${env.IP_SALT || ""}`)).slice(0, 32)}`;
+          if (await rateLimited(env.DB, key, pathname === "/api/waitlist" ? 5 : 120, 60e3)) return tooMany();
+        }
+        return pathname === "/api/waitlist" ? await handleWaitlist(request, env, ctx) : await handleAdEvent(request, env);
+      }
+      if (pathname === "/api/ads/stats") return await handleStats(request, env);
       // The advertise page was renamed to sponsor.html; keep old links working.
       if (pathname === "/advertise.html" || pathname === "/advertise") {
         return Response.redirect(new URL("/sponsor.html" + url.search + url.hash, request.url).toString(), 301);

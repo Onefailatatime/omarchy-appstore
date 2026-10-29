@@ -685,7 +685,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-10-28",
-  "hash": "13a5effc316f3bc18f23e9c8ba12f937d4d394385ee9ea8fc83f7a3b61dc6415"
+  "hash": "09dab32b1309c773255f326e1429a13201fe57e10b79f82e7d1458081b095e6b"
  },
  "apps/t3code-patched-bin.html": {
   "date": "2026-10-20",
@@ -1133,7 +1133,7 @@
  },
  "index.html": {
   "date": "2026-10-28",
-  "hash": "67865453d3a27fb9e3b4232ceb0a6b0c4a79ec5c7aa5995782ba748016cd1c18"
+  "hash": "48c611b1932b499989f977e01c6135d76bb4422bf8b74bf4ff26f38956faa878"
  },
  "install-omarchy-on-intel-mac.html": {
   "date": "2026-10-19",
@@ -1765,7 +1765,7 @@
  },
  "t3code-nightly-bin-on-omarchy.html": {
   "date": "2026-10-28",
-  "hash": "ff87d526f173b38fea068a729cafba9caa1eaa05f53652ae66f0733e82b50bca"
+  "hash": "f0a754be63098a746dfc091b28215ae489b752c6a16a01745f515fce7ba199ef"
  },
  "t3code-patched-bin-on-omarchy.html": {
   "date": "2026-10-20",

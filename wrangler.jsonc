@@ -13,5 +13,12 @@
   "d1_databases": [
     { "binding": "DB", "database_name": "omarchyapps", "database_id": "3e95124f-4c0b-41ef-8e3c-5aaf329f1713", "migrations_dir": "migrations" }
   ],
+  "send_email": [
+    { "name": "EMAIL", "remote": true }
+  ],
+  "vars": {
+    "ALERT_FROM": "alerts@notify.omarchyapps.com",
+    "ALERT_TO": "jessykaboat@gmail.com"
+  },
   "observability": { "enabled": true, "traces": { "enabled": true } }
 }

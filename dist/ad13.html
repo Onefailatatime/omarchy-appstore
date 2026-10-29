@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Key: Gaming mode for Omarchy, tuned in one keystroke</title>
+<meta name="description" content="One key turns Omarchy into a gaming rig.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#1a1b26">
+<link rel="icon" href="data:,">
+<link rel="preload" href="/fonts/jetbrains-mono-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>@font-face{font-family:"JetBrains Mono";src:url(/fonts/jetbrains-mono-latin-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Geist";src:url(/fonts/geist-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:swap}
+*{box-sizing:border-box}
+html{background:#1a1b26;color:#c0caf5;-webkit-text-size-adjust:100%}
+body{margin:0;font:16px/1.55 "Geist",system-ui,sans-serif}
+main{max-width:40rem;margin:0 auto;padding:2.25rem 1.15rem 2.5rem}
+.kicker{display:inline-block;margin:0 0 1rem;padding:.2em .6em;border:1px solid rgba(122,162,247,.55);border-radius:.4em;color:#7dcfff;font:700 .78rem/1.4 "JetBrains Mono",monospace;letter-spacing:.02em}
+h1{margin:0 0 .75rem;font:700 clamp(1.6rem,6.2vw,2.3rem)/1.18 "JetBrains Mono",monospace;color:#c0caf5}
+.lead{margin:0 0 1.75rem;color:rgba(192,202,245,.82);font-size:1.05rem}
+h2{margin:1.9rem 0 .55rem;font:700 .82rem/1.3 "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:#7aa2f7}
+p{margin:0 0 .8rem}
+ul{margin:0;padding-left:1.15rem}
+li{margin:0 0 .45rem}
+.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem;padding:.85rem 1rem;border:1px solid rgba(65,72,104,.8);border-radius:.4em;background:#24283b}
+.price b{font:700 1.15rem/1.3 "JetBrains Mono",monospace;color:#9ece6a}
+.price span{color:rgba(192,202,245,.7);font-size:.92rem}
+form{margin-top:.4rem;padding:1.1rem 1rem 1.2rem;border:1px solid rgba(122,162,247,.45);border-radius:.4em;background:#24283b}
+label,legend{display:block;margin:0 0 .35rem;font-weight:600;font-size:.95rem}
+input[type=email],textarea{width:100%;padding:.7rem .75rem;border:1px solid rgba(65,72,104,.95);border-radius:.4em;background:#1a1b26;color:#c0caf5;font:inherit;font-size:16px}
+input[type=email]:focus,textarea:focus{outline:2px solid #7aa2f7;outline-offset:1px}
+textarea{min-height:5.5rem;resize:vertical}
+.field{margin:0 0 1rem}
+fieldset{margin:0 0 1.1rem;padding:0;border:0}
+.choice{display:flex;gap:.6rem;flex-wrap:wrap}
+.choice label{display:flex;align-items:center;gap:.45rem;margin:0;padding:.55rem .8rem;border:1px solid rgba(65,72,104,.95);border-radius:.4em;font-weight:400;cursor:pointer}
+.choice input{accent-color:#7aa2f7;width:1.05rem;height:1.05rem}
+button{width:100%;padding:.85rem 1rem;border:0;border-radius:.4em;background:#7aa2f7;color:#1a1b26;font:700 1rem/1.2 "JetBrains Mono",monospace;cursor:pointer}
+button:hover{background:#7dcfff}
+button[disabled]{opacity:.6;cursor:wait}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.msg{margin:.85rem 0 0;font-size:.95rem}
+.msg.ok{color:#9ece6a}.msg.err{color:#ff9e64}
+.note{margin-top:1.75rem;padding:.8rem 1rem;border-left:3px solid #ff9e64;background:rgba(255,158,100,.07);font-size:.93rem}
+footer{max-width:40rem;margin:0 auto;padding:0 1.15rem 2.5rem;color:rgba(192,202,245,.55);font-size:.82rem}
+@media (min-width:48rem){main{padding-top:4rem}}</style>
+<script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
+</head>
+<body>
+<main>
+  <p class="kicker">Game Key · coming soon</p>
+  <h1>Gaming mode for Omarchy, tuned in one keystroke</h1>
+  <p class="lead">One key turns Omarchy into a gaming rig.</p>
+  <h2>The problem</h2>
+  <p>Turning an Omarchy machine into a tuned gaming setup takes many manual steps.</p>
+  <h2>How Game Key will solve it</h2>
+  <ul><li>One keybind switches into a tuned gaming mode.</li><li>Sets performance, notifications and launchers for play.</li><li>The same keybind switches everything back.</li></ul>
+  <h2>Planned price</h2>
+  <div class="price"><b>$9 one time</b><span>Shown now so you know before you apply.</span></div>
+  <h2>Apply to join the waitlist</h2>
+  <form id="wl" method="post" action="/api/waitlist" novalidate>
+    <input type="hidden" name="ad" value="13">
+    <input type="hidden" name="source" value="">
+    <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+    <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="you@example.com"></div>
+    <div class="field"><label for="use_case">What would you use it for?</label><textarea id="use_case" name="use_case" maxlength="1000" placeholder="A sentence or two is plenty"></textarea></div>
+    <fieldset><legend>Is this for you or your company?</legend><div class="choice"><label><input type="radio" name="who" value="myself" required> Myself</label><label><input type="radio" name="who" value="company"> My company</label></div></fieldset>
+    <button type="submit">Apply to join the waitlist</button>
+    <p class="msg" id="wl-msg" role="status" aria-live="polite"></p>
+  </form>
+  <p class="note"><b>Coming soon.</b> Game Key is not built yet. We are gathering interest first, and we will email you when early access opens. Your email is used only for this and is never sold or shared.</p>
+</main>
+<footer>An independent project. Not affiliated with Omarchy, Omacom or 37signals.</footer>
+<script>(function(){var AD=13;function send(t,extra){var b=JSON.stringify(Object.assign({ad:AD,type:t,page:"mini"},extra||{}));try{if(navigator.sendBeacon&&navigator.sendBeacon("/api/ads/event",new Blob([b],{type:"application/json"})))return}catch(e){}fetch("/api/ads/event",{method:"POST",headers:{"content-type":"application/json"},body:b,keepalive:true}).catch(function(){})}
+send("view");
+var f=document.getElementById("wl"),m=document.getElementById("wl-msg"),src=(new URLSearchParams(location.search).get("from")||"").slice(0,20);f.source.value=src;
+f.addEventListener("submit",function(e){e.preventDefault();var btn=f.querySelector("button");var who=f.querySelector("input[name=who]:checked");m.className="msg";m.textContent="";
+if(!f.email.value||!f.email.checkValidity()){m.className="msg err";m.textContent="Please enter a valid email address.";return}
+if(!who){m.className="msg err";m.textContent="Please choose myself or my company.";return}
+btn.disabled=true;fetch("/api/waitlist",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({ad:AD,email:f.email.value,use_case:f.use_case.value,who:who.value,source:src,website:f.website.value})}).then(function(r){return r.json().then(function(d){return{ok:r.ok,d:d}})}).then(function(x){if(x.ok){f.reset();f.querySelectorAll("input,textarea,button").forEach(function(el){el.disabled=true});m.className="msg ok";m.textContent=x.d.status==="existing"?"You are already on the list. Your answers were updated. Thank you.":"Thank you. You are on the list, and we will email you when early access opens.";if(window.umami)umami.track("waitlist_signup",{ad:AD})}else{btn.disabled=false;m.className="msg err";m.textContent=(x.d&&x.d.error)||"Something went wrong. Please try again."}}).catch(function(){btn.disabled=false;m.className="msg err";m.textContent="Network error. Please try again."})})})();</script>
+</body>
+</html>

@@ -30,6 +30,8 @@ for (const page of pages) {
   // disktree-bin-on-omarchy.html is a stale file committed by a refresh run
   // from an uncommitted draft; build.py does not generate it.
   if (["404.html", "disktree-bin-on-omarchy.html"].includes(page)) continue;
+  // /ad1 to /ad20 are standalone noindex waitlist pages (tests/ads.test.mjs).
+  if (/^ad\d+\.html$/.test(page)) continue;
   const html = await read(page);
   assert.doesNotMatch(html, /[.]ts[.]net[:/]/, `${page} references the private host`);
   if (!/<title>/.test(html)) continue;
