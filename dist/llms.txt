@@ -243,6 +243,8 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [How to Install & Use schist on Omarchy (2026)](https://omarchyapps.com/schist-on-omarchy.html)
 - [How to Install & Use schist-bin on Omarchy (2026)](https://omarchyapps.com/schist-bin-on-omarchy.html)
 - [How to Install & Use slack-desktop on Omarchy (2026)](https://omarchyapps.com/slack-desktop-on-omarchy.html)
+- [How to Install & Use splinterm on Omarchy (2026)](https://omarchyapps.com/splinterm-on-omarchy.html)
+- [How to Install & Use splinterm-mcp on Omarchy (2026)](https://omarchyapps.com/splinterm-mcp-on-omarchy.html)
 - [How to Install & Use spotify on Omarchy (2026)](https://omarchyapps.com/spotify-on-omarchy.html)
 - [How to Install & Use sublime-text-4 on Omarchy (2026)](https://omarchyapps.com/sublime-text-4-on-omarchy.html)
 - [How to Install & Use supergfxctl on Omarchy (2026)](https://omarchyapps.com/supergfxctl-on-omarchy.html)

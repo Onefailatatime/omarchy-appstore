@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-10-28T13:00:15+00:00",
+ "generated_at": "2026-10-29T01:00:14+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 198,
+ "app_count": 200,
  "apps": [
   {
    "id": "1password",
@@ -1729,6 +1729,28 @@
    "repository": "https://github.com/Onefailatatime/slap-notes",
    "tutorial_url": "https://omarchyapps.com/free-notion-alternative-linux-slap-notes.html",
    "url": "https://omarchyapps.com/apps/slap-notes-bin.html"
+  },
+  {
+   "id": "splinterm",
+   "name": "splinterm",
+   "package": "splinterm",
+   "install_command": "omarchy pkg add splinterm",
+   "category": "Utilities",
+   "description": "Persistent Wayland terminal for humans and bounded automation",
+   "homepage": "https://github.com/ministry-of-taste/splinterm",
+   "tutorial_url": "https://omarchyapps.com/splinterm-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/splinterm.html"
+  },
+  {
+   "id": "splinterm-mcp",
+   "name": "splinterm-mcp",
+   "package": "splinterm-mcp",
+   "install_command": "omarchy pkg add splinterm-mcp",
+   "category": "Utilities",
+   "description": "Policy-scoped MCP stdio adapter for Splinterm",
+   "homepage": "https://github.com/ministry-of-taste/splinterm",
+   "tutorial_url": "https://omarchyapps.com/splinterm-mcp-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/splinterm-mcp.html"
   },
   {
    "id": "spotify",
