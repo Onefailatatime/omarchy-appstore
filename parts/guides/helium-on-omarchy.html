@@ -1,0 +1,125 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add helium-browser-bin` installs cleanly (package 0.7.4-1, 160.42 MB, MIT). Confirm package name helium-browser-bin matches app page URL slug.
+- Launch: confirm `helium-browser` runs on Hyprland/Omarchy without errors; note what happens on first launch (no Chromium first-run dialog since it ships stripped-down).
+- Default-search: confirm Helium's UI presents a default search engine picker — do NOT state DuckDuckGo is pre-selected; check what happens.
+- Settings flags: confirm presence of `helium://settings` and `helium://flags` on-machine.
+- Extensions: confirm the "Extensions" support (Chrome Web Store compatible?) on-machine; check the GitHub for the exact mechanism.
+- Dark mode: confirm `helium://flags#enable-force-dark` works.
+- Import data: confirm whether any import path exists (bookmarks/passwords) in 0.7.4.
+- Auto-update: confirm whether the package can self-update (Chrome style) or is blocked due to the app-store route; confirm package update cadence (last release Oct 10 2026).
+- Known issue #1428: check fix status at publish time — the "missing search settings" default-search complaint; update the Common issues section accordingly.
+- Privacy claims: re-verify the exact claims at https://helium.com/ before publishing (no cookies/banners, blocks ads/trackers/cookie popups). Never claim anything beyond what's documented there.
+- The draft's source list mixes helium.com with "helium-browser" GitHub references — confirm which GitHub repo the Helium browser lives in and its URL before publishing.
+- Screenshots needed: default-search picker UI, helium://flags dark-mode page, extension support, the actual Helium window on Omarchy.
+
+SEO notes:
+- URL: /guides/helium-on-omarchy
+- Title tag: "How to Install & Use Helium on Omarchy (2026)"
+- Meta description: "Install Helium, the privacy-focused Chromium browser, on Omarchy with one command. Default-search picker, dark mode, extensions, and real fixes for the missing default-search settings issue."
+- Target queries: "helium browser omarchy", "helium browser linux", "helium vs brave", "privacy browser omarchy", "helium default search issue". Interlink both ways with the helium-browser-bin app page.
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Helium on Omarchy</h2>
+      <p>Helium is a privacy-focused Chromium-based browser for Omarchy — built on the real Chromium codebase, stripped of Google services, with ad/trackers/cookie-banner blocking built in.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add helium-browser-bin</code></pre>
+      <p>It takes ~2 minutes (v0.7.4-1, ~160 MB). Launch with <code>helium-browser</code> or from the app launcher.</p>
+      <p>Free forever (MIT-licensed Chromium fork). Because it's Chromium under the hood, every site and extension that works in Chrome works in Helium — minus the Google account integration and the tracking.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and launch.</h3>
+      <p><code>omarchy pkg add helium-browser-bin</code>, then launch "Helium" from the app launcher (Super + Space) or run <code>helium-browser</code>. First launch skips the usual Chromium welcome tour — it comes pre-stripped. (Confirm the exact first-launch UI on-machine — this is from the project docs, not a live test.)</p>
+      <h3>2. Pick your default search engine.</h3>
+      <p>Helium presents a default-search picker in its settings rather than shipping one hard-coded — this is the honest version of the story; issue #1428 documents the earlier confusion when the picker/settings were hard to find. Don't assume DuckDuckGo is pre-selected: check the picker on-machine and update this step.</p>
+      <h3>3. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>It's Chromium, not a fork of Chrome.</strong> Helium builds on the Chromium codebase (v0.7.4-1 tracks a recent Chromium), so the rendering engine is the same one powering Chrome and Edge — site compatibility is a non-issue. What's stripped: Google services integration, and the trackers/ads/cookie banners it blocks by default (per helium.com's stated privacy posture — re-verify exact claims before publishing).</li>
+        <li><strong>Extensions work.</strong> Chrome Web Store extensions install the normal way — this is the standard advantage of any Chromium fork, and it's the main reason to pick Helium over a Firefox-based privacy browser if your workflow depends on specific extensions.</li>
+        <li><strong>Dark mode is a flag away.</strong> <code>helium://flags#enable-force-dark</code> forces dark rendering on sites that don't offer it — the classic Chromium trick, available here too. Confirm the flag exists on-machine at publish time.</li>
+      </ul>
+      <h3>4. Omarchy-specific note.</h3>
+      <p>Helium runs as a native Wayland client in its Chromium build (check on-machine whether it picks up Wayland automatically under Omarchy/Hyprland or needs the ozone flags). The <code>-bin</code> package ships a prebuilt binary — updates come through the app store's package sync (last upstream release Oct 10, 2026), not through in-browser self-update; confirm the package can't self-update the Chrome way.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Sourced from the real GitHub issues on the Helium browser repo — check the fix status of each at publish time, since this is a fast-moving young project.</p>
+      <h3>"Where are the search settings?" — default search engine confusion</h3>
+      <p>Issue #1428: users couldn't find where to change the default search engine. The picker exists in settings but was hard to discover in early builds.</p>
+      <p><strong>Fix:</strong> Check whether #1428's fix has landed in the packaged version; if the picker is now discoverable, this section becomes a one-line pointer. Confirm on-machine.</p>
+      <h3>Missing features vs. Chrome (sync, import)</h3>
+      <p>Stripped-down means stripped-down: Google account sync isn't there, and the import path for bookmarks/passwords from other browsers may be limited in 0.7.4.</p>
+      <p><strong>Fix:</strong> Confirm on-machine what import exists; if it's missing, the honest advice is exporting/importing via HTML bookmark files and a password manager CSV — standard Chromium manual migration.</p>
+      <h3>The browser can't self-update like Chrome</h3>
+      <p>Expected: the <code>-bin</code> app-store package is a system package. Updates arrive via <code>omarchy pkg</code> syncs, not the browser.</p>
+      <p><strong>Fix:</strong> Keep the package updated through the normal Omarchy package flow; the project's release cadence (latest Oct 10, 2026) is the pace to expect.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Any password manager with a Chromium extension — the extension support is the point. uBlock Origin is redundant (blocking is built in), but keep it if you want its element picker.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Brave if you want the same Chromium-with-blocking idea plus a company and a rewards ecosystem behind it. Zen Browser or Firefox if you'd rather leave Chromium's engine entirely and want a different UI philosophy.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Helium vs similar browsers</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Helium</th><th>Brave</th><th>Firefox</th><th>Chromium (stock)</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free</td><td>Free</td><td>Free, BSD</td></tr>
+            <tr><td>Best for</td><td>Chromium compatibility with Google stripped out and blocking built in</td><td>Chromium + blocking + crypto/rewards ecosystem</td><td>Non-Chromium engine, deep customization</td><td>Vanilla Chromium, no opinions</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add helium-browser-bin</code></td><td><code>omarchy pkg add brave-bin</code></td><td><code>omarchy pkg add firefox</code></td><td><code>omarchy pkg add chromium</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use Helium if you want Chrome's compatibility with the Google parts removed and no account anywhere; use Brave if you want the same idea with a bigger team behind it; use Firefox if you want off the Chromium engine entirely.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Helium is a free, private alternative to Chrome</h2>
+      <p><strong>Helium is a free, private alternative to Chrome.</strong> Both are free, so this isn't about money — it's about what leaves your machine. What you give up vs. Chrome: Google account sync, and the data collection that funds it. What you keep: the Chromium engine, your extensions, and every site working. Migration is the standard manual path: export bookmarks as HTML, move passwords via your password manager, reinstall extensions from the Chrome Web Store. No import wizard is confirmed in 0.7.4 — check on-machine.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Helium Browser package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/helium-browser-bin.html">View Helium Browser →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Helium work on Omarchy?</summary><p>Yes — install with <code>omarchy pkg add helium-browser-bin</code> (v0.7.4-1). It's a Chromium fork, so it runs as a normal desktop browser on Hyprland.</p></details>
+      <details><summary>Is Helium free?</summary><p>Yes — MIT-licensed, no account, no paid tier.</p></details>
+      <details><summary>Do Chrome extensions work in Helium?</summary><p>Yes — it's Chromium under the hood, so Chrome Web Store extensions install normally. Confirm the exact mechanism on-machine.</p></details>
+      <details><summary>How do I change the default search engine?</summary><p>Through the default-search picker in settings — this was the subject of issue #1428 (hard to find in early builds); check the fix status at publish time.</p></details>
+      <details><summary>Helium vs Brave — which should I pick?</summary><p>Helium if you want the minimal stripped-Chromium idea with no company or token ecosystem attached; Brave if you want the same blocking philosophy backed by a larger project. Both keep you on the Chromium engine.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://helium.com/" target="_blank" rel="noopener">helium.com — official site (privacy posture: blocks ads, trackers, cookie banners)</a></li>
+        <li><a href="https://omarchyapps.com/apps/helium-browser-bin.html" target="_blank" rel="noopener">omarchyapps.com — helium-browser-bin app page (v0.7.4-1, MIT, ~160 MB)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

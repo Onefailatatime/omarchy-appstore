@@ -1,0 +1,138 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add cua-hyprland-plugin` installs (package 0.33.2-3, ~243 KB, MIT) and comes from the Omarchy Edge channel.
+- Version alignment: confirm the installed plugin's ABI matches the running Hyprland (omarchy-edge-20261004-abi profile per package description). Latest upstream release is Cua Driver 0.36.0; note any gap.
+- Seats: confirm the plugin adds `Cua-Agent` and `Cua-Agent-2` seats visible via hyprctl; confirm an agent can drive a background window while the user pointer stays free.
+- cua-driver pairing: confirm installing the plugin alone is not enough — you need cua-driver (install script at cua.ai/driver/install.sh) and connecting via `cua-driver mcp` / SDK.
+- Env var: confirm native-Wayland behavior under CUA_DRIVER_RS_ENABLE_WAYLAND=1 vs default XWayland routes.
+- AT-SPI: confirm at-spi2-core is needed (apt/dnf names in driver README — check the Arch equivalent) and accessibility enabled on the session bus.
+- Qualification: confirm the narrow qualified coverage claim (Calc from libreoffice-fresh 26.2.5-3, Inkscape 1.4.4-6 only; not Chromium/Electron; no Unicode/IME) still holds at the packaged version.
+- Known issues #5344/#5345/#5236/#5416/#5376: check open status at publish time; confirm the Super-shortcut limitation (#5344) is still the current behavior.
+- Warn block: loading an ABI-mismatched Hyprland plugin can crash the compositor — confirm the packaged route prevents this (hyprpm never loads the wrong build?).
+- Screenshots needed: driver status/doctor output, hyprctl showing agent seats, agent driving a background window (before/after), MCP config snippet.
+- Edge-vs-stable note: the plugin ships via the Omarchy Edge channel; confirm what that means for a stable-channel user reading this guide.
+
+SEO notes:
+- URL: /guides/cua-hyprland-plugin-on-omarchy
+- Title tag: "How to Install & Use the Cua Hyprland Plugin on Omarchy (2026)"
+- Meta description: "Install the Cua Hyprland plugin on Omarchy with one command. Compositor-native multi-cursor AI agent input: agents work in background windows while your pointer stays free — plus the ABI rule and real fixes for Super shortcuts and AT-SPI."
+- Target queries: "cua hyprland plugin omarchy", "cua driver omarchy", "ai agent control hyprland", "cua vs hyprland-mcp", "computer use linux omarchy". Interlink both ways with the cua-hyprland-plugin app page.
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Cua Hyprland Plugin on Omarchy</h2>
+      <p><code>cua-hyprland-plugin</code> is an optional Hyprland plugin that gives Cua Driver compositor-native, multi-cursor input on Omarchy — so an AI agent can work in a background window without moving your pointer or stealing your focus.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add cua-hyprland-plugin</code></pre>
+      <p>It takes ~2 minutes (v0.33.2-3, ~243 KB). But know the critical framing first: <strong>this plugin is not a standalone app — it's one half of Cua Driver</strong>, the open-source (MIT) AI computer-use driver that lets agents click, type, and read screens on real machines. You install the plugin for the isolated input seats, and you install <code>cua-driver</code> (from cua.ai/driver/install.sh) to actually drive it via MCP.</p>
+      <p>Free forever (MIT). The plugin was built over a month directly with DHH, @SpencerGBull, and Hyprland author @vaxryy, announced 2026-09-25. On cua.ai's platform-support matrix, Hyprland/Omarchy is marked <strong>Experimental</strong>: "Qualified isolated input since 0.24.0 — Does not inherit Sway coverage."</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install.</h3>
+      <p><code>omarchy pkg add cua-hyprland-plugin</code>. This is the packaged route; the plugin is "off by default and outside the normal installer" for cua-driver, meaning the driver install script won't give you this — the Omarchy package is the intended path (it ships via the Omarchy Edge channel). (Confirm channel behavior on-machine — this is from cua.ai docs and the package description, not a live test.)</p>
+      <h3>2. What the plugin does.</h3>
+      <p>The compositor itself owns two independent agent seats — <code>Cua-Agent</code> and <code>Cua-Agent-2</code> — and routes each seat's input to the right window. That's the whole trick: the agent gets its own painted cursor(s) and works in background windows while your own pointer stays free. No moving-the-visible-mouse tricks, no window-server workarounds.</p>
+      <h3>3. Connect the driver.</h3>
+      <p>Install cua-driver from the official route (<code>/bin/bash -c "$(curl -fsSL https://cua.ai/driver/install.sh)"</code> — downloads the binary and symlinks it to <code>~/.local/bin/cua-driver</code>), then connect your agent: <code>claude mcp add --transport stdio cua-driver -- cua-driver mcp</code>, or use the computer-use compat mode <code>cua-driver mcp --claude-code-computer-use-compat</code>. Python and TS SDKs exist too. Health-check with <code>cua-driver doctor</code>, <code>cua-driver status</code>, <code>cua-driver list_apps</code>.</p>
+      <h3>4. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>The ABI constraint is the whole ballgame.</strong> Hyprland plugins compile against the compositor's internal headers — the plugin's Hyprland ABI and compiler toolchain must match the running compositor. That's why upstream release assets embed the Hyprland commit hash (<code>cua-hyprland-plugin-0.36.0-6d6c734c…-build-kit.tar.gz</code>) and the Omarchy package description reads "Cua input candidate for reviewed profile omarchy-edge-20261004-abi." A mismatched plugin can break Hyprland — the standard warning for all Hyprland plugins (hyprpm/<code>hyprctl plugin load</code> mechanics apply). The packaged route exists precisely to prevent this; don't hand-install a random tarball against your own Hyprland.</li>
+        <li><strong>Coverage is qualified, not general.</strong> As of the docs, qualified isolated input covers exactly two apps: LibreOffice Calc (<code>libreoffice-fresh 26.2.5-3</code>) and Inkscape (<code>1.4.4-6</code>) — the driver checks package metadata before every action. Not covered: Chromium, Electron, XWayland raw input; Unicode and IME; multiple layouts; modified pointer gestures. Native Wayland is opt-in via <code>CUA_DRIVER_RS_ENABLE_WAYLAND=1</code>; without it, Wayland sessions fall back to XWayland routes where the app has a real X11 window. AT-SPI (<code>at-spi2-core</code>) must be enabled and reachable on the session bus, or the driver loses the element tree.</li>
+        <li><strong>This is "computer use 2.0" infrastructure, not an app.</strong> The repo (trycua/cua, ~30k stars) also includes Cua Spaces (desktop VMs, incl. Omarchy images), Lume (local VM manager), Cua Bench (benchmarks), and CUA-S1 decision models. The plugin's job is narrow: isolated input seats. Bring your own agent and model — it speaks MCP, CLI (<code>cua-driver call</code>), or typed SDKs.</li>
+      </ul>
+      <h3>5. Where its config lives.</h3>
+      <p>This is a compositor plugin, not a GUI app: no <code>~/.config/cua-hyprland-plugin</code> to speak of (unconfirmed — the Omarchy packaged route handles loading; no documented <code>hyprland.conf</code> <code>plugin {}</code> snippet or hyprpm URL was found, and the docs flag packaged install/upgrade proof as "remaining work"). The driver's config paths are separate — check the driver README/docs for those. (Confirm on-machine; mark this section as uncertain.)</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Sourced from the real GitHub issues on trycua/cua (open as of 2026-10-18) — nothing invented. These are computer-use-edge issues, not package-manager problems.</p>
+      <h3>Super+W (and all other Super shortcuts) from the agent arrive as plain letters</h3>
+      <p>None of Omarchy's ~180 Super Hyprland bindings fire — driving an Omarchy guest from the Spaces viewer, Super+W arrived as <code>w</code>. Related: Wayland hosts don't request <code>zwp_keyboard_shortcuts_inhibit_v1</code>.</p>
+      <p><strong>Fix:</strong> Open issue #5344 (Oct 2026): there is no user-side workaround in the issue thread — this is a protocol/inhibitor gap. If your agent needs Super bindings, it can't reliably send them yet. Watch #5344 and the companion feature #5345 ("Send ⌘ as Super" for the Mac viewer, which maps ⌘→Control today).</p>
+      <h3>The viewer shows a black desktop on GNOME 50 Wayland</h3>
+      <p>Open issue #5236 (Oct 2026): the driver has native-Wayland capture code (including Hyprland) but nothing for Mutter's ScreenCast portal, so it silently falls back to X11 capture of rootless Xwayland <code>:0</code> and the viewer stays black.</p>
+      <p><strong>Fix:</strong> On Hyprland/Omarchy specifically, native capture exists — this one bites GNOME 50 hosts. If you hit black-screen on Omarchy, check whether your capture path is falling back to X11 first.</p>
+      <h3>Xwayland segfaults on startup and the whole session logs out when an agent tool runs</h3>
+      <p>Open issue #5416 (Oct 2026): a <code>winrects@cua</code> helper active on Ubuntu 26.04/GNOME Shell 50.1 caused mutter's on-demand Xwayland to SIGSEGV — gnome-shell followed, user logged out, unsaved work lost.</p>
+      <p><strong>Fix:</strong> Workaround: disable the <code>winrects@cua</code> helper. Cautionary tale: agent helpers touch the compositor; run experiments in a session you can afford to lose (Cua Spaces VMs exist for exactly this reason).</p>
+      <h3>Driver can't see app UI structure — element tree missing</h3>
+      <p>AT-SPI isn't enabled or reachable on the session bus.</p>
+      <p><strong>Fix:</strong> Install <code>at-spi2-core</code> (Debian/Ubuntu/Fedora names from the README; check the Arch equivalent when verifying), enable toolkit accessibility (<code>gsettings set org.gnome.desktop.interface toolkit-accessibility true</code> on GNOME-based setups), and run <code>cua-driver doctor</code>. Without AT-SPI the driver sees X11 window info but loses the element tree.</p>
+      <h3><code>hyprctl plugin load</code> breaks Hyprland after a manual install</h3>
+      <p>You loaded a plugin build whose Hyprland ABI/toolchain doesn't match the running compositor.</p>
+      <p><strong>Fix:</strong> Use the packaged route (<code>omarchy pkg add cua-hyprland-plugin</code>) instead of hand-installed tarballs; the package pins against the reviewed edge ABI profile. This is the standard Hyprland plugin rule, not a Cua bug.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>cua-driver itself (the plugin is half of the pair), and Cua Spaces if you want the agent in a sandboxed Omarchy VM instead of on your live desktop. Claude Code or any MCP-capable agent as the driver client.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>hyprland-mcp (github.com/alderban107/hyprland-mcp) — an open-source MCP server for Hyprland with 27 tools (screenshot+OCR, click_text, mouse/keyboard via grim/wtype/ydotool, window management), installed via pipx and wired into Claude Code. It's agent-side tooling on top of Hyprland rather than a driver/compositor plugin — less isolated input, more hackable. Or Bytebot for a containerized-Linux-desktop agent if you want per-task sandboxed machines with logged before/after screenshots. The canonical reference is Anthropic's computer-use demo; Cua's pitch is the open-source, background-first alternative.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: cua-hyprland-plugin vs similar approaches</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>cua-hyprland-plugin</th><th>hyprland-mcp</th><th>Bytebot</th><th>Anthropic computer use (reference)</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free, open</td><td>Free, open</td><td>Free, open ref</td></tr>
+            <tr><td>Best for</td><td>Compositor-native isolated agent input on Hyprland: agent works in background windows, your pointer stays free</td><td>Agent-side MCP tooling on Hyprland (screenshot+OCR, click_text, window mgmt) — hackable, no plugin</td><td>Desktop agent in a containerized Linux desktop; per-task sandboxed machines</td><td>Canonical screenshot-and-act loop in a sandboxed VM</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add cua-hyprland-plugin</code> (+ cua-driver)</td><td>pipx install hyprland-mcp</td><td>Docker container</td><td>separate VM setup</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use the Cua plugin if you want true background, multi-cursor agent input on your live Omarchy desktop; use hyprland-mcp if you want MCP tools without touching the compositor; use Bytebot or a VM if the agent should never see your live session.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>The Cua Hyprland plugin is a free, self-hosted alternative to Cua Spaces Pro ($18/mo)</h2>
+      <p><strong>The Cua Hyprland plugin is a free, self-hosted alternative to Cua Spaces Pro ($18/mo).</strong> Everything in this space is open source (MIT/Apache), so the honest pitch is not "free instead of paid" but <strong>"your live Omarchy desktop, agent-driven, self-hosted."</strong> What you give up vs. Cua Spaces' Pro tier ($18/mo): sandboxed VMs with Omarchy images and managed fleets. What you keep: the same driver, local, free. There is no migration guide — you just don't buy the cloud tier.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Cua Hyprland Plugin package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/cua-hyprland-plugin.html">View Cua Hyprland Plugin →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does the plugin work on Omarchy?</summary><p>Yes — Hyprland/Omarchy is the platform the plugin was built for (with DHH and the Hyprland author), and the packaged route ships via Omarchy Edge. It's marked Experimental with qualified isolated input since 0.24.0. Not a standalone app: you need cua-driver connected via MCP.</p></details>
+      <details><summary>Do I need the plugin, or does cua-driver work alone on Omarchy?</summary><p>The driver alone works through XWayland/AT-SPI routes. The plugin adds compositor-native isolated input with two agent seats (<code>Cua-Agent</code>, <code>Cua-Agent-2</code>) — that's what gives true multi-cursor background use. It's off by default and outside the normal installer.</p></details>
+      <details><summary>Why must the plugin version match my Hyprland?</summary><p>Hyprland plugins compile against the compositor's internal headers — ABI and toolchain must match, or Hyprland can crash. Use the packaged install (<code>omarchy pkg add cua-hyprland-plugin</code>), which pins against the reviewed edge ABI profile.</p></details>
+      <details><summary>What apps can an agent actually drive with it?</summary><p>Narrow qualification: LibreOffice Calc and Inkscape, verified against package metadata before each action. Not covered: Chromium, Electron, XWayland raw input, Unicode/IME, multiple layouts, modified pointer gestures. Native Wayland is opt-in (<code>CUA_DRIVER_RS_ENABLE_WAYLAND=1</code>).</p></details>
+      <details><summary>Which agents/models can use it?</summary><p>Bring your own — it speaks MCP (<code>cua-driver mcp</code>), one-shot CLI (<code>cua-driver call</code>), or typed Python/TS SDKs. Docs cover Claude Code, Codex, Cursor, OpenClaw, and Muse Code.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/trycua/cua" target="_blank" rel="noopener">cua GitHub repo — trycua/cua (README: driver, MCP, CLI, SDKs, Spaces, Lume, Bench)</a></li>
+        <li><a href="https://cua.ai/docs" target="_blank" rel="noopener">cua.ai docs — platform support (Hyprland Experimental, qualified isolated input, seat model)</a></li>
+        <li><a href="https://github.com/trycua/cua/issues/5344" target="_blank" rel="noopener">Issue #5344 — Super shortcuts from Spaces viewer never reach the guest compositor</a></li>
+        <li><a href="https://github.com/trycua/cua/issues/5345" target="_blank" rel="noopener">Issue #5345 — feature: send ⌘ as Super for macOS→Linux guests</a></li>
+        <li><a href="https://github.com/trycua/cua/issues/5236" target="_blank" rel="noopener">Issue #5236 — spacesd streams black desktop on GNOME 50 Wayland</a></li>
+        <li><a href="https://github.com/trycua/cua/issues/5416" target="_blank" rel="noopener">Issue #5416 — Xwayland segfault with winrects@cua, session logout</a></li>
+        <li><a href="https://github.com/trycua/cua/issues/5376" target="_blank" rel="noopener">Issue #5376 — spacesd stops answering after viewer teardown (macOS deadlock)</a></li>
+        <li><a href="https://omarchyapps.com/apps/cua-hyprland-plugin.html" target="_blank" rel="noopener">omarchyapps.com — cua-hyprland-plugin app page (v0.33.2-3, MIT, ~243 KB)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

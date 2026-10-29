@@ -1,0 +1,142 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add omadesign-bin` installs 0.6.3-1 and puts `omadesign` on PATH system-wide (/usr/bin/omadesign); confirm it works on the reader's channel (edge vs stable) at publish time.
+- Package contents: desktop entry, SVG icon, MIME registrations (.oma files), man pages, agent skills + plugin files under /usr/share/omadesign/.
+- First launch: Super + Space "oma" finds it; welcome screen scans home dir for .oma projects (skips hidden folders, Trash, symlinks); +Vector/+Layout buttons open the template picker.
+- Theme integration: window follows Omarchy palette and repaints live on theme switch; confirm ~/.local/state/omarchy/current/theme/colors.toml is the file it watches.
+- Keyboard shortcuts: R/P/T/B/C, F1 overlay, Ctrl + / on 0.6.3.
+- Updater in the packaged build: does About > Update still rerun the official installer into ~/.local, or is it disabled when installed via pacman? Confirm which update path wins.
+- Ghostscript optdep: confirm EPS/Illustrator import works with and without ghostscript installed; confirm xdg-desktop-portal-impl is not needed on Omarchy.
+- GitHub issue URLs: #133 (theme reload), #83 (Wayland text input/fcitx5), #177 (motion stutter), #158 (perf benchmark), #73 (AUR declined). Cited by number only — confirm each link before publish.
+- Cloud features: confirm "no published pricing" is still accurate.
+- Screenshots needed: welcome screen, template picker, one mode switch (Vector -> Photo), import dialog, About screen.
+
+SEO notes:
+- URL slug: omadesign-bin-on-omarchy
+- Title tag: "How to Install & Use Omadesign on Omarchy via omadesign-bin (2026)"
+- Meta description: "Install Omadesign on Omarchy with one command (omadesign-bin, v0.6.3). Free native Linux creative suite — vector, layout, photo, motion — themed to your desktop, with real fixes for theme sync, Wayland IME, and slow machines."
+- Keywords: omadesign omarchy, omadesign-bin, omadesign linux install, omadesign vs inkscape, free adobe alternative linux
+- NOTE: the site already carries /omadesign-omarchy.html (published 2026-10-15, outside this pipeline) covering the curl install route. This guide covers the omadesign-bin package route; the 2026-10-16 omadesign.md draft was skipped by the publisher to avoid duplicating it.
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Adobe</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Omadesign on Omarchy</h2>
+      <p>Omadesign is the free, MIT-licensed native Linux creative suite — vector design, layout, pixel painting, RAW photo development, and motion in one Rust app — that inherits your Omarchy theme and font on launch, and it now installs with one command from Omarchy's own package repo as <code>omadesign-bin</code>.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omadesign-bin</code></pre>
+      <p>Takes about 2 minutes: you get the vendor 0.6.3 binary repackaged to <code>/usr/bin/omadesign</code> (it conflicts with the old source package name <code>omadesign</code>, which never shipped). Free forever (MIT). Every editing feature works offline with no account; cloud features (shared projects, team review) need a sign-in, and no pricing is published for them.</p>
+      <p><strong>The honest caveat up front: the package is fresh.</strong> It was merged into omarchy-pkgs on October 11, 2026, and new packages land on the edge ring first, only reaching stable on the next release train — if <code>omarchy pkg add omadesign-bin</code> says "target not found," you're on stable and should wait for promotion or use the curl route (<code>curl -fsSL https://omadesign.app/install | sh</code>, which unpacks into <code>~/.local</code>, no sudo). Second caveat: this is alpha software that moves fast (0.6.0 to 0.6.3 in one month), and this guide is written against 0.6.3.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install.</h3>
+      <p>Run the command above in a terminal. You get the 0.6.3 binary at <code>/usr/bin/omadesign</code>, a desktop entry, an SVG icon, MIME registrations (so <code>.oma</code> files open in it), and man pages — no <code>~/.local/bin</code> PATH dance, since it's a system install. The package also ships the agent skills and plugin files under <code>/usr/share/omadesign/</code>.</p>
+      <h3>2. First launch.</h3>
+      <p>Hit Super + Space and type "oma", or run <code>omadesign</code>. You land on a welcome screen that scans your home directory for existing <code>.oma</code> projects (skipping hidden folders, Trash, and symlinks) and offers +Vector and +Layout buttons that open the template picker. The window already wears your Omarchy palette and font — there is no light/dark toggle because it mirrors whatever theme is active.</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Modes, not separate apps.</strong> Centered buttons across the top switch between Vector, Raster, Layout, Photo, Motion, and Agent — all on one document and one layer stack. Press R for rectangle, P for pen, T for type, B for brush, C for crop. F1 opens the full shortcut list; Ctrl + / toggles a shortcut overlay for the current tool. (Confirm shortcuts on-machine — this is from the site guide's research, not a live test.)</li>
+        <li><strong>It opens and exports the files you already have.</strong> Import covers PSD/PSB, GIMP XCF, PDF, Illustrator (PDF-compatible), OpenRaster, SVG, and camera RAW (DNG, CR2/CR3, NEF, ARW, RAF). Export covers layered PSD, PDF, OpenRaster, 16-bit PNG/TIFF, JPEG, SVG, animated SVG, Lottie, and responsive HTML. The limits are real and documented: PSD text and smart objects come in as flattened pixels, there is no writer for AI or XCF, and PDF export turns text into outlines. Install <code>ghostscript</code> (an optional dependency of the package) for EPS and PostScript-based Illustrator import.</li>
+        <li><strong>Updates: check which path you're on.</strong> From the curl install, updates happen in-app via Omadesign &gt; About &gt; Update, which reruns the official installer and restarts with your documents open. From the <code>omadesign-bin</code> package, updates should arrive with your normal package updates — confirm on-machine whether the in-app updater is disabled in the packaged build or fights with it.</li>
+      </ul>
+      <h3>4. Where its config lives.</h3>
+      <p>Preferences: <code>~/.config/omadesign/</code>. Crash-recovery swap files: <code>~/.local/share/omadesign/&lt;id&gt;.oma.swp</code> (written after about a second idle, deleted on save). Theme is read on launch from <code>~/.local/state/omarchy/current/theme/colors.toml</code>, falling back to <code>~/.config/omarchy/themes/&lt;current&gt;/colors.toml</code>, then a built-in Catppuccin. Font: whatever <code>omarchy font current</code> returns, then fontconfig sans-serif; override with <code>OMADESIGN_FONT=/path/to/font.ttf</code>. Projects are plain folders — a folder counts as a project when it holds <code>.omacolors</code>, <code>.omatype</code>, or an <code>.omabrand/</code> directory. Photo edits sit next to the original as <code>photo.jpg.omaphoto</code>.</p>
+      <h3>5. Omarchy-specific note.</h3>
+      <p>The theme/font integration is the whole point of this app on Omarchy: it's the only design suite here that repaints when you switch themes (a file watcher for that shipped in 0.6.0). Binaries are linked against glibc 2.35, so they run on Asahi Omarchy, current Arch ARM, and anything newer — the package builds for both x86_64 and aarch64.</p>
+      <h3>6. CLI pro tip.</h3>
+      <p><code>omadesign --inspect artwork.psd</code> prints a file's structure without opening the UI, and <code>omadesign --convert artwork.afdesign --output artwork.oma</code> converts between supported formats. <code>omadesign --agent-skill</code> prints a ready-made skill file describing the CLI and document format — drop it in <code>.claude/skills/</code> and Claude Code can batch-convert and inspect your files without you opening the app. (From the site guide's research; confirm flag names on-machine.)</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3><code>omarchy pkg add omadesign-bin</code> says "target not found"</h3>
+      <p><strong>Fix:</strong> You're on the stable channel and the package hasn't been promoted yet. It was merged October 11, 2026 and published to the edge ring; stable gets it with the next Omarchy release train. Until then, use the curl one-liner (<code>curl -fsSL https://omadesign.app/install | sh</code>) into <code>~/.local</code>, or download the tarball and checksum from the GitHub releases page, verify with <code>sha256sum -c</code>, extract, and run the <code>install.sh</code> inside. There is no AUR package — the maintainer declined that request (issue #73). If the package has since reached stable, this section is stale; check before relying on it.</p>
+      <h3>You switch Omarchy themes and Omadesign keeps the old colors</h3>
+      <p><strong>Fix:</strong> Builds before 0.6.0 read the palette once at startup and cached it (issue #133). A file watcher shipped in 0.6.0. Check Omadesign &gt; About — if you're on 0.5.x, update. On a current build a theme switch repaints live; if it still doesn't, confirm <code>~/.local/state/omarchy/current/theme/colors.toml</code> exists, since that's the file it watches.</p>
+      <h3>Ctrl + C / Ctrl + V do nothing, and fcitx5 can't type CJK into a text box on Hyprland</h3>
+      <p><strong>Fix:</strong> Before 0.6.2 the app never activated the Wayland text-input protocol, so the input method never received keystrokes and the clipboard sat on the wrong path (issue #83). Fixed in 0.6.2 — verified by the maintainer under Sway with fcitx5 and Rime; the original report was on Hyprland 0.56. Update through your package channel or the in-app updater. Omarchy ships fcitx5 by default, so this one bit Omarchy users specifically.</p>
+      <h3>Typing and brush strokes lag badly, or motion playback stutters on a big comp</h3>
+      <p><strong>Fix:</strong> Two separate things. Motion playback on complex compositions was fixed upstream at the end of September 2026 (issue #177) — update first. The lag is hardware: the maintainer's own benchmark ran the same build on three machines, and a 4-core AMD thin client with under 6 GB RAM saw 90 ms median keystroke latency with half-second stalls, while an 8 GB Intel laptop sat at 35 ms and an M1 Pro at 21 ms (issue #158). Provisional guidance: 8 GB RAM minimum, 16 GB recommended, and four cores isn't enough. A dedicated GPU is not needed — AI features (background removal, upscaling) run on the CPU.</p>
+      <h3>Affinity files won't open</h3>
+      <p><strong>Fix:</strong> Affinity import goes through an optional GPL-licensed bridge that is not bundled. Run <code>./scripts/setup-affinity-import.sh</code> from a source checkout once — it needs Inkscape's Python modules plus the Python <code>zstandard</code>, <code>Pillow</code>, and <code>numpy</code> packages. Even then, adjustments, live effects, and edit history don't survive, and multi-spread documents can fail.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>inkscape</code> (<code>omarchy pkg add inkscape</code>) if you need a mature SVG editor for the pieces Omadesign still approximates, like mesh gradients and complex text on import; <code>gimp</code> (<code>omarchy pkg add gimp</code>) for the XCF round trip — Omadesign reads XCF but can't write it, so export OpenRaster and open that in GIMP; <code>darktable</code> (<code>omarchy pkg add darktable</code>) if you do serious RAW work: Omadesign's Photo mode covers develop, crop, and presets; Darktable covers everything else.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>inkscape</code> plus <code>gimp</code> plus <code>darktable</code> — the three separate tools Omadesign is trying to replace. All are one <code>omarchy pkg add</code> away, all are mature, none follow your theme.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Omadesign vs Inkscape + GIMP vs Krita</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Omadesign</th><th>Inkscape + GIMP</th><th>Krita</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free, GPL</td><td>Free, GPL</td></tr>
+            <tr><td>Best for</td><td>One app for vector, layout, photo, and motion that matches your Omarchy theme; alpha-stage</td><td>Battle-tested vector and raster editing with huge plugin ecosystems</td><td>Digital painting and illustration — a brush engine nobody else matches</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omadesign-bin</code></td><td><code>omarchy pkg add inkscape gimp</code></td><td><code>omarchy pkg add krita</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use Omadesign if you want one themed app and can live with alpha software; use Inkscape and GIMP if a format detail matters for client work; use Krita if you mostly paint.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Omadesign is a free alternative to Adobe Creative Cloud</h2>
+      <p><strong>Omadesign is a free alternative to Adobe Creative Cloud.</strong> What you give up, honestly: maturity (this is alpha, and a one-person project), PSD text and smart-object fidelity on import (they flatten), any AI/XCF export, and the plugin ecosystem decades of Photoshop/Illustrator built. What you keep: vector, layout, pixel painting, RAW development, and motion in a single native Linux window that matches your desktop — free forever under the MIT license, no subscription, no account for local work.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Adobe (~15 minutes per project)</h2>
+      <ol>
+        <li><strong>Export from Adobe:</strong> save working files as PSD/PSB (layered), AI as PDF-compatible, and photos as DNG/RAW. Omadesign imports all of these.</li>
+        <li><strong>Import into Omadesign:</strong> open the files directly — they'll convert to editable <code>.oma</code> projects, with conversion notes explaining what changed.</li>
+        <li><strong>What doesn't transfer:</strong> PSD text layers and smart objects flatten on import; multi-spread layouts and adjustment history need rebuilding; no scripted actions/plugins.</li>
+        <li><strong>Time estimate:</strong> ~15 minutes per project to import and check fidelity; budget a day to rebuild the templates you rely on.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the omadesign-bin package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omadesign-bin.html">View omadesign-bin →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Omadesign work on Omarchy?</summary><p>Yes — it was built for it. The UI reads your Omarchy theme colors and font on launch and repaints when you switch themes. It runs natively on Wayland under Hyprland, on both x86_64 and Apple Silicon via Asahi. Expect a 4-core or sub-8 GB machine to feel slow (see the benchmark in Common issues).</p></details>
+      <details><summary>Is Omadesign free?</summary><p>Completely, under the MIT license. No trial, no paid tier, no account for local work. Cloud sharing features need a sign-in but there is no published pricing.</p></details>
+      <details><summary>How do I install it — the curl script or the package?</summary><p>The package (<code>omarchy pkg add omadesign-bin</code>) is the current official path and installs system-wide to <code>/usr/bin/omadesign</code>. The curl one-liner still works and installs into <code>~/.local</code> without sudo. If the package isn't on your channel yet (edge-first promotion), use the curl route.</p></details>
+      <details><summary>Omadesign vs Inkscape — which should I pick?</summary><p>Inkscape if you need a specific SVG feature or you ship files to people on other tools — it's the safer bet for anything client-facing. Omadesign if you want raster, photo, and motion in the same window and prefer a native GUI over GTK3. Many people will keep both installed.</p></details>
+      <details><summary>How do I update Omadesign?</summary><p>From the package: normal package updates. From the curl install: Omadesign &gt; About &gt; Update reruns the official installer and restarts with your documents open. Confirm on-machine whether the in-app updater is disabled in the packaged build.</p></details>
+      <details><summary>My theme change didn't apply. Is that a bug?</summary><p>Only on builds before 0.6.0 — check About for the version and update. On 0.6.x, confirm <code>~/.local/state/omarchy/current/theme/colors.toml</code> exists, since that's the file it watches.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/michaelmonetized/omadesign" target="_blank" rel="noopener">Omadesign GitHub repo — michaelmonetized/omadesign (README: native Rust, MIT, Omarchy theme/font integration, glibc 2.35)</a></li>
+        <li><a href="https://omadesign.app/" target="_blank" rel="noopener">Omadesign site (features, install, v0.6.3, Agent panel, CLI workflow)</a></li>
+        <li><a href="https://omarchyapps.com/apps/omadesign-bin.html" target="_blank" rel="noopener">omarchyapps.com omadesign-bin page (v0.6.3-1, omarchy pkg add omadesign-bin, MIT + CDDL-1.0)</a></li>
+        <li><a href="https://raw.githubusercontent.com/omacom/omarchy-pkgs/master/pkgbuilds/omadesign-bin/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs omadesign-bin PKGBUILD (/usr/bin/omadesign, MIME registration, skills/plugins, optdepends)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

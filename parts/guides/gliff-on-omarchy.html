@@ -1,0 +1,143 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add gliff` (package slug `gliff`) — verify it resolves in the store index
+- `gliff` and `gliff-server` both land on PATH after install; `gliff-probe` exists and prints the PASS/FAIL diagnostics
+- Basic flow: install on both machines, SSH key auth set up, `gliff user@host` opens the remote session in a GTK4 window
+- `gliff --headless user@host` creates a private screen that follows the window size
+- Clipboard warning: confirm the README's `--no-clipboard` flag behaves as documented for untrusted hosts
+- Shift+Esc releases keyboard capture back to local WM shortcuts
+- Comparison install commands: confirm `omarchy pkg add sunshine` (per the existing sunshine guide) and that wayvnc / RDP alternatives resolve on Omarchy as claimed
+- License: MIT (repo page), with OpenH264 (BSD-2-Clause) shipped for the CPU tier. Free, no paid tier
+- Version at publish time: check the installed version and note it; guide drafted against v0.4.0
+- Screenshots needed: gliff window showing a remote session, per-machine tabs, the headless-screen mode, `gliff-probe` diagnostics output
+
+SEO notes:
+- URL: /guides/gliff-on-omarchy
+- Title tag: "How to Install & Use gliff on Omarchy (2026)"
+- Meta description: "Install gliff on Omarchy with one command. Hyprland remote desktop over SSH with 4:4:4 crisp text and GPU H.264 end to end. Setup, gliff-probe diagnostics, and real fixes."
+- Keywords: gliff omarchy, gliff remote desktop, gliff --headless, gliff-probe, hyprland remote desktop ssh, gliff vs sunshine
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>gliff on Omarchy</h2>
+      <p>gliff shows another machine's live Hyprland session in a window on yours — over plain SSH, with full 4:4:4 color (crisp text) and GPU-accelerated H.264 end to end. No open ports, no accounts, no relay servers.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add gliff</code></pre>
+      <p>Takes ~2 minutes. Install it on <strong>both</strong> machines — yours (the viewer) and the remote one (the server).</p>
+      <p>The store listing reports a 6.5 MB download / 16.4 MB installed. MIT-licensed open source, free forever, no paid tier, no account.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. The mental model.</h3>
+      <p>gliff is two programs: <code>gliff-server</code> runs on the remote machine and captures its Hyprland output (GPU H.264 encode via VA-API), and <code>gliff</code> runs on your machine and shows it in a GTK4 window. The SSH link is the <em>only</em> transport — gliff launches the server over your existing SSH connection, so there's no firewall hole, no NAT headache, and nothing listening on a public port. Both ends must be running Hyprland; this is not a general VNC/RDP replacement.</p>
+      <h3>2. Install on both ends and run <code>gliff-probe</code> first.</h3>
+      <pre><code class="language-bash"># on BOTH machines
+omarchy pkg add gliff
+gliff-probe</code></pre>
+      <p><code>gliff-probe</code> prints PASS/FAIL for the compositor, drivers, and both video paths (GPU and CPU). Run it on both ends before anything else — it tells you immediately whether you'll get the GPU tier (Vulkan + VA-API H.264) or fall back to CPU encoding (OpenH264, works with no extra setup). GPU tier needs, on Arch: <code>vulkan-radeon</code> + <code>mesa</code> (AMD), or <code>vulkan-intel</code> + <code>intel-media-driver</code> (Intel). NVIDIA encode support is new in v0.4.0; anything without a supported driver silently uses the CPU tier.</p>
+      <h3>3. Connect.</h3>
+      <p>Set up passwordless SSH (key auth) first — it makes every launch painless. Then:</p>
+      <pre><code class="language-bash">gliff user@host              # mirror the remote's focused screen
+gliff --output DP-1 user@host  # mirror a named screen
+gliff --headless user@host   # a private headless screen that follows your window size</code></pre>
+      <p>The headless mode is the quiet killer feature: instead of watching the remote's real screen (awkward if someone else is using it), you get your own private display whose resolution tracks your window.</p>
+      <h3>4. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>Keyboard capture grabs everything while your pointer is over the picture</strong> — including your local Hyprland/WM shortcuts. Press <code>Shift+Esc</code> to release capture and get local shortcuts back. This is the single most confusing behavior on first use.</li>
+        <li><strong>Clipboard is bidirectional by default and trusts the remote host.</strong> Text, images, and files all sync — and a connected host can read your advertised local clipboard. For untrusted machines, launch with <code>gliff --no-clipboard</code>. Selections marked by password managers (x-kde-passwordManagerHint) are withheld even when sharing is on.</li>
+        <li><strong>Quality is adaptive by design:</strong> it drops framerate before sharpness, so text stays crisp under a bad link. Screens wider than 4096 px are streamed at reduced size and scaled up — that's a documented limit, not a bug.</li>
+      </ul>
+      <h3>5. Config location.</h3>
+      <p>No documented dotfile — behavior is driven by CLI flags (<code>--output</code>, <code>--headless</code>, <code>--no-clipboard</code>, <code>--video</code>, <code>--capture</code>, <code>--server-bin</code>). Treat "settings persist" claims as unverified.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>All items below come from the project's README, v0.4.0 release notes, and hardware-quirks doc — none are invented. The repo is young (created 2026-09-12), so the issue tracker is thin; the quirks doc and release notes are the real record.</p>
+      <h3><code>gliff user@host</code> connects but the window stays black — especially in VMs.</h3>
+      <p>The remote GPU may be allocating capture buffers it never fills (seen with VM virtio-gpu/virgl). v0.4.0 makes shm capture the automatic fallback, and you can pick explicitly with <code>--capture</code>.</p>
+      <p><strong>Fix:</strong> Force shared-memory capture: <code>gliff --server-bin 'gliff-server --capture shm' user@host</code>. (<a href="https://github.com/omacom/gliff" target="_blank" rel="noopener">README troubleshooting</a>, <a href="https://github.com/omacom/gliff/releases" target="_blank" rel="noopener">releases</a>)</p>
+      <h3>gliff can't find the remote Hyprland session — SSH connects but the server can't locate the compositor.</h3>
+      <p><code>gliff-server</code> locates the session via <code>XDG_RUNTIME_DIR</code>; SSH sessions sometimes don't carry it.</p>
+      <p><strong>Fix:</strong> Wrap the server launch: <code>gliff --server-bin 'env XDG_RUNTIME_DIR=/run/user/1000 gliff-server' user@host</code> (replace 1000 with the remote user's UID). If <code>gliff-server</code> isn't on the remote PATH at all, give the full path via <code>--server-bin</code>. (<a href="https://github.com/omacom/gliff" target="_blank" rel="noopener">README</a>)</p>
+      <h3>Picture is dark or the GPU tier fails on Intel (non-Panther-Lake) or older NVIDIA.</h3>
+      <p>Hardware reality, not a config bug. The <a href="https://github.com/omacom/gliff/blob/HEAD/docs/hardware-quirks.md" target="_blank" rel="noopener">hardware-quirks doc</a> records: Intel server support is only confirmed on Panther Lake; pre-Panther-Lake generations are untested; an Intel-specific "dark picture" issue is still under investigation in 0.4.0; NVIDIA encode support only landed in 0.4.0.</p>
+      <p><strong>Fix:</strong> Run <code>gliff-probe</code> on both ends first — if the GPU path fails, the CPU tier (OpenH264) works with no extra setup. Unverified on Omarchy: NVIDIA decode, multi-GPU <code>--render-node</code> selection.</p>
+      <h3>Hyprland cursor weirdness — cursor invisible, or removing a monitor kills the session.</h3>
+      <p>Two documented upstream quirks on Hyprland 0.56.2: shared cursor images are always fully transparent, so gliff falls back to the default pointer (cosmetic); and removing a monitor under a live cursor session aborts Hyprland (SIGABRT, observed 3x) — the server mitigates this by ending the capture thread before removing the headless output.</p>
+      <p><strong>Fix:</strong> Don't hot-unplug monitors mid-session. (<a href="https://github.com/omacom/gliff/blob/HEAD/docs/hardware-quirks.md" target="_blank" rel="noopener">hardware-quirks doc</a>)</p>
+      <h3>Clipboard contents leaking to a machine you don't fully trust.</h3>
+      <p>This is the documented trust model, not a bug: "Clipboard sharing still trusts connected hosts by default" — a connected host can read the advertised local clipboard without a local paste.</p>
+      <p><strong>Fix:</strong> Launch with <code>--no-clipboard</code> — mitigations in 0.4.0: password-manager selections are withheld, and requests are restricted to the current offer. Rule of thumb: <code>gliff --no-clipboard</code> for anything that isn't your own box. (<a href="https://github.com/omacom/gliff/releases" target="_blank" rel="noopener">release notes</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Sunshine (the game-streaming server — use gliff for crisp text work and Sunshine when you want to stream a game to Moonlight on a phone/TV; <a href="/sunshine-game-streaming-omarchy.html">guide</a>)</li>
+        <li>Tailscale/SSH key auth (passwordless SSH makes <code>gliff user@host</code> a one-word affair)</li>
+        <li>the Omarchy default bar indicator — Omarchy installs gliff by default now and shows an indicator for active remote sessions</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Sunshine + Moonlight — heavier setup (open ports, HTTPS certs), but better for gaming/media and non-Hyprland clients</li>
+        <li>wayvnc — native Wayland VNC, any VNC client connects, but softer 4:2:0-ish text and you manage port 5900 + auth yourself</li>
+        <li>hypr-rdp/RDP — connects from Windows mstsc, Remmina, FreeRDP, with device redirection, but harder to set up and no 4:4:4 advantage</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: gliff vs similar apps</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr></thead>
+          <tbody>
+            <tr><td><strong>gliff</strong></td><td>Free (MIT)</td><td>Hyprland-to-Hyprland remote desktop where text must stay sharp; zero firewall config</td><td><code>omarchy pkg add gliff</code></td></tr>
+            <tr><td><strong>Sunshine + Moonlight</strong></td><td>Free</td><td>Game/media streaming to varied clients (phones, TVs); lowest latency for motion</td><td><code>omarchy pkg add sunshine</code> (+ Moonlight client)</td></tr>
+            <tr><td><strong>wayvnc</strong></td><td>Free</td><td>"Any VNC client can connect" to a Hyprland box; protocol-native to wlroots</td><td>Arch extra (not in the Omarchy store)</td></tr>
+            <tr><td><strong>hypr-rdp / RDP</strong></td><td>Free</td><td>Connecting from Windows clients (mstsc) with device/sound redirection</td><td>setup varies (not in the Omarchy store)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If both machines run Hyprland and you mostly read text (terminals, editors, browsers), gliff wins on simplicity and sharpness — SSH-only, nothing to open. Pick Sunshine/Moonlight for gaming, wayvnc for universal VNC clients, RDP for Windows-client compatibility.</p>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the gliff package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/gliff.html">View gliff →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does gliff work on Omarchy?</summary><p>Yes — it's an Omarchy first-party app now (moved to omacom/gliff, merged into Omarchy's defaults ~Oct 9–10, 2026). Install with <code>omarchy pkg add gliff</code> on both machines. Both ends must run Hyprland.</p></details>
+      <details><summary>Is gliff free?</summary><p>Yes. MIT-licensed open source (the CPU tier ships OpenH264 under BSD-2-Clause). No paid tier, no account, no relay servers.</p></details>
+      <details><summary>Do I need to open ports or set up NAT?</summary><p>No — that's the point. SSH is the only transport; gliff launches <code>gliff-server</code> over your SSH connection. Set up SSH key auth and <code>gliff user@host</code> just works, even across NAT.</p></details>
+      <details><summary>What GPUs are supported?</summary><p>AMD (Mesa RADV + radeonsi) and Intel (Mesa ANV + intel-media-driver) for the GPU tier; NVIDIA encode landed in v0.4.0. Anything else silently falls back to CPU encoding (OpenH264) with no extra setup. Run <code>gliff-probe</code> on both ends to see your path.</p></details>
+      <details><summary>Why does gliff grab all my keyboard shortcuts?</summary><p>By design: while the pointer is over the remote picture, all input goes to the remote session — including your local WM shortcuts. Press <code>Shift+Esc</code> to release capture back to your local machine.</p></details>
+      <details><summary>Is the clipboard shared with the remote machine?</summary><p>By default, yes — text, images, and files, bidirectionally. A connected host can read your advertised clipboard. Use <code>gliff --no-clipboard</code> on machines you don't fully trust.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/omacom/gliff" target="_blank" rel="noopener">omacom/gliff — README (install, usage, troubleshooting)</a></li>
+        <li><a href="https://github.com/omacom/gliff/releases" target="_blank" rel="noopener">omacom/gliff — releases (v0.4.0 notes: NVIDIA, shm fallback, clipboard)</a></li>
+        <li><a href="https://github.com/omacom/gliff/blob/HEAD/docs/hardware-quirks.md" target="_blank" rel="noopener">omacom/gliff — hardware-quirks doc</a></li>
+        <li><a href="https://omarchyapps.com/apps/gliff.html" target="_blank" rel="noopener">omarchyapps.com/apps/gliff.html — store listing (version 0.4.0-1, 6.5 MB / 16.4 MB, MIT/BSD-2-Clause, install command)</a></li>
+        <li><a href="https://github.com/omacom/omarchy/commit/9d48fc402edf51ae089a7c8c1f7b1a8611744bd8" target="_blank" rel="noopener">Omarchy PR #14712 — install by default + bar indicator</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

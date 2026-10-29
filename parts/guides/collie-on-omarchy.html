@@ -1,0 +1,141 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add collie-bin` installs (upstream docs said "not on AUR/Omarchy yet — build from packaging/aur" as of Oct 2026; reconcile whether that note is stale).
+- Version: app page says 1.22.4-1; upstream released 1.22.6 on 2026-10-18 — note the gap, and confirm which the package ships at publish time.
+- First run: confirm `collie start` prompts for the multiplexer (Herdr/tmux/zellij) and runs tailscale serve; confirm the printed URL + `collie qr` scan works from a phone on the same tailnet.
+- Pairing: confirm `collie pair` 8-char code flow in Settings > Paired devices on the phone PWA; confirm reads fail without a device token (since 1.18.0).
+- Config paths: confirm ~/.config/collie/.env, ~/.local/share/collie/current/bin/collie, ~/.local/state/collie/, ~/.local/bin/collie symlink.
+- Update behavior: confirm `collie update` refuses on package installs ("Package manager installs are updated by the package manager") — package users must update via the Omarchy package.
+- Known issues #503/#505: check whether the update-draft race and the OMP 18.11 powerline frame bug are fixed in the packaged version.
+- Security callout: confirm docs still say never use `tailscale funnel`; confirm COLLIE_TRUSTED_USER behavior.
+- Screenshots needed: phone PWA dashboard (sorted by "needs input"), keys pad, quick replies, `collie qr` output, pairing screen.
+
+SEO notes:
+- URL: /guides/collie-on-omarchy
+- Title tag: "How to Install & Use Collie on Omarchy (2026)"
+- Meta description: "Install Collie, the self-hosted phone UI for terminal AI agents, on Omarchy with one command. Watch and approve Claude Code from your phone over Tailscale — plus real fixes for pairing, refused sends, and the update race."
+- Target queries: "collie omarchy", "collie phone ui terminal ai agents", "collie tailscale", "collie vs vibetunnel", "control claude code from phone". Interlink both ways with the collie-bin app page.
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Collie on Omarchy</h2>
+      <p>Collie is a self-hosted phone web UI for the AI agents running in your terminal — start coding agents on your Omarchy machine, then watch, approve, and answer them from your phone over Tailscale.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add collie-bin</code></pre>
+      <p>It takes ~2 minutes (v1.22.4-1, ~40.8 MB). Then run <code>collie start</code>, scan the printed QR with your phone, and pair the device — no port forwarding, no domain, everything stays on your Tailscale tailnet.</p>
+      <p>Free forever (MIT). This is the exact use case it was built for: you're at the coffee shop, your agent on your home machine blocks on an <code>AskUserQuestion</code>, your phone buzzes.</p>
+      <p><strong>The honest caveat up front: Collie is young and fast-moving</strong> (repo created June 2026, releases roughly daily — upstream published v1.22.6 on 2026-10-18, while the store package is at 1.22.4-1). And <strong>a paired device equals full shell access</strong> — "Treat the URL as a root login," per the docs. This is a security-sensitive tool; the guide covers the trust model because the repo's own docs insist on it.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install.</h3>
+      <p><code>omarchy pkg add collie-bin</code>. Prerequisites from the install docs: Tailscale up on the host (<code>tailscale up</code>), HTTPS enabled for the tailnet (admin console → Enable HTTPS — <code>collie start</code> errors out if it's off), and the Tailscale app on your phone signed into the same account. (Confirm the prereq flow on-machine — this is from upstream docs, not a live test.)</p>
+      <h3>2. First start.</h3>
+      <p>Run <code>collie start</code>. The bridge builds if needed, starts, and prints the URL plus a QR code (<code>collie qr</code> reprints it). First run detects your terminal multiplexer and prompts for a choice — <strong>Herdr is the primary supported backend in 1.0</strong>; tmux, zellij, tuios, and Tern are experimental ("testing is limited to a single operator on one machine — bug reports welcome"). Set <code>COLLIE_MUX=herdr</code> in your <code>.env</code> to skip the prompt. On Linux, <code>collie start</code> runs the bridge as a <code>systemd --user</code> service (stops on logout; <code>loginctl enable-linger $USER</code> for servers).</p>
+      <h3>3. Pair your phone.</h3>
+      <p>Collie runs <code>tailscale serve</code> for you, terminating TLS on your MagicDNS name — the bridge binds loopback only, never 0.0.0.0. Set <code>COLLIE_TRUSTED_USER=you@example.com</code> in your <code>.env</code> and Collie rejects anyone else on the tailnet. Then <code>collie pair</code> on the host: an 8-char code, good for 10 minutes (or <code>collie pair --expires 30d</code>). Enter it in the phone PWA under Settings → Paired devices. <strong>Since 1.18.0, every API request — reads included — needs a paired device token</strong>; before that, anyone who could reach the URL could read every pane. Lost your phone? <code>collie devices revoke &lt;label&gt;</code> works immediately, no restart.</p>
+      <h3>4. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>The dashboard sorts by "needs your input."</strong> Panes running Claude Code, Codex, OpenCode, pi, omp, Grok, Antigravity, or Muse get per-harness "input profiles" — Collie reads the terminal screen and up-levels things like Claude's <code>AskUserQuestion</code> into tappable buttons, instead of making you squint at raw terminal text. Push notifications (Web Push/VAPID — run <code>collie push-keys</code> to generate keys) fire when an agent blocks on input.</li>
+        <li><strong>It's not just a terminal mirror.</strong> There's a configurable keys pad (Esc/Ctrl+C/arrows, custom chords), quick replies and slash commands from <code>quick-replies.toml</code>/<code>commands.toml</code>, a Files screen with read-only git diffs and file attachments, device pairing management, "crews" (several machines behind one URL with failover), and <code>collie stt setup</code> for voice input via the Whistle speech engine. No telemetry — only an update check to GitHub.</li>
+        <li><strong>Never use <code>tailscale funnel</code>.</strong> This is explicit in the security docs: funnel exposes the UI to the public internet, and since a paired device is full shell access, the URL must stay on your private tailnet. Also note: all incoming keystrokes are recorded to <code>~/.local/state/collie/audit.log</code>.</li>
+      </ul>
+      <h3>5. Where its config lives.</h3>
+      <p>Binary: <code>~/.local/share/collie/current/bin/collie</code> (symlinked to <code>~/.local/bin/collie</code> via <code>collie link</code>; updates keep one previous version in <code>~/.local/share/collie/versions/</code>). Config: <code>~/.config/collie/.env</code>, plus <code>~/.collie/config.toml</code> (machine layer) and <code>&lt;config-dir&gt;/config.toml</code> (instance layer; env wins over both — <code>collie config init</code> writes a commented template). Live-reload customizations (no restart): <code>commands.toml</code>, <code>keys.toml</code>, <code>quick-replies.toml</code>, <code>theme.toml</code>, <code>launchers.toml</code>. State: <code>~/.local/state/collie/</code> (audit log, update.json, local-secret, surface samples, paired devices). Logs: <code>journalctl --user -u collie</code>.</p>
+      <h3>6. CLI pro tip.</h3>
+      <p><code>collie --skill</code> prints an agent-facing brief from the binary (no network); <code>collie docs --all</code> prints all docs; <code>collie doctor --json</code> runs rich health checks. And because the phone never touches the multiplexer directly — everything flows through the Bun bridge (<code>/api/snapshot</code> polling, <code>POST</code> to <code>/api/pane/:id/reply</code>) — you can inspect what's happening with plain curl.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Sourced from the real GitHub issues on AltanS/collie (both open as of 2026-10-18) and the documented constraints in the repo — nothing invented.</p>
+      <h3>Phone shows "device not paired" or 403 errors everywhere</h3>
+      <p>Pairing is mandatory since 1.18.0 — every request needs a device token.</p>
+      <p><strong>Fix:</strong> Run <code>collie pair</code> on the host and enter the 8-char code in Settings → Paired devices. If pairing broke after a config change, <code>collie devices list</code> and <code>devices revoke &lt;label&gt;</code> to reset. Lost phone: revoke is immediate, no restart needed.</p>
+      <h3>Every send from the phone is refused — "Collie cannot read this screen"</h3>
+      <p>The screen-reader profile doesn't recognize the agent's current screen. Open issue #505 (Oct 2026): OMP 18.11's default powerline status line sits where Collie's omp reader profile expects the input box's top edge, so <code>findInputFrame</code> finds no frame. Also noted: a pi pane with an extension footer refused every send (fixed in 1.22.5/1.22.6), and a Claude picker or "Heads up" notice can block taps.</p>
+      <p><strong>Fix:</strong> Workaround: use the "Type here" (keys) path instead of the reply path. For debugging, <code>collie doctor</code> will point you at the frame samples in <code>~/.local/state/collie/surface/inbox.jsonl</code> that you can send to the project's lab.</p>
+      <h3>The phone offers an update, but it fails with a vague "staging stopped" error</h3>
+      <p>Known race (open issue #503): the update is offered while the GitHub release is still a draft, the manifest 404s, and the phone shows only "staging stopped before the new version was laid down."</p>
+      <p><strong>Fix:</strong> <strong>Nothing was changed</strong> — wait a minute and retry, or <code>collie update --rollback</code> if you need to go back. Note: on Omarchy package installs, <code>collie update</code> refuses entirely — "package-manager installs are updated by the package manager" — so you update via the Omarchy package.</p>
+      <h3>Pane text shows up in phone app-switcher screenshots</h3>
+      <p>Known platform caveat, not a bug: Android screenshots the app before the page hears backgrounding; iOS gives no guarantee.</p>
+      <p><strong>Fix:</strong> Treat anything typed in visible panes as potentially visible in recent-apps thumbnails. There is no mitigation — don't run secrets in panes Collie watches.</p>
+      <h3>"collie-bin is not on the AUR" per upstream docs, but it's in the Omarchy store</h3>
+      <p>The upstream install docs (as of Oct 2026) say to build from <code>packaging/aur</code> in the repo clone (<code>git clone ... &amp;&amp; cd collie/packaging/aur &amp;&amp; makepkg -si</code>), and that <code>sudo pacman -S collie-bin</code> (Omarchy) will replace the clone "once published."</p>
+      <p><strong>Fix:</strong> If the store package exists and works, those docs are simply stale — but flag any install-path discrepancy when verifying, since the store package may be newer than upstream's docs.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Herdr (the primary multiplexer backend — the Collie + Herdr pairing is the project's 1.0 target). Tailscale — which Collie already assumes. Any of the supported agents: Claude Code, Codex, OpenCode, pi, omp, Grok, Antigravity, Muse.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>vibetunnel for a simpler "watch my Claude Code from anywhere" terminal mirror — no pairing, no push-on-blocked-input, but much less to configure. Or DIY: tmux + Tailscale + Mosh/Termius — full raw terminal on your phone over the tailnet, free and universal, but "proper painful" on a phone keyboard with no glanceable dashboard.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Collie vs similar apps</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Collie</th><th>vibetunnel</th><th>tmux + Tailscale + Mosh</th><th>Omnara</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free / open</td><td>Free</td><td>Freemium (YC S25)</td></tr>
+            <tr><td>Best for</td><td>Agent-aware phone UI for terminal AI agents: input profiles, approval buttons, push on blocked input</td><td>Watching Claude Code from any browser; Git Follow mode for worktrees; session recording</td><td>Universal DIY: raw terminal on your phone over your tailnet</td><td>Voice-first iOS app talking to agents on your machine</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add collie-bin</code></td><td>separate install</td><td><code>omarchy pkg add tmux mosh</code></td><td>App Store</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use Collie if you run coding agents in tmux/Herdr panes and want glanceable phone control with approval buttons and push alerts; use vibetunnel if you just want to watch from a browser; use DIY SSH if you trust your thumbs.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Collie is a free alternative to context-switching back to your desk</h2>
+      <p><strong>Collie is a free alternative to context-switching back to your desk.</strong> Collie's competitors are mostly free or open source too, so the honest positioning is time-cost, not money. What you give up: nothing costs money either way; the real trade is trusting a beta-stage project (releases daily, two real open bugs as of 2026-10-18) with what the docs call "a root login" to your machine. What you keep: full control, self-hosted, no external accounts, no cloud service in the middle. That's the real "price" of this app.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Collie package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/collie-bin.html">View Collie →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Collie work on Omarchy?</summary><p>Yes — there's an official <code>collie-bin</code> binary package on the store. Upstream's own install docs hadn't caught up as of Oct 2026 (they said to build from <code>packaging/aur</code>), so the store package is the easiest path.</p></details>
+      <details><summary>Is Collie free?</summary><p>Completely — MIT license, no paid tier, no telemetry beyond a GitHub update check.</p></details>
+      <details><summary>Do I need to expose a port or buy a domain?</summary><p>No. Collie binds loopback only; <code>collie start</code> runs <code>tailscale serve</code> to terminate TLS on your MagicDNS name. Phone and host just share a tailnet. Never use <code>tailscale funnel</code>.</p></details>
+      <details><summary>Which terminal multiplexers work?</summary><p>Herdr is the primary supported backend; tmux and zellij work but are experimental ("testing is limited to a single operator on one machine"). Tuios and Tern are experimental too. The first <code>collie start</code> asks you to choose.</p></details>
+      <details><summary>What happens if I lose my phone?</summary><p>A paired device is full shell access, so revoke it: <code>collie devices revoke &lt;label&gt;</code> takes effect immediately. Also consider setting short pair expirations (<code>collie pair --expires 12h</code>).</p></details>
+      <details><summary>Collie vs vibetunnel — which should I pick?</summary><p>Collie if you want agent-aware UI (input profiles that turn AskUserQuestion into buttons, push notifications when an agent blocks). vibetunnel if you want a simpler terminal-mirror-in-the-browser with less setup.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/AltanS/collie" target="_blank" rel="noopener">collie GitHub repo — AltanS/collie (README: architecture, backends, features, security posture)</a></li>
+        <li><a href="https://github.com/AltanS/collie/blob/master/docs/install.md" target="_blank" rel="noopener">docs/install.md — prereqs, Linux/macOS/Nix/Windows routes, AUR/PKGBUILD note</a></li>
+        <li><a href="https://github.com/AltanS/collie/blob/master/docs/commands.md" target="_blank" rel="noopener">docs/commands.md — CLI verbs and flags</a></li>
+        <li><a href="https://github.com/AltanS/collie/blob/master/docs/security.md" target="_blank" rel="noopener">docs/security.md — paired-device trust model, pairing since 1.18.0, never funnel</a></li>
+        <li><a href="https://github.com/AltanS/collie/blob/master/docs/configure.md" target="_blank" rel="noopener">docs/configure.md — config paths, env keys</a></li>
+        <li><a href="https://github.com/AltanS/collie/issues/505" target="_blank" rel="noopener">Issue #505 — OMP 18.11 powerline status line breaks send frame detection</a></li>
+        <li><a href="https://github.com/AltanS/collie/issues/503" target="_blank" rel="noopener">Issue #503 — update offered while release still a draft; "staging stopped"</a></li>
+        <li><a href="https://dev.to/stevengonsalvez/remote-coding-running-ai-agents-from-anywhere-the-full-stack-4lji" target="_blank" rel="noopener">Comparison — dev.to full-stack remote-coding survey (vibetunnel, Omnara)</a></li>
+        <li><a href="https://omarchyapps.com/apps/collie-bin.html" target="_blank" rel="noopener">omarchyapps.com — collie-bin app page (v1.22.4-1, MIT, ~40.8 MB)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

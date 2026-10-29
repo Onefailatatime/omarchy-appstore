@@ -1,0 +1,139 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add linuxqq` (package slug `linuxqq`) — verify it resolves in the store index
+- First launch: login flow works (QR from phone app), main window renders correctly on Omarchy theme
+- Clipboard on Wayland: confirm copy/paste between QQ and other apps is actually broken as documented (linuxqq-wayland-fix)
+- Screenshot hotkey: confirm whether it crashes QQ on Wayland as documented
+- Screen sharing: confirm the "cannot use under Wayland" prompt or launcher loop as documented
+- Chinese input: confirm whether fcitx5 needs `--enable-wayland-ime` or the XCB fallback
+- Tray icon: does an icon appear in the Omarchy bar? (Electron StatusNotifierItem behavior — unverified for QQ specifically)
+- Voice/video calls work in the Linux build
+- License: proprietary freeware (LicenseRef-QQ). Free, no paid tier
+- Version at publish time: check installed version and note it; guide drafted against 3.2.34_53644-1
+- Screenshots needed: login screen, main window, the Wayland clipboard/screenshot failure behaviors, voice call UI
+
+SEO notes:
+- URL: /guides/linuxqq-on-omarchy
+- Title tag: "How to Install & Use QQ on Omarchy Linux (2026)"
+- Meta description: "Install Tencent's official QQ Linux client on Omarchy with one command. Fix the Wayland clipboard, screenshot crashes, screen sharing, and fcitx5 input. Setup, FAQ, and alternatives."
+- Keywords: qq linux install, linuxqq arch, qq omarchy, linuxqq wayland clipboard, qq screenshot crash wayland, linuxqq fcitx5
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>linuxqq on Omarchy</h2>
+      <p>linuxqq is Tencent's official Linux QQ client (the Electron-based "NT" build) for Omarchy — 1-on-1 and group chat, voice/video calls, screen sharing, and file transfer, straight from im.qq.com.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add linuxqq</code></pre>
+      <p>Takes ~5 minutes (253.3 MB download / 638.7 MB installed).</p>
+      <p>Free proprietary app — no paid tier.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. First launch.</h3>
+      <p>Open QQ from the launcher. Login is via the phone app — QQ desktop clients authenticate through your mobile QQ (QR or account + mobile verification flow), so have your phone ready. The "NT" build is the full Electron client: chat, calls, screen sharing, file transfer, screenshots.</p>
+      <h3>2. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>On Wayland, expect the Wayland tax — and it's documented, not your fault.</strong> The <a href="https://github.com/shorin-kiwata/linuxqq-wayland-fix" target="_blank" rel="noopener">linuxqq-wayland-fix</a> project (AUR package too, MIT) exists because stock QQ on Wayland has broken clipboard, crashing screenshots, and broken screen sharing. Read "Common issues" before you judge the app. The fix tool works via LD_PRELOAD injection without touching the official package.</li>
+        <li><strong>Voice/video calls are real here.</strong> Unlike some repackaged messengers, the official NT Linux build is a full client — calls included. If you're choosing between this and running Windows QQ in a VM, the VM is ArchWiki's "smallest chance of error" fallback, but it costs the VM's resources.</li>
+        <li><strong>TIM has no Linux version.</strong> TIM is QQ's work-oriented variant — if your workplace uses TIM, the ArchWiki's answer is a VM. Don't waste an hour looking for a Linux TIM client.</li>
+      </ul>
+      <h3>3. Where its config lives.</h3>
+      <p>Electron app data under <code>~/.config/QQ</code> or similar — verify the actual path during the on-machine pass. (Marked unverified.)</p>
+      <h3>4. Omarchy-specific note.</h3>
+      <p>Community AUR variants (<code>linuxqq-nt-bwrap</code>, <code>tencent-qq</code>) repackage the same official binary with Bubblewrap sandboxing and Wayland fixes — AUR-only, not in the Omarchy store. The store's <code>linuxqq</code> is the plain official build.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>All items below are from the linuxqq-wayland-fix project, the ArchWiki Tencent QQ page, or real user notes — none are invented. Unverified items are marked as such.</p>
+      <h3>Copy/paste between QQ and other apps is broken on Wayland.</h3>
+      <p>The linuxqq-wayland-fix README documents this exactly: "Wayland QQ still uses X11's clipboard, so content copied in QQ can't be pasted outside, and content copied outside can't be pasted into QQ."</p>
+      <p><strong>Fix:</strong> Install the AUR <code>linuxqq-wayland-fix</code> companion (or its approach) — it fixes clipboard via injection without modifying the official package. (<a href="https://github.com/shorin-kiwata/linuxqq-wayland-fix" target="_blank" rel="noopener">linuxqq-wayland-fix</a>)</p>
+      <h3>Pressing the screenshot hotkey instantly crashes QQ on Wayland.</h3>
+      <p>Also documented in the same project's known issues — "clicking the screenshot key on Wayland QQ crashes immediately." Consider this a known defect of the stock build, not your setup.</p>
+      <p><strong>Fix:</strong> Same remedy: the linuxqq-wayland-fix companion. (<a href="https://github.com/shorin-kiwata/linuxqq-wayland-fix" target="_blank" rel="noopener">linuxqq-wayland-fix</a>)</p>
+      <h3>Screen sharing says "cannot use under Wayland" or loops opening the launcher.</h3>
+      <p>Documented failure mode in linuxqq-wayland-fix — Wayland screen share prompts that it can't be used, or loops. Their fix routes through PipeWire/Portal.</p>
+      <p><strong>Fix:</strong> If screen sharing is core to your workflow (work meetings), test this first before committing to the native client. (<a href="https://github.com/shorin-kiwata/linuxqq-wayland-fix" target="_blank" rel="noopener">linuxqq-wayland-fix</a>)</p>
+      <h3>Chinese input (fcitx5) doesn't work, or candidate popups crash QQ on Wayland.</h3>
+      <p>For Electron QQ on Wayland: it needs <code>--enable-wayland-ime</code> to talk to fcitx5 via text-input (the package desktop entry only passes <code>--no-sandbox</code>).</p>
+      <p><strong>Fix:</strong> Two sourced fixes: add <code>--enable-wayland-ime</code> (see the <a href="https://github.com/xifan2333/arch-post-install/commit/e8dc562e8d5ad9756a12485de233e7c097f8b9ba" target="_blank" rel="noopener">xifan2333/arch-post-install commit</a>), or — a real user who hit candidate-popup crashes after switching to Wayland — env vars including <code>QT_QPA_PLATFORM=xcb</code> (falls back to XWayland) (<a href="https://github.com/duanluan/linux-notes/blob/HEAD/docs/notes/questions.md" target="_blank" rel="noopener">duanluan/linux-notes</a>).</p>
+      <h3>No tray icon visible on Wayland.</h3>
+      <p>Electron registers a Linux tray icon as a StatusNotifierItem only if a watcher owns org.kde.StatusNotifierWatcher when the Tray is created; otherwise it falls back to an XEmbed icon that no Wayland bar shows — and never retries.</p>
+      <p><strong>Fix:</strong> Unverified for QQ specifically, but the mechanism is documented for Electron apps generally: if your tray icon is missing, check whether the StatusNotifier watcher is up before QQ launches. (<a href="https://github.com/robertg761/ha-desktop-widget" target="_blank" rel="noopener">robertg761/ha-desktop-widget notes</a>)</p>
+      <h3>QQ crashes when starting a screen share while Easy Effects is running.</h3>
+      <p>From the linuxqq-wayland-fix known issues.</p>
+      <p><strong>Fix:</strong> Add <code>TRAE</code> to Easy Effects' input/output exclude lists, then retry the share. (<a href="https://github.com/shorin-kiwata/linuxqq-wayland-fix" target="_blank" rel="noopener">linuxqq-wayland-fix</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>linuxqq-wayland-fix (AUR, MIT) — treat it as a required companion on Wayland, not an optional tweak</li>
+        <li>fcitx5 configured once for the whole desktop</li>
+        <li>PipeWire/Portal stack (needed for the screen-share fix path)</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Windows QQ in a VM — ArchWiki's recommended fallback, "the smallest chance of error," costs VM resources</li>
+        <li><code>linuxqq-nt-bwrap</code> / <code>tencent-qq</code> AUR variants (same official binary + Bubblewrap sandbox + Wayland fixes)</li>
+        <li>and accept there's no web QQ — the old web.qq.com was retired years ago, so don't go looking</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: linuxqq vs similar apps</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr></thead>
+          <tbody>
+            <tr><td><strong>linuxqq</strong></td><td>Free (proprietary)</td><td>Native QQ on Linux with calls and screen sharing (with Wayland caveats)</td><td><code>omarchy pkg add linuxqq</code></td></tr>
+            <tr><td><strong>linuxqq + wayland-fix</strong></td><td>Free</td><td>The same client, but actually usable on Wayland (clipboard, screenshots, share)</td><td>AUR companion (not in Omarchy store)</td></tr>
+            <tr><td><strong>Windows QQ in VM</strong></td><td>Free</td><td>Maximum compatibility ("smallest chance of error" per ArchWiki)</td><td>set up a VM yourself</td></tr>
+            <tr><td><strong>wechat-bin</strong></td><td>Free</td><td>If your contacts are on WeChat instead — Tencent's other messenger, Qt-native, fewer Wayland issues</td><td><code>omarchy pkg add wechat-bin</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you need QQ on Omarchy, install linuxqq and budget 15 minutes for the Wayland fixes — the clipboard/screenshot/screen-share issues are documented and fixable, and the VM fallback is always there if calls are mission-critical.</p>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the linuxqq package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/linuxqq.html">View linuxqq →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does linuxqq work on Omarchy?</summary><p>Yes — it's Tencent's official Electron-based Linux QQ client, packaged for the Omarchy store. Install with <code>omarchy pkg add linuxqq</code>. Budget time for the documented Wayland fixes.</p></details>
+      <details><summary>Is linuxqq free?</summary><p>Yes. Proprietary freeware under Tencent's QQ license (LicenseRef-QQ). No paid tier.</p></details>
+      <details><summary>Why is copy/paste broken between QQ and other apps?</summary><p>The stock build uses X11's clipboard even on Wayland. This is a documented defect, not your config — install the AUR <code>linuxqq-wayland-fix</code> companion (MIT, LD_PRELOAD injection, doesn't modify the official package).</p></details>
+      <details><summary>Why does the screenshot hotkey crash QQ?</summary><p>Another documented Wayland defect of the stock build — same fix companion. Until fixed upstream, treat screenshots-on-Wayland as broken-by-default.</p></details>
+      <details><summary>Does QQ support voice/video calls on Linux?</summary><p>Yes — the NT Electron build is a full client: 1-on-1/group chat, voice/video calls, screen sharing, file transfer. (Verify on-machine during the checklist pass.)</p></details>
+      <details><summary>Is there a web version of QQ?</summary><p>No — the old web.qq.com was retired years ago. Desktop client or VM are the options.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/linuxqq.html" target="_blank" rel="noopener">omarchyapps.com/apps/linuxqq.html — store listing (version 3.2.34_53644-1, 253.3 MB / 638.7 MB, LicenseRef-QQ, install command)</a></li>
+        <li><a href="https://wiki.archlinux.org/title/Tencent_QQ" target="_blank" rel="noopener">ArchWiki: Tencent QQ (Electron NT build, VM fallback, no TIM on Linux)</a></li>
+        <li><a href="https://github.com/shorin-kiwata/linuxqq-wayland-fix" target="_blank" rel="noopener">SHORiN-KiWATA/linuxqq-wayland-fix — clipboard, screenshot crash, screen share, Easy Effects</a></li>
+        <li><a href="https://im.qq.com" target="_blank" rel="noopener">Tencent QQ official</a></li>
+        <li><a href="https://github.com/xifan2333/arch-post-install/commit/e8dc562e8d5ad9756a12485de233e7c097f8b9ba" target="_blank" rel="noopener">xifan2333/arch-post-install — <code>--enable-wayland-ime</code> for Electron QQ</a></li>
+        <li><a href="https://github.com/duanluan/linux-notes/blob/HEAD/docs/notes/questions.md" target="_blank" rel="noopener">duanluan/linux-notes — QQ candidate-popup crash fix</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

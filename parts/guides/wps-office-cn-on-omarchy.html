@@ -1,0 +1,159 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add wps-office-cn` (package slug `wps-office-cn`) — verify it resolves in the store index
+- First launch: does the Fusion dashboard open, or does it exit silently (libxml2.so.2 failure mode)?
+- If silent exit: confirm the libxml2.so.2 -> .so.16 symlink fix and the wpscloudsvr no-op + Office.conf AppComponentMode=classic fix
+- WPSPDF: confirm whether PDF open/export works or needs libtiff5 (AUR)
+- Font rendering: check for the double-bold issue on this 12.x build (reported fixed in CN 12.1.0.17885+)
+- fcitx5 input on Wayland: confirm whether the wps-office-repack +fcitx5xwayland workaround applies to this package
+- Dark theme: check text readability; confirm whether the +kdedark workaround is needed
+- Mime associations: confirm .docx/.xlsx open in WPS (and the wps-office-mime removal fix if they show as zip)
+- Free tier: confirm ads appear in the free tier on this build; don't state premium prices (sources vary)
+- License: proprietary Kingsoft EULA (LicenseRef-WPS-EULA). Free tier ad-supported
+- Version at publish time: check installed version and note it; guide drafted against 12.1.2.29183-1
+- Screenshots needed: Writer, Spreadsheets, Presentation, PDF tools, the free-tier ad placement
+
+SEO notes:
+- URL: /guides/wps-office-cn-on-omarchy
+- Title tag: "How to Install & Use WPS Office on Omarchy Linux (2026)"
+- Meta description: "Install Kingsoft WPS Office (China edition) on Omarchy with one command. Fix the silent-exit launch bug, fonts, PDF support, and fcitx5 input. Free Microsoft 365 alternative."
+- Keywords: wps office linux install, wps-office-cn arch, wps omarchy, wps office linux silent exit, wps office free vs microsoft 365, wps office linux libxml2
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">How to switch</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>wps-office-cn on Omarchy</h2>
+      <p>wps-office-cn is Kingsoft's WPS Office China edition for Omarchy — Writer, Spreadsheets, Presentation, and PDF tools with a Microsoft-Office-style ribbon and the best .docx fidelity of any free suite on Linux.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add wps-office-cn</code></pre>
+      <p>Takes ~15 minutes — the biggest package in this batch: 781.9 MB download / 2.1 GB installed.</p>
+      <p>Free tier is ad-supported (proprietary Kingsoft EULA, LicenseRef-WPS-EULA). Premium exists; pricing varies across sources, so no numbers are quoted here.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Know which WPS you're installing.</h3>
+      <p>This is the <strong>China edition</strong> from linux.wps.cn — the newest track (the AUR pinned comment: "users who want WPS version above 12, install wps-office-cn instead"). The international build at wps.com is older and English-localized; the CN edition is newer but ships Chinese-named default templates. If you only need English and an older version is fine, the international <code>wps-office</code> AUR build is the alternative — but for v12+, this is the package.</p>
+      <h3>2. First launch — watch for the silent exit.</h3>
+      <p>The best-documented modern failure: WPS hard-requires <code>libxml2.so.2</code> while current distros ship <code>libxml2.so.16</code>, so the app can exit instantly with no error. If double-clicking does nothing, that's the prime suspect — the fix is in "Common issues." Similarly, the <code>wpscloudsvr</code> cloud daemon can segfault on modern glibc/libc++ and take the main process down with it.</p>
+      <h3>3. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>Free means ad-supported.</strong> Multiple reviews confirm it: the free version includes ads that can interrupt the workflow, a ~1 GB free cloud cap, and no real-time co-editing. If the ads bother you, LibreOffice and OnlyOffice are the free-and-clean alternatives (comparison below).</li>
+        <li><strong>It's the .docx-fidelity king among free suites.</strong> That's the reason to tolerate the ads and the 2.1 GB: documents round-trip through Microsoft formats better here than in LibreOffice. If your work is "open the client's .docx and it must look right," this is the pick.</li>
+        <li><strong>Fix fonts and input method once, up front.</strong> Missing formula fonts (symbol/webdings/wingdings/mtextra) → install <code>ttf-wps-fonts</code> from AUR. fcitx5 Chinese input on Wayland is broken by default — the community wps-office-repack documents maintained workarounds (<code>+fcitx5xwayland</code>, <code>+kdedark</code> for dark-theme text).</li>
+      </ul>
+      <h3>4. Where its config lives.</h3>
+      <p><code>~/.config/Kingsoft/Office.conf</code> — this is also where the <code>AppComponentMode[Install]=classic</code> fix goes (see issues). (Confirm on-machine.)</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>All items below are from the ArchWiki WPS Office page, AUR comments, or documented fix projects — none are invented.</p>
+      <h3>WPS exits instantly on launch — no window, no error.</h3>
+      <p>The documented modern-distro failure: WPS hard-requires <code>libxml2.so.2</code>, but current distros ship <code>libxml2.so.16</code>. If it still dies, the second culprit is <code>wpscloudsvr</code> segfaulting on modern glibc/libc++ and taking the main process down — the "Fusion" dashboard auto-spawns the daemon otherwise.</p>
+      <p><strong>Fix:</strong> Per the <a href="https://github.com/bhoot1234567890/wps-office-linux-fix" target="_blank" rel="noopener">wps-office-linux-fix</a> project: symlink your newest libxml2 to the expected <code>.so.2</code> name. Then replace <code>wpscloudsvr</code> with a no-op and set <code>AppComponentMode[Install]=classic</code> in <code>~/.config/Kingsoft/Office.conf</code>.</p>
+      <h3>WPSPDF won't open or export PDFs.</h3>
+      <p>The PDF features need <code>libtiff5.so.5</code>.</p>
+      <p><strong>Fix:</strong> ArchWiki + AUR pinned comment (Universebenzene): install <code>libtiff5</code> from AUR. (<a href="https://wiki.archlinux.org/title/WPS_Office" target="_blank" rel="noopener">ArchWiki: WPS Office</a>)</p>
+      <h3>Fonts render too bold / double-bold; formulas show tofu boxes.</h3>
+      <p>Two separate known issues. The overbold rendering: WPS applies its own bolding on top of freetype's fakebold with freetype2 &gt; 2.13 on 11.x builds — fixed in CN 12.1.0.17885+, so this 12.1.2 build should be clean (verify on-machine; older-build workaround was <code>freetype2-wps</code> from AUR). The tofu: missing formula fonts.</p>
+      <p><strong>Fix:</strong> Install <code>ttf-wps-fonts</code> from AUR for symbol/webdings/wingdings/mtextra. (<a href="https://wiki.archlinux.org/title/WPS_Office" target="_blank" rel="noopener">ArchWiki: WPS Office</a>)</p>
+      <h3>Can't type Chinese with fcitx5 on Wayland; text unreadable in dark theme.</h3>
+      <p>The CN edition ships Chinese-named default templates. These are repack-maintainer-verified workarounds, not official Kingsoft fixes — treat as community solutions.</p>
+      <p><strong>Fix:</strong> Community-verified workarounds from the <a href="https://github.com/Rongronggg9/wps-office-repack/blob/main/README.md" target="_blank" rel="noopener">wps-office-repack</a> maintainer: the <code>+fcitx5xwayland</code> variant fixes XWayland input, and <code>+kdedark</code> works around dark-theme text.</p>
+      <h3>After install, .docx/.xlsx files are recognized as zip archives.</h3>
+      <p>Mime association problem.</p>
+      <p><strong>Fix:</strong> ArchWiki: remove the <code>wps-office-mime</code> package to fix the mime association. (<a href="https://wiki.archlinux.org/title/WPS_Office" target="_blank" rel="noopener">ArchWiki: WPS Office</a>)</p>
+      <h3>Download/availability seems China-only or flaky outside China.</h3>
+      <p>Caution, not a confirmed block: an AUR comment (udotirol) reports the related <code>wps-office-365</code> package's download is China-only ("failure while downloading from wpscdn.cn"). The CN edition is served primarily for mainland users.</p>
+      <p><strong>Fix:</strong> If the install stalls on download, this is the likely reason. (<a href="https://aur.archlinux.org/packages/wps-office-365?O=20" target="_blank" rel="noopener">AUR: wps-office-365 comments</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>ttf-wps-fonts</code> (AUR) for formula/symbol fonts</li>
+        <li><code>libtiff5</code> (AUR) for PDF features</li>
+        <li>fcitx5 configured desktop-wide</li>
+        <li>a file manager that opens .docx in WPS by default once mime is fixed</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>LibreOffice — free/open-source, no ads, solid .docx compatibility, heavier and less "Word-like"</li>
+        <li>OnlyOffice — the best MS-format fidelity among FOSS suites, the cleanest WPS replacement</li>
+        <li>the international <code>wps-office</code> AUR build — same suite, English-localized, older version track</li>
+        <li>Google Docs / Office web — zero-install fallback for occasional editing</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: wps-office-cn vs similar apps</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr></thead>
+          <tbody>
+            <tr><td><strong>wps-office-cn</strong></td><td>Free, ad-supported (proprietary)</td><td>Maximum .docx fidelity on Linux; newest v12+ track</td><td><code>omarchy pkg add wps-office-cn</code></td></tr>
+            <tr><td><strong>LibreOffice</strong></td><td>Free (open source)</td><td>No ads, no EULA, dependable all-rounder</td><td><code>omarchy pkg add</code> / Arch repos</td></tr>
+            <tr><td><strong>OnlyOffice</strong></td><td>Free (open source)</td><td>Best MS-format fidelity among FOSS suites; clean UI</td><td>check store / AUR</td></tr>
+            <tr><td><strong>Google Docs / Office web</strong></td><td>Free</td><td>Occasional editing with zero install</td><td>browser</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If "the client's .docx must render exactly right" is the job, WPS Office CN is the free pick — tolerate the ads and the 2.1 GB. If you value clean, ad-free, and open, OnlyOffice is the closest fidelity match and LibreOffice the dependable default.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Free alternative to Microsoft 365 ($6.99+/mo Personal)</h2>
+      <p><strong>What you give up:</strong> real-time co-editing, 1 TB OneDrive, and Outlook integration — plus you accept ads in the free tier and a proprietary EULA. <strong>What you keep:</strong> a Word-style ribbon, .docx/.xlsx/.pptx fidelity that beats every free suite on Linux, and PDF tools — free forever.</p>
+      <p>Honesty sells it: this is not 100% parity with Microsoft 365 — it's "does 90% of what Office does for document work, free forever, with ads." For pure document compatibility on Linux, nothing free beats it.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Microsoft 365 (~15 minutes)</h2>
+      <ol>
+        <li><strong>Export from Microsoft 365:</strong> your files are already .docx/.xlsx/.pptx — there's nothing to export. Copy them over (or point WPS at your OneDrive-synced folder).</li>
+        <li><strong>Import into WPS:</strong> File → Open. Fonts are the main friction — install <code>ttf-wps-fonts</code> (AUR) so symbol/Wingdings content renders.</li>
+        <li><strong>What doesn't transfer:</strong> VBA macros (limited support), real-time co-authoring, OneDrive-native version history, Outlook mail-merge integration.</li>
+        <li><strong>Time estimate:</strong> ~15 minutes plus the 2.1 GB install.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the wps-office-cn package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/wps-office-cn.html">View wps-office-cn →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does wps-office-cn work on Omarchy?</summary><p>It's packaged for the Omarchy store — install with <code>omarchy pkg add wps-office-cn</code>. Budget extra time for the known first-launch fixes (libxml2, wpscloudsvr) on modern distros.</p></details>
+      <details><summary>Is WPS Office free?</summary><p>The free tier is ad-supported (proprietary Kingsoft EULA). Premium tiers exist but pricing varies across sources — check Kingsoft's site for current numbers.</p></details>
+      <details><summary>What's the difference between wps-office-cn and wps-office?</summary><p>The <code>-cn</code> is the China edition from linux.wps.cn — the newest version track (v12+). The international <code>wps-office</code> build is older but English-localized. AUR guidance: install <code>-cn</code> if you want version 12 or above.</p></details>
+      <details><summary>WPS closes immediately when I open it.</summary><p>The two documented culprits: missing <code>libxml2.so.2</code> (symlink your current libxml2 to that name) and the <code>wpscloudsvr</code> segfault (replace with a no-op, set <code>AppComponentMode[Install]=classic</code> in <code>~/.config/Kingsoft/Office.conf</code>).</p></details>
+      <details><summary>Why do my fonts look wrong / too bold?</summary><p>The double-bold bug was fixed in CN 12.1.0.17885+ — this build should be clean. Missing symbol/formula fonts: install <code>ttf-wps-fonts</code> from AUR.</p></details>
+      <details><summary>Can I type Chinese in WPS on Wayland?</summary><p>Broken by default; the community wps-office-repack documents the <code>+fcitx5xwayland</code> workaround. (Community-verified, not official.)</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/wps-office-cn.html" target="_blank" rel="noopener">omarchyapps.com/apps/wps-office-cn.html — store listing (version 12.1.2.29183-1, 781.9 MB / 2.1 GB, LicenseRef-WPS-EULA, install command)</a></li>
+        <li><a href="https://wiki.archlinux.org/title/WPS_Office" target="_blank" rel="noopener">ArchWiki: WPS Office (libtiff5, fonts, mime)</a></li>
+        <li><a href="https://github.com/bhoot1234567890/wps-office-linux-fix" target="_blank" rel="noopener">bhoot1234567890/wps-office-linux-fix — libxml2.so.2 + wpscloudsvr fixes</a></li>
+        <li><a href="https://github.com/Rongronggg9/wps-office-repack/blob/main/README.md" target="_blank" rel="noopener">Rongronggg9/wps-office-repack — fcitx5/kdedark workarounds</a></li>
+        <li><a href="https://linux.wps.cn" target="_blank" rel="noopener">Kingsoft WPS Linux (China)</a></li>
+        <li><a href="https://www.techradar.com/reviews/wps-office-free" target="_blank" rel="noopener">TechRadar: WPS Office Free review (ad-supported free tier)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

@@ -1,0 +1,160 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install command: confirm `omarchy pkg add quickshell` installs 0.3.2.r7.g2b4501a-1.
+- quickshell vs quickshell-git: confirm both exist in the repos, that they conflict, and that `quickshell` is the pinned snapshot (commit 2b4501a) while `-git` tracks master.
+- Omarchy shell: confirm the running Omarchy shell (bar, menu, widgets) is quickshell-based and show where its QML lives (`~/.config/omarchy/...`? `~/.local/share/omarchy/shell`?).
+- Hello-world shell: write the docs' minimal bar example (shell.qml) and confirm `quickshell` runs it on Omarchy — screenshot it.
+- Plugin path: confirm an Omarchy quickshell plugin layout (e.g. jankeesvw.meeting-recorder under ~/.config/omarchy/plugins) and the rescan/enable commands.
+- Optional Qt modules: confirm which of qtsvg/qtimageformats/qtmultimedia/qt5compat Omarchy ships, and what breaks without each (SVG icons? video? blur?).
+- Crash reporter: confirm CRASH_REPORTER=Off in this build and where crash logs land.
+- Issue/forum URLs: confirm the Arch "Quickshell crash on login" thread and the quickshell.org install/intro doc links.
+- Screenshots needed: the example bar running; a before/after of a custom widget; the crash-log location if reproducible.
+
+SEO notes:
+- URL: /guides/quickshell-on-omarchy
+- Title tag: "Quickshell on Omarchy: Install & Build Your Own Wayland Shell (2026)"
+- Meta description: "Quickshell is the QtQuick toolkit behind Omarchy's shell. Install the pinned package, learn the quickshell vs quickshell-git difference, and run your first QML bar in minutes."
+- Keywords: quickshell omarchy, quickshell vs quickshell-git, quickshell tutorial, quickshell crash on login, wayland shell toolkit qml
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Quickshell on Omarchy</h2>
+      <p>Quickshell is a free (LGPL-3.0) QtQuick/QML toolkit for building desktop shells on Wayland — bars, widgets, lock screens, notifications, menus — and it’s what Omarchy’s own shell is built on, so it’s already the runtime behind your bar whether you knew it or not.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add quickshell</code></pre>
+      <p>Takes under a minute (2.2 MB download, 6.4 MB installed, plus the Qt6 stack it depends on). <strong>This is a toolkit, not an app</strong> — there’s no window to open and no launcher icon. You write your shell in QML (a <code>shell.qml</code> file), and <code>quickshell</code> runs it. If you just want to <em>use</em> Omarchy, you already have it: the Omarchy bar, menus, and widgets are quickshell QML running right now.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and confirm the runtime.</h3>
+      <p><code>omarchy pkg add quickshell</code>, then <code>quickshell --version</code> in a terminal. If the Omarchy shell is running, you’re already looking at quickshell’s output — the bar is QML.</p>
+      <h3>2. Run the smallest possible shell.</h3>
+      <p>From the official docs’ introduction, this is the whole “hello world” — a clock bar across the top of every screen:</p>
+      <pre><code class="language-qml">// shell.qml
+import Quickshell
+import Quickshell.Io
+import QtQuick
+
+Scope {
+  id: root
+  property string time
+  Variants {
+    model: Quickshell.screens
+    PanelWindow {
+      required property var modelData
+      screen: modelData
+      anchors { top: true; left: true; right: true }
+      implicitHeight: 30
+      Text {
+        anchors.centerIn: parent
+        text: root.time
+      }
+    }
+  }
+  Process {
+    id: dateProc
+    command: ["date"]
+    running: true
+    stdout: StdioCollector { onStreamFinished: root.time = this.text }
+  }
+  Timer {
+    interval: 1000; running: true; repeat: true
+    onTriggered: dateProc.running = true
+  }
+}</code></pre>
+      <p>Save it as <code>shell.qml</code> in a directory and run <code>quickshell</code> there (confirm the exact invocation on-machine — the docs’ intro covers the config layout). You get a 30px bar with the time, on every monitor. That’s the whole mental model: QML describes the UI, quickshell gives you Wayland superpowers (<code>PanelWindow</code>, per-screen variants, system processes, IPC) that plain Qt can’t.</p>
+      <h3>3. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>Grow by splitting files.</strong> One giant <code>shell.qml</code> gets unmanageable fast. The docs’ pattern: move the bar into <code>Bar.qml</code>, the clock into <code>ClockWidget.qml</code> — any QML file starting with an uppercase letter becomes a reusable type you reference by name (<code>Bar {}</code>). Subfolders come in via <code>import</code> statements. This is how the Omarchy shell itself is organized, and how community plugin authors (like the meeting-recorder bar widget) ship theirs.</li>
+        <li><strong>It’s pre-1.0 and it says so.</strong> From the official install docs: “Quickshell is still in a somewhat early stage of development. There will be breaking changes before 1.0, however a migration guide will be provided.” Concretely: pin your shell to the quickshell version it was written against, read the changelog before updating, and prefer the Omarchy-packaged <code>quickshell</code> (pinned commit) over <code>-git</code> for anything you don’t want to babysit.</li>
+        <li><strong>Optional Qt modules unlock features.</strong> Depending on your distro packaging you may want <code>qtsvg</code> (SVG icons — bundled with most packages), <code>qtimageformats</code> (WEBP and friends), <code>qtmultimedia</code> (video/audio in your shell), and <code>qt5compat</code> (extra effects, notably gaussian blur — though the docs note MultiEffect is usually preferable). If your shell’s SVGs render as blank boxes or blur does nothing, a missing module is the first suspect.</li>
+      </ul>
+      <h3>4. Where its config lives.</h3>
+      <p>Your shells, your choice — quickshell runs whatever config directory you point it at. Omarchy’s own shell QML and its plugins live under the Omarchy config tree (confirm exact paths on-machine: the shell plugins directory is <code>~/.config/omarchy/plugins/</code>, where e.g. the meeting-recorder widget links in as <code>jankeesvw.meeting-recorder</code>). Plugin lifecycle commands from the Omarchy side: <code>omarchy-shell shell rescanPlugins</code>, <code>omarchy-shell shell listPlugins</code>, <code>omarchy plugin enable &lt;name&gt; --section right</code>.</p>
+      <h3>quickshell vs quickshell-git — pick one.</h3>
+      <p>The <code>quickshell</code> package is a pinned, stable snapshot: version <code>0.3.2.r7.g2b4501a</code> means “7 commits past the v0.3.2 tag, at commit 2b4501a,” built by Omarchy with their own patch and crash reporter off. <code>quickshell-git</code> tracks the latest master commit — newer features, newer breakage. They declare a package conflict, so installing one removes the other. Rule of thumb: if you’re writing a shell you want to keep working, take the pinned <code>quickshell</code>; if you’re developing <em>on</em> quickshell or need a fix that landed yesterday, take <code>-git</code> and accept the churn.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Your shell (or a community shell like Caelestia) crashes on login; launching it manually in a terminal works</h3>
+      <p>Real report from the Arch forums (“Quickshell crash on login”): a user with the Caelestia shell saw quickshell crash every login on a fresh Arch install, but <code>caelestia shell</code> run by hand in a terminal worked fine — and the same setup didn’t crash on their laptop, suggesting environment/hardware-specific causes. Quickshell writes crash logs to its crash folder — read those first (the log in that thread included full system info). Usual suspects: the shell starting before the Wayland session is fully up (add a delay or order it after the compositor in your autostart), or mismatched system libraries. On Omarchy specifically, stick to the packaged <code>quickshell</code> built against Omarchy’s Qt rather than mixing in a <code>-git</code> or foreign build.</p>
+      <h3>Crashes or weird behavior after a system update, especially with Nix/home-manager setups</h3>
+      <p><strong>Fix:</strong> From the official docs’ Nix section, verbatim: “Mismatched system dependencies will lead to crashes and other issues.” Quickshell is sensitive to the exact Qt and system libraries it was built against. The Omarchy package handles this by building quickshell itself (with <code>DISTRIBUTOR='Omarchy'</code>) against the repo’s Qt — so the fix is the same as the cause: install quickshell from the same package set as the rest of your system, don’t hand-mix builds, and after a big Qt update, make sure quickshell was rebuilt too (a repo update handles this; a manual build doesn’t).</p>
+      <h3>Your QML worked last month and broke after updating quickshell</h3>
+      <p><strong>Fix:</strong> Expected, not a bug — “there will be breaking changes before 1.0, however a migration guide will be provided” (official docs). Check the release notes/migration guide for the version you jumped to, and consider whether you actually want the rolling <code>quickshell-git</code> or the pinned <code>quickshell</code> package. If you maintain a shell others use, state the supported quickshell version in your README.</p>
+      <h3>SVG icons show as blank, WEBP images don’t load, video elements stay black, or gaussian blur has no effect</h3>
+      <p><strong>Fix:</strong> Missing optional Qt modules. The official install docs list exactly these: <code>qtsvg</code> for SVG (usually bundled), <code>qtimageformats</code> for WEBP and less common formats, <code>qtmultimedia</code> for video/audio, <code>qt5compat</code> for extra effects like gaussian blur. Install the missing module for your distro and restart the shell. (Check what’s already installed before assuming — Omarchy’s packaging may bundle some.)</p>
+      <h3>You installed both <code>quickshell</code> and <code>quickshell-git</code> and pacman complains</h3>
+      <p><strong>Fix:</strong> They conflict by design (<code>conflicts=(quickshell-git)</code> in the Omarchy PKGBUILD) — you can only have one. <code>omarchy pkg remove</code> the one you don’t want, then install the other. If a community shell’s install script pulls in <code>-git</code> as a dependency, decide consciously: <code>-git</code> for latest-master features, <code>quickshell</code> for the stable pinned build.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Hyprland (Omarchy’s compositor — quickshell is the Wayland-shell counterpart to it). The Omarchy plugin system (<code>~/.config/omarchy/plugins/</code>) — the sanctioned way to add quickshell widgets to the Omarchy bar without forking the whole shell. Any QML knowledge you have from Qt carries over directly.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><strong>AGS</strong> (Aylur’s GTK Shell) — the GTK/GJS alternative with a big widget ecosystem, if you think in JavaScript rather than QML. <strong>eww</strong> (ElKowars wacky widgets) — lighter, simpler, great for a couple of custom widgets without committing to a full shell toolkit. <strong>nwg-shell</strong> — a more batteries-included Wayland shell if you want customization without writing QML. None of these run Omarchy’s shell, though — on Omarchy, quickshell is the home team.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Wayland shell toolkits</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>quickshell (pinned)</th><th>quickshell-git</th><th>AGS</th><th>eww</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, LGPL-3.0</td><td>Free, LGPL-3.0</td><td>Free, GPL-3.0</td><td>Free, MIT</td></tr>
+            <tr><td>Best for</td><td>Writing QML shells/widgets; the runtime Omarchy itself uses; stable snapshot</td><td>Living on latest master; new features and new breakage</td><td>JS/GTK-style shell scripting with a rich widget library</td><td>Lightweight one-off widgets without a full shell framework</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add quickshell</code></td><td>Replaces <code>quickshell</code> (conflicts)</td><td>AUR / manual</td><td><code>omarchy pkg add eww</code> (if packaged)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> On Omarchy, learn quickshell — it’s what your bar already runs, and a pinned package means your config won’t rot monthly. Reach for <code>-git</code> only if you’re chasing upstream features; reach for AGS/eww if you refuse QML on principle.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Your bar is already quickshell — the toolkit is free and pre-installed in your workflow</h2>
+      <p>There’s no paid rival to beat here: the value proposition is simpler. Omarchy’s bar, menus, and widgets are quickshell QML running on your machine right now, which means the toolkit you’d learn to customize them is the one your system already tests against. The packaged <code>quickshell</code> is a pinned, stable snapshot (not rolling master), so a shell you write today won’t break monthly. It’s LGPL-3.0, free, 2.2 MB — and the alternative to learning it is customizing your desktop in a framework your own bar doesn’t run.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Quickshell package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/quickshell.html">View Quickshell →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is quickshell the same as the Omarchy shell?</summary><p>No — it’s the <em>runtime</em> the Omarchy shell is built on. Think: Hyprland is the compositor, quickshell is the shell toolkit, and Omarchy’s bar/menu/widgets are QML code running on quickshell. Installing the package gives you the toolkit; Omarchy’s QML is what you see.</p></details>
+      <details><summary>What’s the difference between quickshell and quickshell-git?</summary><p><code>quickshell</code> is built from a pinned commit (currently 7 commits past v0.3.2) — stable, reproducible, what Omarchy tests against. <code>quickshell-git</code> rebuilds from the latest master — newest code, least tested. They conflict; keep exactly one.</p></details>
+      <details><summary>Do I need to know QML?</summary><p>To write your own shell or widgets, yes — QML is the language. If you only want to <em>install</em> someone else’s quickshell config (like a community dotfiles shell), you just need the package and their config directory.</p></details>
+      <details><summary>Does quickshell work outside Wayland / outside Hyprland?</summary><p>It’s a Wayland-first toolkit (<code>PanelWindow</code>, layer-shell, session lock via <code>ext-session-lock-v1</code>). There is some X11 accommodation in the codebase, but treat it as Wayland-only for planning purposes.</p></details>
+      <details><summary>Why does the Omarchy build turn the crash reporter off?</summary><p>The PKGBUILD sets <code>CRASH_REPORTER=Off</code> and <code>DISTRIBUTOR='Omarchy'</code> — the packaged build opts out of upstream’s crash reporting. Crash logs still land locally in quickshell’s crash folder; check there (not upstream’s tracker) when debugging on Omarchy.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/quickshell.html" target="_blank" rel="noopener">omarchyapps.com — quickshell package page (0.3.2.r7.g2b4501a-1, LGPL-3.0-only, updated 2026-10-16, <code>omarchy pkg add quickshell</code>)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/blob/master/pkgbuilds/quickshell/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs PKGBUILD — quickshell (pinned commit 2b4501a past v0.3.2, conflicts quickshell-git, load_qtquick_611.patch, quickshell-check.hook, DISTRIBUTOR='Omarchy', CRASH_REPORTER=Off)</a></li>
+        <li><a href="https://quickshell.org/docs/v0.2.0/guide/install-setup/" target="_blank" rel="noopener">quickshell.org — Installation &amp; Setup (install by release or master, optional Qt modules, pre-1.0 breaking changes note)</a></li>
+        <li><a href="https://quickshell.org/docs/v0.2.1/guide/introduction/" target="_blank" rel="noopener">quickshell.org — Introduction (minimal bar example, multi-file pattern)</a></li>
+        <li><a href="https://github.com/quickshell-mirror/quickshell" target="_blank" rel="noopener">Upstream repo/mirror: quickshell-mirror/quickshell (primary: git.outfoxxed.me)</a></li>
+        <li><a href="https://bbs.archlinux.org/viewtopic.php?pid=2254635" target="_blank" rel="noopener">Arch forums — “Quickshell crash on login” (Caelestia shell crash report)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

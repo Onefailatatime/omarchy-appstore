@@ -1,0 +1,139 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add disktree-bin` (package slug `disktree-bin`) — verify it resolves in the store index
+- First launch: what actually appears on first launch (scan of home? any onboarding?), and roughly how long a typical home scan takes
+- Keyboard bindings listed (Space/X mark, Enter go in, `c` review, `v` volumes, `g` whole disk, `/` filter, `t` mode) behave as documented on 0.11.0
+- The side panel's "Worth a look" suggestions and the free-space projection read as described
+- Review flow: marked list opens with `c`; "Move to trash" vs "Delete permanently" behave as documented (permanent always asks first; trash commits directly)
+- Trash backend: does a stock Omarchy box have trash-cli installed (i.e., which trash backend actually fires)?
+- The README's Hyprland float rule (`windowrule = float, class:^(disktree)$`) matches the packaged 0.11.0 build (issue #11 reported an empty app_id on 0.9.1; fixed upstream but unconfirmed on this package)
+- Volume picker (`v`) lists mounted volumes ordered fullest first, and switching volumes rescans as described
+- Refusal rules: verify the app refuses system trees (/usr, /etc, /boot, /var/lib) and mount points as documented in "What it refuses to do"
+- Comparison install commands: confirm `sudo pacman -S ncdu`, `sudo pacman -S baobab`, and `sudo pacman -S filelight` resolve on a stock Omarchy box
+- License: MIT (confirmed in repo). Free, no paid tier exists
+- Version at publish time: check `disktree --version` and note it; guide drafted against v0.11.0 (released 2026-10-04; Omarchy package 0.11.0-3)
+- Screenshots needed: the treemap mosaic (colored by kind of data), the side panel (selection details, "Worth a look", free-space meter), the review screen (`c`), the volume picker (`v`), filter (`/`) in action
+
+SEO notes:
+- URL: /guides/disktree-bin-on-omarchy
+- Title tag: "How to Install & Use disktree-bin on Omarchy (2026)"
+- Meta description: "Install disktree-bin on Omarchy with one command. Disk-space treemap that scans home or the whole disk, marks what should go, and deletes with a two-step review. Setup, keys, and real fixes from the issue tracker."
+- Keywords: disktree omarchy, disktree-bin install, disktree how to change partition, disktree Hyprland windowrule, disk space treemap omarchy, free alternative to daisydisk linux
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>disktree-bin on Omarchy</h2>
+      <p>disktree is a disk-space treemap built for Omarchy (Rust + GPUI, follows your Omarchy theme) that scans your home directory or whole disk, draws every directory as a nested mosaic sized by what it really costs on disk and colored by kind of data, and lets you mark what should go and then trash or permanently delete it from a two-step review screen.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add disktree-bin</code></pre>
+      <p>Launch disktree from the app launcher (or run <code>disktree</code> in a terminal) — it scans your home directory by default. Takes ~2 minutes. The store listing reports an 11.4 MB download / 29 MB installed: this is the prebuilt-binary package of v0.11.0, so you skip the long Rust compile the <code>-bin</code> package exists to avoid.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. First launch.</h3>
+      <p>Launch disktree from the app launcher (or run <code>disktree</code> in a terminal) and it scans your home directory by default. What you see: a breadcrumb trail from <code>/</code> at the top; below it the scan totals, the current filter, and a legend; the mosaic itself — every directory as a nested tile, sized by real on-disk cost (what <code>du</code> reports), colored by kind of data (code, git checkouts, media, documents, caches, toolchains, synced files), with reclaimable space (caches, build output, package stores) shown with a diagonal hatch; and a side panel with the selection's details, the largest plausibly-removable items ("Worth a look"), what you've marked, and the disk's free space now vs. after your marks.</p>
+      <h3>2. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Mark with Space (or X), then review with <code>c</code>.</strong> Marking is completely reversible — press Space again to unmark. Nothing happens until you open the review list and commit. There are two commit paths: "Move to trash" (the default when a trash is available; on Linux it tries trash-cli's <code>trash-put</code>, then <code>gio trash</code>, then a built-in XDG trash) and "Delete permanently" (<code>rm -rf</code> semantics, which always asks first in a dialog that names what goes and how much comes back). After a removal, disktree rescans so the on-screen numbers match the disk.</li>
+        <li><strong>Scroll to dive in.</strong> Scroll toward a directory to magnify toward the pointer, keep scrolling to go into it — one continuous motion. Enter goes into the selected directory at any depth; Backspace or Escape goes up one level; <code>&lt;</code>/<code>&gt;</code> (or alt+arrows) go back and forward through the directories you visited. <code>[</code> and <code>]</code> draw fewer or more levels; <code>+</code>/<code>-</code> magnify; <code>0</code> resets.</li>
+        <li><strong>Switch what you measure.</strong> Press <code>t</code> to cycle what tile areas and colors mean (Size / Files / Age); <code>d</code> toggles disk usage vs apparent size; <code>i</code> includes or skips hidden entries (included by default — <code>~/.cache</code> is often the biggest thing in a home); <code>r</code> rescans; <code>v</code> opens the volume picker; <code>g</code> widens to the whole disk; <code>/</code> filters by name; <code>o</code> (or right-click) shows the tile in your file manager.</li>
+      </ul>
+      <h3>3. Make it roomy.</h3>
+      <p>Hyprland tiles new windows, so disktree opens into whatever tile it is given — and it's designed for a big window. Float it or give it a rule (per the README):</p>
+      <pre><code class="language-bash">windowrule = float, class:^(disktree)$
+windowrule = size 1400 900, class:^(disktree)$</code></pre>
+      <h3>4. Config location.</h3>
+      <p>The README documents no config file or dotfile — settings (theme choice, saved view choices) are recent feature work in the repo (issues #87/#88, closed) and may or may not be in the packaged 0.11.0. Treat all "settings persist between launches" claims as unverified until confirmed on the box.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>The README's Hyprland float rule never matches — the window doesn't float</h3>
+      <p>Issue #11 found the 0.9.1 window mapped with an empty Wayland app_id, so <code>class:^(disktree)$</code> matched nothing and docks couldn't tie it to its launcher entry. It's fixed upstream (closed), and the README documents class <code>disktree</code> — but it was only seen on 0.9.1, and whether the fix landed in the packaged 0.11.0 build is unverified (<a href="https://github.com/tobi/disktree/issues/11" target="_blank" rel="noopener">issue #11</a>).</p>
+      <p><strong>Fix:</strong> If the rule doesn't match, run <code>hyprctl clients</code> while disktree is open and check its actual class.</p>
+      <h3>"How do I change partitions?" — no obvious way to scan a different disk</h3>
+      <p>A real user asked exactly this (<a href="https://github.com/tobi/disktree/issues/67" target="_blank" rel="noopener">issue #67</a>).</p>
+      <p><strong>Fix:</strong> Press <code>v</code> (or click <strong>Volumes</strong> beside the disk name in the side panel): the picker lists every mounted volume with its free space, fullest first, skipping pseudo-filesystems and duplicate btrfs/APFS mount points, and selecting one resets the scan root straight to that volume.</p>
+      <h3>Unreadable entries show up when scanning the whole disk</h3>
+      <p>By design. Without root, system directories can't be read, and the README says they're counted as unreadable in the top bar rather than guessed at. The scan still covers one whole volume (mount source, so btrfs subvolumes like <code>/home</code>, <code>/var/log</code>, <code>/var/cache/pacman/pkg</code> are included; <code>/proc</code>, <code>/sys</code>, <code>/run</code>, tmpfs, <code>/boot</code>, other disks, network shares, and snapshot subvolumes are left out — counting snapshots would count the disk twice).</p>
+      <p><strong>Fix:</strong> Don't run disktree as root to "fix" this — its removal rules exist to protect system trees regardless (<a href="https://github.com/tobi/disktree" target="_blank" rel="noopener">README: The whole disk</a>).</p>
+      <h3>"Move to trash" vs "Delete permanently" — what actually happens on Linux?</h3>
+      <p>Per the README: trash tries <code>trash-put</code> from trash-cli first, then <code>gio trash</code>, then a built-in XDG trash — the trash commit is direct (recoverable until the trash is emptied). Permanent deletion is <code>rm -rf</code> semantics and always asks first, in a dialog naming what goes and how much space comes back. There are also hard guards: only paths under the scanned root can go, and the filesystem root, the scanned root, your home directory, mount points (or anything containing one), and system trees (<code>/usr</code>, <code>/etc</code>, <code>/boot</code>, <code>/var/lib</code>, <code>/nix/store</code>, Homebrew prefixes) are refused outright — pacman, paccache, or <code>journalctl --vacuum</code> are the tools for those.</p>
+      <p><strong>Fix:</strong> None needed — this is the documented behavior. If you don't know which trash backend is firing on your box, check whether trash-cli is installed; disktree tries it first (<a href="https://github.com/tobi/disktree" target="_blank" rel="noopener">README: What it refuses to do</a>).</p>
+      <h3>disktree won't start or draws nothing (e.g., on a VM or odd GPU setup)</h3>
+      <p>The README's install notes require a Wayland or X11 session with a GPU that GPUI can drive (Vulkan), and Rust 1.97+ if you build from source. A headless VM or a GPU-less remote session is a documented prerequisite gap, not a bug in your setup — this hasn't been reproduced and reported on Omarchy specifically, so mark it unverified (<a href="https://github.com/tobi/disktree" target="_blank" rel="noopener">README: Install</a>).</p>
+      <p><strong>Fix:</strong> This is a documented prerequisite gap, not a bug: disktree needs a Wayland or X11 session with a Vulkan-capable GPU to draw anything.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>flea</code> (the Omarchy-native file manager — find the folder in disktree, then <code>o</code> opens it in your file manager; <a href="https://omarchyapps.com/apps/flea.html" target="_blank" rel="noopener">Omarchy App Store</a>), <code>paccache</code> (clean <code>/var/cache/pacman/pkg</code>, which disktree shows but refuses to remove for you), and <code>journalctl --vacuum</code> (same story for <code>/var/log</code>).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>ncdu</code> — the classic terminal tree browser (<code>sudo pacman -S ncdu</code>); <code>baobab</code> (GNOME's Disk Usage Analyzer) for a rings-chart view (<code>sudo pacman -S baobab</code>); or <code>filelight</code> for a KDE-style treemap if you're not married to the Omarchy theme.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: disktree vs ncdu, Baobab &amp; Filelight</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>disktree</th><th>ncdu</th><th>Baobab</th><th>Filelight</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Omarchy users who want a graphical treemap with a guided mark-and-review delete flow; follows the Omarchy theme</td><td>Terminal-first users; fast scanning, SSH-friendly, no GUI needed</td><td>GNOME users wanting ring charts and folder-by-folder drill-down</td><td>KDE/Qt-flavored treemap with per-partition ring overview</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add disktree-bin</code></td><td><code>sudo pacman -S ncdu</code> (Arch extra; not in the Omarchy store)</td><td><code>sudo pacman -S baobab</code> (Arch extra; not in the Omarchy store)</td><td><code>sudo pacman -S filelight</code> (Arch extra; not in the Omarchy store)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you're on Omarchy and want the "what's eating my disk, and let me safely remove it" answer in one graphical window that matches your theme, disktree is the pick; ncdu wins if you live in a terminal or work over SSH.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>disktree-bin is a free alternative to DaisyDisk ($9.99 one-time on the Mac App Store)</h2>
+      <p><strong>disktree-bin is a free alternative to DaisyDisk ($9.99 one-time on the Mac App Store).</strong> What you give up: DaisyDisk's commercial polish, in-app Quick Look previews, and the circular "sunburst" map style. What you keep: the treemap, mark-and-review deletion with a trash-then-permanent flow, a free-space projection that tells you what your marks are worth before you commit, and whole-disk scanning — all free and MIT-licensed. No migration needed: DaisyDisk is macOS-only, so disktree-bin is the answer for the same "find what's eating the disk" itch on an Omarchy box.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the disktree-bin package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/disktree-bin.html">View disktree-bin →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does disktree work on Omarchy?</summary><p>Yes — it's built for it. Rust + GPUI through gpui-omarchy, so it follows your Omarchy theme and behaves like the rest of the desktop. Install with <code>omarchy pkg add disktree-bin</code>.</p></details>
+      <details><summary>Is disktree free?</summary><p>Yes. MIT-licensed open source by Tobias Lütke (<a href="https://github.com/tobi/disktree" target="_blank" rel="noopener">tobi/disktree</a>). No paid tier, no trial.</p></details>
+      <details><summary>How is disktree different from ncdu?</summary><p>Both answer "what's eating my disk." ncdu is a terminal tree browser; disktree is a graphical treemap with mouse+keyboard navigation, tiles colored by kind of data (code, git, media, caches), hatch-marked reclaimable space, and a two-step mark-then-review delete flow with a free-space projection.</p></details>
+      <details><summary>Can disktree delete the wrong thing?</summary><p>It's designed against it: marking is reversible, permanent deletion always asks first in a dialog naming what goes, and the removal rules refuse the filesystem root, your home directory, mount points, anything containing a mount point, and system trees (<code>/usr</code>, <code>/etc</code>, <code>/boot</code>, <code>/var/lib</code>, …). That said, a trash commit happens directly — recoverable until you empty the trash.</p></details>
+      <details><summary>How do I scan a different disk or partition?</summary><p>Press <code>v</code> to open the volume picker (or click <strong>Volumes</strong> in the side panel), pick the volume, and the scan resets to it. Press <code>g</code> (or <code>disktree --disk</code>) for the whole disk your home lives on.</p></details>
+      <details><summary>How do I uninstall it cleanly?</summary><p><code>omarchy pkg drop disktree-bin</code>. The README documents no dotfiles or user state for the GUI build, so there's no extra cleanup step to run first — unverified on Omarchy, confirm during the verify pass.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/tobi/disktree" target="_blank" rel="noopener">tobi/disktree — README (install, use, keys, what it measures, what it refuses to do, On Hyprland)</a></li>
+        <li><a href="https://omarchyapps.com/apps/disktree-bin.html" target="_blank" rel="noopener">omarchyapps.com/apps/disktree-bin.html — store listing (version 0.11.0-3, 11.4 MB / 29 MB, MIT, install command)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/disktree-bin" target="_blank" rel="noopener">PKGBUILD — omacom/omarchy-pkgs/pkgbuilds/disktree-bin</a></li>
+        <li><a href="https://github.com/tobi/disktree/issues/67" target="_blank" rel="noopener">issue #67 — "How to change patition?"</a></li>
+        <li><a href="https://github.com/tobi/disktree/issues/11" target="_blank" rel="noopener">issue #11 — empty Wayland app_id breaking class rules (0.9.1, closed)</a></li>
+        <li><a href="https://github.com/tobi/disktree/issues/86" target="_blank" rel="noopener">issue #86 — right-click behavior change (open)</a></li>
+        <li><a href="https://github.com/tobi/disktree/issues/99" target="_blank" rel="noopener">issue #99 — failed-scan messaging (open)</a></li>
+        <li><a href="https://apps.apple.com/us/app/daisydisk/id411643860?mt=12" target="_blank" rel="noopener">DaisyDisk App Store listing — $9.99</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

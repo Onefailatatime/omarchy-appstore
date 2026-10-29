@@ -1,0 +1,142 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add omacharts` installs 0.1.13-1 and adds `omacharts` to PATH; note which channel (edge vs stable) the package is on at publish time.
+- First launch: confirm the Omarchy bar plugin installs itself on first run (watchlist in the bar with sparklines); confirm `omacharts plugin` round-trips (install/remove/update).
+- Yahoo default: confirm zero-config first chart — search a ticker, confirm bars appear with no setup.
+- thinkorswim path: confirm `omacharts provider login` opens a real Chromium-family window; confirm session files land in `~/.config/omacharts/tos.env` and `~/.config/omacharts/tos-browser/`; confirm non-US listings (e.g. a Taipei ticker) show the documented "no name" state rather than an empty chart.
+- Keyboard basics: type a letter (symbol search), a number (resolution), and `?` (hotkey list); confirm on-machine.
+- CLI: confirm `omacharts status show`, `omacharts chart indicator add rsi`, and `omacharts skill install` behave as documented, including the running-window vs stored-database split and exit code 6 with no window open.
+- Issue #55: confirm current status — is the Omarchy bar still stealing right-clicks in fullscreen (Super + F), and is omacom/omarchy#14162 merged yet?
+- Screenshots needed: main window on an Omarchy theme, one split layout, the `?` hotkey overlay, watchlist bar plugin, thinkorswim sign-in step.
+
+SEO notes:
+- URL: /guides/omacharts-on-omarchy
+- Title tag: "How to Install & Use Omacharts on Omarchy (2026)"
+- Meta description: "Install Omacharts on Omarchy with one command. Fast native stock charts with free Yahoo data, thinkorswim streaming, indicators, drawings, and a full CLI — plus fixes for the fullscreen right-click issue and ToS sign-in."
+- Keywords: omacharts omarchy, omacharts linux install, omacharts thinkorswim, free stock charting app linux, omacharts vs tradingview
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from TradingView</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Omacharts on Omarchy</h2>
+      <p>Omacharts is a fast, native, keyboard-first stock charting app for Omarchy — Rust + GTK4, themes itself to your desktop, charts free Yahoo Finance data out of the box or streams your Charles Schwab thinkorswim account, and ships a full CLI and agent skill so terminals and AI agents can drive every chart.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omacharts</code></pre>
+      <p>Takes ~1 minute — the package is in Omarchy's own repo (v0.1.13-1 on the app-store page, Oct 2026), MIT licensed, and the launcher, man page, shell completions, and agent skill come along automatically. It works with zero setup: Yahoo Finance is the default data feed and needs no account.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and launch.</h3>
+      <p>Run the command above. The binary lands at <code>/usr/bin/omacharts</code>; a desktop entry (<code>com.jorgemanrubia.Omacharts.desktop</code>) puts it in Super + Space.</p>
+      <h3>2. First launch — no account, no onboarding.</h3>
+      <p>Open it and you're looking at a chartbook immediately — no account, no onboarding wizard, no API key. First thing to try: type a letter to search symbols, a number to change resolution (1D, 1W, 1M…), and press <code>?</code> to see every hotkey. The maintainer (Jorge Manrubia, 37signals) designed it keyboard-first, so learning <code>?</code> is the single highest-leverage 30 seconds.</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Chartbooks, not single charts</strong> — Split a chart horizontally or vertically (mouse or keyboard), as deep as you like; each chart keeps its own symbol, resolution, indicators and settings. Save arrangements as <em>chartbooks</em>, each with its own watchlist, and switch from the strip along the bottom. Link charts into one of nine groups and they move together — a pointer on one draws a crosshair on the rest (<code>omacharts chart crosshair off</code> to disable).</li>
+        <li><strong>Indicators and drawings are keystroke-fast</strong> — SMA, EMA, VWAP with bands, Bollinger bands, volume, volume profile, RSI, MACD, ATR, stochastic — each in its own resizable strip. Drawings: trendlines, levels, arrows, zig-zags, boxes, circles, text — one keystroke each. Colors are theme roles, so drawings stay readable when you switch Omarchy themes; palette names (Amber, Teal…) re-resolve on theme change, <code>#rrggbb</code> stays fixed.</li>
+        <li><strong>Everything the window does, the CLI does</strong> — <code>omacharts watchlist create Semis &amp;&amp; omacharts watchlist add Semis NVDA AMD AVGO TSM MU</code> builds a watchlist without touching the GUI; commands hit the running window live or, with nothing open, work against the stored database (even over ssh). <code>omacharts surface --json</code> emits the whole command surface for scripting, and <code>omacharts skill install</code> installs a skill so your AI agent (Claude Code, Codex) can chart for you. The Omarchy bar plugin installs itself on first run — your watchlist lives in the bar with sparklines, surviving the window closing; <code>omacharts plugin</code> manages it.</li>
+      </ul>
+      <h3>4. Data feeds.</h3>
+      <p><strong>Yahoo Finance default:</strong> nothing to configure. <strong>thinkorswim (Charles Schwab):</strong> pick it in Preferences → Market data → Provider, or <code>omacharts config set provider tos</code>, then <code>omacharts provider login</code>. That opens a real Chrome/Chromium/Brave/Edge window where you sign in yourself — Omacharts never sees your password or OTP, types nothing into the page, and keeps only the browser session (stored in <code>~/.config/omacharts/tos.env</code> and <code>~/.config/omacharts/tos-browser/</code>). It has no order-entry code at all; it only asks for charts. Coverage limits: thinkorswim charts US stocks/ETFs, futures, class shares and major indexes; Taipei (<code>2330.TW</code>) and Madrid listings have no thinkorswim names — those charts fall back to Yahoo.</p>
+      <h3>5. Config location.</h3>
+      <p><code>~/.config/omacharts/</code> (including <code>tos.env</code> and <code>tos-browser/</code> for the thinkorswim session). Watchlist export/import (<code>omacharts watchlist export</code> / <code>import</code>) carries setups between machines.</p>
+      <p><strong>Practical notes:</strong> The app follows your Omarchy theme and generates an indicator palette per active theme, with a dedicated Omarchy bar plugin plus an agent skill — a first-class Omarchy citizen, not a ported web app. Binaries ship for x86_64 and aarch64 (covers Asahi).</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>In fullscreen (Super + F), right-clicks on the top ~26px of the window do nothing</h3>
+      <p>Only the bottom fifth of the resolution-strip buttons responds. This is not an omacharts bug (issue <a href="https://github.com/jorgemanrubia/omacharts/issues/55" target="_blank" rel="noopener">jorgemanrubia/omacharts#55</a>, opened Oct 12 2026): Omarchy's bar hides behind the fullscreen window but stays on Hyprland's top layer, stealing pointer input (upstream <a href="https://github.com/omacom/omarchy/issues/14079" target="_blank" rel="noopener">omacom/omarchy#14079</a>).</p>
+      <p><strong>Fix:</strong> A fix exists in <a href="https://github.com/omacom/omarchy/pull/14162" target="_blank" rel="noopener">omacom/omarchy#14162</a> (moves the bar to the bottom layer while a workspace is fullscreen) but it was unreviewed and conflicting as of the issue date. Workaround until it merges: right-click lower on the buttons, or leave fullscreen.</p>
+      <h3><code>omacharts provider login</code> says it needs a Chromium-family browser</h3>
+      <p>And you only have Omarchy's default. The thinkorswim sign-in opens a real Chrome/Chromium/Brave/Edge window by design — the app never handles your credentials directly.</p>
+      <p><strong>Fix:</strong> Install one (<code>omarchy pkg add chromium</code> or your pick) first; the app keeps the session in a dedicated profile beside it so the next sign-in is a trusted device. Yahoo Finance needs no browser and no sign-in at all.</p>
+      <h3>A Taipei (<code>2330.TW</code>) or Madrid listing charts nothing on thinkorswim, or shows "no name"</h3>
+      <p>This is a documented limitation, not a bug: thinkorswim's name lookup only covers US listings. Those symbols need Yahoo — switch the provider (<code>omacharts config set provider yahoo</code>, or per-window from the command line with <code>omacharts --provider yahoo</code>).</p>
+      <p><strong>Fix:</strong> Taiwan exchanges are searchable by ticker, English name, or Chinese name (<code>台積電</code>) and chart on Taipei's own trading hours via Yahoo.</p>
+      <h3><code>omarchy pkg add omacharts</code> reports the package is missing</h3>
+      <p>New Omarchy packages land on the edge channel first and reach stable with the next Omarchy release train (the maintainer's README itself noted the package was "waiting to be merged" shortly before it landed).</p>
+      <p><strong>Fix:</strong> If you're on stable and it's missing, either switch to edge temporarily or use the release tarball route from the GitHub releases page and <code>sudo pacman -U</code> the file.</p>
+      <h3>A CLI command fails with <code>exit code 6</code>: "no window is open, so there is no focused chart to act on"</h3>
+      <p>Expected behavior, not a bug: chart/chartbook commands that don't name a chart default to the focused one, which only exists while a window is open.</p>
+      <p><strong>Fix:</strong> With nothing running, either launch the app or name the chart explicitly (<code>--chart pos:1</code>); <code>pos:N</code> is preferred over raw chart ids, which are reassigned when the layout rebuilds. (Documented in doc/cli.md; exit code 7 means the command hit an internal bug — worth reporting.)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>omacharts' own Omarchy bar plugin (ships with the app — the sparkline watchlist in your top bar). Your terminal + <code>omacharts watchlist export</code> for backups and machine sync. Anything you watch earnings on — the app charts, it doesn't tell you what to buy.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><strong>TradingView in the browser</strong> if you need crypto/forex pairs, multi-device web sync, or Pine Script community indicators — it's the reference this app is chasing, minus the native feel. Or raw <code>yfinance</code> in Python if you want data, not charts, in a pipeline.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: omacharts vs TradingView vs thinkorswim desktop</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omacharts</th><th>TradingView</th><th>thinkorswim desktop</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Freemium, paid plans for more indicators/alerts</td><td>Free (needs Schwab account)</td></tr>
+            <tr><td>Best for</td><td>Fast native stock charts with Yahoo free data, thinkorswim streaming, keyboard-first, full CLI/agent skill</td><td>Crypto, forex, multi-device sync, Pine Script community indicators</td><td>Full trading terminal — order entry, options chains, studies</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omacharts</code></td><td>Browser / web app</td><td>Manual install, not packaged</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use omacharts if you want a fast native charting window that lives in your Omarchy theme and doubles as a CLI; use TradingView if you trade crypto/forex or need cloud sync everywhere; use thinkorswim desktop if you actually place orders.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Omacharts is a free alternative to TradingView's paid plans</h2>
+      <p><strong>Omacharts is a free alternative to TradingView's paid plans.</strong> What you give up, honestly: web/multi-device sync, crypto and forex charting, and the Pine Script community indicator library — omacharts charts equities via Yahoo/thinkorswim only, and its indicator set is a strong core list (SMA/EMA, VWAP, Bollinger, RSI, MACD, ATR, stochastic, volume profile), not thousands of community scripts. What you keep: unlimited charts and indicators, streaming data via your own Schwab account, drawings, chartbooks and watchlists, and a CLI/agent skill TradingView will never give you — free forever under MIT, no account needed.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from TradingView (~10 minutes)</h2>
+      <ol>
+        <li><strong>Export from TradingView:</strong> TradingView doesn't export watchlists as files directly — copy your ticker lists; strip exchange prefixes (<code>NASDAQ:</code> → plain tickers).</li>
+        <li><strong>Import into omacharts:</strong> <code>omacharts watchlist create Name &amp;&amp; omacharts watchlist add Name $(tr -d '\r"' &lt; export.txt | tr ',;' '\n\n' | grep -v '^[[:space:]]*#' | sed 's/.*://')</code> — the maintainer's own doc/cli.md gives exactly this pipeline; bad tickers are reported and skipped, not silently dropped.</li>
+        <li><strong>What doesn't transfer:</strong> Pine Script indicators, multi-timeframe alert scripts, and drawing annotations on specific bars — rebuild the indicators you rely on with omacharts' equivalents (RSI/MACD/Bollinger all present).</li>
+        <li><strong>Time estimate:</strong> ~10 minutes to move watchlists; budget an evening to re-create complex indicator stacks.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Omacharts package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omacharts.html">View Omacharts →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does omacharts work on Omarchy?</summary><p>It was built for it — Rust + GTK4/libadwaita, Omarchy theme-following indicator palettes, a first-run Omarchy bar plugin, and an <code>omarchy pkg add omacharts</code> install path from Omarchy's own repo. x86_64 and aarch64 both ship.</p></details>
+      <details><summary>Is omacharts free?</summary><p>Yes — MIT licensed, and the default Yahoo Finance feed needs no account, no key, no sign-in. thinkorswim streaming needs your own Charles Schwab account.</p></details>
+      <details><summary>Can I use it without opening the window?</summary><p>Yes — that's the point of the CLI. With the app closed, commands run headless against the stored database (works over ssh); with it open, they take effect in the live window. An exit code 6 means you aimed at the focused chart with no window open — name the chart explicitly instead.</p></details>
+      <details><summary>Does it place trades?</summary><p>No. The thinkorswim client in omacharts has no order-entry code — a test fails if one is ever routed — and it only ever sends chart and login requests to thinkorswim's own gateways. This is a charting app, not a trading terminal.</p></details>
+      <details><summary>Where does my thinkorswim session live?</summary><p><code>~/.config/omacharts/tos.env</code> (move it with <code>TOS_ENV_FILE</code>) plus a browser profile in <code>~/.config/omacharts/tos-browser/</code>. Sessions expire; when charts say so, re-run <code>omacharts provider login</code>.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/jorgemanrubia/omacharts" target="_blank" rel="noopener">omacharts GitHub README — features, install, data feeds, CLI, agent skill</a></li>
+        <li><a href="https://github.com/jorgemanrubia/omacharts/blob/main/doc/cli.md" target="_blank" rel="noopener">omacharts doc/cli.md — command surface, exit codes, worked examples, provider behavior</a></li>
+        <li><a href="https://github.com/jorgemanrubia/omacharts/issues/55" target="_blank" rel="noopener">omacharts issue #55 — fullscreen right-click on Omarchy, links to omacom/omarchy#14079 and #14162</a></li>
+        <li><a href="https://omarchyapps.com/apps/omacharts.html" target="_blank" rel="noopener">omarchyapps.com omacharts page — v0.1.13-1, <code>omarchy pkg add omacharts</code>, MIT, 2026-10-11</a></li>
+        <li><a href="https://raw.githubusercontent.com/omacom/omarchy-pkgs/master/pkgbuilds/omacharts/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs omacharts PKGBUILD — deps (gtk4, libadwaita), arches, binary path, desktop entry, completions, man page</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

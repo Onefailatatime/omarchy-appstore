@@ -1,0 +1,138 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add monologue` installs cleanly and `monologue` launches from the app launcher (package 0.3.1-1, ~149 KB download).
+- First launch: confirm camera + mic pickers appear, device IDs are remembered by device ID, and the mic meter shows live levels with peak hold.
+- Keyboard shortcuts on-machine: Space record/pause/resume, Enter or Ctrl+Enter stop-and-edit, Esc discard-and-restart, Q quit, S split at playhead, [ ] jump to pause/clip edge, Z zoom.
+- Theme sync: confirm the window wears the active Omarchy accent and repaints on theme switch; confirm `~/.local/state/omarchy/current/theme/colors.toml` is what it reads.
+- Working takes path: confirm `~/.local/share/omacom/monologue/recordings/` holds the in-progress take, and that starting a new take or quitting deletes it (prompt if unsaved).
+- Crash recovery: confirm a take interrupted <1 hour ago reopens in the editor; confirm older leftovers are deleted.
+- Output format: confirm saved file is H.264 MP4 + AAC, unedited saves are bit-identical copies, edited saves are CRF 18 re-encodes.
+- Save dialog: confirm it needs xdg-desktop-portal working; confirm saving into Monologue's own recordings folder is refused.
+- Known issues #3/#8/#9: check whether the fixes have landed in a release newer than 0.3.1; update the Common issues section accordingly.
+- Screenshots needed: record UI (camera picker, mic meter), filmstrip editor (split/undo/pause marks), save dialog.
+- Confirm whether the omarchyapps.com app page's "Tutorial" link (/monologue-on-omarchy.html) still points at a thin package-facts page — this guide is the real usage tutorial; decide whether the publisher should link this draft instead.
+
+SEO notes:
+- URL: /guides/monologue-on-omarchy (NOTE: the site already carries /monologue-on-omarchy.html — as of 2026-10-18 it's a thin package-facts page, not a usage tutorial. Publisher should supersede/replace it with this guide, not publish alongside it.)
+- Title tag: "How to Install & Use Monologue on Omarchy (2026)"
+- Meta description: "Install Monologue, the theme-synced webcam recorder for Omarchy, with one command. Space-to-record takes, built-in trim editor, MP4 output — plus real fixes for 4K encoding stops and the auto-deleting takes folder."
+- Target queries: "monologue omarchy webcam", "monologue webcam recorder linux", "monologue vs obs webcam", "webcam recorder omarchy", "monologue takes deleted". Interlink both ways with the monologue app page and the Omacut guide/app page.
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Monologue on Omarchy</h2>
+      <p>Monologue is a simple, theme-synced webcam recorder built for Omarchy — press Space to record a take, trim it in a built-in filmstrip editor, and save an MP4.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add monologue</code></pre>
+      <p>It takes ~2 minutes — the package (v0.3.1-1, ~149 KB) pulls Qt6 Multimedia and FFmpeg automatically. Launch it from the app launcher or run <code>monologue</code>.</p>
+      <p>Free forever (MIT). It's made by the Omarchy org itself (omacom), so it's the most Omarchy-native webcam app on the store — it reads your theme's accent live, like its sibling app Omacut.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and launch.</h3>
+      <p><code>omarchy pkg add monologue</code>, then find "Monologue" in the launcher (Super + Space) or run <code>monologue</code> in a terminal. On first launch it asks you to pick a camera and a microphone — it remembers them by device ID, so you only do this once, and missing inputs never silently switch on you. There's an explicit "No audio" option if you want a silent take. The mic meter shows live levels with peak hold and clipping indication, even while paused. (Confirm the first-launch flow on-machine — this is from the README, not a live test.)</p>
+      <h3>2. Record.</h3>
+      <p>Hit <strong>Space</strong> to start recording; Space again pauses or resumes the same take. Stop the take with <strong>Enter</strong> (or the shutter button), or hit <strong>Esc</strong> to discard it and start over. The round button next to the shutter pauses and resumes.</p>
+      <h3>3. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>Editing is built in.</strong> Stopping a take opens it in a filmstrip editor: trim either end, split clips (double-click or S), cut gaps, undo everything (Ctrl+Z / Ctrl+Shift+Z), with pause marks visible on the timeline. This replaced the old "Open in Omacut" flow in v0.3.0 — no second app needed.</li>
+        <li><strong>A take only exists while you're working on it.</strong> In-progress takes live in <code>~/.local/share/omacom/monologue/recordings/</code>, one folder per take. Starting a new recording or quitting <strong>deletes</strong> the take (it asks if unsaved). If the app crashes mid-take, next launch reopens it in the editor only if it was written less than an hour ago — older leftovers are deleted, and edits/pause marks are lost either way.</li>
+        <li><strong>Edited saves re-encode, unedited saves don't.</strong> Save an untouched take and you get a bit-identical copy of the original capture — no quality loss. Trim or split it and it re-encodes to H.264 CRF 18 with AAC audio via a hidden temp file that's atomically renamed into place, so the original is never touched.</li>
+      </ul>
+      <h3>4. Where its config lives.</h3>
+      <p>Settings (device IDs, last save dir) use Qt settings, normally <code>~/.config/omacom/monologue.conf</code>. Working takes: <code>~/.local/share/omacom/monologue/recordings/</code>. Theme is read live from <code>~/.local/state/omarchy/current/theme/colors.toml</code>. Note: you can't save into Monologue's own recordings folder — pick a real destination in the save dialog.</p>
+      <h3>5. Omarchy-specific note.</h3>
+      <p>The theme sync is the whole reason to use this over a generic app: accent colors follow theme symlink switches live, and controls/dialogs follow Hyprland's active corner rounding (including your personal overrides). It needs PipeWire-Pulse for mic capture (Omarchy ships it) and a working xdg-desktop-portal for the save dialog.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Sourced from the real GitHub issues on omacom/monologue (open issues, all reported against 0.3.0/0.3.1, none fixed in a release as of 2026-10-18) — nothing invented. Several are self-reported by the maintainer with "PR to follow" notes, so read them as the developer's own debugging journal.</p>
+      <h3>A 4K30 recording stops within seconds, even on fast hardware</h3>
+      <p>Known limitation in 0.3.1 (issue #8): Qt's recorder decodes MJPEG to RGB and encodes 10-bit 4:4:4 H.264 in software at roughly 17 fps — it can't sustain 4K30 and won't use hardware encoding (h264_vaapi). The proposed fix is decoding to 8-bit 4:2:0 on a thread pool and encoding via FFmpeg directly. There is no workaround in the app today, because there's no resolution picker.</p>
+      <p><strong>Fix:</strong> Record at a lower camera resolution if your camera lets you advertise one, or wait for the fix. Check whether a release newer than 0.3.1 has landed before publishing.</p>
+      <h3>Recording dies about a second in at 1080p on a slower machine</h3>
+      <p>Same family of problem (issue #3): MJPEG is encoded as 4:4:4 in software with no way to lower the resolution — the app always picks the camera's maximum advertised resolution (preferring 30 fps). On an i5-8279U with a NexiGo N60, recording failed ~1 s in. Issue #3 proposes adding a resolution dropdown; it doesn't exist yet.</p>
+      <p><strong>Fix:</strong> If this happens to you, the take stops with a "Video encoding cannot keep up" message rather than silently degrading — it's a hard stop, not corruption.</p>
+      <h3>A take silently recorded ~20 fps instead of 30 — about a third of the frames missing, no error shown</h3>
+      <p>Frame jitter near the frame grid (issue #9): when camera timing wobbles across slot boundaries, <code>Writer::videoAt</code>'s rounding silently dropped frames in ~1 of 4 takes. A fix with a regression test was proposed by the maintainer.</p>
+      <p><strong>Fix:</strong> If your footage looks subtly choppy with no warning, this was likely it — check the actual fps of the output file (<code>ffprobe</code>) rather than trusting the timer.</p>
+      <h3>I want a macOS version</h3>
+      <p>There isn't one and there won't be from this repo — it's Linux/Omarchy only (Qt6 + PipeWire-Pulse).</p>
+      <p><strong>Fix:</strong> One user in issue #1 mentioned building their own fork ("Mac-Monologue"), but its state is unverified, so don't point people at it as a solution.</p>
+      <h3>My old takes vanished from <code>~/.local/share/omacom/monologue/recordings/</code></h3>
+      <p>That's by design, not data loss. A take lives there only while you're working on it. Quit or start a new recording and it's gone (you're prompted if unsaved).</p>
+      <p><strong>Fix:</strong> Save first, to anywhere except that folder.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Omacut — Monologue's sibling from the same org; Monologue records and trims takes, Omacut does the serious editing. VokoscreenNG or OBS if you also need screen capture next to the webcam (Monologue is webcam-only).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Webcamoid for a full-featured webcam suite (effects, multi-camera, virtual camera) — but it won't sync your Omarchy theme and has no take editor. OBS Studio if you need scenes, streaming, and recording in one pro tool and don't mind the learning curve.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Monologue vs similar apps</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Monologue</th><th>OBS Studio</th><th>Webcamoid</th><th>GNOME Snapshot</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free, GPL</td><td>Free, GPL</td><td>Free, GPL</td></tr>
+            <tr><td>Best for</td><td>Quick webcam takes that match your theme, with a built-in trim editor</td><td>Pro recording + streaming with scenes, plugins, virtual camera</td><td>Full webcam suite: effects, filters, multi-camera, virtual camera</td><td>Minimal quick photo/video capture, no editor</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add monologue</code></td><td><code>omarchy pkg add obs-studio</code></td><td><code>omarchy pkg add webcamoid</code></td><td><code>omarchy pkg add snapshot</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use Monologue if you want Space-to-record webcam takes with a trimmer that matches your Omarchy theme; use OBS if you're streaming or need scenes; use Webcamoid if you want effects and virtual-camera output.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Monologue is a free, local alternative to Loom's recorder</h2>
+      <p><strong>Monologue is a free, local alternative to Loom's recorder.</strong> Monologue is itself free and open source, so there is no meaningful paid-to-free migration story here — Loom's recorder is priced per seat, and Monologue just doesn't upload anywhere. What you give up vs. Loom: cloud hosting, link-sharing, and viewer analytics. What you keep: the actual recording and editing, locally, free forever. No migration guide applies — just don't upload to Loom.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Monologue package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/monologue.html">View Monologue →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Monologue work on Omarchy?</summary><p>Yes — it was built for Omarchy by the Omarchy org (omacom). It syncs your live theme accent and follows Hyprland's corner rounding. Qt6-based, native Wayland.</p></details>
+      <details><summary>Is Monologue free?</summary><p>Completely — MIT license, no account, no paid tier. The omarchyapps.com app page's mention of "pricing" is template filler; the project has none.</p></details>
+      <details><summary>Where do my recordings go?</summary><p>In-progress takes live in <code>~/.local/share/omacom/monologue/recordings/</code> only while you work on them — save to a real folder before quitting or starting a new take, or the take is deleted. Saved videos are H.264 MP4 with AAC audio.</p></details>
+      <details><summary>Can I lower the recording resolution?</summary><p>Not yet — the app always picks the camera's maximum advertised resolution. Issue #3 proposes adding a resolution picker; until then, on slower machines or 4K cameras, recordings may stop with "Video encoding cannot keep up" (issues #3, #8).</p></details>
+      <details><summary>Does Monologue work on macOS or Windows?</summary><p>No — Linux/Omarchy only. Issue #1 exists; a community macOS fork was mentioned once but is unverified.</p></details>
+      <details><summary>Monologue vs OBS — which should I pick?</summary><p>Monologue if your whole job is "record a webcam take and trim it" — one window, Space to record, theme-synced. OBS if you need scenes, streaming, plugins, or screen + webcam compositing. Plenty of people keep both.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/omacom/monologue" target="_blank" rel="noopener">monologue GitHub repo — omacom/monologue (README: workflow, shortcuts, formats, theme sync, paths)</a></li>
+        <li><a href="https://github.com/omacom/monologue/issues/8" target="_blank" rel="noopener">Issue #8 — 4K30 recording stops: Qt encodes MJPEG as 10-bit 4:4:4 H.264 in software</a></li>
+        <li><a href="https://github.com/omacom/monologue/issues/3" target="_blank" rel="noopener">Issue #3 — recording fails at 1080p on slower machines; no resolution picker</a></li>
+        <li><a href="https://github.com/omacom/monologue/issues/9" target="_blank" rel="noopener">Issue #9 — takes silently lose ~a third of frames via frame-slot rounding</a></li>
+        <li><a href="https://github.com/omacom/monologue/issues/1" target="_blank" rel="noopener">Issue #1 — macOS port request</a></li>
+        <li><a href="https://omarchyapps.com/apps/monologue.html" target="_blank" rel="noopener">omarchyapps.com — monologue app page (v0.3.1-1, MIT, ~149 KB, deps, uninstall)</a></li>
+        <li><a href="https://omarchyapps.com/monologue-on-omarchy.html" target="_blank" rel="noopener">omarchyapps.com/monologue-on-omarchy.html — existing thin tutorial page (package facts only; checked 2026-10-18)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

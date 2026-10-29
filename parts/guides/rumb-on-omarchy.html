@@ -1,0 +1,140 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add rumb` installs from Omarchy's repo, and that the store listing slug is `rumb` (not rumb-bin).
+- `rumb` lands on PATH after install; `rumb --demo` launches the demo dashboard exactly like issue #8 describes.
+- Basic flow: `rumb` draws the eye ring, the pending-updates tiles, and the problems panels within a few seconds of the scan finishing.
+- Key bindings: left/right pick a subsystem part, Enter opens versions + updates-by-risk + problems; `j` opens journal lines for a problem; `3` switches the updates map between map/rows/hidden.
+- "Before you update" checklist: confirm it names the snapshot tool, flags reboot when the running kernel or nvidia driver is replaced, and compares free space with what the update needs.
+- Terminal check: run in Omarchy's default terminal and in kitty — confirm foot/kitty render the eye; note ghostty CPU cost; confirm Alacritty shows the explanatory note instead of the eye.
+- License: MIT (repo page). Free, no paid tier, no account.
+- Version at publish time: check the installed version (header should show `rumb 0.1.5 · machine · …` per the v0.1.5 release); guide drafted against v0.1.5.
+- Screenshots needed: the eye ring with risk-marked subsystem rows, pending-updates tiles, a subsystem detail window, the "before you update" checklist.
+
+SEO notes:
+- URL slug: rumb-on-omarchy (renders at /rumb-on-omarchy.html)
+- Title tag: "How to Install & Use rumb on Omarchy (2026)"
+- Meta description: "Install rumb on Omarchy with one command. Read-only terminal dashboard: pending updates ranked by risk, crash-to-package tracing, and a pre-update checklist. Setup, terminal notes, and real fixes."
+- Keywords: rumb omarchy, rumb arch dashboard, rumb --demo, checkupdates alternative, should i update arch now, arch update risk
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Update routine</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>rumb on Omarchy</h2>
+      <p>rumb is a read-only terminal dashboard for Arch and Omarchy that shows what your next update brings — ranked by risk — and what's already failing, tied to the package that owns it. It never asks for root.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add rumb</code></pre>
+      <p>Takes about 2 minutes (1.3 MB download, 2.8 MB installed). MIT-licensed open source, free forever — no paid tier, no account. Version 0.1.5 at guide time (October 2026). Project: <a href="https://github.com/HANCORE-linux/rumb" target="_blank" rel="noopener">HANCORE-linux/rumb</a> (created October 18, 2026 — brand new).</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. The mental model.</h3>
+      <p>rumb answers two questions before you ever run <code>omarchy update</code>: <em>what is this update going to touch, and how risky is it?</em> and <em>what's already broken on my machine?</em> The centerpiece is an "eye": a ring with every pending update placed by risk (high/medium/low) and by subsystem sector — kernel, graphics, compositor, toolkit, shell, base, apps. Around it sit tiles: pending updates by risk, problems per day, time since last upgrade, what the pending Omarchy update fixes (read from its release notes), and reclaimable disk space. Everything is read-only — it scans your system and the journal, then tells you. The fixing is still yours to do.</p>
+      <h3>2. Install and run it.</h3>
+      <pre><code class="language-bash">omarchy pkg add rumb   # install
+rumb                   # run the dashboard
+man rumb               # full manual</code></pre>
+      <p>Curious without running a scan? <code>rumb --demo</code> (called out by an early user in <a href="https://github.com/HANCORE-linux/rumb/issues/8" target="_blank" rel="noopener">issue #8</a>) launches the dashboard with sample data — the best way to learn the layout before pointing it at your real system.</p>
+      <h3>3. Learn the three navigations.</h3>
+      <p>Use the arrows to pick a subsystem part and press Enter — a detail window opens over the dashboard showing that part's versions, its pending updates broken down by risk, and its problems. On a pending update, Enter shows its facts beside a dependency graph: what it depends on and what requires it, plus the full risk reason ("why is this high-risk?"). On a crash, Enter shows when it last happened, the signal in plain words, and the functions it crashed in, with the crash site marked. And <code>j</code> on any problem pulls the journal lines for it, matched by program name as well as by name.</p>
+      <h3>4. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>Use it <em>before</em> updating.</strong> The dashboard is a pre-flight check, not a post-mortem. Its "before you update" checklist tells you which tool will take the snapshot, whether the update replaces your running kernel or the nvidia driver (i.e., you'll reboot), and whether you have enough free disk space. Read that panel, then run <code>omarchy update</code>.</li>
+        <li><strong>Your terminal decides what you see.</strong> rumb draws the eye, icons, and graphs as terminal <em>images</em>. foot and kitty render them properly; ghostty works but the author warns it spends a lot of CPU on the images (not recommended); Alacritty can't display images at all — the eye stays empty and (since v0.1.4) you get an explanatory note in its place. Run it in foot or kitty.</li>
+        <li><strong>It's read-only by design — that's the trust model.</strong> It only ever scans and reports; it never asks for root and never changes anything. The trade: when it tells you something is wrong, the fix is a separate step (<code>omarchy update</code>, a reinstall, a config edit). This also makes it safe to run over and over, in demo or on someone else's box.</li>
+      </ul>
+      <h3>5. Config location.</h3>
+      <p>No documented config file — behavior is driven by CLI flags and keys (documented in <code>man rumb</code>). Treat "settings persist" claims as unverified.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>I don't use Arch — will rumb work on NixOS / Debian / Fedora?</h3>
+      <p><strong>Fix:</strong> No. rumb reads Arch package data (pacman) — an <a href="https://github.com/HANCORE-linux/rumb/issues/8" target="_blank" rel="noopener">open issue (#8, Oct 22, 2026)</a> asks about NixOS support and the requester themselves notes "this program relies on Arch packages such as pacman." The author hasn't committed to other distros. On Omarchy (Arch-based) this is a non-issue; on anything else, rumb simply has no data to show.</p>
+      <h3>The eye and icons are blank — I'm on Alacritty</h3>
+      <p><strong>Fix:</strong> Documented limitation, not a bug: Alacritty can't display terminal images, so the eye and icons render empty. Since v0.1.4 the dashboard shows an explanatory note in place of the eye instead of just drawing nothing (<a href="https://github.com/HANCORE-linux/rumb/releases" target="_blank" rel="noopener">release notes</a>). Switch to foot or kitty for the full dashboard; everything text-based (tiles, lists, detail windows) still works anywhere.</p>
+      <h3>rumb eats CPU / memory in my terminal</h3>
+      <p><strong>Fix:</strong> Known upstream: ghostty spends a lot of CPU on rumb's per-frame images, and earlier versions grew memory ~15 MiB/s in ghostty. The author explicitly does not recommend ghostty. Recent releases fix the worst of it — pictures are now replaced in place so the terminal keeps one image per picture (ghostty memory stays flat, kitty needs about half the CPU) (<a href="https://github.com/HANCORE-linux/rumb/releases" target="_blank" rel="noopener">release notes</a>). Practical move: run rumb in foot or kitty.</p>
+      <h3>Some problems never show up in the dashboard</h3>
+      <p><strong>Fix:</strong> Fixed upstream in v0.1.4: the scan previously stalled or dropped problems when the journal contained lines without a program path (e.g., raw kernel messages). Those lines now also reach the live events (<a href="https://github.com/HANCORE-linux/rumb/releases" target="_blank" rel="noopener">release notes</a>). If you're on an older version, <code>omarchy update</code> pulls the fix.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>omarchy update</code> (rumb tells you what the update brings and whether it needs a reboot; the update does the work), <code>btop</code> (live resource graphs to complement rumb's update/problem view), and a timeshift/snapper-style snapshot setup (rumb's pre-update checklist names the snapshot tool — make sure it's actually configured).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>checkupdates</code> (pacman-contrib's own read-only pending-update list — plain text, zero dashboard, no risk ranking), <code>topgrade</code> (runs all your updaters including AUR — but it's interactive and <em>does</em> change your system, the opposite of rumb's read-only philosophy), or <code>octopi</code>/<code>pamac</code> (GUI package managers with update lists, but heavier and no risk ranking or crash analysis).</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: rumb vs checkupdates vs topgrade vs octopi/pamac</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>rumb</th><th>checkupdates (pacman-contrib)</th><th>topgrade</th><th>octopi / pamac</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Pre-update briefing: pending updates ranked by risk, problems tied to owning packages, all read-only</td><td>"What has updates?" as a plain terminal list — nothing more</td><td>Actually running every updater (pacman, AUR helpers, cargo, npm…) in one go</td><td>GUI package management with update browsing</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add rumb</code></td><td>Comes with pacman-contrib</td><td>Arch extra / AUR (not in the Omarchy store)</td><td>Arch extra / AUR (not in the Omarchy store)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you want a quick, safe "should I update right now and what's it going to touch?" glance before you update — especially the risk ranking and the crash-to-package tracing — rumb is the only tool that does exactly that, and being read-only makes it safe to run constantly. Pick <code>checkupdates</code> for a minimal list, topgrade when you want to <em>do</em> the updating, octopi/pamac if you want a GUI.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>rumb is free — the alternative to updating blind</h2>
+      <p><strong>There is no paid product rumb replaces</strong> — paid system-health dashboards are a server/SaaS category, not a desktop pre-update briefing. The honest pitch is narrower: <strong>the free alternative to updating blind.</strong> What you give up: nothing — a one-line <code>checkupdates</code> can't tell you which updates are risky, which need a reboot, or whether you're about to run out of disk space mid-update. What you keep: your update workflow exactly as it is; rumb just briefs you first.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to add rumb to your update routine (~5 minutes)</h2>
+      <ol>
+        <li><strong>Install it:</strong> <code>omarchy pkg add rumb</code> (1.3 MB download; 2.8 MB installed).</li>
+        <li><strong>Run the briefing:</strong> <code>rumb</code> — read the eye (pending updates by risk and subsystem sector), the pending-updates tiles, and the problems panels. Run <code>rumb --demo</code> first if you want to learn the layout on sample data.</li>
+        <li><strong>Read the "before you update" checklist:</strong> it names the snapshot tool, flags whether the update replaces your running kernel or nvidia driver (reboot), and compares free disk space against what the update needs.</li>
+        <li><strong>Run the update yourself:</strong> <code>omarchy update</code> — rumb is read-only and never updates for you.</li>
+        <li><strong>Re-run after:</strong> <code>rumb</code> again to confirm the tiles cleared and no new problems appeared.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the rumb package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/rumb.html">View rumb →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does rumb work on Omarchy?</summary><p>Yes — it's built for Arch and Omarchy (the Omarchy tile reads pending Omarchy updates from their release notes). Install with <code>omarchy pkg add rumb</code>. It's read-only and never asks for root.</p></details>
+      <details><summary>Is rumb free?</summary><p>Yes. MIT-licensed open source. No paid tier, no account, no telemetry mentioned.</p></details>
+      <details><summary>Can rumb install updates or fix problems for me?</summary><p>No — read-only by design. It shows you what the next update brings and what's already failing, tied to the package that owns it. You fix things with your normal tools (<code>omarchy update</code>, reinstalls, config edits).</p></details>
+      <details><summary>What terminal should I use with rumb?</summary><p>foot or kitty — rumb draws images for the eye and icons. ghostty works but uses a lot of CPU; Alacritty shows an explanatory note instead of the eye because it can't display images.</p></details>
+      <details><summary>Does rumb work on NixOS / non-Arch distros?</summary><p>No — it reads Arch package data via pacman. A <a href="https://github.com/HANCORE-linux/rumb/issues/8" target="_blank" rel="noopener">NixOS support request</a> is open (Oct 22, 2026) but the author hasn't committed to it.</p></details>
+      <details><summary>How do I explore it without scanning my system?</summary><p><code>rumb --demo</code> launches the full dashboard with sample data — safe to poke around and learn the keys (Enter for details, <code>j</code> for journal lines, <code>3</code> for the updates map).</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/HANCORE-linux/rumb" target="_blank" rel="noopener">HANCORE-linux/rumb — README (install, run, terminals, man page)</a></li>
+        <li><a href="https://github.com/HANCORE-linux/rumb/releases" target="_blank" rel="noopener">HANCORE-linux/rumb — releases (v0.1.4 and v0.1.5 notes: terminal pictures, journal fix, memory, demo-era features)</a></li>
+        <li><a href="https://github.com/HANCORE-linux/rumb/issues/8" target="_blank" rel="noopener">Issue #8 — NixOS support? (confirms rumb --demo, pacman dependency)</a></li>
+        <li><a href="https://www.omarchyarchive.com/" target="_blank" rel="noopener">@hancore_linux post via omarchyarchive.com — v0.1.4 announcement, dashboard panels</a></li>
+        <li><a href="https://omarchyapps.com/apps/rumb.html" target="_blank" rel="noopener">omarchyapps.com — rumb app page (version 0.1.5-1, 1.3 MB / 2.8 MB, MIT, install command)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

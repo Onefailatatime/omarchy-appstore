@@ -1,0 +1,127 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install command: confirm `omarchy pkg add qcom-firmware-extract` installs 1-5 and drops `/usr/bin/qcom-firmware-extract` (+ README at /usr/share or docs path).
+- Flags: confirm `--stage DIR`, `--install`, `--no-rebuild`, `-d <path>`, `--list-missing` all exist and behave as the README describes (`qcom-firmware-extract --help`).
+- Manifest: after a run, confirm `/var/lib/omarchy/qcom-firmware/manifest` records what was installed, from where, with checksums.
+- mkinitcpio hook: confirm `/etc/mkinitcpio.conf.d/qcom-firmware.conf` is written and the GPU zap shader lands in the initramfs; confirm the `limine-mkinitcpio-hook` optdepends matters.
+- Installed paths: confirm firmware lands in `/usr/lib/firmware/updates/` and `provided.d/<compatible>.list` exclusion works.
+- BitLocker case: confirm the tool refuses/errors clearly on a BitLocker-encrypted Windows partition (do NOT test by encrypting anything — document from the README only).
+- Installer integration: confirm the installer actually runs `--stage`/`--install` automatically on Snapdragon hardware (install/hardware/qualcomm/firmware.sh).
+- Non-Snapdragon machine: confirm the tool exits cleanly with no device tree.
+- Screenshots needed: terminal output of a run (redact nothing sensitive — but keep serials out), the manifest file, `dmesg` showing firmware loads.
+
+SEO notes:
+- URL: /guides/qcom-firmware-extract-snapdragon-omarchy
+- Title tag: "qcom-firmware-extract on Omarchy: Snapdragon Firmware from Windows (2026)"
+- Meta description: "qcom-firmware-extract copies vendor-signed Qualcomm firmware from your Windows install for Snapdragon X laptops on Omarchy. How it works, BitLocker gotchas, and when you don't need it."
+- Keywords: qcom-firmware-extract, snapdragon x elite linux firmware, snapdragon laptop arch linux firmware missing, qualcomm firmware windows dual boot linux
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>qcom-firmware-extract on Omarchy</h2>
+      <p>qcom-firmware-extract is a small GPL-licensed script (12 KB) that copies the vendor-signed Qualcomm firmware your Snapdragon laptop needs — GPU zap shader, audio/compute DSP images — out of your own Windows installation and into Linux’s firmware directory. It’s for Snapdragon X (Elite/Plus) laptops running Omarchy; everyone else can ignore it.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add qcom-firmware-extract</code></pre>
+      <p>On a running system, use it with <code>sudo qcom-firmware-extract</code> — it scans your internal disks for a Windows partition, copies only the firmware files your device tree says the kernel will ask for and that aren’t already in <code>/usr/lib/firmware</code>, installs them under <code>/usr/lib/firmware/updates/</code>, rebuilds the boot image, and tells you to reboot. Two hard requirements, straight from the package docs: your machine must have a Qualcomm device tree (a non-Snapdragon machine makes the tool exit immediately), and the Windows partition must <strong>not</strong> be BitLocker-encrypted — turn BitLocker off in Windows first, because the tool can only mount the NTFS partition read-only when it isn’t encrypted.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Know whether you need it.</h3>
+      <p>Run <code>sudo qcom-firmware-extract --list-missing</code> — it lists the firmware names your device tree wants that are missing under <code>/usr/lib/firmware</code>. Nothing missing (for example, because <code>linux-firmware</code> now ships your machine’s vendor directory — true for some ThinkPads) means the tool copies nothing and you’re done. No device tree at all means it exits at once. Most Omarchy users on Intel/AMD/Apple hardware will never need this package.</p>
+      <h3>2. Prepare the source.</h3>
+      <p>If you’re dual-booting: boot Windows once, turn off BitLocker (Settings → Privacy &amp; security → Device encryption), and shut down fully — no hibernation, no Fast Startup holding the NTFS partition dirty. If you already wiped Windows: get the <code>FileRepository</code> driver store from a Windows install of the <strong>same model</strong> (a friend’s identical laptop, a recovery image, a USB copy).</p>
+      <h3>3. Run it.</h3>
+      <pre><code class="language-bash">sudo qcom-firmware-extract              # scan internal disks, install what's missing, rebuild boot image
+sudo qcom-firmware-extract -d /mnt/usb/FileRepository   # use an external driver store instead</code></pre>
+      <p>Reboot afterwards. The GPU zap shader is added to the initramfs via <code>/etc/mkinitcpio.conf.d/qcom-firmware.conf</code> (the <code>limine-mkinitcpio-hook</code> optdepends handles rebuilding the boot image); the DSP images load from the root filesystem at boot.</p>
+      <h3>4. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>The package contains no firmware.</strong> It’s a copier, not a distributor — the files it copies never leave your machine and are never downloaded. That’s deliberate: these are vendor-signed blobs Qualcomm and the laptop vendors haven’t contributed to <code>linux-firmware</code>, and the tool is explicitly “a temporary measure until laptop vendors contribute complete firmware sets to linux-firmware.” When <code>linux-firmware</code> ships your machine’s vendor directory, the tool copies nothing — and when every supported machine is covered, the package gets dropped entirely.</li>
+        <li><strong>The device tree is the source of truth.</strong> The tool doesn’t guess: it reads the <code>firmware-name</code> properties from your running device tree, keeps the names that are missing, and finds each one by filename in <code>Windows/System32/DriverStore/FileRepository</code>. A DSP image the device tree calls <code>*_dtb.mbn</code> is also found under its Windows name <code>*_dtbs.elf</code>. When Windows carries several variants and <code>linux-firmware</code> has a companion image from the same device-tree node, the sibling image’s hash picks the compatible variant; ambiguous variants with no unique match are skipped, not guessed.</li>
+        <li><strong>Everything is recorded.</strong> What was installed, where it came from, and its checksum goes into <code>/var/lib/omarchy/qcom-firmware/manifest</code>. If you ever need to audit, roll back, or hand the machine to someone, that manifest is the paper trail. (Board packages can also exclude names that must not come from Windows via <code>/usr/share/qcom-firmware-extract/provided.d/&lt;compatible&gt;.list</code> — listed names are never searched, installed, or reported missing.)</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>All sourced from the package’s bundled README.package.md and the Ubuntu Concept Snapdragon discourse the tool derives from.</p>
+      <h3>The tool can’t read the Windows partition / finds nothing</h3>
+      <p><strong>Fix:</strong> The documented cause is BitLocker: “BitLocker volumes cannot be read; turn BitLocker off in Windows first.” Boot Windows, disable device encryption, and fully shut down (Fast Startup / hibernation also leaves the NTFS volume in a state Linux won’t mount cleanly). Then re-run.</p>
+      <h3>You already wiped Windows with a full-disk install and now firmware is missing</h3>
+      <p><strong>Fix:</strong> The installer only gets one chance — it runs <code>qcom-firmware-extract --stage DIR</code> “right after the disk is chosen, before anything is written” precisely because “a full-disk install destroys the Windows partition the files come from.” If you missed that window, the escape hatch is <code>sudo qcom-firmware-extract -d /path/to/FileRepository</code> pointed at a driver store from a Windows install of the <em>same model</em> (USB disk is fine). Same model matters: “the files are tied to the vendor’s signing keys.”</p>
+      <h3>Some firmware is still missing after a run, or a variant was “skipped”</h3>
+      <p><strong>Fix:</strong> Per the README, when Windows carries several variants of a file and there’s no companion image in <code>linux-firmware</code> to disambiguate by hash, the tool skips rather than installs the wrong signed blob. Check <code>--list-missing</code> to see what’s still absent, and check whether your board’s package handles that name itself (<code>provided.d/&lt;compatible&gt;.list</code>) — some boards process a vendor driver file or deliberately hold back an untested image. When in doubt, ask in the Snapdragon-on-Linux community with your exact model and the missing filename.</p>
+      <h3>On some machines (e.g., ThinkPad T14s) the tool copies nothing at all</h3>
+      <p><strong>Fix:</strong> That’s the retirement path working: “When linux-firmware ships a machine’s vendor directory, the tool copies nothing.” Per the Ubuntu Concept discourse, the T14s’s signed firmware landed in <code>linux-firmware</code>, so extraction became unnecessary there — but “the devices use signed blobs with keys that differ for each hardware,” so each model needs adding individually and “realistically not all laptops will ever be supported.” If <code>--list-missing</code> is empty, you don’t have a problem; you have a supported machine.</p>
+      <h3>After installing firmware, early boot display still misbehaves</h3>
+      <p><strong>Fix:</strong> The GPU zap shader must be in the initramfs, not just on the root filesystem — that’s what <code>/etc/mkinitcpio.conf.d/qcom-firmware.conf</code> is for, and the tool rebuilds the boot image itself. If you ran with <code>--no-rebuild</code> (as the installer does, building once afterwards) or interrupted it, make sure the <code>limine-mkinitcpio-hook</code> optdepends is installed and the boot image was actually rebuilt, then reboot. The DSP images, by contrast, load from the root filesystem and don’t need the initramfs.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>linux-firmware-qcom</code> (Arch’s packaged Qualcomm firmware — the tool complements it, and a machine it fully covers needs no extraction). The <code>limine-mkinitcpio-hook</code> optdepends (rebuilds the boot image after firmware lands). The manifest at <code>/var/lib/omarchy/qcom-firmware/manifest</code> — your audit trail.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Doing it by hand — the manifest and the README tell you exactly which filenames go to <code>/usr/lib/firmware/updates/</code> and which config the initramfs needs. But there’s no real alternative tool; the “alternative” is waiting for your vendor to upstream firmware to <code>linux-firmware</code>, at which point this package retires itself.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: getting Qualcomm firmware onto Linux</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>qcom-firmware-extract</th><th>linux-firmware-qcom</th><th>Manual copy</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, GPL-2.0+</td><td>Free, GPL-2.0+</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Snapdragon laptops whose vendor hasn’t upstreamed firmware; runs automatically in the Omarchy installer</td><td>Machines whose vendor firmware already landed upstream (e.g., ThinkPad T14s) — zero effort</td><td>Debugging a single missing file; you know the exact filename from <code>dmesg</code></td></tr>
+            <tr><td>How</td><td><code>omarchy pkg add qcom-firmware-extract</code> then <code>sudo qcom-firmware-extract</code></td><td><code>pacman -S linux-firmware-qcom</code> (or via the <code>linux-firmware</code> meta package)</td><td>Copy the signed file to <code>/usr/lib/firmware/updates/</code>, rebuild initramfs</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use qcom-firmware-extract if you’re on a Snapdragon X laptop and <code>--list-missing</code> shows gaps; use nothing at all if <code>linux-firmware</code> already covers your machine; go manual only when you’re debugging one specific file.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>A copier, not a distributor — and a deliberately temporary one</h2>
+      <p>The package contains no firmware at all: it copies vendor-signed blobs from a Windows install you already own on that same machine, and the files never leave your machine and are never downloaded. It’s an explicitly temporary measure until laptop vendors contribute complete firmware sets to <code>linux-firmware</code> — when your machine’s vendor directory ships upstream, the tool copies nothing, and when every supported machine is covered, the package retires itself. Everything it does is recorded in <code>/var/lib/omarchy/qcom-firmware/manifest</code>, the audit trail.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Qcom Firmware Extract package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/qcom-firmware-extract.html">View Qcom Firmware Extract →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does it download firmware from the internet?</summary><p>No. It copies from your own Windows installation on the same machine (or a driver store you provide). “The files it copies never leave the machine and are never downloaded.”</p></details>
+      <details><summary>Is this legal / safe?</summary><p>You’re copying vendor-signed firmware from a Windows license you already own on that machine, for use on that same machine. The package docs frame it as a temporary measure until vendors contribute complete firmware sets to <code>linux-firmware</code> — at which point the tool stands down.</p></details>
+      <details><summary>I don’t have a Snapdragon laptop. Do I need this?</summary><p>No. On a machine without a Qualcomm device tree the tool “exits at once.” It’s packaged in the Omarchy repos so the installer can use it on Snapdragon hardware; everyone else can ignore it.</p></details>
+      <details><summary>What about NVIDIA RTX Spark / MediaTek laptops?</summary><p>Different chips, different firmware — this tool is Qualcomm-specific. The RTX Spark and Snapdragon X <em>power profiles</em> are a separate thing (see the omarchy-power-profiles-daemon guide).</p></details>
+      <details><summary>I wiped Windows already. Am I stuck?</summary><p>Not necessarily: <code>sudo qcom-firmware-extract -d</code> accepts any driver store you can mount, including on USB — but it must be from the same laptop model, since the blobs are tied to the vendor’s signing keys.</p></details>
+      <details><summary>Will I need this forever?</summary><p>No — that’s the design. “When every supported machine is covered, drop the package and prune the <code>/usr/lib/firmware/updates</code> entries listed in the manifest.”</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/qcom-firmware-extract.html" target="_blank" rel="noopener">omarchyapps.com — qcom-firmware-extract package page (1-5, GPL-2.0-or-later, updated 2026-10-07, <code>omarchy pkg add qcom-firmware-extract</code>)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/blob/master/pkgbuilds/qcom-firmware-extract/README.package.md" target="_blank" rel="noopener">omarchy-pkgs PKGBUILD + README.package.md — qcom-firmware-extract (maintainer Jimmy Van Veen; derived from Canonical’s qcom-firmware-extract, GPL-2+; full operation, manifest, provided.d, BitLocker, retirement)</a></li>
+        <li><a href="https://discourse.ubuntu.com/t/ubuntu-concept-snapdragon-x-elite/48800?page=25" target="_blank" rel="noopener">Ubuntu Concept Snapdragon X Elite discourse — qcom-firmware-extract origins, linux-firmware coverage per model (T14s), signed-blob per-hardware notes</a></li>
+        <li><a href="https://wiki.archlinux.org/title/Firmware" target="_blank" rel="noopener">ArchWiki — Firmware (linux-firmware-qcom package)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

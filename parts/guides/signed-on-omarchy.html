@@ -1,0 +1,129 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: `omarchy pkg add signed` (app-store page, version 0.3.1-1). Confirm it pulls the package and its deps (poppler-qt6, qpdf, nss, noto-fonts, xdg-desktop-portal).
+- Binary name: README documents `signed open [pdf]` — confirm `signed` is the launched binary and that it appears in the launcher (Super + Space -> "signed").
+- Signature flow: scan/photo of a signature on white paper -> Paper threshold slider behavior (More vs Less) -> signature placed, moved, scaled; confirm the saved signature file appears in ~/.local/share/signed/signatures/.
+- Save signed copy: confirm Ctrl+S writes <name>-signed.pdf next to the original and the original is untouched; confirm placed items remain editable until close.
+- Digital seal: create a certificate for a signature, save a sealed copy, and open it in another PDF viewer (e.g. Chrome) to confirm it reports the signature/seal; confirm certs land in ~/.local/share/signed/certificates/.
+- CLI: `signed signatures`, `signed pages lease.pdf`, `signed text lease.pdf --page 4`, `signed sign lease.pdf out.pdf --items items.json` — confirm each works headless and exit codes (0/1) behave.
+- `signed skill install` — confirm it copies the skill to ~/.agents/skills/signed/ and links ~/.claude/skills/.
+- Limits: confirm a password-protected PDF refuses to open; confirm form fields do NOT get filled as fields; confirm no mouse-drawing signature tool exists.
+- Theme: confirm the interface follows the Omarchy theme's accent color.
+- Screenshots needed: main window with a signed lease, signature menu / add-signature dialog, CLI `signed text` output example.
+
+SEO notes:
+- URL: /guides/signed-on-omarchy
+- Title tag: "How to Sign PDFs on Omarchy with Signed (2026)"
+- Meta description: "Signed is Omacom's free PDF signing app for Omarchy: drop your signature, text, or today's date on any page, save a sealed copy, or sign headless from the CLI. Install with one command."
+- Keywords: signed omarchy, sign pdf linux, pdf signature linux free, signed app omarchy cli
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Signed on Omarchy</h2>
+      <p>Signed is a free (MIT), Omacom-built PDF signing app for Omarchy — open a PDF, drop your signature, text, or today’s date anywhere on a page, and save a signed copy, optionally sealed with a self-signed digital certificate.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add signed</code></pre>
+      <p>Takes under a minute — it’s a 207.6 KB download. Version 0.3.1-1, maintained by Omacom (the Omarchy team’s own org) since October 11, 2026. Launch it with <code>signed open</code> or <code>signed open lease.pdf</code>, or find it in the launcher. Modeled on the signing tools in Apple’s Preview, and nothing more: no PDF editing, no form filling, no bloat.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and open a PDF.</h3>
+      <p><code>omarchy pkg add signed</code>, then <code>signed open some.pdf</code> (Ctrl+O opens from inside the app). The interface follows your Omarchy theme’s accent color.</p>
+      <h3>2. Add your signature.</h3>
+      <p>Open the Signature menu and choose <strong>Add signature…</strong>, or just drop an image on the window. Use a scan or a well-lit photo of your signature on white paper — Signed removes the paper, keeps the ink (blue stays blue), and crops to it. If shadows sneak in, slide <strong>Paper threshold</strong> toward <em>More</em>; if faint strokes disappear, slide toward <em>Less</em>. PNGs that are already transparent are used as-is. Name it (“Alex Morgan”, “Initials”), and it’s saved to <code>~/.local/share/signed/signatures/</code> for reuse.</p>
+      <h3>3. Place things.</h3>
+      <p>Press <strong>S</strong> for your last-used signature, <strong>T</strong> for a text box, <strong>D</strong> for today’s date (in your locale’s format, editable as ordinary text). Drag to move, drag a corner to scale, double-click text to edit it again. Signatures and text remember the size you last gave them.</p>
+      <h3>4. Save a signed copy.</h3>
+      <p>Ctrl+S writes <code>&lt;name&gt;-signed.pdf</code> beside the original. The original is <strong>never</strong> changed — Signed refuses to save over it. The signed copy keeps the original pages exactly as they were (text stays selectable, nothing re-rendered) with your items laid on top. Placed items stay editable until you close the PDF, so you can fix a misplaced signature and save again.</p>
+      <h3>5. Seal it (optional).</h3>
+      <p>When adding a signature, turn on <strong>Digital seal</strong>: create a self-signed certificate for it (named after the signature, optional organization), reuse an existing one, or <strong>Import a .p12 file…</strong> from elsewhere. A sealed copy carries an invisible PKCS#7 signature over the whole document, the kind every PDF viewer understands, so any change made after you saved it shows up in the viewer. Honest caveat: these certs are self-signed, so the seal proves the file <em>wasn’t changed</em>, not <em>who</em> signed it — most viewers will report “unknown signer.” Certs live unencrypted in <code>~/.local/share/signed/certificates/</code>, so anyone on the machine can seal with them.</p>
+      <h3>6. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>It works from the command line, with no display.</strong> <code>signed signatures</code> lists saved signatures; <code>signed add-signature "Initials" photo.jpg</code> saves one; <code>signed pages lease.pdf</code> lists page sizes in points; <code>signed text lease.pdf --page 4</code> dumps each text box; <code>signed render lease.pdf --page 4 --grid -o p4.png</code> renders a page with a 50-point grid. The big one: <code>signed sign lease.pdf lease-signed.pdf --items items.json</code> places a signature by name, text, or today’s date at coordinates from the top-left — it validates every item first and reports all problems at once, never writing over the original. Add <code>--json</code> for structured output, exit 0 on success / 1 on failure. <code>signed help &lt;command&gt;</code> documents options; <code>signed help items</code> prints the whole items.json format.</li>
+        <li><strong>It teaches your agents.</strong> <code>signed skill install</code> copies a short Signed skill to <code>~/.agents/skills/signed/</code> (Codex) and links it into <code>~/.claude/skills/</code> (Claude Code), so a coding agent can sign PDFs for you headlessly. <code>signed skill</code> prints it instead.</li>
+        <li><strong>Hotkeys are the whole UI philosophy.</strong> S / Shift+S for signatures, T for text, D for date, arrows (Shift = 10 pt) to nudge, <code>[</code> / <code>]</code> to resize, Ctrl+D to duplicate, Ctrl+Z / Ctrl+Shift+Z for undo/redo, ? shows the hotkey list in-app. Letter keys do nothing while typing.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>No user-reported issues existed on the GitHub tracker as of 2026-10-18 (repo created 2026-10-11, 20 commits, 0 open / 0 closed issues). Everything below is from the README’s own documented limits and requirements — real constraints, just not user reports yet. None of these are claimed as reproduced.</p>
+      <h3>A password-protected PDF won’t open</h3>
+      <p><strong>Fix:</strong> This is a documented limit, not a bug: Signed can’t open encrypted PDFs. Decrypt it first (e.g. with <code>qpdf --decrypt</code>, which is already a Signed dependency: <code>qpdf --password=&lt;pw&gt; --decrypt locked.pdf open.pdf</code>) and sign the decrypted copy.</p>
+      <h3>You can’t fill in the PDF’s form fields</h3>
+      <p><strong>Fix:</strong> Also a documented limit: form fields are not filled as fields. Place text over them instead (T, click, type). The underlying PDF keeps its original form fields as-is — Signed lays text on top of the page.</p>
+      <h3>You want to draw your signature with the mouse</h3>
+      <p><strong>Fix:</strong> There is no mouse-drawing tool. Signatures come from images only (scan, photo, or transparent PNG). The README explicitly models this on Apple’s Preview and says “and nothing more.”</p>
+      <h3>The file picker doesn’t open, or opening a PDF fails</h3>
+      <p><strong>Fix:</strong> Signed’s requirements list includes <code>xdg-desktop-portal</code> and a portal backend for the file picker. Omarchy ships this, so it should work out of the box — but if you’ve removed portals, the picker is the thing that breaks. Reinstall via <code>omarchy pkg add xdg-desktop-portal</code> (verify on-machine). Not reported by any user; this is from the requirements section.</p>
+      <h3>A viewer says your sealed PDF’s signer is “unknown”</h3>
+      <p><strong>Fix:</strong> Expected: Signed’s certificates are self-signed. The seal proves the file is unchanged (PKCS#7 over the whole document), not who signed it — it is not a qualified electronic signature (QES). If you need legal-grade signatures, import a real <code>.p12</code> certificate via <strong>Import a .p12 file…</strong> instead.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Claws (<code>omarchy pkg add claws</code>) or your mail app for the signed contracts that leave by email; <code>qpdf</code> (already a dependency) for decrypting PDFs before signing; a scanning app on your phone for capturing the signature image.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Xournal++ (<code>omarchy pkg add xournalpp</code>) — annotates PDFs freehand but doesn’t do the PKCS#7 seal; or the Chrome PDF viewer, which signs nothing and just lets you fill forms.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: signed vs similar apps</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>signed</th><th>Xournal++</th><th>Master PDF Editor 5</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free, GPL</td><td>Free tier (watermarked) / paid</td></tr>
+            <tr><td>Best for</td><td>Fast PDF signing with a digital seal + a scriptable CLI, themed for Omarchy</td><td>Freehand PDF annotation and handwritten notes</td><td>Editing PDF text and forms, not just signing</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add signed</code></td><td><code>omarchy pkg add xournalpp</code></td><td>manual download</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Signed if you want the Apple-Preview-style signature workflow — drop, place, save, seal — plus a CLI that scripts and agents can use; pick Xournal++ if you mostly need to write on PDFs by hand.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Signed is free, MIT, and built by the Omarchy team itself</h2>
+      <p>No trial, no paid tier, no account — Signed is MIT-licensed and built by Omacom, the Omarchy team’s own org, and its interface follows your Omarchy theme’s accent color. Modeled on the signing tools in Apple’s Preview and nothing more: no PDF editing, no form filling, no bloat. And unlike the alternatives, it’s fully scriptable — a headless CLI (<code>signed sign lease.pdf lease-signed.pdf --items items.json</code>) and an installable agent skill mean your coding agents can sign PDFs for you.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Signed package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/signed.html">View Signed →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Signed free?</summary><p>Yes, MIT-licensed, built by Omacom (the Omarchy team’s org). No trial, no paid tier, no account.</p></details>
+      <details><summary>Does Signed work on Omarchy?</summary><p>It was built for it — the interface follows your theme’s accent color, and it’s packaged in the official Omarchy repo (<code>omarchy pkg add signed</code>, 0.3.1-1 as of 2026-10-18). Requirements: poppler-qt6, qpdf, nss, noto-fonts, xdg-desktop-portal — all handled by the package install.</p></details>
+      <details><summary>Does the digital seal prove my identity?</summary><p>No — and the README is explicit about it. The self-signed seal proves the file wasn’t changed after signing; it is not a qualified electronic signature and viewers will say the signer is unknown. You can import a real <code>.p12</code> certificate if you have one.</p></details>
+      <details><summary>Can I sign a PDF without opening the GUI?</summary><p>Yes: <code>signed sign lease.pdf lease-signed.pdf --items items.json</code>, with items like <code>{"signature": "Alex Morgan", "page": 4, "x": 76, "bottom": 198, "width": 150}</code>. Run <code>signed skill install</code> to teach your coding agents to do it.</p></details>
+      <details><summary>Why can’t it open my locked PDF?</summary><p>Password-protected PDFs are a documented limit. Decrypt first with <code>qpdf --decrypt</code> and sign the open copy.</p></details>
+      <details><summary>Where are my signatures stored?</summary><p><code>~/.local/share/signed/signatures/</code> (or under <code>$XDG_DATA_HOME</code> if set), as PNGs named after the signature. Certificates live in <code>~/.local/share/signed/certificates/</code>, unencrypted — anyone on the machine can seal with them.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/signed.html" target="_blank" rel="noopener">omarchyapps.com/apps/signed.html — app page: one-liner, install command, version 0.3.1-1, MIT, synced 2026-10-18</a></li>
+        <li><a href="https://github.com/omacom/signed" target="_blank" rel="noopener">omacom/signed GitHub README — signing flow, signatures, digital seal, CLI reference, hotkeys, limits, requirements (repo created 2026-10-11; 0 issues open/closed as of 2026-10-18)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/signed" target="_blank" rel="noopener">omarchy-pkgs signed PKGBUILD — official Omarchy packaging</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

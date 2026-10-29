@@ -1,0 +1,139 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add wechat-bin` (package slug `wechat-bin`) — verify it resolves in the store index
+- First launch: does the login QR code render, and does scanning from the phone app complete login?
+- Input method: confirm the XMODIFIERS / GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx env-var workaround actually fixes Chinese input on Omarchy (per ArchWiki and duanluan's notes)
+- HiDPI: confirm whether the app scales on HiDPI and whether QT_SCALE_FACTOR helps
+- Tray behavior on Hyprland: does the Qt client show a tray icon / minimize-to-tray correctly on stock Omarchy? (wechat-xwayland exists as a workaround — its exact failure mode is unverified)
+- Feature check: do Mini Programs, Moments, and voice/video calls work in the 4.1.13.x Linux build?
+- Comparison: confirm the community `wechat` AUR variant's sandboxing/HiDPI fixes are as described (not in Omarchy store)
+- License: proprietary freeware (LicenseRef-WeChat). Free, no paid tier
+- Version at publish time: check installed version and note it; guide drafted against 4.1.13.26-1
+- Screenshots needed: QR-code login screen, main chat window on Omarchy theme, Settings panels
+
+SEO notes:
+- URL: /guides/wechat-bin-on-omarchy
+- Title tag: "How to Install & Use WeChat on Omarchy Linux (2026)"
+- Meta description: "Install Tencent's official WeChat Linux client on Omarchy with one command. QR-code login, input-method and HiDPI fixes, real Wayland issues. Setup, FAQ, and alternatives."
+- Keywords: wechat linux install, wechat-bin arch, wechat omarchy, wechat linux chinese input, wechat linux wayland tray
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>wechat-bin on Omarchy</h2>
+      <p>wechat-bin is Tencent's official native Linux WeChat client (Qt-based "xWeChat") for Omarchy — chat, Moments, Mini Programs, and voice/video calls in one app, with QR-code login from your phone.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add wechat-bin</code></pre>
+      <p>Takes ~10 minutes (331.8 MB download / 790.1 MB installed).</p>
+      <p>Free proprietary app — no paid tier. Note the binary is big: it installs at 790 MB.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. First launch = QR-code login.</h3>
+      <p>Open WeChat from the launcher. What you see: a large QR code. You <strong>cannot</strong> log in with a username/password — open the WeChat app on your phone, tap the + in the top right, tap "Scan", scan the code, and confirm on the phone. That's the only login path for every desktop/web WeChat client. After that, your session persists between launches.</p>
+      <h3>2. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>It's a real native client, not a web wrapper.</strong> The Qt-based official build supports Mini Programs, Moments, and voice/video calls per the ArchWiki — substantially more than WeChat Web (web.wechat.com), which only does messaging + file transfer. If someone tells you "just use the web version," the things you'd lose are calls, Moments, and Mini Programs.</li>
+        <li><strong>Fix input method before you type a word.</strong> The ArchWiki states plainly: the XMODIFIERS environment variable is required for this package to use input method. On Omarchy with fcitx5, if Chinese input doesn't work, add to the app's launcher entry:
+      <pre><code class="language-bash">env GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx XMODIFIERS=@im=fcitx wechat-bin</code></pre>
+      (A real user hit exactly this after switching to Wayland and fixed it with the env vars — <a href="https://github.com/duanluan/linux-notes/blob/HEAD/docs/notes/questions.md" target="_blank" rel="noopener">duanluan's notes</a>.)
+        </li>
+        <li><strong>Check scaling on HiDPI.</strong> The same user's notes record that WeChat "does not scale correctly" — the fix was <code>QT_SCALE_FACTOR=1.5</code> in the launcher entry. Tune the number to your display.</li>
+      </ul>
+      <h3>3. Where its config lives.</h3>
+      <p>User data lives under <code>~/.config/wechat</code> or <code>~/.WeChat</code> depending on build — verify the actual path during the on-machine pass before publishing. (Marked unverified.)</p>
+      <h3>4. Omarchy-specific note.</h3>
+      <p>The stock <code>wechat-bin</code> package is the unmodified official binary. A community AUR package named <code>wechat</code> wraps the same binary with sandboxing plus input-method, HiDPI, background-portal, and hybrid-GPU workarounds — that's an AUR-only alternative, not in the Omarchy store. Also relevant: <code>wechat-xwayland</code> exists as an AUR workaround that "launches wechat-bin through Qt XWayland with a KDE activation command" — it implies the Qt-native Wayland mode has tray/activation quirks on some setups; the specific failure mode is unverified, so test tray behavior on Omarchy directly.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>All items below are from the ArchWiki WeChat page, GitHub issue threads, or real user notes — none are invented. Unverified items are marked as such.</p>
+      <h3>Can't input Chinese — keystrokes go nowhere in the chat box (especially after switching to Wayland).</h3>
+      <p>This is the best-documented WeChat-on-Linux issue. Per the ArchWiki, the XMODIFIERS environment variable is required for input method support in this package.</p>
+      <p><strong>Fix:</strong> Set <code>GTK_IM_MODULE=fcitx</code>, <code>QT_IM_MODULE=fcitx</code>, and <code>XMODIFIERS=@im=fcitx</code> (adjust for ibus) in the launcher entry or the environment you launch it from. (<a href="https://wiki.archlinux.org/title/WeChat" target="_blank" rel="noopener">ArchWiki: WeChat</a>, <a href="https://github.com/duanluan/linux-notes/blob/HEAD/docs/notes/questions.md" target="_blank" rel="noopener">duanluan/linux-notes</a>)</p>
+      <h3>UI is tiny or blurry on a HiDPI display.</h3>
+      <p>Real user report: WeChat "does not scale correctly."</p>
+      <p><strong>Fix:</strong> Set <code>QT_SCALE_FACTOR=1.5</code> (or your preferred factor) on the launch environment. The community <code>wechat</code> AUR variant ships HiDPI fixes out of the box if the raw package fights you. (<a href="https://github.com/duanluan/linux-notes/blob/HEAD/docs/notes/questions.md" target="_blank" rel="noopener">duanluan/linux-notes</a>)</p>
+      <h3>Icon elements / UI parts don't display.</h3>
+      <p>A real reported symptom in the wechat-universal-flatpak tracker (issue #73), where users hoped a v32 build would resolve "icon elements not displaying." This is version-dependent rendering flakiness, and it's unverified on the exact 4.1.13.26-1 Omarchy package.</p>
+      <p><strong>Fix:</strong> If you hit blank icons, try a newer package version first. (<a href="https://github.com/web1n/wechat-universal-flatpak/issues/73" target="_blank" rel="noopener">web1n/wechat-universal-flatpak#73</a>)</p>
+      <h3>Minimize-to-tray / background behavior is wrong on Wayland/Hyprland.</h3>
+      <p>Unverified failure mode — but the signal is real: AUR's <code>wechat-xwayland</code> package exists specifically to launch wechat-bin through Qt XWayland, and the ArchWiki notes "background portal" fixes in the sandbox variant.</p>
+      <p><strong>Fix:</strong> If tray misbehaves on Omarchy, test the XWayland launch path during verification. (<a href="https://aur.archlinux.org/packages/wechat-xwayland" target="_blank" rel="noopener">AUR: wechat-xwayland</a>, <a href="https://wiki.archlinux.org/title/WeChat" target="_blank" rel="noopener">ArchWiki: WeChat</a>)</p>
+      <h3>Considering the Windows client under Wine instead for feature parity.</h3>
+      <p>Per the ArchWiki, the Wine route is worse: "all the Mini Program function of Wine-based WeChat are not available, and pictures larger than a certain size cannot be sent."</p>
+      <p><strong>Fix:</strong> Stick with the native Linux client. (<a href="https://wiki.archlinux.org/title/WeChat" target="_blank" rel="noopener">ArchWiki: WeChat</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>fcitx5 (get input method right once and every Chinese app benefits)</li>
+        <li>Qt theming (Kvantum/Qt settings to match the Omarchy look)</li>
+        <li>the <code>wechat-xwayland</code> AUR workaround if the native Wayland tray path misbehaves</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>WeChat Web (web.wechat.com) — zero install, QR login, but messaging + file transfer only (no Moments, no calls)</li>
+        <li>the community <code>wechat</code> AUR variant (same official binary + sandboxing and input/HiDPI/GPU workarounds)</li>
+        <li>Windows WeChat under Wine (not recommended — loses Mini Programs and large image sends)</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: wechat-bin vs similar apps</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr></thead>
+          <tbody>
+            <tr><td><strong>wechat-bin</strong></td><td>Free (proprietary)</td><td>The full WeChat experience on Linux: chat, calls, Moments, Mini Programs</td><td><code>omarchy pkg add wechat-bin</code></td></tr>
+            <tr><td><strong>WeChat Web</strong></td><td>Free</td><td>Occasional messaging from a browser with zero install</td><td>nothing — web.wechat.com</td></tr>
+            <tr><td><strong>community <code>wechat</code> (AUR)</strong></td><td>Free</td><td>Same official binary + sandboxing, input-method, HiDPI fixes</td><td>AUR (not in Omarchy store)</td></tr>
+            <tr><td><strong>Windows WeChat via Wine</strong></td><td>Free</td><td>Only if you need a Windows-only quirk; loses Mini Programs + big images</td><td>ArchWiki Wine route (not recommended)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you need WeChat on Omarchy with calls and Mini Programs, wechat-bin is the only serious option — plan 10 minutes for the input-method and scaling setup, and use WeChat Web for the casual second machine.</p>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the wechat-bin package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/wechat-bin.html">View wechat-bin →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does wechat-bin work on Omarchy?</summary><p>Yes — it's Tencent's official Qt-based Linux client, packaged for the Omarchy store. Install with <code>omarchy pkg add wechat-bin</code>. The package is large (790 MB installed).</p></details>
+      <details><summary>Is wechat-bin free?</summary><p>Yes. Proprietary freeware under Tencent's WeChat license (LicenseRef-WeChat). No paid tier.</p></details>
+      <details><summary>How do I log in?</summary><p>QR code only. Open the app, scan the code with the WeChat app on your phone, confirm on the phone. There is no username/password login for desktop WeChat.</p></details>
+      <details><summary>Why can't I type Chinese in WeChat?</summary><p>The known input-method gap: the ArchWiki says the XMODIFIERS environment variable is required for this package to use input method. Launch with <code>GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx XMODIFIERS=@im=fcitx</code> (adapt for ibus).</p></details>
+      <details><summary>Does it support voice/video calls and Mini Programs?</summary><p>Per the ArchWiki, the official Linux client supports Mini Programs, Moments, and VoIP — unlike the Wine-based Windows client, where Mini Programs don't work at all. (Verify on-machine during the checklist pass.)</p></details>
+      <details><summary>How is this different from WeChat Web?</summary><p>WeChat Web is messaging + file transfer only. The native client adds voice/video calls, Moments, and Mini Programs — at the cost of a 790 MB install.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/wechat-bin.html" target="_blank" rel="noopener">omarchyapps.com/apps/wechat-bin.html — store listing (version 4.1.13.26-1, 331.8 MB / 790.1 MB, LicenseRef-WeChat, install command)</a></li>
+        <li><a href="https://wiki.archlinux.org/title/WeChat" target="_blank" rel="noopener">ArchWiki: WeChat (input method, sandbox variant fixes, Wine limitations)</a></li>
+        <li><a href="https://linux.weixin.qq.com" target="_blank" rel="noopener">Tencent official Linux client</a></li>
+        <li><a href="https://github.com/duanluan/linux-notes/blob/HEAD/docs/notes/questions.md" target="_blank" rel="noopener">duanluan/linux-notes — real-user Wayland/HiDPI/input fixes</a></li>
+        <li><a href="https://github.com/web1n/wechat-universal-flatpak/issues/73" target="_blank" rel="noopener">web1n/wechat-universal-flatpak#73 — icon elements not displaying</a></li>
+        <li><a href="https://aur.archlinux.org/packages/wechat-xwayland" target="_blank" rel="noopener">AUR: wechat-xwayland — XWayland workaround package</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/WeChat" target="_blank" rel="noopener">Wikipedia: WeChat — QR login, web client limits</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

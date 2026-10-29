@@ -1,0 +1,134 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add hype` installs cleanly and `hype` launches from the app launcher (package 0.6.0-1, ~327 KB).
+- First launch: confirm new-deck (Ctrl+N) flow, visual editor layout (sidebar + live preview + per-slide editor), Overview mode (Ctrl+M), Markdown mode (Ctrl+.`).
+- Shortcuts on-machine: Ctrl+N/O/S/E/Shift+E/Space/F5/Shift+F5, F5 present-from-slide.
+- Headless CLI: confirm `hype new`, `hype check`, `hype slides`, `hype render`, `hype export`, `hype themes` work without a display; confirm `hype skill install` writes to ~/.agents/skills/hype/ and ~/.claude/skills/.
+- Styling: confirm installed Omarchy themes (e.g. tokyo-night) appear as deck themes and are saved in front matter; confirm inline svg blocks follow theme colors and stay vector in PDF.
+- Media: confirm pasted images land in images/ auto-converted to PNG/WebP at 4K; confirm one-image-per-slide rule; confirm logo placement syntax ![position=bottom-right size=10%].
+- Export: confirm PDF keeps vector text; confirm PPTX export produces 4K JPEGs per slide with videos embedded; note README caveat that video autoplay/loop in Microsoft PowerPoint is unverified.
+- Backups: confirm .hype-backups/ beside the deck, recovery snapshots in ~/.local/state/hype/recovery/, and the "Version history" file menu.
+- Known issues #1/#10/#18/#21: all closed Oct 14, 2026; confirm the fixes are present in the shipped 0.6.0 build (edge-vs-stable install question in #1 resolved same-day).
+- Screenshots needed: visual editor with live preview, Overview grid, Markdown mode, presenter view, one export dialog.
+
+SEO notes:
+- URL: /guides/hype-on-omarchy
+- Title tag: "How to Install & Use Hype on Omarchy (2026)"
+- Meta description: "Install Hype, the Markdown presentation app for Omarchy, with one command. Visual slide editor, Omarchy-theme styling, one-key PDF/PowerPoint export, and a headless CLI for AI-built decks."
+- Target queries: "hype omarchy presentations", "markdown presentations linux", "hype vs marp", "markdown to powerpoint linux", "hype omacom". Interlink both ways with the hype app page.
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Hype on Omarchy</h2>
+      <p>Hype is a native Omarchy desktop app for making presentations from plain Markdown files — a visual slide editor, Overview grid, one-command PDF/PowerPoint export, and a headless CLI your coding agent can drive.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add hype</code></pre>
+      <p>It takes ~2 minutes (v0.6.0-1, ~327 KB). Open <strong>Hype</strong> from the app launcher or run <code>hype</code> in a terminal.</p>
+      <p>Free forever (MIT). It's built by the Omarchy org (omacom) in C++/Qt, so it feels like a native citizen — your Omarchy themes double as presentation themes.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and launch.</h3>
+      <p><code>omarchy pkg add hype</code>, then Super + Space, type "hype", or run <code>hype</code>. Ctrl+N starts a new deck; the app reopens your last presentation on launch. (Confirm the first-launch flow on-machine — this is from the README, not a live test.)</p>
+      <h3>2. First deck.</h3>
+      <p>A presentation is <strong>just a Markdown file</strong> plus a media folder. The app gives you three views: <strong>Visual</strong> (click a slide in the sidebar, edit its Markdown under a live preview), <strong>Overview</strong> (Ctrl+M — a grid of all slides for reordering, duplicating, deleting), and <strong>Markdown mode</strong> (Ctrl+.` — edit the whole deck's raw source). Autosave kicks in after a 1 s typing pause, so Ctrl+S is almost ceremonial. Slides are separated by <code>---</code> with blank lines on either side; title, theme, and font live in the file's front matter.</p>
+      <h3>3. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>Themes are your Omarchy themes.</strong> Styling comes from installed Omarchy themes (e.g. <code>tokyo-night</code>), saved in the file's front matter — so your deck wears the same palette as your desktop, and the file stays portable (the other computer just needs the same font installed). This is Hype's party trick; no other Markdown-deck tool styles from your window manager theme.</li>
+        <li><strong>Media has its own dialect.</strong> One image or video per slide, referenced by filename only — Hype finds the directory. Pasted images auto-convert to lossless PNG/WebP sized for 4K with background compression and a progress bar. Layout comes from image alt text: <code>![fit](photo.jpg)</code> vs <code>![span](photo.jpg)</code>, <code>![fit background=blur](diagram.png)</code>, <code>![position=bottom-right size=10%](logo.svg)</code> for corner logos (any of nine positions, 1–100% size, not for videos). <code>svg</code> fenced code blocks render as inline vector drawings that follow theme colors (<code>var(--accent)</code>) and stay vector in PDF. Note the quirk: Hype reads <code>*asterisks*</code> as <strong>italic</strong> but <code>_underscores_</code> as <strong>underline</strong>, not italic.</li>
+        <li><strong>Export is one keystroke.</strong> Ctrl+E exports PDF (vector text, images as high-quality JPEG sized to visible area at 4K), Ctrl+Shift+E exports PowerPoint (.pptx — slides become 4K JPEGs, pixel-perfect but not editable; videos embed, GIF/WebP auto-convert to embedded MP4). And the CLI can do it headless: <code>hype export talk/presentation.md talk.pdf</code>.</li>
+      </ul>
+      <h3>4. Presenting.</h3>
+      <p>Ctrl+Space or F5 presents from the selected slide; Shift+F5 starts from the beginning. With two displays, slides go to the external display and a <strong>Presenter View</strong> opens on your laptop — current/next slide, counter, and speaker notes pulled from <code>&lt;!-- comments --&gt;</code>.</p>
+      <h3>5. The agent angle.</h3>
+      <p>Hype ships <code>hype help format</code> — the full slide format spec, machine-readable — plus <code>hype skill install</code>, which installs a Hype skill into <code>~/.agents/skills/hype/</code> (Codex) and <code>~/.claude/skills/</code> (Claude Code). Every CLI command takes <code>--json</code>. That means your coding agent can build you a deck: <code>hype new talk/presentation.md --title "My talk" --theme tokyo-night</code>, then <code>hype render talk/presentation.md --slide 3 -o slide.png</code> to preview.</p>
+      <h3>6. Where its config lives.</h3>
+      <p>The deck itself is the config: <code>presentation.md</code> plus <code>images/</code> and <code>videos/</code> beside it, theme/font in front matter. Backups: every saved version lands in <code>.hype-backups/</code> next to the deck (restore by copying a <code>.bak</code> over the <code>.md</code>). Crash-recovery snapshots: <code>~/.local/state/hype/recovery/</code>, with a "Version history" menu in the app. No <code>~/.config/hype</code> path is documented — the README never mentions one (confirm on-machine).</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Sourced from the real GitHub issues on omacom/hype — all four were closed on Oct 14, 2026, and there are <strong>zero open issues</strong> as of 2026-10-18. This is a young (~1 month) but actively maintained project; fixes below landed in the 0.6.x line.</p>
+      <h3><code>omarchy pkg add hype</code> fails with "target not found"</h3>
+      <p>The package hit the edge channel first and wasn't on stable on day one (issue #1, opened Sep 20, 2026 — closed same day when the reporter realized the mistake). This is the recurring new-package pattern on the store: edge first, stable on the release train.</p>
+      <p><strong>Fix:</strong> If you see it, your channel just hasn't caught up — check the app page or wait for the next train.</p>
+      <h3>New decks keep the "Untitled" placeholder title instead of the file name</h3>
+      <p>Fixed in 0.6.x (issue #10): the new-deck template wrote <code>title: Untitled</code> into front matter in two places in <code>src/deck.cpp</code>, shadowing the filename fallback, while the CLI's <code>hype new</code> already used the filename. The latest release notes say new presentations take their title from the saved filename unless you set one explicitly.</p>
+      <p><strong>Fix:</strong> If you still see it, update.</p>
+      <h3>SVGs that declare a small size render blurry, and show up as low-resolution bitmaps in PDF</h3>
+      <p>Fixed in 0.6.x (issue #18): the image loader treated an SVG's declared size as its "original size" and never enlarged it, so a 400×240 chart was rasterized at 400×240 then stretched (no selectable text in PDF). Now SVG files stay sharp at any size and remain vector in PDF, and inline <code>svg</code> code blocks stay vector too.</p>
+      <p><strong>Fix:</strong> Update if your SVG exports look soft.</p>
+      <h3>How do I put a logo in the corner of a slide?</h3>
+      <p>Added in 0.6.x (issue #21): <code>![position=bottom-right size=10%](logo.svg)</code> — any of nine positions (top-left through bottom-right), size 1–100%, default 10%. Works for still and animated images, not videos. Per-slide placement; a global "logo on every slide from front matter" is a separate, still-unbuilt feature.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Monologue (<code>omarchy pkg add monologue</code>) — record your talk-through as webcam takes, trim them, and play the video under your deck. Any coding agent with the Hype skill installed — Claude Code generates decks while you do other work.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Marp (marp.app) if you want the Markdown-deck ecosystem (CLI + VS Code extension, CSS themes, huge community) but can live without a visual editor. Slidev if you want a dev-framework deck with animations and Vue components. reveal.js if you want maximum control and write HTML yourself.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Hype vs similar apps</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Hype</th><th>Marp</th><th>Slidev</th><th>Deckset</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free, MIT</td><td>Free, MIT</td><td>~$30, paid</td></tr>
+            <tr><td>Best for</td><td>Markdown decks with a real visual editor, Omarchy-theme styling, one-key PPTX export</td><td>Markdown decks in your own editor; huge ecosystem, CSS themes, no GUI editor</td><td>Developer decks with animations, code highlighting, live components</td><td>"Write Markdown, get beautiful slides" on a Mac — closest in spirit, Apple-only</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add hype</code></td><td>npm/standalone</td><td>npm</td><td>Mac only</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use Hype if you live on Omarchy and want a native visual slide editor with one-key PowerPoint export; use Marp if you want the biggest Markdown-deck ecosystem and edit in your own tools; use Deckset only if you're on a Mac.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Hype is a free alternative to Deckset (~$30, Mac-only)</h2>
+      <p><strong>Hype is a free alternative to Deckset (~$30, Mac-only).</strong> What you give up, honestly: the Mac-native ecosystem, and a mature visual editor that Deckset users know by heart. What you keep: write Markdown, get beautiful slides — plus things Deckset doesn't have: a headless CLI your AI agent can drive, presenter view, and themes that follow your desktop. Since Deckset is Mac-only anyway, the honest framing is less "switch" and more "the Omarchy-native answer to the same idea." No migration guide applies — but if you're porting a Marp deck, the <code>---</code> separators carry over; you'll need to adapt Marp's YAML directives and theme CSS to Hype's front matter + alt-text dialect.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Hype package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/hype.html">View Hype →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Hype work on Omarchy?</summary><p>Yes — it was built for Omarchy by the Omarchy org (omacom). Native Qt6 app, C++/Qt, and your installed Omarchy themes are its presentation themes.</p></details>
+      <details><summary>Is Hype free?</summary><p>Completely — MIT license, no account, no paid tier.</p></details>
+      <details><summary>What format does Hype save in?</summary><p>Plain Markdown (slides separated by <code>---</code>) plus <code>images/</code> and <code>videos/</code> folders beside the file. Theme and font live in the front matter. Backups in <code>.hype-backups/</code>; crash snapshots in <code>~/.local/state/hype/recovery/</code>.</p></details>
+      <details><summary>Can I export to PowerPoint or PDF?</summary><p>Yes, both built in: Ctrl+E for PDF (vector text), Ctrl+Shift+E for PowerPoint. PPTX slides are 4K JPEGs — pixel-perfect but not editable; videos embed. Per the README, video autoplay/loop behavior inside Microsoft PowerPoint is unverified.</p></details>
+      <details><summary>Can I automate or script decks?</summary><p>Yes — the CLI needs no display: <code>hype new</code>, <code>check</code>, <code>slides</code>, <code>render</code>, <code>export</code>, <code>themes</code>, all with <code>--json</code>, and <code>hype skill install</code> teaches Claude Code / Codex the format.</p></details>
+      <details><summary>Hype vs Marp — which should I pick?</summary><p>Hype if you want a visual slide editor and Omarchy-native theming. Marp if you want the biggest ecosystem and you're happy editing Markdown in VS Code. The <code>---</code> separators are the same, so switching is mostly adapting directives and themes.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/omacom/hype" target="_blank" rel="noopener">hype GitHub repo — omacom/hype (README: views, shortcuts, media dialect, CLI, exports, recovery)</a></li>
+        <li><a href="https://github.com/omacom/hype/issues/1" target="_blank" rel="noopener">Issue #1 — "target not found" (edge vs stable), closed Sep 20, 2026</a></li>
+        <li><a href="https://github.com/omacom/hype/issues/10" target="_blank" rel="noopener">Issue #10 — new decks kept "Untitled" placeholder title</a></li>
+        <li><a href="https://github.com/omacom/hype/issues/18" target="_blank" rel="noopener">Issue #18 — small-size SVGs rendered blurry / low-res in PDF</a></li>
+        <li><a href="https://github.com/omacom/hype/issues/21" target="_blank" rel="noopener">Issue #21 — logo placement feature request, shipped as 9-position syntax</a></li>
+        <li><a href="https://omarchyapps.com/apps/hype.html" target="_blank" rel="noopener">omarchyapps.com — hype app page (v0.6.0-1, MIT, ~327 KB)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

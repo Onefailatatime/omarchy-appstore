@@ -1,0 +1,128 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: `omarchy pkg add thinkpad-t14-amd-touchpad-dkms` (app-store page, version 0.2.3-1). Confirm it declares a dependency on the matching kernel headers (linux-omarchy-headers) or whether the user must install them first.
+- `thinkpad-t14-amd-touchpad-check` exists after install; confirm its output shows the three modules as DKMS-built and the touchpad on the RMI4 transport.
+- Touchpad device rename: confirm the device changes from `SynPS/2 Synaptics TouchPad` to `Synaptics TM3471-030` (check `grep Phys /proc/bus/input/devices` and Hyprland's device name `synaptics-tm3471-030`).
+- Omarchy touchpad toggle: confirm `omarchy-hw-touchpad` and the XF86TouchpadOn/Off binds still find the renamed pad (fallback to ID_INPUT_TOUCHPAD per omacom/omarchy#14431) on the current Omarchy release.
+- Report interval: confirm the pad reports every ~15 ms over RMI4/SMBus vs 80 Hz single-finger / ~40 Hz two-finger on PS/2 (from the README's three tested machines; confirm on one machine).
+- Suspend/resume: confirm pad survives S3 or s2idle resume (the 300 ms settle patch); report which sleep mode the machine uses.
+- Removal: `sudo pacman -Rns thinkpad-t14-amd-touchpad-dkms` (or omarchy pkg remove) then reboot — confirm stock modules return and the pad falls back to PS/2.
+- DKMS-after-kernel-update behavior: after a kernel update, confirm the DKMS hook rebuilds the modules and `thinkpad-t14-amd-touchpad-check` still passes; record what a failed build looks like.
+- Screenshots needed: `thinkpad-t14-amd-touchpad-check` output, dmesg lines showing RMI4 attach, before/after libinput device name.
+
+SEO notes:
+- URL: /guides/thinkpad-t14-amd-touchpad-on-omarchy
+- Title tag: "Fix the ThinkPad T14 AMD Touchpad on Omarchy (RMI4/SMBus DKMS)"
+- Meta description: "The ThinkPad T14/P14s AMD touchpad runs on the slow PS/2 fallback in the stock kernel. This DKMS package switches it to RMI4 over SMBus: 15 ms reports, working taps and gestures, TrackPoint intact. One install command, one check after kernel updates."
+- Keywords: thinkpad t14 amd touchpad linux, t14 gen 2 touchpad not working linux, synaptics rmi4 smbus thinkpad, thinkpad touchpad ps/2 fallback fix
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>The ThinkPad T14 AMD Touchpad Fix on Omarchy</h2>
+      <p>thinkpad-t14-amd-touchpad-dkms is a DKMS package (version 0.2.3-1, by orospakr, packaged for Omarchy) that fixes the ThinkPad T14/P14s Gen 1 and Gen 2 AMD touchpad by switching it from the sluggish PS/2 fallback to RMI4 over SMBus — with the TrackPoint still working on its pass-through.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add thinkpad-t14-amd-touchpad-dkms</code></pre>
+      <p>Reboot, then run <code>thinkpad-t14-amd-touchpad-check</code> to confirm the pad is on the RMI4 transport. This is for one specific family of machines: <strong>ThinkPad T14 Gen 2a/Gen 2 AMD and T14/P14s Gen 1 AMD with a Synaptics pad (TM3471-030, PnP IDs <code>LEN2073</code> / <code>LEN2064</code>)</strong>. If that’s not your machine, this package does nothing for you. Free and open (GPL-2.0-only). Honest framing from the repo itself: this is a <strong>carry, not a fork</strong> — every patch is aimed at a specific upstream tree, and the package exists only until stock Omarchy/Arch kernels drive the pad over SMBus on their own.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes — plus a reboot)</h2>
+      <h3>1. Check you have the right hardware.</h3>
+      <p>This is only for ThinkPad T14 Gen 2a / Gen 2 AMD, T14 Gen 1 AMD, and P14s Gen 1/Gen 2 AMD with a Synaptics pad. The shape that matters: an AMD FCH SMBus controller (<code>1022:790b</code>) and a Synaptics pad that supports RMI4 over SMBus. If your touchpad currently shows as <code>SynPS/2 Synaptics TouchPad</code> in <code>libinput list-devices</code> on one of these machines, you’re the target audience. The maintainer tested on three T14 Gen 2a AMD units (Ryzen 7 PRO 5850U, pad firmware ids 3942087 and 3418235), and there’s an independent report on a T14 Gen 1 AMD (Ryzen 7 PRO 4750U, <code>LEN2064</code>, Fedora 44, kernel 7.2.9).</p>
+      <h3>2. Install with headers present.</h3>
+      <p><code>omarchy pkg add thinkpad-t14-amd-touchpad-dkms</code>. The README’s upstream install path says to have the headers for your kernel installed (<code>linux-omarchy-headers</code> on Omarchy) — confirm during verification whether the Omarchy package declares that dependency or whether you need <code>omarchy pkg add linux-omarchy-headers</code> first. The install triggers an initramfs rebuild (mkinitcpio’s hook fires on <code>usr/src/*/dkms.conf</code>; on a UKI setup that’s a new image), so expect it to take a little while.</p>
+      <h3>3. Reboot and check.</h3>
+      <p>Run <code>thinkpad-t14-amd-touchpad-check</code>. It reports whether the three modules are installed, loaded from the DKMS copies, and whether the touchpad is on the RMI4 transport. The pad’s input device is renamed from <code>SynPS/2 Synaptics TouchPad</code> to <code>Synaptics TM3471-030</code> (<code>synaptics-tm3471-030</code> in Hyprland) — anything keyed on the old name has to follow it (see issues below).</p>
+      <h3>4. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>DKMS means “rebuilt on every kernel update” — automatically, until it can’t.</strong> On each kernel install DKMS reapplies the patches and recompiles. If a build fails (e.g. a kernel series bump the patches don’t apply to), the stock modules silently load and your pad drops back to PS/2. The check command makes that visible. <strong>Run it after every kernel update</strong> — that’s the whole maintenance routine.</li>
+        <li><strong>The modules are unsigned.</strong> Installing them sets the kernel’s <code>O</code> (out-of-tree) and <code>E</code> (unsigned module) taint flags. On a kernel that enforces module signatures (typical with locked-down Secure Boot), they won’t load at all. See the issues section.</li>
+        <li><strong>Removal is clean.</strong> <code>sudo pacman -Rns thinkpad-t14-amd-touchpad-dkms</code> (or <code>dkms remove thinkpad-t14-amd-touchpad/&lt;version&gt; --all</code>), reboot, and DKMS restores the stock modules — the pad returns to PS/2 exactly as before.</li>
+      </ul>
+      <h3>5. What the patches actually do (the short version).</h3>
+      <p><code>i2c-piix4</code> gains SMBus Host Notify through the AMD FCH’s ASF target block (ACPI <code>SMB0001</code>) — without this, psmouse can’t use the SMBus path at all. <code>rmi_smbus</code> gets a 300 ms settle after the PS/2 reset psmouse sends at resume — without it the pad reconfigured too soon and came back at 80 Hz or jumped on first touch after suspend. <code>psmouse</code> sets the F01 doze interval Lenovo’s Windows driver uses (short taps and two-finger touches were missed at the default) and adds <code>LEN2073</code> (Gen 2) and <code>LEN2064</code> (Gen 1) to the SMBus allowlist. Two mainline backports ride along so installing the package doesn’t drop fixes Omarchy’s <code>linux-omarchy</code> already ships (a psmouse use-after-free and signed coordinates in <code>focaltech.c</code>).</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Sourced from the project’s README (orospakr/thinkpad-t14-amd-touchpad, 0.2.3) — the maintainer documents behavior thoroughly, so these are maintainer-documented, cited where possible. Not reproduced by the draft author.</p>
+      <h3>After a kernel update the touchpad feels bad again — taps missed, gestures gone</h3>
+      <p><strong>Fix:</strong> The DKMS build probably failed on the new kernel and the stock modules silently loaded, dropping the pad back to PS/2. Run <code>thinkpad-t14-amd-touchpad-check</code> — it’s designed to make this visible. If it reports the stock modules, reinstall the package (<code>omarchy pkg add thinkpad-t14-amd-touchpad-dkms</code>) to trigger a rebuild, and check the DKMS log for the failure. The repo’s kernel policy: <code>tools/pre-build.sh</code> warns in the DKMS log when the running kernel is from a different series than the pristine sources, and CI tests patch application weekly against current Arch <code>linux-headers</code>, <code>linux-omarchy-headers</code>, and mainline master — so a series bump shows up as a known failure before a refresh release lands.</p>
+      <h3>Omarchy’s touchpad toggle (and the XF86TouchpadOn/Off keybinds) stop finding the touchpad</h3>
+      <p><strong>Fix:</strong> Expected side effect: the device is renamed from <code>SynPS/2 Synaptics TouchPad</code> to <code>Synaptics TM3471-030</code>, and Omarchy’s <code>omarchy-hw-touchpad</code> used to match on the name alone. Fixed in <code>omacom/omarchy#14431</code>, which added a fallback to udev’s <code>ID_INPUT_TOUCHPAD</code> — so the toggle works again on Omarchy releases that include that fix. If your toggle still can’t find the pad, update Omarchy first. Anything else keyed on the old device name (Hyprland input config, scripts) needs updating to the new name manually.</p>
+      <h3>The modules won’t load — dmesg complains about signatures, or the check shows stock modules</h3>
+      <p><strong>Fix:</strong> The three DKMS modules are unsigned, so the kernel taints (<code>O</code> and <code>E</code> flags) and a kernel enforcing module signatures refuses to load them. If you run Secure Boot in enforcing mode, either sign the modules yourself (MOK workflow) or accept that this package can’t load on your setup. The stock modules then load and the pad stays on PS/2.</p>
+      <h3>On a kernel with psmouse built in (not a module), nothing improves</h3>
+      <p><strong>Fix:</strong> This is documented for Fedora (which builds psmouse into the kernel): the DKMS copy of psmouse is unused, patches 0003–0005 and the backports don’t take effect, and the pad needs <code>psmouse.synaptics_intertouch=1</code> on the kernel command line — with only the <code>i2c-piix4</code> and <code>rmi_smbus</code> patches applying. Omarchy builds psmouse as a module, so this shouldn’t apply to Omarchy users; it’s here for completeness because the same package is installable on other distros.</p>
+      <h3>You bought a T14 Gen 1 AMD and wonder if it’s covered</h3>
+      <p><strong>Fix:</strong> Yes, since 0.2.3: <code>LEN2064</code> (Gen 1 AMD) joined the SMBus allowlist via patch 0005. An independent report confirms a T14 Gen 1 AMD (20UD001AMH, Ryzen 7 PRO 4750U, TM3471-020) attached over RMI4 at 15 ms reports with working taps across three suspend cycles. Note that run was on Fedora and needed <code>psmouse.synaptics_intertouch=1</code> on the kernel command line — on Omarchy the module build should apply the allowlist directly.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>linux-omarchy-eevdf-headers</code> if you’re also trying the EEVDF kernel flavor — DKMS needs the headers matching the kernel you’re actually booted into. Any ThinkPad power-management setup you already run is unaffected (this package touches only input modules).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Living with the PS/2 fallback — no package, taps and two-finger gestures as the stock kernel leaves them (80 Hz / ~40 Hz reports). Or wait: the patches are all aimed upstream, and the package retires itself once a stock Omarchy or Arch kernel drives the pad over SMBus on its own (check with <code>grep Phys /proc/bus/input/devices</code> showing the Synaptics device on an <code>rmi4-</code> path, package removed).</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: touchpad driver options for the T14 AMD</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>This DKMS package</th><th>Stock kernel (PS/2)</th><th>Windows driver</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, GPL-2.0</td><td>Free (built in)</td><td>Free (came with the machine)</td></tr>
+            <tr><td>Report rate</td><td>every 15 ms, two-finger intact</td><td>80 Hz 1-finger / ~40 Hz 2-finger</td><td>full rate, all gestures</td></tr>
+            <tr><td>Taps / two-finger</td><td>fixed (doze interval + allowlist)</td><td>missed taps documented</td><td>works</td></tr>
+            <tr><td>TrackPoint</td><td>still works on PS/2 pass-through, 7–8 ms reports</td><td>works</td><td>works</td></tr>
+            <tr><td>Maintenance</td><td>run the check tool after every kernel update</td><td>none</td><td>none</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Install this if your T14/P14s Gen 1–2 AMD touchpad misses taps and feels laggy on Linux — it’s the only path to the SMBus transport the pad was designed for, and it uninstalls cleanly if upstream ever catches up.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>A carry, not a fork — it uninstalls cleanly when upstream catches up</h2>
+      <p>Every patch in this package is aimed at a specific upstream tree (linux-i2c, linux-input), and the package exists only until stock Omarchy/Arch kernels drive the pad over SMBus on their own — at which point it retires itself. That means there’s no lock-in to evaluate: <code>sudo pacman -Rns thinkpad-t14-amd-touchpad-dkms</code>, reboot, and DKMS restores the stock modules, with the pad back on PS/2 exactly as before. Free (GPL-2.0-only), and the check tool makes it visible when a failed kernel-update rebuild drops you back to the stock path.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the ThinkPad T14 AMD Touchpad package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/thinkpad-t14-amd-touchpad-dkms.html">View ThinkPad T14 AMD Touchpad →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Which machines does this work on?</summary><p>ThinkPad T14 Gen 2a / Gen 2 AMD, T14 Gen 1 AMD, and P14s Gen 1 / Gen 2 AMD with a Synaptics pad (TM3471-030, PnP <code>LEN2073</code> / <code>LEN2064</code>). The maintainer tested three Gen 2a units; a Gen 1 unit is independently reported working. Anything with the same shape (AMD FCH SMBus <code>1022:790b</code>, Synaptics pad with RMI4-over-SMBus) should work.</p></details>
+      <details><summary>How do I know it’s working?</summary><p>Run <code>thinkpad-t14-amd-touchpad-check</code>. It tells you whether the three modules are the DKMS copies and whether the pad is on the RMI4 transport. The device name also changes from <code>SynPS/2 Synaptics TouchPad</code> to <code>Synaptics TM3471-030</code>.</p></details>
+      <details><summary>Do I need to do anything after a kernel update?</summary><p>Run the check command. DKMS rebuilds automatically on kernel install; if the build fails, the pad silently falls back to PS/2 and the check is how you notice.</p></details>
+      <details><summary>Will this break my TrackPoint?</summary><p>No — the TrackPoint stays on its PS/2 pass-through and keeps working; on the reported machines it actually got faster (7–8 ms reports instead of 23–40 ms).</p></details>
+      <details><summary>Is this permanent, or will upstream fix it?</summary><p>Temporary by design. The README calls it “a carry, not a fork”: every patch is aimed at a specific upstream tree (linux-i2c, linux-input), and the package retires once a stock Omarchy or Arch kernel drives the pad over SMBus by itself. A table in the README tracks each patch’s upstream status.</p></details>
+      <details><summary>Does it work with Secure Boot?</summary><p>The modules are unsigned and taint the kernel (<code>O</code>/<code>E</code> flags). A kernel enforcing module signatures won’t load them — sign them yourself via MOK or this package can’t run on your setup.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/thinkpad-t14-amd-touchpad-dkms.html" target="_blank" rel="noopener">omarchyapps.com/apps/thinkpad-t14-amd-touchpad-dkms.html — app page: description, install command, version 0.2.3-1, GPL-2.0, synced 2026-10-18</a></li>
+        <li><a href="https://github.com/orospakr/thinkpad-t14-amd-touchpad" target="_blank" rel="noopener">orospakr/thinkpad-t14-amd-touchpad README — hardware table, module/patch table, install/remove, DKMS behavior, check tool, carried-patches contract, kernel policy, known gap (read 2026-10-18)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/thinkpad-t14-amd-touchpad-dkms" target="_blank" rel="noopener">omacom/omarchy-pkgs — the package this guide’s install path uses (PKGBUILD fetch was rate-limited 2026-10-18; dependency details marked unverified above)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

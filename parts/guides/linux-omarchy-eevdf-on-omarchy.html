@@ -1,0 +1,142 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist (covers linux-omarchy-eevdf AND linux-omarchy-eevdf-headers — one guide, a pair):
+- Install commands: `omarchy pkg add linux-omarchy-eevdf` and `omarchy pkg add linux-omarchy-eevdf-headers` (app-store pages, both version 7.2.8-8). Confirm both resolve and install.
+- uname -r: confirm the booted release string is `7.2.8-8-omarchy-eevdf` (from localversion.20-pkgname = ${pkgbase#linux} in the PKGBUILD — verify on-machine, not assumed).
+- Boot selection: Omarchy uses limine; confirm a second boot entry appears after install and that it can be selected at boot; confirm how to change the default (limine config) and how the entry is named.
+- mkinitcpio: confirm the initramfs image is generated on install (presets from the `pkgbase` file in /usr/lib/modules/<release>/pkgbase).
+- EEVDF tunables: patch 0145-sched-eevdf-tunables is in the patch list — confirm what /proc or /sys tunables it exposes (e.g. /proc/sys/kernel/sched_* entries) and whether they differ from the bore kernel.
+- Scheduler identity: confirm `cat /sys/kernel/debug/sched/...` or dmesg identifies plain EEVDF (no BORE). Compare behavior notes vs linux-omarchy (BORE + ADIOS).
+- DKMS pairing: with linux-omarchy-eevdf-headers installed, confirm a DKMS module (e.g. thinkpad-t14-amd-touchpad-dkms) builds against the eevdf kernel; confirm the check tool passes when booted into eevdf.
+- Co-install: confirm linux-omarchy and linux-omarchy-eevdf can sit side by side and both boot.
+- Removal: confirm removing the package removes its boot entry and does not strand the bootloader.
+- Sizes: download 183.4 MB / installed 183.5 MB (kernel), download 94.5 MB / installed 345.4 MB (headers) — confirm on-machine.
+- Screenshots needed: limine boot menu with both entries, uname -r output, scheduler tunables listing.
+
+SEO notes:
+- URL: /guides/linux-omarchy-eevdf-on-omarchy (covers both the kernel and the -headers companion in one page, mirroring how Arch documents kernel+headers pairs)
+- Title tag: "Omarchy EEVDF Kernel: Install linux-omarchy-eevdf (2026)"
+- Meta description: "linux-omarchy-eevdf is Omarchy's plain-EEVDF kernel flavor: same Omarchy patchset as the default, without the BORE scheduler. Install it alongside your current kernel, pick it at boot, and add the headers package for DKMS modules."
+- Target queries: "linux-omarchy-eevdf", "omarchy kernel flavors", "omarchy bore vs eevdf", "omarchy install second kernel", "dkms headers omarchy". Interlink both ways with both app pages (https://omarchyapps.com/apps/linux-omarchy-eevdf.html, https://omarchyapps.com/apps/linux-omarchy-eevdf-headers.html) and with the thinkpad touchpad guide.
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>linux-omarchy-eevdf on Omarchy</h2>
+      <p>linux-omarchy-eevdf is Omarchy's alternative kernel flavor (7.2.8-8) — the same Omarchy kernel patchset with the plain EEVDF CPU scheduler instead of the BORE/ADIOS-tuned default — for tinkerers who want to try stock scheduler behavior, benchmark against BORE, or bisect a scheduler-related problem. The companion package linux-omarchy-eevdf-headers holds the headers and build scripts DKMS modules need to compile against it.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add linux-omarchy-eevdf
+omarchy pkg add linux-omarchy-eevdf-headers  # only if you build DKMS modules</code></pre>
+      <p>Install the EEVDF kernel, then select it in your bootloader at the next boot (it installs alongside your current kernel, it doesn't replace it). Takes a few minutes: 183.4 MB download. If you build out-of-tree modules (DKMS packages like the ThinkPad T14 touchpad driver), also install <code>omarchy pkg add linux-omarchy-eevdf-headers</code>.</p>
+      <p><strong>Who this is for:</strong> people who know what a CPU scheduler is and want to try one. If that sentence doesn't describe you, stay on the default kernel — this package changes nothing you'll notice in a browser or terminal, and switching kernels is the one package install that can leave a machine unbootable if something goes wrong.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (15 minutes — includes a reboot)</h2>
+      <h3>1. Understand what you're choosing between.</h3>
+      <p>Omarchy ships two kernel flavors, both built from the same Omarchy patchset (kernel 7.2.8). The default, <code>linux-omarchy</code>, is described in its PKGBUILD as "Omarchy Linux (BORE CPU scheduler, ADIOS I/O scheduler)": it carries the BORE patch (0110-bore-7.0.0 — Burst-Oriented Response Enhancer, which detects bursty interactive tasks and prioritizes them inside EEVDF) plus the ADIOS I/O scheduler (0150-adios-3.2.0), tuned to keep the desktop responsive under load. <code>linux-omarchy-eevdf</code> drops both of those and instead carries 0145-sched-eevdf-tunables — plain upstream EEVDF (Earliest Eligible Virtual Deadline First, the default Linux scheduler since 6.6, which replaced CFS) with Omarchy's tunables and the rest of the Omarchy patchset (Btrfs, AMD display, sound, power-management fixes, etc.). Think of it as the "control group" kernel: same Omarchy fixes, stock scheduling philosophy.</p>
+      <h3>2. Install.</h3>
+      <p><code>omarchy pkg add linux-omarchy-eevdf</code>. The install generates the initramfs for the new kernel release (<code>7.2.8-8-omarchy-eevdf</code> per the PKGBUILD's localversion files — confirm on-machine). Your current kernel stays installed and stays the default; the new kernel just adds a boot entry.</p>
+      <h3>3. Select it at boot.</h3>
+      <p>Reboot and pick the new entry in the bootloader (Omarchy uses limine — confirm the entry naming and how to change the default in the checklist above). Verify with <code>uname -r</code>: you should see the <code>-omarchy-eevdf</code> release string instead of <code>-omarchy</code>.</p>
+      <h3>4. Install the headers if you need them.</h3>
+      <p><code>omarchy pkg add linux-omarchy-eevdf-headers</code>. You need this package (345.4 MB installed) only if you compile out-of-tree kernel modules — i.e. you use a DKMS package. The canonical example on this site: <code>thinkpad-t14-amd-touchpad-dkms</code> rebuilds its <code>i2c-piix4</code>, <code>rmi_smbus</code>, and <code>psmouse</code> modules via DKMS, and DKMS compiles against the headers of the kernel you're installing for. No DKMS packages, no headers needed. The headers package provides <code>LINUX-HEADERS</code> and symlinks <code>/usr/src/linux-omarchy-eevdf</code> to the build tree, and the kernel package lists it as an optdepend ("headers and scripts for building modules") — along with <code>scx-scheds</code> if you want to experiment with sched_ext schedulers on top.</p>
+      <h3>5. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>The two kernels coexist.</strong> Installing eevdf doesn't remove <code>linux-omarchy</code>. If the eevdf kernel misbehaves, reboot and pick your old entry — you always have a way back. (Confirm the default-entry behavior on-machine before publishing.)</li>
+        <li><strong>DKMS modules are per-kernel.</strong> A DKMS package built against <code>linux-omarchy-headers</code> is not built for the eevdf kernel until its headers are installed and the DKMS hook rebuilds. After installing both, run the relevant check tool (e.g. <code>thinkpad-t14-amd-touchpad-check</code>) while booted into the eevdf kernel to confirm the modules actually built for it.</li>
+        <li><strong>Expect no fireworks.</strong> EEVDF vs BORE differences show up under mixed load (compiling while playing audio, heavy multitasking) and in benchmarks, not in idle desktop feel. If you're trying this to fix a specific stutter, measure before and after — don't go by vibes.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>No user-reported issues exist yet for this specific package (it appeared on the app store 2026-10-18). The items below are grounded in the PKGBUILD contents, the sibling touchpad-driver repo's documented DKMS behavior, and standard Arch kernel practice — marked where they're general practice rather than package-specific reports. Nothing here is claimed as reproduced.</p>
+      <h3>You installed it, rebooted, and <code>uname -r</code> still shows the old kernel</h3>
+      <p>Installing a kernel package only adds a boot entry — it doesn't change which entry boots by default. General Arch behavior, not package-specific.</p>
+      <p><strong>Fix:</strong> Reboot, open the bootloader menu (Omarchy uses limine), and select the eevdf entry explicitly. If you want it as the default, change the default in the limine configuration (verify exact steps on-machine — marked unverified).</p>
+      <h3>A DKMS package (e.g. the ThinkPad touchpad driver) stopped working after you switched to the eevdf kernel</h3>
+      <p>DKMS builds modules per kernel release, and it needs the matching headers.</p>
+      <p><strong>Fix:</strong> Install <code>omarchy pkg add linux-omarchy-eevdf-headers</code>, then trigger a rebuild (reinstall the DKMS package), then run its check tool while booted into the eevdf kernel. The touchpad repo documents the failure mode precisely: if the DKMS build fails, the stock modules load and the hardware silently falls back to its unpatched behavior — the check tool is how you notice. (From orospakr/thinkpad-t14-amd-touchpad README; applies to any DKMS module on any kernel flavor.)</p>
+      <h3>You're not sure the scheduler actually changed</h3>
+      <p>Compare <code>uname -r</code> output (<code>-omarchy</code> vs <code>-omarchy-eevdf</code>) and inspect the scheduler tunables the eevdf patch exposes (patch 0145-sched-eevdf-tunables — exact paths to be confirmed on-machine in the checklist).</p>
+      <p><strong>Fix:</strong> For a behavioral check, BORE's whole point is prioritizing bursty interactive tasks under background load; a compile-while-playing-audio test is the classic discriminator, but quantify it rather than eyeballing it.</p>
+      <h3>Disk space jumped by ~530 MB</h3>
+      <p>Expected: the kernel is 183.5 MB installed and the headers are 345.4 MB installed (app-store package details, 7.2.8-8).</p>
+      <p><strong>Fix:</strong> If you don't build modules, skip the headers package. If you abandon the experiment, remove both packages and the boot entry goes with them (confirm on-machine).</p>
+      <h3>You want to go back to the default kernel permanently</h3>
+      <p>Reboot into the <code>linux-omarchy</code> entry, then remove the eevdf packages (<code>omarchy pkg remove linux-omarchy-eevdf linux-omarchy-eevdf-headers</code> — confirm exact remove syntax on-machine). Your original kernel and its entry are untouched by the whole experiment, since the packages never replaced anything.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>thinkpad-t14-amd-touchpad-dkms</code> — the DKMS touchpad driver is the most concrete reason to care about the headers package; its guide covers the per-kernel rebuild dance. <code>scx-scheds</code> (listed as an optdepend in the PKGBUILD) if you want to experiment with sched_ext schedulers, which is the deeper end of the same pool.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Staying on <code>linux-omarchy</code> — the BORE/ADIOS default is what the Omarchy team tunes and tests, and it's the kernel the 4.0.4 release made the default boot option. Or the stock Arch <code>linux</code> package if you want zero Omarchy patches at all.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Omarchy kernel flavors</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>linux-omarchy-eevdf</th><th>linux-omarchy (default)</th><th>Arch <code>linux</code></th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, GPL-2.0-only</td><td>Free, GPL-2.0-only</td><td>Free, GPL-2.0</td></tr>
+            <tr><td>CPU scheduler</td><td>Plain EEVDF (+ Omarchy tunables patch)</td><td>EEVDF + BORE (burst-priority)</td><td>Plain EEVDF</td></tr>
+            <tr><td>I/O scheduler</td><td>stock</td><td>ADIOS</td><td>stock</td></tr>
+            <tr><td>Omarchy patchset</td><td>yes (Btrfs, AMD, sound, PM…)</td><td>yes</td><td>no</td></tr>
+            <tr><td>Best for</td><td>scheduler A/B tests, bisecting scheduler issues, purists</td><td>daily driving on Omarchy</td><td>minimalists who want zero distro patches</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add linux-omarchy-eevdf</code></td><td>preinstalled / default since 4.0.4</td><td><code>omarchy pkg add linux</code> (verify)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Install the eevdf flavor if you want the control group — same Omarchy fixes, stock scheduling behavior, easy A/B against BORE. Everyone else should stay on the default.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>linux-omarchy-eevdf: the free "control group" kernel for scheduler A/B tests</h2>
+      <p><strong>linux-omarchy-eevdf: the free "control group" kernel for scheduler A/B tests.</strong> There is no paid rival here — every kernel in the comparison is free and open source, so the pitch is capability, not price. What you give up vs. the default <code>linux-omarchy</code>: the BORE burst-priority tuning and the ADIOS I/O scheduler — the desktop-responsiveness polish the Omarchy team tunes and tests. What you keep: the same Omarchy patchset (Btrfs, AMD display, sound, power-management fixes) with stock upstream scheduling philosophy, easy A/B testing against BORE, and a DKMS-headers companion for out-of-tree modules. This one is for tinkerers who know what a CPU scheduler is — if that's not you, stay on the default.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the linux-omarchy-eevdf package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/linux-omarchy-eevdf.html">View linux-omarchy-eevdf →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>What is EEVDF?</summary><p>Earliest Eligible Virtual Deadline First — the Linux CPU scheduler since kernel 6.6, replacing the Completely Fair Scheduler (CFS). Among tasks that are owed CPU time (eligible), it runs the one with the earliest virtual deadline, which gives latency-sensitive tasks better responsiveness without manual tuning. BORE is a patch on top of EEVDF that additionally prioritizes short, bursty tasks.</p></details>
+      <details><summary>How is linux-omarchy-eevdf different from linux-omarchy?</summary><p>Same kernel version (7.2.8) and same Omarchy patchset, minus two things: the BORE CPU-scheduler patch and the ADIOS I/O scheduler patch. It keeps Omarchy's other fixes and adds EEVDF scheduler tunables. Verified by diffing the two PKGBUILDs' patch lists in omarchy-pkgs.</p></details>
+      <details><summary>Do I need the -headers package?</summary><p>Only if you compile out-of-tree kernel modules — i.e. you use a DKMS package. It provides the build tree at <code>/usr/src/linux-omarchy-eevdf</code> that DKMS builds against. No DKMS packages, no headers needed.</p></details>
+      <details><summary>Can both kernels be installed at once?</summary><p>Yes — that's the intended setup. Install eevdf, keep booting the default, and pick eevdf from the bootloader menu when you want to test it. Removing the packages removes the entry.</p></details>
+      <details><summary>Will this make my desktop faster?</summary><p>Probably not noticeably. EEVDF-vs-BORE differences appear under mixed CPU load and in benchmarks, not in idle desktop feel. Install it to experiment or to bisect a scheduler-suspected issue, not as a speed upgrade.</p></details>
+      <details><summary>Does it work with Secure Boot / signed modules?</summary><p>The PKGBUILD carries the same secure-boot-related patches as the default kernel (efi-secure-boot-lockdown, module-sig-platform-keyring in the patch list). Out-of-tree DKMS modules you build yourself are still your own signing problem. Behavior on a Secure Boot-enforcing machine is on the on-machine checklist.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/linux-omarchy-eevdf.html" target="_blank" rel="noopener">omarchyapps.com/apps/linux-omarchy-eevdf.html — app page: description, install command, version 7.2.8-8, GPL-2.0, sizes, synced 2026-10-18</a></li>
+        <li><a href="https://omarchyapps.com/apps/linux-omarchy-eevdf-headers.html" target="_blank" rel="noopener">omarchyapps.com/apps/linux-omarchy-eevdf-headers.html — companion page: description, install command, version 7.2.8-8, sizes, synced 2026-10-18</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/linux-omarchy-eevdf" target="_blank" rel="noopener">omarchy-pkgs linux-omarchy-eevdf PKGBUILD — full patch list (0145-sched-eevdf-tunables; no bore/adios patches), localversion naming, optdepends incl. scx-scheds, provides LINUX-HEADERS (read 2026-10-18)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/linux-omarchy" target="_blank" rel="noopener">omarchy-pkgs linux-omarchy PKGBUILD — default flavor pkgdesc "BORE CPU scheduler, ADIOS I/O scheduler", patches 0110-bore-7.0.0 and 0150-adios-3.2.0 (read 2026-10-18)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/linux-omarchy-bore" target="_blank" rel="noopener">omarchy-pkgs linux-omarchy-bore PKGBUILD — transitional package confirming linux-omarchy-bore became linux-omarchy (read 2026-10-18)</a></li>
+        <li><a href="http://www.linux-magazine.com/Issues/2025/301/EEVDF" target="_blank" rel="noopener">Linux Magazine / kernel docs — EEVDF replaced CFS in kernel 6.6; Peter Zijlstra's design</a></li>
+        <li><a href="http://www.zenwalk.org/2026/08/zenwalk-burst-oriented-kernel-brings.html" target="_blank" rel="noopener">Zenwalk — BORE (Burst-Oriented Response Enhancer) explained: prioritizes short bursty tasks inside EEVDF</a></li>
+        <li><a href="https://linuxiac.com/omarchy-4-0-4-makes-its-custom-linux-kernel-the-default/" target="_blank" rel="noopener">linuxiac — Omarchy 4.0.4 made linux-omarchy the default boot kernel</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

@@ -1,0 +1,137 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add dingtalk-bin` (package slug `dingtalk-bin`) — verify it resolves in the store index
+- First launch: does the app open, and what does login require (phone number + SMS verification)?
+- Blank-window-after-update: is `rm -rf ~/.config/DingTalk/` the correct config path and fix on this build?
+- Wayland/Hyprland behavior: tray icon, screen sharing, input method — all currently unsourced; record what actually happens rather than assuming
+- English translation quality: confirm the "half-baked English" reports on this version
+- License: proprietary Alibaba EULA (LicenseRef-DingTalk). Core features free; premium/AI upsells exist — don't state prices
+- Version at publish time: check installed version and note it; guide drafted against 8.2.8.260818002-1
+- Screenshots needed: login screen, main chat window, meeting UI, Settings panels
+
+SEO notes:
+- URL: /guides/dingtalk-bin-on-omarchy
+- Title tag: "How to Install & Use DingTalk on Omarchy Linux (2026)"
+- Meta description: "Install Alibaba's official DingTalk Linux client on Omarchy with one command. Fix the blank-window-after-update bug, login requirements, and real Linux issues. Setup, FAQ, and alternatives."
+- Keywords: dingtalk linux install, dingtalk-bin arch, dingtalk omarchy, dingtalk blank window linux, dingtalk linux english
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>dingtalk-bin on Omarchy</h2>
+      <p>dingtalk-bin is Alibaba's official DingTalk Linux client (钉钉) for Omarchy — workplace chat with read-receipts, "DING" urgent alerts, video meetings, and OA workflow tools, in a free (but proprietary) enterprise package.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add dingtalk-bin</code></pre>
+      <p>Takes ~10 minutes — it's a big one: 454.9 MB download / 1 GB installed.</p>
+      <p>Free enterprise platform — core chat/meeting features carry no per-seat fee. Account requires a phone number + SMS verification. Proprietary Alibaba EULA (LicenseRef-DingTalk).</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. First launch and login.</h3>
+      <p>Open DingTalk from the launcher. Account setup requires a phone number with SMS verification (documented in deployment manuals) — have your phone nearby. The Linux build is an official Alibaba client (the AUR <code>dingtalk-bin</code> mirrors Alibaba's own Debian/RedHat releases), so this isn't a Wine hack or a repack.</p>
+      <h3>2. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>It's built for workplace surveillance-adjacent workflows.</strong> DingTalk's signature features are read-receipts and "DING" urgent alerts that escalate to SMS/calls. Real users on SourceForge flag two honest drawbacks: half-baked English translations and heavy read/unread staff-status tracking. If your org runs on DingTalk, you know this already; if you're evaluating it, know what you're signing your team up for.</li>
+        <li><strong>The 1 GB install is normal.</strong> The official client bundles its meeting stack (the same <code>libconference_new.so</code> that shows up in bug reports). Don't be alarmed by the size — but do make sure you actually need the desktop client before spending a gig: the browser version at dingtalk.com covers light use.</li>
+        <li><strong>If it won't start or shows a blank window after an update, the fix is deleting its config.</strong> This is the best-documented Linux issue for DingTalk: after updates, chat windows can render blank — quit the app, <code>rm -rf ~/.config/DingTalk/</code>, relaunch. Details in "Common issues."</li>
+      </ul>
+      <h3>3. Where its config lives.</h3>
+      <p><code>~/.config/DingTalk/</code> — this is also the folder you nuke to fix the blank-window issue. (Confirm the path on-machine; sourced from the AUR comment fix.)</p>
+      <h3>4. Omarchy-specific note.</h3>
+      <p>No DingTalk-specific Wayland/Hyprland bug reports surfaced in research — the Linux client is primarily tested on UOS/Kylin/Debian-lineage distros, so everything about tray icons, screen sharing, and input methods on Hyprland is currently unverified. Record actual behavior on the box rather than assuming breakage.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Sourced from AUR comments and documented reports — nothing invented. Wayland-specific issues are absent from the record, so they're marked unverified rather than assumed.</p>
+      <h3>Blank/white chat window after updating.</h3>
+      <p>A real AUR comment (sgyhy, 2025-09-24): after updating to 7.8.15.x, chat windows rendered blank. Config corruption across updates is the known pattern — if any UI goes weird after an update, this is the first thing to try.</p>
+      <p><strong>Fix:</strong> Quit DingTalk completely, <code>rm -rf ~/.config/DingTalk/</code>, relaunch. (<a href="https://aur.archlinux.org/packages/dingtalk-bin?O=20" target="_blank" rel="noopener">AUR: dingtalk-bin comments</a>)</p>
+      <h3>Won't launch at all on a modern distro — missing/broken library loads.</h3>
+      <p>A Debian 13 report (CSDN, Nov 2025) traced this to newer glibc's <code>dlopen()</code> refusing libraries with executable-stack flags: <code>dingtalk_dll.so</code> and <code>libconference_new.so</code> fail to load. Observed on Debian 13 — whether Arch/Omarchy hits the same glibc behavior is unverified, but the failure signature (silent refusal to start) and the fix are real.</p>
+      <p><strong>Fix:</strong> <code>patchelf --clear-execstack</code> on those two libraries under the install dir. (<a href="https://blog.csdn.net/qadzhangc/article/details/154384182" target="_blank" rel="noopener">CSDN report</a>)</p>
+      <h3>English UI is half-translated or confusing.</h3>
+      <p>Multiple users report half-baked English translations in the Linux client. If your org works in Chinese this is a non-issue; English-first teams should expect rough edges in labels and dialogs. (SourceForge user reviews.)</p>
+      <p><strong>Fix:</strong> No fix — this is the shipped product.</p>
+      <h3>Build/packaging breaks with weird patchelf errors.</h3>
+      <p>An AUR comment traced packaging breakage to environment pollution — a conda environment's <code>patchelf</code> shadowing the system one ("conda也有patchelf"). Edge case, but real.</p>
+      <p><strong>Fix:</strong> If you're building or the install acts strangely, check for conda env interference. (<a href="https://aur.archlinux.org/packages/dingtalk-bin?O=20" target="_blank" rel="noopener">AUR: dingtalk-bin comments</a>)</p>
+      <h3>Tray icon / screen sharing / IME behavior on Hyprland.</h3>
+      <p>The client targets UOS/Kylin/Debian desktops; test and record actual behavior on Omarchy during the verify pass instead of copying assumptions from other Electron/Qt apps.</p>
+      <p><strong>Fix:</strong> Unverified — no sourced reports found either way.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>fcitx5 (if your org works in Chinese, get input right desktop-wide)</li>
+        <li>a second workspace for the always-on chat window (DingTalk is a "leave it open all day" app)</li>
+        <li>the DingTalk web client for the machine where you don't want the 1 GB install</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Lark (Feishu) — ByteDance's equivalent; SourceForge users rate its interface better for personal/business use, also has Linux support</li>
+        <li>Slack or Teams-for-Linux (AUR <code>teams-for-linux-bin</code>, community Electron) for Western-centric teams with better translations</li>
+        <li>Matrix/Rocket.Chat — self-hosted and open if Alibaba-account + surveillance concerns matter</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: dingtalk-bin vs similar apps</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr></thead>
+          <tbody>
+            <tr><td><strong>dingtalk-bin</strong></td><td>Free (proprietary)</td><td>Teams/orgs already on DingTalk — DING alerts, read-receipts, OA workflows</td><td><code>omarchy pkg add dingtalk-bin</code></td></tr>
+            <tr><td><strong>Lark (Feishu)</strong></td><td>Free tier</td><td>ByteDance's equivalent; better-regarded interface</td><td>check AUR / official Linux build</td></tr>
+            <tr><td><strong>Slack</strong></td><td>Free tier</td><td>Western teams; best translations and integrations</td><td>official Linux / web</td></tr>
+            <tr><td><strong>Teams-for-Linux</strong></td><td>Free</td><td>Microsoft-centric orgs; community Electron client</td><td>AUR <code>teams-for-linux-bin</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Nobody installs DingTalk for fun — you install it because your org runs on it. If that's you, the native Linux client beats the web version for meetings and DING alerts; if you're choosing a platform, Lark and Slack are the better-regarded alternatives.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>dingtalk-bin: the free official client that saves you from the browser tab</h2>
+      <p>The honest framing: DingTalk itself is the free enterprise platform (no per-seat fee for core features). What you give up vs the web version: nothing — you gain meetings, DING alerts, and OA tools. What you keep: the 1 GB of disk.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the dingtalk-bin package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/dingtalk-bin.html">View dingtalk-bin →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does dingtalk-bin work on Omarchy?</summary><p>It's Alibaba's official Linux client, packaged for the Omarchy store — install with <code>omarchy pkg add dingtalk-bin</code>. Wayland/Hyprland-specific behavior (tray, screen share, IME) is currently unverified; the client is primarily tested on Debian-lineage desktops.</p></details>
+      <details><summary>Is DingTalk free?</summary><p>The core platform is free for enterprises (no per-seat fee for chat/meetings); newer 8.x marketing includes premium/AI upsells — no verified pricing, so don't quote numbers. Proprietary Alibaba EULA.</p></details>
+      <details><summary>How do I log in?</summary><p>A phone number with SMS verification is required to create/verify the account.</p></details>
+      <details><summary>The chat window is blank after an update — what do I do?</summary><p>Quit DingTalk, delete <code>~/.config/DingTalk/</code>, and relaunch. This is the documented fix for config corruption across updates.</p></details>
+      <details><summary>DingTalk won't start at all — no window, no error.</summary><p>Check the library-load failure mode: on newer glibc, <code>dingtalk_dll.so</code> and <code>libconference_new.so</code> can be refused for executable-stack flags. The documented fix is <code>patchelf --clear-execstack</code> on those two libraries (observed on Debian 13; unverified on Arch).</p></details>
+      <details><summary>Is there a lighter option than the 1 GB desktop client?</summary><p>Yes — the browser version at dingtalk.com covers chat and light use with zero install.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/dingtalk-bin.html" target="_blank" rel="noopener">omarchyapps.com/apps/dingtalk-bin.html — store listing (version 8.2.8.260818002-1, 454.9 MB / 1 GB, LicenseRef-DingTalk, install command)</a></li>
+        <li><a href="https://aur.archlinux.org/packages/dingtalk-bin" target="_blank" rel="noopener">AUR: dingtalk-bin — comments (blank window fix, conda patchelf)</a></li>
+        <li><a href="https://blog.csdn.net/qadzhangc/article/details/154384182" target="_blank" rel="noopener">CSDN — executable-stack/glibc 2.41 launch failure</a></li>
+        <li><a href="https://www.dingtalk.com" target="_blank" rel="noopener">DingTalk official</a></li>
+        <li><a href="https://tms.dingtalk.com/markets/dingtalk/download" target="_blank" rel="noopener">DingTalk Linux download hub</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

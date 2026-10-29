@@ -1,0 +1,132 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add omairc` works and installs 1.10.3-3; note channel (edge vs stable) at publish time — the maintainer README says the official Omarchy package is on the edge channel and stable/rc need the install.sh route; confirm which is true now.
+- Arch note: the package is x86_64-only per the PKGBUILD; confirm on an Asahi/aarch64 Omarchy machine whether the package is offered at all.
+- First launch: confirm the Connect sheet (Freenode, TLS on, autojoin #omarchy), NickServ SASL behavior, and member list/avatar rendering on Omarchy.
+- Theme: confirm colors follow the Omarchy theme and update live on theme switch; text follows desktop scale.
+- CLI: confirm the binary is also the local CLI — `omairc connections`, `omairc status`, `omairc send --network <id> '#channel' hello`, `omairc read --unread`; confirm second launch raises the existing window.
+- Demo mode: confirm `omairc --demo-server` runs without connecting (good for screenshots).
+- Ctrl+/ shortcut list: confirm contents on-machine.
+- Config paths: confirm where profiles, passwords (QtKeychain → which secret backend on Omarchy?), and logs land; confirm `~/.config/omairc/` if so.
+- omairc-tui: confirm whether the static TUI binary is available and how it relates to the Qt app.
+- Issue links to confirm: #379 (soju/bouncer-networks), #220 (notifications toggle), #219 (profile section), #196 (CLI join/query/part).
+- Screenshots needed: Connect sheet, channel view with member list, Ctrl+/ shortcut list, demo-server window.
+
+SEO notes:
+- URL: /guides/omairc-on-omarchy
+- Title tag: "How to Install & Use Omairc on Omarchy (2026)"
+- Meta description: "Install Omairc on Omarchy with one command. Dead-simple native IRC with a keyboard-first Qt UI, a local CLI, an AI agent skill, and a terminal companion — plus real limits on bouncers, DCC, and ARM."
+- Keywords: omairc omarchy, omairc install, omarchy IRC client, simple IRC client linux 2026, omairc-tui
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Omairc on Omarchy</h2>
+      <p>Omairc is a dead-simple, keyboard-first IRC client for Omarchy — a Qt Quick + C++ app where the same binary is both the chat window and a local CLI, themed to your Omarchy desktop, with a companion terminal client and an AI-agent skill so agents can read and send on IRC for you.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omairc</code></pre>
+      <p>Takes ~1 minute — the official Omarchy package (v1.10.3-3 on the app-store page), MIT licensed. <strong>Caveats:</strong> the maintainer's README says the official Omarchy package is published on the <strong>edge channel</strong>, and on stable/rc you may need the install.sh route (<code>curl -fsSL https://raw.githubusercontent.com/fredimachado/omairc/main/install.sh | sh</code>, which adds a pacman repo and installs it) — confirm which channel has it before telling anyone it "just works." Also: the package is <strong>x86_64-only</strong>, so Asahi/ARM users need the build-from-source route.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and launch.</h3>
+      <p>Run the command above (edge channel, per the maintainer's README) or the install.sh route on stable/rc. The binary lands on your PATH as <code>omairc</code>.</p>
+      <h3>2. First launch — the Connect sheet.</h3>
+      <p>The first thing you see is a Connect sheet: pick a network (Freenode is prefilled), TLS is on, autojoin is <code>#omarchy</code>, pick your nick. NickServ uses SASL PLAIN when the server offers it, otherwise <code>IDENTIFY</code>. That's the whole onboarding — you're in a channel in seconds. Several networks live in one window, each keeping its own channels, direct messages, nick, and Status console.</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Keyboard first, always</strong> — Press Ctrl+/ to list every shortcut. The member list shows people counts on channels; click a nick to open a direct message, Ctrl+W closes it. Avatars, a status line, and bot marks appear when the network supports them. You get backlog on join and your recent local lines after a restart.</li>
+        <li><strong>The window IS the CLI</strong> — The same <code>omairc</code> binary drives the running window from a terminal: <code>omairc connections</code>, <code>omairc status</code>, <code>omairc send --network &lt;id&gt; '#channel' hello</code>, <code>omairc read '#channel' --since 5m</code>, <code>omairc read --unread</code>, <code>omairc conversations</code>, <code>omairc names</code>, <code>omairc raise</code>. Quote channel targets. Commands need the window running — except <code>--help</code> and <code>--version</code>, which exit without one. A second launch just raises the existing window.</li>
+        <li><strong>Agent-friendly by design</strong> — <code>npx skills add fredimachado/omairc/skills -g</code> installs a local CLI skill so an AI agent can read channels and send messages through your running window. There's also <code>omairc-tui</code>, a separate static Go terminal client shipped on the same GitHub release (installable via <code>install-tui.sh</code> to <code>~/.local/bin</code>, Homebrew, Scoop, or <code>go install</code>).</li>
+      </ul>
+      <h3>4. Data and privacy.</h3>
+      <p>Backlog comes from the server on join; your local lines persist across restarts. Passwords go through QtKeychain (system keyring). No account with the app's author exists; it's IRC — your identity lives on the networks you join.</p>
+      <h3>5. Config location.</h3>
+      <p>Per the README: "Profiles use the Qt app config location" — on Linux that's conventionally <code>~/.config/omairc/</code> (UNCONFIRMED — verify on-machine). The bundled iA Writer Mono font is part of the package.</p>
+      <p><strong>Practical notes:</strong> Colors follow the Omarchy theme and update live, text follows the desktop text scale, and notifications fire for mentions or DMs while the window is unfocused. Try <code>omairc --demo-server</code> to skip Connect entirely — handy for exploring or taking screenshots without joining a network.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3><code>omarchy pkg add omairc</code> finds nothing, but the app store lists it</h3>
+      <p>The maintainer publishes the official Omarchy package on the <strong>edge channel</strong>, built against that channel's Qt — if you're on stable or rc, either switch channels or use the maintainer's install script.</p>
+      <p><strong>Fix:</strong> <code>curl -fsSL https://raw.githubusercontent.com/fredimachado/omairc/main/install.sh | sh</code> adds an <code>[omairc]</code> pacman repository from the latest GitHub release and installs it (re-running upgrades). Read the script first if you prefer — the README says so too.</p>
+      <h3>You're on Apple Silicon (Asahi) and the package won't install</h3>
+      <p>The omarchy-pkgs PKGBUILD declares <code>arch=('x86_64')</code> only — there is no aarch64 package.</p>
+      <p><strong>Fix:</strong> Build from source (<code>git clone https://github.com/fredimachado/omairc.git</code>, <code>./bin/install</code> as your user) or use the static <code>omairc-tui</code> terminal client, which ships macOS/Linux binaries per release (including ARM) and needs no Qt at all.</p>
+      <h3>Your bouncer (Soju/ZNC) connects, but there's no history sync</h3>
+      <p>Backlog only covers what the server sends on join. This is a known limit, tracked in issue <a href="https://github.com/fredimachado/omairc/issues/379" target="_blank" rel="noopener">fredimachado/omairc#379</a> ("Track soju.im/bouncer-networks support").</p>
+      <p><strong>Fix:</strong> The README's Limits section confirms: no Soju or ZNC history-sync protocol, and the Connect sheet has no separate SASL account or bouncer-network fields. If you live behind a bouncer, you're waiting on #379 — the app is honest about being a simple client, not a Quassel replacement.</p>
+      <h3>You can't find a global "desktop notifications on/off" toggle in Preferences</h3>
+      <p>It doesn't exist yet — tracked as issue <a href="https://github.com/fredimachado/omairc/issues/220" target="_blank" rel="noopener">#220</a> ("Preferences: Notifications section (global desktop-notify toggle)"). Notifications currently fire for mentions and DMs while the window is unfocused, with no global switch. Same story for the profile section: display-name, avatar, and status metadata are tracked in issue <a href="https://github.com/fredimachado/omairc/issues/219" target="_blank" rel="noopener">#219</a>.</p>
+      <h3><code>omairc join #channel</code> or <code>omairc query nick</code> from the terminal does nothing useful</h3>
+      <p>The local CLI's command set is <code>connections</code>, <code>status</code>, <code>send</code>, <code>conversations</code>, <code>read</code>, <code>names</code>, <code>raise</code> — it doesn't have join/query/part yet (tracked in issue <a href="https://github.com/fredimachado/omairc/issues/196" target="_blank" rel="noopener">#196</a>, which also covers <code>send --action</code> without stealing focus).</p>
+      <p><strong>Fix:</strong> Use the in-window slash commands instead: <code>/list</code>, <code>/join</code>-style flows, <code>/pref</code>, <code>/status</code>, <code>/avatar</code>, <code>/autoaway</code>, plus CTCP — those run from the composer.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>omairc-tui</code> — the static terminal companion from the same project, for when you're ssh'd in or live in tmux. Your AI agent + the omairc skill (<code>npx skills add fredimachado/omairc/skills -g</code>) — "what did #omarchy say about the new theme" is a genuinely useful agent query. And any IRC network where Omarchy folks hang out — autojoin <code>#omarchy</code> is the default for a reason.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><strong>Quassel</strong> (<code>omarchy pkg add quassel</code>) if you want the full client-plus-core model with history sync and a mobile client — it's the heavyweight omairc deliberately isn't. <strong>WeeChat or irssi</strong> if you never leave the terminal and don't want a GUI at all.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: omairc vs Quassel vs WeeChat</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omairc</th><th>Quassel</th><th>WeeChat</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free, MIT</td><td>Free, GPL</td></tr>
+            <tr><td>Best for</td><td>Simple native GUI IRC with CLI + agent skill, Omarchy-themed</td><td>Always-on IRC via client/core split, full history sync, mobile apps</td><td>Terminal-native power users, scripting in half a dozen languages</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omairc</code> (edge)</td><td><code>omarchy pkg add quassel</code></td><td><code>omarchy pkg add weechat</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use omairc if you want IRC to feel like a native Omarchy app with a CLI an agent can drive; use Quassel if you need bouncer-style history sync; use WeeChat if you live in tmux.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Omairc: native IRC that an AI agent can drive</h2>
+      <p><strong>Omairc is the free, dead-simple IRC client that behaves like a native Omarchy app.</strong> There's no paid rival to undercut here — the point is the shape: one keyboard-first Qt window that follows your Omarchy theme live, while the <em>same binary</em> doubles as a local CLI and an installable agent skill, so your terminal or AI agent can read channels and send messages through the running window. What you give up vs the heavyweights: no bouncer history-sync protocol (Quassel wins there), no DCC/file transfer, no plugins or scripts — the app is honest about being a simple client.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Omairc package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omairc.html">View Omairc →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does omairc work on Omarchy?</summary><p>Yes — it was built for Omarchy: Qt Quick window, colors that follow the Omarchy theme live, desktop-scale text, and unfocused-window mention/DM notifications. One wrinkle: the maintainer ships the official package on the edge channel, and x86_64 only.</p></details>
+      <details><summary>Is omairc free?</summary><p>Yes — MIT licensed. The IRC protocol code in <code>src/irc/</code> is LGPL-3.0-or-later and the bundled iA Writer Mono font is OFL-1.1, per the README.</p></details>
+      <details><summary>How is it different from Quassel?</summary><p>Quassel's whole architecture is a persistent core + clients with history sync. Omairc is deliberately simpler: one window, several networks, a local CLI into that window, no DCC/file transfer, no plugins, no scripts, no bouncer history-sync protocol. If those words make you sad, Quassel is right there.</p></details>
+      <details><summary>Can an AI agent use my IRC?</summary><p>Yes — that's a headline feature here. <code>npx skills add fredimachado/omairc/skills -g</code> installs a skill wrapping the local CLI, so an agent can read channels and send messages through your running window (the window must be running).</p></details>
+      <details><summary>What's the terminal client?</summary><p><code>omairc-tui</code>: a separate static Go binary on the same GitHub release. Install with <code>curl -fsSL https://raw.githubusercontent.com/fredimachado/omairc/main/install-tui.sh | sh</code> (lands in <code>~/.local/bin</code>), or Homebrew/Scoop/<code>go install</code>. It doesn't need Qt or the GUI at all.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/fredimachado/omairc" target="_blank" rel="noopener">omairc GitHub README — features, limits, install routes, CLI, agent skill, tui</a></li>
+        <li><a href="https://github.com/fredimachado/omairc/issues" target="_blank" rel="noopener">omairc issues: #379 (soju/bouncer-networks), #220 (notifications toggle), #219 (profile section), #196 (CLI join/query/part)</a></li>
+        <li><a href="https://omarchyapps.com/apps/omairc.html" target="_blank" rel="noopener">omarchyapps.com omairc page — v1.10.3-3, <code>omarchy pkg add omairc</code>, MIT/LGPL/OFL, 2026-10-14</a></li>
+        <li><a href="https://raw.githubusercontent.com/omacom/omarchy-pkgs/master/pkgbuilds/omairc/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs omairc PKGBUILD — x86_64-only, Qt6 deps, Qt 6.12 patches, qmake6 build</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

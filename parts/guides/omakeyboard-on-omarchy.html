@@ -1,0 +1,139 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add omakeyboard` installs 0.1.0-1 (the README also mentions `omarchy-pkg-add` as an older spelling and an edge-first caveat: "New packages land on Omarchy's edge channel first and reach stable with the next Omarchy release" — confirm channel at publish time).
+- Requirement: confirm Omarchy 4+ is actually needed (the README requires the Lua-configured Hyprland); confirm it refuses or warns on older Omarchy.
+- First launch: confirm the recipe/start-from-preset flow vs blank page; confirm the four pages (Mappings list, keyboard view, Shortcuts, Settings) and the Ctrl+1..4 page switches.
+- Mapping flow: create one mapping (e.g. Caps Lock as Control), confirm the key tester (Ctrl+T) shows what keys actually type, and confirm Ctrl+Return apply shows the staged pipeline and snapshots before changing.
+- Apply safety: confirm an apply that goes wrong really puts everything back (rollback); confirm where the marked block lands in ~/.config/hypr/hyprland.lua and that "Restore defaults" removes it cleanly.
+- Config paths: confirm ~/.config/omakeyboard/ holds the rules and ~/.local/state/omakeyboard/ holds generated keymaps + backups; confirm the export/import single-file round trip.
+- Collision detection: confirm the Shortcuts page warns when a shortcut would collide with an existing Hyprland binding.
+- Keyboard shortcuts of the app itself: confirm Ctrl+N, Ctrl+K, Ctrl+L, Ctrl+Tab, Ctrl+Z (undo deletion), F5 (re-read from disk).
+- Limits: confirm the "What it cannot do" list on-machine (no tap-vs-hold, no key sequences, no per-app remaps, no two-keys-one-action) — these are XKB/Hyprland limits, not app bugs.
+- Issues: 0 open as of 2026-10-18 — recheck at publish time; docs/ "How it works" page has the apply pipeline detail worth citing.
+- Screenshots needed: mappings list, keyboard view with a layer held, key tester, Shortcuts page with a collision warning, apply pipeline screen, Settings.
+
+SEO notes:
+- URL: /guides/omakeyboard-on-omarchy
+- Title tag: "How to Install & Use OmaKeyboard on Omarchy (2026)"
+- Meta description: "Install OmaKeyboard on Omarchy with one command. Visual keyboard remapping, layers, and shortcuts with snapshot rollback — what it can and can't do (tap-vs-hold, sequences, per-app maps), plus real fixes."
+- Keywords: omakeyboard omarchy, omakeyboard install, remap keyboard omarchy, keyboard remapping hyprland gui, omakeyboard vs keyd
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>OmaKeyboard on Omarchy</h2>
+      <p>OmaKeyboard is a visual keyboard remapper and shortcut manager for Omarchy — Caps Lock as Control, arrows under your right hand on a held layer, app-launching shortcuts — per keyboard, with no daemon running and no keymap files to hand-edit.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omakeyboard</code></pre>
+      <p>Takes ~1 minute (v0.1.0-1 on the app-store page, MIT). <strong>Two caveats:</strong> it needs <strong>Omarchy 4 or newer</strong> (the version that configures Hyprland in Lua — earlier Omarchy won't work), and the maintainer's README notes new packages land on the edge channel first, reaching stable with the next Omarchy release — if the package is missing on your machine, either wait for the release train or <code>sudo pacman -U</code> the release tarball from GitHub.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and launch.</h3>
+      <p>Run the command above (or the release package on stable, per the README). Launch from Super + Space — the binary is <code>omakeyboard</code>.</p>
+      <h3>2. First launch — start from a recipe.</h3>
+      <p>Don't start from a blank page — the app offers <strong>recipes</strong>, ready-made setups you can start from and tweak. You'll see four pages: Mappings (as a list), the keyboard view (mappings drawn on the actual keys), Shortcuts, and Settings. Switch pages with Ctrl+1 … Ctrl+4.</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Your mappings are drawn on the keys</strong> — Click a key to change it, hold a layer key to see what that layer does while held, and use Ctrl+L to step through layers in the keyboard view (Ctrl+K toggles list/keyboard views). Ctrl+N adds a mapping; the key tester (Ctrl+T) shows you what your keys actually type, right now, as you press them.</li>
+        <li><strong>Nothing reaches your keyboard until you apply — and apply is safe</strong> — Ctrl+Return applies, and the app shows you what the apply did stage by stage. It takes a snapshot before every change, so an apply that goes wrong puts everything back. This is the feature that makes experimenting with remaps fun instead of terrifying: there's no "I bricked my keyboard layout" state.</li>
+        <li><strong>Shortcuts get collision detection</strong> — The Shortcuts page handles app launches, window actions, and setting toggles — and it reads what your system already uses, so it can warn you when two shortcuts would collide. Undo a deletion with Ctrl+Z; F5 re-reads everything from disk.</li>
+      </ul>
+      <h3>4. What it cannot do (know this before you plan your dream layout).</h3>
+      <p>These are limits of XKB and Hyprland, not of the app — and the README says so in an Advanced section too:</p>
+      <ul>
+        <li>Tap for one thing, hold for another — XKB has no notion of time.</li>
+        <li>Two keys pressed at once producing a third.</li>
+        <li>A key that types a sequence.</li>
+        <li>Different remaps per application.</li>
+      </ul>
+      <p>"Nothing is installed to work around these, and nothing is suggested." That's honesty you can build on: what the app shows you is what XKB can actually do.</p>
+      <h3>5. Config locations.</h3>
+      <p><code>~/.config/omakeyboard/</code> holds your rules. <code>~/.local/state/omakeyboard/</code> holds the generated keymaps and the backups. And one marked block in <code>~/.config/hypr/hyprland.lua</code> — that's the whole footprint in your Hyprland config; nothing else is touched, and "Restore defaults" takes all of it back out. Settings also exports your setup as one file you can hand to someone else.</p>
+      <p><strong>Practical notes:</strong> This is an Omarchy-shaped tool through and through: it applies changes with <code>hyprctl</code>, reads the bindings already in your Lua configuration, themes itself in every Omarchy theme (the README shows it in all of them), and follows the desktop dark mode and text scale via <code>xdg-desktop-portal</code>. Ctrl+Tab moves between keyboards — mappings are per-keyboard, so your laptop board and your external board can have different layouts.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3><code>omarchy pkg add omakeyboard</code> finds nothing</h3>
+      <p>New packages land on Omarchy's edge channel first and reach stable with the next Omarchy release (stated in the README's own Install section).</p>
+      <p><strong>Fix:</strong> If you're on stable, either wait, or install the release package directly: <code>sudo pacman -U</code> the <code>omakeyboard-0.1.0-1-x86_64.pkg.tar.zst</code> asset from the <a href="https://github.com/gabamnml/omakeyboard/releases" target="_blank" rel="noopener">GitHub releases page</a> — or clone and <code>./bin/install</code>. (x86_64 asset; aarch64 users should check the release page for their asset.)</p>
+      <h3>The app launches but mappings don't apply, or it complains about your setup</h3>
+      <p>OmaKeyboard requires <strong>Omarchy 4 or newer</strong> — that's the version that configures Hyprland in Lua, and the app reads and writes that Lua configuration. On older Omarchy (hyprland.conf era) the whole mechanism the app drives doesn't exist.</p>
+      <p><strong>Fix:</strong> Upgrade Omarchy first; there's no compatibility mode.</p>
+      <h3>You remapped Caps Lock as Control (or a layer) and now you can't type your password / something broke mid-apply</h3>
+      <p>This is what the snapshot system is for: every apply snapshots first, and a bad apply rolls back.</p>
+      <p><strong>Fix:</strong> If you're locked out of the GUI, the rollback state lives in <code>~/.local/state/omakeyboard/</code> (backups) and your hand-written config is untouched except the one marked block in <code>~/.config/hypr/hyprland.lua</code> — "Restore defaults" removes that block entirely. (UNVERIFIED on-machine: confirm the exact recovery steps before publishing.)</p>
+      <h3>You want tap-Caps-for-Escape / hold-Caps-for-Control, or a key that types a whole snippet, or different remaps in your editor vs your browser</h3>
+      <p>Not supported — and it never will be through this app. XKB has no notion of time (no tap-vs-hold), no two-keys-to-one-action, no sequences, no per-application maps. These are the README's own "What it cannot do" bullets.</p>
+      <p><strong>Fix:</strong> The usual workarounds live outside XKB (keyd, xremap, QMK firmware) — see the comparison table.</p>
+      <h3>The Shortcuts page flags your new shortcut as colliding with an existing binding</h3>
+      <p>That's the feature working: the app reads your system's current bindings and tells you when two would collide, rather than silently overriding one.</p>
+      <p><strong>Fix:</strong> Change the shortcut, or find and remove the conflicting binding in your Hyprland config first.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Your Omarchy theme — it's built to match all of them. A second physical keyboard: mappings are per-keyboard, so your laptop board and your external board can have different layouts. The key tester (Ctrl+T) for diagnosing "is this key even sending what I think" before you file anything.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Editing <code>~/.config/hypr/input.lua</code> by hand (the Omarchy manual's Keyboard/Mouse/Trackpad page documents <code>kb_options</code> like <code>compose:caps</code> and repeat settings) — zero new software, full XKB option power, but no GUI and no safety net. Or <code>keyd</code>/<code>xremap</code> if you need what OmaKeyboard can't do (tap-vs-hold, sequences, per-app maps).</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: omakeyboard vs keyd vs xremap</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omakeyboard</th><th>keyd</th><th>xremap</th><th>Hand-edited Hyprland config</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free, MIT</td><td>Free, MIT</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Visual remapping + layers + shortcuts with snapshot rollback, per keyboard, Hyprland-native</td><td>System-wide remapping incl. tap-vs-hold and layers, daemon-based</td><td>Per-application remaps, key sequences, tap-vs-hold, X11+Wayland</td><td>XKB options (compose key, layouts, repeat) with zero new software</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omakeyboard</code></td><td>AUR / manual</td><td>Manual / AUR</td><td>Edit <code>~/.config/hypr/input.lua</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use OmaKeyboard if you want a safe, visual way to remap within XKB's limits; use keyd or xremap if you need tap-vs-hold, sequences, or per-app maps; hand-edit input.lua if you only need XKB options like the compose key.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>OmaKeyboard is the safe GUI for what XKB can actually do</h2>
+      <p><strong>OmaKeyboard is the free, safe GUI alternative to hand-editing configs or running a remapping daemon.</strong> There's no paid software being replaced here — the honest pitch runs the other way. What you give up vs keyd/xremap: tap-vs-hold, key sequences, and per-application remaps. What you keep: everything XKB can actually do, with recipes to start from, a key tester, collision warnings, and snapshot rollback on every apply — all themed to your Omarchy desktop. No daemon running, no keymap files to hand-edit.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the OmaKeyboard package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omakeyboard.html">View OmaKeyboard →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does OmaKeyboard work on Omarchy?</summary><p>Only on Omarchy 4+. It drives Hyprland through its Lua configuration and <code>hyprctl</code>, which is how Omarchy 4 configures input. Earlier Omarchy versions can't use it.</p></details>
+      <details><summary>Will it break my existing Hyprland config?</summary><p>It touches exactly one marked block in <code>~/.config/hypr/hyprland.lua</code> and nothing else; your rules live in <code>~/.config/omakeyboard/</code>, keymaps and backups in <code>~/.local/state/omakeyboard/</code>. "Restore defaults" removes its block entirely. Every apply snapshots first and rolls back on failure.</p></details>
+      <details><summary>Can different keyboards have different layouts?</summary><p>Yes — mappings are per keyboard. Ctrl+Tab moves between keyboards in the app.</p></details>
+      <details><summary>Why can't I make tap do one thing and hold do another?</summary><p>XKB has no notion of time — that's a limitation of the layer OmaKeyboard builds on, and the README lists it explicitly alongside no key sequences, no two-keys-to-one-action, and no per-app remaps.</p></details>
+      <details><summary>Is it a daemon? Does it run in the background?</summary><p>No — "no daemon running and no keymap to hand-edit." It generates keymaps and applies them via <code>hyprctl</code>; nothing resident.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/gabamnml/omakeyboard" target="_blank" rel="noopener">omakeyboard GitHub README — install, shortcuts, what-it-cannot-do, where-it-writes, requirements</a></li>
+        <li><a href="https://omarchyapps.com/apps/omakeyboard.html" target="_blank" rel="noopener">omarchyapps.com omakeyboard page — v0.1.0-1, <code>omarchy pkg add omakeyboard</code>, MIT, 2026-10-08</a></li>
+        <li><a href="https://raw.githubusercontent.com/omacom/omarchy-pkgs/master/pkgbuilds/omakeyboard/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs omakeyboard PKGBUILD — Qt6/Hyprland/Lua deps, install script, desktop entry, icon sizes</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

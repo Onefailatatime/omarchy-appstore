@@ -1,0 +1,146 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- `omarchy pkg add feishu-bin` — confirm the package slug installs cleanly
+- Launch from the app launcher; note the actual binary/desktop entry name
+- Login flow: confirm a personal Feishu account (mobile number signup) logs in; confirm a Lark account does NOT work in this client
+- Chinese input: type pinyin through fcitx5 into a chat box; confirm the candidate window appears
+- Screen share in a meeting on Hyprland: does the portal picker appear, or a black screen?
+- Tray icon: does it show in waybar when the window is closed?
+- Electron sandbox: does it launch cleanly, or abort with a `setuid_sandbox_host.cc` FATAL?
+- Autostart: does it add itself to autostart, and is there a toggle in settings?
+- Config location: find the real config dir under `~/.config/` and confirm the name
+- Screenshots needed: login screen, main chat window, meeting view, docs tab, settings
+
+SEO notes:
+- URL: /guides/feishu-bin-on-omarchy
+- Title tag: "How to Install & Use Feishu (feishu-bin) on Omarchy (2026)"
+- Meta description: "Install Feishu on Omarchy with one command. ByteDance's all-in-one work suite (feishu-bin): messages, video meetings, collaborative docs — plus fixes for the Electron sandbox, Wayland screen sharing, fcitx5 input, and the Feishu-vs-Lark login trap."
+- Keywords: feishu omarchy, feishu linux client, feishu-bin arch, feishu vs lark difference, feishu linux screen sharing wayland
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Feishu vs Lark, DingTalk &amp; WeCom</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Feishu on Omarchy</h2>
+      <p>Feishu (飞书) is ByteDance's all-in-one work suite — messaging, video meetings, and collaborative docs — and this is the desktop client for the <strong>China service</strong>, not the international Lark app. Install the client that matches your org's service: a Lark account will never log in here.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add feishu-bin</code></pre>
+      <p>That's the install. Fair warning: it's a 528 MB download and takes 1.5 GB on disk. It's a proprietary Electron app, not open source. The client is free to download and use; enterprise features are paid — check feishu.cn for current pricing.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Know which account you need before you log in.</h3>
+      <p>Feishu is the mainland-China service; Lark is its international sister app from the same company. They are separate services with separately stored data (<a href="https://daoinsights.com/works/how-does-bytedances-enterprise-collaboration-platform-create-the-future-of-work/" target="_blank" rel="noopener">Dao Insights</a>) — your Lark login will not work here and vice versa. If your employer runs on Feishu, log in with the account they gave you (usually tied to your mobile number, or through your org's SSO). If you're signing up personally, the client walks you through mobile-number registration.</p>
+      <h3>2. Learn these three things first:</h3>
+      <ul>
+        <li><strong>Messages</strong> — the Slack-like chat in the left rail, with threads and pinned docs.</li>
+        <li><strong>Meetings</strong> — video calls with screen sharing, the calendar icon next to it.</li>
+        <li><strong>Docs</strong> — real-time collaborative documents, the closest thing to Google Docs inside the app.</li>
+      </ul>
+      <p>Everything else — OKRs, approvals, admin panels — can wait until your org actually uses them.</p>
+      <h3>3. Make it behave on Hyprland.</h3>
+      <p>Feishu is an Electron app built with Windows and macOS in mind. On Omarchy it runs, but a few Linux-isms bite: Chinese input needs fcitx5 configured (see issues below), screen sharing in meetings depends on your Wayland portals, and closing the window may or may not minimize to tray. Work through the issues section once and it settles down.</p>
+      <p><strong>Where config lives:</strong> Electron apps on Linux keep their data under <code>~/.config/</code>. Look for a <code>feishu</code> (or similarly named) directory there after first launch — this needs on-machine confirmation.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>The app refuses to launch with a FATAL:setuid_sandbox_host.cc error</h3>
+      <p>Chromium's security model wants its <code>chrome-sandbox</code> helper owned by root with setuid permissions, and AUR-packaged Electron apps sometimes ship it misconfigured (<a href="https://susiloharjo.web.id/solving-electron-suid-sandbox-error-on-linux-ubuntu-a-quick-guide/" target="_blank" rel="noopener">background</a>).</p>
+      <p><strong>Fix:</strong> Launch with the sandbox disabled: <code>feishu --no-sandbox</code> (use the actual binary name from your install). That gets you running immediately, at the cost of disabling Chromium's inner process isolation — acceptable on a work machine running only your employer's app, less great as a daily habit. <em>Unverified for this specific package — confirm whether it launches cleanly first.</em></p>
+      <h3>In a meeting, screen sharing shows a black screen or the share picker never appears</h3>
+      <p>On Wayland, screen capture doesn't go through X11 anymore — apps must request it through PipeWire and <code>xdg-desktop-portal</code>, which pops the system share picker (<a href="https://dev.to/umair24171/wayland-developer-issues-practical-fixes-without-losing-your-mind-2ah1" target="_blank" rel="noopener">background</a>).</p>
+      <p><strong>Fix:</strong> First check the plumbing is alive: <code>systemctl --user status pipewire wireplumber</code>. On Omarchy/Hyprland the portal backend should already be present; if the picker still never appears, the Feishu client may be running through XWayland instead of native Wayland, which breaks portal capture entirely. <em>Unverified for Feishu specifically — whether its screen share works under Hyprland is an open verification item.</em></p>
+      <h3>You can't type Chinese — pinyin goes in as plain Latin letters</h3>
+      <p>Feishu won't do IME for you; it relies on your system input framework. On Arch-based systems that's fcitx5.</p>
+      <p><strong>Fix:</strong> Install <code>fcitx5-im</code> and <code>fcitx5-chinese-addons</code>, then make sure the environment variables are set before your session starts (<code>GTK_IM_MODULE=fcitx</code>, <code>QT_IM_MODULE=fcitx</code>, <code>XMODIFIERS=@im=fcitx</code> — the standard Arch fcitx5 setup from the <a href="https://wiki.archlinux.org/title/Fcitx5" target="_blank" rel="noopener">Arch Wiki</a>). Electron apps pick up input through the GTK IM module path, so if fcitx5 works in your browser it should work in Feishu too. If the candidate window appears in the wrong place or not at all, try toggling the client between Wayland and XWayland mode. <em>Unverified on this client.</em></p>
+      <h3>Closing the window kills the app entirely — no tray icon</h3>
+      <p>Electron apps on Linux draw their tray icons through StatusNotifierItem, and whether you see one depends on your bar. Omarchy's waybar needs a tray module enabled to show it at all, and some Electron builds simply never register the icon on Wayland sessions (<a href="https://bbs.archlinux.org/viewtopic.php?id=314602" target="_blank" rel="noopener">similar reports</a>).</p>
+      <p><strong>Fix:</strong> Check Feishu's settings for a "close to tray" / "minimize on close" toggle first — if the app doesn't offer it, the window manager can't invent it. <em>Tray behavior unverified.</em></p>
+      <h3>"Wrong username or password" even though your credentials work on your phone</h3>
+      <p>You're probably logging into the wrong service. Feishu and Lark look nearly identical but are separate backends with separately stored user data (<a href="https://daoinsights.com/works/how-does-bytedances-enterprise-collaboration-platform-create-the-future-of-work/" target="_blank" rel="noopener">source</a>).</p>
+      <p><strong>Fix:</strong> A Lark account will never authenticate against Feishu's servers. Double-check which one your org uses: if your invite link or admin panel lives on <code>feishu.cn</code>, you need a Feishu account; if it's on <code>larksuite.com</code>, you need Lark — and this client is the wrong download for you.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>fcitx5</code> (Chinese input — effectively required, not optional), a phone running the Feishu mobile app (fastest way to approve logins and scan the desktop QR code).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>The Feishu web client at feishu.cn in your browser — fine for chat and docs, weaker for meetings.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Feishu vs Lark vs DingTalk vs WeCom</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Feishu</th><th>Lark</th><th>DingTalk</th><th>WeCom</th></tr></thead>
+          <tbody>
+            <tr><td>Made by</td><td>ByteDance (China service)</td><td>ByteDance (international)</td><td>Alibaba</td><td>Tencent</td></tr>
+            <tr><td>Best for</td><td>Working with a China-based team or employer on Feishu</td><td>Same app, but your org is outside China</td><td>Your org standardized on Alibaba's suite</td><td>Your org standardized on Tencent's suite</td></tr>
+            <tr><td>Account</td><td>Feishu account (mobile signup) — separate from Lark</td><td>Lark account — does not work in Feishu</td><td>DingTalk account</td><td>WeCom / WeChat Work account</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add feishu-bin</code></td><td>Not on the store as of Oct 2026</td><td><code>omarchy pkg add dingtalk-bin</code> — see the <a href="/apps/dingtalk-bin.html">DingTalk app page</a></td><td>Not on the store as of Oct 2026</td></tr>
+            <tr><td>Pricing</td><td>Free to start; check feishu.cn for enterprise plans</td><td>Free to start; check larksuite.com</td><td>Check dingtalk.com</td><td>Check wecom.work</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> You don't choose Feishu — your employer or your China-based collaborators do. If they run on Feishu, this client is the one you need; if they run on Lark, DingTalk, or WeCom, this download is the wrong one no matter how similar the screenshots look.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Feishu's Linux client is free to use</h2>
+      <p><strong>The Linux desktop client is free to download and use</strong> — which matters because ByteDance's official support skews Windows/macOS/mobile, and Linux users of China-market work apps are often left with the web client. This package closes that gap. There is no free "Feishu clone" to pitch instead: Feishu is proprietary enterprise software with a free entry tier, and enterprise features are paid (check feishu.cn for current pricing).</p>
+    </aside>
+
+    <section id="switch">
+      <h2>Picking Feishu vs Lark, DingTalk, or WeCom (~10 minutes)</h2>
+      <ol>
+        <li><strong>Ask your org which service they run on:</strong> Feishu (feishu.cn) and Lark (larksuite.com) are separate backends — accounts never cross over. DingTalk and WeCom are separate Alibaba and Tencent products entirely.</li>
+        <li><strong>Install the matching client:</strong> On Omarchy: <code>omarchy pkg add feishu-bin</code> for Feishu; <code>omarchy pkg add dingtalk-bin</code> for DingTalk.</li>
+        <li><strong>Sign up with the right account:</strong> Personal Feishu signup is mobile-number based; most people installing this were invited by an employer, in which case you log in with your org account (often via SSO) and the phone-number question never comes up.</li>
+        <li><strong>Fix the Linux rough edges:</strong> Work through the Common issues section above — Electron sandbox flags, Wayland screen sharing, and fcitx5 input are the three that bite on Hyprland.</li>
+        <li><strong>What doesn't transfer:</strong> Nothing crosses between services — your Feishu chat history, contacts, and docs live on Feishu's backend only, and a Lark login will never authenticate here.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Feishu package</h2><p>See the live version, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/feishu-bin.html">View Feishu →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Feishu the same as Lark?</summary><p>No. Same company (ByteDance), nearly identical apps, but Feishu is the mainland-China service and Lark is the international one. They run on separate backends with separately stored data, and accounts do not cross over. Install the client that matches your org's service.</p></details>
+      <details><summary>Is Feishu free?</summary><p>The client and basic use are free; enterprise features are paid. Check feishu.cn for current pricing — treat any pricing claim here as stale and verify there.</p></details>
+      <details><summary>Why is the download so big?</summary><p>528 MB down, 1.5 GB installed — that's a bundled Electron/Chromium runtime plus the app itself. Typical for Electron-packaged enterprise apps; it's not a native lightweight client.</p></details>
+      <details><summary>Does Feishu work on Omarchy/Wayland?</summary><p>It installs with one command and it's an Electron app, so it runs wherever Electron runs. Linux-specific rough edges — sandbox flags, Wayland screen sharing, fcitx5 input, tray behavior — are documented above and pending on-machine verification.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/feishu-bin.html" target="_blank" rel="noopener">omarchyapps.com — feishu-bin app page (version 7.72.23-1, 528.4 MB / 1.5 GB)</a></li>
+        <li><a href="https://daoinsights.com/works/how-does-bytedances-enterprise-collaboration-platform-create-the-future-of-work/" target="_blank" rel="noopener">Dao Insights — Feishu vs Lark: separate services, data stored separately</a></li>
+        <li><a href="https://www.marketing-interactive.com/feishu-and-lark-for-dummies-101-on-the-new-work-collaboration-app-coming-for-lark" target="_blank" rel="noopener">Marketing Interactive — Feishu serves Chinese clients in China; Lark is the international sister app</a></li>
+        <li><a href="https://open.feishu.cn/solutions/detail/sso" target="_blank" rel="noopener">Feishu Open Platform — SSO: org members log in with internal accounts</a></li>
+        <li><a href="https://susiloharjo.web.id/solving-electron-suid-sandbox-error-on-linux-ubuntu-a-quick-guide/" target="_blank" rel="noopener">Electron SUID sandbox error — background on the --no-sandbox workaround</a></li>
+        <li><a href="https://dev.to/umair24171/wayland-developer-issues-practical-fixes-without-losing-your-mind-2ah1" target="_blank" rel="noopener">Wayland screen sharing fix — PipeWire + xdg-desktop-portal background</a></li>
+        <li><a href="https://bbs.archlinux.org/viewtopic.php?id=314602" target="_blank" rel="noopener">Arch forums — Electron tray icon regression reports on Linux</a></li>
+        <li><a href="https://wiki.archlinux.org/title/Fcitx5" target="_blank" rel="noopener">Arch Wiki — Fcitx5 setup</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

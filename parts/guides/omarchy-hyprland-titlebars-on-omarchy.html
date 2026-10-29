@@ -1,0 +1,134 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add omarchy-hyprland-titlebars` installs 0.2.2-2; note channel (edge vs stable) at publish time.
+- Behavior: confirm titlebars appear ONLY on floating workspaces (Super+T to toggle a window/workspace to floating); confirm tiled windows never get titlebars.
+- Drag behaviors: confirm dragging a titlebar moves the window; double-click maximizes; dragging a maximized window's titlebar restores it to floating size under the pointer.
+- Titles: confirm a desktop entry's StartupWMClass gives the app name, otherwise the raw window title; confirm web apps show page/domain (e.g. web.whatsapp.com reads "WhatsApp").
+- Load path: confirm the plugin loads from /usr/lib/omarchy-hyprland-titlebars/titlebars.so only while a workspace floats (Omarchy's Lua config); confirm where that load call lives in the Omarchy config for citing.
+- Hyprland pin: confirm the installed package depends on hyprland=0.56.2 and that a Hyprland upgrade pulls a rebuilt titlebars package automatically (rebuild_on in .omarchy/package.json).
+- `enabled` default: the fork defaults `enabled` to false (upstream hyprbars defaults true) — confirm what "a plugin left loaded after the config stops configuring it draws nothing" means in practice for tinkerers loading it via hyprpm.
+- Custom buttons: confirm the `hl.plugin.hyprbars.add_button()` Lua interface and one %WINDOW% example (e.g. the close-button example in the README) on a floating window.
+- workspace_tag: confirm titlebars can be scoped to tagged floating windows only, and release space immediately when untagged/tiled (per README).
+- Issues: 0 open as of 2026-10-18 — recheck at publish time.
+- Screenshots needed: floating window with titlebar on an Omarchy theme, maximized-then-dragged restore, titlebar on a web app (WhatsApp), inactive vs active titlebar colors.
+
+SEO notes:
+- URL: /guides/omarchy-hyprland-titlebars-on-omarchy
+- Title tag: "How to Install & Use Hyprland Titlebars on Omarchy (2026)"
+- Meta description: "Install Omarchy's Hyprland titlebar plugin with one command. Titlebars for floating workspaces — drag, double-click maximize, smart titles, custom buttons — plus the Hyprland version-pin gotcha explained."
+- Keywords: omarchy floating window titlebars, omarchy-hyprland-titlebars, hyprbars omarchy, hyprland titlebar plugin, omarchy floating workspace title bar
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Hyprland Titlebars on Omarchy</h2>
+      <p>Omarchy Hyprland Titlebars is a native Hyprland plugin (a fork of hyprbars, maintained under the omacom org) that gives Omarchy's floating workspaces their window titlebars — drag to move, double-click to maximize, theme-neutral colors, and window-aware titles.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omarchy-hyprland-titlebars</code></pre>
+      <p>Takes ~1 minute (v0.2.2-2, BSD-3-Clause + MIT). <strong>This is not an app you launch</strong> — there's no window, no launcher icon. It's a Hyprland plugin that Omarchy's own Lua config loads automatically, but only while a workspace is floating. If you never float anything, it does nothing visible — that's by design.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install.</h3>
+      <p>Run the command above. The plugin lands at the fixed path <code>/usr/lib/omarchy-hyprland-titlebars/titlebars.so</code> — that path is a contract with Omarchy core, which loads it with <code>hl.plugin.load("/usr/lib/omarchy-hyprland-titlebars/titlebars.so")</code> from its Lua config, only while a workspace floats.</p>
+      <h3>2. See it work.</h3>
+      <p>Float a window (Super + T toggles tiling/floating, or pop one out) and the titlebar appears: theme-neutral colors, the app's name, and buttons. Drag the titlebar to move the window. Double-click it to maximize. Drag a maximized window's titlebar and it comes back to its floating size, landing under your pointer. Buttons highlight in their own icon color at low opacity on hover, so the effect follows any theme without a setting.</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Titles are smarter than the raw window title</strong> — A titlebar shows the app's name when a desktop entry claims the window's class (via <code>StartupWMClass</code> or its file name), and the window's own title otherwise. Web apps get their page title or just their domain — which is why <code>web.whatsapp.com</code> reads "WhatsApp" instead of a URL. Your own entries in <code>$XDG_DATA_HOME/applications</code> win over system ones, and an entry added while Hyprland runs is picked up within a couple of seconds.</li>
+        <li><strong>It's a hyprbars fork with Omarchy opinions</strong> — It registers itself with Hyprland as <code>hyprbars</code> and keeps the <code>hl.plugin.hyprbars.add_button()</code> Lua interface and all <code>plugin.hyprbars.*</code> options, because Omarchy's config is written against those names. The fork (adapted from the Omarchy Windows 98 theme's vendored hyprbars, with Hyprland 0.56 Lua API support) adds three options: <code>enabled</code> (defaults to <strong>false</strong>, unlike upstream's true — a loaded-but-unconfigured plugin draws nothing instead of surprise bars), <code>bar_color_inactive</code> (transparent falls back to <code>bar_color</code>), and <code>workspace_tag</code> (scope titlebars to floating windows carrying a tag; untag or tile and the titlebar space releases immediately).</li>
+        <li><strong>Custom buttons can target the clicked window safely</strong> — Button <code>action</code> commands and <code>on_double_click</code> may contain <code>%WINDOW%</code>, replaced synchronously with the clicked titlebar's window address (e.g. <code>0x1234abcd</code>) before the command spawns — so async actions stay aimed at the clicked window even if focus moved. The replacement is hex only; no window title or app-controlled text enters the command. Example from the README:
+          <pre><code class="language-lua">hl.plugin.hyprbars.add_button({
+  bg_color = "rgb(f7768e)", fg_color = "rgb(1a1b26)", size = 18, icon = "×",
+  action = [[hyprctl dispatch 'hl.dsp.window.close({ window = "address:%WINDOW%" })']],
+})</code></pre>
+        </li>
+      </ul>
+      <h3>4. Colors, font, rounding, actions come from Omarchy's config.</h3>
+      <p>No theme styling is embedded in the renderer — the plugin draws what Omarchy tells it. That's why it's theme-neutral and why switching Omarchy themes doesn't need a plugin update.</p>
+      <h3>5. Config location.</h3>
+      <p>There is no per-user config file — behavior is driven by Omarchy's own Hyprland Lua configuration (<code>plugin.hyprbars.*</code> options and the <code>add_button</code> interface). The package files: <code>/usr/lib/omarchy-hyprland-titlebars/titlebars.so</code>, licenses under <code>/usr/share/licenses/omarchy-hyprland-titlebars/</code>.</p>
+      <p><strong>Practical notes:</strong> This exists because Omarchy core has no build step, so the plugin ships as its own package built by omarchy-pkgs from the repo's release tags. It coexists safely with the Windows XP theme's own hyprbars fork (symbols carry an <code>OmarchyFloating</code> prefix, built with <code>-fno-gnu-unique</code> for clean load/unload).</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>After a Hyprland update, floating windows lose their titlebars (or Hyprland refuses to load the plugin)</h3>
+      <p>A Hyprland plugin only loads into the exact Hyprland build it was compiled against — Hyprland refuses mismatched builds. The package pins <code>hyprland=0.56.2</code> as a dependency, and omarchy-pkgs rebuilds the plugin whenever Hyprland changes, moving the pin automatically (<code>rebuild_on</code> in <code>.omarchy/package.json</code>).</p>
+      <p><strong>Fix:</strong> A normal package update should heal this itself — if titlebars vanish after an update, check that the titlebars package actually upgraded alongside Hyprland (<code>pacman -Q omarchy-hyprland-titlebars</code>), and don't try to load an old <code>titlebars.so</code> by hand.</p>
+      <h3>You installed it and see no titlebars anywhere</h3>
+      <p>Almost certainly because nothing is floating. The plugin is loaded from Omarchy's Lua config <strong>only while a workspace floats</strong> — tiled workspaces never get titlebars, by design.</p>
+      <p><strong>Fix:</strong> Float a window (Super + T) and look again. If you loaded the plugin manually (e.g. via <code>hyprpm</code>) and still see nothing, remember this fork defaults <code>enabled</code> to false — unlike upstream hyprbars, a loaded-but-unconfigured plugin deliberately draws nothing.</p>
+      <h3>A titlebar shows a cryptic raw window title instead of the app name</h3>
+      <p>Titles come from desktop entries: the app name appears when an entry claims the window's class through <code>StartupWMClass</code> or its file name. No matching entry → the raw window title.</p>
+      <p><strong>Fix:</strong> Add your own desktop entry in <code>~/.local/share/applications/</code> (yours wins over system entries) with the right <code>StartupWMClass</code> — it's picked up within a couple of seconds, no Hyprland restart needed.</p>
+      <h3>You want titlebars on floating windows but not on <em>every</em> floating window</h3>
+      <p>Use the fork's <code>workspace_tag</code> option: set it and titlebars apply only to floating windows carrying that tag. Remove the tag (or tile the window) and the titlebar space releases immediately.</p>
+      <p><strong>Fix:</strong> This is a per-config option in Omarchy's Lua — there's no GUI for it; it's a tinkerer's knob. (UNVERIFIED on-machine: confirm the exact option path before publishing.)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Omarchy's floating workspace mode itself — that's the whole point. The Windows 98 / Windows XP Omarchy themes, which vendor their own hyprbars forks this package was adapted from (they coexist cleanly). <code>hyprctl</code> for inspecting window addresses when writing custom <code>%WINDOW%</code> buttons.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Pure tiling — the Omarchy default. Don't install the package at all and floating windows stay bare, exactly like stock Omarchy. Or the upstream <code>hyprbars</code> plugin if you want the unmodified original with its own defaults (this fork's <code>enabled=false</code> default and tag scoping are Omarchy opinions).</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: titlebar options on Omarchy</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omarchy-hyprland-titlebars</th><th>Upstream hyprbars</th><th>Theme-vendored forks (Win98/WinXP)</th><th>No titlebars (stock)</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, BSD/MIT</td><td>Free, BSD</td><td>Free, BSD</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Titlebars on Omarchy's floating workspaces, Omarchy-configured, auto-rebuilt with Hyprland</td><td>The original plugin with upstream defaults (<code>enabled</code> true), any Hyprland setup</td><td>Titlebars styled for a specific retro Omarchy theme</td><td>Pure keyboard-driven tiling, zero chrome</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omarchy-hyprland-titlebars</code></td><td>Manual / hyprpm</td><td>With the theme</td><td>Default</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Install this if you float windows on Omarchy and want titlebars that match the system's config; skip it if you live in pure tiling; grab upstream hyprbars only if you're configuring Hyprland by hand outside Omarchy's opinions.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Floating titlebars, the Omarchy way</h2>
+      <p><strong>Omarchy Hyprland Titlebars is the free, official route to titlebars on Omarchy's floating workspaces.</strong> There's no paid rival here — the decision is tiling-only vs float-friendly. What you get for one install command: theme-neutral titlebars drawn from Omarchy's own config (drag to move, double-click to maximize, smart titles that know "WhatsApp" from <code>web.whatsapp.com</code>), a safe <code>%WINDOW%</code> interface for custom buttons, and automatic rebuilds in lockstep with Hyprland 0.56. Tiled windows never get titlebars — pure tiling stays pure, exactly like stock Omarchy.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Hyprland Titlebars package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omarchy-hyprland-titlebars.html">View Hyprland Titlebars →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does it work on Omarchy?</summary><p>It's an official omacom package built specifically for Omarchy's floating workspace mode — the package exists because Omarchy core has no build step. x86_64 and aarch64 both ship.</p></details>
+      <details><summary>Is it free?</summary><p>Yes — the original hyprbars code is BSD-3-Clause, Omarchy's changes are MIT; the package installs both licenses.</p></details>
+      <details><summary>I installed it and nothing changed. Is it broken?</summary><p>No — it only draws titlebars on floating workspaces, and Omarchy loads it only while a workspace floats. Float a window (Super + T) to see it. If you never float, the package legitimately does nothing.</p></details>
+      <details><summary>What happens when Hyprland updates?</summary><p>The plugin is compiled against one exact Hyprland build (currently pinned to 0.56.2). omarchy-pkgs rebuilds it automatically whenever Hyprland changes and bumps the dependency pin, so updating normally keeps them in lockstep. Don't hand-load a stale <code>.so</code>.</p></details>
+      <details><summary>Can I add my own titlebar buttons?</summary><p>Yes, through the kept <code>hl.plugin.hyprbars.add_button()</code> Lua interface. Use <code>%WINDOW%</code> in the action command to target the clicked window's address safely.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/omacom/omarchy-hyprland-titlebars" target="_blank" rel="noopener">omarchy-hyprland-titlebars GitHub README — origin, options, titles, %WINDOW%, Hyprland ABI, verifying</a></li>
+        <li><a href="https://omarchyapps.com/apps/omarchy-hyprland-titlebars.html" target="_blank" rel="noopener">omarchyapps.com omarchy-hyprland-titlebars page — v0.2.2-2, <code>omarchy pkg add omarchy-hyprland-titlebars</code>, BSD-3-Clause/MIT, 2026-10-15</a></li>
+        <li><a href="https://raw.githubusercontent.com/omacom/omarchy-pkgs/master/pkgbuilds/omarchy-hyprland-titlebars/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs omarchy-hyprland-titlebars PKGBUILD — hyprland=0.56.2 pins, cmake build, install path</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

@@ -1,0 +1,116 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install command: confirm `omarchy pkg add omarchy-themes-intros` installs 2026.10.14-1.
+- Effect: switch themes (Style menu) with and without the package installed — confirm an intro video plays on switch with it, and the background jumps straight to the still image without it.
+- Install path: confirm where the videos land on disk (`pacman -Ql omarchy-themes-intros`) — guide currently does not state a path because the PKGBUILD's package() body wasn't fully readable.
+- Size: confirm the installed footprint (~96.4 MB per the package page).
+- Versioning claim: confirm the version string (2026.10.14) matches the date of the last intro-touching commit in basecamp/omarchy, per the PKGBUILD comment.
+- Mechanism: confirm what plays the video (Omarchy shell/theme switcher?) and whether sound is involved.
+- New theme behavior: add a theme whose intro postdates the package version — confirm no intro plays until the package is updated (per the "pinned by hand" comment).
+- Screenshots needed: hard to screenshot a video — capture a frame mid-transition, plus the theme switcher UI.
+
+SEO notes:
+- URL: /guides/omarchy-theme-intros
+- Title tag: "Omarchy Theme Intros: What the 96 MB Package Does (2026)"
+- Meta description: "omarchy-themes-intros is Omarchy's package of background intro videos that play when you switch themes. What it is, why it's versioned by date, and whether you need it."
+- Keywords: omarchy-themes-intros, omarchy theme intro video, omarchy theme switch animation, omarchy themes backgrounds
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Omarchy Theme Intros on Omarchy</h2>
+      <p>omarchy-themes-intros is a 96 MB data package (MIT, maintained by DHH) containing the short background intro videos that play when you switch Omarchy themes — pure eye candy, zero configuration.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omarchy-themes-intros</code></pre>
+      <p>Takes a minute — it’s a 96.3 MB download of video files, <code>arch=any</code>, no dependencies, no service, nothing to configure. After installing, switch themes and you’ll see a short intro animation play before the new background settles. Uninstall it and theme switches just jump straight to the still image, exactly as before. There is genuinely nothing to “use” here — this guide answers the only real questions: what is this package, why is it 96 MB, and do I need it. (You don’t <em>need</em> it. You’ll probably <em>want</em> it.)</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install.</h3>
+      <p><code>omarchy pkg add omarchy-themes-intros</code>. That’s the whole setup — the package drops the intro videos alongside Omarchy’s theme data (confirm the exact path on your machine with <code>pacman -Ql omarchy-themes-intros</code>; the install location wasn’t readable from the package recipe at draft time).</p>
+      <h3>2. Switch a theme and watch.</h3>
+      <p>Open the Omarchy menu → Style → Theme (or however you switch themes on your install) and pick a different theme. With the package installed, a short intro video plays as the new theme’s background arrives, then settles into the still image. Without it, the switch goes straight to the still — same result, less theater.</p>
+      <h3>3. The three things everyone needs to know:</h3>
+      <ul>
+        <li><strong>It’s a split-out data package, on purpose.</strong> The intro videos used to ride inside the big <code>omarchy-dev</code> package and made it huge. Per the package recipe’s own comments, the videos “are most of omarchy-dev’s size and change far less often than the code, so they ship here” — splitting them means the main package can rebuild on every commit without re-shipping ~96 MB of video each time.</li>
+        <li><strong>It’s versioned by hand, by commit date.</strong> The version string (currently 2026.10.14) isn’t a release — it’s the date of the last commit in the Omarchy repo that touched an intro video, and the recipe pins that exact commit. Translation: if a new theme’s intro video lands in Omarchy tomorrow, it won’t play on your machine until this package gets bumped to include it. If your favorite theme has no intro video at all, the background simply switches straight to the still image — that’s by design, not a bug.</li>
+        <li><strong>It costs disk, nothing else.</strong> No daemon, no config file, no CPU when idle. The only ongoing cost is the 96 MB on disk. On a cramped drive, removing it is a free 96 MB with no functional downside.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>Honest note up front: this is a static data package with no code, no service, and no configuration — there are no documented bug reports against it. What’s below are the real behaviors from the package recipe that <em>look</em> like bugs, so you don’t file them as bugs.</p>
+      <h3>You installed a brand-new Omarchy theme and no intro video plays for it</h3>
+      <p><strong>Why it’s not a bug:</strong> The package is pinned by hand to the last commit that touched an intro video. A new intro simply isn’t in the package until the maintainer bumps the pinned commit and version. Check the package version against the theme’s release date; if the theme is newer than the package, you’re waiting on a package update, not a fix.</p>
+      <h3>Some themes play an intro, others switch straight to the still image</h3>
+      <p><strong>Why it’s not a bug:</strong> From the recipe comments: “a background without one switches straight to the still image.” Not every theme ships an intro video. Nothing is broken; that theme just doesn’t have one.</p>
+      <h3>The package feels big for what it does (96 MB)</h3>
+      <p><strong>Fix:</strong> That’s the actual content — one intro video per theme, and video is heavy. If disk space matters more than the transition animation, remove the package: <code>omarchy pkg remove omarchy-themes-intros</code> (confirm the exact remove command on-machine). Theme switching works identically, minus the video.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Omarchy’s theme system itself — this package is literally the garnish on it. If you’re theme-hopping (and on Omarchy, you will be), the intros make each switch feel intentional. Community themes from other authors play by the same rule: intro video present, it plays; absent, still image.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Uninstalling it. There is no alternative package and no setting to tweak — the “alternative” is the still image you already had. If you want <em>custom</em> intro videos, the recipe sources them from <code>themes/*/backgrounds/intros</code> in the Omarchy repo, so a theme author adds one by shipping a video in that path — but wiring a personal video into your own theme is unverified at draft time, so don’t attempt it until someone tests it.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: theme intro options</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omarchy-themes-intros</th><th>No package</th><th>Bundled in omarchy-dev</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free, MIT</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>The official intro videos, kept in sync with Omarchy’s themes</td><td>Saving 96 MB; theme switches go straight to the still image</td><td>Historical — this is where the videos used to live before the split</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omarchy-themes-intros</code></td><td>(default state)</td><td>N/A (split out)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Install it if you like the transition theater and have 96 MB to spare; skip it if you’re on a tiny drive — you lose an animation, nothing else.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>The 96 MB is optional eye candy — removing it costs you nothing functional</h2>
+      <p>What you keep without the package: theme switching works identically — the background just jumps straight to the still image instead of playing a transition animation. What the package adds: a short intro video each time you switch to a theme that has one, at a one-time cost of ~96 MB on disk, no daemon, no config, no CPU when idle. If space is tight, removing it is a free 96 MB with no functional downside.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Omarchy Theme Intros package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omarchy-themes-intros.html">View Omarchy Theme Intros →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>What actually plays the intro video?</summary><p>Omarchy’s own theme-switching machinery — the package only supplies the video files. The exact player component wasn’t confirmed from the recipe at draft time, so treat the mechanism as unverified.</p></details>
+      <details><summary>Do the intros have sound?</summary><p>Unconfirmed at draft time. Check on a real install — the mechanism and sound behavior need on-machine verification before this can be stated.</p></details>
+      <details><summary>Will new themes get intros automatically?</summary><p>Only when this package is updated to the commit that added them. The version date tells you how fresh the collection is — 2026.10.14 means intros added after Oct 14, 2026 aren’t in your copy yet.</p></details>
+      <details><summary>Can I add my own intro video to a theme?</summary><p>The videos ship from <code>themes/*/backgrounds/intros</code> in the Omarchy repo, so in principle a theme can carry its own — but the on-disk install path and filename conventions are unverified at draft time. Don’t attempt the steps until someone confirms them on a real machine.</p></details>
+      <details><summary>Does it slow down theme switching or use battery?</summary><p>It plays a short video during the switch itself, then stops — no background process, no idle cost. The cost is the 96 MB of disk, full stop.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/omarchy-themes-intros.html" target="_blank" rel="noopener">omarchyapps.com — omarchy-themes-intros package page (2026.10.14-1, MIT, 96.3 MB, updated 2026-10-14, <code>omarchy pkg add omarchy-themes-intros</code>)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/blob/master/pkgbuilds/omarchy-themes-intros/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs PKGBUILD — omarchy-themes-intros (maintainer DHH, intro videos split from omarchy-dev, hand-pinned commit, versioned by commit date, “a background without one switches straight to the still image”)</a></li>
+        <li><a href="https://omarchy.org/manual/making-your-own-theme/" target="_blank" rel="noopener">Omarchy manual — Making your own theme (theme structure, backgrounds, Style menu)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

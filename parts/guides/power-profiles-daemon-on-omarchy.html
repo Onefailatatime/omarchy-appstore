@@ -1,0 +1,136 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install command: confirm `omarchy pkg add omarchy-power-profiles-daemon` installs 0.30-3 and that it replaces/conflicts with stock `power-profiles-daemon`.
+- Service state: confirm `systemctl status power-profiles-daemon` is active after install; check whether the service is enabled by default or needs `sudo systemctl enable --now`.
+- CLI works: confirm `powerprofilesctl` runs (needs python-gobject — check it's pulled in or whether the user must install it) and `powerprofilesctl list` shows the available profiles.
+- Omarchy integration: confirm install/config/power.sh behavior — desktop/plugged sets `performance`, laptop-on-battery sets `balanced` + enables `omarchy-battery-monitor.timer`.
+- Patch evidence: on Apple Silicon confirm the cpufreq boost driver patch is active; on Snapdragon X confirm the 60/75% frequency caps behave as described. (Needs the hardware — mark "not tested" if unavailable.)
+- Shebang note: confirm `head -1 /usr/bin/powerprofilesctl` is `#!/usr/bin/python3` (the mise/venv workaround).
+- TLP conflict: confirm installing `tlp` conflicts/errors as expected, and document which one Omarchy recommends.
+- Issue/forum URLs: confirm the bbs.archlinux.org tlp conflict thread, the Mint TLP conflict post, and the Fedora Changes page links work.
+- Screenshots needed: this is a daemon — no GUI. Screenshot candidates: `powerprofilesctl list` output, `systemctl status`, battery-monitor notification.
+
+SEO notes:
+- URL: /guides/power-profiles-daemon-on-omarchy
+- Title tag: "power-profiles-daemon on Omarchy: Install & Switch Power Profiles (2026)"
+- Meta description: "Omarchy's power-profiles-daemon adds NVIDIA RTX Spark, Apple Silicon, and Snapdragon X power profiles to the standard Linux power daemon. Install, check, and switch profiles from the terminal."
+- Keywords: power-profiles-daemon omarchy, powerprofilesctl arch, power-profiles-daemon vs tlp, snapdragon x linux power profiles, omarchy battery balanced performance
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>power-profiles-daemon on Omarchy</h2>
+      <p>Omarchy's power-profiles-daemon (0.30, rebuilt by Omarchy with patches for NVIDIA RTX Spark, Apple Silicon, and Snapdragon X hardware) is the background service that exposes your CPU power profiles — performance, balanced, power-saver — over D-Bus so apps and scripts can read and switch them.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omarchy-power-profiles-daemon</code></pre>
+      <p>Takes seconds — it's a 69.9 KB daemon, installed in 169.4 KB, and it <strong>replaces</strong> Arch's stock <code>power-profiles-daemon</code> (the package declares <code>provides</code> + <code>conflicts</code>, so it's a drop-in swap, not a second copy). Then check it's alive: <code>systemctl status power-profiles-daemon</code>, and read your profiles with <code>powerprofilesctl list</code>.</p>
+      <p>This is plumbing, not an app. There's no window, no launcher icon — it just runs, and your desktop, your battery monitor, and your scripts talk to it. If your Omarchy machine came from the installer, it's very likely already running; this package is how you get Omarchy's patched 0.30 build with the new-hardware profiles.</p>
+      <p><strong>What the Omarchy build adds over stock 0.30:</strong> four documented patches — NVIDIA RTX Spark (N1X) per-core energy-preference profiles (proposed upstream as merge request !236), acceptance of the kernel's <code>balanced-performance</code> spelling, a generic cpufreq driver that uses the boost switch on Apple Silicon, and frequency caps for Snapdragon X (60% max in power-saver, 75% in balanced, uncapped in performance; proposed as !239). If you're on an RTX Spark, Snapdragon X, or Apple Silicon machine, this is the version you want. On plain x86_64 it behaves like stock.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and verify the service.</h3>
+      <p>Run the command above, then:</p>
+      <pre><code class="language-bash">systemctl status power-profiles-daemon   # should be active (running)
+powerprofilesctl list                    # the profiles your hardware offers</code></pre>
+      <h3>2. Switch profiles from the terminal.</h3>
+      <pre><code class="language-bash">powerprofilesctl set performance    # plugged in / full speed
+powerprofilesctl set balanced       # the everyday default
+powerprofilesctl set power-saver    # stretch the battery</code></pre>
+      <p>(<code>powerprofilesctl</code> needs <code>python-gobject</code> — it's an optdepends, so if the command errors on an import, install that first.)</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Profiles come from your hardware's drivers, not from the daemon's generosity</strong> — The daemon exposes what the kernel offers: on most Intel/AMD laptops that's all three profiles; on some hardware the <code>performance</code> profile simply doesn't exist and you'll only see <code>balanced</code> and <code>power-saver</code>. That's normal — the Omarchy patches exist precisely to teach the daemon about newer chips (RTX Spark, Snapdragon X, Apple Silicon) whose drivers upstream 0.30 doesn't fully understand yet.</li>
+        <li><strong>Omarchy picks a sane default at install</strong> — Omarchy's installer (<code>install/config/power.sh</code>) checks <code>/sys/class/power_supply</code> for a battery: no battery (desktop) → profile set to <code>performance</code>; battery present → <code>balanced</code>, plus the <code>omarchy-battery-monitor.timer</code> systemd user service for low-battery notifications. You don't need to touch anything unless you want different behavior.</li>
+        <li><strong>Pick this OR tlp, never both</strong> — They fight over the same CPU frequency controls. Omarchy ships the daemon; if you install <code>tlp</code> from the Arch repos, expect a package conflict — that's the system protecting you from two drivers steering the same wheel.</li>
+      </ul>
+      <h3>4. Where its config lives.</h3>
+      <p>Almost nowhere user-facing — that's the point of a D-Bus service. The daemon binary and its systemd unit live under <code>/usr</code>; per-user behavior (like which profile Omarchy chose for you) is whatever the install script set via <code>powerprofilesctl</code>. There is no <code>~/.config</code> file to edit; you drive it with <code>powerprofilesctl</code> or any app that speaks its D-Bus interface.</p>
+      <h3>5. Script it.</h3>
+      <p>Because it's D-Bus, anything can read the active profile — e.g., show it in your Omarchy bar, or auto-switch on AC/battery events with a udev rule or a small systemd path unit watching <code>/sys/class/power_supply/</code>. <code>powerprofilesctl</code> is the friendly wrapper; the raw interface is <code>org.freedesktop.UPower.PowerProfiles</code> (renamed from the old <code>net.hadess.PowerProfiles</code> back in 0.20, so if an old script references the old name, that's why it broke).</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Installing <code>tlp</code> (or <code>tlp-rdw</code>) errors out: "tlp and power-profiles-daemon are in conflict"</h3>
+      <p>This is intentional and well-documented (see the long-running Arch forum thread <a href="https://bbs.archlinux.org/viewtopic.php?id=273068" target="_blank" rel="noopener">"tlp-rdw and power-profiles-daemon are in conflict"</a>, and Mint's note that "the power-profiles-daemon package conflicts with tlp so they can't both be installed").</p>
+      <p><strong>Fix:</strong> Decide which power manager you want. To go with TLP: remove this package (check the exact remove command on-machine), install <code>tlp</code>, then <code>sudo systemctl enable --now tlp</code>. To stay with the daemon (Omarchy's default): don't install TLP. Running both means two daemons fighting over CPU governors — whichever you choose, mask or remove the other.</p>
+      <h3><code>powerprofilesctl</code> fails with a Python import error (e.g., <code>No module named 'gi'</code>)</h3>
+      <p>The tool needs PyGObject. The Omarchy PKGBUILD lists <code>python-gobject</code> as an optdepends ("for powerprofilesctl") and even rewrites the script's shebang to <code>#!/usr/bin/python3</code> so it uses the system Python instead of whatever a mise or venv puts first on PATH — because a venv Python lacks PyGObject. (Sourced directly from the package recipe.)</p>
+      <p><strong>Fix:</strong> Install <code>python-gobject</code> and run it with the system Python.</p>
+      <h3><code>powerprofilesctl list</code> shows only <code>balanced</code> — no <code>performance</code> profile</h3>
+      <p>Usually not a bug: the performance profile only appears when your hardware's drivers expose the knobs for it (upstream documents this; a Manjaro forum thread from the GNOME 41 era confirms "if you don't have a Performance mode available, it's not technically supported out of the box").</p>
+      <p><strong>Fix:</strong> On Snapdragon X / RTX Spark / Apple Silicon, this Omarchy build's patches are what teach the daemon those knobs — make sure you're actually running the Omarchy package (<code>pacman -Q omarchy-power-profiles-daemon</code> should show 0.30-3), not a stale stock install. If the hardware genuinely lacks the controls, no software will conjure them.</p>
+      <h3>The profile you set doesn't stick, or your laptop doesn't switch profiles when you unplug</h3>
+      <p>The daemon itself doesn't auto-switch on AC/battery events — that's the desktop's or a script's job. On Omarchy, the <em>installer</em> sets the profile once based on battery presence; there is no built-in "performance on AC, saver on battery" rule after that.</p>
+      <p><strong>Fix:</strong> If you want automatic switching, that's a small script watching <code>/sys/class/power_supply/</code> and calling <code>powerprofilesctl set ...</code> — or use TLP, which does exactly this kind of policy out of the box.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>The <code>omarchy-battery-monitor.timer</code> user service (low-battery notifications on laptops — enabled by the Omarchy installer alongside the <code>balanced</code> profile). Any bar widget that reads the D-Bus interface to show the current profile. <code>upower</code> (already a dependency) for the battery data underneath.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><strong>TLP</strong> (<code>tlp</code> from the Arch repos) — the veteran power manager with far more knobs (charge thresholds, USB autosuspend, Wi-Fi power saving) and real AC/battery policies, at the cost of editing config files in <code>/etc/tlp.d/</code>. Or <strong>auto-cpufreq</strong> — automatic, laptop-focused CPU frequency scaling with a TUI. Both replace the daemon; both conflict with it. Rule of thumb: want profiles apps understand (GNOME-style)? Keep the daemon. Want aggressive battery tuning with one config file? TLP.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: power profiles options</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omarchy-power-profiles-daemon</th><th>stock power-profiles-daemon</th><th>TLP</th><th>auto-cpufreq</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, GPL-3.0</td><td>Free, GPL-3.0</td><td>Free, GPL-3.0</td><td>Free, LGPL</td></tr>
+            <tr><td>Best for</td><td>Standard profiles over D-Bus; patched for RTX Spark, Apple Silicon, Snapdragon X</td><td>Same daemon without Omarchy's new-hardware patches</td><td>Deep battery tuning, charge thresholds, AC/battery policies</td><td>Set-and-forget automatic CPU scaling on laptops</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omarchy-power-profiles-daemon</code></td><td><code>pacman -S power-profiles-daemon</code> (replaced by the Omarchy build)</td><td><code>omarchy pkg add tlp</code> (conflicts — pick one)</td><td>AUR / manual</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Stay on Omarchy's build if you want the standard profile interface and own newer ARM/Apple hardware; switch to TLP if your priority is squeezing hours out of a battery with fine-grained control.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>One daemon for every power profile — patched for new hardware</h2>
+      <p><strong>Omarchy's power-profiles-daemon is the standard Linux power interface, rebuilt with patches for the newest hardware.</strong> There's no paid rival to undercut — the value is correctness on modern chips. What the Omarchy build adds over stock 0.30: NVIDIA RTX Spark per-core energy-preference profiles, the kernel's <code>balanced-performance</code> spelling, an Apple Silicon cpufreq-boost driver, and Snapdragon X frequency caps (60% power-saver, 75% balanced, uncapped performance). On plain x86_64 it behaves like stock — free forever, GPL-3.0, and Omarchy's installer already picks a sane default for you.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the power-profiles-daemon package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omarchy-power-profiles-daemon.html">View power-profiles-daemon →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is this a GUI app?</summary><p>No — it's a system daemon with no window. You talk to it with <code>powerprofilesctl</code> in a terminal, or through apps that read its D-Bus interface. The Omarchy installer configures it for you, so many users will never type a command.</p></details>
+      <details><summary>Does it replace the normal power-profiles-daemon?</summary><p>Yes, by design. The package declares <code>provides=(power-profiles-daemon)</code> and <code>conflicts=(power-profiles-daemon)</code> — installing it swaps out Arch's stock build for Omarchy's patched 0.30. Anything that depended on the stock package keeps working.</p></details>
+      <details><summary>Why does Omarchy ship its own build instead of Arch's?</summary><p>Because upstream 0.30 doesn't yet know about the newest hardware. The four Omarchy patches add NVIDIA RTX Spark power profiles, the kernel's <code>balanced-performance</code> spelling, an Apple Silicon cpufreq-boost driver, and Snapdragon X frequency caps — several are proposed upstream (MRs !236/!237/!238/!239) and the package comments say to drop them once merged. When upstream catches up, Omarchy's build converges back to stock.</p></details>
+      <details><summary>How do I see which profile is active right now?</summary><p>Run <code>powerprofilesctl</code> with no arguments. For scripts, query the D-Bus interface <code>org.freedesktop.UPower.PowerProfiles</code>.</p></details>
+      <details><summary>Will it make my battery last longer by itself?</summary><p>Only if you switch to <code>power-saver</code>. The daemon exposes the profiles; it doesn't choose for you (beyond Omarchy's one-time installer default). Automatic AC/battery switching is a TLP-style feature — if you want that, that's the sign to evaluate TLP.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/omarchy-power-profiles-daemon.html" target="_blank" rel="noopener">omarchyapps.com — omarchy-power-profiles-daemon package page (0.30-3, GPL-3.0-only, updated 2026-10-14, <code>omarchy pkg add omarchy-power-profiles-daemon</code>)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/blob/master/pkgbuilds/omarchy-power-profiles-daemon/PKGBUILD" target="_blank" rel="noopener">omarchy-pkgs PKGBUILD — omarchy-power-profiles-daemon (4 patches with MR references, python-gobject optdepends, shebang fix)</a></li>
+        <li><a href="https://gitlab.freedesktop.org/upower/power-profiles-daemon" target="_blank" rel="noopener">Upstream project: gitlab.freedesktop.org/upower/power-profiles-daemon (MR !236 referenced in package)</a></li>
+        <li><a href="https://bbs.archlinux.org/viewtopic.php?id=273068" target="_blank" rel="noopener">Arch forums — "tlp-rdw and power-profiles-daemon are in conflict" (tlp vs ppd conflict)</a></li>
+        <li><a href="https://forums.linuxmint.com/viewtopic.php?t=451434&sid=e1b076aa0a1ddf68c935b26467a162d&view=print" target="_blank" rel="noopener">Mint forums — TLP/power-profiles-daemon conflict note</a></li>
+        <li><a href="https://fedoraproject.org/wiki/Changes/Power_Profiles_Daemon" target="_blank" rel="noopener">Fedora Changes — Power Profiles Daemon (profiles, D-Bus rename history)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>

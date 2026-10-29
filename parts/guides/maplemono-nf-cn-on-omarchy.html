@@ -1,0 +1,141 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- `omarchy pkg add maplemono-nf-cn` installs cleanly (152.1 MB download, 335.3 MB installed)
+- `fc-list | grep -i maple` shows the exact family name the package registers (expect something like "Maple Mono NF CN" — UNVERIFIED)
+- Set `font-family` in `~/.config/ghostty/config` to the fc-list family name; reload with ctrl+shift+, and confirm ligatures + icons render
+- Nerd Font icon test: run `printf '\uf07b \uf013\n'` (folder + gear glyphs) — no tofu boxes
+- CJK test: print a line of Chinese/Japanese text and confirm the CN glyphs render at 2:1 width vs Latin
+- Confirm which weights/styles shipped (Light, Regular, Medium, SemiBold, Bold, ExtraBold + italics, per upstream v7)
+- Confirm whether `maplemono-nf-cn-unhinted` is also listed on omarchyapps.com (unverified at time of writing)
+- Screenshots needed: fc-list output showing the font, ghostty config with font-family set, terminal showing ligatures + icons, CJK text next to Latin text
+
+SEO notes:
+- URL: /guides/maplemono-nf-cn-on-omarchy
+- Title tag: "How to Install & Use Maple Mono (maplemono-nf-cn) on Omarchy (2026)"
+- Meta description: "Install Maple Mono NF CN on Omarchy with one command. Free, open-source monospace font (OFL-1.1) with Nerd Font icons and full CJK glyphs — set it in ghostty, fix icon boxes and ligatures."
+- Keywords: maple mono omarchy, maplemono-nf-cn arch, maple mono ghostty font-family, maple mono chinese nerd font, coding font with chinese glyphs linux
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch your terminal font</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Maple Mono on Omarchy</h2>
+      <p>Maple Mono is a free, open-source monospace coding font (OFL-1.1) with round corners, smart ligatures, and first-class Nerd Font icons — and this NF CN package adds full Chinese/Japanese glyphs, so one font covers your code, your terminal icons, and your CJK text.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add maplemono-nf-cn</code></pre>
+      <p>One command on Omarchy. It takes a few minutes (152 MB download). Version 7.9-1, listed on omarchyapps.com. Upstream: <a href="https://github.com/subframe7536/maple-font" target="_blank" rel="noopener">subframe7536/maple-font</a> (29K+ stars). AUR package: <code>maplemono-nf-cn</code>.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and confirm it's registered.</h3>
+      <p>After the install finishes, check that fontconfig picked it up:</p>
+      <pre><code class="language-bash">fc-list | grep -i maple</code></pre>
+      <p>You should see entries across several weights (Regular, Bold, Medium, etc.) plus italics. Write down the exact family name it reports. Everything below uses that exact name — don't guess it.</p>
+      <h3>2. Set it as your ghostty font.</h3>
+      <p>Omarchy ships ghostty as the terminal, and its config lives at <code>~/.config/ghostty/config</code>. Add this line (one setting per line):</p>
+      <pre><code class="language-ini">font-family = Maple Mono NF CN</code></pre>
+      <p>Use the exact family name from <code>fc-list</code> in step 1 (the name above is the expected one — UNVERIFIED until the on-machine checklist is complete). Then reload the config instantly with <strong>ctrl+shift+,</strong> — no restart needed. You can validate the file first with <code>ghostty +validate-config</code>.</p>
+      <h3>3. Test icons and ligatures.</h3>
+      <p>Paste this in the terminal and hit enter:</p>
+      <pre><code class="language-bash">printf '\uf07b \uf013\n'</code></pre>
+      <p>You should see a folder icon and a gear icon. If you see tofu boxes instead, you're pointed at the wrong family name — go back to step 1. To see ligatures in action, type an operator like <code>=&gt;</code>, <code>!=</code>, or <code>==</code> in your editor or shell. If ligatures don't render, enable them explicitly in ghostty:</p>
+      <pre><code class="language-ini">font-feature = +liga
+font-feature = +calt</code></pre>
+      <p><strong>Where config lives:</strong> fontconfig. The package installs system-wide (typically <code>/usr/share/fonts</code> on Arch). Per-user fonts go in <code>~/.local/share/fonts/</code>, and per-user fontconfig rules live in <code>~/.config/fontconfig/fonts.conf</code>. Refresh the cache after any manual font change with <code>fc-cache -f -v</code>.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Nerd Font icons (Starship prompt, directory listings) show as empty boxes after switching</h3>
+      <p><strong>Fix:</strong> You're almost certainly using the plain "Maple Mono" family name instead of the Nerd Font one. Run <code>fc-list | grep -i maple</code>, find the entry whose family includes "NF", and paste that exact name into <code>font-family</code> in <code>~/.config/ghostty/config</code>. Then reload with ctrl+shift+,. Apps also cache font lists at startup, so fully quit and reopen anything that still shows boxes.</p>
+      <h3>Ligatures (=&gt;, !=, ==) don't combine into single glyphs</h3>
+      <p><strong>Fix:</strong> Maple's smart ligatures are OpenType contextual alternates (<code>calt</code>). Enable them in ghostty with <code>font-feature = +calt</code> and <code>font-feature = +liga</code>. In editors, check the font ligatures toggle (VS Code: <code>"editor.fontLigatures": true</code>; Neovim GUI frontends have their own setting). This step is sourced from ghostty config docs and Maple's feature docs — <em>UNVERIFIED on Omarchy until the checklist above is complete.</em></p>
+      <h3>Chinese or Japanese text renders, but the spacing looks wider than other Chinese fonts</h3>
+      <p><strong>Fix:</strong> Expected behavior, not a bug. The CN variant is built on Resource Han Rounded and uses a strict 2:1 Chinese-to-English width ratio, which the README notes makes "spacing of Chinese characters larger compared to other popular Chinese fonts." If you hate it, switch to the non-CN <code>maplemono-nf</code> build and let a separate CJK font handle Chinese (configure the fallback in ghostty with a second <code>font-family</code> line, or via fontconfig).</p>
+      <h3>The install is slow, or you notice the 335.3 MB installed size</h3>
+      <p><strong>Fix:</strong> That's the CN glyphs. A full CJK character set based on Resource Han Rounded is heavy — this is one of the largest font packages in the store. If you don't read Chinese or Japanese, install the non-CN NF variant instead (unverified whether omarchyapps.com lists <code>maplemono-nf</code> separately — check the site). One wrinkle: upstream's README marks the AUR builds as "Not Recommended" (preferring the ArchLinuxCN repo), but on Omarchy the supported path is <code>omarchy pkg add</code> regardless.</p>
+      <h3>Text looks slightly blurry or off on your display compared to the screenshots</h3>
+      <p><strong>Fix:</strong> This package is the <strong>hinted</strong> build (autohint applied). Upstream ships an unhinted variant (<code>maplemono-nf-cn-unhinted</code>) for users who prefer it, and hinting preference varies by display and DPI. If you switch variants, clear the font cache (<code>fc-cache -f -v</code>) and fully restart your apps — fontconfig and terminals both cache rendered glyphs.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>ghostty</code> (Omarchy's default terminal — set the font in <code>~/.config/ghostty/config</code>), <code>starship</code> (its prompt icons need a Nerd Font, which this package provides).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>ttf-jetbrains-mono-nerd-basic</code> (<a href="/apps/ttf-jetbrains-mono-nerd-basic.html">listed on omarchyapps.com</a>) — the plainer, more corporate alternative with a smaller footprint.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Maple Mono NF CN vs JetBrains Mono Nerd vs CaskaydiaCove Nerd</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Maple Mono NF CN</th><th>JetBrains Mono Nerd (ttf-jetbrains-mono-nerd-basic)</th><th>CaskaydiaCove Nerd</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (OFL-1.1)</td><td>Free (OFL-1.1)</td><td>Free (OFL-1.1)</td></tr>
+            <tr><td>Best for</td><td>One font for code + icons + Chinese/Japanese</td><td>General coding; the safe, neutral pick</td><td>VS Code users who like Cascadia's look</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add maplemono-nf-cn</code></td><td>On omarchyapps.com</td><td>Manual / AUR (unverified in store)</td></tr>
+            <tr><td>CJK coverage</td><td>Full (Resource Han Rounded, 2:1 width)</td><td>None</td><td>None</td></tr>
+            <tr><td>Ligatures</td><td>Smart contextual ligatures, customizable OpenType features</td><td>Standard ligature set</td><td>Standard ligature set</td></tr>
+            <tr><td>Footprint</td><td>152 MB download / 335 MB installed</td><td>Small</td><td>Small</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Maple Mono NF CN if you work with Chinese or Japanese text and want exactly one font everywhere; pick JetBrains Mono Nerd if you want the smaller, more conventional option.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Maple Mono is free software — no paid tier to beat</h2>
+      <p><strong>There is no free-alternative pitch here because Maple Mono is itself free</strong> (SIL Open Font License 1.1) — no paid software to replace. What you get for $0: a monospace coding font with round corners, smart contextual ligatures, baked-in Nerd Font icons, and a full Chinese/Japanese glyph set in one install, instead of juggling a separate CJK fallback font.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch your terminal font (~5 minutes)</h2>
+      <ol>
+        <li><strong>Install the new font:</strong> <code>omarchy pkg add maplemono-nf-cn</code> (152 MB download; 335 MB installed).</li>
+        <li><strong>Get the exact family name:</strong> <code>fc-list | grep -i maple</code> — copy the family name exactly as fontconfig reports it.</li>
+        <li><strong>Point ghostty at it:</strong> Add <code>font-family = Maple Mono NF CN</code> (your exact name) to <code>~/.config/ghostty/config</code>, then reload with ctrl+shift+,.</li>
+        <li><strong>Verify icons and ligatures:</strong> <code>printf '\uf07b \uf013\n'</code> should show a folder and a gear; type <code>=&gt;</code> to see ligatures combine. Tofu boxes mean the wrong family name — go back to step 2.</li>
+        <li><strong>What doesn't transfer:</strong> Nothing — a font swap has no state. Your old font stays installed unless you remove it; point every other app at the new name if you want consistency.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Maple Mono package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/maplemono-nf-cn.html">View Maple Mono →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>What do "NF" and "CN" mean?</summary><p>NF = Nerd Font variant: thousands of patched-in icons (folder glyphs, git symbols, OS logos) for terminal prompts like Starship and status bars. CN = Chinese variant: full CJK glyphs built on Resource Han Rounded, with a strict 2:1 width ratio to the Latin glyphs so mixed-language code and Markdown tables line up. This package is both.</p></details>
+      <details><summary>Is this the hinted or unhinted build?</summary><p>Hinted. The package description on omarchyapps.com says "(hinted)", matching upstream's autohint builds. An unhinted variant (<code>maplemono-nf-cn-unhinted</code>) exists upstream for users who prefer it (unverified whether it's listed on omarchyapps.com).</p></details>
+      <details><summary>How do I set it as my terminal font on Omarchy?</summary><p><code>omarchy pkg add maplemono-nf-cn</code>, then get the exact family name with <code>fc-list | grep -i maple</code>, add <code>font-family = &lt;that name&gt;</code> to <code>~/.config/ghostty/config</code>, and reload with ctrl+shift+,.</p></details>
+      <details><summary>Will my Starship prompt icons still work?</summary><p>Yes. That's what the NF in the name is for — the Nerd Font patches are baked in, so prompt icons, <code>eza --icons</code> listings, and Waybar module icons all render from the same font.</p></details>
+      <details><summary>Why is the download 152 MB when other fonts are a few megabytes?</summary><p>The CN half of the package. A complete Simplified + Traditional Chinese + Japanese glyph set is enormous; this package weighs 335.3 MB installed. If you don't need CJK, use a non-CN build and save the disk.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/subframe7536/maple-font" target="_blank" rel="noopener">subframe7536/maple-font — README (features, CN variant, hinted/unhinted, AUR note)</a></li>
+        <li><a href="https://deepwiki.com/subframe7536/maple-font/2.2-opentype-features" target="_blank" rel="noopener">DeepWiki — Maple Mono OpenType features</a></li>
+        <li><a href="https://deepwiki.com/subframe7536/maple-font/3-build-system" target="_blank" rel="noopener">DeepWiki — Maple Mono build system (CN/CJK output pipeline)</a></li>
+        <li><a href="https://omarchyapps.com/apps/maplemono-nf-cn.html" target="_blank" rel="noopener">omarchyapps.com — maplemono-nf-cn app page (152.1 MB / 335.3 MB, OFL-1.1, 7.9-1, updated Oct 19 2026)</a></li>
+        <li><a href="https://petronellatech.com/blog/ghostty-terminal-emulator-setup-configuration-guide-2026/" target="_blank" rel="noopener">Ghostty 1.3 setup guide — font-family / font-feature syntax, ctrl+shift+, reload, +validate-config</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+    </section>
