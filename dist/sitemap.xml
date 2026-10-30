@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://omarchyapps.com/</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://omarchyapps.com/</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://omarchyapps.com/leaderboard.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://omarchyapps.com/develop.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/about.html</loc><lastmod>2026-10-20</lastmod></url>
@@ -84,7 +84,7 @@
   <url><loc>https://omarchyapps.com/apps/buzz.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/caja-open-any-terminal.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/claude-code.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/claude-desktop.html</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/claude-desktop.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/cliamp.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/collie-bin.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/crush-bin.html</loc><lastmod>2026-10-29</lastmod></url>
@@ -164,7 +164,7 @@
   <url><loc>https://omarchyapps.com/apps/maplemono-nf-cn.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/microsoft-edge-stable-bin.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/minecraft-launcher.html</loc><lastmod>2026-10-20</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/mise-bin.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/mise-bin.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/monologue.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/nautilus-dropbox.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/nautilus-open-any-terminal.html</loc><lastmod>2026-10-20</lastmod></url>
@@ -238,7 +238,7 @@
   <url><loc>https://omarchyapps.com/apps/superwhisper-bin.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/symfony-cli.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-bin.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/t3code-nightly-bin.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/t3code-nightly-bin.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-patched-bin.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tensaku.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/thinkpad-t14-amd-touchpad-dkms.html</loc><lastmod>2026-10-20</lastmod></url>
@@ -350,7 +350,7 @@
   <url><loc>https://omarchyapps.com/macbook12-spi-driver-dkms-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/makima-bin-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/microsoft-edge-stable-bin-on-omarchy.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://omarchyapps.com/mise-bin-on-omarchy.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://omarchyapps.com/mise-bin-on-omarchy.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://omarchyapps.com/nautilus-open-any-terminal-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/nordvpn-bin-on-omarchy.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://omarchyapps.com/omarchy-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
@@ -383,7 +383,7 @@
   <url><loc>https://omarchyapps.com/supergfxctl-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/superwhisper-bin-on-omarchy.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://omarchyapps.com/t3code-bin-on-omarchy.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://omarchyapps.com/t3code-nightly-bin-on-omarchy.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://omarchyapps.com/t3code-nightly-bin-on-omarchy.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://omarchyapps.com/t3code-patched-bin-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/tensaku-on-omarchy.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/thinkpad-t14-amd-touchpad-dkms-on-omarchy.html</loc><lastmod>2026-10-29</lastmod></url>
