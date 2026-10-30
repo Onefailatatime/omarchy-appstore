@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-10-29T13:00:13+00:00",
+ "generated_at": "2026-10-30T01:00:16+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 200,
+ "app_count": 202,
  "apps": [
   {
    "id": "1password",
@@ -448,6 +448,17 @@
    "homepage": "https://www.google.com/chrome",
    "tutorial_url": "https://omarchyapps.com/google-chrome-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/google-chrome.html"
+  },
+  {
+   "id": "gridcraft-bin",
+   "name": "gridcraft-bin",
+   "package": "gridcraft-bin",
+   "install_command": "omarchy pkg add gridcraft-bin",
+   "category": "Utilities",
+   "description": "Clean-room spreadsheet in pure Rust that opens and saves Excel workbooks",
+   "homepage": "https://github.com/storytold/gridcraft",
+   "tutorial_url": "https://omarchyapps.com/gridcraft-bin-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/gridcraft-bin.html"
   },
   {
    "id": "grok-bot",
@@ -2063,6 +2074,17 @@
    "homepage": "https://linux.weixin.qq.com/",
    "tutorial_url": "https://omarchyapps.com/wechat-bin-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/wechat-bin.html"
+  },
+  {
+   "id": "wordcraft-bin",
+   "name": "wordcraft-bin",
+   "package": "wordcraft-bin",
+   "install_command": "omarchy pkg add wordcraft-bin",
+   "category": "Utilities",
+   "description": "Clean-room word processor in pure Rust that opens and saves Word documents",
+   "homepage": "https://github.com/storytold/wordcraft",
+   "tutorial_url": "https://omarchyapps.com/wordcraft-bin-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/wordcraft-bin.html"
   },
   {
    "id": "wps-office-cn",

@@ -84,8 +84,8 @@
   "hash": "046b56c62976b4b59b90b7a8771f99042a7e00ec340d27e0022edb739961f1ba"
  },
  "apps/crush-bin.html": {
-  "date": "2026-10-23",
-  "hash": "e59018629108641473a4609706ffcbd1fb675370d3bfe26a410ec31d5fb18a63"
+  "date": "2026-10-29",
+  "hash": "290151e837ef65a4a4d642df1fedea07b5b0a2f37addd621124dd0f410a34b44"
  },
  "apps/cua-driver-bin.html": {
   "date": "2026-10-20",
@@ -145,11 +145,11 @@
  },
  "apps/ghost-runtime.html": {
   "date": "2026-10-29",
-  "hash": "8c0d4a97fbbee9e0dc063286badb4d4f5dd661f2888be02dda67261ed098f091"
+  "hash": "fe8dd5711f4ac8a11f0061c02bbb4e7741ca3122519cdf6195928d67510b70f0"
  },
  "apps/ghost.html": {
   "date": "2026-10-29",
-  "hash": "0daa1658992c2be7e50b86b421e5f48338f9afbdf7b40b27a789c72398ddb164"
+  "hash": "95f2e088b1c41f814158a7d3c2c03dc87169222786694f9cb0b8bc027865f38a"
  },
  "apps/ghostty-nautilus.html": {
   "date": "2026-10-28",
@@ -176,8 +176,12 @@
   "hash": "b77643ff978f26f5862c54e6d47b8a180398ee5800dbab72792801c959496e2d"
  },
  "apps/google-chrome.html": {
-  "date": "2026-10-27",
-  "hash": "b1164785988c9be8cfd8ea333b3f06a809976f9a7db8b15346dfdfe3d54ac1d6"
+  "date": "2026-10-29",
+  "hash": "1dc1656023531f2ffaa1e4e0a94be1e8a3a2087fa92563bd0877d10ef9d5d5ff"
+ },
+ "apps/gridcraft-bin.html": {
+  "date": "2026-10-29",
+  "hash": "eb6371fb44971ae94f336ee95e7c6036560b63aea8e9219fda1c853c2025c092"
  },
  "apps/grok-bot.html": {
   "date": "2026-10-28",
@@ -348,8 +352,8 @@
   "hash": "d6004a18911facc3dddb1815047196afd92f84800d25bf598a3d0f209f246495"
  },
  "apps/lmstudio-bin.html": {
-  "date": "2026-10-20",
-  "hash": "40d07e291d9f6b27a7aedd0f0c6b1008e0a87347f28542a9c16c16902b18c040"
+  "date": "2026-10-29",
+  "hash": "877c8f27740f617b9a04d651f3727ed13c9ca911af6863bc6fa6c283f6077767"
  },
  "apps/lmstudio.html": {
   "date": "2026-10-20",
@@ -380,16 +384,16 @@
   "hash": "630ddf6062759425693dd3d406473ad3f083507e02b10bb9b830289cb0919bc6"
  },
  "apps/microsoft-edge-stable-bin.html": {
-  "date": "2026-10-26",
-  "hash": "6a122647e9b709b531507533f18f477f62aa90c5d69fac837e13c95cf09cd5d6"
+  "date": "2026-10-29",
+  "hash": "706e4e02e19f94fa4ed04d91387f292e7a6253d65d566b6e05af004957cb6a96"
  },
  "apps/minecraft-launcher.html": {
   "date": "2026-10-20",
   "hash": "532b2b9d942ec10ab8b9f77a2671186d13e23024ec2246f14b8e3034f31bfcd3"
  },
  "apps/mise-bin.html": {
-  "date": "2026-10-28",
-  "hash": "cfe058aba87934deb91f1ab8f4c61ed96b155ee2487a7490657184a0957e79e7"
+  "date": "2026-10-29",
+  "hash": "4682eba4ab0a728c32379fe601a0160ef81fd6461f72b72212ab6fc2b06cc9b6"
  },
  "apps/monologue.html": {
   "date": "2026-10-20",
@@ -556,8 +560,8 @@
   "hash": "93feab9aa6ec264f178a7baa257006dc7f1c461360676e7af8228d4d2c15fcda"
  },
  "apps/openai-codex-desktop.html": {
-  "date": "2026-10-28",
-  "hash": "8dcaf48df96c99452f7ba041c1a72cf710b36a6146d9e9e90a07787d6d74b56d"
+  "date": "2026-10-29",
+  "hash": "d518235dd9d9e87e23a2628d314316aa4ded82e0f7c9faa8303a276ec37f2bbc"
  },
  "apps/opencl-nvidia-580xx.html": {
   "date": "2026-10-20",
@@ -608,16 +612,16 @@
   "hash": "123789ebc46c44f63f641fcfd2ff529ea378a6e5973e0a094599a5a09b78db6f"
  },
  "apps/rawmakase-bin.html": {
-  "date": "2026-10-27",
-  "hash": "31791d50b31563a08f4089de2875b0c02bcc3f9092213e4aa7d6d0712a52b884"
+  "date": "2026-10-29",
+  "hash": "b475c1eb601fc2a6e07655020bbf9f6380be4336aec0b684238d7e4512d80ced"
  },
  "apps/retroarch-joypad-autoconfig-git.html": {
   "date": "2026-10-20",
   "hash": "1edd3fd1a02514f493121803f1a2126ed53810274ca539d27c27379de10dd4db"
  },
  "apps/rumb.html": {
-  "date": "2026-10-25",
-  "hash": "fecc62b2ee35d4314069a66c52645efebd8ff9a0d9cb842a622733affb616e1a"
+  "date": "2026-10-29",
+  "hash": "20c491d811b480c838d499bb9a0573a7cb1a3d36becf33f817f52600579fe9fa"
  },
  "apps/rustdesk.html": {
   "date": "2026-10-20",
@@ -681,11 +685,11 @@
  },
  "apps/t3code-bin.html": {
   "date": "2026-10-29",
-  "hash": "3d6710552ed7cc4deb52637885d11df74e9dca87a9f20485a681c41b120873ad"
+  "hash": "b911f53c3137cf69266ffd4c46f48f65e743477c50b9df1cc059c9d08fbfdbb5"
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-10-29",
-  "hash": "348018b7e7d524c6ac7d49d3b80977441ec65effca63973f8b75cae8a806b879"
+  "hash": "b862d34bae1861f65fbc7d211d198d47fbad985ef93b848585306c7001fc0cfa"
  },
  "apps/t3code-patched-bin.html": {
   "date": "2026-10-20",
@@ -763,6 +767,10 @@
   "date": "2026-10-20",
   "hash": "23cb2982ef9a578a8bdf1e77f782691e6790feea2a15aa6383d7aa70a4c705fc"
  },
+ "apps/wordcraft-bin.html": {
+  "date": "2026-10-29",
+  "hash": "95fdceb4b243515c9d593ef2478f95368c4e6576e0c2c381c76c3e13b08853fe"
+ },
  "apps/wps-office-cn.html": {
   "date": "2026-10-20",
   "hash": "e8e29d47ccd379bb41496a868dd71c7b48662d7ec9b7e9bc55e368e3b3c48eed"
@@ -816,8 +824,8 @@
   "hash": "de2d36d665a48b74f4d94678c61f0d8e5f9818e77c36e975b646f6ff60cbde21"
  },
  "apps/zen-browser-bin.html": {
-  "date": "2026-10-21",
-  "hash": "2604f3a25ebfd35b29a495dd658d8a66e523f089dcfe2046f14ce312035f212a"
+  "date": "2026-10-29",
+  "hash": "0a5a78fc840d6ef7d250740ad6fd8f864695e2c933858ce7ca46485a3349bc14"
  },
  "asdcontrol-on-omarchy.html": {
   "date": "2026-10-20",
@@ -860,8 +868,8 @@
   "hash": "e2d0ab1488dec77ee8b925752c7347f330fa639955868a50f4e97277c8aae179"
  },
  "catalog.html": {
-  "date": "2026-10-28",
-  "hash": "7ebde0158b298c52765a091b247131784160a4df7accd449809cc31320947d01"
+  "date": "2026-10-29",
+  "hash": "74e0a9298ade7295f044203f60116f0759434c86ca1851247007a9ac13144887"
  },
  "category/ai-agents.html": {
   "date": "2026-10-20",
@@ -908,8 +916,8 @@
   "hash": "c05799cc34bd42b17a4cb893e8e45c07fb4565ae8835f576d45aa78dc63b0bcc"
  },
  "category/utilities.html": {
-  "date": "2026-10-28",
-  "hash": "268305a52b7183cf5817d4cb2475988ea0cab26e44e0bef11859db57928e76c0"
+  "date": "2026-10-29",
+  "hash": "10ce62ec2b2eb1d11d1fd4fecaa607c7c6b6574b46eed3cf4e2c0e0e77062662"
  },
  "claude-code-on-omarchy.html": {
   "date": "2026-10-27",
@@ -932,8 +940,8 @@
   "hash": "7b7823a7e56dc2fccdb95fac283497a16fd26b99f757b79cd0e46a582e6d44d2"
  },
  "crush-bin-on-omarchy.html": {
-  "date": "2026-10-23",
-  "hash": "e4db11369302ca608736d29e8ebdf4a65caf02c83dff1fccfd8596c2491055af"
+  "date": "2026-10-29",
+  "hash": "5949a7195be98c95cdb8b200847b63c66a1835e126083538fd2e6cf1de28177a"
  },
  "cua-driver-bin-on-omarchy.html": {
   "date": "2026-10-21",
@@ -1037,27 +1045,27 @@
  },
  "ghost-on-omarchy.html": {
   "date": "2026-10-29",
-  "hash": "2672a6e9fed48ab4b86e1ef22a2c725ef757add1a87412df7beb5de2b0f25e9e"
+  "hash": "3f00cc98b017f893c6cf89bfcc0ee6f8555ac0dcf821eb0cca2ab405bb6cb405"
  },
  "ghost-runtime-on-omarchy.html": {
   "date": "2026-10-29",
-  "hash": "af4d22779c8f120324a0289ca409580d29daed41b3b9138847aad46eb13c5a45"
+  "hash": "99f8ea7b16602f368002668034ef357e5b88e943aebab5006af98e610512e811"
  },
  "ghostty-nautilus-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "7b2218fceb1d817f41fb15f08cf58ec4536e0df068f98814a9574bd5ee5f5e83"
+  "date": "2026-10-29",
+  "hash": "a296fd30e36cbe9c7fa3b118059096f616a51fd8e662269232c4e51bc03d6d93"
  },
  "ghostty-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "496e217dbbfd6504e8455c31ab72ed2b4496b7fa4d32f044c32dac8ae1651a70"
+  "date": "2026-10-29",
+  "hash": "a8b64b9a051e4b6c444d3d09416910fa754a47212c25099cacdc3fcb95c3c9de"
  },
  "ghostty-shell-integration-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "bf529abbf47d2d80f8032a8a5a8d6ac01281e63ac8431bf9a3d1121e537dc397"
+  "date": "2026-10-29",
+  "hash": "49c9649140881394f7c50d62a4d4a418d84846910926d339607a8e5d184d65b3"
  },
  "ghostty-terminfo-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "61f7dd8e7c2d64b25e9b5089db836657da8540a08b9cea8d6efe6332c3fd77fa"
+  "date": "2026-10-29",
+  "hash": "3ebb02888b73a94f5b564a034dd88dedee81d4bf002baf1696cbffc74800e48f"
  },
  "github-copilot-cli-on-omarchy.html": {
   "date": "2026-10-28",
@@ -1068,12 +1076,16 @@
   "hash": "ad5eedbc0508a89a700305ddfd363df98891cd343cef63a3746b63ae77f03144"
  },
  "google-chrome-on-omarchy.html": {
-  "date": "2026-10-27",
-  "hash": "c4306d0a22c0c20c2981326f78d8f6e783e9afcc99731ab028c1885d8da797ae"
+  "date": "2026-10-29",
+  "hash": "940d601df865245fb81245914d4bf46247a9a4da579881aaa199978fc5a20aa6"
  },
  "gpu-screen-recorder-on-omarchy.html": {
   "date": "2026-10-19",
   "hash": "774de068678cc872b6798577c8071605a6aeaad0301d53bfc34d4129a6cc5f16"
+ },
+ "gridcraft-bin-on-omarchy.html": {
+  "date": "2026-10-29",
+  "hash": "39f1aa2b38b063902db5562a1ecadc08ee05a5049b944a6d7ed89f4be5e3b963"
  },
  "grok-bot-on-omarchy.html": {
   "date": "2026-10-28",
@@ -1133,7 +1145,7 @@
  },
  "index.html": {
   "date": "2026-10-29",
-  "hash": "7df910b58e0ef669b77a30f7f17930b74a22e024c459e4ad7c1e33cea3bbbdc8"
+  "hash": "f32d8fb962301f6aff51cd83fd13b6bdd192dca6eb147be4725b539d510bbed1"
  },
  "install-omarchy-on-intel-mac.html": {
   "date": "2026-10-19",
@@ -1192,8 +1204,8 @@
   "hash": "acbb1661e9dfce39fe76190f5ddaea88393f06df02536664564708e3d8d79c0e"
  },
  "leaderboard.html": {
-  "date": "2026-10-28",
-  "hash": "3a4cdea9425bee12bd8ff8525b1ea288ba310439b16b20fc2663c4afc2af28c8"
+  "date": "2026-10-29",
+  "hash": "9ebdb3a9b69b6db648705e12ed0f449249bf0cfdb8bcc4dbced5d528cdaf3046"
  },
  "learn-omarchy-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1348,8 +1360,8 @@
   "hash": "23e09e2d41744ed89dbb9497da28730176a8de3d6fb1a9e44ed46353232d23da"
  },
  "lmstudio-bin-on-omarchy.html": {
-  "date": "2026-10-20",
-  "hash": "21d025fb6285eed1d4c43220a0249be2269d8dad5d5376fa2adfe9ffe7e1d6b0"
+  "date": "2026-10-29",
+  "hash": "184294303be7f025c78624a5cf43f94a9dcb3cf13322904a558df34c25e94d9b"
  },
  "lmstudio-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1384,16 +1396,16 @@
   "hash": "314c2d18c8a8c1c04d5d39362e84edd325a60787a7b03f6c9b70865c22a3ff4c"
  },
  "microsoft-edge-stable-bin-on-omarchy.html": {
-  "date": "2026-10-26",
-  "hash": "912df735186341f074b714df14372d58199eabb9bfe6a41d213484b3ab891708"
+  "date": "2026-10-29",
+  "hash": "e43ff055dc76491caa15940eec4a43b3a7800c386711dca3824933e4523155ae"
  },
  "minecraft-launcher-on-omarchy.html": {
   "date": "2026-10-20",
   "hash": "e5e36b00b748c2cab24fc3e9d2fbfc7eb374fffbb7a9927ebfa3b554a0e882dc"
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "5545a62061b5bad42fbd739980132fcb907d6b7b957b3f829daf5e83c30a716b"
+  "date": "2026-10-29",
+  "hash": "fef89398cefed366d5d186e03651669999a965b155a83dafcf3996a48003fffa"
  },
  "monologue-on-omarchy.html": {
   "date": "2026-10-18",
@@ -1456,8 +1468,8 @@
   "hash": "58e6db53b1cc8961b065197fb7b480084125c12563308ab86e8ce10a7a6924ac"
  },
  "omarchy-apps-list.html": {
-  "date": "2026-10-28",
-  "hash": "7f26bf49db116f03f570689ef994d5d1c4ac7004ed3a51844ccb008c0e87ede3"
+  "date": "2026-10-29",
+  "hash": "c7fa4dab316bc1b6a1e707268ced53564cb6c1c70c28befef1693407e41ce3ed"
  },
  "omarchy-audio-tuner-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1588,8 +1600,8 @@
   "hash": "f1ea62cf4a88c94c14caadc23db1787e40b5c2283b19ea262c5149775c9ca07d"
  },
  "openai-codex-desktop-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "de6f0a359e8cd1ecaaa3135c88a940c0a869c99ac9e82ef5fe6635a13b8c9bd6"
+  "date": "2026-10-29",
+  "hash": "fb851d5cbe927cdf530760a0c9036d31fe0354a4c5125ad4933b3728815653ef"
  },
  "opencl-nvidia-580xx-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1660,8 +1672,8 @@
   "hash": "2bfb9f6cf25dc4a4394a6504a3302898b84ee1e0210492e438ed228cf30e251a"
  },
  "rawmakase-bin-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "926b53c4566626e3d7c5ca93492abe8b57f650257bc828290e9f109b42e87b27"
+  "date": "2026-10-29",
+  "hash": "05ff972000a945a859c465e1e41f47980e316a105eab1f510d29238b40d72da3"
  },
  "retroarch-joypad-autoconfig-git-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1716,8 +1728,8 @@
   "hash": "606602082ab1ad06fb49350e406f361559563a49970f2556f40d2cfe4e4202e1"
  },
  "sponsor.html": {
-  "date": "2026-10-28",
-  "hash": "a4e71cd8e688c3cd8063621a02e9a73d842c7f41a8f6f8746b6120ab6b659b8b"
+  "date": "2026-10-29",
+  "hash": "69673834efda81cffd39c2cda22a1807b98a7e03694ca8f8ebecd7dd9db2ccb6"
  },
  "spotify-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1761,11 +1773,11 @@
  },
  "t3code-bin-on-omarchy.html": {
   "date": "2026-10-29",
-  "hash": "7aa5041611af94ce8664fcec06fed0a23e4f22bf0c0a142116f6413cfaba5be5"
+  "hash": "2400153eefed2729fde6a4a755540b63f5f14631c20603c2bffcef3717da3fde"
  },
  "t3code-nightly-bin-on-omarchy.html": {
   "date": "2026-10-29",
-  "hash": "198635e1f088033d88c1783292c7ea3224fce97aa33171675cd6ccb36ceaed31"
+  "hash": "796b5e3cd885da266ddb6542ad574f4d3dcf8bc8069efdb10d3e0f10b9ed1361"
  },
  "t3code-patched-bin-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1780,16 +1792,16 @@
   "hash": "6d5100fc21e8b0b193cb21ad5a58e7b03d0f63ccd07172343fa3e83938ecde96"
  },
  "thinkpad-t14-amd-touchpad-dkms-on-omarchy.html": {
-  "date": "2026-10-20",
-  "hash": "48d8b02095e129dda233d5948d4734d4dd39de28467b7083d5a0aa3c2bfc261e"
+  "date": "2026-10-29",
+  "hash": "9b5be74225e04b37fa17ddda0836772840705b541f033a5a92a256db8c6d7b4a"
  },
  "thinkpad-t14-amd-touchpad-on-omarchy.html": {
   "date": "2026-10-18",
   "hash": "dc2e9ca8b2de129d071cccebcba3e728e8db09d300ca232308595467d23809c2"
  },
  "tmog-bin-on-omarchy.html": {
-  "date": "2026-10-20",
-  "hash": "bdd6e4ac0480b777bed43bb4e1e70bea075667de545fa0f6ca1b711b13714911"
+  "date": "2026-10-29",
+  "hash": "0a34a9fa7e7a02e84aaad243b7df70558a2bb73618d86a0b7e1ea05ec4f805c7"
  },
  "tobi-try-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1808,8 +1820,8 @@
   "hash": "894ddf157987d80cd50c2fbf2e7fccd040ec9943fe155486d151b398061e46e3"
  },
  "tutorials.html": {
-  "date": "2026-10-28",
-  "hash": "2d5c1f1201d40b5cff377e3a8974842052d76dc9a37f76e90e95f7fb5d7f8d67"
+  "date": "2026-10-29",
+  "hash": "ee795e350a1387a71d66b35c80e10b966438fef9856b21fcd674b3bb117997e0"
  },
  "tuxedo-drivers-nocompatcheck-dkms-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1820,8 +1832,8 @@
   "hash": "88bc0ab97d867ff370e26bd418ff577271fb56616a86ff557a33dba4b0872db4"
  },
  "tzupdate-on-omarchy.html": {
-  "date": "2026-10-20",
-  "hash": "8588b1f0e11bc66a303035f48661bcb66fbc57071426bf36fe3ceacc40b26cca"
+  "date": "2026-10-29",
+  "hash": "ed0d8438c2cfe10e1cabdbe5eb4e309e8a0233266ca53acdcb8249c9eae0a677"
  },
  "ufw-docker-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1836,16 +1848,16 @@
   "hash": "168a618087322bf1b0b40937bdcb9fa6bbc453c52d8b6efb57e5a5785a45d14d"
  },
  "vi-on-omarchy.html": {
-  "date": "2026-10-20",
-  "hash": "d8e2a56bacebeb448d729204d958a297614d21a30784c6f6fa06a89a627fffc6"
+  "date": "2026-10-29",
+  "hash": "bacdacef10785b6ee791cd8b426aa648ee1a825e237022c5ce8e32b0953eda41"
  },
  "visual-studio-code-bin-on-omarchy.html": {
   "date": "2026-10-28",
   "hash": "49d032d4a8778ff1fcdce232239488d08f6f9984a863f5784be0239067a5d2e9"
  },
  "voxtype-bin-on-omarchy.html": {
-  "date": "2026-10-20",
-  "hash": "829f082ac430c3b8c59b9404b68b467e2d63197bf0214f1214b6b3a704d26392"
+  "date": "2026-10-29",
+  "hash": "ad551828802913e83c1ed905ed379de07604b8df151d58a4a20efa754c013527"
  },
  "vs/omarchy-vs-arch.html": {
   "date": "2026-10-20",
@@ -1880,8 +1892,8 @@
   "hash": "0e68f4a53cf99ed39d1705d00ee2db5402f0d79b7a28080da064034a599053b5"
  },
  "wayfreeze-on-omarchy.html": {
-  "date": "2026-10-20",
-  "hash": "003913e103e47ae5954d470190cbfa2559c71cd035cfbd3b84a6b52480b4e63c"
+  "date": "2026-10-29",
+  "hash": "d11625878c1015641ba19d476c88b35366fb1d719f7b0f21a61a9050ec7d844f"
  },
  "wechat-bin-on-omarchy.html": {
   "date": "2026-10-16",
@@ -1898,6 +1910,10 @@
  "windows-shortcuts-on-omarchy.html": {
   "date": "2026-10-19",
   "hash": "06f36a5dee622e8680ee252ab8d3dc9fe7915f7051c031bb2ac8584590c871dc"
+ },
+ "wordcraft-bin-on-omarchy.html": {
+  "date": "2026-10-29",
+  "hash": "db9abae58501c14c02ef7507adbbcb26e55f3c03e0a9c9be761c332e92a6e351"
  },
  "wps-office-cn-on-omarchy.html": {
   "date": "2026-10-16",
@@ -1956,7 +1972,7 @@
   "hash": "318332e520293c564ed4f10282684d26341c646f4c6e90da0bb555666d5f9ed5"
  },
  "zen-browser-bin-on-omarchy.html": {
-  "date": "2026-10-21",
-  "hash": "97c3b43486fe6ebf1b34442649bd43d25a6a874fbf3dab530ce9177acc180b12"
+  "date": "2026-10-29",
+  "hash": "3707d6c548ce8a39255495dc7b83f9db22158328cd112e47ad78f6b36197b446"
  }
 }
