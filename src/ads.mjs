@@ -5,7 +5,9 @@ import ADS from "./ad-catalog.mjs";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 // Plain page types plus the sponsor slots the house ads fill (page_slot).
-const PAGE_TYPES = new Set(["home", "app", "category", "tutorial", "guide", "other", "mini", "home_header", "home_footer", "app_banner"]);
+// Every page type has a header and a footer slot (app pages: banner and footer).
+const PAGE_TYPES = new Set(["home", "app", "category", "tutorial", "guide", "other", "mini", "home_header", "home_footer", "app_banner", "app_footer",
+  ...["guide", "tutorial", "category", "other"].flatMap((t) => [`${t}_header`, `${t}_footer`])]);
 const EVENTS = { impression: "impressions", click: "clicks", view: "views" };
 const headers = { "cache-control": "no-store", "content-type": "application/json; charset=utf-8", "x-content-type-options": "nosniff" };
 const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers });

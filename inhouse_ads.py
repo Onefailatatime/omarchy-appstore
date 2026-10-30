@@ -264,39 +264,68 @@ def ads_js() -> str:
             " * They fill the site's own sponsor slots only while no paid sponsor holds them:\n"
             " * the homepage header and footer rotations and the app profile banner.\n"
             " * Fair rotation: each browser starts at a random ad and then steps to the\n"
-            " * next one for every slot it fills, so all twenty get equal exposure.\n"
-            " * Impressions count once per slot when the ad is half visible; clicks\n"
+            " * next one for every unit it fills, so all twenty get equal exposure and\n"
+            " * no ad repeats on a page. Header and footer show three at a time.\n"
+            " * Impressions count once per unit when it is half visible; clicks\n"
             " * open /adN in a new tab. */\n"
-            + ADS_RUNTIME.replace("__ADS__", json.dumps(data, separators=(",", ":"), ensure_ascii=False)))
+            + ADS_RUNTIME.replace("__ADS__", json.dumps(data, separators=(",", ":"), ensure_ascii=False))
+            .replace("__CSS__", json.dumps(ROW_CSS)))
 
 
 # Each copy of the script fills the slots placed above it, so a slot is drawn
 # as soon as it is parsed. The unit reuses the sponsor unit markup and classes
 # (.ad, .ad.text, .mark, .copy, .sub, .cta) so it has the slot's size and look.
+# A slot with data-oa-count="3" shows three different ads side by side in the
+# sponsor row grid (.ad-rotate, the same 3 up layout paid sponsors use). No ad
+# repeats on a page; each unit logs its own impression (half visible) and click.
+# The row CSS ships inside this script (ROW_CSS) rather than parts/style.css, so the
+# shared stylesheet hash does not change: a few stale pages in dist/ that build.py
+# no longer rewrites still link the current stylesheet by hash.
 ADS_RUNTIME = r"""(function(){"use strict";
-var ADS=__ADS__,N=ADS.length,KEY="oa_ad_next";
+var ADS=__ADS__,N=ADS.length,KEY="oa_ad_next",used=window.__oaUsed||(window.__oaUsed={});
 var slots=document.querySelectorAll("[data-oa-slot]:not([data-oa-done])");
-function next(){var i;try{var s=localStorage.getItem(KEY);i=s===null?Math.floor(Math.random()*N):(parseInt(s,10)%N+N)%N;localStorage.setItem(KEY,String((i+1)%N))}catch(e){i=Math.floor(Math.random()*N)}return ADS[i]}
+function step(){var i;try{var s=localStorage.getItem(KEY);i=s===null?Math.floor(Math.random()*N):(parseInt(s,10)%N+N)%N;localStorage.setItem(KEY,String((i+1)%N))}catch(e){i=window.__oaI===undefined?Math.floor(Math.random()*N):(window.__oaI+1)%N;window.__oaI=i}return i}
+function next(){for(var t=0;t<N;t++){var ad=ADS[step()];if(!used[ad.r]){used[ad.r]=1;return ad}}return null}
 function send(ad,t,page){var b=JSON.stringify({ad:ad.r,type:t,page:page});try{if(navigator.sendBeacon&&navigator.sendBeacon("/api/ads/event",new Blob([b],{type:"application/json"})))return}catch(e){}try{fetch("/api/ads/event",{method:"POST",headers:{"content-type":"application/json"},body:b,keepalive:true})}catch(e){}}
-function fill(slot){
-slot.setAttribute("data-oa-done","1");
-var type=slot.getAttribute("data-oa-slot")||"other",pos=slot.getAttribute("data-oa-pos")||"",page=pos?type+"_"+pos:type,ad=next();
-var a=document.createElement("a");a.className=slot.getAttribute("data-oa-class")||"ad";
+if(!document.getElementById("oa-ad-css")){var st=document.createElement("style");st.id="oa-ad-css";st.textContent=__CSS__;document.head.appendChild(st)}
+var io="IntersectionObserver" in window?new IntersectionObserver(function(es){for(var k=0;k<es.length;k++){if(es[k].isIntersecting){var el=es[k].target;io.unobserve(el);if(el.__oaImp)el.__oaImp()}}},{threshold:.5}):null;
+function unit(ad,cls,type,pos,page){
+var a=document.createElement("a");a.className=cls;
 a.href="/ad"+ad.r+"?from="+encodeURIComponent(type)+(pos?"&slot="+encodeURIComponent(pos):"");a.target="_blank";a.rel="noopener";
 a.setAttribute("data-oa-ad",String(ad.r));
 a.innerHTML='<span class="mark" aria-hidden="true"></span><span class="copy"><strong></strong><span class="sub"></span></span><span class="cta">Join the waitlist ↗</span>';
 a.querySelector(".mark").textContent=ad.n.charAt(0);a.querySelector("strong").textContent=ad.n;a.querySelector(".sub").textContent=ad.l;
 a.setAttribute("aria-label",ad.n+": "+ad.l+" Opens the waitlist in a new tab.");
 a.addEventListener("click",function(){send(ad,"click",page);if(window.umami)try{umami.track("house_ad_click",{ad:ad.r,page:type,slot:pos})}catch(e){}});
-slot.appendChild(a);
-var seen=false;function imp(){if(seen)return;seen=true;send(ad,"impression",page)}
-if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){for(var k=0;k<es.length;k++){if(es[k].isIntersecting){imp();io.disconnect()}}},{threshold:.5});io.observe(a)}else imp()}
+var seen=false;a.__oaImp=function(){if(seen)return;seen=true;send(ad,"impression",page)};
+return a}
+function fill(slot){
+slot.setAttribute("data-oa-done","1");
+var type=slot.getAttribute("data-oa-slot")||"other",pos=slot.getAttribute("data-oa-pos")||"",page=pos?type+"_"+pos:type;
+var cls=slot.getAttribute("data-oa-class")||"ad",n=Math.max(1,Math.min(3,parseInt(slot.getAttribute("data-oa-count")||"1",10)||1));
+var box=slot;if(n>1){box=document.createElement("div");box.className="ad-rotate oa-row";box.setAttribute("data-oa-row",pos||type);slot.appendChild(box)}
+var made=[];for(var k=0;k<n;k++){var ad=next();if(!ad)break;var a=unit(ad,cls,type,pos,page);box.appendChild(a);made.push(a)}
+for(var m=0;m<made.length;m++){if(io)io.observe(made[m]);else made[m].__oaImp()}}
 for(var j=0;j<slots.length;j++)fill(slots[j]);
 })();"""
 
 
+ROW_CSS = '.oa-row{padding-top:0;margin-bottom:0;align-items:stretch;} .oa-row > .ad{min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"mark name cta" "mark sub sub";column-gap:0.75em;row-gap:0.2em;align-items:center;} .oa-row > .ad .copy{display:contents;} .oa-row > .ad .mark{grid-area:mark;align-self:start;} .oa-row > .ad strong{grid-area:name;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;} .oa-row > .ad .sub{grid-area:sub;} .oa-row > .ad .cta{grid-area:cta;padding:0.15em 0.55em;font-size:78%;} .ad-app-banner .oa-row > .ad{border-width:var(--border-width);} @media (max-width:760px){.ad-header .oa-row,.ad-app-banner .oa-row{display:flex;gap:var(--space-small,0.6em);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-left:0;scrollbar-width:none;-webkit-overflow-scrolling:touch;} .ad-header .oa-row::-webkit-scrollbar,.ad-app-banner .oa-row::-webkit-scrollbar{display:none;} .ad-header .oa-row > .ad,.ad-app-banner .oa-row > .ad{flex:0 0 86%;scroll-snap-align:start;} .ad-footer .oa-row{gap:var(--space-small,0.6em);}}'
+
+
+# How many different ads each house slot shows at once (1 to 3). Header and
+# footer match the paid sponsor rows, which show 3 at a time.
+SLOT_COUNTS = {"home_header": 3, "home_footer": 3, "app_banner": 3}
+
+
+def slot_count(kind: str, pos: str) -> int:
+    # Every page type shows three in its header and footer slots.
+    return SLOT_COUNTS.get(f"{kind}_{pos}", 3 if pos in ("header", "footer") else 1)
+
+
 def slot_html(kind: str, pos: str, unit_class: str) -> str:
-    return (f'<div class="oa-house" data-oa-slot="{kind}" data-oa-pos="{pos}" data-oa-class="{unit_class}"></div>'
+    count = slot_count(kind, pos)
+    return (f'<div class="oa-house" data-oa-slot="{kind}" data-oa-pos="{pos}" data-oa-class="{unit_class}" data-oa-count="{count}"></div>'
             '<script src="/oa-ads.js"></script>')
 
 
@@ -311,11 +340,28 @@ HOME_SLOTS = [
 # slot. A paid footer sponsor never matches the pattern, so its heading stays.
 APP_HEADER_RE = re.compile(r'(<header class="app-header">.*?</header>\n)', re.S)
 
+# Every other page (guides, tutorials, "on Omarchy" pages, best apps,
+# categories, install, vs, about, press, develop, sponsor and the rest) gets a
+# header slot under its title block, between the hero and <main> (never right
+# under the top bar), and a footer slot just above the site footer. App pages
+# keep their banner as the header slot and get the footer slot. The wrappers
+# use the homepage slot classes, so they look the same and need no new CSS.
+PAGE_WRAP = '<div class="{cls}" data-oa-page>'
+HERO_END_RE = re.compile(r'(<header class="hero[^"]*">.*?</header>\n)(\n*<main class="wrap)', re.S)
+SITE_FOOTER_RE = re.compile(r'(</main>\n+)(<footer class="site">)')
+
+
+def page_slot(kind: str, pos: str) -> str:
+    cls = "ad-header" if pos == "header" else "ad-footer"
+    return PAGE_WRAP.format(cls=cls) + slot_html(kind, pos, "ad text" if pos == "header" else "ad") + "</div>\n"
+
+
 # Markup from earlier builds that must come out before pages are hashed:
 # the old bar under the top bar (v1), plus anything this module adds now.
 SLOT_STRIP = [
     re.compile(r'\n<div class="oa-house" data-oa-slot="[a-z]+" hidden></div><script src="/oa-ads.js"></script>'),
     re.compile(r'<div class="ad-app-banner"><div class="oa-house"[^>]*></div><script src="/oa-ads.js"></script></div>\n'),
+    re.compile(r'<div class="ad-(?:header|footer)" data-oa-page><div class="oa-house"[^>]*></div><script src="/oa-ads.js"></script></div>\n'),
 ]
 
 
@@ -345,7 +391,7 @@ def build(dist: pathlib.Path, tutorials: set[str], guides: set[str]) -> dict:
     for a in ADS:
         (dist / f"ad{a['rank']}.html").write_text(mini_page(a), encoding="utf-8")
     (dist / "oa-ads.js").write_text(ads_js(), encoding="utf-8")
-    counts = {"home_header": 0, "home_footer": 0, "app_banner": 0, "sponsor_held": 0}
+    counts = {"home_header": 0, "home_footer": 0, "app_banner": 0, "page_header": 0, "page_footer": 0, "sponsor_held": 0, "no_slot": []}
 
     home = dist / "index.html"
     text = home.read_text(encoding="utf-8")
@@ -366,4 +412,22 @@ def build(dist: pathlib.Path, tutorials: set[str], guides: set[str]) -> dict:
         if n:
             page.write_text(new, encoding="utf-8")
             counts["app_banner"] += 1
+
+    ad_pages = {f"ad{a['rank']}.html" for a in ADS}
+    for page in sorted(dist.rglob("*.html")):
+        rel = page.relative_to(dist).as_posix()
+        if rel == "index.html" or rel in ad_pages:
+            continue  # homepage handled above; /adN are the ads' own landing pages
+        kind = page_type(rel, tutorials, guides)
+        text = page.read_text(encoding="utf-8")
+        if kind != "app":
+            text, n = HERO_END_RE.subn(lambda m, k=kind: m.group(1) + page_slot(k, "header") + m.group(2), text, count=1)
+            counts["page_header"] += n
+            if not n:
+                counts["no_slot"].append(rel + " (header)")
+        text, n = SITE_FOOTER_RE.subn(lambda m, k=kind: m.group(1) + page_slot(k, "footer") + m.group(2), text, count=1)
+        counts["page_footer"] += n
+        if not n:
+            counts["no_slot"].append(rel + " (footer)")
+        page.write_text(text, encoding="utf-8")
     return counts

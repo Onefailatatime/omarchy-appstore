@@ -68,8 +68,8 @@
   "hash": "de3c46c61eb3a1286cc749051ea334a0eca9a52ded8edaf68680e6a29f657c87"
  },
  "apps/claude-code.html": {
-  "date": "2026-10-27",
-  "hash": "7438efd428457089d2c14b4463bf5190938b2342c30380c5352d20b36be2fa92"
+  "date": "2026-10-29",
+  "hash": "5f45bbb64c884f0b50bbbfbcfb917ef74627e8d61c04aa6812a630e583d21802"
  },
  "apps/claude-desktop.html": {
   "date": "2026-10-27",
@@ -920,8 +920,8 @@
   "hash": "10ce62ec2b2eb1d11d1fd4fecaa607c7c6b6574b46eed3cf4e2c0e0e77062662"
  },
  "claude-code-on-omarchy.html": {
-  "date": "2026-10-27",
-  "hash": "68123ad7711c51fea8bcf631591cf14c1628a17115211f7d357ab0990682a778"
+  "date": "2026-10-29",
+  "hash": "668f3606735efc299a6437f12b4a5afc03a945b462c8a2b6eb679a1eb2ebd591"
  },
  "claude-desktop-omarchy.html": {
   "date": "2026-10-11",
@@ -1145,7 +1145,7 @@
  },
  "index.html": {
   "date": "2026-10-29",
-  "hash": "f32d8fb962301f6aff51cd83fd13b6bdd192dca6eb147be4725b539d510bbed1"
+  "hash": "a2e00e961a704b9dc1689121935f0fbe75d65993be415029a99a7320de456af5"
  },
  "install-omarchy-on-intel-mac.html": {
   "date": "2026-10-19",

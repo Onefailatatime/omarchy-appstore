@@ -37,6 +37,12 @@ assert.equal((await handleAdEvent(post("/api/ads/event", { ad: 3, type: "view", 
 assert.equal((await handleAdEvent(post("/api/ads/event", { ad: 21, type: "click" }), env, now)).status, 400, "only ads 1 to 20");
 assert.equal((await handleAdEvent(post("/api/ads/event", { ad: 3, type: "signup" }), env, now)).status, 400, "signups only come from the waitlist");
 assert.equal((await handleAdEvent(post("/api/ads/event", { ad: 3, type: "click" }, { origin: "https://evil.test" }), env, now)).status, 403);
+// Header and footer slots on every page type keep their own page type.
+for (const pt of ["guide_header", "tutorial_footer", "category_header", "other_footer", "app_footer"]) {
+  assert.equal((await handleAdEvent(post("/api/ads/event", { ad: 4, type: "impression", page: pt }), env, now)).status, 204);
+}
+assert.deepEqual(env.DB.raw.prepare("SELECT page_type FROM ad_daily WHERE ad = 4 ORDER BY page_type").all().map((r) => r.page_type),
+  ["app_footer", "category_header", "guide_header", "other_footer", "tutorial_footer"]);
 const views = env.DB.raw.prepare("SELECT page_type, views FROM ad_daily WHERE views > 0").all();
 assert.deepEqual(views.map((r) => ({ ...r })), [{ page_type: "mini", views: 1 }]);
 assert.equal(pacificDay(now), "2026-10-29");
@@ -96,28 +102,41 @@ for (let n = 1; n <= 20; n++) {
 }
 const walk = (d) => readdirSync(d).flatMap((f) => statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]);
 const pages = walk(dist).filter((f) => f.endsWith(".html") && !/\/ad\d+\.html$/.test(f) && !f.includes("/_preview/"));
-// House ads only fill the site's own empty sponsor slots: homepage header and
-// footer, and the app profile banner. No bar under the top bar, no new placements.
+// House ads fill the homepage sponsor slots and the app banner, and every
+// other page gets a header slot under its title block (never right under the
+// top bar) and a footer slot just above the site footer.
 const slotsIn = (html) => [...html.matchAll(/data-oa-slot="([a-z]+)" data-oa-pos="([a-z]+)"/g)].map((m) => m[1] + "_" + m[2]);
+const TYPES = ["guide", "tutorial", "category", "other"];
+let withSlots = 0;
 for (const f of pages) {
   const html = readFileSync(f, "utf8");
   const rel = f.slice(dist.length);
   const slots = slotsIn(html);
   assert.equal((html.match(/data-oa-slot=/g) || []).length, slots.length, `well formed slots in ${rel}`);
-  assert.doesNotMatch(html, /<header class="topbar">[\s\S]*?<\/header>\s*<div class="oa-house"/, `no bar under the top bar in ${rel}`);
+  assert.doesNotMatch(html, /<header class="topbar">(?:(?!<\/header>)[\s\S])*<\/header>\s*<div class="(oa-house|ad-header)/, `no bar under the top bar in ${rel}`);
+  assert.doesNotMatch(html, /data-oa-count="[^3]"/, `three ads per slot in ${rel}`);
+  if (slots.length) withSlots++;
   if (rel === "index.html") {
     assert.deepEqual(slots, ["home_header", "home_footer"]);
-    assert.match(html, /<div class="ad-header"><div class="oa-house" data-oa-slot="home" data-oa-pos="header" data-oa-class="ad text"><\/div><script src="\/oa-ads.js"><\/script><\/div>/);
+    assert.match(html, /<div class="ad-header"><div class="oa-house" data-oa-slot="home" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"><\/div><script src="\/oa-ads.js"><\/script><\/div>/);
     assert.doesNotMatch(html, /href="\/sponsor\.html#(header|footer)"/, "open cards replaced");
-    assert.match(html, /<div class="ad-footer"><div class="oa-house" data-oa-slot="home" data-oa-pos="footer" data-oa-class="ad"><\/div><script src="\/oa-ads.js"><\/script><\/div>/, "no Sponsors heading over a house ad");
+    assert.match(html, /<div class="ad-footer"><div class="oa-house" data-oa-slot="home" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"><\/div><script src="\/oa-ads.js"><\/script><\/div>/, "no Sponsors heading over a house ad, three house ads");
   } else if (rel.startsWith("apps/")) {
-    assert.deepEqual(slots, ["app_banner"], rel);
+    assert.deepEqual(slots, ["app_banner", "app_footer"], rel);
     assert.match(html, /<\/header>\n<div class="ad-app-banner"><div class="oa-house"/);
+    assert.match(html, /<\/main>\n+<div class="ad-footer" data-oa-page><div class="oa-house"[^>]*><\/div><script src="\/oa-ads.js"><\/script><\/div>\n<footer class="site">/);
   } else {
-    assert.deepEqual(slots, [], `no house ad in ${rel}`);
+    assert.equal(slots.length, 2, `header and footer slot in ${rel}`);
+    const [h, ft] = slots;
+    assert.ok(TYPES.some((t) => h === t + "_header" && ft === t + "_footer"), `${rel}: ${slots}`);
+    assert.match(html, /<\/header>\n<div class="ad-header" data-oa-page><div class="oa-house"[^>]*><\/div><script src="\/oa-ads.js"><\/script><\/div>\n\n*<main class="wrap/, `header slot under the title block in ${rel}`);
+    assert.match(html, /<\/main>\n+<div class="ad-footer" data-oa-page><div class="oa-house"[^>]*><\/div><script src="\/oa-ads.js"><\/script><\/div>\n<footer class="site">/, `footer slot above the site footer in ${rel}`);
+    assert.doesNotMatch(html, /Sponsors<\/h2><div class="oa-house"/);
   }
 }
+assert.equal(withSlots, pages.length, "every site page has ad slots");
 const js = readFileSync(join(dist, "oa-ads.js"), "utf8");
 assert.match(js, /a\.target="_blank";a\.rel="noopener"/);
 assert.doesNotMatch(js, /FROM US/i);
+assert.match(js, /used\[ad\.r\]/, "no ad repeats on a page");
 console.log("ads-tests-ok");
