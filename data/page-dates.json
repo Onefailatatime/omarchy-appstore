@@ -68,8 +68,8 @@
   "hash": "de3c46c61eb3a1286cc749051ea334a0eca9a52ded8edaf68680e6a29f657c87"
  },
  "apps/claude-code.html": {
-  "date": "2026-10-29",
-  "hash": "5f45bbb64c884f0b50bbbfbcfb917ef74627e8d61c04aa6812a630e583d21802"
+  "date": "2026-10-31",
+  "hash": "f3314f8c0a96efce54ea351275dc883e97d67d6b97bba83b52bcfaffde10e0cd"
  },
  "apps/claude-desktop.html": {
   "date": "2026-10-30",
@@ -352,8 +352,8 @@
   "hash": "d6004a18911facc3dddb1815047196afd92f84800d25bf598a3d0f209f246495"
  },
  "apps/lmstudio-bin.html": {
-  "date": "2026-10-29",
-  "hash": "877c8f27740f617b9a04d651f3727ed13c9ca911af6863bc6fa6c283f6077767"
+  "date": "2026-10-31",
+  "hash": "482038e4026c701e982d91ba3fb875a8c92a3544578c5f10cee1d5039f52f57c"
  },
  "apps/lmstudio.html": {
   "date": "2026-10-20",
@@ -392,8 +392,8 @@
   "hash": "532b2b9d942ec10ab8b9f77a2671186d13e23024ec2246f14b8e3034f31bfcd3"
  },
  "apps/mise-bin.html": {
-  "date": "2026-10-30",
-  "hash": "569397c0323a645aeef0788f70bcdc34a00e2a45b7c6fcc847eea8fb2ac17f6f"
+  "date": "2026-10-31",
+  "hash": "7a9c106aaab16d25012d9c08667680c9431e1d87eb97081242226f441907c92f"
  },
  "apps/monologue.html": {
   "date": "2026-10-20",
@@ -684,12 +684,12 @@
   "hash": "ad39cc7d1c7dbc240ca6829ebb23aeb277f83d150ab8e263144f431920a2f739"
  },
  "apps/t3code-bin.html": {
-  "date": "2026-10-29",
-  "hash": "b911f53c3137cf69266ffd4c46f48f65e743477c50b9df1cc059c9d08fbfdbb5"
+  "date": "2026-10-31",
+  "hash": "42b26f6743353548bcb9510d80701c8c67a93e3c3651dffbad89d16f7b0b37eb"
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-10-30",
-  "hash": "0000d716d728d27e0bb2502e963d42a341ff7bcc3cb8a919cf20611aceeaab82"
+  "date": "2026-10-31",
+  "hash": "5a5afc1b83956806efd7471982a7ac6a19f4f61d1d97af43c9dc064c306ac182"
  },
  "apps/t3code-patched-bin.html": {
   "date": "2026-10-20",
@@ -920,8 +920,8 @@
   "hash": "10ce62ec2b2eb1d11d1fd4fecaa607c7c6b6574b46eed3cf4e2c0e0e77062662"
  },
  "claude-code-on-omarchy.html": {
-  "date": "2026-10-29",
-  "hash": "668f3606735efc299a6437f12b4a5afc03a945b462c8a2b6eb679a1eb2ebd591"
+  "date": "2026-10-31",
+  "hash": "50c085880e95379d8dd65c541d4b7f45a37182a1ff02c377e5712d3d065df18a"
  },
  "claude-desktop-omarchy.html": {
   "date": "2026-10-11",
@@ -1144,8 +1144,8 @@
   "hash": "3c71769e2fa314550bed4fd400e019755e938544f9e5f1b17db26c599b9c6bc5"
  },
  "index.html": {
-  "date": "2026-10-30",
-  "hash": "ef17a7a02eb8a280cd0a1251eabd63cedfa0fcd6d22022b3e814afd3bddbfb05"
+  "date": "2026-10-31",
+  "hash": "fa5654bfb65d6889491a619f06eb47ea0dfe095f1ccc52108152d02684457ed5"
  },
  "install-omarchy-on-intel-mac.html": {
   "date": "2026-10-19",
@@ -1360,8 +1360,8 @@
   "hash": "23e09e2d41744ed89dbb9497da28730176a8de3d6fb1a9e44ed46353232d23da"
  },
  "lmstudio-bin-on-omarchy.html": {
-  "date": "2026-10-29",
-  "hash": "184294303be7f025c78624a5cf43f94a9dcb3cf13322904a558df34c25e94d9b"
+  "date": "2026-10-31",
+  "hash": "3986cfbc4e728f25326f10961d43001b398923a2432674d85e4aa669ff5e1504"
  },
  "lmstudio-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1404,8 +1404,8 @@
   "hash": "e5e36b00b748c2cab24fc3e9d2fbfc7eb374fffbb7a9927ebfa3b554a0e882dc"
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-10-30",
-  "hash": "481c70921cbc4a07af3265a2fb8209e009840ab6f794e142e4883ab42c65a4e6"
+  "date": "2026-10-31",
+  "hash": "a31d39879ee5aad479adcb96159f43479fc92cfd86e820224b5e9d719772cd69"
  },
  "monologue-on-omarchy.html": {
   "date": "2026-10-18",
@@ -1772,12 +1772,12 @@
   "hash": "f7baaf5dca40bb8fd549ab9148b46d436a319fc572f2ad350277da403dc14c79"
  },
  "t3code-bin-on-omarchy.html": {
-  "date": "2026-10-29",
-  "hash": "2400153eefed2729fde6a4a755540b63f5f14631c20603c2bffcef3717da3fde"
+  "date": "2026-10-31",
+  "hash": "050cbb39ffefb573b37a07fe25113a06341159b7aa2d59c9dcb2ef720da84ebe"
  },
  "t3code-nightly-bin-on-omarchy.html": {
-  "date": "2026-10-30",
-  "hash": "5b113a32358c4259fc0d59b5b557db86806fefeb7fc3230ba55bfc5427ab4e83"
+  "date": "2026-10-31",
+  "hash": "7c7c986df3f1cf072378fad24b354fb410c867941ca2090ed183b1b41d4bae34"
  },
  "t3code-patched-bin-on-omarchy.html": {
   "date": "2026-10-20",
