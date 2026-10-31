@@ -44,16 +44,16 @@
   "hash": "aaf5cdad16bafab02d00ecd34b75b1870356c2ed065681cf14ee63148807818a"
  },
  "apps/basecamp-cli.html": {
-  "date": "2026-10-28",
-  "hash": "bd2339378a0b8f73109ebdc50841d2baa4566d6384f2227e34757fd89bdc70f1"
+  "date": "2026-10-30",
+  "hash": "41ef9fd4d4a151df8f1861200d624cf278e5e04d4523baf9425a0a85870cb779"
  },
  "apps/brave-bin.html": {
-  "date": "2026-10-28",
-  "hash": "bbb9ccaf00921396cbae4f8fbc773dbdf98cff1e0aed7bac175a9e6cf525c4c3"
+  "date": "2026-10-30",
+  "hash": "7b64f07e6f7fd73c33d33fb508df836788886a8705d50299021b6c880acb0a61"
  },
  "apps/brave-origin-bin.html": {
-  "date": "2026-10-28",
-  "hash": "4446bc9da8e51b0463e1b8ada01e64cc8c68d4791bb3f558cc44f09d8311605f"
+  "date": "2026-10-30",
+  "hash": "00ce158672e95c564510935f310627f6a2eccc8d2d328a2ca749ba24dd20da4f"
  },
  "apps/bun-bin.html": {
   "date": "2026-10-20",
@@ -188,8 +188,8 @@
   "hash": "ea7001ef886ff8d726e8cdc80c31671df23eb0ad0a7c5bc8a96dfd048a1f655d"
  },
  "apps/helium-browser-bin.html": {
-  "date": "2026-10-28",
-  "hash": "9106597fe639ff7be230f35318d4da532492f76bd65dc4a71edd7c02895cd632"
+  "date": "2026-10-30",
+  "hash": "1367558f28dcda6c158ff8c8d4266a55f7f1037d65cd671912812b1fb8937855"
  },
  "apps/herdr.html": {
   "date": "2026-10-20",
@@ -384,8 +384,8 @@
   "hash": "630ddf6062759425693dd3d406473ad3f083507e02b10bb9b830289cb0919bc6"
  },
  "apps/microsoft-edge-stable-bin.html": {
-  "date": "2026-10-29",
-  "hash": "706e4e02e19f94fa4ed04d91387f292e7a6253d65d566b6e05af004957cb6a96"
+  "date": "2026-10-30",
+  "hash": "8f4c83044f5fcc299e754a2a34f96c149b4523b0aa2fdd9e04bd2be8ef99d777"
  },
  "apps/minecraft-launcher.html": {
   "date": "2026-10-20",
@@ -576,8 +576,8 @@
   "hash": "8f427f4256580ce6def629a1fa61686ac5c020510709be341f77f80649469dd7"
  },
  "apps/owe.html": {
-  "date": "2026-10-22",
-  "hash": "eaa90df0c93ceb64da3cf135d5489362496447de648af580df1240a6141b044a"
+  "date": "2026-10-30",
+  "hash": "8290a59e10b5229d1f3575151e3bd30d75780337ceffcd8d9c4e02df0deaff27"
  },
  "apps/perplexity.html": {
   "date": "2026-10-27",
@@ -612,8 +612,8 @@
   "hash": "123789ebc46c44f63f641fcfd2ff529ea378a6e5973e0a094599a5a09b78db6f"
  },
  "apps/rawmakase-bin.html": {
-  "date": "2026-10-29",
-  "hash": "b475c1eb601fc2a6e07655020bbf9f6380be4336aec0b684238d7e4512d80ced"
+  "date": "2026-10-30",
+  "hash": "5b2316cd1651fb5d774af0fd0b50e62ab369d862270d04018e9895571c7c9ab3"
  },
  "apps/retroarch-joypad-autoconfig-git.html": {
   "date": "2026-10-20",
@@ -644,8 +644,8 @@
   "hash": "d2c0492bb3f24ce892051a994d1eec8ad9d67a1870154124246322c05c17a879"
  },
  "apps/slap-notes-bin.html": {
-  "date": "2026-10-20",
-  "hash": "ad42bcbe5d875d5a6653db35520b2c0b5cf8b346895b8ac1aeb857bfcc9d2e55"
+  "date": "2026-10-30",
+  "hash": "54e064c54832dfc68076f416be1446b223bed5f9fd0855ee6a49dc9907878d64"
  },
  "apps/splinterm-mcp.html": {
   "date": "2026-10-28",
@@ -689,7 +689,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-10-30",
-  "hash": "965db2a3f3791b60bbc6b50172887bffb052bf3fd153d54b8a23fb2740b5b9b0"
+  "hash": "0000d716d728d27e0bb2502e963d42a341ff7bcc3cb8a919cf20611aceeaab82"
  },
  "apps/t3code-patched-bin.html": {
   "date": "2026-10-20",
@@ -840,20 +840,20 @@
   "hash": "9442a5736c626d1a4634e4d9fc638adbb34a861cdf2d1fcd631a1398ff89ef9e"
  },
  "basecamp-cli-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "ce9e00561cc5d58c5ac2510bc69242b0bfcfd34ba6fc297ed5ff30c968eee943"
+  "date": "2026-10-30",
+  "hash": "5bed124a1e217ca67cb897c6e84172d1009a53bbcf5972887bc4efea30674090"
  },
  "best-apps-for-omarchy.html": {
   "date": "2026-09-05",
   "hash": "86b3488911158999801cf1726b9366db4ce3960714e4ada9a5e1bb3ba3581aee"
  },
  "brave-bin-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "1a94673182cb15605331e174d450ff6c379331bc0a7b0f11ec4a1bda939df738"
+  "date": "2026-10-30",
+  "hash": "0d4836a9146d27d2323e57d5a113a6efd617419b0cf69c4cb5d892a0d9851716"
  },
  "brave-origin-bin-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "716407bc7893c99437dbd57071a32fa24db67f4ba7eb9541524bd2a85526ce9a"
+  "date": "2026-10-30",
+  "hash": "652a8fea1eef5b87f7bf23731410c97e07dc0934901f21ef0d5286de85992904"
  },
  "bun-bin-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1096,8 +1096,8 @@
   "hash": "ad493ba46ae66ee60a5c1cd74654e2d73db9bf70792623760c050ca58405ed33"
  },
  "helium-browser-bin-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "87b8d6af7f946c27473f6c1918284e171c068f2070d53429f8c347c0f4dd13b0"
+  "date": "2026-10-30",
+  "hash": "83729bc9ba4c331ffaaa8642644be709f918ec3b615401ee760a5adce6a4e88d"
  },
  "helium-on-omarchy.html": {
   "date": "2026-10-18",
@@ -1145,7 +1145,7 @@
  },
  "index.html": {
   "date": "2026-10-30",
-  "hash": "6b3331e830208a8823aa9ea6e832722769aa441c0edbf8a0d9a1338860461bbc"
+  "hash": "ef17a7a02eb8a280cd0a1251eabd63cedfa0fcd6d22022b3e814afd3bddbfb05"
  },
  "install-omarchy-on-intel-mac.html": {
   "date": "2026-10-19",
@@ -1396,8 +1396,8 @@
   "hash": "314c2d18c8a8c1c04d5d39362e84edd325a60787a7b03f6c9b70865c22a3ff4c"
  },
  "microsoft-edge-stable-bin-on-omarchy.html": {
-  "date": "2026-10-29",
-  "hash": "e43ff055dc76491caa15940eec4a43b3a7800c386711dca3824933e4523155ae"
+  "date": "2026-10-30",
+  "hash": "ce9de212143fc37e3efbfce9c7b54d6695d211ae57ffb213cde115c30b044930"
  },
  "minecraft-launcher-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1620,8 +1620,8 @@
   "hash": "20b8cf6d7f3b18c046c4bc3459b705b5857801d390360dfc208b1e8b50b4df6d"
  },
  "owe-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "7b798ae787edc5c7080ed7667c3df332f35334e9fb0866087653e416e2e11558"
+  "date": "2026-10-30",
+  "hash": "b3fb0e61015cde4604359fdf209e5164eb2588df3ed0d818fd44d189acfb3d4d"
  },
  "perplexity-on-omarchy.html": {
   "date": "2026-10-27",
@@ -1672,8 +1672,8 @@
   "hash": "2bfb9f6cf25dc4a4394a6504a3302898b84ee1e0210492e438ed228cf30e251a"
  },
  "rawmakase-bin-on-omarchy.html": {
-  "date": "2026-10-29",
-  "hash": "05ff972000a945a859c465e1e41f47980e316a105eab1f510d29238b40d72da3"
+  "date": "2026-10-30",
+  "hash": "0245f8b4ff111301bd716cb22338c38f7e6f4d8b0d16b2e3ddae91d4780076de"
  },
  "retroarch-joypad-autoconfig-git-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1777,7 +1777,7 @@
  },
  "t3code-nightly-bin-on-omarchy.html": {
   "date": "2026-10-30",
-  "hash": "91c09871f1dcf39d2085cc48e434fe06fef0fa3addecdfb0e6415f48bde90590"
+  "hash": "5b113a32358c4259fc0d59b5b557db86806fefeb7fc3230ba55bfc5427ab4e83"
  },
  "t3code-patched-bin-on-omarchy.html": {
   "date": "2026-10-20",
