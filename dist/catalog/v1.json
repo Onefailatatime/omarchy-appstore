@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-10-31T13:00:24+00:00",
+ "generated_at": "2026-11-01T01:00:14+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 202,
+ "app_count": 204,
  "apps": [
   {
    "id": "1password",
@@ -515,6 +515,17 @@
    "repository": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher",
    "tutorial_url": "https://omarchyapps.com/heroic-games-launcher-bin-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/heroic-games-launcher-bin.html"
+  },
+  {
+   "id": "hex-bin",
+   "name": "hex-bin",
+   "package": "hex-bin",
+   "install_command": "omarchy pkg add hex-bin",
+   "category": "Utilities",
+   "description": "Hex voice dictation app by Anomaly: hold a key, speak, and it types (Linux beta; not the hex dump tool)",
+   "homepage": "https://github.com/anomalyco/hex",
+   "tutorial_url": "https://omarchyapps.com/hex-bin-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/hex-bin.html"
   },
   {
    "id": "hey-cli",
@@ -1089,6 +1100,17 @@
    "homepage": "https://nordvpn.com/download/linux/",
    "tutorial_url": "https://omarchyapps.com/nordvpn-bin-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/nordvpn-bin.html"
+  },
+  {
+   "id": "notion-desktop",
+   "name": "notion-desktop",
+   "package": "notion-desktop",
+   "install_command": "omarchy pkg add notion-desktop",
+   "category": "Utilities",
+   "description": "Official Notion desktop app",
+   "homepage": "https://www.notion.com/desktop",
+   "tutorial_url": "https://omarchyapps.com/notion-desktop-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/notion-desktop.html"
   },
   {
    "id": "nvidia-580xx-dkms",
