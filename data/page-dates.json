@@ -180,8 +180,8 @@
   "hash": "1dc1656023531f2ffaa1e4e0a94be1e8a3a2087fa92563bd0877d10ef9d5d5ff"
  },
  "apps/gridcraft-bin.html": {
-  "date": "2026-10-29",
-  "hash": "eb6371fb44971ae94f336ee95e7c6036560b63aea8e9219fda1c853c2025c092"
+  "date": "2026-11-01",
+  "hash": "9e47601a065e5eeb09f20a97524ee4afd176cd66c9e64e04e90acb1f5ae06ecd"
  },
  "apps/grok-bot.html": {
   "date": "2026-10-28",
@@ -396,8 +396,8 @@
   "hash": "532b2b9d942ec10ab8b9f77a2671186d13e23024ec2246f14b8e3034f31bfcd3"
  },
  "apps/mise-bin.html": {
-  "date": "2026-10-31",
-  "hash": "7a9c106aaab16d25012d9c08667680c9431e1d87eb97081242226f441907c92f"
+  "date": "2026-11-01",
+  "hash": "50fdfa3de2bd6a76137aa681deb14ef75110fc9b3f6cd673309e5f941fb11c03"
  },
  "apps/monologue.html": {
   "date": "2026-10-20",
@@ -628,8 +628,8 @@
   "hash": "1edd3fd1a02514f493121803f1a2126ed53810274ca539d27c27379de10dd4db"
  },
  "apps/rumb.html": {
-  "date": "2026-10-29",
-  "hash": "20c491d811b480c838d499bb9a0573a7cb1a3d36becf33f817f52600579fe9fa"
+  "date": "2026-11-01",
+  "hash": "72dc015495b35ca09490f39ef3d95240d9e7206f0847ca1faa8876a02aaca8db"
  },
  "apps/rustdesk.html": {
   "date": "2026-10-20",
@@ -684,8 +684,8 @@
   "hash": "259fca275855c328b3cb9a5f63f2f30241efb90979498d0a763501e9e771843b"
  },
  "apps/superwhisper-bin.html": {
-  "date": "2026-10-28",
-  "hash": "46fc4a75b49a98e98c8b1d0e6a128c2bf48e6e01534bfb77b97f620d9d399cd4"
+  "date": "2026-11-01",
+  "hash": "014393916b4be4ed65c551ce99f654c52b8b30e80ca19e27c2bc3550bca5ac66"
  },
  "apps/symfony-cli.html": {
   "date": "2026-10-20",
@@ -696,8 +696,8 @@
   "hash": "42b26f6743353548bcb9510d80701c8c67a93e3c3651dffbad89d16f7b0b37eb"
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-10-31",
-  "hash": "df2b3ba0ca2dc6a98f8371a6dd59ec5244bc8f5dec3751faf0d0c921bc4e0787"
+  "date": "2026-11-01",
+  "hash": "cfba14a6d023830e1dd6ea52acefa675a03a664c49908e8ee325b2dda25150d8"
  },
  "apps/t3code-patched-bin.html": {
   "date": "2026-10-20",
@@ -760,8 +760,8 @@
   "hash": "e36691442fdfe8c63f299ee0ac18d6a5cffa167a58dacef5479e568c224d1984"
  },
  "apps/voxtype-bin.html": {
-  "date": "2026-10-20",
-  "hash": "60f4f5fe3b4cde20de7be769eb385da79e11fa56cf25a0ecfa262a4cf66969d0"
+  "date": "2026-11-01",
+  "hash": "c29fb27bfc1f433befff7f84f0844ad118dc8e6902e4976d4748997e48a67ab4"
  },
  "apps/walker.html": {
   "date": "2026-10-20",
@@ -776,8 +776,8 @@
   "hash": "23cb2982ef9a578a8bdf1e77f782691e6790feea2a15aa6383d7aa70a4c705fc"
  },
  "apps/wordcraft-bin.html": {
-  "date": "2026-10-29",
-  "hash": "95fdceb4b243515c9d593ef2478f95368c4e6576e0c2c381c76c3e13b08853fe"
+  "date": "2026-11-01",
+  "hash": "29c686fe04828ae926b1dcfda4a71eb44e25193436e5891d8a4bd9ce5c17e1dc"
  },
  "apps/wps-office-cn.html": {
   "date": "2026-10-20",
@@ -1092,8 +1092,8 @@
   "hash": "774de068678cc872b6798577c8071605a6aeaad0301d53bfc34d4129a6cc5f16"
  },
  "gridcraft-bin-on-omarchy.html": {
-  "date": "2026-10-31",
-  "hash": "9ecb05dbdec0e9e18bf14afc1c85740936a9cd120f907140c6a4f4e78414c3e9"
+  "date": "2026-11-01",
+  "hash": "e758e385dc013bc20b10d57e29c4850fc4f7aae8d830f31ddc30833011c6bff4"
  },
  "grok-bot-on-omarchy.html": {
   "date": "2026-10-28",
@@ -1156,8 +1156,8 @@
   "hash": "3c71769e2fa314550bed4fd400e019755e938544f9e5f1b17db26c599b9c6bc5"
  },
  "index.html": {
-  "date": "2026-10-31",
-  "hash": "a91ed49a054727081169d89a474bd44fb09f66420798861a31b89dd1faa06f22"
+  "date": "2026-11-01",
+  "hash": "e63fa56c6821ba241ea65e32cfe9cf8106959b0b43d522e75e7885410676a852"
  },
  "install-omarchy-on-intel-mac.html": {
   "date": "2026-10-19",
@@ -1416,8 +1416,8 @@
   "hash": "e5e36b00b748c2cab24fc3e9d2fbfc7eb374fffbb7a9927ebfa3b554a0e882dc"
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-10-31",
-  "hash": "a31d39879ee5aad479adcb96159f43479fc92cfd86e820224b5e9d719772cd69"
+  "date": "2026-11-01",
+  "hash": "01b5ec975d95e5acf8789b0862456750fbbd2899ce503ce2250810451cbf54da"
  },
  "monologue-on-omarchy.html": {
   "date": "2026-10-18",
@@ -1772,8 +1772,8 @@
   "hash": "80e208dc4290756938b24572973ef7b1f15b7dff40494b614e27c262cb3f6467"
  },
  "superwhisper-bin-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "5c70ceb9250b999c1ebb9669242e1c4f22c473aceb221eb1d522ea6878c0299e"
+  "date": "2026-11-01",
+  "hash": "9f4823469cdf506d89e6325defcb25468ecf71abe543646f1cea64ecb02ad9e0"
  },
  "switch-from-mac-to-omarchy-safely.html": {
   "date": "2026-10-19",
@@ -1792,8 +1792,8 @@
   "hash": "050cbb39ffefb573b37a07fe25113a06341159b7aa2d59c9dcb2ef720da84ebe"
  },
  "t3code-nightly-bin-on-omarchy.html": {
-  "date": "2026-10-31",
-  "hash": "b623ae26afa4db49e2bb5681b3f31683c5f7222ae2af436fb21994bd6119a145"
+  "date": "2026-11-01",
+  "hash": "63e53e93d6e02d2286a740afc7567febc2b7af410660de8a5e68795dbbfc8ffe"
  },
  "t3code-patched-bin-on-omarchy.html": {
   "date": "2026-10-20",
@@ -1872,8 +1872,8 @@
   "hash": "49d032d4a8778ff1fcdce232239488d08f6f9984a863f5784be0239067a5d2e9"
  },
  "voxtype-bin-on-omarchy.html": {
-  "date": "2026-10-29",
-  "hash": "ad551828802913e83c1ed905ed379de07604b8df151d58a4a20efa754c013527"
+  "date": "2026-11-01",
+  "hash": "ae439c2577875b5d59170e555bd04e2995cb52ec657ce5c788700f839a8b279e"
  },
  "vs/omarchy-vs-arch.html": {
   "date": "2026-10-20",
@@ -1928,8 +1928,8 @@
   "hash": "06f36a5dee622e8680ee252ab8d3dc9fe7915f7051c031bb2ac8584590c871dc"
  },
  "wordcraft-bin-on-omarchy.html": {
-  "date": "2026-10-29",
-  "hash": "db9abae58501c14c02ef7507adbbcb26e55f3c03e0a9c9be761c332e92a6e351"
+  "date": "2026-11-01",
+  "hash": "4bc7064d6cefa40c3f83098dfacde6242b12684254644defc0f20bfcab254e26"
  },
  "wps-office-cn-on-omarchy.html": {
   "date": "2026-10-16",
