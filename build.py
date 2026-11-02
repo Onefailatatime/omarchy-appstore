@@ -1624,6 +1624,7 @@ def main() -> None:
         )
         guide_body = (ROOT / "parts" / "guides" / f"{guide['slug']}.html").read_text(encoding="utf-8")
         guide_body = fill_package_watch(guide, guide_body, pkgs)
+        guide_body = guide_body.replace("__PKG_COUNT__", str(len(pkgs)))
         (DIST / f"{guide['slug']}.html").write_text(render_seo_page(
             guide_template, page_css, guide, guide_body, related, synced,
             ("Guides", "/#guides"), f"Reviewed {synced} · independent editorial guide",

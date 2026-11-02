@@ -1,0 +1,92 @@
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#browse">Browse</a>
+      <a href="#install">Install</a>
+      <a href="#categories">Categories</a>
+      <a href="#favorites">Reader favorites</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="looking">
+      <h2>Looking for an Omarchy store?</h2>
+      <p>Omarchy Apps lists __PKG_COUNT__ packages from the official Omarchy package repository, each with its own profile page. Whether you searched for omarchy store, omarchystore or omarchy app store, this is a catalog you can browse by category, search by name, and use to find the exact install command for any package.</p>
+      <p>The catalog is rebuilt from <a href="https://pkgs.omarchy.org/" target="_blank" rel="noopener">pkgs.omarchy.org</a> twice a day, so new packages appear here shortly after they land in the repository. Omarchy Apps is an independent community project. It is not affiliated with or endorsed by Omacom or David Heinemeier Hansson.</p>
+    </section>
+
+    <section id="browse">
+      <h2>How to browse the store</h2>
+      <ol>
+        <li><strong>Search the homepage.</strong> The <a href="/">Omarchy Apps homepage</a> has a search box and a card for every package, grouped by category.</li>
+        <li><strong>Open a category.</strong> Each category page below lists every package of that kind on one page.</li>
+        <li><strong>See what readers like.</strong> The <a href="/leaderboard.html">Top apps leaderboard</a> ranks packages by reader votes.</li>
+        <li><strong>Scan the full list.</strong> The <a href="/omarchy-apps-list.html">Omarchy apps list</a> shows every package in the repository on a single page.</li>
+        <li><strong>Read a guide.</strong> The <a href="/guides.html">guides</a> cover setup, comparisons and app by app walkthroughs.</li>
+      </ol>
+      <p>Every app profile shows the package version, license, project homepage, source and requirements, so you can check what you are installing before you run anything.</p>
+    </section>
+
+    <section id="install">
+      <h2>How to install an app from the store</h2>
+      <p>Open the app's profile, confirm it is the project you expect, then copy the command it shows into a terminal:</p>
+      <pre class="guide-code"><code>omarchy pkg add &lt;package-name&gt;</code></pre>
+      <p>Use the exact package name from the profile. To remove a package later, run <code>omarchy pkg drop &lt;package-name&gt;</code>. This website does not host or download any software. The command hands the install to Omarchy and its configured package sources, and the package then updates with the rest of your system.</p>
+      <p>For apps that are not in the Omarchy repository yet, the guide on <a href="/how-to-install-apps-on-omarchy.html">how to install apps on Omarchy safely</a> covers Arch packages, the AUR and a quick safety check.</p>
+    </section>
+
+    <section id="categories">
+      <h2>Top categories</h2>
+      <ul>
+        <li><a href="/category/utilities.html">Utilities</a>: file managers, transfers, launchers and everyday tools</li>
+        <li><a href="/category/system-drivers.html">System &amp; Drivers</a>: hardware support and system components</li>
+        <li><a href="/category/gaming-emulation.html">Gaming &amp; Emulation</a>: game libraries, launchers and emulators</li>
+        <li><a href="/category/themes-desktop.html">Themes &amp; Desktop</a>: themes and desktop customization</li>
+        <li><a href="/category/ai-agents.html">AI &amp; Agents</a>: agent apps and AI coding tools</li>
+        <li><a href="/category/developer-tools.html">Developer Tools</a>: editors, runtimes and command line tools</li>
+        <li><a href="/category/media-creative.html">Media &amp; Creative</a>: video, image and audio apps</li>
+        <li><a href="/category/terminal-shell.html">Terminal &amp; Shell</a>: terminals and shell setups</li>
+        <li><a href="/category/security-privacy.html">Security &amp; Privacy</a>: password managers and privacy tools</li>
+        <li><a href="/category/productivity-notes.html">Productivity &amp; Notes</a>: notes and writing apps</li>
+        <li><a href="/category/browsers-web.html">Browsers &amp; Web</a>: web browsers</li>
+        <li><a href="/category/communication.html">Communication</a>: chat and messaging</li>
+      </ul>
+    </section>
+
+    <section id="favorites">
+      <h2>Reader favorites to start with</h2>
+      <p>These are among the apps readers vote for most often on the <a href="/leaderboard.html">leaderboard</a>. Open a profile to see its install command and details.</p>
+      <ul>
+        <li><a href="/apps/flea.html">flea</a>: a fast file manager built for Omarchy and driven from the keyboard.</li>
+        <li><a href="/apps/strata.html">Strata</a>: a file manager for people who would rather press keys than click.</li>
+        <li><a href="/apps/slap-notes-bin.html">Slap Notes</a>: local first block notes with linked pages and a built in research agent. Disclosure: Slap Notes is made by the person who runs this site.</li>
+        <li><a href="/apps/omarchy-zsh.html">omarchy-zsh</a>: Omarchy's shared shell configuration as a ready to use Zsh setup.</li>
+        <li><a href="/apps/hermes-desktop.html">Hermes Desktop</a>: a native desktop shell for the Hermes agent.</li>
+        <li><a href="/apps/omakade.html">Omakade</a>: one local game library for the launchers you already use.</li>
+      </ul>
+      <p>Want a curated starter set instead? See <a href="/best-apps-for-omarchy.html">the best Omarchy apps to install first</a>.</p>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Browse all __PKG_COUNT__ packages</h2><p>Search the catalog, open a profile, and copy its install command.</p></div>
+      <a class="button" href="/">Open Omarchy Apps →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>What is the Omarchy store?</summary><p>Omarchy Apps is an unofficial store and catalog of apps for Omarchy. It lists every package in the official Omarchy package repository, with a profile page for each one showing its source, license, requirements and install command.</p></details>
+      <details><summary>How do I install an app from the Omarchy store?</summary><p>Open the app's profile, check the project link and requirements, then run <code>omarchy pkg add</code> followed by the exact package name in a terminal. The install runs through Omarchy and its package sources. This site does not host or download packages.</p></details>
+      <details><summary>Is Omarchy Apps the official Omarchy store?</summary><p>No. It is an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. The packages it lists come from the official repository at pkgs.omarchy.org.</p></details>
+      <details><summary>How often is the catalog updated?</summary><p>The catalog is rebuilt from pkgs.omarchy.org twice a day, so new packages show up shortly after they land in the official repository.</p></details>
+      <details><summary>Can I suggest an app that is missing?</summary><p>Yes. You can suggest an app from the homepage, and the Develop page explains how packaging for the official Omarchy repository works.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources and next steps</h2>
+      <ul>
+        <li><a href="https://pkgs.omarchy.org/" target="_blank" rel="noopener">pkgs.omarchy.org: the official Omarchy package repository</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs" target="_blank" rel="noopener">omarchy-pkgs on GitHub</a></li>
+        <li><a href="https://omarchy.org/manual/" target="_blank" rel="noopener">The Omarchy Manual</a></li>
+        <li><a href="/develop.html">Develop for Omarchy: packaging checklist</a></li>
+        <li><a href="/catalog.html">Catalog feed: the whole catalog as JSON</a></li>
+      </ul>
+      <p class="editorial-note">Package details come from the official repository and can change between refreshes. When this page and the Omarchy Manual differ, follow the manual.</p>
+    </section>

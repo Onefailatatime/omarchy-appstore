@@ -57,6 +57,8 @@ export default {
     const url = new URL(request.url);
     const { pathname } = url;
     try {
+      // omarchystore.omarchyapps.com is a vanity host: every path goes to the Omarchy store page.
+      if (url.hostname === "omarchystore.omarchyapps.com") return Response.redirect("https://omarchyapps.com/omarchy-store.html", 301);
       // One canonical host: www redirects to the apex.
       if (url.hostname.startsWith("www.")) {
         url.hostname = url.hostname.slice(4);

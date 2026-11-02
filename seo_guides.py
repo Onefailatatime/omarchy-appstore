@@ -767,3 +767,46 @@ GUIDES = [{'slug': 'strata-file-manager-faq',
                              'position': 6,
                              'name': 'Keep a way back',
                              'text': 'Windows stays in the Limine boot menu.'}]}]}]
+
+# Omarchy store landing page for "omarchy store", "omarchystore" and "omarchy app store" searches.
+# Body: parts/guides/omarchy-store.html. __PKG_COUNT__ is filled with the live package count at build time.
+GUIDES.append({
+    'slug': 'omarchy-store',
+    'title': 'Omarchy Store: Browse and Install Omarchy Apps',
+    'description': 'Looking for an Omarchy store? Browse every package in the official Omarchy repository by category, '
+                   'see reader favorites, and copy the install command.',
+    'eyebrow': 'Omarchy app store',
+    'heading': 'The Omarchy <span>app store</span>',
+    'tagline': 'Every package in the official Omarchy repository, sorted into categories, ranked by readers, '
+               'with the install command on every page.',
+    'answer': 'Omarchy Apps is an unofficial store and catalog of apps for Omarchy. It lists every package in the official '
+              'Omarchy package repository, groups them into categories, and gives each one a profile with its source, '
+              'license and exact install command. Browse or search here, then install from your terminal with omarchy pkg add '
+              'followed by the package name.',
+    'search_terms': ['omarchy store', 'omarchystore', 'omarchy app store', 'app store', 'store', 'catalog'],
+    'faqs': [
+        ('What is the Omarchy store?',
+         'Omarchy Apps is an unofficial store and catalog of apps for Omarchy. It lists every package in the official Omarchy '
+         'package repository, with a profile page for each one showing its source, license, requirements and install command.'),
+        ('How do I install an app from the Omarchy store?',
+         "Open the app's profile, check the project link and requirements, then run omarchy pkg add followed by the exact package "
+         'name in a terminal. The install runs through Omarchy and its package sources. This site does not host or download packages.'),
+        ('Is Omarchy Apps the official Omarchy store?',
+         'No. It is an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. '
+         'The packages it lists come from the official repository at pkgs.omarchy.org.'),
+        ('How often is the catalog updated?',
+         'The catalog is rebuilt from pkgs.omarchy.org twice a day, so new packages show up shortly after they land in the '
+         'official repository.'),
+        ('Can I suggest an app that is missing?',
+         'Yes. You can suggest an app from the homepage, and the Develop page explains how packaging for the official Omarchy '
+         'repository works.'),
+    ],
+    'extra_graph': [{
+        '@type': 'CollectionPage',
+        '@id': 'https://omarchyapps.com/omarchy-store.html#collection',
+        'name': 'Omarchy Store: Browse and Install Omarchy Apps',
+        'url': 'https://omarchyapps.com/omarchy-store.html',
+        'about': {'@type': 'Thing', 'name': 'Omarchy', 'sameAs': 'https://omarchy.org/'},
+        'isPartOf': {'@type': 'WebSite', 'name': 'Unofficial Omarchy App Store', 'url': 'https://omarchyapps.com/'},
+    }],
+})
