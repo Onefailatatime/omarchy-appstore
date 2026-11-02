@@ -1,56 +1,109 @@
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
-      <a href="#official-repo">Official repository</a>
-      <a href="#other-sources">Arch and AUR</a>
+      <a href="#menu">Install from the menu</a>
+      <a href="#multiple">Install several at once</a>
+      <a href="#terminal">Install from the terminal</a>
+      <a href="#aur">AUR packages</a>
+      <a href="#remove">Remove packages</a>
+      <a href="#updates">Update</a>
       <a href="#safety-check">Safety check</a>
-      <a href="#updates">Updates and removal</a>
       <a href="#faq">Questions</a>
     </nav>
 
-    <section id="official-repo">
-      <h2>Install from the official Omarchy package repository first</h2>
-      <p>The simplest path is a package already published by Omarchy. Search this directory, open the app profile and review its project link, license, requirements and package source. Then copy the displayed command:</p>
-      <pre class="guide-code"><code>omarchy pkg add &lt;package-name&gt;</code></pre>
-      <p>Use the exact package name from the profile. Names ending in <code>-bin</code> commonly install a prebuilt upstream binary, while another package may build from source or package a different release channel. Read the profile instead of guessing which variant you want.</p>
-      <p>This website does not download or serve the package. The command hands installation to Omarchy and its configured package sources.</p>
+    <section id="quick-answer">
+      <h2>What is the quickest way to install apps on Omarchy?</h2>
+      <p>Press <kbd>Super</kbd> + <kbd>Space</kbd>, choose <strong>Install</strong>, then <strong>Package</strong>. Type to filter, press <kbd>Tab</kbd> on each package you want, then press <kbd>Enter</kbd> to install them all together. In a terminal, list several names in one command:</p>
+      <pre class="guide-code"><code>omarchy pkg add flea strata rustdesk</code></pre>
+      <p>For the AUR, use <strong>Install</strong>, then <strong>AUR</strong> in the same menu. Update everything with <strong>Update</strong>, then <strong>Omarchy</strong>, not with <code>pacman -Syu</code>.</p>
     </section>
 
-    <section id="other-sources">
-      <h2>When an app is not in the Omarchy repository</h2>
-      <p>The official manual recommends checking the Omarchy Menu under <strong>Install → Package</strong>, then looking for an Arch package and, if necessary, the AUR. The AUR is powerful because the community can describe how to build software that is not in the official repositories, but it deserves more review—not less.</p>
+    <section id="menu">
+      <h2>How do I install one app from the Omarchy menu?</h2>
       <ol>
-        <li>Prefer the project's official website or repository when choosing a package name.</li>
-        <li>Read the PKGBUILD and associated install scripts before building an unfamiliar AUR package.</li>
-        <li>Check the maintainer, recent comments, update history and source URLs.</li>
-        <li>Be skeptical of install instructions that pipe a remote script directly into a shell.</li>
-        <li>Confirm whether the application needs filesystem, microphone, camera, network or background-service access.</li>
+        <li>Press <kbd>Super</kbd> + <kbd>Space</kbd> to open the Omarchy menu.</li>
+        <li>Choose <strong>Install</strong>, then <strong>Package</strong>.</li>
+        <li>Start typing the name. The list filters as you type.</li>
+        <li>Highlight the package and press <kbd>Enter</kbd>. Omarchy asks for your password, then installs it.</li>
       </ol>
-    </section>
-
-    <aside class="guide-callout" id="safety-check">
-      <h2>A 60-second package safety check</h2>
-      <p>Ask four questions: Is this the real upstream project? Does the package download from a source I recognize? Does its license and version match what I expect? Are its requested permissions reasonable for the job? A repository listing is useful distribution metadata, not a guarantee that software is risk-free.</p>
-    </aside>
-
-    <section>
-      <h2>Understand the three layers</h2>
+      <p>The bottom part of the picker shows the package details, so you can read what it is before you install. Handy keys inside the picker:</p>
       <div class="table-scroll">
         <table class="compare-table">
-          <thead><tr><th>Source</th><th>Good first choice when</th><th>What to verify</th></tr></thead>
+          <thead><tr><th>Key</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Tab</kbd></td><td>Mark or unmark a package (multi select)</td></tr>
+            <tr><td><kbd>Enter</kbd></td><td>Install everything you marked</td></tr>
+            <tr><td><kbd>Alt</kbd> + <kbd>P</kbd></td><td>Show or hide the package details</td></tr>
+            <tr><td><kbd>Alt</kbd> + <kbd>J</kbd> / <kbd>Alt</kbd> + <kbd>K</kbd></td><td>Scroll the details down or up</td></tr>
+            <tr><td><kbd>Alt</kbd> + <kbd>D</kbd> / <kbd>Alt</kbd> + <kbd>U</kbd></td><td>Scroll the details half a page</td></tr>
+            <tr><td><kbd>Esc</kbd></td><td>Close without installing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="multiple">
+      <h2>How do I install multiple packages at once on Omarchy?</h2>
+      <p>This is the part most guides skip. The <strong>Install</strong>, then <strong>Package</strong> picker is a multi select list.</p>
+      <ol>
+        <li>Open <kbd>Super</kbd> + <kbd>Space</kbd>, then <strong>Install</strong>, then <strong>Package</strong>.</li>
+        <li>Type the first name, highlight it and press <kbd>Tab</kbd>. It gets a green marker.</li>
+        <li>Clear the search, type the next name and press <kbd>Tab</kbd> again. Repeat for as many as you like.</li>
+        <li>Press <kbd>Enter</kbd> once. Omarchy installs every marked package in a single run.</li>
+      </ol>
+      <p>The AUR picker (<strong>Install</strong>, then <strong>AUR</strong>) works the same way, and it also lets you press <kbd>Alt</kbd> + <kbd>B</kbd> to read a package's PKGBUILD before you install it.</p>
+    </section>
+
+    <section id="terminal">
+      <h2>How do I install apps from the terminal?</h2>
+      <p>Use the exact package name from its profile on this site:</p>
+      <pre class="guide-code"><code>omarchy pkg add &lt;package-name&gt;</code></pre>
+      <p>For several, put them on one line with spaces. For example <a href="/flea-file-manager-omarchy.html">flea</a>, <a href="/strata-file-manager-omarchy.html">strata</a> and <a href="/rustdesk-on-omarchy.html">rustdesk</a>:</p>
+      <pre class="guide-code"><code>omarchy pkg add flea strata rustdesk</code></pre>
+      <p><code>omarchy pkg add</code> skips anything you already have, then checks that each package really installed and tells you by name if one didn't.</p>
+      <p>Names ending in <code>-bin</code> usually install a prebuilt release from the upstream project. Other variants may build from source or follow a nightly channel. Read the profile instead of guessing.</p>
+      <p>This website does not download or serve any package. The command hands installation to Omarchy and its configured package sources.</p>
+    </section>
+
+    <section id="aur">
+      <h2>What if an app isn't in the Omarchy repository?</h2>
+      <p>Check <strong>Install</strong>, then <strong>Package</strong> first. If it isn't there, try <strong>Install</strong>, then <strong>AUR</strong>, or an AUR helper such as <a href="/yay-on-omarchy.html">yay</a>. The AUR isn't vetted by the Arch team, and anyone can upload to it. So before you build something unfamiliar:</p>
+      <ul>
+        <li>Prefer the project's own site or repo when picking the package name.</li>
+        <li>Read the PKGBUILD (<kbd>Alt</kbd> + <kbd>B</kbd> in the AUR picker).</li>
+        <li>Check the maintainer, recent comments and update history.</li>
+        <li>Be careful with install steps that pipe a remote script straight into a shell.</li>
+      </ul>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th>Source</th><th>Good first choice when</th><th>What to check</th></tr></thead>
           <tbody>
             <tr><td>Omarchy package repository</td><td>The app already has a current profile and package</td><td>Upstream source, package variant, requirements and license</td></tr>
-            <tr><td>Arch repositories</td><td>A standard Arch package meets the need</td><td>Package details and compatibility with your setup</td></tr>
+            <tr><td>Arch repositories</td><td>A standard Arch package meets the need</td><td>Package details and fit with your setup</td></tr>
             <tr><td>AUR</td><td>No suitable official package exists</td><td>PKGBUILD, sources, maintainer activity, comments and install hooks</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <section id="updates">
-      <h2>Update Omarchy through Omarchy</h2>
-      <p>For a full system update, use the Omarchy Menu's update flow or the documented Omarchy update command. The official manual warns that a direct <code>pacman -Syu</code> or <code>yay -Syu</code> skips the snapshot, migrations and coordinated configuration work Omarchy performs around an update.</p>
-      <p>Before removing an app, record any data location or export format you need. Removing a package and deleting your personal application data are separate operations; do not erase a configuration directory unless you know it contains nothing you want to keep.</p>
+    <section id="remove">
+      <h2>How do I remove packages on Omarchy?</h2>
+      <p>From the menu: <kbd>Super</kbd> + <kbd>Space</kbd>, then <strong>Remove</strong>, then <strong>Package</strong>. It works like the install picker, so <kbd>Tab</kbd> marks several and <kbd>Enter</kbd> removes them all, along with their config files and unused dependencies.</p>
+      <p>From the terminal:</p>
+      <pre class="guide-code"><code>omarchy pkg drop &lt;package-name&gt;</code></pre>
+      <p><code>omarchy pkg drop</code> takes several names too and quietly skips any that aren't installed. Removing a package is not the same as deleting your own data, so export anything you want to keep first.</p>
     </section>
+
+    <section id="updates">
+      <h2>How do I update apps on Omarchy?</h2>
+      <p>Use <strong>Update</strong>, then <strong>Omarchy</strong> in the menu, or click the circle arrow next to the clock when a release is out. In a terminal, run:</p>
+      <pre class="guide-code"><code>omarchy update</code></pre>
+      <p>This pulls the latest Omarchy configs, runs migrations and updates your packages together. The manual advises against running <code>pacman -Syu</code> or <code>yay -Syu</code> yourself, because you can miss the config changes newer packages need. If an update ever goes wrong, restart and pick the pre update snapshot from the boot menu.</p>
+    </section>
+
+    <aside class="guide-callout" id="safety-check">
+      <h2>A 60 second package check</h2>
+      <p>Is this the real upstream project? Does it download from a source you recognize? Do the license and version match what you expect? Are the permissions it asks for reasonable for the job? A repository listing is useful, but it isn't a guarantee.</p>
+    </aside>
 
     <div class="guide-cta">
       <div><h2>Find the exact package name</h2><p>Search all current Omarchy packages and open a profile before copying its install command.</p></div>
@@ -59,18 +112,35 @@
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>What command installs a package from the Omarchy repository?</summary><p>Package profiles in this directory provide a copyable <code>omarchy pkg add</code> command using the exact current package name.</p></details>
-      <details><summary>Can I use pacman and the AUR on Omarchy?</summary><p>Yes. Omarchy is Arch-based, and its manual points users to Arch packages and the AUR when needed. Full system updates should still go through Omarchy's update flow.</p></details>
-      <details><summary>Does the Unofficial Omarchy App Store host packages?</summary><p>No. It is a directory. Install commands retrieve software through Omarchy and the configured package sources, not from this website.</p></details>
+      <details><summary>How do I install multiple packages at once on Omarchy?</summary><p>Open the Omarchy menu with Super + Space, choose Install, then Package, press Tab on each package you want, then press Enter. Or run <code>omarchy pkg add</code> followed by all the names, separated by spaces.</p></details>
+      <details><summary>Is there a GUI app store for Omarchy?</summary><p>The built in way is the Omarchy menu: Install, then Package or AUR, a searchable list with a details preview. This site is an unofficial directory on top of that, so you can browse by category, read profiles and copy the exact install command.</p></details>
+      <details><summary>What is the shortcut for the Omarchy menu?</summary><p>Super + Space.</p></details>
+      <details><summary>What is the difference between Install, Package and Install, AUR?</summary><p>Package lists the official Arch repositories and the Omarchy Package Repository. AUR lists community packages that aren't vetted by the Arch team, so read the PKGBUILD first.</p></details>
+      <details><summary>How do I uninstall an app on Omarchy?</summary><p>Choose Remove, then Package in the Omarchy menu (Tab to pick several), or run <code>omarchy pkg drop &lt;name&gt;</code> in a terminal.</p></details>
+      <details><summary>Can I use pacman and yay on Omarchy?</summary><p>Yes for installing. For full system updates, use Update, then Omarchy, or <code>omarchy update</code>, so migrations run with the new packages.</p></details>
+      <details><summary>Does the Unofficial Omarchy App Store host packages?</summary><p>No. It is a directory. Install commands go through Omarchy and its package sources, not this site.</p></details>
+    </section>
+
+    <section id="keep-exploring">
+      <h2>Keep exploring</h2>
+      <ul>
+        <li><a href="/best-apps-for-omarchy.html">The best Omarchy apps to install first</a></li>
+        <li><a href="/omarchy-apps-list.html">Omarchy apps list: every package in the official repo</a></li>
+        <li><a href="/flea-file-manager-omarchy.html">Flea file manager on Omarchy</a></li>
+        <li><a href="/vs/omarchy-vs-arch.html">Omarchy vs Arch Linux</a></li>
+      </ul>
     </section>
 
     <section class="sources">
-      <h2>Official sources and next steps</h2>
+      <h2>Official sources</h2>
       <ul>
-        <li><a href="https://omarchy.org/manual/development-tools/" target="_blank" rel="noopener">Omarchy Manual: packages, AUR and development tools</a></li>
-        <li><a href="https://omarchy.org/manual/updates/" target="_blank" rel="noopener">Omarchy Manual: safe update flow and rollbacks</a></li>
+        <li><a href="https://omarchy.org/manual/" target="_blank" rel="noopener">The Omarchy Manual</a></li>
+        <li><a href="https://omarchy.org/manual/other-packages/" target="_blank" rel="noopener">Omarchy Manual: Other Packages</a></li>
+        <li><a href="https://omarchy.org/manual/updates/" target="_blank" rel="noopener">Omarchy Manual: Updates</a></li>
+        <li><a href="https://omarchy.org/manual/omarchy-cli/" target="_blank" rel="noopener">Omarchy Manual: Omarchy CLI</a></li>
+        <li><a href="https://github.com/basecamp/omarchy/tree/master/bin" target="_blank" rel="noopener">Omarchy source: the omarchy pkg commands and menu pickers</a></li>
         <li><a href="https://wiki.archlinux.org/title/Arch_User_Repository" target="_blank" rel="noopener">ArchWiki: Arch User Repository</a></li>
         <li><a href="/develop.html">Develop for Omarchy packaging checklist</a></li>
       </ul>
-      <p class="editorial-note">Commands and menus can evolve. When this guide and the official Omarchy manual differ, follow the official manual.</p>
+      <p class="editorial-note">Commands and menus can change. When this guide and the official Omarchy manual differ, follow the manual. Not affiliated with Omarchy, Omacom or DHH.</p>
     </section>

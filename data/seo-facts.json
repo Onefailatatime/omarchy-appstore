@@ -21,6 +21,24 @@
     },
     "cachyos": {
       "name": "CachyOS", "site": "https://cachyos.org/",
+      "editorial": {
+        "_comment": "Hand written page copy from Freddy's 2026-11-01 draft, approved by Jessyka 2026-11-02. Body sections live in body_file; FAQs render on the page and as FAQPage schema.",
+        "title": "Omarchy vs CachyOS (2026): Which Arch Distro Fits You?",
+        "description": "Omarchy vs CachyOS, compared from each project's own docs: desktop, performance tuning, installer, packages, updates and who each one suits. Plus how to try both.",
+        "tagline": "Both are built on Arch. One hands you a finished keyboard driven desktop, the other tunes Arch for speed and lets you pick the desktop.",
+        "answer": "Pick Omarchy if you want a finished, keyboard driven Hyprland desktop that's set up for you, with themes, apps and hotkeys ready on day one. Pick CachyOS if you want Arch with performance tuned packages and kernels, and you'd like to choose your own desktop, from KDE Plasma and GNOME to COSMIC or Hyprland. Both use pacman and the AUR, so most Arch software works on either.",
+        "body_file": "parts/vs/omarchy-vs-cachyos.html",
+        "faqs": [
+          ["Is Omarchy better than CachyOS?", "They aim at different things. Omarchy gives you a finished keyboard driven Hyprland desktop. CachyOS gives you performance tuned Arch packages and lets you choose the desktop. The better one is the one that fits how you work."],
+          ["Is CachyOS faster than Omarchy?", "CachyOS focuses on speed: it recompiles Arch packages for newer CPUs and ships tuned kernels, and its wiki cites a 5% to 20% uplift for x86-64-v3 builds over generic x86-64. Omarchy focuses on the desktop experience instead. We haven't run our own benchmarks, so we don't publish a number for either."],
+          ["Can I use Hyprland on CachyOS?", "Yes. Hyprland is one of the desktops you can pick in the CachyOS installer. Omarchy's own configs and menus are built for Omarchy, though."],
+          ["Are both based on Arch Linux?", "Yes. Both are rolling releases on Arch, both use pacman, and both can use the AUR."],
+          ["Which is better for gaming?", "Both can run Steam, Lutris and Heroic, since they're all Arch packages. CachyOS adds gaming focused kernel and package tuning. See Steam on Omarchy and gaming on Omarchy after Windows on this site."],
+          ["Can I dual boot Omarchy with Windows?", "Yes. The Omarchy manual's Dual Boot Install chapter covers installing into free space next to Windows: shrink a Windows partition, choose the free space install, then run limine-scan to add Windows to the boot menu. It doesn't work with BitLocker on, since BitLocker encrypts the whole drive."],
+          ["How do I install apps on Omarchy?", "Open the Omarchy menu with Super + Space, choose Install, then Package. Or run omarchy pkg add followed by the package name."]
+        ],
+        "faq_links": {"Which is better for gaming?": [["/install/steam-on-omarchy.html", "Steam on Omarchy"], ["/gaming-on-omarchy-after-windows.html", "Gaming on Omarchy after Windows"]], "Can I dual boot Omarchy with Windows?": [["/dual-boot-windows-and-omarchy.html", "Dual boot Windows and Omarchy"]]}
+      },
       "rows": [
         ["Base", "base", {"text": "Built on Arch Linux with the same rolling-release model.", "src": "https://cachyos.org/"}],
         ["Packages", "packages", {"text": "Every package compiled for x86-64-v3, x86-64-v4 and Zen4 with LTO; core packages also get PGO and BOLT.", "src": "https://cachyos.org/"}],

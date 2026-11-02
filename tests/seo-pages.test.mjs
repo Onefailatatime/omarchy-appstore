@@ -45,11 +45,16 @@ for (const page of pages) {
   }
 }
 
+const appExtras = JSON.parse(await readFile(new URL("../data/app-extras.json", import.meta.url), "utf8"));
 const apps = pages.filter((p) => p.startsWith("apps/"));
 for (const p of apps) {
   const html = await read(p);
   const name = p.slice(5, -5);
-  assert.match(html, /<title>Install [^<]+ on Omarchy( \| [^<]+)?<\/title>/, p);
+  // data/app-extras.json gives a few hand written app pages their own title and an FAQ.
+  if (appExtras[name]) {
+    assert.ok(html.includes(`<title>${appExtras[name].title}</title>`), p);
+    assert.match(html, /"@type":"FAQPage"/, `${p} FAQ schema`);
+  } else assert.match(html, /<title>Install [^<]+ on Omarchy( \| [^<]+)?<\/title>/, p);
   const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   const app = ld["@graph"].find((n) => n["@type"] === "SoftwareApplication");
   for (const k of ["name", "applicationCategory", "operatingSystem", "softwareVersion", "url", "fileSize", "dateModified"]) assert.ok(app[k], `${p} ${k}`);
@@ -65,6 +70,10 @@ for (const k of ["ubuntu", "cachyos", "arch", "fedora", "mint", "popos", "bazzit
   const html = await read(`vs/omarchy-vs-${k}.html`);
   assert.ok((html.match(/class="src"/g) || []).length >= 4, `${k} comparison cites sources`);
 }
+const cachy = await read("vs/omarchy-vs-cachyos.html");
+assert.match(cachy, /<title>Omarchy vs CachyOS \(2026\): Which Arch Distro Fits You\?<\/title>/);
+assert.match(cachy, /"@type":"FAQPage"/, "cachyos comparison has FAQ schema");
+assert.doesNotMatch(cachy, /<!-- (TABLE|FAQ) -->/, "cachyos comparison filled its slots");
 const installs = pages.filter((p) => p.startsWith("install/"));
 assert.ok(installs.length >= 8);
 for (const p of installs) assert.match(await read(p), /omarchy\.org\/manual\//, `${p} cites the manual`);

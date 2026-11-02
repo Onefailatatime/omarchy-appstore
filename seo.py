@@ -134,18 +134,37 @@ def build(*, root, dist, pkgs, categories, slug, display_name, guide_template, s
                 f'<section><h2>More about Omarchy</h2><ul>{omlist}</ul></section>'
                 f'<section><h2>Sources</h2><p>Omarchy facts: <a href="https://omarchy.org/manual/">the Omarchy manual</a>. {html.escape(name)} facts: '
                 f'<a href="{html.escape(d["site"])}">{html.escape(d["site"])}</a>. Checked {synced}. This site is not affiliated with either project.</p></section>')
+        # A hand written page (data/seo-facts.json "editorial") keeps the sourced
+        # table and adds its own sections and FAQ around it.
+        ed = d.get("editorial")
+        sources = fact_sources
+        faq_graph = []
+        if ed:
+            title, desc = ed["title"], ed["description"]
+            part = (root / ed["body_file"]).read_text(encoding="utf-8")
+            sources = fact_sources + [ed["body_file"]]
+            def faq_item(q, a):
+                links = ed.get("faq_links", {}).get(q, [])
+                more = (" " + ", ".join(f'<a href="{h}">{html.escape(t)}</a>' for h, t in links) + ".") if links else ""
+                return f"<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}{more}</p></details>"
+            faq = ('<section class="guide-faq" id="faq"><h2>Frequently asked questions</h2>'
+                   + "".join(faq_item(q, a) for q, a in ed["faqs"]) + "</section>")
+            body = part.replace("<!-- TABLE -->", body.split("<section><h2>Sources</h2>")[0]).replace(
+                "<!-- FAQ -->", faq + "<section><h2>Sources</h2>" + body.split("<section><h2>Sources</h2>")[1])
+            faq_graph = [{"@type": "FAQPage", "@id": site + path + "#faq", "mainEntity": [
+                {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in ed["faqs"]]}]
         schema = {"@context": "https://schema.org", "@graph": [
             {"@type": "Article", "@id": site + path + "#article", "headline": title, "description": desc, "url": site + path,
              "dateModified": synced, "author": {"@type": "Person", "name": "Jessyka", "url": site + "/about.html"},
              "publisher": {"@type": "Organization", "name": site_name, "url": site + "/"},
              "about": [{"@type": "SoftwareApplication", "name": "Omarchy", "applicationCategory": "OperatingSystem", "url": "https://omarchy.org/"},
                        {"@type": "SoftwareApplication", "name": name, "applicationCategory": "OperatingSystem", "url": d["site"]}]},
-            _crumbs(site, [("Home", "/"), ("Guides", "/guides.html"), (f"Omarchy vs {name}", path)])]}
+            _crumbs(site, [("Home", "/"), ("Guides", "/guides.html"), (f"Omarchy vs {name}", path)])] + faq_graph}
         write(path, _render(guide_template, site=site, path=path, title=title, description=desc, eyebrow="Comparison",
                             crumb_label="Guides", crumb_href="/guides.html", heading=f"Omarchy vs <span>{html.escape(name)}</span>",
-                            tagline="Only what each project's official site says, with a source on every line.",
-                            answer=f"{om['base']['text']} {name}: {d['rows'][0][2]['text']}",
-                            body=body, schema=schema, synced=synced, related=_related([l for l in vs_links if l[0] != path])), fact_sources)
+                            tagline=ed["tagline"] if ed else "Only what each project's official site says, with a source on every line.",
+                            answer=ed["answer"] if ed else f"{om['base']['text']} {name}: {d['rows'][0][2]['text']}",
+                            body=body, schema=schema, synced=synced, related=_related([l for l in vs_links if l[0] != path])), sources)
 
     in_repo = {p["name"] for p in pkgs}
     inst_links = [(f"/install/{g['slug']}-on-omarchy.html", f"Install {g['app']} on Omarchy", g["menu"]) for g in facts["install"]]

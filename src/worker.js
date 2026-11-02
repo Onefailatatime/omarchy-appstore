@@ -5,6 +5,7 @@
 import { handleVoteRequest, D1VoteStore } from "./votes.mjs";
 import { handleSubscribeRequest } from "./subscribe.mjs";
 import { handleAdEvent, handleWaitlist, handleStats } from "./ads.mjs";
+import merged from "../data/merged-pages.json" with { type: "json" };
 
 async function sha256Hex(text) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
@@ -46,6 +47,12 @@ export async function proxyStats(request, pathname, origin, fetchImpl = fetch) {
     return new Response(res.body, { status: res.status, headers: { "content-type": res.headers.get("content-type") || "application/json", "cache-control": "no-store" } });
   }
   return new Response("Not found", { status: 404 });
+}
+
+// Accepts the .html URL, the clean URL and a trailing slash.
+export function mergedTarget(pathname, redirects = merged.redirects) {
+  const clean = pathname.replace(/\/+$/, "");
+  return redirects[clean] || redirects[clean + ".html"] || null;
 }
 
 const tooMany = () => new Response(JSON.stringify({ error: "Too many requests. Try again in a minute." }), {
@@ -94,6 +101,9 @@ export default {
         return pathname === "/api/waitlist" ? await handleWaitlist(request, env, ctx) : await handleAdEvent(request, env);
       }
       if (pathname === "/api/ads/stats") return await handleStats(request, env);
+      // One page per app: merged duplicates 301 to the page that owns the query (data/merged-pages.json).
+      const mergedTo = mergedTarget(pathname);
+      if (mergedTo) return Response.redirect(new URL(mergedTo + url.search, request.url).toString(), 301);
       // The advertise page was renamed to sponsor.html; keep old links working.
       if (pathname === "/advertise.html" || pathname === "/advertise") {
         return Response.redirect(new URL("/sponsor.html" + url.search + url.hash, request.url).toString(), 301);

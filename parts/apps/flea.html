@@ -1,0 +1,43 @@
+    <section id="quick-answer"><h2>What is the flea file manager?</h2><p>Flea is a GUI file manager built for Omarchy. It has four views, Quick Look previews on <kbd>Space</kbd>, undoable file operations, and vim, Mac or Windows style keys. To install it and make it your default file manager, run:</p><pre><code>omarchy pkg add flea &amp;&amp; flea --default</code></pre><p>To try it without changing your defaults, run only <code>omarchy pkg add flea</code>.</p></section>
+    <section id="features"><h2>What does flea do?</h2><ul>
+      <li><strong>Four views.</strong> List, columns, grid and two panes, with tabs. Flea can remember the view for each folder.</li>
+      <li><strong>Quick Look.</strong> Press Space to preview images, PDFs, text, media, archives and 3D model thumbnails.</li>
+      <li><strong>File operations with undo.</strong> Copy, move, rename, trash, compress and extract, plus renaming many files at once.</li>
+      <li><strong>Tags.</strong> Seven tags in your theme's colors. Press T, then 1 to 7, and search them with <code>tag:red</code>.</li>
+      <li><strong>Network and devices.</strong> SMB, SFTP, FTPS, WebDAV, NFS, Dropbox and Taildrop, plus USB drives, encrypted drives, phones and cameras from the sidebar.</li>
+      <li><strong>Disk images.</strong> Write an ISO or IMG to a USB drive and verify every byte.</li>
+      <li><strong>The shelf.</strong> It sits in the Omarchy bar and holds files you send to it, so you can drag them into any app later.</li>
+      <li><strong>Fits Omarchy.</strong> It follows your theme colors, text sizes and window transparency.</li>
+    </ul></section>
+    <section id="default"><h2>How do I make flea my default file manager?</h2><ol>
+      <li>Run <code>omarchy pkg add flea</code>.</li>
+      <li>To make it your default file manager, file chooser and the app on <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd>, run <code>flea --default</code> from a terminal in your session.</li>
+      <li>To undo that, run <code>flea --default off</code>. The same switch is in Settings, then About.</li>
+      <li>Updates come with <code>omarchy update</code>.</li>
+    </ol><p>Want flea only for Open and Save dialogs? Run <code>flea --picker</code>. Moving from an AUR <code>flea-bin</code> or <code>flea-git</code> install? Run <code>sudo pacman -S flea</code> and answer y when pacman asks to replace it. Removing it: run <code>flea --default off</code> first, then <code>omarchy pkg drop flea</code>.</p></section>
+    <section id="views"><h2>What views does flea have?</h2><div class="table-scroll"><table class="compare-table"><thead><tr><th>View</th><th>Key</th><th>Best for</th></tr></thead><tbody>
+      <tr><td>List</td><td>Ctrl + 1</td><td>Details like size and date</td></tr>
+      <tr><td>Columns</td><td>Ctrl + 2</td><td>Browsing with a preview column</td></tr>
+      <tr><td>Grid</td><td>Ctrl + 3</td><td>Photos and video clips</td></tr>
+      <tr><td>Two panes</td><td>Ctrl + 4</td><td>Two folders side by side</td></tr>
+    </tbody></table></div></section>
+    <section id="keys"><h2>What are the flea keyboard shortcuts?</h2><p>Press <kbd>?</kbd> inside flea for the full keymap, or the comma key for settings. These are the default keys:</p><div class="table-scroll"><table class="compare-table"><thead><tr><th>Action</th><th>Keys</th></tr></thead><tbody>
+      <tr><td>Move, go up, open a folder</td><td>j k, h, l</td></tr>
+      <tr><td>Open with the default app</td><td>Enter</td></tr>
+      <tr><td>Quick Look</td><td>Space</td></tr>
+      <tr><td>Copy, cut, paste</td><td>y x p, or Ctrl + C, X, V</td></tr>
+      <tr><td>Rename</td><td>r or F2</td></tr>
+      <tr><td>Trash, undo, redo</td><td>dd or Delete, z, Ctrl + Shift + Z</td></tr>
+      <tr><td>Search, filter the list</td><td>f, /</td></tr>
+      <tr><td>Go to a path or folder</td><td>: or Ctrl + L</td></tr>
+      <tr><td>New tab, close tab, switch tab</td><td>t, w, 1 to 9</td></tr>
+      <tr><td>Open a terminal here</td><td>Ctrl + T</td></tr>
+      <tr><td>Show hidden files</td><td>.</td></tr>
+    </tbody></table></div><p>Prefer other keys? Settings has Default, Vim, Mac and Windows presets. The Windows preset uses Ctrl + Shift + 1 to 4 for views and Ctrl + Y for redo.</p></section>
+    <section id="flea-vs-strata"><h2>Flea or strata?</h2><p>Both are GUI file managers you can install from the Omarchy repo, and you can try both.</p><div class="table-scroll"><table class="compare-table"><thead><tr><th></th><th>Flea</th><th><a href="/apps/strata.html">Strata</a></th></tr></thead><tbody>
+      <tr><td>Built with</td><td>Rust backend, Quickshell interface</td><td>GTK4</td></tr>
+      <tr><td>Views</td><td>List, columns, grid, two panes</td><td>Miller columns, grid, table</td></tr>
+      <tr><td>Made for</td><td>Omarchy specifically</td><td>Modern Linux desktops, designed to fit Omarchy style setups</td></tr>
+      <tr><td>Extras</td><td>Shelf, tags, network mounts, disk image writer</td><td>Fuzzy filename search, sandboxed previews</td></tr>
+      <tr><td>Install</td><td><code>omarchy pkg add flea</code></td><td><code>omarchy pkg add strata</code></td></tr>
+    </tbody></table></div><p>Pick flea if you want the tightest fit with Omarchy's theme, bar and defaults. Pick strata if you like Miller columns and a GTK app. In the flea developer's own test on Oct 12, 2026, flea's window opened in 505 ms and strata's in 588 ms with 100,000 files in a folder (<a href="https://github.com/thisisgm/flea/blob/main/docs/benchmarks.md" target="_blank" rel="noopener">method</a>). Those numbers come from one machine. More on strata: <a href="/strata-file-manager-faq.html">Strata file manager FAQ</a>. New to installing? See <a href="/how-to-install-apps-on-omarchy.html">how to install apps on Omarchy</a> or the <a href="/best-apps-for-omarchy.html">best Omarchy apps to install first</a>.</p></section>

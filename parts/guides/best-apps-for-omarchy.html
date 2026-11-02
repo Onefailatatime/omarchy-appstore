@@ -1,50 +1,92 @@
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
+      <a href="#preinstalled">Already installed</a>
       <a href="#starter-five">Starter five</a>
       <a href="#creative">Creative apps</a>
       <a href="#developer">Developer tools</a>
+      <a href="#app-store">App store and apps list</a>
       <a href="#faq">Questions</a>
     </nav>
 
+    <section id="quick-answer">
+      <h2>What are the best apps to install first on Omarchy?</h2>
+      <p>A fresh Omarchy install already has a lot of the best apps. LocalSend, Aether, Omacut, Obsidian, LibreOffice, Pinta, Omawrite, Chromium and Hype are all part of Omarchy's base package list. So the best first move is to add what's missing. Start with a file manager, notes and remote access:</p>
+      <pre class="guide-code"><code>omarchy pkg add strata slap-notes-bin rustdesk</code></pre>
+      <p>Or open the Omarchy menu (<kbd>Super</kbd> + <kbd>Space</kbd>), choose <strong>Install</strong>, then <strong>Package</strong>, press <kbd>Tab</kbd> on each one and press <kbd>Enter</kbd>. Add the specialist tools below only when a job calls for them.</p>
+      <p class="editorial-note">Disclosure: Slap Notes is made by Jessyka, who runs this site.</p>
+    </section>
+
+    <section id="preinstalled">
+      <h2>What apps come preinstalled on Omarchy?</h2>
+      <p>These come with Omarchy, so there's nothing to install. The source is Omarchy's base package list (<code>install/omarchy-base.packages</code> in the Omarchy source), and the <a href="https://omarchy.org/manual/guis/" target="_blank" rel="noopener">GUIs</a> and <a href="https://omarchy.org/manual/tuis/" target="_blank" rel="noopener">TUIs</a> chapters of the manual describe them:</p>
+      <ul>
+        <li><a href="/localsend-on-omarchy.html">LocalSend</a> for sending files between devices</li>
+        <li><a href="/aether-on-omarchy.html">Aether</a> for building a theme from a wallpaper</li>
+        <li><a href="/omacut-video-editor-omarchy.html">Omacut</a> for quick video trims</li>
+        <li>Obsidian for Markdown notes</li>
+        <li>LibreOffice for documents and spreadsheets</li>
+        <li>Pinta for simple image edits</li>
+        <li><a href="/omawrite-writing-omarchy.html">Omawrite</a> for writing</li>
+        <li>Chromium as the browser</li>
+        <li>Hype, Monologue, Omacalc, Signed and Disktree, which are Omarchy's own small tools</li>
+      </ul>
+      <p>Editors like VSCode, Cursor and Zed are under <strong>Install</strong>, then <strong>Editor</strong>, and Steam and Heroic are under <strong>Install</strong>, then <strong>Gaming</strong> (<a href="https://omarchy.org/manual/development-tools/" target="_blank" rel="noopener">Development Tools</a>, <a href="https://omarchy.org/manual/gaming/" target="_blank" rel="noopener">Gaming</a>).</p>
+    </section>
+
     <section>
-      <h2>Do not install everything</h2>
-      <p>A clean Omarchy setup is useful because it is curated. Treat this list as a menu, not a command to install twelve packages at once. Start with the recurring jobs your current setup does poorly, open each profile, confirm the upstream project and requirements, then add one tool at a time.</p>
+      <h2>Start small, then add</h2>
+      <p>A good Omarchy setup stays lean. Pick the jobs your current setup does badly, install the matching apps, and leave the rest until you need them. Every pick links to its profile, where you can check the upstream project, license and requirements before you install. Want the full how to, including installing several at once? See <a href="/how-to-install-apps-on-omarchy.html#multiple">how to install apps on Omarchy</a>.</p>
     </section>
 
     <section id="starter-five">
       <h2>Five useful apps for almost any Omarchy setup</h2>
-      <h3>1. <a href="/apps/localsend.html">LocalSend</a> — private nearby file transfers</h3>
-      <p>Send files between Linux, Windows, macOS, Android and iOS on the local network without uploading them to a cloud drive. It is the practical cross-platform answer to “how do I AirDrop this to Linux?”</p>
-      <h3>2. <a href="/apps/slap-notes-bin.html">Slap Notes</a> — local-first blocks and linked notes</h3>
-      <p>A native notes workspace with block editing, wiki links, a visual graph, daily notes and an optional research agent. It is particularly interesting if Notion feels too cloud-first and plain Markdown feels too bare.</p>
-      <h3>3. <a href="/apps/strata.html">Strata</a> — keyboard-first file management</h3>
+      <h3>1. <a href="/localsend-on-omarchy.html">LocalSend</a>: private file transfers between your devices</h3>
+      <p><strong>Already installed.</strong> Send files between Linux, Windows, macOS, Android and iOS on the local network without uploading them to a cloud drive. It is the practical cross platform answer to “how do I AirDrop this to Linux?”</p>
+      <h3>2. <a href="/apps/slap-notes-bin.html">Slap Notes</a>: local blocks and linked notes</h3>
+      <pre class="guide-code"><code>omarchy pkg add slap-notes-bin</code></pre>
+      <p>A native notes workspace with block editing, wiki links, a visual graph, daily notes and an optional research agent. It is particularly interesting if Notion feels too cloud first and plain Markdown feels too bare.</p>
+      <h3>3. <a href="/strata-file-manager-omarchy.html">Strata</a>: keyboard first file management</h3>
+      <pre class="guide-code"><code>omarchy pkg add strata</code></pre>
       <p>Browse with Miller columns, thumbnails or a sortable table, then use fuzzy search and previews to move through files quickly. Its GTK4 interface fits naturally beside the rest of an Omarchy desktop.</p>
-      <h3>4. <a href="/apps/aether.html">Aether</a> — build a theme from a wallpaper</h3>
-      <p>Extract a palette from an image, tune it and generate a coordinated theme across the desktop and supported apps. It turns Omarchy customization into a visual workflow instead of a manual color-file exercise.</p>
-      <h3>5. <a href="/apps/rustdesk.html">RustDesk</a> — remote desktop access</h3>
-      <p>A useful option when you need to reach another computer or help someone remotely. Review the networking and security model before exposing any remote-access tool.</p>
+      <p>Prefer Flea? It's the other keyboard first file manager in the repo: <a href="/flea-file-manager-omarchy.html">Flea on Omarchy</a>.</p>
+      <h3>4. <a href="/aether-on-omarchy.html">Aether</a>: build a theme from a wallpaper</h3>
+      <p><strong>Already installed.</strong> Extract a palette from an image, tune it and generate a coordinated theme across the desktop and supported apps. It turns Omarchy customization into a visual workflow instead of a manual color file exercise.</p>
+      <h3>5. <a href="/rustdesk-on-omarchy.html">RustDesk</a>: remote desktop access</h3>
+      <pre class="guide-code"><code>omarchy pkg add rustdesk</code></pre>
+      <p>A useful option when you need to reach another computer or help someone remotely. Review the networking and security model before exposing any remote access tool.</p>
     </section>
 
     <section id="creative">
       <h2>Four creative and presentation tools</h2>
-      <h3>6. <a href="/apps/omacut.html">Omacut</a> — trim a clip without a full editor</h3>
-      <p>Open a video, choose the start and end, preview and export. It is intentionally much smaller than a multitrack editor.</p>
-      <h3>7. <a href="/apps/omapresent.html">Omapresent</a> — turn Markdown into slides</h3>
+      <h3>6. <a href="/omacut-video-editor-omarchy.html">Omacut</a>: trim a clip without a full editor</h3>
+      <p><strong>Already installed.</strong> Open a video, choose the start and end, preview and export. It is intentionally much smaller than a multitrack editor.</p>
+      <h3>7. <a href="/omapresent-on-omarchy.html">Omapresent</a>: turn Markdown into slides</h3>
+      <pre class="guide-code"><code>omarchy pkg add omapresent</code></pre>
       <p>Present directly from structured Markdown, keep speaker notes on a separate display and export to PDF or a static web bundle.</p>
-      <h3>8. <a href="/apps/schist-bin.html">Schist</a> — an open-source layered image editor</h3>
-      <p>Built for serious layer-based image work with PSD and Affinity compatibility goals, non-destructive editing and an extensible plugin design.</p>
-      <h3>9. <a href="/apps/hyprshade.html">Hyprshade</a> — screen shaders for Hyprland</h3>
-      <p>Apply and manage screen shaders for effects such as blue-light reduction or visual customization without rebuilding the desktop.</p>
+      <h3>8. <a href="/schist-bin-on-omarchy.html">Schist</a>: a layered image editor</h3>
+      <pre class="guide-code"><code>omarchy pkg add schist-bin</code></pre>
+      <p>Built for serious layer based image work with PSD and Affinity compatibility goals, non destructive editing and an extensible plugin design.</p>
+      <h3>9. <a href="/hyprshade-on-omarchy.html">Hyprshade</a>: screen shaders for Hyprland</h3>
+      <pre class="guide-code"><code>omarchy pkg add hyprshade</code></pre>
+      <p>Apply and manage screen shaders for effects such as blue light reduction or visual customization without rebuilding the desktop.</p>
     </section>
 
     <section id="developer">
       <h2>Three picks for developers and gamers</h2>
-      <h3>10. <a href="/apps/openai-codex-bin.html">Codex CLI</a> — an agent in the terminal</h3>
+      <h3>10. <a href="/openai-codex-bin-on-omarchy.html">Codex CLI</a>: a coding agent in the terminal</h3>
+      <pre class="guide-code"><code>omarchy pkg add openai-codex-bin</code></pre>
       <p>Work with a coding agent inside a repository: ask questions, review changes, edit files and run project commands. It requires an eligible OpenAI account or API access.</p>
-      <h3>11. <a href="/apps/cursor-bin.html">Cursor</a> — a graphical AI-first code editor</h3>
-      <p>A familiar VS Code-style environment with integrated agents for people who prefer a desktop IDE over a terminal-first coding workflow.</p>
-      <h3>12. <a href="/apps/heroic-games-launcher-bin.html">Heroic Games Launcher</a> — one library for several game stores</h3>
-      <p>Manage Epic, GOG and Amazon game libraries, plus Wine and Proton compatibility tools, from an open-source launcher built for Linux as well as macOS and Windows.</p>
+      <h3>11. <a href="/cursor-bin-on-omarchy.html">Cursor</a>: an AI first code editor</h3>
+      <pre class="guide-code"><code>omarchy pkg add cursor-bin</code></pre>
+      <p>A familiar VS Code style environment with integrated agents for people who prefer a desktop IDE over a terminal first coding workflow.</p>
+      <h3>12. <a href="/heroic-games-launcher-bin-on-omarchy.html">Heroic Games Launcher</a>: one library for several game stores</h3>
+      <pre class="guide-code"><code>omarchy pkg add heroic-games-launcher-bin</code></pre>
+      <p>Manage Epic, GOG and Amazon game libraries, plus Wine and Proton compatibility tools, from an open source launcher built for Linux as well as macOS and Windows.</p>
+    </section>
+
+    <section id="app-store">
+      <h2>Is there an Omarchy app store or a full apps list?</h2>
+      <p>Omarchy's built in way to add software is the Omarchy menu: <strong>Install</strong>, then <strong>Package</strong> for the Arch repos, or <strong>Install</strong>, then <strong>AUR</strong>. This site is an unofficial, searchable directory of every package in the Omarchy Package Repository. Browse the <a href="/omarchy-apps-list.html">full Omarchy apps list</a>, or see which apps readers rank highest on <a href="/leaderboard.html">Top apps</a>.</p>
     </section>
 
     <aside class="guide-callout">
@@ -59,9 +101,13 @@
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>What should I install first on Omarchy?</summary><p>Start with one app for each recurring task you actually have. LocalSend, a notes app, a file manager and one creative tool make a useful first pass.</p></details>
-      <details><summary>Are every one of these apps official Omarchy projects?</summary><p>No. The official repository includes a mix of Omarchy projects, upstream third-party software and independent community apps. Each profile links to its real project source.</p></details>
-      <details><summary>Does this list automatically install anything?</summary><p>No. The guide only links to package profiles. You decide what to install and run the displayed Omarchy command yourself.</p></details>
+      <details><summary>What are the best apps to install on Omarchy first?</summary><p>LocalSend, Aether and Omacut already come with Omarchy. Add Strata for files, Slap Notes for linked notes and RustDesk for remote access with <code>omarchy pkg add strata slap-notes-bin rustdesk</code>.</p></details>
+      <details><summary>What apps come preinstalled on Omarchy?</summary><p>LocalSend, Aether, Omacut, Obsidian, LibreOffice, Pinta, Omawrite, Chromium and Hype, plus Omarchy's own small tools like Monologue and Disktree. Neovim is the default editor.</p></details>
+      <details><summary>Is there an Omarchy app store?</summary><p>The built in one is the Omarchy menu: Install, then Package or AUR. This site is an unofficial directory on top of it, with a profile and an install command for every app in the Omarchy repo.</p></details>
+      <details><summary>How do I install several of these at once?</summary><p>Put all the package names after <code>omarchy pkg add</code>, separated by spaces. Or open Install, then Package in the Omarchy menu, press Tab on each one, then Enter.</p></details>
+      <details><summary>What's the best file manager for Omarchy?</summary><p>Strata and Flea are both keyboard first and both in the repo. Strata has Miller columns, thumbnails and a table view. Flea focuses on speed, rich previews of images, video, PDFs and archives, and undoable file operations. See <a href="/flea-file-manager-omarchy.html">Flea on Omarchy</a> and the <a href="/strata-file-manager-faq.html">Strata FAQ</a>.</p></details>
+      <details><summary>Are these official Omarchy apps?</summary><p>Some are Omarchy projects and some are third party or indie apps packaged in the Omarchy Package Repository. Each profile links to the real upstream project.</p></details>
+      <details><summary>Does this page install anything?</summary><p>No. It links to profiles and shows commands. You run them yourself.</p></details>
     </section>
 
     <section class="sources">

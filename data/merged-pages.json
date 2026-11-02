@@ -1,0 +1,15 @@
+{
+ "note": "One page per app. Each old URL 301s (src/worker.js) to the page that owns the query, and build.py no longer generates the old page, lists it in the sitemap, llms.txt or the tutorials hub, or links to it. Chosen from Pete's duplicate checks (omarchy-marketing/seo-recovery-2026-11/duplicates.md, canonical-check-2026-11-01.md) and approved by Jessyka on 2026-11-02.",
+ "decided": "2026-11-02",
+ "redirects": {
+  "/helium-browser-bin-on-omarchy.html": "/helium-on-omarchy.html",
+  "/collie-bin-on-omarchy.html": "/collie-on-omarchy.html",
+  "/qcom-firmware-extract-on-omarchy.html": "/qcom-firmware-extract-snapdragon-omarchy.html",
+  "/thinkpad-t14-amd-touchpad-dkms-on-omarchy.html": "/thinkpad-t14-amd-touchpad-on-omarchy.html",
+  "/omarchy-power-profiles-daemon-on-omarchy.html": "/power-profiles-daemon-on-omarchy.html",
+  "/omarchy-meeting-recorder-bin-on-omarchy.html": "/meeting-recorder-on-omarchy.html",
+  "/t3code-nightly-bin-on-omarchy.html": "/t3code-bin-on-omarchy.html",
+  "/t3code-patched-bin-on-omarchy.html": "/t3code-bin-on-omarchy.html",
+  "/apps/t3code.html": "/apps/t3code-bin.html"
+ }
+}

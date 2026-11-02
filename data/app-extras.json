@@ -1,0 +1,18 @@
+{
+  "_comment": "Hand written additions for single app pages (title, meta, answer sections and FAQ). Only apps listed here change; every other app page uses the shared template as is. flea: Freddy's 2026-11-01 draft from the flea README, approved by Jessyka 2026-11-02.",
+  "flea": {
+    "title": "Flea File Manager for Omarchy: Install, Keys, Views and FAQ",
+    "description": "Flea is a fast, keyboard friendly GUI file manager made for Omarchy. Install it with one command, set it as your default, and learn its views, Quick Look and keys.",
+    "body_file": "parts/apps/flea.html",
+    "faqs": [
+      ["What is the flea file manager?", "Flea is a GUI file manager made for Omarchy by developer GM (thisisgm on GitHub). It pairs a Rust backend with a Quickshell interface and follows your Omarchy theme."],
+      ["How do I install flea on Omarchy?", "Run omarchy pkg add flea. Add && flea --default to make it your default file manager."],
+      ["Is flea in the AUR?", "The README says flea is only available from the Omarchy Package Repository now. If you have an older flea-bin or flea-git from the AUR, sudo pacman -S flea replaces it."],
+      ["How do I make flea my default file manager?", "Run flea --default from a terminal in your Omarchy session. It also becomes the app on Super + Shift + F and your Open and Save dialog. flea --default off undoes it."],
+      ["Does flea have vim keys?", "Yes. j, k, h and l move around by default, and there are Vim, Mac and Windows key presets in settings."],
+      ["Can flea preview files?", "Yes. Press Space for Quick Look on images, PDFs, text, media, archives and 3D model thumbnails."],
+      ["Is flea free?", "Yes. It's MIT licensed. The developer takes sponsorships on GitHub."],
+      ["Flea or strata?", "Flea is built for Omarchy and follows its theme and bar. Strata is a GTK4 file manager with Miller columns. Both install with one command, so try both."]
+    ]
+  }
+}

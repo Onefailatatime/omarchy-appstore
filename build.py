@@ -41,6 +41,10 @@ DATE_TOKEN = "9999-12-31"
 # Generated tutorials that repeat their app page and earn no search traffic of
 # their own point their canonical at the app page and stay out of the sitemap.
 TUTORIAL_CANONICALS_FILE = ROOT / "data" / "tutorial-canonicals.json"
+APP_EXTRAS_FILE = ROOT / "data" / "app-extras.json"  # hand written additions for a few single app pages
+APP_EXTRAS = {k: v for k, v in json.loads(APP_EXTRAS_FILE.read_text(encoding="utf-8")).items() if not k.startswith("_")} if APP_EXTRAS_FILE.exists() else {}
+MERGED_PAGES_FILE = ROOT / "data" / "merged-pages.json"  # old URL -> the one page that owns its query (301 in src/worker.js)
+MERGED = json.loads(MERGED_PAGES_FILE.read_text(encoding="utf-8"))["redirects"] if MERGED_PAGES_FILE.exists() else {}
 DB_URL = "https://pkgs.omarchy.org/stable/x86_64/omarchy.db"
 DB_CACHE = ROOT / "data" / "omarchy.db"
 PKGS_REMOTE = "https://github.com/omacom/omarchy-pkgs"
@@ -118,30 +122,38 @@ GUIDES = [
     },
     {
         "slug": "best-apps-for-omarchy",
-        "title": "Best Omarchy Apps to Install First: 12 Useful Picks",
-        "description": "Start a new Omarchy setup with 12 useful apps for notes, files, themes, video, screenshots, gaming, remote access and developer work.",
+        "title": "Best Omarchy Apps (2026): 12 to Install First, With Commands",
+        "description": "The best apps for a new Omarchy setup, picked by job: files, notes, transfers, themes, video, coding and gaming. Each pick has its exact omarchy pkg add command.",
         "eyebrow": "Starter app guide",
         "heading": "The best Omarchy apps to <span>install first</span>",
-        "tagline": "A practical starter set chosen by job, not a pile of packages to install blindly.",
-        "answer": "The best Omarchy apps are the ones that fill a real gap in your workflow. Start with a small set: LocalSend for transfers, Slap Notes for local knowledge, Strata for files, Aether for themes and Omacut for quick video trims—then add specialist tools only when you need them.",
+        "tagline": "Twelve picks chosen by job, each with the exact install command. Start with five, add the rest when you need them.",
+        "answer": "A fresh Omarchy install already includes LocalSend, Aether, Omacut, Obsidian, LibreOffice, Pinta, Omawrite, Chromium and Hype. Add what's missing first: a file manager, notes and remote access, with omarchy pkg add strata slap-notes-bin rustdesk. Add the specialist tools below only when a job calls for them.",
         "faqs": [
-            ("What should I install first on Omarchy?", "Start with one app for each recurring task you actually have. LocalSend, a notes app, a file manager and one creative tool make a useful first pass."),
-            ("Are every one of these apps official Omarchy projects?", "No. The official repository includes a mix of Omarchy projects, upstream third-party software and independent community apps. Each profile links to its real project source."),
-            ("Does this list automatically install anything?", "No. The guide only links to package profiles. You decide what to install and run the displayed Omarchy command yourself."),
+            ("What are the best apps to install on Omarchy first?", "LocalSend, Aether and Omacut already come with Omarchy. Add Strata for files, Slap Notes for linked notes and RustDesk for remote access with omarchy pkg add strata slap-notes-bin rustdesk."),
+            ("What apps come preinstalled on Omarchy?", "LocalSend, Aether, Omacut, Obsidian, LibreOffice, Pinta, Omawrite, Chromium and Hype, plus Omarchy's own small tools like Monologue and Disktree. Neovim is the default editor."),
+            ("Is there an Omarchy app store?", "The built in one is the Omarchy menu: Install, then Package or AUR. This site is an unofficial directory on top of it, with a profile and an install command for every app in the Omarchy repo."),
+            ("How do I install several of these at once?", "Put all the package names after omarchy pkg add, separated by spaces. Or open Install, then Package in the Omarchy menu, press Tab on each one, then Enter."),
+            ("What's the best file manager for Omarchy?", "Strata and Flea are both keyboard first and both in the repo. Strata has Miller columns, thumbnails and a table view. Flea focuses on speed, rich previews of images, video, PDFs and archives, and undoable file operations."),
+            ("Are these official Omarchy apps?", "Some are Omarchy projects and some are third party or indie apps packaged in the Omarchy Package Repository. Each profile links to the real upstream project."),
+            ("Does this page install anything?", "No. It links to profiles and shows commands. You run them yourself."),
         ],
     },
     {
         "slug": "how-to-install-apps-on-omarchy",
-        "title": "How to Install Apps on Omarchy Safely",
-        "description": "Learn how to install, inspect, update and remove apps on Omarchy using the official package repository, Arch packages and the AUR.",
+        "title": "How to Install Apps on Omarchy (One or Many at Once)",
+        "description": "Install one app or several at once on Omarchy. Use the Omarchy menu with Tab to multi select, or omarchy pkg add with a list. Covers the AUR, removal and safe updates.",
         "eyebrow": "Omarchy package guide",
         "heading": "How to install apps on <span>Omarchy</span>",
-        "tagline": "Use the official repository first, inspect unfamiliar software, and let Omarchy handle full-system updates.",
-        "answer": "For an app in the official Omarchy package repository, use the profile's copyable omarchy pkg add command. For other software, check Omarchy's Install menu, Arch repositories and then the AUR. Review the source and permissions first, and use Omarchy's own update flow instead of a direct full pacman or yay upgrade.",
+        "tagline": "The Omarchy menu, the terminal, several packages at once, the AUR, removal and updates.",
+        "answer": "Press Super + Space, choose Install, then Package. Type to filter, press Tab on each package you want, then Enter to install them all together. In a terminal, list several names in one command: omarchy pkg add flea strata rustdesk. For the AUR use Install, then AUR. Update everything with omarchy update, not pacman -Syu.",
         "faqs": [
-            ("What command installs a package from the Omarchy repository?", "Package profiles in this directory provide a copyable omarchy pkg add command using the exact current package name."),
-            ("Can I use pacman and the AUR on Omarchy?", "Yes. Omarchy is Arch-based, and its manual points users to Arch packages and the AUR when needed. Full system updates should still go through Omarchy's update flow."),
-            ("Does the Unofficial Omarchy App Store host packages?", "No. It is a directory. Install commands retrieve software through Omarchy and the configured package sources, not from this website."),
+            ("How do I install multiple packages at once on Omarchy?", "Open the Omarchy menu with Super + Space, choose Install, then Package, press Tab on each package you want, then press Enter. Or run omarchy pkg add followed by all the names, separated by spaces."),
+            ("Is there a GUI app store for Omarchy?", "The built in way is the Omarchy menu: Install, then Package or AUR, a searchable list with a details preview. This site is an unofficial directory on top of that, so you can browse by category, read profiles and copy the exact install command."),
+            ("What is the shortcut for the Omarchy menu?", "Super + Space."),
+            ("What is the difference between Install, Package and Install, AUR?", "Package lists the official Arch repositories and the Omarchy Package Repository. AUR lists community packages that aren't vetted by the Arch team, so read the PKGBUILD first."),
+            ("How do I uninstall an app on Omarchy?", "Choose Remove, then Package in the Omarchy menu (Tab to pick several), or run omarchy pkg drop followed by the package name in a terminal."),
+            ("Can I use pacman and yay on Omarchy?", "Yes for installing. For full system updates, use Update, then Omarchy, or omarchy update, so migrations run with the new packages."),
+            ("Does the Unofficial Omarchy App Store host packages?", "No. It is a directory. Install commands go through Omarchy and its package sources, not this site."),
         ],
     },
     {
@@ -1216,7 +1228,8 @@ def tutorial_url(name: str) -> str:
     for guide_slug, names in GUIDE_PACKAGES.items():
         if name in names and PRIMARY_GUIDE.get(name, guide_slug) == guide_slug:
             return f"/{guide_slug}.html"
-    return f"/{slug(name)}-on-omarchy.html"
+    path = f"/{slug(name)}-on-omarchy.html"
+    return MERGED.get(path, path)
 
 
 def app_title(p: dict) -> str:
@@ -1296,9 +1309,13 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
     author = (f'by <a href="{html.escape(p["author_url"])}" target="_blank" '
               f'rel="author noopener">{html.escape(p["author_name"])}</a>'
               if p.get("author_name") and p.get("author_url") else "")
+    extra = APP_EXTRAS.get(p["name"])
+    if extra:
+        schema["@graph"].append({"@type": "FAQPage", "@id": canonical + "#faq", "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in extra["faqs"]]})
     replacements = {
         "__STYLE__": css,
-        "__TITLE__": html.escape(app_title(p)),
+        "__TITLE__": html.escape(extra["title"] if extra else app_title(p)),
         "__SITE_URL__": SITE_URL,
         "__CANONICAL__": canonical,
         "__SHARE_URL__": canonical,
@@ -1326,6 +1343,17 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
     page = template
     for key, value in replacements.items():
         page = page.replace(key, value)
+    if extra:
+        meta = html.escape(extra["description"])
+        for attr in ('name="description"', 'property="og:description"', 'name="twitter:description"'):
+            page = page.replace(f'<meta {attr} content="{html.escape(desc)}">', f'<meta {attr} content="{meta}">', 1)
+        faq = ('<section class="guide-faq" id="faq"><h2>Frequently asked questions</h2>'
+               + "".join(f"<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>" for q, a in extra["faqs"])
+               + "</section>\n")
+        anchor = "    <section><h2>What is "
+        assert anchor in page, "app template lost its What is section"
+        page = page.replace(anchor, (ROOT / extra["body_file"]).read_text(encoding="utf-8") + anchor, 1)
+        page = page.replace('    <div class="actions">', faq + '    <div class="actions">', 1)
     return page
 
 
@@ -1631,7 +1659,11 @@ def main() -> None:
             extra_graph=guide.get("extra_graph")), encoding="utf-8")
 
     guided = {n for names in GUIDE_PACKAGES.values() for n in names}
-    tuts = tutorials.build(pkgs, guided, {g["slug"] for g in GUIDES}, SITE_URL, profile_images)
+    # Merged URLs are reserved too, so no generated page takes them and no related list links to them.
+    merged_slugs = {path.strip("/").removesuffix(".html") for path in MERGED}
+    tuts = tutorials.build(pkgs, guided, {g["slug"] for g in GUIDES} | merged_slugs, SITE_URL, profile_images)
+    for path in MERGED:  # the worker 301s these; drop the copy an earlier build left in dist
+        (DIST / path.lstrip("/")).unlink(missing_ok=True)
     canonical_to_app = set(json.loads(TUTORIAL_CANONICALS_FILE.read_text())["pages"]) if TUTORIAL_CANONICALS_FILE.exists() else set()
     for t in tuts:
         p = t["pkg"]
