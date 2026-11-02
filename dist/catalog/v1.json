@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-11-02T02:00:15+00:00",
+ "generated_at": "2026-11-02T14:00:15+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 206,
+ "app_count": 205,
  "apps": [
   {
    "id": "1password",
@@ -1909,17 +1909,6 @@
    "repository": "https://github.com/pingdotgg/t3code",
    "tutorial_url": "https://omarchyapps.com/t3code-nightly-bin-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/t3code-nightly-bin.html"
-  },
-  {
-   "id": "t3code-patched-bin",
-   "name": "t3code-patched-bin",
-   "package": "t3code-patched-bin",
-   "install_command": "omarchy pkg add t3code-patched-bin",
-   "category": "Utilities",
-   "description": "Open-source control plane for coding agents, with Omarchy environment-theme patches",
-   "homepage": "https://t3.codes",
-   "tutorial_url": "https://omarchyapps.com/t3code-patched-bin-on-omarchy.html",
-   "url": "https://omarchyapps.com/apps/t3code-patched-bin.html"
   },
   {
    "id": "tensaku",

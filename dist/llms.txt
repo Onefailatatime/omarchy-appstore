@@ -258,7 +258,6 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [How to Install & Use symfony-cli on Omarchy (2026)](https://omarchyapps.com/symfony-cli-on-omarchy.html)
 - [How to Install & Use t3code on Omarchy (2026)](https://omarchyapps.com/t3code-bin-on-omarchy.html)
 - [How to Install & Use t3code-nightly on Omarchy (2026)](https://omarchyapps.com/t3code-nightly-bin-on-omarchy.html)
-- [How to Install & Use t3code-patched on Omarchy (2026)](https://omarchyapps.com/t3code-patched-bin-on-omarchy.html)
 - [How to Install & Use tensaku on Omarchy (2026)](https://omarchyapps.com/tensaku-on-omarchy.html)
 - [thinkpad-t14-amd-touchpad-dkms on Omarchy: Install & Use](https://omarchyapps.com/thinkpad-t14-amd-touchpad-dkms-on-omarchy.html)
 - [How to Install & Use tmog on Omarchy (2026)](https://omarchyapps.com/tmog-bin-on-omarchy.html)
