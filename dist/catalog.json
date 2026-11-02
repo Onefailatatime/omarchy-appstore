@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-11-01T14:00:14+00:00",
+ "generated_at": "2026-11-02T02:00:15+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 204,
+ "app_count": 206,
  "apps": [
   {
    "id": "1password",
@@ -492,6 +492,28 @@
    "homepage": "https://github.com/herdrdev/herdr",
    "tutorial_url": "https://omarchyapps.com/herdr-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/herdr.html"
+  },
+  {
+   "id": "herdr-app",
+   "name": "herdr-app",
+   "package": "herdr-app",
+   "install_command": "omarchy pkg add herdr-app",
+   "category": "Utilities",
+   "description": "Herdr desktop app: terminals and coding agents that keep running",
+   "homepage": "https://github.com/herdrdev/herdr-app",
+   "tutorial_url": "https://omarchyapps.com/herdr-app-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/herdr-app.html"
+  },
+  {
+   "id": "herdr-core",
+   "name": "herdr-core",
+   "package": "herdr-core",
+   "install_command": "omarchy pkg add herdr-core",
+   "category": "Utilities",
+   "description": "Herdr core (hc): the server that keeps Herdr terminals and coding agents running",
+   "homepage": "https://github.com/herdrdev/herdr-core",
+   "tutorial_url": "https://omarchyapps.com/herdr-core-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/herdr-core.html"
   },
   {
    "id": "hermes-desktop",
