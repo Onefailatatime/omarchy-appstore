@@ -1,0 +1,137 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add herdr-core` installs `/usr/bin/herdr-core` and the `hc` symlink, and that `hc` is on PATH in a fresh shell
+- Packaged version at publish time: omarchy-pkgs master carries 0.1.16-1 (upstream already released 0.1.17 as of 2026-11-02 — check whether the package has been bumped)
+- Core auto-start: does the core start on demand when the app or `hc` first talks to it, or must it be started explicitly? Record the actual behavior on Omarchy
+- The `hc run` / `--bg` / `ls` / `attach` / `read` loop works from Omarchy's default shell (zsh); detach key Ctrl+\ works in the attached terminal
+- 180-second default wait check-in: `hc run` without `--bg` checks in after 180 s, leaving the program running — confirm the behavior and how the printed address looks
+- `hc --skill` prints the agent guide; templates workflow (`hc templates`, `hc run --bg --name review reviewer ...`, `hc send`, `hc wait --children all`) works end to end
+- Multi-machine: `hc machine add <ssh-host> --name box` against a real host; `hc run --on box ...` runs remotely; addresses like `box/t3` attach correctly
+- Config: `~/.config/herdr-core/config.toml` shell override (e.g. `shell = ["nu"]`) applies to the next new shell; a bad setting surfaces a config error, not a silent fallback
+- `hc update` behavior on the packaged build: PKGBUILD says a root-owned hc reports "system package manager" and never updates itself — record the exact message and the correct Omarchy update path
+- Conflicts: confirm `herdr-core` conflicts with AUR `hc-bin` and `herdr-core-bin` as the PKGBUILD declares, and note the resolution for users migrating from them
+- Screenshots needed: `hc ls` output, `hc run --bg` + `hc attach` flow, `hc get` snapshot, `hc events` stream, the agents-sidebar view in herdr-app fed by core status (OSC 7501)
+
+SEO notes:
+- URL: /guides/herdr-core-on-omarchy
+- Title tag: "How to Install & Use Herdr Core (hc) on Omarchy (2026)"
+- Meta description: "Install herdr-core on Omarchy with one command. Persistent terminals for coding agents: hc run, attach, read, multi-machine addresses, agent skill docs, and real fixes from the README and issue tracker."
+- Keywords: herdr-core omarchy, hc herdr install linux, herdr core vs tmux, hc run persistent terminal, herdr machine add ssh, osc 7501 agent status
+- Interlink both ways with the herdr-core app listing page and the herdr-app guide
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Herdr Core on Omarchy</h2>
+      <p>Herdr Core (<code>hc</code>) is the free, open-source (Apache-2.0) headless server behind Herdr: it runs programs and coding agents in terminals that stay alive after you leave — from your shell, from an agent, or from the Herdr desktop app.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add herdr-core
+hc run --bg --name demo "echo hello from a terminal that outlives this shell"
+hc ls            # see live terminals
+hc read demo     # read output without attaching</code></pre>
+      <p>Install herdr-core on Omarchy with one command — it takes under a minute. The Omarchy package installs <code>/usr/bin/herdr-core</code> and symlinks it as <code>hc</code>, the command you'll actually type. It needs only glibc and libgcc, builds for x86_64 and ARM64, and <strong>conflicts with the AUR's <code>hc-bin</code> and <code>herdr-core-bin</code></strong> (same files, documented in the PKGBUILD).</p>
+      <p>You rarely need this package on its own: <code>omarchy pkg add herdr-app</code> already pulls <code>herdr-core&gt;=0.1.11</code> in. Install it standalone if you want the persistent-terminal server without the GUI window — e.g. on a headless box you drive from SSH.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Run something and walk away.</h3>
+      <p><code>hc run cargo test</code> streams output and waits. <code>hc run --bg --name web bun dev</code> starts it in the background and returns immediately, printing the terminal's address (like <code>t1f</code>). Close your viewer — the program keeps running. A foreground <code>hc run</code> that you leave waiting checks in after 180 seconds by default, printing the address so you can <code>hc read</code> it or wait again later.</p>
+      <h3>2. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Attach, read, or take over — your choice.</strong> <code>hc ls</code> lists live terminals, <code>hc attach web</code> takes over a terminal (Ctrl+\ detaches), and <code>hc read web --lines 100</code> reads output without disturbing the program. For a terminal you want to survive even if its program is lost, start it with <code>hc run --keep</code> — recovery brings back a fresh shell, never re-runs the task. A normal exit or an explicit kill still ends it.</li>
+        <li><strong>Agents run agents.</strong> Give any agent <code>hc --skill</code> — it prints the full agent guide in one read: how to delegate, wait, report back, and clean up. Templates give an agent a command and a role: <code>hc templates</code> to list them, then e.g. <code>hc run --bg --name review reviewer "Review src/x.rs. Read-only."</code>, <code>hc send review "Focus on the error path."</code>, <code>hc read review --lines 100</code>. Agents started inside an hc terminal become its children — they report back with <code>hc send</code>, wait with <code>hc wait --children all</code>, and the parent gets notes when a child needs attention or ends. Children end with their parent unless started with <code>--outlive-parent</code>.</li>
+        <li><strong>One core per machine, one list everywhere.</strong> <code>hc machine add my-ssh-host --name box</code>, then <code>hc run --on box --cwd /srv/app cargo test</code> runs on the remote — programs and files stay on that machine, while your local core folds its terminals into the same list (<code>hc attach box/t3</code>). Status comes from the program itself: an agent reports working/done/blocked/error through OSC 7501, the Program Status Protocol — the core stores what the program reports and never guesses from screen text. A program that doesn't report status has none. <code>hc get review</code> snapshots one terminal; <code>hc events</code> follows changes.</li>
+      </ul>
+      <h3>3. Config location.</h3>
+      <p><code>~/.config/herdr-core/config.toml</code> (or <code>$XDG_CONFIG_HOME/herdr-core/config.toml</code>). The one setting you'll touch first is the default shell — with no program, <code>hc run --bg</code> starts <code>$SHELL</code> (or <code>/bin/sh</code>):</p>
+      <pre><code class="language-toml">shell = ["nu"]</code></pre>
+      <p>Changes apply to the next new shell or <code>--keep</code> recovery, no restart needed. A bad setting reports a config error and a shell that can't start reports <code>spawn_failed</code> — recovery stays pending and retries, logging to <code>core.log</code> (config) or <code>holder.log</code> (spawn); it never silently falls back to another shell.</p>
+      <p><strong>Core draws nothing.</strong> "Use it from your shell, an agent, or your own app." — README. If you want windows, panes, and an agents sidebar, that's the <code>herdr-app</code> package.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3><code>hc update</code> does nothing, or says updates are handled elsewhere</h3>
+      <p><strong>Fix:</strong> That's the packaging working as designed. The PKGBUILD notes: "A root-owned hc reports 'system package manager' and never updates itself." On Omarchy you update through the package manager, not <code>hc update</code> — the upstream <code>hc update</code> flow (which keeps running terminals across the update) only applies to the curl-installed binaries. Run your normal Omarchy package update instead; running terminals keep running.</p>
+      <h3>New terminals fail with <code>spawn_failed</code>, or the core reports a config error</h3>
+      <p><strong>Fix:</strong> Check <code>~/.config/herdr-core/config.toml</code> — the <code>shell</code> list must be an executable followed by separate arguments, no extra quoting, and it must be non-empty (e.g. <code>shell = ["nu"]</code>). A bad setting surfaces as a config error; a shell binary that can't start reports <code>spawn_failed</code>, with recovery pending and retrying. Read <code>core.log</code> (config problems) or <code>holder.log</code> (spawn problems) for the exact error — the core never silently falls back to a different shell, so what you configured is what failed.</p>
+      <h3>A worker started on another machine shows up under the wrong parent in the Agents tree</h3>
+      <p>Known open bug: <a href="https://github.com/herdrdev/herdr-core/issues/76" target="_blank" rel="noopener">issue #76</a> — with two cores registered to each other, a remote worker's parent keeps the incoming core ID instead of the machine alias, so the app's literal parent-address comparison misses the match and the worker doesn't nest under its real parent. Reproduced on Arch Linux (both hosts x86_64) with <code>hc</code> 0.1.16 / app 0.1.11. The reporter found no workaround. If your multi-machine Agents tree looks flat, check whether you're hitting this before rearranging your setup.</p>
+      <h3>New tabs/spaces always start in the home folder after <code>cd</code></h3>
+      <p>This is a real bug — but <strong>Windows-only</strong>: <a href="https://github.com/herdrdev/herdr-core/issues/80" target="_blank" rel="noopener">issue #80</a> reports <code>foreground.cwd</code> never updating for Git Bash (MSYS2) shells on Windows, because MSYS2 keeps its POSIX cwd internally and never updates the Win32 process directory. On Omarchy/Linux, folder tracking follows the shell normally — if it doesn't, that's a different bug worth reporting with your shell named.</p>
+      <h3>An agent shows no status — no Working/Blocked/Done, just a terminal</h3>
+      <p>Nothing is broken: "Core stores what it reports. It does not guess from screen text or recognize agent brands. A program that does not report status has none." Status only exists if the program emits it via OSC 7501. Use <code>hc get &lt;terminal&gt;</code> to see the snapshot and confirm the program simply isn't reporting — then it's on the agent's side, not the core's.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>herdr-app</code> — the desktop window over this core; agents sidebar, spaces, and peek.</li>
+        <li><code>collie-bin</code> — a phone web UI for the agents in your terminals, served over Tailscale.</li>
+        <li>Any coding agent that speaks OSC 7501 status (Claude Code, Codex CLI, and friends all live happily inside <code>hc</code> terminals).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>tmux</code> — the classic. Free, everywhere, sessions survive SSH disconnects and you can reattach from anywhere. What tmux doesn't give you: agent status, parent/child agent trees, multi-machine address routing (<code>box/t3</code>), or an OpenRPC API for building your own clients (<code>hc schema</code> prints it).</li>
+        <li><code>zellij</code> — the modern middle ground: layouts and plugins, still TUI-only.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: herdr-core vs terminal multiplexers</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>herdr-core</th><th>tmux</th><th>Zellij</th><th>systemd-run / nohup</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, Apache-2.0</td><td>Free, MIT</td><td>Free, MIT</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Persistent terminals as a server: agents spawning agents, status from the program, multi-machine addresses, API for custom clients</td><td>The universal multiplexer — sessions that survive disconnects, scriptable, zero daemons, works over plain SSH</td><td>Modern multiplexer UX: layouts, floating panes, plugins — still terminal-only, one machine at a time</td><td>Fire-and-forget background jobs with zero new concepts</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add herdr-core</code></td><td><code>sudo pacman -S tmux</code> (not in the Omarchy store)</td><td><code>sudo pacman -S zellij</code> (not in the Omarchy store)</td><td>Built in</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Use <code>hc</code> when your terminals are <em>agents</em> — things with parents, children, statuses, and machines — that need to outlive your shell and be inspectable by other programs. Use tmux when you just want your own sessions to survive a dropped SSH connection.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>herdr-core is free and open source — no paid product to undercut</h2>
+      <p><strong>herdr-core is free and Apache-2.0 — there's no paid product to undercut here.</strong> The comparison that matters is against the <em>complexity</em> of doing this yourself: <code>hc run --bg</code>, <code>hc wait</code>, and <code>hc read</code> replace a pile of nohup/redirect/poll scripting, and <code>hc schema</code> gives you an OpenRPC + JSON Schema API for building your own clients — <code>hc connect</code> even carries the protocol over stdin/stdout, including through SSH. The cost is one small server and a config file, versus zero new moving parts with tmux. Pick your trade.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Herdr Core package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/herdr-core.html">View Herdr Core →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does herdr-core work on Omarchy?</summary><p>Yes — packaged as <code>herdr-core</code> (x86_64 + ARM64), depending only on glibc and libgcc. It conflicts with the AUR's <code>hc-bin</code>/<code>herdr-core-bin</code>, so pick one source.</p></details>
+      <details><summary>Is herdr-core free?</summary><p>Yes. Apache-2.0, <a href="https://github.com/herdrdev/herdr-core" target="_blank" rel="noopener">herdrdev/herdr-core</a>. No account, no paid tier; upstream's curl installer is free too.</p></details>
+      <details><summary>Do I need it if I install the Herdr desktop app?</summary><p>No — <code>omarchy pkg add herdr-app</code> depends on <code>herdr-core&gt;=0.1.11</code> and pulls it in. Install <code>herdr-core</code> alone only when you want the server without the GUI (headless boxes, SSH-driven workflows).</p></details>
+      <details><summary>Do my programs survive closing my terminal?</summary><p>Yes — that's the point. "Closing your viewer does not end the program." A reboot is different: kept terminals recover as fresh shells, not the old programs (<code>--keep</code> preserves the terminal; a normal exit or explicit kill still ends it).</p></details>
+      <details><summary>How do I update it?</summary><p>Through the Omarchy package manager. The packaged <code>hc</code> reports "system package manager" and won't self-update (documented in the PKGBUILD) — that's correct behavior, not an error.</p></details>
+      <details><summary>How do agents talk to it?</summary><p><code>hc --skill</code> prints the agent guide in one read. Agents start workers with <code>hc run --bg</code>, coordinate with <code>hc send</code> / <code>hc wait --children all</code>, and report status to the core via OSC 7501 so the app can show Working/Blocked/Done/Idle.</p></details>
+      <details><summary>What if I was using hc-bin from the AUR?</summary><p>The packaged <code>herdr-core</code> conflicts with <code>hc-bin</code> and <code>herdr-core-bin</code> — remove the AUR package and install through the store command so the file ownership is consistent.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/herdrdev/herdr-core" target="_blank" rel="noopener">herdrdev/herdr-core — README (Install, Run it and come back, Default shell, Agents run agents, Every machine, Status comes from the program, Build your own client)</a></li>
+        <li><a href="https://omarchyapps.com/apps/herdr-core.html" target="_blank" rel="noopener">omarchyapps.com/apps/herdr-core.html — store listing (install command, category, homepage)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/blob/master/pkgbuilds/herdr-core/PKGBUILD" target="_blank" rel="noopener">PKGBUILD — omacom/omarchy-pkgs/pkgbuilds/herdr-core (version 0.1.16-1, /usr/bin/hc symlink, root-owned hc never self-updates, conflicts with hc-bin/herdr-core-bin, x86_64 + aarch64)</a></li>
+        <li><a href="https://github.com/herdrdev/herdr-core/issues/76" target="_blank" rel="noopener">Issue #76 — Bidirectional machine registration leaves remote parent as core ID instead of machine alias (open, reproduced on Arch)</a></li>
+        <li><a href="https://github.com/herdrdev/herdr-core/issues/80" target="_blank" rel="noopener">Issue #80 — Windows: folder tracking never updates for Git Bash (MSYS2) shells (Windows-only; Linux unaffected)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

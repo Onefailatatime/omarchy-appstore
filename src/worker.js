@@ -71,6 +71,8 @@ export default {
         url.hostname = url.hostname.slice(4);
         return Response.redirect(url.toString(), 301);
       }
+      // Sister site: /cachyos, /cachyos/ and /cachyos/* go to cachyosapps.com.
+      if (pathname === "/cachyos" || pathname.startsWith("/cachyos/")) return Response.redirect("https://cachyosapps.com/", 301);
       if (pathname.startsWith("/stats/")) return await proxyStats(request, pathname, env.UMAMI_UPSTREAM);
       if (pathname === "/api/votes" || pathname === "/api/subscribe") {
         if (request.method === "POST") {

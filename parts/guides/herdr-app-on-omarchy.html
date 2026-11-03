@@ -1,0 +1,133 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add herdr-app` installs, pulls `herdr-core>=0.1.11` as a dependency, and creates the launcher entry
+- Packaged version at publish time: omarchy-pkgs master carries 0.1.11-1 (upstream already released 0.1.12 as of 2026-11-02 — check whether the package has been bumped)
+- First launch: does the app offer to install/update the core, or does it silently use the packaged `herdr-core`? Record what the dialog says
+- Vulkan: confirm the app launches on a stock Omarchy machine (mesa Vulkan driver) and record which driver satisfied the `vulkan-driver` dep
+- Spaces/tabs/panes behavior: new tab starts in the focused terminal's folder; closing the window leaves terminals running in the core; closing a pane/tab ends them
+- Reboot recovery: kept panes come back as fresh shells in their last folders, not the old programs (README-documented — confirm on Omarchy)
+- Command palette: Ctrl+Shift+P on Omarchy; `herdr-app ls`, `herdr-app status`, `herdr-app commands`, `herdr-app --skill` from a terminal
+- SSH machine setup: Settings → Machines, add a host from ~/.ssh/config, confirm spaces on the remote run there
+- Telemetry: is there a Settings → Privacy toggle in the packaged build? (PKGBUILD leaves HERDR_APP_RELEASE unset, so pacman owns updates — record what the Updates screen shows)
+- Config paths: where settings.json, keys.json, layouts, and mods live on the packaged build (unverified — find and note them)
+- Screenshots needed: first-launch space view, split panes, agents sidebar showing Working/Blocked/Done/Idle, command palette, Settings → Machines, the update prompt if it appears
+
+SEO notes:
+- URL: /guides/herdr-app-on-omarchy
+- Title tag: "How to Install & Use Herdr (Desktop App) on Omarchy (2026)"
+- Meta description: "Install the Herdr desktop app on Omarchy with one command. Spaces, tabs and panes for coding agents, the agents sidebar (Working/Blocked/Done/Idle), multi-machine SSH workspaces, and real fixes from the README and issue tracker."
+- Keywords: herdr app linux, herdr-app omarchy, herdr desktop app install, herdr agents sidebar, herdr vs ghostty, coding agent terminal manager linux
+- Interlink both ways with the herdr-app app listing page and the herdr-core guide
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Herdr (Desktop App) on Omarchy</h2>
+      <p>Herdr is the free, open-source (Apache-2.0) desktop app for terminals and coding agents — organize work into spaces and tabs, see which agents need you in one sidebar, and close the window knowing every terminal keeps running on the Herdr core underneath.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add herdr-app</code></pre>
+      <p>Launch Herdr from the app launcher, or run <code>herdr-app</code> in a terminal. The Omarchy package installs <code>/usr/bin/herdr-app</code> plus a desktop entry, and pulls <code>herdr-core</code> (&gt;= 0.1.11) in automatically — you never install the core by hand. No account, no signup, no payment. Linux needs a desktop session and a working Vulkan driver; the package already depends on <code>vulkan-driver</code> and <code>vulkan-icd-loader</code>, so a stock Omarchy GPU setup qualifies.</p>
+      <p>Don't confuse the Herdr packages: <strong>herdr-app</strong> is this desktop window, <strong>herdr-core</strong> (<code>hc</code>) is the headless server that actually runs your terminals, <strong>herdr</strong> is the separate terminal workspace-manager CLI from the same org, and <strong>omarchy-herdr</strong> is DHH's fork of the workspace manager with Omarchy pane-border support.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and launch.</h3>
+      <p>Run the command above. First launch lands you in a <strong>space</strong>: a space holds the work on one machine, usually in one repo. An unnamed space follows its first terminal's folder — name it when you want a label that sticks.</p>
+      <h3>2. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Tabs and panes, with follow-your-folder.</strong> Each space has tabs; split a tab into panes to put terminals side by side. New tabs start in the focused terminal's folder. <strong>Closing the window does not stop anything</strong> — the core keeps running every terminal. Closing a pane or tab <em>does</em> end its terminals. After a reboot, kept panes come back as <strong>fresh shells in their last folders</strong>, not the old programs — plan long agent runs accordingly.</li>
+        <li><strong>The agents sidebar is the point.</strong> It collects agents from all your spaces in one list, including workers started by another agent. Agents that report status show as <strong>Working</strong> (still busy), <strong>Blocked</strong> (waiting for you), <strong>Done</strong> (finished while you were elsewhere), or <strong>Idle</strong> (not working, or a finished agent you've already seen). Click one to jump to it; a worker without a pane opens in a peek overlay you can promote to a tab.</li>
+        <li><strong>The command palette runs the window.</strong> Ctrl+Shift+P shows every command and its key (Cmd+Shift+P on macOS). From a terminal, <code>herdr-app ls</code>, <code>herdr-app status</code>, and <code>herdr-app commands</code> give you the CLI view; <code>herdr-app --skill</code> prints the agent guide for driving the window. Duplicate a shipped layout or mod before editing it — your copies stay yours, the app reloads them on save, and a broken edit keeps the last good version and tells you.</li>
+      </ul>
+      <h3>3. Config location.</h3>
+      <p>Personal layouts, mods, and key files are reloaded on save (<code>keys.json</code> holds key bindings). The core's own config is separate: <code>~/.config/herdr-core/config.toml</code>. App settings (fonts, colors, sounds, privacy) live in the in-app Settings — notably Settings → Updates and Settings → Privacy.</p>
+      <p><strong>SSH machines:</strong> Settings → Machines lets you add a host from <code>~/.ssh/config</code> so its spaces run their terminals on the remote — remote work keeps running when your local window closes, as long as the remote machine and core stay up. Ctrl-click a live terminal address in terminal text (like <code>t7</code> locally or <code>vps/t7</code> on another machine) to peek at it.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>The app won't start or shows a blank window</h3>
+      <p>The README is explicit: "Linux needs a desktop session and a working Vulkan driver." The Omarchy package already depends on <code>vulkan-driver</code> and <code>vulkan-icd-loader</code>, but the ICD loader alone is not a driver — make sure your GPU's actual Vulkan driver is installed. On stock Omarchy with mesa this is normally satisfied; on exotic hardware you may need the vendor driver. If it still won't render, note the GPU and driver in the bug report.</p>
+      <h3>The app says it can't use the installed core</h3>
+      <p><strong>Fix:</strong> This is an expected path — the README documents that "the app can help install or update a core it cannot use." On Omarchy the package pins <code>herdr-core&gt;=0.1.11</code> as a dependency, so a plain install should already satisfy it. If you have <code>hc-bin</code> or <code>herdr-core-bin</code> from the AUR installed, note the packaged <code>herdr-core</code> <strong>conflicts</strong> with both (documented in the PKGBUILD) — remove the conflicting one and reinstall through the store command.</p>
+      <h3>Everything's gone after a reboot</h3>
+      <p><strong>Fix:</strong> That's documented behavior, not data loss: "After a reboot or core crash, kept panes get fresh shells in their last folders, not their old programs." The core keeps terminals across <em>window</em> closes, not reboots. For work that must survive, drive it from the core side instead: <code>hc run --bg --name job &lt;command&gt;</code> plus <code>hc wait</code>/<code>hc read</code>, or templates for agent roles — and expect to restart the programs after reboot.</p>
+      <h3>Nerd Font icons render as boxes</h3>
+      <p>This is a real, open bug — but it's <strong>Windows-only</strong>: <a href="https://github.com/herdrdev/herdr-app/issues/356" target="_blank" rel="noopener">issue #356</a> reports 0.1.12 stopped falling back to the bundled Symbols Nerd Font on Windows. The reporter notes macOS and Linux report the missing glyph correctly, so on Omarchy this specific bug doesn't apply. If you see broken icons on Linux, it's a different bug — check that a Nerd Font is actually selected in Settings.</p>
+      <h3>Themes can't color bold or selected text</h3>
+      <p>Known open limitation: <a href="https://github.com/herdrdev/herdr-app/issues/357" target="_blank" rel="noopener">issue #357</a> — themes can't assign separate colors for bold text (Ghostty's <code>bold-color</code>) or selected text (Ghostty's <code>selection-foreground</code>); bold only changes weight, selection only changes the background. No fix yet; the reporter offered a PR. If bold text is unreadable in your theme, pick colors where weight-only bold still contrasts.</p>
+      <h3>Usage telemetry — is the app phoning home?</h3>
+      <p>The README says "Usage telemetry is on by default in releases. Turn it off in Settings → Privacy." One packaging wrinkle: upstream's self-updating release builds and the packaged Omarchy build differ — the PKGBUILD leaves <code>HERDR_APP_RELEASE</code> unset ("release builds update themselves and send telemetry; pacman owns this one"), so updates come through pacman, not the app. If the Settings → Privacy toggle is present in the packaged build, use it; the verify pass should confirm what it shows.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>herdr-core</code> — the server under the app; learn <code>hc</code> and you can drive everything from the shell too.</li>
+        <li><code>collie-bin</code> — a phone web UI for the AI agents in your terminal, served over Tailscale: your agents, in your pocket.</li>
+        <li><code>ghostty</code> — the terminal the Herdr window's VT layer is built on (herdr-app vendors Ghostty's VT code).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>zellij</code> — free, open-source TUI workspace manager with layouts and plugins (<code>omarchy pkg add</code> won't find it in this store, but it's a <code>pacman</code>/<code>yay</code> staple). No GUI window, no agents sidebar, no multi-machine core — one static binary with zero daemons.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Herdr vs similar tools</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Herdr (desktop app)</th><th>Ghostty</th><th>Zellij</th><th>omarchy-herdr</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, Apache-2.0</td><td>Free, MIT</td><td>Free, MIT</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Omarchy users running multiple coding agents who want a GUI: spaces, agent statuses, terminals that survive closing the window</td><td>A fast native terminal emulator, one window per session — no agent management, no persistence</td><td>Terminal-only workspace management (layouts, plugins) for people who live in the shell</td><td>The DHH fork of the Herdr workspace-manager CLI with Omarchy pane borders</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add herdr-app</code> (core included)</td><td><code>omarchy pkg add ghostty</code></td><td>Not in the Omarchy store (AUR/pacman)</td><td><code>omarchy pkg add omarchy-herdr</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick the Herdr desktop app if you want your coding agents visible and manageable in a real window; pick Ghostty if you just want a great terminal; pick Zellij or tmux if you'd rather never leave the shell.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Herdr is free and open source — no paid tier to undercut</h2>
+      <p><strong>Herdr is free and Apache-2.0, including the desktop app, the core, and the agent skill docs.</strong> There is no paid tier to undercut. The honest pitch is the reverse of the usual: <strong>this is the open-source tool commercial agent-harness products charge for.</strong> What you give up vs. a managed service: someone else's uptime guarantees and a cloud control plane. What you keep: persistent agent terminals on your own machines, multi-machine SSH workspaces, and a protocol (<code>hc schema</code> → OpenRPC/JSON Schema) you can build your own clients against.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Herdr package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/herdr-app.html">View Herdr →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Herdr work on Omarchy?</summary><p>Yes. It's packaged for Omarchy (x86_64 + ARM64) as <code>herdr-app</code> with <code>herdr-core</code> as a hard dependency. Linux needs a desktop session and a working Vulkan driver — stock Omarchy qualifies.</p></details>
+      <details><summary>Is Herdr free?</summary><p>Yes — Apache-2.0, by the herdrdev org (<a href="https://github.com/herdrdev/herdr-app" target="_blank" rel="noopener">herdrdev/herdr-app</a>). No account, no paid tier. Upstream's curl installer is also free.</p></details>
+      <details><summary>What's the difference between herdr-app, herdr-core, herdr, and omarchy-herdr?</summary><p><code>herdr-app</code> is the desktop window (this guide). <code>herdr-core</code> (<code>hc</code>) is the headless server that runs terminals and agents — installing the app pulls it in automatically. <code>herdr</code> is a separate terminal workspace-manager CLI from the same org. <code>omarchy-herdr</code> is DHH's fork of that workspace manager with Omarchy pane-border support.</p></details>
+      <details><summary>Do my terminals survive closing the window?</summary><p>Yes — that's the whole design: "The window arranges terminals. The core runs them." Close the window, everything keeps running. Rebooting is different: after a reboot, kept panes come back as fresh shells in their last folders, not the old programs.</p></details>
+      <details><summary>Does it work on other machines?</summary><p>Yes. Add an SSH machine in Settings → Machines (or <code>hc machine add</code> on the core side) and its spaces run their terminals there. Remote work keeps running when your local window closes, as long as the remote machine and core stay up.</p></details>
+      <details><summary>How do I drive it as an AI agent?</summary><p><code>herdr-app --skill</code> prints the agent guide for driving the window; <code>hc --skill</code> (on the core side) prints the one for running and coordinating programs. See the FAQ of the herdr-core guide for the <code>hc</code> commands.</p></details>
+      <details><summary>How do I update it?</summary><p>On Omarchy, through the package manager — the packaged build doesn't self-update the way upstream's curl-installed releases do (documented in the PKGBUILD: "pacman owns this one").</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/herdrdev/herdr-app" target="_blank" rel="noopener">herdrdev/herdr-app — README (Install, Find your work, Work on another machine, Make it yours, Updates and privacy, For agents)</a></li>
+        <li><a href="https://omarchyapps.com/apps/herdr-app.html" target="_blank" rel="noopener">omarchyapps.com/apps/herdr-app.html — store listing (install command, category, homepage)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/blob/master/pkgbuilds/herdr-app/PKGBUILD" target="_blank" rel="noopener">PKGBUILD — omacom/omarchy-pkgs/pkgbuilds/herdr-app (version 0.1.11-1, herdr-core&gt;=0.1.11 dep, vulkan/wayland deps, HERDR_APP_RELEASE unset, x86_64 + aarch64)</a></li>
+        <li><a href="https://github.com/herdrdev/herdr-app/issues/356" target="_blank" rel="noopener">Issue #356 — Nerd Font icons break on Windows when the terminal font has no icons (0.1.12, Windows-only)</a></li>
+        <li><a href="https://github.com/herdrdev/herdr-app/issues/357" target="_blank" rel="noopener">Issue #357 — Themes can't color bold or selected text (open; reporter offered a PR)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>
