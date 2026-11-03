@@ -830,13 +830,13 @@
   "v": 3
  },
  "apps/splinterm-mcp.html": {
-  "date": "2026-10-28",
-  "hash": "de38e14db4e67b35780d6b10243fbcdb6a4d2b4872212592d0dccb343ea91993",
+  "date": "2026-11-03",
+  "hash": "08415ab2f2ef76cd039114d919f0fd619897b43bf25a542952aed4a38ec6f58f",
   "v": 3
  },
  "apps/splinterm.html": {
-  "date": "2026-10-28",
-  "hash": "d4d32b7059faf8cec28fa7f686957747e7bb55fea1cc85c02d762dbebeee8ead",
+  "date": "2026-11-03",
+  "hash": "18f98b46a553c387a148848bea16b9bd3b68b5a7542e37a4a6cd9962941297cd",
   "v": 3
  },
  "apps/spotify.html": {
@@ -880,8 +880,8 @@
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-02",
-  "hash": "81753da7241063aee2b344d7b9887f526be0d5b55737b0ce1c238d48f65e4715",
+  "date": "2026-11-03",
+  "hash": "db9bb42ce04319d9b787b29a194225698375562109f26f30b23940cfbcbd966a",
   "v": 3
  },
  "apps/tensaku.html": {
