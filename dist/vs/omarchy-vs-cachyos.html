@@ -35,9 +35,9 @@
 
 <header class="topbar">
   <div class="wrap topbar-in">
-    <a class="brand" href="/index.html" aria-label="Unofficial Omarchy App Store home"><img class="brand-mark" src="/images/logo-floppy-68.png?v=2" width="34" height="34" alt=""><span class="brand-name">Omarchy <b>Apps</b></span></a>
+    <a class="brand" href="/" aria-label="Unofficial Omarchy App Store home"><img class="brand-mark" src="/images/logo-floppy-68.png?v=2" width="34" height="34" alt=""><span class="brand-name">Omarchy <b>Apps</b></span></a>
     <nav class="topbar-links" aria-label="Primary">
-      <a href="/index.html">Apps</a>
+      <a href="/">Apps</a>
       <a href="/leaderboard.html">Top apps</a>
       <a href="/guides.html" aria-current="page">Guides</a>
       <a href="/develop.html">Develop</a>
@@ -53,7 +53,7 @@
     <p class="eyebrow">Comparison</p>
     <h1>Omarchy vs <span>CachyOS</span></h1>
     <p class="tag">Both are built on Arch. One hands you a finished keyboard driven desktop, the other tunes Arch for speed and lets you pick the desktop.</p>
-    <p class="facts">Reviewed 2026-11-02 · independent editorial guide</p>
+    <p class="facts">Independent editorial guide</p>
   </div>
 </header>
 <div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div><script src="/oa-ads.js"></script></div>
@@ -94,7 +94,7 @@
 <pre class="guide-code"><code>/lib/ld-linux-x86-64.so.2 --help | grep supported</code></pre>
 <p>If you see <code>x86-64-v4 (supported, searched)</code>, your CPU can use the v4 repos.<a class="src" href="https://wiki.cachyos.org/features/optimized_repos/" target="_blank" rel="noopener">[wiki.cachyos.org]</a></p>
 </section>
-<section class="guide-faq" id="faq"><h2>Frequently asked questions</h2><details><summary>Is Omarchy better than CachyOS?</summary><p>They aim at different things. Omarchy gives you a finished keyboard driven Hyprland desktop. CachyOS gives you performance tuned Arch packages and lets you choose the desktop. The better one is the one that fits how you work.</p></details><details><summary>Is CachyOS faster than Omarchy?</summary><p>CachyOS focuses on speed: it recompiles Arch packages for newer CPUs and ships tuned kernels, and its wiki cites a 5% to 20% uplift for x86-64-v3 builds over generic x86-64. Omarchy focuses on the desktop experience instead. We haven&#x27;t run our own benchmarks, so we don&#x27;t publish a number for either.</p></details><details><summary>Can I use Hyprland on CachyOS?</summary><p>Yes. Hyprland is one of the desktops you can pick in the CachyOS installer. Omarchy&#x27;s own configs and menus are built for Omarchy, though.</p></details><details><summary>Are both based on Arch Linux?</summary><p>Yes. Both are rolling releases on Arch, both use pacman, and both can use the AUR.</p></details><details><summary>Which is better for gaming?</summary><p>Both can run Steam, Lutris and Heroic, since they&#x27;re all Arch packages. CachyOS adds gaming focused kernel and package tuning. See Steam on Omarchy and gaming on Omarchy after Windows on this site. <a href="/install/steam-on-omarchy.html">Steam on Omarchy</a>, <a href="/gaming-on-omarchy-after-windows.html">Gaming on Omarchy after Windows</a>.</p></details><details><summary>Can I dual boot Omarchy with Windows?</summary><p>Yes. The Omarchy manual&#x27;s Dual Boot Install chapter covers installing into free space next to Windows: shrink a Windows partition, choose the free space install, then run limine-scan to add Windows to the boot menu. It doesn&#x27;t work with BitLocker on, since BitLocker encrypts the whole drive. <a href="/dual-boot-windows-and-omarchy.html">Dual boot Windows and Omarchy</a>.</p></details><details><summary>How do I install apps on Omarchy?</summary><p>Open the Omarchy menu with Super + Space, choose Install, then Package. Or run omarchy pkg add followed by the package name.</p></details></section><section><h2>Sources</h2><p>Omarchy facts: <a href="https://omarchy.org/manual/">the Omarchy manual</a>. CachyOS facts: <a href="https://cachyos.org/">https://cachyos.org/</a>. Checked 2026-11-02. This site is not affiliated with either project.</p></section>
+<section class="guide-faq" id="faq"><h2>Frequently asked questions</h2><details><summary>Is Omarchy better than CachyOS?</summary><p>They aim at different things. Omarchy gives you a finished keyboard driven Hyprland desktop. CachyOS gives you performance tuned Arch packages and lets you choose the desktop. The better one is the one that fits how you work.</p></details><details><summary>Is CachyOS faster than Omarchy?</summary><p>CachyOS focuses on speed: it recompiles Arch packages for newer CPUs and ships tuned kernels, and its wiki cites a 5% to 20% uplift for x86-64-v3 builds over generic x86-64. Omarchy focuses on the desktop experience instead. We haven&#x27;t run our own benchmarks, so we don&#x27;t publish a number for either.</p></details><details><summary>Can I use Hyprland on CachyOS?</summary><p>Yes. Hyprland is one of the desktops you can pick in the CachyOS installer. Omarchy&#x27;s own configs and menus are built for Omarchy, though.</p></details><details><summary>Are both based on Arch Linux?</summary><p>Yes. Both are rolling releases on Arch, both use pacman, and both can use the AUR.</p></details><details><summary>Which is better for gaming?</summary><p>Both can run Steam, Lutris and Heroic, since they&#x27;re all Arch packages. CachyOS adds gaming focused kernel and package tuning. See Steam on Omarchy and gaming on Omarchy after Windows on this site. <a href="/install/steam-on-omarchy.html">Steam on Omarchy</a>, <a href="/gaming-on-omarchy-after-windows.html">Gaming on Omarchy after Windows</a>.</p></details><details><summary>Can I dual boot Omarchy with Windows?</summary><p>Yes. The Omarchy manual&#x27;s Dual Boot Install chapter covers installing into free space next to Windows: shrink a Windows partition, choose the free space install, then run limine-scan to add Windows to the boot menu. It doesn&#x27;t work with BitLocker on, since BitLocker encrypts the whole drive. <a href="/dual-boot-windows-and-omarchy.html">Dual boot Windows and Omarchy</a>.</p></details><details><summary>How do I install apps on Omarchy?</summary><p>Open the Omarchy menu with Super + Space, choose Install, then Package. Or run omarchy pkg add followed by the package name.</p></details></section><section><h2>Sources</h2><p>Omarchy facts: <a href="https://omarchy.org/manual/">the Omarchy manual</a>. CachyOS facts: <a href="https://cachyos.org/">https://cachyos.org/</a>. This site is not affiliated with either project.</p></section>
 
   </article>
 
@@ -115,14 +115,14 @@
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <a class="brand" href="/index.html"><img class="brand-mark" src="/images/logo-floppy-68.png?v=2" width="34" height="34" alt=""><span class="brand-name">Omarchy <b>Apps</b></span></a>
+      <a class="brand" href="/"><img class="brand-mark" src="/images/logo-floppy-68.png?v=2" width="34" height="34" alt=""><span class="brand-name">Omarchy <b>Apps</b></span></a>
       <p>Every package in the official Omarchy repo, searchable and ranked by readers. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing.</p>
     </div>
-    <nav aria-label="Site"><h3>Site</h3><a href="/index.html">Apps</a><a href="/omarchy-apps-list.html">All apps list</a><a href="/leaderboard.html">Top apps</a><a href="/guides.html">Guides</a><a href="/develop.html">Develop</a><a href="/sponsor.html">Sponsor</a><a href="/about.html">About</a><a href="/press.html">Press</a><a href="/faq.html">FAQ</a><a href="/catalog.html">Catalog feed</a><a href="/terms.html">Terms</a></nav>
+    <nav aria-label="Site"><h3>Site</h3><a href="/">Apps</a><a href="/omarchy-apps-list.html">All apps list</a><a href="/leaderboard.html">Top apps</a><a href="/guides.html">Guides</a><a href="/develop.html">Develop</a><a href="/sponsor.html">Sponsor</a><a href="/about.html">About</a><a href="/press.html">Press</a><a href="/faq.html">FAQ</a><a href="/catalog.html">Catalog feed</a><a href="/terms.html">Terms</a></nav>
     <nav aria-label="Omarchy"><h3>Omarchy</h3><a href="https://omarchy.org/">omarchy.org</a><a href="https://omarchy.org/manual/">Manual</a><a href="https://github.com/omacom/omarchy-pkgs">omarchy-pkgs</a><a href="https://omarchyplugins.com/">Plugins</a></nav>
     <nav aria-label="Contact"><h3>Say hello</h3><a href="https://x.com/jessyka_boat" target="_blank" rel="noopener">@jessyka_boat on X</a><a href="/develop.html#newsletter">Newsletter</a></nav>
   </div>
-  <div class="wrap footer-base"><span>Synced 2026-11-02</span><span>No trackers, videos play on click</span><span>Packages come from pkgs.omarchy.org</span></div>
+  <div class="wrap footer-base"><span>No trackers, videos play on click</span><span>Packages come from pkgs.omarchy.org</span></div>
 </footer>
 </body>
 </html>

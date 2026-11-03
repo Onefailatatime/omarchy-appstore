@@ -7,6 +7,7 @@ const read = (p) => readFile(new URL(p, dist), "utf8");
 const sitemap = await read("sitemap.xml");
 const headers = await read("_headers");
 const today = new Date().toISOString().slice(0, 10);
+const thinApps = new Set(JSON.parse(await readFile(new URL("../data/thin-apps.json", import.meta.url), "utf8")).apps);
 
 assert.doesNotMatch(headers, /[.]ts[.]net/);
 assert.match(headers, /\/style\.\*\.css\n\s+Cache-Control: public, max-age=31536000, immutable/);
@@ -59,7 +60,23 @@ for (const p of apps) {
   const app = ld["@graph"].find((n) => n["@type"] === "SoftwareApplication");
   for (const k of ["name", "applicationCategory", "operatingSystem", "softwareVersion", "url", "fileSize", "dateModified"]) assert.ok(app[k], `${p} ${k}`);
   assert.equal(app.aggregateRating, undefined, "no invented ratings");
-  assert.match(sitemap, new RegExp(`/apps/${name.replace(/[.+]/g, "\\$&")}\\.html`));
+  const inSitemap = new RegExp(`/apps/${name.replace(/[.+]/g, "\\$&")}\\.html<`);
+  // data/thin-apps.json: thin app pages are noindex, follow and stay out of the sitemap.
+  if (thinApps.has(name)) {
+    assert.match(html, /<meta name="robots" content="noindex,follow">/, `${p} noindex`);
+    assert.doesNotMatch(sitemap, inSitemap, `${p} not in sitemap`);
+  } else {
+    assert.match(html, /<meta name="robots" content="index,follow/, `${p} indexable`);
+    assert.match(sitemap, inSitemap);
+  }
+}
+for (const keep of ["flea", "strata", "slap-notes-bin", "omarchy-task-manager"]) assert.ok(!thinApps.has(keep), `${keep} stays indexed`);
+
+// No build time freshness: no footer sync stamp and no review stamp on generated pages.
+for (const p of pages) {
+  const html = await read(p);
+  assert.doesNotMatch(html, /<span>Synced \d{4}/, `${p} footer stamp`);
+  if (p.startsWith("category/") || p.startsWith("vs/") || p.startsWith("install/")) assert.doesNotMatch(html, /Reviewed \d{4}/, `${p} review stamp`);
 }
 
 const cats = pages.filter((p) => p.startsWith("category/"));

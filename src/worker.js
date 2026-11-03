@@ -66,11 +66,16 @@ export default {
     try {
       // omarchystore.omarchyapps.com is a vanity host: every path goes to the Omarchy store page.
       if (url.hostname === "omarchystore.omarchyapps.com") return Response.redirect("https://omarchyapps.com/omarchy-store.html", 301);
-      // One canonical host: www redirects to the apex.
-      if (url.hostname.startsWith("www.")) {
-        url.hostname = url.hostname.slice(4);
+      // One canonical origin: http and www both go to https://omarchyapps.com in a single 301.
+      // Cloudflare's Always Use HTTPS is a zone setting, so the worker does it. Local dev stays on http.
+      const local = url.hostname === "localhost" || url.hostname === "127.0.0.1";
+      if ((url.protocol === "http:" && !local) || url.hostname.startsWith("www.")) {
+        if (!local) url.protocol = "https:";
+        if (url.hostname.startsWith("www.")) url.hostname = url.hostname.slice(4);
         return Response.redirect(url.toString(), 301);
       }
+      // The homepage has one URL: /index.html folds into /.
+      if (pathname === "/index.html") return Response.redirect(new URL("/" + url.search, request.url).toString(), 301);
       // Sister site: /cachyos, /cachyos/ and /cachyos/* go to cachyosapps.com.
       if (pathname === "/cachyos" || pathname.startsWith("/cachyos/")) return Response.redirect("https://cachyosapps.com/", 301);
       if (pathname.startsWith("/stats/")) return await proxyStats(request, pathname, env.UMAMI_UPSTREAM);

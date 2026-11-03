@@ -1,7 +1,8 @@
 {
- "note": "Generated tutorials that point their canonical at the app page and are left out of the sitemap. Chosen from Search Console page data for Jul 29 \u2013 Oct 26, 2026 (PT, 90 days, web search, includes fresh data): no clicks, under 30 impressions, and no more impressions than the app page. Hand written guides are never listed here.",
+ "note": "Generated tutorials that point their canonical at the app page and are left out of the sitemap. Chosen from Search Console page data for Jul 29 \u2013 Oct 26, 2026 (PT, 90 days, web search, includes fresh data): no clicks, under 30 impressions, and no more impressions than the app page. Hand written guides are never listed here. Extended 2026-11-02 with Search Console page data for Sep 3 to Nov 1, 2026 (PT, 60 days, web search): generated tutorials with no clicks, under 30 impressions and no more impressions than the app page, for packages added more than 30 days ago.",
  "decided": "2026-10-28",
  "pages": [
+  "1password-beta-on-omarchy",
   "asdcontrol-on-omarchy",
   "caja-open-any-terminal-on-omarchy",
   "crush-bin-on-omarchy",
@@ -52,12 +53,14 @@
   "omarchy-speedtest-on-omarchy",
   "omaspeak-bin-on-omarchy",
   "omatrack-on-omarchy",
+  "opencl-nvidia-580xx-on-omarchy",
   "owe-lockfeed-on-omarchy",
   "owe-on-omarchy",
   "python-sounddevice-on-omarchy",
   "python-terminaltexteffects-on-omarchy",
   "qmk-hid-on-omarchy",
   "rawmakase-bin-on-omarchy",
+  "retroarch-joypad-autoconfig-git-on-omarchy",
   "schist-bin-on-omarchy",
   "schist-on-omarchy",
   "splinterm-mcp-on-omarchy",
@@ -67,6 +70,7 @@
   "ttf-ia-writer-on-omarchy",
   "ttf-jetbrains-mono-nerd-basic-on-omarchy",
   "tuxedo-drivers-nocompatcheck-dkms-on-omarchy",
+  "typora-on-omarchy",
   "v4l2-relayd-on-omarchy",
   "wayfreeze-on-omarchy",
   "xpadneo-dkms-on-omarchy",
@@ -76,5 +80,13 @@
   "yaru-sound-theme-on-omarchy",
   "yaru-xfwm4-theme-on-omarchy",
   "yt6801-dkms-on-omarchy"
- ]
+ ],
+ "extended": {
+  "2026-11-02": [
+   "1password-beta-on-omarchy",
+   "opencl-nvidia-580xx-on-omarchy",
+   "retroarch-joypad-autoconfig-git-on-omarchy",
+   "typora-on-omarchy"
+  ]
+ }
 }

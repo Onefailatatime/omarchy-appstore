@@ -43,6 +43,11 @@ DATE_TOKEN = "9999-12-31"
 TUTORIAL_CANONICALS_FILE = ROOT / "data" / "tutorial-canonicals.json"
 APP_EXTRAS_FILE = ROOT / "data" / "app-extras.json"  # hand written additions for a few single app pages
 APP_EXTRAS = {k: v for k, v in json.loads(APP_EXTRAS_FILE.read_text(encoding="utf-8")).items() if not k.startswith("_")} if APP_EXTRAS_FILE.exists() else {}
+# Thin app pages (data/thin-apps.json lists the rule): noindex, follow and out of the sitemap.
+THIN_APPS_FILE = ROOT / "data" / "thin-apps.json"
+THIN_APPS = set(json.loads(THIN_APPS_FILE.read_text(encoding="utf-8"))["apps"]) if THIN_APPS_FILE.exists() else set()
+ROBOTS_INDEX = '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">'
+ROBOTS_NOINDEX = '<meta name="robots" content="noindex,follow">'
 MERGED_PAGES_FILE = ROOT / "data" / "merged-pages.json"  # old URL -> the one page that owns its query (301 in src/worker.js)
 MERGED = json.loads(MERGED_PAGES_FILE.read_text(encoding="utf-8"))["redirects"] if MERGED_PAGES_FILE.exists() else {}
 DB_URL = "https://pkgs.omarchy.org/stable/x86_64/omarchy.db"
@@ -1563,6 +1568,27 @@ def render_seo_page(template: str, css: str, guide: dict, body: str, related: st
             .replace("__SITE_URL__", SITE_URL)
             .replace("__STYLE__", css))
 
+# What counts as a content change for the page date ledger. Dates, build
+# timestamps, the hashed stylesheet name and download or installed sizes are
+# not content. On pages that list many packages (home, leaderboard, catalogue,
+# categories, lists) a package's version bump is not a change to that page
+# either; it moves the app's own page instead. Bump LEDGER_VERSION whenever
+# this changes: stored dates are kept and only the hashes are refreshed.
+# v3: home links point at / instead of /index.html (a link target, not content).
+LEDGER_VERSION = 3
+LISTING_PAGES = re.compile(r"^(index|leaderboard|catalog|guides|tutorials|omarchy-apps-list|category/.*)\.html$")
+
+
+def content_fingerprint(rel: str, text: str) -> str:
+    s = re.sub(r"/style\.[0-9a-f]{10}\.css", "/style.css", text)
+    s = re.sub(r"\d{4}-\d\d-\d\d(T\d\d:\d\d(:\d\d)?(\.\d+)?(Z|[+-]\d\d:?\d\d)?)?", "D", s)
+    s = re.sub(r'data-(built|added)-ts="\d+"', "", s)
+    s = re.sub(r"\b\d+(\.\d+)? ?(B|KB|MB|GB|KiB|MiB|GiB)\b", "SIZE", s)
+    if LISTING_PAGES.match(rel):
+        s = re.sub(r'data-version="[^"]*"', "", s)
+        s = re.sub(r'<span class="ver">[^<]*</span>', "", s)
+    return s
+
 
 def stamp_page_dates(today: str, fixed: dict[str, str]) -> dict[str, str]:
     """Swap DATE_TOKEN in every built page for the date that page last changed.
@@ -1574,19 +1600,18 @@ def stamp_page_dates(today: str, fixed: dict[str, str]) -> dict[str, str]:
     for page in sorted(DIST.rglob("*.html")):
         rel = page.relative_to(DIST).as_posix()
         text = page.read_text(encoding="utf-8")
-        # The stylesheet name and the feed sample's generated_at timestamp change every build; neither is page content.
-        stable = re.sub(r"/style\.[0-9a-f]{10}\.css", "/style.css", text)
-        stable = re.sub(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[+-]\d\d:\d\d", "", stable)
-        digest = hashlib.sha256(stable.encode()).hexdigest()
+        digest = hashlib.sha256(content_fingerprint(rel, text).encode()).hexdigest()
         old = ledger.get(rel) or {}
         if rel in fixed:
             date = fixed[rel]
-        elif old.get("date") and old.get("hash") in (None, digest):  # no hash yet: a seeded date
+        elif old.get("date") and (old.get("hash") is None or old.get("v") != LEDGER_VERSION):
+            date = old["date"]  # a seeded date, or a hash from an older fingerprint: keep the date, adopt the new hash
+        elif old.get("date") and old.get("hash") == digest:
             date = old["date"]
         else:
             date = today
         date = min(date, today)
-        fresh[rel] = {"date": date, "hash": digest}
+        fresh[rel] = {"date": date, "hash": digest, "v": LEDGER_VERSION}
         dates[rel] = date
         if DATE_TOKEN in text:
             page.write_text(text.replace(DATE_TOKEN, date), encoding="utf-8")
@@ -1815,7 +1840,9 @@ def main() -> None:
     canonical_to_app = set(json.loads(TUTORIAL_CANONICALS_FILE.read_text())["pages"]) if TUTORIAL_CANONICALS_FILE.exists() else set()
     for t in tuts:
         p = t["pkg"]
-        if t["slug"] in canonical_to_app:
+        if t["slug"] in canonical_to_app and p["name"] in THIN_APPS:
+            t["noindex"] = True  # its app page is noindexed, so a canonical there would point at a page Google drops
+        elif t["slug"] in canonical_to_app:
             t["canonical"] = SITE_URL + t["profile"]
         canonical = f"{SITE_URL}/{t['slug']}.html"
         howto = {
@@ -1839,9 +1866,12 @@ def main() -> None:
             f'<a class="related-guide" href="{href}"><strong>{label} on Omarchy</strong><span>Tutorial</span></a>'
             for href, label in sibs[:3]
         ) + f'\n<a class="related-guide" href="{t["profile"]}"><strong>{html.escape(t["display"])} package page</strong><span>Version, size, license and install command</span></a>'
-        (DIST / f"{t['slug']}.html").write_text(render_seo_page(
+        tut_page = render_seo_page(
             guide_template, page_css, t, t["body"], related, synced, ("Tutorials", "/tutorials.html"),
-            f"Package data synced {synced} · generated from the official Omarchy package repo", [howto, app]), encoding="utf-8")
+            "Generated from the official Omarchy package repo", [howto, app])
+        if t.get("noindex"):
+            tut_page = tut_page.replace(ROBOTS_INDEX, ROBOTS_NOINDEX)
+        (DIST / f"{t['slug']}.html").write_text(tut_page, encoding="utf-8")
 
     by_cat_t: dict[str, list[dict]] = {}
     for t in tuts:
@@ -1873,7 +1903,8 @@ def main() -> None:
     resolved_css = css.replace("__CATVARS__", cat_vars).replace("url(fonts/", "url(../fonts/")
     for p in pkgs:
         (apps_dir / f"{slug(p['name'])}.html").write_text(
-            render_app_page(app_template, resolved_css, p, synced, app_banners), encoding="utf-8"
+            render_app_page(app_template, resolved_css, p, synced, app_banners).replace(ROBOTS_INDEX, ROBOTS_NOINDEX) if p["name"] in THIN_APPS
+            else render_app_page(app_template, resolved_css, p, synced, app_banners), encoding="utf-8"
         )
 
     for d in ("category", "vs", "install"):
@@ -1925,6 +1956,12 @@ def main() -> None:
         return min(git_date(str(part.relative_to(ROOT)), "parts/guide.html"),
                    datetime.date.fromtimestamp(part.stat().st_mtime).isoformat())
     fixed = {f"{guide['slug']}.html": edit_date(ROOT / "parts" / "guides" / f"{guide['slug']}.html") for guide in GUIDES}
+    # Pages left in dist/ by packages that have since left the repo keep their
+    # old footer; the build-time sync stamp is gone site wide, so strip it there too.
+    for leftover in DIST.rglob("*.html"):
+        text = leftover.read_text(encoding="utf-8")
+        if "<span>Synced " in text:
+            leftover.write_text(re.sub(r"<span>Synced \d{4}-\d\d-\d\d</span>", "", text), encoding="utf-8")
     page_dates = stamp_page_dates(today, fixed)
     checklist = functions_dir / "checklist.mjs"
     checklist.write_text(checklist.read_text(encoding="utf-8").replace(DATE_TOKEN, page_dates.get("develop.html", today)), encoding="utf-8")
@@ -1933,9 +1970,9 @@ def main() -> None:
         return page_dates[(path.lstrip("/") or "index.html")]
     paths = ["/"] + [f"/{name}.html" for name in ("leaderboard", "develop", "about", "press", "faq", "sponsor", "guides", "terms")]
     paths += [f"/{guide['slug']}.html" for guide in GUIDES]
-    paths += [f"/apps/{slug(p['name'])}.html" for p in pkgs]
+    paths += [f"/apps/{slug(p['name'])}.html" for p in pkgs if p["name"] not in THIN_APPS]
     paths += [path for path, _ in seo_pages] + [path for path, _ in catalog_pages]
-    paths += ["/tutorials.html"] + [f"/{t['slug']}.html" for t in tuts if not t.get("canonical")]
+    paths += ["/tutorials.html"] + [f"/{t['slug']}.html" for t in tuts if not t.get("canonical") and not t.get("noindex")]
     sitemap_entries = [(SITE_URL + path, lastmod(path)) for path in paths]
     sitemap_urls = [u for u, _ in sitemap_entries]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']

@@ -1,0 +1,193 @@
+<!-- INTERNAL NOTES
+VERSION NOTE: draft was written against store listing 0.2.0-1 (Oct 26); the live app page on 2026-10-27 shows 0.2.1-1, and the fragment below uses 0.2.1-1. Re-check at publish time.
+SUPERSEDE NOTE: https://omarchyapps.com/omarchy-speedtest-on-omarchy.html already exists as a short auto-generated app page (updated 2026-10-27). This full guide replaces it at the same URL, exactly as prior pipeline guides did (e.g. wps-office-cn-on-omarchy.html) — not a duplicate.
+VERIFY ON OMARCHY checklist
+- [ ] Exact install command: confirm `omarchy pkg add omarchy-speedtest` installs from Omarchy's repo, and that the store listing slug is `omarchy-speedtest`.
+- [ ] Binary location: README says Omarchy installs it as `/usr/lib/omarchy/speedtest` — confirm whether `omarchy-speedtest` is also on PATH, or whether the direct CLI must be run via that full path.
+- [ ] Normal path: confirm `omarchy network speedtest` runs it and that the speed test panel in the Omarchy UI shows the result — most users should never need the raw CLI.
+- [ ] Direct CLI: confirm `omarchy-speedtest down` prints running Mbps about four times a second and a final rate last, and `omarchy-speedtest down --json` prints one JSON record like `{"bytes":577238143,"seconds":5,"mbps":923.58,"connections":8}`.
+- [ ] Upload path: confirm `omarchy-speedtest up` and `omarchy-speedtest up --json` work the same way.
+- [ ] Exit codes: confirm 0 = result, 1 = test failed, 2 = usage error (e.g. a bad argument).
+- [ ] Version at publish time: store listing says 0.2.1-1 as of 2026-10-27 (draft said 0.2.0-1); re-check at publish time.
+- [ ] License: MIT (repo page and store listing). Free, no paid tier, no account.
+- [ ] Download size: store listing says 2.9 MB download / 6.8 MB installed — confirm on install.
+- [ ] Screenshots needed: the speed test panel result, a terminal `down` run showing the streaming rates, a `--json` run showing the single JSON record.
+- [ ] CTA link: /apps/omarchy-speedtest.html verified live 2026-10-27.
+SEO notes
+- URL: /guides/omarchy-speedtest-on-omarchy (publishes at root: /omarchy-speedtest-on-omarchy.html)
+- Title tag: How to Install & Use omarchy-speedtest on Omarchy (2026)
+- Meta description: Install omarchy-speedtest on Omarchy with one command. Omarchy's own speed test client for speed.omarchy.org: download/upload in Mbps, JSON output for scripts, and what its numbers mean versus speedtest.net.
+- Target queries: "omarchy speedtest", "omarchy network speedtest", "speed.omarchy.org", "omarchy-speedtest down", "omarchy speed test panel", "linux speedtest cli json". Interlink both ways with the omarchy-speedtest app listing page.
+-->
+
+<nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">How to switch</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+<section id="install">
+  <h2>omarchy-speedtest on Omarchy</h2>
+  <p>omarchy-speedtest is Omarchy's own network speed test client: it measures your download or upload speed against <code>speed.omarchy.org</code> and powers the <code>omarchy network speedtest</code> command and the speed test panel — no browser, no account, no ads.</p>
+  <h3>TL;DR</h3>
+  <pre><code class="language-bash">omarchy pkg add omarchy-speedtest</code></pre>
+  <p>Takes ~2 minutes.</p>
+  <p>The store listing reports a 2.9 MB download / 6.8 MB installed. MIT-licensed open source, free forever, no paid tier, no account. Version 0.2.1-1 at guide-staging time (Oct 2026).</p>
+</section>
+
+<section id="getting-started">
+  <h2>Getting started (5 minutes)</h2>
+  <h3>1. The mental model — this is a component, not an app you open.</h3>
+  <p>Most Omarchy tools in this guide series are things you launch. This one is different: it is the engine behind a feature you already have. <code>omarchy network speedtest</code> and the speed test panel run it for you. The direct <code>omarchy-speedtest</code> command exists for scripting, debugging, and comparing numbers — you only reach for it when the panel's number surprises you and you want the raw output. If you just want to know "how fast is my connection right now," use the panel, not the CLI.</p>
+  <h3>2. Install and run your first test.</h3>
+  <pre><code class="language-bash">omarchy pkg add omarchy-speedtest   # install
+omarchy network speedtest           # the normal way: Omarchy's own command/panel path</code></pre>
+  <p>For the raw CLI (per the README):</p>
+  <pre><code class="language-bash">omarchy-speedtest down        # download test: streaming Mbps, final rate last
+omarchy-speedtest up          # upload test
+omarchy-speedtest down --json # one machine-readable record, for scripts</code></pre>
+  <p>Without <code>--json</code>, the README says it prints the running rate in Mbps about four times a second and the final rate last, one number per line. With <code>--json</code>, it prints exactly one record:</p>
+  <pre><code class="language-json">{"bytes":577238143,"seconds":5,"mbps":923.58,"connections":8}</code></pre>
+  <h3>3. The three things everyone needs to know:</h3>
+  <ul>
+    <li><strong>It tests against one server: <code>speed.omarchy.org</code>.</strong> That is a feature, not a bug — the same endpoint every time means your numbers are comparable week to week. But it also means the number is "your speed to Omarchy's server," not "your speed to the nearest Ookla server" or "your speed to Netflix." If speedtest.net says 900 and this says 600, neither is lying; they measured different paths. Compare omarchy-speedtest against itself over time, not against other testers in the same minute.</li>
+    <li><strong>A test is five seconds, eight connections.</strong> Per the README, it opens eight persistent HTTP/1.1 connections, warms up (connection setup and warm-up sit outside the measurement), grows each request until it takes 250 ms, then measures a five-second window and counts only payload bytes. That design is why the number is stable: it is not a single burst, and a slow connection joining late cannot stretch the clock. The flip side: a five-second test will not catch the slow fade of a long download or a connection that degrades after a minute.</li>
+    <li><strong>It reports speed only — no ping, no jitter.</strong> The README documents download and upload in Mbps and nothing else. If you need latency (ping/jitter) for gaming or calls, pair it with a ping test (<code>ping</code> to your router, then to a public host) — do not expect a latency figure out of this tool, and do not read one into the JSON record. The record carries <code>bytes</code>, <code>seconds</code>, <code>mbps</code>, and <code>connections</code> only.</li>
+  </ul>
+  <h3>4. Scripting it (the <code>--json</code> payoff).</h3>
+  <p>The single-record JSON output is the whole reason the CLI exists alongside the panel. A one-liner logs a timestamped result you can graph later:</p>
+  <pre><code class="language-bash">omarchy-speedtest down --json >> ~/speedtest.log</code></pre>
+  <p>Exit codes make scripts reliable: 0 means a result, 1 means the test failed, 2 means a usage error (bad argument). Check the code before trusting the output — a failed test prints no result record, it exits 1.</p>
+  <h3>5. Config location.</h3>
+  <p>No config file is documented. Behavior is driven by the command (<code>down</code>/<code>up</code>, <code>--json</code>) and three environment variables documented in the README:</p>
+  <ul>
+    <li><code>OMARCHY_SPEEDTEST_PARENT_PID</code> — the launcher's parent, set by <code>omarchy-network-speedtest</code>; the panel uses this so a closed panel never leaves transfers running</li>
+    <li><code>OMARCHY_SPEEDTEST_URL</code> — another compatible service, for development</li>
+    <li><code>OMARCHY_SPEEDTEST_CONNECTIONS</code> — 1 to 16 connections instead of 8, for comparisons</li>
+  </ul>
+  <p>Do not set <code>OMARCHY_SPEEDTEST_URL</code> for normal use — it exists so developers can point the client at a test service. Pointing it anywhere else changes what you are measuring.</p>
+</section>
+
+<section id="issues">
+  <h2>Common issues &amp; fixes</h2>
+  <p>The repo was created Oct 26, 2026 — the day this guide was drafted — so there is no issue tracker history to mine, and nothing below is presented as a user-reported bug. Every item is a behavior documented in the README, with the practical consequence spelled out. Anything not in the README is marked unverified.</p>
+  <h3>My number is much lower than speedtest.net / fast.com showed.</h3>
+  <p>Expected, not a fault — different servers, different paths. This client measures only against <code>speed.omarchy.org</code>, over eight connections in a five-second window, counting payload bytes only. A browser test picks a nearby server, often with a different connection count and duration, and may count differently. Re-run the Omarchy test twice, then compare it with your own earlier Omarchy results, not with another tester's number. If the Omarchy number itself has collapsed versus last week, that is the signal worth chasing (cable, Wi-Fi band, VPN — see below). Unverified on Omarchy: whether the panel surfaces the server location or any per-connection detail.</p>
+  <h3>The test fails outright, or errors about a slow first byte.</h3>
+  <p>Documented behavior: a first byte later than the three-second drain allowance ends the run with an error saying so. In practice that means the client could not get any payload moving in time — the link was stalled, the server was unreachable, or the connection was so slow it never started. Check the obvious first: are you actually online, is a VPN or proxy in the way, is another download saturating the link? Then re-run. If it fails consistently while the browser works fine, that is a real bug report for the repo — note the exit code (1 = test failed) and the exact error text. Unverified: the exact wording of the error on Omarchy.</p>
+  <h3>Upload numbers look odd behind a VPN or HTTP proxy.</h3>
+  <p>Documented measurement difference. On Linux without a proxy, uploads count what the server's TCP stack acknowledged during the window (<code>tcpi_bytes_acked</code> from <code>TCP_INFO</code>). Through an HTTP proxy, those acknowledgements say nothing about the service, so uploads instead count confirmed requests — an acknowledgement does not prove the body arrived, but the next answered request on the same connection does, and the clock runs until the last one answers. Same tool, different counting method, so proxy and non-proxy upload numbers are not strictly comparable. If you need a clean number, test with the VPN/proxy off, then with it on, and label which is which.</p>
+  <h3>I ran the CLI directly and nothing is on my PATH / the panel closed and the test kept going (or stopped).</h3>
+  <p>Two documented details to check. First, the README says Omarchy installs the client as <code>/usr/lib/omarchy/speedtest</code> — it is a component the panel launches, so the bare <code>omarchy-speedtest</code> name may not be on your PATH the way a normal app binary is; the supported front door is <code>omarchy network speedtest</code> and the panel. Second, the client is deliberately tied to its parent on Linux: it asks for <code>SIGTERM</code> when its parent exits and exits if its parent is no longer the process in <code>OMARCHY_SPEEDTEST_PARENT_PID</code>, so a closed panel never leaves transfers running. If a direct CLI run dies when you close its terminal, that is the parent-death behavior working as designed, not a crash. Unverified: the exact PATH situation on a fresh Omarchy install — confirm before telling anyone to type the bare command.</p>
+  <h3>I want a longer test, or fewer/more connections, to compare with another tool.</h3>
+  <p>You can change the connection count, but not the window. Set <code>OMARCHY_SPEEDTEST_CONNECTIONS</code> to a value from 1 to 16 for comparisons (default 8). There is no documented flag for a longer measurement window — the five-second window is part of the design. If you need a sustained-throughput picture (does the link hold up for a minute?), this is the wrong tool for that question; use a long download or <code>iperf3</code> against your own server instead, and use omarchy-speedtest for the quick comparable number.</p>
+</section>
+
+<section id="pairs">
+  <h2>Pairs well with / If you hate this, try</h2>
+  <h3>Pairs well with</h3>
+  <ul>
+    <li>the Omarchy speed test panel itself (the normal front end for this client)</li>
+    <li><code>ping</code> (for the latency/jitter numbers this tool deliberately does not report)</li>
+    <li>a bar network widget such as omarchy-net-speed (live up/down rates in the bar — current throughput, not a benchmark; a different question from a speed test)</li>
+  </ul>
+  <h3>If you hate this, try</h3>
+  <ul>
+    <li>Ookla's <code>speedtest</code> CLI (the speedtest.net backend, nearest-server selection, includes ping — but a third-party server choice and a separate install)</li>
+    <li><code>speedtest-cli</code> (the classic Python client, same Ookla backend, widely packaged)</li>
+    <li><code>fast</code> / fast-cli (Netflix's backend — good for "is my ISP throttling video?" specifically, bad as a general benchmark)</li>
+  </ul>
+  <p>None of these are in the Omarchy store listing for this app; they answer different questions, which is the point.</p>
+</section>
+
+<section id="comparison">
+  <h2>Comparison: omarchy-speedtest vs similar apps</h2>
+  <div class="table-scroll">
+    <table class="compare-table">
+      <thead>
+        <tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>omarchy-speedtest</strong></td><td>Free (MIT)</td><td>A repeatable, comparable number against one fixed server, plus the panel/CLI integration</td><td><code>omarchy pkg add omarchy-speedtest</code></td></tr>
+        <tr><td><strong>Ookla <code>speedtest</code> CLI</strong></td><td>Free (account optional)</td><td>Nearest-server test with ping, the number everyone else quotes</td><td>Separate download, not the Omarchy store path</td></tr>
+        <tr><td><strong><code>speedtest-cli</code></strong> (Python)</td><td>Free</td><td>Scriptable Ookla tests from any terminal</td><td>Arch repos / pip, not this store entry</td></tr>
+        <tr><td><strong>fast-cli</strong> (Netflix)</td><td>Free</td><td>Checking video-streaming throughput specifically</td><td>npm, not this store entry</td></tr>
+        <tr><td><strong><code>iperf3</code></strong></td><td>Free</td><td>Sustained throughput to a server you control — the real diagnostic</td><td>Arch extra</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Verdict:</strong> If you want the number Omarchy itself shows, and a number you can compare with last week's number, this is the only tool that gives it — it is free, MIT, and already wired into the panel. Pick Ookla's CLI when you need ping and the number the rest of the world quotes; pick <code>iperf3</code> when you are actually diagnosing a link.</p>
+</section>
+
+<aside class="guide-callout">
+  <h2>Free alternative to speedtest.net in a browser (free, but ad- and tracker-heavy)</h2>
+  <p><strong>What you give up:</strong> the nearest-server choice, ping/jitter figures, and the familiar web UI. <strong>What you keep:</strong> the one number that matters (download/upload Mbps), in a five-second terminal run with a JSON record you can log — no browser tab, no ads, no account, no cookies.</p>
+  <p>Honesty note: speedtest.net itself costs nothing, so this is not a money-saving swap — it is a cleanliness and repeatability swap. The honest pitch is "the same question, asked the same way every time, with output you can script," not "free instead of paid." And the migration is trivial: there is nothing to export. Run the Omarchy test once, write the number down, and that is your new baseline; run it again next week and compare.</p>
+</aside>
+
+<section id="switch">
+  <h2>How to switch from speedtest.net (~2 minutes)</h2>
+  <ol>
+    <li><strong>Export from speedtest.net:</strong> nothing to export — your history there stays there.</li>
+    <li><strong>Import into omarchy-speedtest:</strong> nothing to import. Run <code>omarchy network speedtest</code> once and write the number down — that is your new baseline.</li>
+    <li><strong>What doesn't transfer:</strong> nearest-server selection, ping/jitter figures, and your speedtest.net history.</li>
+    <li><strong>Time estimate:</strong> ~2 minutes plus the 2.9 MB install.</li>
+  </ol>
+</section>
+
+<div class="guide-cta">
+  <h2>Open the omarchy-speedtest package</h2>
+  <p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p>
+  <a class="button" href="/apps/omarchy-speedtest.html">View omarchy-speedtest →</a>
+</div>
+
+<section class="guide-faq" id="faq">
+  <h2>Frequently asked questions</h2>
+  <details>
+    <summary>Does omarchy-speedtest work on Omarchy?</summary>
+    <p>Yes — it is Omarchy's own client, built for <code>speed.omarchy.org</code>, and it is what <code>omarchy network speedtest</code> and the speed test panel run. Install with <code>omarchy pkg add omarchy-speedtest</code>.</p>
+  </details>
+  <details>
+    <summary>Is omarchy-speedtest free?</summary>
+    <p>Yes. MIT-licensed open source. No paid tier, no account, no ads.</p>
+  </details>
+  <details>
+    <summary>How do I run a speed test the normal way?</summary>
+    <p>Use <code>omarchy network speedtest</code> or the speed test panel. The raw <code>omarchy-speedtest down|up</code> CLI is for scripting and debugging, and per the README the binary lives at <code>/usr/lib/omarchy/speedtest</code>.</p>
+  </details>
+  <details>
+    <summary>What does a test measure?</summary>
+    <p>Download or upload speed in Mbps against <code>speed.omarchy.org</code>, over eight connections in a five-second window, counting payload bytes only. It does not report ping or jitter.</p>
+  </details>
+  <details>
+    <summary>Why does my number differ from speedtest.net?</summary>
+    <p>Different server, different path, different method. This client always tests against <code>speed.omarchy.org</code>; browser tests pick a nearby server. Compare omarchy-speedtest with itself over time.</p>
+  </details>
+  <details>
+    <summary>Can I use it in a script?</summary>
+    <p>Yes: <code>omarchy-speedtest down --json</code> prints one JSON record (<code>bytes</code>, <code>seconds</code>, <code>mbps</code>, <code>connections</code>). Exit 0 = result, 1 = test failed, 2 = usage error.</p>
+  </details>
+  <details>
+    <summary>Can I test against a different server?</summary>
+    <p>Only via the <code>OMARCHY_SPEEDTEST_URL</code> environment variable, which the README documents for development. For normal use, leave it alone — changing the server changes what you are measuring.</p>
+  </details>
+  <details>
+    <summary>Does it work through a VPN or proxy?</summary>
+    <p>It runs, but the upload counting method changes through an HTTP proxy (confirmed requests instead of TCP acknowledgements on Linux), so proxy and non-proxy upload numbers are not strictly comparable.</p>
+  </details>
+</section>
+
+<section class="sources">
+  <h2>Official sources</h2>
+  <ul>
+    <li><a href="https://omarchyapps.com/apps/omarchy-speedtest.html" target="_blank" rel="noopener">omarchyapps.com/apps/omarchy-speedtest.html — store listing (version 0.2.1-1, 2.9 MB / 6.8 MB, MIT, install command, updated 2026-10-26)</a></li>
+    <li><a href="https://github.com/omacom/omarchy-speedtest" target="_blank" rel="noopener">omacom/omarchy-speedtest — README (CLI syntax, JSON record, measurement method, environment variables, exit codes, binary path, parent-death behavior)</a></li>
+    <li><a href="https://omarchyapps.com/catalog/v1.json" target="_blank" rel="noopener">omarchyapps.com/catalog/v1.json — catalog generated 2026-10-26T13:00:14Z, app_count 198</a></li>
+  </ul>
+  <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+</section>

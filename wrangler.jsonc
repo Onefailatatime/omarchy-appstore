@@ -3,7 +3,7 @@
   "name": "omarchyapps",
   "main": "src/worker.js",
   "compatibility_date": "2026-09-28",
-  "workers_dev": true,
+  "workers_dev": false,
   "routes": [
     { "pattern": "omarchyapps.com", "custom_domain": true },
     { "pattern": "www.omarchyapps.com", "custom_domain": true },

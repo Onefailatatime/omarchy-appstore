@@ -28,7 +28,7 @@ def _render(template, *, site, path, title, description, eyebrow, crumb_label, c
             .replace("__SITE_URL__/__SLUG__.html", site + path)
             .replace('<a href="/#guides">Guides</a>', f'<a href="{crumb_href}">{html.escape(crumb_label)}</a>')
             .replace("__CRUMB__", f'<a href="{crumb_href}">{html.escape(crumb_label)}</a>')
-            .replace("__FACTS__", "Reviewed __SYNCED__ · independent editorial guide")
+            .replace("__FACTS__", "Independent editorial guide")
             .replace("__TITLE__", html.escape(title))
             .replace("__DESCRIPTION__", html.escape(description))
             .replace("__EYEBROW__", html.escape(eyebrow))
@@ -133,7 +133,7 @@ def build(*, root, dist, pkgs, categories, slug, display_name, guide_template, s
                 f'<tbody>{"".join(rows)}</tbody></table></div></section>'
                 f'<section><h2>More about Omarchy</h2><ul>{omlist}</ul></section>'
                 f'<section><h2>Sources</h2><p>Omarchy facts: <a href="https://omarchy.org/manual/">the Omarchy manual</a>. {html.escape(name)} facts: '
-                f'<a href="{html.escape(d["site"])}">{html.escape(d["site"])}</a>. Checked {synced}. This site is not affiliated with either project.</p></section>')
+                f'<a href="{html.escape(d["site"])}">{html.escape(d["site"])}</a>. This site is not affiliated with either project.</p></section>')
         # A hand written page (data/seo-facts.json "editorial") keeps the sourced
         # table and adds its own sections and FAQ around it.
         ed = d.get("editorial")
@@ -175,7 +175,7 @@ def build(*, root, dist, pkgs, categories, slug, display_name, guide_template, s
         desc = f"Install {g['app']} on Omarchy the official way: {g['menu']}. Step by step from the Omarchy manual, with the source linked."[:160]
         steps = "".join(f"<li>{html.escape(s)}</li>" for s in g["steps"])
         body = (f'<section><h2>Steps</h2><ol>{steps}</ol><p>{html.escape(g["note"])}{_src(g["src"])}</p></section>'
-                f'<section><h2>Source</h2><p>From the official <a href="{html.escape(g["src"])}">Omarchy manual</a>, checked {synced}. '
+                f'<section><h2>Source</h2><p>From the official <a href="{html.escape(g["src"])}">Omarchy manual</a>. '
                 f'{html.escape(g["app"])} is not a package in the Omarchy repo, so it has no app page here; for repo apps use <a href="/omarchy-apps-list.html">the apps list</a>.</p></section>')
         schema = {"@context": "https://schema.org", "@graph": [
             {"@type": "HowTo", "@id": site + path + "#howto", "name": title, "description": desc, "url": site + path,

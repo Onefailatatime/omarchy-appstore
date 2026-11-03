@@ -1,0 +1,21 @@
+{
+ "note": "Thin app pages: noindex, follow and left out of the sitemap. A generated tutorial that points its canonical at one of these is noindexed too. Add real content (data/enrichment.json or data/app-extras.json) and remove the name here to index it again.",
+ "rule": "A page counts as thin when all of these hold: (1) it is generated only from package database facts, with no reviewed description, no screenshot, no demo video and no hand written FAQ; (2) the app has no hand written guide; (3) the package was added to the repo more than 30 days ago; (4) Search Console page data for the last 60 days (Sep 3 to Nov 1, 2026 PT, web search) shows no clicks and under 30 impressions. Hand guides, the homepage, leaderboard, press and flea, strata, slap-notes-bin and omarchy-task-manager are never listed.",
+ "decided": "2026-11-02",
+ "apps": [
+  "bambustudio-bin",
+  "cua-driver-bin",
+  "dell-xps13-sidecar-amps",
+  "ghostty",
+  "ghostty-shell-integration",
+  "ghostty-terminfo",
+  "linux-omarchy",
+  "linux-omarchy-bore-headers",
+  "linux-omarchy-headers",
+  "omarchy-billboard-generator",
+  "omareel",
+  "omawake-bin",
+  "owe-lockfeed",
+  "vi"
+ ]
+}

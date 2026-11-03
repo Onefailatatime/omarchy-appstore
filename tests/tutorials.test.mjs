@@ -18,6 +18,9 @@ for (const file of apps) {
   const canonical = tutorial.match(/<link rel="canonical" href="([^"]+)">/)[1];
   if (canonical === `https://omarchyapps.com/apps/${file}`) {
     assert.doesNotMatch(sitemap, new RegExp(`omarchyapps\\.com${link[1].replace(".", "\\.")}<`), `${link[1]} left out of sitemap`);
+  } else if (/<meta name="robots" content="noindex,follow">/.test(tutorial)) {
+    // Thin app (data/thin-apps.json): the tutorial is noindexed with its app page and stays out of the sitemap.
+    assert.doesNotMatch(sitemap, new RegExp(`omarchyapps\\.com${link[1].replace(".", "\\.")}<`), `${link[1]} noindex, left out of sitemap`);
   } else {
     assert.equal(canonical, `https://omarchyapps.com${link[1]}`, `${link[1]} is self canonical`);
     assert.match(sitemap, new RegExp(`omarchyapps\\.com${link[1].replace(".", "\\.")}`), `${link[1]} in sitemap`);
