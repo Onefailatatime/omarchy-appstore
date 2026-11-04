@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-11-03T14:00:13+00:00",
+ "generated_at": "2026-11-04T02:00:15+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 205,
+ "app_count": 206,
  "apps": [
   {
    "id": "1password",
@@ -52,6 +52,17 @@
    "homepage": "https://github.com/omacom/aether",
    "tutorial_url": "https://omarchyapps.com/aether-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/aether.html"
+  },
+  {
+   "id": "amp-desktop-bin",
+   "name": "amp-desktop-bin",
+   "package": "amp-desktop-bin",
+   "install_command": "omarchy pkg add amp-desktop-bin",
+   "category": "Utilities",
+   "description": "Amp, the frontier coding agent, as a desktop app",
+   "homepage": "https://ampcode.com",
+   "tutorial_url": "https://omarchyapps.com/amp-desktop-bin-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/amp-desktop-bin.html"
   },
   {
    "id": "asdcontrol",
@@ -1201,6 +1212,17 @@
    "url": "https://omarchyapps.com/apps/omadesign-bin.html"
   },
   {
+   "id": "omafeed",
+   "name": "omafeed",
+   "package": "omafeed",
+   "install_command": "omarchy pkg add omafeed",
+   "category": "Utilities",
+   "description": "A native Rust RSS reader for Linux and Omarchy",
+   "homepage": "https://github.com/pch/omafeed",
+   "tutorial_url": "https://omarchyapps.com/omafeed-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/omafeed.html"
+  },
+  {
    "id": "omairc",
    "name": "omairc",
    "package": "omairc",
@@ -1728,17 +1750,6 @@
    "homepage": "https://rustdesk.com/",
    "tutorial_url": "https://omarchyapps.com/rustdesk-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/rustdesk.html"
-  },
-  {
-   "id": "schist",
-   "name": "schist",
-   "package": "schist",
-   "install_command": "omarchy pkg add schist",
-   "category": "Media & Creative",
-   "description": "Layered image editor with PSD and Affinity support",
-   "homepage": "https://github.com/Infrawrench/schist",
-   "tutorial_url": "https://omarchyapps.com/schist-on-omarchy.html",
-   "url": "https://omarchyapps.com/apps/schist.html"
   },
   {
    "id": "schist-bin",
