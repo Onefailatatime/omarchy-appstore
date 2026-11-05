@@ -135,8 +135,8 @@
   "v": 3
  },
  "apps/cursor-cli.html": {
-  "date": "2026-10-22",
-  "hash": "d15c84e1c46ed53bb0e7cdf26142a9339e3471c922890e8944d93507f7dbb7ac",
+  "date": "2026-11-05",
+  "hash": "193f7a6e9ffcdc7dba819f468569d8b04394ed9207a01ef2819dbf0cc7d079b2",
   "v": 3
  },
  "apps/dbxcli-bin.html": {
@@ -190,13 +190,13 @@
   "v": 3
  },
  "apps/ghost-runtime.html": {
-  "date": "2026-11-04",
-  "hash": "88b6420a9da8ddab7dbcde289629a3acce194a1e36d0d94fa5005683075d9802",
+  "date": "2026-11-05",
+  "hash": "c585d5b022de50432b66632cca1215ffac204075740cb5d8ac05a361234c1ce2",
   "v": 3
  },
  "apps/ghost.html": {
-  "date": "2026-11-04",
-  "hash": "437c4da3f02b6c4dc96a96df2fa72e308862b0cf1e7779a16504b780d341acd0",
+  "date": "2026-11-05",
+  "hash": "9e42d24ecf92802a0b3c95e4c3cb334b0f4ba553ea6033c5f6a76960765b6d13",
   "v": 3
  },
  "apps/ghostty-nautilus.html": {
@@ -225,8 +225,8 @@
   "v": 3
  },
  "apps/gliff.html": {
-  "date": "2026-10-24",
-  "hash": "6ac3486852c3197290b0b1d03b7c63ed3608224f2a6446d4088ff49c82d86f57",
+  "date": "2026-11-05",
+  "hash": "8b7802c7d9261c54218d8ac8d7235bfab9d8ee697fc69db1fbfca9ce5530170d",
   "v": 3
  },
  "apps/google-chrome.html": {
@@ -240,13 +240,13 @@
   "v": 3
  },
  "apps/grok-bot.html": {
-  "date": "2026-11-04",
-  "hash": "e1ea22f1dff332392ec973efd0939e5e9b3cf5fea0f13913c2ef4d83fe7783f7",
+  "date": "2026-11-05",
+  "hash": "f433a52614a100fe350c16c283c2af2f4008aa7675850a9ac3bd339e84f51011",
   "v": 3
  },
  "apps/helium-browser-bin.html": {
-  "date": "2026-11-02",
-  "hash": "5138c6713b35797bb21978bdac96a9e30c84976e7f5fa4693297991718dbc6a7",
+  "date": "2026-11-05",
+  "hash": "d61e6ae295a0a54e2dc37616ecb4193626c7ef0904548179b80247f77e600450",
   "v": 3
  },
  "apps/herdr-app.html": {
@@ -580,8 +580,8 @@
   "v": 3
  },
  "apps/omafeed.html": {
-  "date": "2026-11-04",
-  "hash": "9b6954c3028c2872826eb488f19fc882d867eb9756c90664a9fcd9965de3ff43",
+  "date": "2026-11-05",
+  "hash": "c9e0468f02260f08e62acfdc3a3332e7293155ee02ec3f9fe3e6ed0e912d8f99",
   "v": 3
  },
  "apps/omairc.html": {
@@ -675,8 +675,8 @@
   "v": 3
  },
  "apps/omarchy-settings.html": {
-  "date": "2026-11-04",
-  "hash": "9e274314b5bfdca1c465e1ec0ed7ff153dd8041a88dedb57015e209978b314cb",
+  "date": "2026-11-05",
+  "hash": "9d613d6c2dc88d2ac50448b9020719f039088ea5f0e37bbadc9e657d74f2ac9c",
   "v": 3
  },
  "apps/omarchy-speedtest.html": {
@@ -700,8 +700,8 @@
   "v": 3
  },
  "apps/omarchy.html": {
-  "date": "2026-11-04",
-  "hash": "63c0a9a3a2aca08dff74c0b199815bb6df97afbc031c8029daf5f41ca2ca6574",
+  "date": "2026-11-05",
+  "hash": "f3d1e08fa279bfe43ebd79385ad8f9259a2c8f39594bc18f48e7bc54e699ca60",
   "v": 3
  },
  "apps/omareel.html": {
@@ -785,8 +785,8 @@
   "v": 3
  },
  "apps/perplexity.html": {
-  "date": "2026-11-02",
-  "hash": "5a57d6c3cac7ff06800bb49df913f68f823592ee6b5e2222174147acc7a50a5d",
+  "date": "2026-11-05",
+  "hash": "3aa46b9a1a7e2362299ab7c40c7b6e0fbd2d6c5a73a55ab12d19945437d2d05e",
   "v": 3
  },
  "apps/python-mediapipe.html": {
@@ -915,8 +915,8 @@
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-04",
-  "hash": "1b94b9eb1b8f356987df5358e47390e0c20d810f92131da5191bb3d3fe5e0c8b",
+  "date": "2026-11-05",
+  "hash": "58ae59ff269e953f0603f5ae3067c7918e73452ec75d14d91bd1935233c077f1",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -1010,8 +1010,8 @@
   "v": 3
  },
  "apps/wordcraft-bin.html": {
-  "date": "2026-11-03",
-  "hash": "0680512d8da144fdb86ae88e20871e6c9bc935de21b52abafef6deac6f0e5405",
+  "date": "2026-11-05",
+  "hash": "36e7698c54de9a5f9fa4f41ab85f2528ec9d5b94df834ea3b79904ce72470bd9",
   "v": 3
  },
  "apps/wps-office-cn.html": {
@@ -1240,8 +1240,8 @@
   "v": 3
  },
  "cursor-cli-on-omarchy.html": {
-  "date": "2026-10-22",
-  "hash": "392bae7bd9e296c74485220093f36d541963fe3ce6426a897eae85523cf77df7",
+  "date": "2026-11-05",
+  "hash": "5aaa492614966be567cca74dc75a304325d3013433308e06f01a8955d19b5ad4",
   "v": 3
  },
  "dbxcli-bin-on-omarchy.html": {
@@ -1350,13 +1350,13 @@
   "v": 3
  },
  "ghost-on-omarchy.html": {
-  "date": "2026-11-04",
-  "hash": "b376cc7f4e3962b7311270be419a929b20781cb96f2991ed2ebeae17f1b715bf",
+  "date": "2026-11-05",
+  "hash": "7f9e978e8a91bceedb1275417fe99ae4f963bd43ce61eb5235fe398399b2c854",
   "v": 3
  },
  "ghost-runtime-on-omarchy.html": {
-  "date": "2026-11-04",
-  "hash": "3bdf0c5dcd2b8338b6105b597b6ea038e92a16472055958a784c58121b3fd06a",
+  "date": "2026-11-05",
+  "hash": "8e2181f827bf08de875e2f6bf895b6a856d15a5d8d618fbce6a1b2bf4939a56b",
   "v": 3
  },
  "ghostty-nautilus-on-omarchy.html": {
@@ -1405,8 +1405,8 @@
   "v": 3
  },
  "grok-bot-on-omarchy.html": {
-  "date": "2026-11-04",
-  "hash": "25159b148c405b3f4be859dad9341ad0dc379750e7338a0ddf9baaa7c984bd2f",
+  "date": "2026-11-05",
+  "hash": "680ede664e2ad7108edbed88b6d4da2d49f19aa57d88f18d6aeaf82c39dc1888",
   "v": 3
  },
  "guides.html": {
@@ -1970,8 +1970,8 @@
   "v": 3
  },
  "omarchy-on-omarchy.html": {
-  "date": "2026-11-04",
-  "hash": "47207806add879643a338127dc32a1298b51aca073027644e781d7ea61a6b1a2",
+  "date": "2026-11-05",
+  "hash": "b38c57781681df5796ae12523db7754a658fc9807b190afd3445205d18b47a00",
   "v": 3
  },
  "omarchy-on-t2-macbook.html": {
@@ -1985,8 +1985,8 @@
   "v": 3
  },
  "omarchy-settings-on-omarchy.html": {
-  "date": "2026-11-04",
-  "hash": "0fdd75f6b3ad91e21af935fcc582070e3f74294556fbcb9caf0b987660da4472",
+  "date": "2026-11-05",
+  "hash": "e08fb47ca7233532c03e1d591d1ee6c5f6216f0a4957c82a19f39da7073c975a",
   "v": 3
  },
  "omarchy-speedtest-on-omarchy.html": {
@@ -2105,8 +2105,8 @@
   "v": 3
  },
  "perplexity-on-omarchy.html": {
-  "date": "2026-11-02",
-  "hash": "c79d7dbda74645cc44f684774f7b72b3da2b15e5cfe1012affb55529ffb655b7",
+  "date": "2026-11-05",
+  "hash": "d6f586caf51a8790840f7eb96f6122e1e377fdde0162503e38fe0498ecf516cf",
   "v": 3
  },
  "pinta-on-omarchy.html": {
