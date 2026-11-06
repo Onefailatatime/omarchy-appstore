@@ -50,8 +50,8 @@
   "v": 3
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-03",
-  "hash": "1256de5a3a634eef80ae7afa1fe183f7421feb838517a03ec66a5e342c8f60f0",
+  "date": "2026-11-06",
+  "hash": "64ca983fb8566067819c8197d5442091163e98befd24f797ea50c452b5efe237",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -65,8 +65,8 @@
   "v": 3
  },
  "apps/basecamp-cli.html": {
-  "date": "2026-11-05",
-  "hash": "85a955945a3467f6144964b695e6ecbaffe1841bfcd1f14252ef37b7884f7c94",
+  "date": "2026-11-06",
+  "hash": "4ca0ef8cbbca5c124b8f803b0ff1312f0c3fc62b55ec2571d18bf00afd365a99",
   "v": 3
  },
  "apps/brave-bin.html": {
@@ -190,13 +190,13 @@
   "v": 3
  },
  "apps/ghost-runtime.html": {
-  "date": "2026-11-05",
-  "hash": "c585d5b022de50432b66632cca1215ffac204075740cb5d8ac05a361234c1ce2",
+  "date": "2026-11-06",
+  "hash": "d1077cded0adf1bb935a5a4955bbcf4182cbd01683e02b957ba5cd7e40b13773",
   "v": 3
  },
  "apps/ghost.html": {
-  "date": "2026-11-05",
-  "hash": "9e42d24ecf92802a0b3c95e4c3cb334b0f4ba553ea6033c5f6a76960765b6d13",
+  "date": "2026-11-06",
+  "hash": "aa280b32a43405ee6a5bac09be73418a822d3af73723724ff62801dfa7a019d7",
   "v": 3
  },
  "apps/ghostty-nautilus.html": {
@@ -220,8 +220,8 @@
   "v": 3
  },
  "apps/github-copilot-cli.html": {
-  "date": "2026-10-28",
-  "hash": "2602976fd91c87d616ea7613c60187d239a08a9be8eda0fbff0e885c886564a6",
+  "date": "2026-11-06",
+  "hash": "2e0a4cec12591fb278df108666fb2506c8ea6876ccbd3e6a9bfdfe6aa8974715",
   "v": 3
  },
  "apps/gliff.html": {
@@ -520,8 +520,8 @@
   "v": 3
  },
  "apps/mise-bin.html": {
-  "date": "2026-11-05",
-  "hash": "ebb9c9b9da0ffb3f6624e7404e433c51909c1beb6992896629f70b5fe3496d59",
+  "date": "2026-11-06",
+  "hash": "93a2dc8451020c407190f9295855dbcbfbef9cbb2ee21f921f61b3213287a1d2",
   "v": 3
  },
  "apps/monologue.html": {
@@ -740,8 +740,8 @@
   "v": 3
  },
  "apps/omazed.html": {
-  "date": "2026-10-20",
-  "hash": "9d7fd4df74d4758d764ac1644906e3fc5891dc11909031c056f5c86cb0f48d8d",
+  "date": "2026-11-06",
+  "hash": "d0b93ecaa82db713a6648a3a0f983f5edcb9a9fec9dfd7f582beb589ecf70264",
   "v": 3
  },
  "apps/once-bin.html": {
@@ -915,8 +915,8 @@
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-05",
-  "hash": "b1bba798f3c0fcc5997abcc62406536628b7058536f0dd9b15e78a866eab4f93",
+  "date": "2026-11-06",
+  "hash": "8b684c7905b1e4461d2d895794f0e9c50f210ab9a14ca5be9a50a7fd2153f97f",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -985,8 +985,8 @@
   "v": 3
  },
  "apps/visual-studio-code-bin.html": {
-  "date": "2026-11-05",
-  "hash": "fb699b437097edca5f8e6327aa35b06ed66d6dcf5846bdaae457d4912a3f8896",
+  "date": "2026-11-06",
+  "hash": "cc1a5f742366f5ec355cae12f4b2d873518e4bd13169e76b6e511c2470f22aaa",
   "v": 3
  },
  "apps/voxtype-bin.html": {
@@ -1100,8 +1100,8 @@
   "v": 3
  },
  "basecamp-cli-on-omarchy.html": {
-  "date": "2026-11-05",
-  "hash": "bab3100e0cc3f658854130830d763e38f290fc10c601f7d57cef6ad3be0fac7a",
+  "date": "2026-11-06",
+  "hash": "522b24df15c0bc7c3a41df696c5e70d249fbdee844e3d85611d02fe260495568",
   "v": 3
  },
  "best-apps-for-omarchy.html": {
@@ -1350,13 +1350,13 @@
   "v": 3
  },
  "ghost-on-omarchy.html": {
-  "date": "2026-11-05",
-  "hash": "9b95a21579a009f5126d5a7ed05daf805b0e19c11e3c4e4460aa80b0c63a633a",
+  "date": "2026-11-06",
+  "hash": "1818f5b92b89eebb587b5254dfeb06d587e02b54eea83b0002b820dc0c1fccc5",
   "v": 3
  },
  "ghost-runtime-on-omarchy.html": {
-  "date": "2026-11-05",
-  "hash": "864b7076fe95f1022bd74f285b658b83eea9e52d2f47d59260d5cb4afd943c50",
+  "date": "2026-11-06",
+  "hash": "9cad9e4f602a410028714602508a5a1cc7f322acef33722544e548ad3896f4c6",
   "v": 3
  },
  "ghostty-nautilus-on-omarchy.html": {
@@ -1380,8 +1380,8 @@
   "v": 3
  },
  "github-copilot-cli-on-omarchy.html": {
-  "date": "2026-10-28",
-  "hash": "044bc58d5c3214c02dde3ae706fd151b8b4ecf5e91837b2d5f310a53432e2654",
+  "date": "2026-11-06",
+  "hash": "1f6ae36628b69eab774495ec6f62a7a9089b0dee2e09a7ffcebd009d7f029667",
   "v": 3
  },
  "gliff-on-omarchy.html": {
@@ -1815,8 +1815,8 @@
   "v": 3
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-11-05",
-  "hash": "04b98288a8b3433ae4c9648f5c83354cec3f3a711c7b06842a9a0d3f714d6e43",
+  "date": "2026-11-06",
+  "hash": "fd2f246cc97b91496f5f46d5be855238b2c5d8018070f0942e40783a24ae021d",
   "v": 3
  },
  "monologue-on-omarchy.html": {
@@ -2055,8 +2055,8 @@
   "v": 3
  },
  "omazed-on-omarchy.html": {
-  "date": "2026-10-20",
-  "hash": "623f6c2e31bf83c1393d54ee09e31acc38c7b6e8c0bd54d78dbcab4181c657d0",
+  "date": "2026-11-06",
+  "hash": "036850c58cc84e07c43b033638a7bd30aa0c685ee9c0cf963c00eed6e2d316b2",
   "v": 3
  },
  "once-bin-on-omarchy.html": {
@@ -2370,8 +2370,8 @@
   "v": 3
  },
  "visual-studio-code-bin-on-omarchy.html": {
-  "date": "2026-11-05",
-  "hash": "79cb697bee53e4a147678c897be1b664b88d46703e30cb2accd07b47daef5cc6",
+  "date": "2026-11-06",
+  "hash": "7074f019d09382cf1a7a5bccc31c6c9e80ba990bb5098d0b9b4565637e4591a2",
   "v": 3
  },
  "voxtype-bin-on-omarchy.html": {
