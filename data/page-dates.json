@@ -51,7 +51,7 @@
  },
  "apps/amp-desktop-bin.html": {
   "date": "2026-11-06",
-  "hash": "64ca983fb8566067819c8197d5442091163e98befd24f797ea50c452b5efe237",
+  "hash": "cae1047bfad9b06c3f45464d4207134561332d733d966ae15c999297e1442044",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -95,8 +95,8 @@
   "v": 3
  },
  "apps/claude-code.html": {
-  "date": "2026-11-03",
-  "hash": "afa9143e06e9f15e2a967515d2697f41b517313fb1f3b28ece7567ee0c913247",
+  "date": "2026-11-06",
+  "hash": "ac12edac0ed24c1fce03b9d99ad0e5efdfafbba7deb5f664c0435503687a2926",
   "v": 3
  },
  "apps/claude-desktop.html": {
@@ -221,7 +221,7 @@
  },
  "apps/github-copilot-cli.html": {
   "date": "2026-11-06",
-  "hash": "2e0a4cec12591fb278df108666fb2506c8ea6876ccbd3e6a9bfdfe6aa8974715",
+  "hash": "75345f1b0b4be40fa71c5c0339c3c09efed0c9fff7073848c31eada7ef5e3bba",
   "v": 3
  },
  "apps/gliff.html": {
@@ -240,8 +240,8 @@
   "v": 3
  },
  "apps/grok-bot.html": {
-  "date": "2026-11-05",
-  "hash": "f433a52614a100fe350c16c283c2af2f4008aa7675850a9ac3bd339e84f51011",
+  "date": "2026-11-06",
+  "hash": "e7d1e3f6ee407158c031e2fb3c8cce7f3bc06e03bd006678d8ce499874a2122e",
   "v": 3
  },
  "apps/helium-browser-bin.html": {
@@ -580,8 +580,8 @@
   "v": 3
  },
  "apps/omafeed.html": {
-  "date": "2026-11-05",
-  "hash": "c9e0468f02260f08e62acfdc3a3332e7293155ee02ec3f9fe3e6ed0e912d8f99",
+  "date": "2026-11-06",
+  "hash": "8a3f5bf0671bd190e5ee4eb366a6a007a261a507e199a32a6b7f5a0130b62d45",
   "v": 3
  },
  "apps/omairc.html": {
@@ -755,8 +755,8 @@
   "v": 3
  },
  "apps/openai-codex-desktop.html": {
-  "date": "2026-11-05",
-  "hash": "31c0a742388970ac716d0a6b2fa4f8e9a803c3613e01a56a19d3c409b497a5a4",
+  "date": "2026-11-06",
+  "hash": "898fa2ff7dd8e7498394edbbef063e7f2b32cbddf424eda391d89de0d26687fc",
   "v": 3
  },
  "apps/opencl-nvidia-580xx.html": {
@@ -825,8 +825,8 @@
   "v": 3
  },
  "apps/rawmakase-bin.html": {
-  "date": "2026-11-04",
-  "hash": "7d55ab710a27500413c7073b3ba139d5f983036dc35e87ffe2619303a4ec9ced",
+  "date": "2026-11-06",
+  "hash": "8f85f5972f033fde2781646715ec516005e83b10535297463ebb63b254545198",
   "v": 3
  },
  "apps/retroarch-joypad-autoconfig-git.html": {
@@ -916,7 +916,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-06",
-  "hash": "8b684c7905b1e4461d2d895794f0e9c50f210ab9a14ca5be9a50a7fd2153f97f",
+  "hash": "1929404b8b0ced6c77b2ef2fa12fca527e09c6cfe123011a261989aec853fe0a",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -1080,8 +1080,8 @@
   "v": 3
  },
  "apps/zen-browser-bin.html": {
-  "date": "2026-10-29",
-  "hash": "18e81fc283fdfcff627906a2eb7dc485400b3c0e79881e8c112db4260a7d60a7",
+  "date": "2026-11-06",
+  "hash": "1555a232b0c13902eb2ae611cc08e80f00d9414b73149ec27d47e057a10b1eab",
   "v": 3
  },
  "asdcontrol-on-omarchy.html": {
@@ -1200,8 +1200,8 @@
   "v": 3
  },
  "claude-code-on-omarchy.html": {
-  "date": "2026-11-03",
-  "hash": "25e044e6790009be043d4ee72ac90d59cda2820c0da6f844d90df2fef160593f",
+  "date": "2026-11-06",
+  "hash": "026c62e371662bd034068969cac90179757da09a84bbfc67071429d693557c36",
   "v": 3
  },
  "claude-desktop-omarchy.html": {
@@ -1381,7 +1381,7 @@
  },
  "github-copilot-cli-on-omarchy.html": {
   "date": "2026-11-06",
-  "hash": "1f6ae36628b69eab774495ec6f62a7a9089b0dee2e09a7ffcebd009d7f029667",
+  "hash": "19439ba9728c3d84436350f3f0620ffacca6cb8834e7a8ec393c4dc321474f2c",
   "v": 3
  },
  "gliff-on-omarchy.html": {
@@ -1405,8 +1405,8 @@
   "v": 3
  },
  "grok-bot-on-omarchy.html": {
-  "date": "2026-11-05",
-  "hash": "680ede664e2ad7108edbed88b6d4da2d49f19aa57d88f18d6aeaf82c39dc1888",
+  "date": "2026-11-06",
+  "hash": "5eeecfa40c14d18bfed93ac1eb44d03bb41194dc4582195ebab29f233b2be3c6",
   "v": 3
  },
  "guides.html": {
@@ -2070,8 +2070,8 @@
   "v": 3
  },
  "openai-codex-desktop-on-omarchy.html": {
-  "date": "2026-11-05",
-  "hash": "029864aba7fc4ab531300d9c94ecc41bdd414fa50b6a11da6edd0991e0007b49",
+  "date": "2026-11-06",
+  "hash": "4f46137b64a2abbc3fdf914fab82776e3108a4e37ada17078065847169c95486",
   "v": 3
  },
  "opencl-nvidia-580xx-on-omarchy.html": {
@@ -2160,8 +2160,8 @@
   "v": 3
  },
  "rawmakase-bin-on-omarchy.html": {
-  "date": "2026-11-04",
-  "hash": "05bbfcf273bdd6d4699ce51347e2f5c3bc3aa0bc5afc4a4a01463cc9f284533c",
+  "date": "2026-11-06",
+  "hash": "af8c3ef01132de94b6da46441db545aedb1f170a592dcff124be5d29f0c3d9bb",
   "v": 3
  },
  "retroarch-joypad-autoconfig-git-on-omarchy.html": {
@@ -2520,8 +2520,8 @@
   "v": 3
  },
  "zen-browser-bin-on-omarchy.html": {
-  "date": "2026-11-04",
-  "hash": "404756dd4ab881f8598afeac8abede0c8fcf7464bbed7424a4f80a571e99c0a7",
+  "date": "2026-11-06",
+  "hash": "7452ee6ea7a78c492c62f1a0d7ca24df7faa66322f010436218c10434dd6b1d7",
   "v": 3
  }
 }
