@@ -50,8 +50,8 @@
   "v": 3
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-06",
-  "hash": "cae1047bfad9b06c3f45464d4207134561332d733d966ae15c999297e1442044",
+  "date": "2026-11-07",
+  "hash": "ccc0dc1040bbb9f48f5814be373006e3e58c7ef929973c0bc39170a9e1ef9033",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -65,8 +65,8 @@
   "v": 3
  },
  "apps/basecamp-cli.html": {
-  "date": "2026-11-06",
-  "hash": "4ca0ef8cbbca5c124b8f803b0ff1312f0c3fc62b55ec2571d18bf00afd365a99",
+  "date": "2026-11-07",
+  "hash": "a074fd67f59890143997d9649b2d363f7aa33c693289c69a2267bc6615096a45",
   "v": 3
  },
  "apps/brave-bin.html": {
@@ -520,8 +520,8 @@
   "v": 3
  },
  "apps/mise-bin.html": {
-  "date": "2026-11-06",
-  "hash": "93a2dc8451020c407190f9295855dbcbfbef9cbb2ee21f921f61b3213287a1d2",
+  "date": "2026-11-07",
+  "hash": "2be8aed3e3f86305becdb10ec929b1f6079b8fe050381cadb1ff4026d98192df",
   "v": 3
  },
  "apps/monologue.html": {
@@ -915,8 +915,8 @@
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-06",
-  "hash": "1929404b8b0ced6c77b2ef2fa12fca527e09c6cfe123011a261989aec853fe0a",
+  "date": "2026-11-07",
+  "hash": "ef3f5b3cae55314988d4d076006931f9b238bac094f2dd0fb75d76d4b65182bf",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -1100,8 +1100,8 @@
   "v": 3
  },
  "basecamp-cli-on-omarchy.html": {
-  "date": "2026-11-06",
-  "hash": "522b24df15c0bc7c3a41df696c5e70d249fbdee844e3d85611d02fe260495568",
+  "date": "2026-11-07",
+  "hash": "3451e92c996b0a18a5324a5f3b9afca87844f536f8e7342bb42092a5e167847e",
   "v": 3
  },
  "best-apps-for-omarchy.html": {
@@ -1815,8 +1815,8 @@
   "v": 3
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-11-06",
-  "hash": "fd2f246cc97b91496f5f46d5be855238b2c5d8018070f0942e40783a24ae021d",
+  "date": "2026-11-07",
+  "hash": "59f43b927795514f194a4b0992e4bf0c7d188f63bca10e3b14a0eb6cedb5b8a8",
   "v": 3
  },
  "monologue-on-omarchy.html": {
