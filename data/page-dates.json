@@ -51,7 +51,7 @@
  },
  "apps/amp-desktop-bin.html": {
   "date": "2026-11-07",
-  "hash": "ccc0dc1040bbb9f48f5814be373006e3e58c7ef929973c0bc39170a9e1ef9033",
+  "hash": "db9e3f751dc9529931da24fc9db8eca4910e1038a4dc729ec94a258f51bd10ff",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -66,7 +66,7 @@
  },
  "apps/basecamp-cli.html": {
   "date": "2026-11-07",
-  "hash": "a074fd67f59890143997d9649b2d363f7aa33c693289c69a2267bc6615096a45",
+  "hash": "42c42ccf85350e44ffd37b81ab70a833d324062ea4e67c3dd0e896daea8345aa",
   "v": 3
  },
  "apps/brave-bin.html": {
@@ -235,8 +235,8 @@
   "v": 3
  },
  "apps/gridcraft-bin.html": {
-  "date": "2026-11-05",
-  "hash": "35d0c3df1d2b38d95601f83114c7c7d6309d1dbe30732938f58e0cc0240c75df",
+  "date": "2026-11-07",
+  "hash": "c05646495cdb402c38be2f00b979bba8d44daeaeca918e7b546e6a58ac648221",
   "v": 3
  },
  "apps/grok-bot.html": {
@@ -916,7 +916,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-07",
-  "hash": "ef3f5b3cae55314988d4d076006931f9b238bac094f2dd0fb75d76d4b65182bf",
+  "hash": "e48fd85aa00293faca12cbc525287a65564252a0fdbf670fc45fc7a93228b997",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -1010,8 +1010,8 @@
   "v": 3
  },
  "apps/wordcraft-bin.html": {
-  "date": "2026-11-05",
-  "hash": "0799ad5d37e1cdb1f5f9dbf1e2f73a81cbf72323a709535893d4b528296c81a8",
+  "date": "2026-11-07",
+  "hash": "54c6d52ee76859280f5cb655b605d9d2ebb08ae695200b4d606ed48312628566",
   "v": 3
  },
  "apps/wps-office-cn.html": {
@@ -1101,7 +1101,7 @@
  },
  "basecamp-cli-on-omarchy.html": {
   "date": "2026-11-07",
-  "hash": "3451e92c996b0a18a5324a5f3b9afca87844f536f8e7342bb42092a5e167847e",
+  "hash": "e28b5271e9605e8484b74b5b9dfd1e82baf8e97b9005c60945196ab7c1d50131",
   "v": 3
  },
  "best-apps-for-omarchy.html": {
