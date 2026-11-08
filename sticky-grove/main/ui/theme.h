@@ -1,12 +1,18 @@
-// Grove look: paper white, ink black, two greys, round corners, hand-cut shapes.
+// Tarot card look: ink on paper, hairline rules, Art Nouveau lettering and ornaments.
 #pragma once
+#include "assets.h"
 #include "lvgl.h"
 
-#define FONT_SMALL (&lv_font_montserrat_16)
-#define FONT_BODY  (&lv_font_montserrat_20)
-#define FONT_TITLE (&lv_font_montserrat_28)
-#define FONT_HERO  (&lv_font_montserrat_36)
-#define FONT_CLOCK (&lv_font_montserrat_48)
+LV_FONT_DECLARE(eagle_22)
+LV_FONT_DECLARE(eagle_30)
+LV_FONT_DECLARE(eagle_40)
+
+#define FONT_SMALL  (&lv_font_montserrat_16)
+#define FONT_BODY   (&lv_font_montserrat_18)
+#define FONT_BIG    (&lv_font_montserrat_28)
+#define FONT_DECO_S (&eagle_22)   // navigation, small headings
+#define FONT_DECO   (&eagle_30)   // card titles
+#define FONT_DECO_L (&eagle_40)   // the clock
 
 #define COLOR_INK   lv_color_black()
 #define COLOR_PAPER lv_color_white()
@@ -16,10 +22,10 @@
 
 void theme_init(lv_display_t *disp);
 
-lv_obj_t *theme_card(lv_obj_t *parent, int w, int h);
-lv_obj_t *theme_button(lv_obj_t *parent, const char *text, lv_event_cb_t cb, void *user_data);
 lv_obj_t *theme_label(lv_obj_t *parent, const char *text, const lv_font_t *font);
-lv_obj_t *theme_title(lv_obj_t *parent, const char *text);   // page heading with a leaf mark
-lv_obj_t *theme_column(lv_obj_t *parent, int w, int h);      // vertical flex list, scrollable
-// Hills, clouds, a tree and a cottage across the bottom of `parent`.
-void theme_scenery(lv_obj_t *parent, int y, int w, int h);
+lv_obj_t *theme_button(lv_obj_t *parent, const char *text, lv_event_cb_t cb, void *user_data);
+lv_obj_t *theme_image(lv_obj_t *parent, const lv_image_dsc_t *src);   // ink-coloured artwork
+lv_obj_t *theme_rule(lv_obj_t *parent, int x, int y, int w);          // one-pixel hairline
+lv_obj_t *theme_row(lv_obj_t *parent, int h);                         // invisible full-width row
+lv_obj_t *theme_column(lv_obj_t *parent, int w, int h);               // vertical list, scrollable
+lv_obj_t *theme_box(lv_obj_t *parent, int w, int h);                  // hairline-bordered panel

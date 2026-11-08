@@ -5,6 +5,7 @@
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "display.h"
 #include "pins.h"
 
 static const char *TAG = "touch";
@@ -88,8 +89,21 @@ static void read_cb(lv_indev_t *indev, lv_indev_data_t *data)
 #if TOUCH_MIRROR_Y
             y = SCREEN_H - 1 - y;
 #endif
-            last.x = LV_CLAMP(0, x, SCREEN_W - 1);
-            last.y = LV_CLAMP(0, y, SCREEN_H - 1);
+            x = LV_CLAMP(0, x, SCREEN_W - 1);
+            y = LV_CLAMP(0, y, SCREEN_H - 1);
+            // Panel coordinates -> logical ones, the inverse of display.c's rotation.
+            display_rotation_t rot = display_rotation();
+            if (rot == ROT_PORTRAIT_CW) {
+                int32_t lx = SCREEN_H - 1 - y;
+                y = x;
+                x = lx;
+            } else if (rot == ROT_PORTRAIT_CCW) {
+                int32_t lx = y;
+                y = SCREEN_W - 1 - x;
+                x = lx;
+            }
+            last.x = x;
+            last.y = y;
             data->point = last;
             data->state = LV_INDEV_STATE_PRESSED;
         }

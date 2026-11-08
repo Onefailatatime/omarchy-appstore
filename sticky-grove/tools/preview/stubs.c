@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include "board.h"
 #include "display.h"
+#include "imu.h"
+void preview_rebind_buffer(void);
 #include "net.h"
 #include "nvs.h"
 #include "nvs_flash.h"
@@ -40,5 +42,16 @@ bool venice_ask(const char *s, const char *u) { return false; }
 bool venice_poll(char *r, int n, bool *ok) { return false; }
 
 void display_request(display_refresh_t mode) {}
+static display_rotation_t s_rot;
+void display_set_rotation(display_rotation_t r)
+{
+    s_rot = r;
+    bool portrait = r != ROT_LANDSCAPE;
+    lv_display_set_resolution(lv_display_get_default(), portrait ? 480 : 800, portrait ? 800 : 480);
+    preview_rebind_buffer();
+}
+display_rotation_t display_rotation(void) { return s_rot; }
+void imu_init(i2c_master_bus_handle_t bus) {}
+imu_orientation_t imu_orientation(void) { return IMU_UNKNOWN; }
 void display_wait_idle(uint32_t ms) {}
 void display_sleep(void) {}

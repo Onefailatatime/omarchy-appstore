@@ -1,5 +1,5 @@
-// Dashboard: date and clock, room climate, today's to-dos, habit dots, the note,
-// the next calendar event, and the grove along the bottom.
+// Dashboard: the Moon figure beside the day, clock, room climate, today's
+// to-dos, habit dots, the next event and the pinned note.
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -36,7 +36,7 @@ static void dot(lv_obj_t *parent, int x, int y, bool filled, bool today)
 {
     lv_obj_t *d = lv_obj_create(parent);
     lv_obj_remove_flag(d, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_CLICKABLE);
-    lv_obj_set_size(d, 14, 14);
+    lv_obj_set_size(d, 12, 12);
     lv_obj_set_pos(d, x, y);
     lv_obj_set_style_radius(d, LV_RADIUS_CIRCLE, 0);
     lv_obj_set_style_border_color(d, COLOR_INK, 0);
@@ -45,53 +45,23 @@ static void dot(lv_obj_t *parent, int x, int y, bool filled, bool today)
     lv_obj_set_style_bg_opa(d, filled ? LV_OPA_COVER : LV_OPA_TRANSP, 0);
 }
 
-void page_home_build(lv_obj_t *parent)
+static lv_obj_t *small(lv_obj_t *parent, const char *text, int x, int y, int w)
 {
-    time_t now = time(NULL);
-    struct tm t;
-    localtime_r(&now, &t);
-    bool time_known = t.tm_year >= 124;
-    uint32_t today = day_index_tm(&t);
+    lv_obj_t *l = theme_label(parent, text, FONT_SMALL);
+    lv_obj_set_pos(l, x, y);
+    if (w > 0) {
+        lv_obj_set_width(l, w);
+        lv_label_set_long_mode(l, LV_LABEL_LONG_DOT);
+    }
+    return l;
+}
 
-    lv_obj_t *day = theme_label(parent, time_known ? kDays[t.tm_wday] : "Hello", FONT_HERO);
-    lv_obj_set_pos(day, 0, 0);
-    lv_obj_t *date = lv_label_create(parent);
-    if (time_known) {
-        lv_label_set_text_fmt(date, "%s %d", kMonths[t.tm_mon], t.tm_mday);
-    } else {
-        lv_label_set_text(date, "Clock not set yet. Connect Wi-Fi in Setup.");
-    }
-    lv_obj_set_pos(date, 2, 42);
-
-    s_clock = theme_label(parent, "", FONT_CLOCK);
-    lv_obj_align(s_clock, LV_ALIGN_TOP_RIGHT, 0, -6);
-    if (time_known) {
-        set_clock(&t);
-    } else {
-        lv_label_set_text(s_clock, "--:--");
-    }
-
-    // Status line: climate, battery, network, next event.
-    char status[160] = "";
-    float c, h;
-    if (sht40_read(&c, &h)) {
-        if (g_cfg.fahrenheit) {
-            snprintf(status, sizeof(status), "%.0f F  %.0f%% humidity", c * 9 / 5 + 32, h);
-        } else {
-            snprintf(status, sizeof(status), "%.0f C  %.0f%% humidity", c, h);
-        }
-    }
-    int battery = board_battery_percent();
-    if (battery >= 0) {
-        snprintf(status + strlen(status), sizeof(status) - strlen(status), "   Battery %d%%%s",
-                 battery, board_on_usb_power() ? " (charging)" : "");
-    }
-    if (net_state() != NET_CONNECTED) {
-        snprintf(status + strlen(status), sizeof(status) - strlen(status), "   Offline");
-    }
-    lv_obj_t *status_label = theme_label(parent, status, FONT_SMALL);
-    lv_obj_set_pos(status_label, 2, 76);
-
+// The lists under the header: to-dos, habits, note. Returns nothing; fills y..ch.
+static void lists(lv_obj_t *parent, int x, int y, int w, int h, uint32_t today, int max_habits)
+{
+    theme_rule(parent, x, y, w);
+    y += 6;
+    small(parent, "Today", x, y, 0);
     int next = event_next(today);
     if (next >= 0) {
         const event_t *e = &g_data.events[next];
@@ -103,66 +73,113 @@ void page_home_build(lv_obj_t *parent)
         } else if (d == today + 1) {
             lv_label_set_text_fmt(up, "Tomorrow: %s", e->text);
         } else {
-            lv_label_set_text_fmt(up, "%s %d: %s", kMonths[e->month - 1], e->day, e->text);
+            lv_label_set_text_fmt(up, "%.3s %d: %s", kMonths[e->month - 1], e->day, e->text);
         }
-        lv_obj_set_width(up, 300);
+        lv_obj_set_width(up, w - 70);
         lv_label_set_long_mode(up, LV_LABEL_LONG_DOT);
-        lv_obj_align(up, LV_ALIGN_TOP_RIGHT, 0, 78);
         lv_obj_set_style_text_align(up, LV_TEXT_ALIGN_RIGHT, 0);
+        lv_obj_set_pos(up, x + 70, y);
     }
-
-    // Three cards.
-    const int top = 108, height = 206;
-    lv_obj_t *todo_card = theme_card(parent, 300, height);
-    lv_obj_set_pos(todo_card, 0, top);
-    theme_label(todo_card, "Today", FONT_SMALL);
-    int shown = 0, y = 28;
-    for (int i = 0; i < g_data.todo_count && shown < 4; i++) {
+    y += 22;
+    int shown = 0;
+    for (int i = 0; i < g_data.todo_count && shown < 3; i++) {
         if (g_data.todos[i].done) continue;
-        lv_obj_t *cb = lv_checkbox_create(todo_card);
+        lv_obj_t *cb = lv_checkbox_create(parent);
         lv_checkbox_set_text(cb, g_data.todos[i].text);
-        lv_obj_set_style_text_font(cb, FONT_SMALL, 0);
-        lv_obj_set_width(cb, 272);
-        lv_obj_set_pos(cb, 0, y);
+        lv_obj_set_width(cb, w);
+        lv_obj_set_pos(cb, x, y);
         lv_obj_add_event_cb(cb, todo_toggle, LV_EVENT_VALUE_CHANGED, &g_data.todos[i]);
-        y += 38;
+        y += 22;
         shown++;
     }
     if (shown == 0) {
-        lv_obj_t *empty = theme_label(todo_card, "All clear. Enjoy the quiet.", FONT_SMALL);
-        lv_obj_set_pos(empty, 0, 32);
+        small(parent, "All clear. Enjoy the quiet.", x, y, 0);
+        y += 22;
     }
-
-    lv_obj_t *habit_card = theme_card(parent, 186, height);
-    lv_obj_set_pos(habit_card, 310, top);
-    theme_label(habit_card, "Habits", FONT_SMALL);
-    y = 30;
-    for (int i = 0; i < g_data.habit_count && i < 5; i++) {
+    y += 4;
+    theme_rule(parent, x, y, w);
+    y += 6;
+    for (int i = 0; i < g_data.habit_count && i < max_habits; i++) {
         const habit_t *hb = &g_data.habits[i];
-        lv_obj_t *name = theme_label(habit_card, hb->name, FONT_SMALL);
-        lv_obj_set_pos(name, 0, y);
-        lv_obj_set_size(name, 58, 20);
-        lv_label_set_long_mode(name, LV_LABEL_LONG_DOT);
+        small(parent, hb->name, x, y, w - 120);
         for (int k = 6; k >= 0; k--) {
-            dot(habit_card, 62 + (6 - k) * 14, y + 2, habit_done_on(hb, today - k), k == 0);
+            dot(parent, x + w - 100 + (6 - k) * 14, y + 3, habit_done_on(hb, today - k), k == 0);
         }
-        y += 32;
+        y += 20;
     }
     if (g_data.habit_count == 0) {
-        lv_obj_t *empty = theme_label(habit_card, "Add a habit to\nstart a streak.", FONT_SMALL);
-        lv_obj_set_pos(empty, 0, 32);
+        small(parent, "Add a habit to start a streak.", x, y, 0);
+        y += 20;
+    }
+    y += 2;
+    theme_rule(parent, x, y, w);
+    y += 6;
+    lv_obj_t *note = theme_label(parent, g_data.note[0] ? g_data.note : "Nothing pinned.", FONT_SMALL);
+    lv_obj_set_pos(note, x, y);
+    lv_obj_set_size(note, w, h - y > 16 ? h - y : 16);
+    lv_label_set_long_mode(note, LV_LABEL_LONG_WRAP);
+}
+
+void page_home_build(lv_obj_t *parent)
+{
+    const ui_layout_t *L = ui_layout();
+    time_t now = time(NULL);
+    struct tm t;
+    localtime_r(&now, &t);
+    bool time_known = t.tm_year >= 124;
+    uint32_t today = day_index_tm(&t);
+
+    char status[96] = "";
+    float c, h;
+    if (sht40_read(&c, &h)) {
+        snprintf(status, sizeof(status), g_cfg.fahrenheit ? "%.0f F, %.0f%% humidity" : "%.0f C, %.0f%% humidity",
+                 g_cfg.fahrenheit ? c * 9 / 5 + 32 : c, h);
+    }
+    char power[48] = "";
+    int battery = board_battery_percent();
+    if (battery >= 0) {
+        snprintf(power, sizeof(power), "Battery %d%%%s", battery, board_on_usb_power() ? ", charging" : "");
+    }
+    if (net_state() != NET_CONNECTED) {
+        strlcat(power, power[0] ? ", offline" : "Offline", sizeof(power));
+    }
+    const char *weekday = time_known ? kDays[t.tm_wday] : "Hello";
+    char date[40];
+    if (time_known) {
+        snprintf(date, sizeof(date), "%s %d", kMonths[t.tm_mon], t.tm_mday);
+    } else {
+        snprintf(date, sizeof(date), "Clock not set. Join Wi-Fi in Setup.");
     }
 
-    lv_obj_t *note_card = theme_card(parent, 152, height);
-    lv_obj_set_pos(note_card, 506, top);
-    theme_label(note_card, "Note", FONT_SMALL);
-    lv_obj_t *note = theme_label(note_card, g_data.note[0] ? g_data.note : "Nothing pinned.", FONT_SMALL);
-    lv_obj_set_pos(note, 0, 28);
-    lv_obj_set_width(note, 124);
-    lv_obj_set_height(note, 150);
-    lv_label_set_long_mode(note, LV_LABEL_LONG_WRAP);
-
-    theme_scenery(parent, 324, UI_CONTENT_W - 32, 124);
+    if (L->portrait) {
+        lv_obj_t *fig = theme_image(parent, &asset_figure_s);
+        lv_obj_set_pos(fig, 0, 0);
+        int x0 = 146, iw = L->cw - 146;
+        lv_obj_t *day = theme_label(parent, weekday, FONT_DECO_S);
+        lv_obj_set_pos(day, x0, 0);
+        small(parent, date, x0, 28, iw);
+        s_clock = theme_label(parent, "--:--", FONT_DECO);
+        lv_obj_set_pos(s_clock, x0, 52);
+        small(parent, status, x0, 96, iw);
+        small(parent, power, x0, 116, iw);
+        lists(parent, 0, 204, L->cw, L->ch, today, 2);
+    } else {
+        lv_obj_t *fig = theme_image(parent, &asset_figure_l);
+        lv_obj_set_pos(fig, 0, 0);
+        int x0 = 204, iw = L->cw - 204;
+        lv_obj_t *day = theme_label(parent, weekday, FONT_DECO);
+        lv_obj_set_pos(day, x0, 0);
+        s_clock = theme_label(parent, "--:--", FONT_DECO_L);
+        lv_obj_align(s_clock, LV_ALIGN_TOP_RIGHT, -L->inset, -6);
+        small(parent, date, x0, 36, iw);
+        char line[150];
+        snprintf(line, sizeof(line), "%s%s%s", status, status[0] && power[0] ? "   " : "", power);
+        small(parent, line, x0, 56, iw);
+        lists(parent, x0, 76, iw, L->ch, today, 3);
+    }
+    if (time_known) {
+        set_clock(&t);
+    }
 }
 
 void page_home_minute(void)

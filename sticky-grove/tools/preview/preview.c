@@ -5,6 +5,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
+#include "assets.h"
 #include "lvgl.h"
 #include "store.h"
 #include "ui/ui.h"
@@ -12,9 +13,15 @@
 #define W 800
 #define H 480
 static uint16_t frame[W * H];
+static int cur_w = W, cur_h = H;
 static uint32_t ticks;
 
 static uint32_t tick_cb(void) { return ticks; }
+
+void preview_rebind_buffer(void)
+{
+    lv_display_set_buffers(lv_display_get_default(), frame, NULL, sizeof(frame), LV_DISPLAY_RENDER_MODE_DIRECT);
+}
 
 static void flush_cb(lv_display_t *d, const lv_area_t *a, uint8_t *px)
 {
@@ -26,8 +33,8 @@ static void save(const char *name, bool gray4)
     char path[128];
     snprintf(path, sizeof(path), "out/%s.pgm", name);
     FILE *f = fopen(path, "wb");
-    fprintf(f, "P5\n%d %d\n255\n", W, H);
-    for (int i = 0; i < W * H; i++) {
+    fprintf(f, "P5\n%d %d\n255\n", cur_w, cur_h);
+    for (int i = 0; i < cur_w * cur_h; i++) {
         uint16_t p = frame[i];
         uint32_t r = (p >> 11) & 0x1F, g = (p >> 5) & 0x3F, b = p & 0x1F;
         uint8_t gray = (r * 255 / 31 * 77 + g * 255 / 63 * 151 + b * 255 / 31 * 28) >> 8;
@@ -58,6 +65,7 @@ int main(void)
     lv_display_set_buffers(disp, frame, NULL, sizeof(frame), LV_DISPLAY_RENDER_MODE_DIRECT);
     lv_display_set_flush_cb(disp, flush_cb);
 
+    assets_init();
     store_init();
     strcpy(g_cfg.wifi_ssid, "HomeWifi");
     strcpy(g_cfg.venice_key, "vn_demo");
@@ -88,5 +96,17 @@ int main(void)
     ui_prompt("New to-do", "What needs doing?", TODO_TEXT - 1, NULL, NULL);
     settle();
     save("todo_keyboard", false);
+
+    // The same pages held upright.
+    ui_set_rotation(ROT_PORTRAIT_CW);
+    cur_w = H;
+    cur_h = W;
+    for (int p = 0; p < PAGE_COUNT; p++) {
+        char name[32];
+        snprintf(name, sizeof(name), "portrait_%s", names[p]);
+        ui_show(p);
+        settle();
+        save(name, p == PAGE_HOME);
+    }
     return 0;
 }

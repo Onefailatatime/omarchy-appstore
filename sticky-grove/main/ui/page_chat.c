@@ -1,5 +1,5 @@
-// Ask Venice AI. The device's own lists ride along as context, and bullet
-// answers can be dropped straight into the to-do list.
+// The Oracle: ask Venice AI. The device's own lists ride along as context,
+// and bullet answers can be dropped straight into the to-do list.
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -19,9 +19,9 @@ static void build_context(char *out, size_t len)
     struct tm t;
     localtime_r(&now, &t);
     char date[48];
-    strftime(date, sizeof(date), "%A %B %d, %Y, %H:%M", &t);
+    strftime(date, sizeof(date), "%A %B %d, %Y, %I:%M %p", &t);
     int n = snprintf(out, len,
-        "You are Grove, a warm and brief helper living on a small e-paper display on the owner's wall. "
+        "You are the Oracle, a warm and brief helper living on a small e-paper display on the owner's wall. "
         "Reply in plain text under 80 words. No markdown headings, no emoji. "
         "When you list tasks, put each on its own line starting with '- '. "
         "The owner is building a business and wants her first five paying clients.\n"
@@ -138,42 +138,43 @@ static void cleanup_cb(lv_event_t *e)
 
 void page_chat_build(lv_obj_t *parent)
 {
-    theme_title(parent, "Chat");
-    s_status = theme_label(parent, g_cfg.venice_key[0] ? g_cfg.venice_model : "No API key yet", FONT_SMALL);
-    lv_obj_align(s_status, LV_ALIGN_TOP_RIGHT, 0, 10);
-
+    const ui_layout_t *L = ui_layout();
     s_input = lv_textarea_create(parent);
     lv_textarea_set_one_line(s_input, true);
     lv_textarea_set_max_length(s_input, 200);
     lv_textarea_set_placeholder_text(s_input, "Ask anything...");
-    lv_obj_set_size(s_input, 330, 50);
-    lv_obj_set_pos(s_input, 0, 52);
+    lv_obj_set_size(s_input, L->cw - 72 - L->inset, 40);
+    lv_obj_set_pos(s_input, 0, 0);
     lv_obj_add_event_cb(s_input, focus_cb, LV_EVENT_CLICKED, NULL);
     lv_obj_t *send = theme_button(parent, "Ask", send_cb, NULL);
-    lv_obj_set_pos(send, 340, 52);
+    lv_obj_set_size(send, 64, 40);
+    lv_obj_set_pos(send, L->cw - 64 - L->inset, 0);
     lv_obj_t *plan = theme_button(parent, "Plan my day", plan_cb, NULL);
-    lv_obj_set_style_text_font(plan, FONT_SMALL, 0);
-    lv_obj_set_pos(plan, 425, 52);
+    lv_obj_set_pos(plan, 0, 48);
     lv_obj_t *nudge = theme_button(parent, "Nudge", nudge_cb, NULL);
-    lv_obj_set_style_text_font(nudge, FONT_SMALL, 0);
-    lv_obj_set_pos(nudge, 566, 52);
+    lv_obj_set_pos(nudge, 134, 48);
+    s_status = theme_label(parent, g_cfg.venice_key[0] ? g_cfg.venice_model : "No API key yet", FONT_SMALL);
+    lv_obj_set_pos(s_status, L->portrait ? 0 : 240, L->portrait ? 86 : 56);
 
-    lv_obj_t *card = theme_card(parent, UI_CONTENT_W - 32, UI_CONTENT_H - 32 - 114);
-    lv_obj_set_pos(card, 0, 114);
-    lv_obj_add_event_cb(card, cleanup_cb, LV_EVENT_DELETE, NULL);   // card dies with the page
-    lv_obj_add_flag(card, LV_OBJ_FLAG_SCROLLABLE);
+    int top = L->portrait ? 108 : 92;
+    theme_rule(parent, 0, top, L->cw);
+    lv_obj_t *card = lv_obj_create(parent);
+    lv_obj_set_size(card, L->cw, L->ch - top - 2);
+    lv_obj_set_pos(card, 0, top + 2);
+    lv_obj_set_style_pad_top(card, 8, 0);
+    lv_obj_set_scrollbar_mode(card, LV_SCROLLBAR_MODE_OFF);
     lv_obj_set_scroll_dir(card, LV_DIR_VER);
+    lv_obj_add_event_cb(card, cleanup_cb, LV_EVENT_DELETE, NULL);   // card dies with the page
     s_question = theme_label(card, "Tap the field, or try Plan my day.", FONT_SMALL);
     lv_obj_set_style_text_color(s_question, COLOR_SHADE, 0);
     lv_obj_set_width(s_question, LV_PCT(100));
     lv_label_set_long_mode(s_question, LV_LABEL_LONG_WRAP);
-    s_answer = theme_label(card, "Grove knows your to-dos, habits and note, so ask about your day.", FONT_BODY);
+    s_answer = theme_label(card, "The Oracle knows your to-dos, habits and note, so ask about your day.", FONT_BODY);
     lv_obj_set_width(s_answer, LV_PCT(100));
     lv_label_set_long_mode(s_answer, LV_LABEL_LONG_WRAP);
-    lv_obj_align_to(s_answer, s_question, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 10);
+    lv_obj_align_to(s_answer, s_question, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 8);
     s_save_btn = theme_button(parent, "Add bullets to To-do", save_bullets_cb, NULL);
-    lv_obj_set_style_text_font(s_save_btn, FONT_SMALL, 0);
-    lv_obj_align(s_save_btn, LV_ALIGN_BOTTOM_RIGHT, -8, -8);
+    lv_obj_align(s_save_btn, LV_ALIGN_BOTTOM_RIGHT, 0, 0);
     lv_obj_add_flag(s_save_btn, LV_OBJ_FLAG_HIDDEN);
 
     // Coming back while an answer is pending, or after one landed unseen.

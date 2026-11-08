@@ -37,71 +37,75 @@ static void add_cb(lv_event_t *e)
     ui_prompt("New habit", "Something small, done daily", HABIT_TEXT - 1, added, NULL);
 }
 
-static void day_box(lv_obj_t *parent, int x, bool filled, bool today)
+static void day_box(lv_obj_t *parent, int x, int y, bool filled, bool today)
 {
     lv_obj_t *b = lv_obj_create(parent);
     lv_obj_remove_flag(b, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_CLICKABLE);
-    lv_obj_set_size(b, 26, 26);
-    lv_obj_align(b, LV_ALIGN_LEFT_MID, x, 0);
-    lv_obj_set_style_radius(b, 8, 0);
+    lv_obj_set_size(b, 20, 20);
+    lv_obj_set_pos(b, x, y);
+    lv_obj_set_style_radius(b, 5, 0);
     lv_obj_set_style_border_color(b, COLOR_INK, 0);
-    lv_obj_set_style_border_width(b, today ? 3 : 1, 0);
+    lv_obj_set_style_border_width(b, today ? 2 : 1, 0);
     lv_obj_set_style_bg_color(b, COLOR_INK, 0);
     lv_obj_set_style_bg_opa(b, filled ? LV_OPA_COVER : LV_OPA_TRANSP, 0);
 }
 
 static void rebuild(void)
 {
+    const ui_layout_t *L = ui_layout();
+    int w = L->cw;
     lv_obj_clean(s_list);
     for (int i = 0; i < g_data.habit_count; i++) {
         habit_t *h = &g_data.habits[i];
-        lv_obj_t *row = theme_card(s_list, LV_PCT(100), 62);
-        lv_obj_set_style_pad_ver(row, 6, 0);
+        bool done = habit_done_on(h, s_today);
+        int streak = habit_streak(h, s_today);
+        lv_obj_t *row = theme_row(s_list, L->portrait ? 66 : 48);
         lv_obj_t *name = theme_label(row, h->name, FONT_BODY);
-        lv_obj_align(name, LV_ALIGN_LEFT_MID, 0, 0);
-        lv_obj_set_width(name, 170);
+        lv_obj_set_pos(name, 0, L->portrait ? 2 : 12);
+        lv_obj_set_size(name, L->portrait ? w - 120 : 150, 22);
         lv_label_set_long_mode(name, LV_LABEL_LONG_DOT);
+        lv_obj_t *count = lv_label_create(row);
+        lv_obj_set_style_text_font(count, FONT_SMALL, 0);
+        lv_label_set_text_fmt(count, streak == 1 ? "%d day" : "%d days", streak);
+        int boxes_x = L->portrait ? 0 : 160;
+        int boxes_y = L->portrait ? 34 : 14;
         for (int k = 6; k >= 0; k--) {
-            day_box(row, 180 + (6 - k) * 32, habit_done_on(h, s_today - k), k == 0);
+            day_box(row, boxes_x + (6 - k) * 24, boxes_y, habit_done_on(h, s_today - k), k == 0);
         }
-        lv_obj_t *streak = lv_label_create(row);
-        lv_obj_set_style_text_font(streak, FONT_SMALL, 0);
-        int n = habit_streak(h, s_today);
-        lv_label_set_text_fmt(streak, n == 1 ? "%d day" : "%d days", n);
-        lv_obj_align(streak, LV_ALIGN_LEFT_MID, 412, 0);
-        lv_obj_t *done = theme_button(row, habit_done_on(h, s_today) ? LV_SYMBOL_OK "  Done" : "Done",
-                                      done_cb, h);
-        lv_obj_set_size(done, 100, 42);
-        lv_obj_set_style_pad_all(done, 4, 0);
-        if (habit_done_on(h, s_today)) {
-            lv_obj_add_state(done, LV_STATE_CHECKED);
+        lv_obj_set_pos(count, L->portrait ? w - 112 : 336, L->portrait ? 4 : 14);
+        lv_obj_t *btn = theme_button(row, done ? LV_SYMBOL_OK "  Done" : "Done", done_cb, h);
+        lv_obj_set_size(btn, 84, 32);
+        lv_obj_set_style_pad_all(btn, 4, 0);
+        if (done) {
+            lv_obj_add_state(btn, LV_STATE_CHECKED);
         }
-        lv_obj_align(done, LV_ALIGN_RIGHT_MID, -52, 0);
+        lv_obj_set_pos(btn, L->portrait ? 180 : w - 130, L->portrait ? 28 : 8);
         lv_obj_t *del = theme_button(row, LV_SYMBOL_CLOSE, delete_cb, (void *)(intptr_t)i);
-        lv_obj_set_size(del, 42, 42);
-        lv_obj_set_style_pad_all(del, 4, 0);
-        lv_obj_set_style_text_font(del, FONT_SMALL, 0);
-        lv_obj_align(del, LV_ALIGN_RIGHT_MID, 0, 0);
+        lv_obj_set_size(del, 36, 30);
+        lv_obj_set_style_pad_all(del, 2, 0);
+        lv_obj_set_style_text_font(del, &lv_font_montserrat_14, 0);
+        lv_obj_set_pos(del, w - 36, L->portrait ? 0 : 9);
+        theme_rule(row, 0, L->portrait ? 65 : 47, w);
     }
     if (g_data.habit_count == 0) {
-        theme_label(s_list, "No habits yet. Tap Add and keep it tiny.", FONT_BODY);
+        theme_label(s_list, "No habits yet. Tap Add and keep it tiny.", FONT_SMALL);
     }
 }
 
 void page_habits_build(lv_obj_t *parent)
 {
+    const ui_layout_t *L = ui_layout();
     time_t now = time(NULL);
     struct tm t;
     localtime_r(&now, &t);
     s_today = day_index_tm(&t);
 
-    theme_title(parent, "Habits");
     lv_obj_t *add = theme_button(parent, LV_SYMBOL_PLUS "  Add", add_cb, NULL);
-    lv_obj_align(add, LV_ALIGN_TOP_RIGHT, 0, 0);
-    lv_obj_t *hint = theme_label(parent, "Last seven days, today on the right.", FONT_SMALL);
-    lv_obj_set_pos(hint, 2, 44);
+    lv_obj_align(add, LV_ALIGN_TOP_RIGHT, -L->inset, 0);
+    lv_obj_t *hint = theme_label(parent, "Seven days, today on the right.", FONT_SMALL);
+    lv_obj_set_pos(hint, L->portrait ? 36 : 0, 10);   // clear of the portrait frame's lily
 
-    s_list = theme_column(parent, UI_CONTENT_W - 32, UI_CONTENT_H - 32 - 72);
-    lv_obj_set_pos(s_list, 0, 72);
+    s_list = theme_column(parent, L->cw, L->ch - 44);
+    lv_obj_set_pos(s_list, 0, 44);
     rebuild();
 }

@@ -15,23 +15,46 @@ static const char *TAG = "display";
 #define PARTIALS_BEFORE_FULL 10
 
 static seeed_epaper_panel_handle_t s_panel;
-static uint16_t *s_rgb;      // LVGL draw buffer
-static uint8_t *s_gray8;     // frame handed to the panel task
+static lv_display_t *s_disp;
+static uint16_t *s_rgb;      // LVGL draw buffer, logical orientation
+static uint8_t *s_gray8;     // panel orientation frame handed to the refresh task
 static uint8_t *s_gray2;     // packed 2 bpp copy for GRAY4 refreshes
 static SemaphoreHandle_t s_frame_lock;
 static TaskHandle_t s_task;
-static volatile display_refresh_t s_requested = DISPLAY_REFRESH_PARTIAL;
 static portMUX_TYPE s_lock = portMUX_INITIALIZER_UNLOCKED;
+static volatile display_refresh_t s_requested = DISPLAY_REFRESH_PARTIAL;
+static display_rotation_t s_rotation = ROT_LANDSCAPE;
 static bool s_need_full = true;   // first frame, and the frame after a GRAY4 pass
 static int s_partials;
 static volatile bool s_pushing;
 
+static inline uint8_t luma(uint16_t p)
+{
+    uint32_t r = (p >> 11) & 0x1F, g = (p >> 5) & 0x3F, b = p & 0x1F;
+    return (uint8_t)((r * 255 / 31 * 77 + g * 255 / 63 * 151 + b * 255 / 31 * 28) >> 8);
+}
+
+// Logical frame -> panel frame. Portrait frames are 480 wide and 800 tall.
 static void rgb_to_gray(void)
 {
-    for (size_t i = 0; i < PIXELS; i++) {
-        uint16_t p = s_rgb[i];
-        uint32_t r = (p >> 11) & 0x1F, g = (p >> 5) & 0x3F, b = p & 0x1F;
-        s_gray8[i] = (uint8_t)((r * 255 / 31 * 77 + g * 255 / 63 * 151 + b * 255 / 31 * 28) >> 8);
+    if (s_rotation == ROT_LANDSCAPE) {
+        for (size_t i = 0; i < PIXELS; i++) {
+            s_gray8[i] = luma(s_rgb[i]);
+        }
+        return;
+    }
+    for (int y = 0; y < SCREEN_W; y++) {          // logical rows, 800 of them
+        for (int x = 0; x < SCREEN_H; x++) {      // logical columns, 480 of them
+            int px, py;
+            if (s_rotation == ROT_PORTRAIT_CW) {
+                px = y;
+                py = SCREEN_H - 1 - x;
+            } else {
+                px = SCREEN_W - 1 - y;
+                py = x;
+            }
+            s_gray8[py * SCREEN_W + px] = luma(s_rgb[y * SCREEN_H + x]);
+        }
     }
 }
 
@@ -156,11 +179,11 @@ lv_display_t *display_init(void)
     s_frame_lock = xSemaphoreCreateMutex();
     xTaskCreate(refresh_task, "epaper", 4096, NULL, 3, &s_task);
 
-    lv_display_t *disp = lv_display_create(SCREEN_W, SCREEN_H);
-    lv_display_set_color_format(disp, LV_COLOR_FORMAT_RGB565);
-    lv_display_set_buffers(disp, s_rgb, NULL, PIXELS * 2, LV_DISPLAY_RENDER_MODE_DIRECT);
-    lv_display_set_flush_cb(disp, flush_cb);
-    return disp;
+    s_disp = lv_display_create(SCREEN_W, SCREEN_H);
+    lv_display_set_color_format(s_disp, LV_COLOR_FORMAT_RGB565);
+    lv_display_set_buffers(s_disp, s_rgb, NULL, PIXELS * 2, LV_DISPLAY_RENDER_MODE_DIRECT);
+    lv_display_set_flush_cb(s_disp, flush_cb);
+    return s_disp;
 }
 
 void display_request(display_refresh_t mode)
@@ -170,6 +193,23 @@ void display_request(display_refresh_t mode)
         s_requested = mode;
     }
     taskEXIT_CRITICAL(&s_lock);
+}
+
+void display_set_rotation(display_rotation_t rotation)
+{
+    if (rotation == s_rotation) {
+        return;
+    }
+    s_rotation = rotation;
+    bool portrait = rotation != ROT_LANDSCAPE;
+    lv_display_set_resolution(s_disp, portrait ? SCREEN_H : SCREEN_W, portrait ? SCREEN_W : SCREEN_H);
+    // Same bytes, new row length: re-register the buffer so LVGL recomputes its stride.
+    lv_display_set_buffers(s_disp, s_rgb, NULL, PIXELS * 2, LV_DISPLAY_RENDER_MODE_DIRECT);
+}
+
+display_rotation_t display_rotation(void)
+{
+    return s_rotation;
 }
 
 void display_wait_idle(uint32_t timeout_ms)

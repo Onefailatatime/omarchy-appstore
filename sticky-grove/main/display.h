@@ -1,7 +1,10 @@
 // E-paper panel behind an LVGL display. LVGL renders into a full RGB565 frame;
 // every finished frame is turned to grey and pushed by a refresh task.
+// Portrait mode keeps the panel landscape and rotates the frame on the way out.
 #pragma once
 
+#include <stdbool.h>
+#include <stdint.h>
 #include "lvgl.h"
 
 typedef enum {
@@ -10,9 +13,13 @@ typedef enum {
     DISPLAY_REFRESH_GRAY4,        // four grey levels, slowest; used for the dashboard
 } display_refresh_t;
 
+typedef enum { ROT_LANDSCAPE = 0, ROT_PORTRAIT_CW, ROT_PORTRAIT_CCW } display_rotation_t;
+
 lv_display_t *display_init(void);
 // Mode for the next pushed frame. Stronger modes win until the frame is shown.
 void display_request(display_refresh_t mode);
+void display_set_rotation(display_rotation_t rotation);
+display_rotation_t display_rotation(void);
 // Blocks until no frame is being pushed, or the timeout passes.
 void display_wait_idle(uint32_t timeout_ms);
 void display_sleep(void);

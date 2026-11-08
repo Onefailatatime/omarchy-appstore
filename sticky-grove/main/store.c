@@ -70,6 +70,7 @@ void store_init(void)
         memset(&g_cfg, 0, sizeof(g_cfg));
         g_cfg.magic = CFG_MAGIC;
         strcpy(g_cfg.venice_model, "llama-3.3-70b");
+        g_cfg.tz_index = 3;   // US Pacific
         g_cfg.sleep_minutes = 5;
         g_cfg.fahrenheit = true;
     }

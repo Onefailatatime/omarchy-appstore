@@ -1,4 +1,4 @@
-// Month view on the left, the chosen day's events on the right.
+// Month view with the chosen day's events beside it (landscape) or under it (portrait).
 #include <time.h>
 #include "store.h"
 #include "theme.h"
@@ -8,11 +8,10 @@
 #define LV_CALENDAR_CTRL_TODAY     LV_BUTTONMATRIX_CTRL_CUSTOM_1
 #define LV_CALENDAR_CTRL_HIGHLIGHT LV_BUTTONMATRIX_CTRL_CUSTOM_2
 
-static lv_obj_t *s_calendar;
-static lv_obj_t *s_day_title;
-static lv_obj_t *s_events;
+static lv_obj_t *s_calendar, *s_day_title, *s_events;
 static lv_calendar_date_t s_selected;
 static lv_calendar_date_t s_marks[EVENT_MAX];
+static int s_pane_w;
 
 static const char *const kMonths[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                       "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
@@ -50,7 +49,7 @@ static void draw_day(lv_event_t *e)
     if (border) {
         border->color = (marked || picked) ? COLOR_INK : COLOR_PAPER;
         border->opa = LV_OPA_COVER;
-        border->width = picked ? 3 : 2;
+        border->width = picked ? 2 : 1;
     }
     if (label && today) {
         label->color = COLOR_PAPER;
@@ -88,18 +87,17 @@ static void show_day(void)
     int idx[EVENT_MAX];
     int n = event_find(s_selected.year, s_selected.month, s_selected.day, idx, EVENT_MAX);
     for (int i = 0; i < n; i++) {
-        lv_obj_t *row = lv_obj_create(s_events);
-        lv_obj_remove_flag(row, LV_OBJ_FLAG_SCROLLABLE);
-        lv_obj_set_size(row, LV_PCT(100), 44);
+        lv_obj_t *row = theme_row(s_events, 36);
         lv_obj_t *text = theme_label(row, g_data.events[idx[i]].text, FONT_SMALL);
-        lv_obj_set_width(text, 156);
-        lv_label_set_long_mode(text, LV_LABEL_LONG_WRAP);
+        lv_obj_set_size(text, s_pane_w - 44, 20);
+        lv_label_set_long_mode(text, LV_LABEL_LONG_DOT);
         lv_obj_align(text, LV_ALIGN_LEFT_MID, 0, 0);
         lv_obj_t *del = theme_button(row, LV_SYMBOL_CLOSE, delete_cb, (void *)(intptr_t)idx[i]);
-        lv_obj_set_size(del, 40, 36);
+        lv_obj_set_size(del, 36, 28);
         lv_obj_set_style_pad_all(del, 2, 0);
-        lv_obj_set_style_text_font(del, FONT_SMALL, 0);
+        lv_obj_set_style_text_font(del, &lv_font_montserrat_14, 0);
         lv_obj_align(del, LV_ALIGN_RIGHT_MID, 0, 0);
+        theme_rule(row, 0, 35, s_pane_w);
     }
     if (n == 0) {
         theme_label(s_events, "Nothing planned.", FONT_SMALL);
@@ -117,6 +115,7 @@ static void day_pressed(lv_event_t *e)
 
 void page_calendar_build(lv_obj_t *parent)
 {
+    const ui_layout_t *L = ui_layout();
     time_t now = time(NULL);
     struct tm t;
     localtime_r(&now, &t);
@@ -124,26 +123,31 @@ void page_calendar_build(lv_obj_t *parent)
     s_selected.month = t.tm_mon + 1;
     s_selected.day = t.tm_mday;
 
+    int cal_w = L->portrait ? L->cw : 330;
+    int cal_h = L->portrait ? 290 : L->ch;
     s_calendar = lv_calendar_create(parent);
-    lv_obj_set_size(s_calendar, 410, UI_CONTENT_H - 32);
+    lv_obj_set_size(s_calendar, cal_w, cal_h);
     lv_obj_set_pos(s_calendar, 0, 0);
     lv_calendar_set_today_date(s_calendar, s_selected.year, s_selected.month, s_selected.day);
     lv_calendar_set_showed_date(s_calendar, s_selected.year, s_selected.month);
     lv_obj_t *header = lv_calendar_header_arrow_create(s_calendar);
-    lv_obj_set_style_text_font(header, FONT_BODY, 0);
+    lv_obj_set_style_text_font(header, FONT_DECO_S, 0);
     lv_obj_add_event_cb(s_calendar, day_pressed, LV_EVENT_VALUE_CHANGED, NULL);
     lv_obj_add_event_cb(lv_calendar_get_btnmatrix(s_calendar), draw_day, LV_EVENT_DRAW_TASK_ADDED, NULL);
     mark_dates();
 
-    lv_obj_t *pane = theme_card(parent, UI_CONTENT_W - 32 - 424, UI_CONTENT_H - 32);
-    lv_obj_set_pos(pane, 424, 0);
-    s_day_title = theme_label(pane, "", FONT_TITLE);
-    lv_obj_t *add = theme_button(pane, LV_SYMBOL_PLUS, add_cb, NULL);
-    lv_obj_set_size(add, 48, 44);
-    lv_obj_set_style_pad_all(add, 4, 0);
-    lv_obj_align(add, LV_ALIGN_TOP_RIGHT, 0, -4);
-    s_events = theme_column(pane, LV_PCT(100), UI_CONTENT_H - 32 - 28 - 60);
-    lv_obj_set_pos(s_events, 0, 52);
-    lv_obj_set_style_pad_all(s_events, 0, 0);
+    int px = L->portrait ? 0 : cal_w + 16;
+    int py = L->portrait ? cal_h + 8 : 0;
+    s_pane_w = L->portrait ? L->cw : L->cw - px;
+    int pane_h = L->portrait ? L->ch - py : L->ch;
+    theme_rule(parent, px, py + 36, s_pane_w);
+    s_day_title = theme_label(parent, "", FONT_DECO_S);
+    lv_obj_set_pos(s_day_title, px, py + 4);
+    lv_obj_t *add = theme_button(parent, LV_SYMBOL_PLUS "  Add", add_cb, NULL);
+    lv_obj_set_size(add, 80, 30);
+    lv_obj_set_style_pad_all(add, 3, 0);
+    lv_obj_set_pos(add, px + s_pane_w - 80 - (L->portrait ? 0 : L->inset), py);
+    s_events = theme_column(parent, s_pane_w, pane_h - 44);
+    lv_obj_set_pos(s_events, px, py + 44);
     show_day();
 }

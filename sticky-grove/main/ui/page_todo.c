@@ -45,12 +45,10 @@ static void rebuild(void)
 {
     lv_obj_clean(s_list);
     for (int i = 0; i < g_data.todo_count; i++) {
-        lv_obj_t *row = lv_obj_create(s_list);
-        lv_obj_remove_flag(row, LV_OBJ_FLAG_SCROLLABLE);
-        lv_obj_set_size(row, LV_PCT(100), 48);
+        lv_obj_t *row = theme_row(s_list, 40);
         lv_obj_t *cb = lv_checkbox_create(row);
         lv_checkbox_set_text(cb, g_data.todos[i].text);
-        lv_obj_set_width(cb, 560);
+        lv_obj_set_width(cb, lv_obj_get_width(s_list) - 50);
         lv_obj_align(cb, LV_ALIGN_LEFT_MID, 0, 0);
         if (g_data.todos[i].done) {
             lv_obj_add_state(cb, LV_STATE_CHECKED);
@@ -59,26 +57,35 @@ static void rebuild(void)
         }
         lv_obj_add_event_cb(cb, toggle_cb, LV_EVENT_VALUE_CHANGED, &g_data.todos[i]);
         lv_obj_t *del = theme_button(row, LV_SYMBOL_CLOSE, delete_cb, (void *)(intptr_t)i);
-        lv_obj_set_size(del, 44, 40);
-        lv_obj_set_style_pad_all(del, 4, 0);
-        lv_obj_set_style_text_font(del, FONT_SMALL, 0);
+        lv_obj_set_size(del, 36, 30);
+        lv_obj_set_style_pad_all(del, 2, 0);
+        lv_obj_set_style_text_font(del, &lv_font_montserrat_14, 0);
         lv_obj_align(del, LV_ALIGN_RIGHT_MID, 0, 0);
+        theme_rule(row, 0, 39, lv_obj_get_width(s_list));
     }
     if (g_data.todo_count == 0) {
-        theme_label(s_list, "Nothing here. Tap Add to plant the first task.", FONT_BODY);
+        theme_label(s_list, "Nothing here. Tap Add to plant the first task.", FONT_SMALL);
     }
 }
 
 void page_todo_build(lv_obj_t *parent)
 {
-    theme_title(parent, "To-do");
+    const ui_layout_t *L = ui_layout();
     lv_obj_t *add = theme_button(parent, LV_SYMBOL_PLUS "  Add", add_cb, NULL);
-    lv_obj_align(add, LV_ALIGN_TOP_RIGHT, 0, 0);
+    lv_obj_align(add, LV_ALIGN_TOP_RIGHT, -L->inset, 0);
     lv_obj_t *clear = theme_button(parent, "Clear done", clear_cb, NULL);
-    lv_obj_align_to(clear, add, LV_ALIGN_OUT_LEFT_MID, -10, 0);
+    lv_obj_align_to(clear, add, LV_ALIGN_OUT_LEFT_MID, -8, 0);
+    if (!L->portrait) {   // no room beside the buttons when upright
+        lv_obj_t *count = lv_label_create(parent);
+        lv_obj_set_style_text_font(count, FONT_SMALL, 0);
+        int open = 0;
+        for (int i = 0; i < g_data.todo_count; i++) open += !g_data.todos[i].done;
+        lv_label_set_text_fmt(count, "%d open", open);
+        lv_obj_set_pos(count, 0, 10);
+    }
 
-    s_list = theme_column(parent, UI_CONTENT_W - 32, UI_CONTENT_H - 32 - 58);
-    lv_obj_set_pos(s_list, 0, 58);
-    lv_obj_set_style_pad_row(s_list, 4, 0);
+    s_list = theme_column(parent, L->cw, L->ch - 44);
+    lv_obj_set_pos(s_list, 0, 44);
+    lv_obj_update_layout(s_list);
     rebuild();
 }
