@@ -50,8 +50,8 @@
   "v": 3
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-07",
-  "hash": "db9e3f751dc9529931da24fc9db8eca4910e1038a4dc729ec94a258f51bd10ff",
+  "date": "2026-11-08",
+  "hash": "8ff70ea7cce0bd97bd088eb9e271037aa418f816f0597dbca9456bd04fbc9b5c",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -65,8 +65,8 @@
   "v": 3
  },
  "apps/basecamp-cli.html": {
-  "date": "2026-11-07",
-  "hash": "42c42ccf85350e44ffd37b81ab70a833d324062ea4e67c3dd0e896daea8345aa",
+  "date": "2026-11-08",
+  "hash": "7a35dfe65e26098313cf5a696e24654a76e497222794e2196dc8257a1527a9bf",
   "v": 3
  },
  "apps/brave-bin.html": {
@@ -915,8 +915,8 @@
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-07",
-  "hash": "e48fd85aa00293faca12cbc525287a65564252a0fdbf670fc45fc7a93228b997",
+  "date": "2026-11-08",
+  "hash": "c68ba18dc3c47d43568408f097b85ef66f53465fc46dd75c7b8f368498573528",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -1100,8 +1100,8 @@
   "v": 3
  },
  "basecamp-cli-on-omarchy.html": {
-  "date": "2026-11-07",
-  "hash": "e28b5271e9605e8484b74b5b9dfd1e82baf8e97b9005c60945196ab7c1d50131",
+  "date": "2026-11-08",
+  "hash": "eb56fc78a13a786599bcab314294b99adb2feb174beb46106b333ff588242694",
   "v": 3
  },
  "best-apps-for-omarchy.html": {
