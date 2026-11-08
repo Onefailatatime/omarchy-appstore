@@ -1,0 +1,15 @@
+# Desktop renderer: draws every screen of the firmware to PNG so layouts can be
+# checked without a device. Build: cmake -B build && cmake --build build && ./build/preview
+cmake_minimum_required(VERSION 3.16)
+project(sticky_grove_preview C)
+set(CMAKE_C_STANDARD 11)
+set(ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../..)
+set(LV_CONF_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lv_conf.h CACHE STRING "" FORCE)
+set(LV_CONF_BUILD_DISABLE_EXAMPLES ON CACHE BOOL "" FORCE)
+set(LV_CONF_BUILD_DISABLE_DEMOS ON CACHE BOOL "" FORCE)
+set(LV_CONF_BUILD_DISABLE_THORVG_INTERNAL ON CACHE BOOL "" FORCE)
+add_subdirectory(${ROOT}/managed_components/lvgl__lvgl lvgl)
+file(GLOB UI_SRCS ${ROOT}/main/ui/*.c)
+add_executable(preview preview.c stubs.c ${ROOT}/main/store.c ${UI_SRCS})
+target_include_directories(preview PRIVATE stubs ${ROOT}/main)
+target_link_libraries(preview lvgl m)
