@@ -185,8 +185,8 @@
   "v": 3
  },
  "apps/flea.html": {
-  "date": "2026-11-05",
-  "hash": "1cb58ead2bc8e951307d66a227426867b9d3d84fec9659c481f10461734883d1",
+  "date": "2026-11-08",
+  "hash": "a73a232953321bd49614a3be91006932f71d7be576270e3e3d932d1e32fc1ffd",
   "v": 3
  },
  "apps/ghost-runtime.html": {
@@ -250,13 +250,13 @@
   "v": 3
  },
  "apps/herdr-app.html": {
-  "date": "2026-11-04",
-  "hash": "a634ad05313b0947ed3c1c5f8ec48445f5213a5c418ea8d7945808148dec438d",
+  "date": "2026-11-08",
+  "hash": "4e7dbc09a3780513015ca59a5add348d3994ed8a7b3a422660b4800dbd414cf8",
   "v": 3
  },
  "apps/herdr-core.html": {
-  "date": "2026-11-04",
-  "hash": "d4813709fed7858cb05be2d754ad8b3ef9c4637433020b10aa32d4f61ba2f59e",
+  "date": "2026-11-08",
+  "hash": "9f76953047cd6bc3af2bb783be97af768144326845de8eed78e616653ddd8d93",
   "v": 3
  },
  "apps/herdr.html": {
@@ -520,8 +520,8 @@
   "v": 3
  },
  "apps/mise-bin.html": {
-  "date": "2026-11-07",
-  "hash": "2be8aed3e3f86305becdb10ec929b1f6079b8fe050381cadb1ff4026d98192df",
+  "date": "2026-11-08",
+  "hash": "6dae8d2b04a75d30e5b1bde34a8f8d5413d43d47531d313c7da58a81dadaeb57",
   "v": 3
  },
  "apps/monologue.html": {
@@ -755,8 +755,8 @@
   "v": 3
  },
  "apps/openai-codex-desktop.html": {
-  "date": "2026-11-06",
-  "hash": "898fa2ff7dd8e7498394edbbef063e7f2b32cbddf424eda391d89de0d26687fc",
+  "date": "2026-11-08",
+  "hash": "335d6ec0e5a24fdcdf72541f1ef3b19942bb1e13061a6ac59ccb17e014d918d2",
   "v": 3
  },
  "apps/opencl-nvidia-580xx.html": {
@@ -880,8 +880,8 @@
   "v": 3
  },
  "apps/strata.html": {
-  "date": "2026-10-20",
-  "hash": "b695ad13cd7ea8f48486cc972d87475468090ad50cc4d2b4a140d5a9fbb091e1",
+  "date": "2026-11-08",
+  "hash": "4b9f1b3aab686d1cce662f10aca32542fe006ba7b09ebe3825e05d744c314e79",
   "v": 3
  },
  "apps/sublime-text-4.html": {
@@ -916,7 +916,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-08",
-  "hash": "c68ba18dc3c47d43568408f097b85ef66f53465fc46dd75c7b8f368498573528",
+  "hash": "ca1166bb3b9a5eaee33eefaef9fe55c07f24cba54bde298005a713cd5431c5d3",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -1815,8 +1815,8 @@
   "v": 3
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-11-07",
-  "hash": "59f43b927795514f194a4b0992e4bf0c7d188f63bca10e3b14a0eb6cedb5b8a8",
+  "date": "2026-11-08",
+  "hash": "3fb676eb30c260ea0331199401bd92833e16473da4234870eaf98353a8bf3812",
   "v": 3
  },
  "monologue-on-omarchy.html": {
@@ -2070,8 +2070,8 @@
   "v": 3
  },
  "openai-codex-desktop-on-omarchy.html": {
-  "date": "2026-11-06",
-  "hash": "4f46137b64a2abbc3fdf914fab82776e3108a4e37ada17078065847169c95486",
+  "date": "2026-11-08",
+  "hash": "222700fcb32b6b4768340273a719fc1aba727fc8596db97f3ef6ec971a8df9bd",
   "v": 3
  },
  "opencl-nvidia-580xx-on-omarchy.html": {
