@@ -40,4 +40,14 @@ assert.ok(list.mainEntity.numberOfItems >= htmlCards + rest);
 assert.ok(list.mainEntity.itemListElement.length < 20, "ItemList is not a full dump of the catalogue");
 
 assert.ok(typeof details === "object");
+
+assert.match(homepage, /rel="preload"[^>]+fonts\/jetbrains-mono-latin-400\.woff2/);
+assert.doesNotMatch(homepage, /jetbrains-mono-latin-700/, "Bold is not preloaded or linked");
+const cssName = homepage.match(/href="\/(style\.[0-9a-f]{10}\.css)"/)[1];
+const css = await readFile(new URL(cssName, dist), "utf8");
+assert.match(css, /jetbrains-mono-latin-400\.woff2/);
+assert.doesNotMatch(css, /jetbrains-mono-latin-700/, "Bold @font-face is gone");
+assert.ok(existsSync(new URL("fonts/jetbrains-mono-latin-400.woff2", dist)));
+assert.ok(existsSync(new URL("fonts/geist-latin-wght-normal.woff2", dist)));
+assert.ok(!existsSync(new URL("fonts/jetbrains-mono-latin-700.woff2", dist)), "Bold file is not in dist");
 console.log(`homepage-catalog-ok (preview ${htmlCards} cards, ${rest} deferred)`);

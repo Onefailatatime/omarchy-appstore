@@ -616,7 +616,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-09",
-  "hash": "ca68464dd9d45ce0d5560a689d29c5790d565499bb3781363ff10d7f1212a165",
+  "hash": "68dc9ac1d77250ac410941a854921975e5ce99c98b86ba5f899f5af63f2e758e",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -721,7 +721,7 @@
  },
  "basecamp-cli-on-omarchy.html": {
   "date": "2026-11-09",
-  "hash": "74d2070b981efd04af3194c97ec10f217608fad0a3fe6e795900f2bcc083a1c5",
+  "hash": "2e56f1a9ec49cd83124d522659f77e845a3536c14f08fb0487b24c34eb9fa878",
   "v": 3
  },
  "best-apps-for-omarchy.html": {
@@ -1091,7 +1091,7 @@
  },
  "linux-ptl-headers-on-omarchy.html": {
   "date": "2026-11-09",
-  "hash": "a1f7a070caa79bd459def5679dcb6f39c8c51ce1865ff4f5ff6cead1749f9fdc",
+  "hash": "e7f2b915f34f017250edfdeb032dcb01ffaaf4ebe6061185f5f5196c8b4c353b",
   "v": 3
  },
  "linux-ptl-on-omarchy.html": {

@@ -1932,8 +1932,15 @@ def main() -> None:
     (DIST / "terms.html").write_text(terms, encoding="utf-8")
     fonts = DIST / "fonts"
     fonts.mkdir(exist_ok=True)
+    # Regular is preloaded and used for body copy. Bold is synthesized from it,
+    # so the 700 file stays in assets/ but is left out of the build output.
+    skip_fonts = {"jetbrains-mono-latin-700.woff2"}
     for f in (ROOT / "assets" / "fonts").glob("*.woff2"):
+        if f.name in skip_fonts:
+            continue
         (fonts / f.name).write_bytes(f.read_bytes())
+    for leftover in skip_fonts:
+        (fonts / leftover).unlink(missing_ok=True)
     images = DIST / "images"
     images.mkdir(exist_ok=True)
     for f in (ROOT / "assets" / "images").glob("*"):
@@ -2138,6 +2145,9 @@ def main() -> None:
         new = text
         for v in variants:
             new = new.replace(v, link)
+        # Leftover pages already have a hashed link from a prior build; retarget
+        # them so they do not keep requesting a stylesheet file we just deleted.
+        new = re.sub(r'<link rel="stylesheet" href="/style\.[0-9a-f]{10}\.css">', link, new)
         if new != text:
             inlined += 1
             page_file.write_text(new, encoding="utf-8")
