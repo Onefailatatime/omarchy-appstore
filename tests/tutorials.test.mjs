@@ -8,14 +8,23 @@ const hub = await readFile(new URL("tutorials.html", dist), "utf8");
 const apps = (await readdir(new URL("apps/", dist))).filter((f) => f.endsWith(".html"));
 assert.ok(apps.length > 100, "profiles were built");
 
-// Every profile links to a tutorial page that exists, is in the sitemap, and is listed on the hub or is a guide.
+// Every profile either links to a live tutorial (or the kept page that tutorial now 301s into),
+// or is itself the page those how-tos now 301 into.
 for (const file of apps) {
   const page = await readFile(new URL(`apps/${file}`, dist), "utf8");
-  const link = page.match(/<a class="button" href="(\/[a-z0-9-]+\.html)">Tutorial:/);
+  const mergedIntoThis = Object.entries(merged).some(([, to]) => to === `/apps/${file}`);
+  if (mergedIntoThis) continue;
+  const link = page.match(/<a class="button" href="(\/(?:apps\/)?[a-z0-9-]+\.html)">Tutorial:/);
   assert.ok(link, `${file} links to its tutorial`);
   const tutorial = await readFile(new URL(link[1].slice(1), dist), "utf8");
-  // A tutorial is either in the sitemap, or it points its canonical at this profile and stays out of it.
   const canonical = tutorial.match(/<link rel="canonical" href="([^"]+)">/)[1];
+  if (link[1].startsWith("/apps/")) {
+    // Variant listings (for example t3code-nightly) share the kept package page.
+    assert.equal(canonical, `https://omarchyapps.com${link[1]}`, `${link[1]} is self canonical`);
+    assert.equal((tutorial.match(/<h1/g) || []).length, 1, `${link[1]} has one h1`);
+    continue;
+  }
+  // A tutorial is either in the sitemap, or it points its canonical at this profile and stays out of it.
   if (canonical === `https://omarchyapps.com/apps/${file}`) {
     assert.doesNotMatch(sitemap, new RegExp(`omarchyapps\\.com${link[1].replace(".", "\\.")}<`), `${link[1]} left out of sitemap`);
   } else if (/<meta name="robots" content="noindex,follow">/.test(tutorial)) {

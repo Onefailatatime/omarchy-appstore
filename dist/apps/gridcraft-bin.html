@@ -61,7 +61,150 @@
     <section><h2>Install gridcraft-bin on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add gridcraft-bin</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>No special requirements documented.</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>Check the project site for current pricing.</dd><dt>Licence</dt><dd>Apache-2.0 OR MIT, OFL-1.1</dd><dt>Download</dt><dd>49.9 MB</dd><dt>Installed</dt><dd>109.8 MB</dd></dl></div></section>
 
-    <div class="actions"><a class="button" href="/gridcraft-bin-on-omarchy.html">Tutorial: how to use gridcraft on Omarchy</a><a class="button ghost" href="https://github.com/storytold/gridcraft" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/gridcraft-bin" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
+<section class="folded-guide" id="guide"><nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">How to switch</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+<section id="install">
+  <h2>GridCraft on Omarchy</h2>
+  <p>GridCraft is a free, open-source (Apache-2.0 or MIT) Excel clone written from scratch in pure Rust — the Excel ribbon workflow, 513 worksheet functions, PivotTables and charts, with <code>.xlsx</code> as its native format. It is alpha software: fast and fun, but its own authors estimate it is only ~50% ready for real work.</p>
+  <h3>TL;DR</h3>
+  <pre><code class="language-bash">omarchy pkg add gridcraft-bin</code></pre>
+  <p>Install GridCraft on Omarchy with one command. 45.8 MB download, 98.8 MB installed, version 0.13.0-1. Launch it from the app launcher or <code>gridcraft</code> in a terminal, then try <strong>File → New → Sample</strong> to open a built-in demo workbook (a quarterly sales dashboard with conditional formatting, sparklines and live charts). No account, no license key, no telemetry. Apache-2.0 or MIT licensed, free forever.</p>
+</section>
+
+<section id="getting-started">
+  <h2>Getting started (5 minutes)</h2>
+  <h3>1. Install and launch.</h3>
+  <p>Run the command above, then launch GridCraft from the app launcher or with <code>gridcraft</code> in a terminal. You'll see the familiar Excel layout: ribbon across the top, formula bar, Name Box, and sheet tabs along the bottom.</p>
+  <h3>2. The 3 things you need to know:</h3>
+  <ul>
+    <li><strong><code>.xlsx</code> is the native format.</strong> Open any Excel workbook directly — styles, formulas (including dynamic arrays), tables, conditional formats, charts, PivotTables and print settings round-trip. It also reads CSV/TSV, opens old Excel 97–2003 <code>.xls</code> files (values, formulas and number formats only), and imports XLSB and ODS worksheet data.</li>
+    <li><strong>File → New → Sample is your playground.</strong> The built-in sample builds a whole sales dashboard from GridCraft commands, and is the fastest way to see what works today (513 of Excel's 523 worksheet functions, including <code>LET</code>, <code>LAMBDA</code>, <code>MAP</code>, <code>REDUCE</code>, <code>SCAN</code>, <code>BYROW</code>, <code>BYCOL</code>, <code>MAKEARRAY</code>).</li>
+    <li><strong>AI agents can drive it too.</strong> GridCraft ships a CLI, a JSON control channel, and an MCP server, so scripts and AI agents (like Claude Code) can read, calculate, and format spreadsheets programmatically. The desktop app logs to <code>~/.config/gridcraft/logs</code> (the README points you to attach <code>gridcraft.log</code> to bug reports).</li>
+  </ul>
+  <h3>3. Config location.</h3>
+  <p>Settings live at <code>~/.config/gridcraft/</code> (logs sit in <code>~/.config/gridcraft/logs/</code>), and <code>RUST_LOG=debug</code> before the launch command turns up log verbosity for troubleshooting.</p>
+</section>
+
+<section id="issues">
+  <h2>Common issues &amp; fixes</h2>
+  <p>All sourced from the project's own docs, gaps doc, release notes, and issue tracker. Nothing below was reproduced on Omarchy — confirm each fix on-machine before relying on it.</p>
+  <h3>Non-Latin script text shows as tofu boxes (□□□)</h3>
+  <p>The data is fine but glyphs don't render — e.g. Thai text in cells shows as empty boxes even when the right font is installed on the system. The data parses correctly (the CLI prints it fine); only <strong>glyph lookup</strong> fails.</p>
+  <p><strong>Fix:</strong> Reported in <a href="https://github.com/storytold/gridcraft/issues/1762" target="_blank" rel="noopener">issue #1762</a>: GridCraft's script-fallback lists probe a fixed set of font directories, and on systems that install fonts somewhere nonstandard the fallback chain comes up empty. Check where your font lives (<code>fc-list :lang=th</code> for Thai) and symlink it into one of the paths GridCraft probes — the issue's workaround:</p>
+  <pre><code class="language-bash">sudo ln -s /path/to/NotoSansThai-Regular.ttf \
+  /usr/share/fonts/truetype/noto/NotoSansThai-Regular.ttf</code></pre>
+  <p>Then restart GridCraft. If your workbook's audience needs CJK or Arabic, know going in: the project's own <a href="https://github.com/storytold/gridcraft/blob/main/docs/gaps.md" target="_blank" rel="noopener">gaps doc</a> lists "text in non-Latin scripts doesn't render or export" as a beta blocker — a real gap, not a config mistake.</p>
+  <h3>Excel asks to repair a .xlsx that GridCraft saved</h3>
+  <p>GridCraft opens and saves <code>.xlsx</code>, but the team is upfront that round-trip fidelity has only been proven on files the team itself created — validation against a corpus of real-world Excel workbooks has not happened yet (<a href="https://github.com/storytold/gridcraft/blob/main/docs/gaps.md" target="_blank" rel="noopener">gaps.md, beta blocker #1</a>). Complex files with PivotTables, charts, conditional formatting, validation or dynamic arrays are the risk zone.</p>
+  <p><strong>Fix:</strong> Before you send a GridCraft-edited file to someone, open the saved copy in real Excel (or LibreOffice Calc) yourself and look for a repair prompt. Keep a pristine copy of anything important — GridCraft 0.13.0 is alpha, and its own authors estimate ~50% readiness for real work. For brand-new spreadsheets built in GridCraft, this rarely bites; for inherited enterprise workbooks, treat the first round-trip as an experiment.</p>
+  <h3>A formula returns a slightly wrong or stale result</h3>
+  <p>Calculation correctness is a known weak area at alpha: the gaps doc lists 15-significant-digit equality issues, spill ranges not updating after structural edits, and qualified-name breakage after sheet renames (tracked in issues like #57, #133, #139, #140, #134). The 0.13.0 release fixed several function results (<code>PERCENTRANK</code>, <code>YEARFRAC</code>, <code>ISOWEEKNUM</code>, <code>IMSQRT</code>) and added iterative-calculation controls to <strong>Options → Formulas</strong> (max iterations, max change).</p>
+  <p><strong>Fix:</strong> First, update to the latest Omarchy build (<code>omarchy pkg add gridcraft-bin</code> — the store is tracking 0.13.0 as of 2026-10-29). If a formula looks stale after editing, force a recalc; for circular references, check the new iterative-calculation options. If the numbers still disagree with Excel, trust Excel — this is exactly the class of bug the project's own roadmap flags as next up, and it's worth filing an issue with the workbook attached.</p>
+  <h3>An old .xls file opens, but loses its formatting</h3>
+  <p>GridCraft opens Excel 97–2003 <code>.xls</code> files, but only reads values, formulas, number formats, merges, sizes and names — fonts, fills, borders, charts, pictures, comments, conditional formats and validation are silently dropped, and <code>.xls</code> is never written back (<a href="https://github.com/storytold/gridcraft/blob/main/docs/gaps.md" target="_blank" rel="noopener">gaps.md</a>).</p>
+  <p><strong>Fix:</strong> Save the file as <code>.xlsx</code> the moment it opens cleanly (File → Save As), then re-apply the lost formatting in GridCraft. If you need the original layout preserved pixel-for-pixel, open it in LibreOffice Calc instead — GridCraft's <code>.xls</code> path is a rescue hatch, not a converter.</p>
+</section>
+
+<section id="pairs">
+  <h2>Pairs well with / If you hate this, try</h2>
+  <h3>Pairs well with</h3>
+  <ul>
+    <li><code>wordcraft-bin</code> (its office-suite sibling — same ArtCraft family, same one-command install; see the WordCraft guide)</li>
+    <li><code>localsend-bin</code> (beam a finished spreadsheet to your phone)</li>
+    <li><code>omacut</code> (GridCraft has no real media tools; do your video in omacut and your numbers here)</li>
+  </ul>
+  <h3>If you hate this, try</h3>
+  <ul>
+    <li>LibreOffice Calc (<code>sudo pacman -S libreoffice-fresh</code>) — slower startup, uglier, but 30 years of .xlsx fidelity and VBA-compatible macros. GridCraft is the sports car; Calc is the truck.</li>
+  </ul>
+</section>
+
+<section id="comparison">
+  <h2>Comparison: GridCraft vs Excel vs LibreOffice Calc</h2>
+  <div class="table-scroll">
+    <table class="compare-table">
+      <thead>
+        <tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>GridCraft</strong></td><td>Free (Apache-2.0 or MIT)</td><td>New spreadsheets, quick analysis, AI-agent-driven automation, people who want native speed</td><td><code>omarchy pkg add gridcraft-bin</code></td></tr>
+        <tr><td><strong>Microsoft Excel</strong></td><td>$9.99/mo (Microsoft 365 Personal, billed monthly)</td><td>Enterprise workbooks, macros/VBA, guaranteed client compatibility</td><td>Web only via Microsoft 365, or Windows VM</td></tr>
+        <tr><td><strong>LibreOffice Calc</strong></td><td>Free (MPL-2.0)</td><td>Complex legacy .xlsx files, macros, proven fidelity</td><td><code>sudo pacman -S libreoffice-fresh</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Verdict:</strong> Pick GridCraft for new work you create yourself — it's fast, free, and the CLI/MCP hooks make it the only spreadsheet your AI agents can actually drive. Keep LibreOffice Calc (or real Excel in a VM/browser) for client workbooks you must not corrupt.</p>
+</section>
+
+<aside class="guide-callout">
+  <h2>GridCraft is a free alternative to Microsoft Excel ($9.99/mo)</h2>
+  <p><strong>GridCraft is a free alternative to Microsoft Excel ($9.99/mo).</strong> What you give up: VBA macros, add-ins, real-time co-authoring, and the certainty that any Excel file on Earth opens perfectly. What you keep: the ribbon workflow, 513 of 523 functions, PivotTables, 17 chart types, Solver, conditional formatting, and native .xlsx round-tripping for normal files.</p>
+</aside>
+
+<section id="switch">
+  <h2>How to switch from Excel (~15 minutes)</h2>
+  <ol>
+    <li><strong>Export from Excel:</strong> you don't need to — <code>.xlsx</code> is GridCraft's native format. Just point it at your existing files.</li>
+    <li><strong>Open your files:</strong> File → Open, pick the workbook. Everything standard transfers: formulas, dynamic arrays, tables, charts, PivotTables, print settings.</li>
+    <li><strong>What doesn't transfer:</strong> VBA macros (there is no macro engine — this is the big one), COM add-ins, and pixel-perfect fidelity on unusually complex layouts (verify by eye the first time).</li>
+    <li><strong>Time estimate:</strong> open-and-go for most personal spreadsheets. Budget ~15 minutes per complex workbook for the first verify pass.</li>
+  </ol>
+</section>
+
+<div class="guide-cta">
+  <h2>Open the gridcraft-bin package</h2>
+  <p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p>
+  <a class="button" href="/apps/gridcraft-bin.html">View gridcraft-bin →</a>
+</div>
+
+<section class="guide-faq" id="faq">
+  <h2>Frequently asked questions</h2>
+  <details>
+    <summary>Does GridCraft work on Omarchy?</summary>
+    <p>Yes — it's published in the Omarchy package store as <code>gridcraft-bin</code> (0.13.0-1, built 2026-10-29). Install with <code>omarchy pkg add gridcraft-bin</code>. It runs natively (no Electron — it's pure Rust on the GPU) and the store lists no special requirements.</p>
+  </details>
+  <details>
+    <summary>Is GridCraft really free?</summary>
+    <p>Yes. The license is Apache-2.0 or MIT at your choice, no account, no license server, no telemetry. It is made by the ArtCraft team (GitHub org <code>storytold</code>).</p>
+  </details>
+  <details>
+    <summary>Can it replace Excel for real work?</summary>
+    <p>For new and ordinary spreadsheets: genuinely yes. For complex, macro-laden, or client-facing workbooks: not yet. The project itself says it's alpha and ~50% ready for real work — keep Excel (or LibreOffice Calc) around for anything where a wrong number costs you money.</p>
+  </details>
+  <details>
+    <summary>Can AI agents use my spreadsheets?</summary>
+    <p>Yes — that's one of GridCraft's unusual strengths. Beyond the GUI it ships a CLI, a JSON control channel, and an MCP server that lets agents read, write, calculate, and format spreadsheet data programmatically.</p>
+  </details>
+  <details>
+    <summary>Does it run in a browser too?</summary>
+    <p>Yes — there's a WebAssembly build you can run locally in a browser, where workbooks are read locally and Save downloads the file to your machine. The Omarchy package is the native desktop app.</p>
+  </details>
+</section>
+
+<section class="sources">
+  <h2>Official sources</h2>
+  <ul>
+    <li><a href="https://omarchyapps.com/apps/gridcraft-bin.html" target="_blank" rel="noopener">omarchyapps.com — gridcraft-bin listing (0.13.0-1, Apache-2.0 OR MIT, 45.8 MB / 98.8 MB)</a></li>
+    <li><a href="https://github.com/storytold/gridcraft" target="_blank" rel="noopener">storytold/gridcraft — repo (features, install)</a></li>
+    <li><a href="https://github.com/storytold/gridcraft/blob/main/docs/gaps.md" target="_blank" rel="noopener">docs/gaps.md — known gaps vs Excel (beta blockers)</a></li>
+    <li><a href="https://github.com/storytold/gridcraft/issues/1762" target="_blank" rel="noopener">issue #1762 — Thai text renders as tofu</a></li>
+    <li><a href="https://vectorcraft.app/gridcraft" target="_blank" rel="noopener">vectorcraft.app/gridcraft — GridCraft web edition (feature overview)</a></li>
+    <li><a href="https://www.software-mirrors.com/products/gridcraft" target="_blank" rel="noopener">software-mirrors.com — GridCraft feature/internals summary</a></li>
+    <li><a href="https://pasqualepillitteri.it/en/news/22194/artcraft-wordcraft-gridcraft-deckcraft-office-clones-rust" target="_blank" rel="noopener">ArtCraft suite launch (WordCraft/GridCraft/DeckCraft, Oct 2026)</a></li>
+    <li><a href="https://www.getpricepulse.com/companies/microsoft-365-pricing.html" target="_blank" rel="noopener">getpricepulse.com — Microsoft 365 Personal pricing ($9.99/mo)</a></li>
+  </ul>
+  <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+</section></section>
+    <div class="actions"><a class="button" href="#guide">Guide: how to use gridcraft on Omarchy</a><a class="button ghost" href="https://github.com/storytold/gridcraft" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/gridcraft-bin" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
 <div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="app" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div><script src="/oa-ads.js"></script></div>

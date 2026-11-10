@@ -61,7 +61,151 @@
     <section><h2>Install splinterm-mcp on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add splinterm-mcp</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>No special requirements documented.</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>Check the project site for current pricing.</dd><dt>Licence</dt><dd>MIT</dd><dt>Download</dt><dd>2.3 MB</dd><dt>Installed</dt><dd>6.5 MB</dd></dl></div></section>
 
-    <div class="actions"><a class="button" href="/splinterm-mcp-on-omarchy.html">Tutorial: how to use splinterm-mcp on Omarchy</a><a class="button ghost" href="https://github.com/ministry-of-taste/splinterm" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/splinterm" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
+<section class="folded-guide" id="guide"><nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">How to switch</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+<section id="install">
+  <h2>splinterm-mcp on Omarchy</h2>
+  <p>splinterm-mcp is a policy-scoped MCP adapter for Splinterm that lets your coding agents (Claude Code, Codex, VS Code) reach your persistent terminal sessions through a bounded, consent-gated interface instead of raw shell access.</p>
+  <h3>TL;DR</h3>
+  <pre><code class="language-bash">omarchy pkg add splinterm
+omarchy pkg add splinterm-mcp</code></pre>
+  <p>Install splinterm-mcp on Omarchy with one command. It takes ~2 minutes. MIT-licensed open source, free, no paid tier. Guide drafted against the 0.1.1-1 Omarchy package (store listing reports 1.9 MB download / 5.3 MB installed).</p>
+  <p>You need both: the adapter is a separately packaged split of Splinterm's automation surface, and it operates on the same <code>splinterd</code>-owned sessions. <strong>Installing the package or adding it to an agent host grants nothing</strong> — every operation is denied until you explicitly grant access.</p>
+</section>
+
+<section id="getting-started">
+  <h2>Getting started (5 minutes)</h2>
+  <h3>1. Install both packages.</h3>
+  <p>The adapter without Splinterm is useless; install <code>splinterm</code> first if you haven't.</p>
+  <h3>2. Add the adapter to your agent host in one command.</h3>
+  <pre><code class="language-bash">splinterm mcp setup claude-code    # or: codex, vscode
+splinterm mcp setup codex --dry-run   # preview the change first</code></pre>
+  <p>This adds one MCP server named <code>splinterm</code> to the host's config and changes nothing else: Claude Code gets an entry in <code>~/.claude.json</code>, Codex in <code>~/.codex/config.toml</code>, VS Code in <code>~/.config/Code/User/mcp.json</code>. <strong>Setup grants no access and writes no policy.</strong> Start a new session of the host to load the server.</p>
+  <h3>3. Grant access when (and only when) the agent asks.</h3>
+  <p>The first time the agent needs a workspace, it calls <code>request_lair_access</code> and you answer in Splinterm's prompt — a default-deny trusted prompt with three access levels (Look, Look and type, Manage) and three durations (just this once, while this workspace is open, always for this workspace). Grants for a protected package install can be remembered; development builds are only offered the two shorter durations.</p>
+  <h3>4. Watch what agents are doing.</h3>
+  <p>Agents self-report status (<code>working</code>, <code>needs_input</code>, <code>done</code>, <code>error</code>, <code>idle</code>) through <code>splinterm report_agent_status</code> or the MCP tool <code>splinterm.report_agent_status</code>; the Explorer shows a per-Splint icon and per-Dojo tab badge, and the command palette lists pending agent access requests with per-entry revoke. See herdr if you want a dedicated agent-watcher on Omarchy.</p>
+  <h3>5. Revoke when done.</h3>
+  <p><code>splinterm access list</code> shows the adapter's grants; <code>splinterm access revoke</code> ends them. Removing the <code>splinterm</code> entry from your host config (<code>splinterm mcp remove claude-code</code>) does NOT revoke grants — revoking is separate and deliberate.</p>
+</section>
+
+<section id="issues">
+  <h2>Common issues &amp; fixes</h2>
+  <p>All sourced from the project's own MCP docs and status doc. Nothing below was reproduced on Omarchy — confirm each fix on-machine before relying on it.</p>
+  <h3>An agent's request to reach a workspace silently fails or is denied</h3>
+  <p><strong>Fix:</strong> Denial is the default. Machine clients never inherit human graphical authority, and the daemon denies every adapter operation until you grant the exact executable path and digest policy. Check <code>splinterm access list</code> for the grant and answer the pending request in Splinterm's prompt — a waiting indicator (Explorer mark, window title, palette count) shows requests awaiting an answer. (<a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/mcp.md" target="_blank" rel="noopener">docs/mcp.md</a>, <a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/status.md" target="_blank" rel="noopener">docs/status.md</a>)</p>
+  <h3><code>splinterm mcp setup</code> refuses to write your host config with a refusal naming permissions</h3>
+  <p><strong>Fix:</strong> Setup is paranoid about the files it edits: it refuses malformed JSON/TOML, symlinks, files owned by another user or group-writable, and private-group setups (umask <code>002</code>) that make files <code>0664</code>. Run the exact <code>chmod g-w</code> command the refusal names, then retry. A shared sticky directory like <code>/tmp</code> is refused outright. (<a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/mcp.md" target="_blank" rel="noopener">docs/mcp.md</a>)</p>
+  <h3>Setup added the server, but Claude Code doesn't see the <code>splinterm</code> MCP server</h3>
+  <p><strong>Fix:</strong> Start a NEW session of the host to load the server. Also: Claude Code rewrites <code>~/.claude.json</code> while running, so a session that was open during setup can write its older copy back — run setup with no Claude Code session open, or verify afterwards with <code>claude mcp get splinterm</code>. (<a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/mcp.md" target="_blank" rel="noopener">docs/mcp.md</a>)</p>
+  <h3>VS Code mcp.json entry doesn't behave as expected</h3>
+  <p><strong>Fix:</strong> Upstream is honest about this one: the VS Code entry follows the documented form but was not verified against a real VS Code install. If setup asks for <code>--config PATH</code>, point it at your VS Code profile's <code>mcp.json</code> and test. Mark anything weird for the issue tracker. (<a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/mcp.md" target="_blank" rel="noopener">docs/mcp.md</a>)</p>
+  <h3>You installed <code>splinterm-mcp</code> but nothing agent-shaped can connect, and the adapter binary isn't where expected</h3>
+  <p><strong>Fix:</strong> The adapter identity is exact: setup resolves the installed adapter next to the <code>splinterm</code> you run (<code>/usr/bin/splinterm-mcp</code> for the package). A user-local build in <code>~/.cargo/bin</code> is offered only short-duration grants, and a raw Nix store path never gets "Always" and dies on upgrade/GC. If in doubt, <code>splinterm mcp setup --dry-run</code> shows the exact adapter path and identity it would use. (<a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/mcp.md" target="_blank" rel="noopener">docs/mcp.md</a>)</p>
+</section>
+
+<section id="pairs">
+  <h2>Pairs well with / If you hate this, try</h2>
+  <h3>Pairs well with</h3>
+  <ul>
+    <li><code>splinterm</code> (required — the adapter is a split package of its automation surface; see the Splinterm guide)</li>
+    <li><code>herdr</code> (dedicated Omarchy agent-status watcher; Splinterm's agent-status display covers the basics, herdr is the specialist)</li>
+    <li><code>claude-code</code> / <code>openai-codex-bin</code> (the hosts the adapter plugs into)</li>
+  </ul>
+  <h3>If you hate this, try</h3>
+  <ul>
+    <li>tmux control mode (<code>tmux -CC</code> / control mode scripts) — the DIY route to letting scripts drive a terminal, with none of the consent/policy machinery (and none of the safety)</li>
+    <li>paste into your agent host's own terminal — zero integration, zero risk</li>
+  </ul>
+  <p>If the idea of agents in your shell makes you itchy, this whole package is skippable — Splinterm works fine as a human terminal without it.</p>
+</section>
+
+<section id="comparison">
+  <h2>Comparison: splinterm-mcp vs similar options</h2>
+  <div class="table-scroll">
+    <table class="compare-table">
+      <thead>
+        <tr><th>Tool</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>splinterm-mcp</strong></td><td>Free (MIT)</td><td>Letting Claude Code/Codex agents work inside your persistent Splinterm sessions with per-workspace consent and revocable grants</td><td><code>omarchy pkg add splinterm-mcp</code></td></tr>
+        <tr><td><strong>tmux control mode</strong></td><td>Free</td><td>The DIY classic: drive any tmux session from a script; powerful, but no identity checks, no consent prompts, no revocation list</td><td><code>omarchy pkg add tmux</code></td></tr>
+        <tr><td><strong>Paste-into-agent</strong></td><td>Free</td><td>Keeping agents in their own sandbox and pasting commands yourself; zero integration, zero risk</td><td>n/a</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Verdict:</strong> If your agents live in Claude Code or Codex and your shells live in Splinterm, this is the intended bridge — consent-gated and revocable instead of raw PTY access. If you'd rather keep agents out of your terminal entirely, skip it.</p>
+</section>
+
+<aside class="guide-callout">
+  <h2>splinterm-mcp is a free alternative to Warp's AI blocks ($15/mo) and cloud agent environments</h2>
+  <p><strong>splinterm-mcp is a free alternative to Warp's AI blocks ($15/mo) and cloud agent environments.</strong> What you give up: Warp's polished UI and cloud sync. What you keep: local-only control, an audit trail, and zero subscription — agents reach your persistent local sessions, but access is consent-gated by default, scoped to exact executable identity, and revocable per workspace. For the Omarchy user who wants coding agents in the terminal without the cloud, this is the native path.</p>
+</aside>
+
+<section id="switch">
+  <h2>How to switch from Warp AI / a cloud agent setup (~15 minutes)</h2>
+  <ol>
+    <li><strong>Export from Warp:</strong> nothing to export — your agent context lives in Warp's cloud, and the migration is to a consent-gated local model anyway. Note which projects you ran agents in.</li>
+    <li><strong>Install both packages:</strong> <code>omarchy pkg add splinterm</code>, then <code>omarchy pkg add splinterm-mcp</code>. Remember: installing grants nothing.</li>
+    <li><strong>Plug in your host:</strong> <code>splinterm mcp setup claude-code</code> (or <code>codex</code>), start a new host session, and grant access per workspace when the agent first asks — choose the narrowest access level and duration that gets the job done.</li>
+    <li><strong>What doesn't transfer:</strong> Warp's polished agent UI and cloud-synced context. What you gain: local-only control, per-workspace consent, and grants you can revoke with <code>splinterm access revoke</code>.</li>
+  </ol>
+</section>
+
+<div class="guide-cta">
+  <h2>Open the splinterm-mcp package</h2>
+  <p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p>
+  <a class="button" href="/apps/splinterm-mcp.html">View splinterm-mcp →</a>
+</div>
+
+<section class="guide-faq" id="faq">
+  <h2>Frequently asked questions</h2>
+  <details>
+    <summary>Does splinterm-mcp work on Omarchy?</summary>
+    <p>Yes — it's an official Omarchy package (0.1.1-1) from the same repo as Splinterm. The validated target is x86_64 Omarchy/Arch with native Wayland.</p>
+  </details>
+  <details>
+    <summary>Is splinterm-mcp free?</summary>
+    <p>Yes, MIT-licensed open source, part of the splinterm repository. No paid tier.</p>
+  </details>
+  <details>
+    <summary>Does installing it give my agents access to my terminal?</summary>
+    <p>No — and that's the point. Installing the package, or running <code>splinterm mcp setup</code>, grants nothing. The daemon denies every adapter operation until you answer the consent prompt (or write an exact policy). Terminal output remains untrusted data and can never grant authority.</p>
+  </details>
+  <details>
+    <summary>Which agent hosts does it support?</summary>
+    <p>Claude Code, Codex, and VS Code via <code>splinterm mcp setup &lt;host&gt;</code>. The VS Code entry form is upstream-unverified — test before trusting it.</p>
+  </details>
+  <details>
+    <summary>How do I completely remove it?</summary>
+    <p>Remove the host entry with <code>splinterm mcp remove claude-code</code> (or whichever host), revoke grants with <code>splinterm access revoke</code>, then <code>omarchy pkg drop splinterm-mcp</code>. Removing the host entry alone revokes nothing — do both steps.</p>
+  </details>
+  <details>
+    <summary>Can agents report what they're doing, like herdr?</summary>
+    <p>Splinterm 0.2 (on <code>main</code>, accepted in the Omarchy VM, unreleased) adds explicit agent-status reporting: agents self-report <code>working</code> / <code>needs_input</code> / <code>done</code> / <code>error</code> / <code>idle</code>, shown as Explorer icons and Dojo tab badges. On the stable 0.1.1 package, watch the release notes for 0.2 — or run herdr alongside for status watching now.</p>
+  </details>
+</section>
+
+<section class="sources">
+  <h2>Official sources</h2>
+  <ul>
+    <li><a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/mcp.md" target="_blank" rel="noopener">docs/mcp.md — MCP adapter setup and security</a></li>
+    <li><a href="https://github.com/ministry-of-taste/splinterm" target="_blank" rel="noopener">ministry-of-taste/splinterm — README (automation and remote access)</a></li>
+    <li><a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/status.md" target="_blank" rel="noopener">docs/status.md — agent status reporting, easy agent access (0.2, on main)</a></li>
+    <li><a href="https://omarchyapps.com/apps/splinterm-mcp.html" target="_blank" rel="noopener">omarchyapps.com — splinterm-mcp listing (0.1.1-1, MIT, 1.9 MB)</a></li>
+  </ul>
+  <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+</section></section>
+    <div class="actions"><a class="button" href="#guide">Guide: how to use splinterm-mcp on Omarchy</a><a class="button ghost" href="https://github.com/ministry-of-taste/splinterm" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/splinterm" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
 <div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="app" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div><script src="/oa-ads.js"></script></div>

@@ -1,7 +1,7 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-11-10T02:00:20+00:00",
+ "generated_at": "2026-11-10T05:56:36+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
@@ -17,7 +17,7 @@
    "category": "Security & Privacy",
    "description": "Password manager and secure wallet",
    "homepage": "https://1password.com",
-   "tutorial_url": "https://omarchyapps.com/1password-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/1password.html",
    "url": "https://omarchyapps.com/apps/1password.html"
   },
   {
@@ -28,7 +28,7 @@
    "category": "Security & Privacy",
    "description": "Password manager and secure wallet",
    "homepage": "https://1password.com",
-   "tutorial_url": "https://omarchyapps.com/1password-beta-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/1password-beta.html",
    "url": "https://omarchyapps.com/apps/1password-beta.html"
   },
   {
@@ -39,7 +39,7 @@
    "category": "Security & Privacy",
    "description": "1Password command line tool",
    "homepage": "https://app-updates.agilebits.com/product_history/CLI2",
-   "tutorial_url": "https://omarchyapps.com/1password-cli-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/1password-cli.html",
    "url": "https://omarchyapps.com/apps/1password-cli.html"
   },
   {
@@ -50,7 +50,7 @@
    "category": "Themes & Desktop",
    "description": "Desktop theming application - extract colors from wallpapers and apply cohesive themes",
    "homepage": "https://github.com/omacom/aether",
-   "tutorial_url": "https://omarchyapps.com/aether-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/aether.html",
    "url": "https://omarchyapps.com/apps/aether.html"
   },
   {
@@ -61,7 +61,7 @@
    "category": "Utilities",
    "description": "Amp, the frontier coding agent, as a desktop app",
    "homepage": "https://ampcode.com",
-   "tutorial_url": "https://omarchyapps.com/amp-desktop-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/amp-desktop-bin.html",
    "url": "https://omarchyapps.com/apps/amp-desktop-bin.html"
   },
   {
@@ -72,7 +72,7 @@
    "category": "System & Drivers",
    "description": "Control brightness on Apple Displays connected via USB-C",
    "homepage": "https://github.com/omakasui/asdcontrol",
-   "tutorial_url": "https://omarchyapps.com/asdcontrol-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/asdcontrol.html",
    "url": "https://omarchyapps.com/apps/asdcontrol.html"
   },
   {
@@ -106,7 +106,7 @@
    "description": "Web browser that blocks ads and trackers by default (binary release)",
    "homepage": "https://brave.com",
    "repository": "https://github.com/brave/brave-browser",
-   "tutorial_url": "https://omarchyapps.com/brave-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/brave-bin.html",
    "url": "https://omarchyapps.com/apps/brave-bin.html"
   },
   {
@@ -117,7 +117,7 @@
    "category": "Utilities",
    "description": "The minimalist browser from the makers of Brave (binary release).",
    "homepage": "https://brave.com/origin/download",
-   "tutorial_url": "https://omarchyapps.com/brave-origin-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/brave-origin-bin.html",
    "url": "https://omarchyapps.com/apps/brave-origin-bin.html"
   },
   {
@@ -128,7 +128,7 @@
    "category": "Developer Tools",
    "description": "All-in-one JavaScript runtime built for speed, with bundler, transpiler, test runner, and package manager. Includes bunx, shell completions and support for baseline CPUs",
    "homepage": "https://github.com/oven-sh/bun",
-   "tutorial_url": "https://omarchyapps.com/bun-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/bun-bin.html",
    "url": "https://omarchyapps.com/apps/bun-bin.html"
   },
   {
@@ -150,7 +150,7 @@
    "category": "Terminal & Shell",
    "description": "context-menu entry for opening other terminal in nautilus",
    "homepage": "https://github.com/Stunkymonkey/nautilus-open-any-terminal",
-   "tutorial_url": "https://omarchyapps.com/caja-open-any-terminal-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/caja-open-any-terminal.html",
    "url": "https://omarchyapps.com/apps/caja-open-any-terminal.html"
   },
   {
@@ -172,7 +172,7 @@
    "category": "Utilities",
    "description": "Official Claude desktop app with Claude Code",
    "homepage": "https://claude.ai",
-   "tutorial_url": "https://omarchyapps.com/claude-desktop-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/claude-desktop.html",
    "url": "https://omarchyapps.com/apps/claude-desktop.html"
   },
   {
@@ -206,7 +206,7 @@
    "description": "A powerful terminal-based AI assistant for developers, providing intelligent coding assistance directly in your terminal.",
    "homepage": "https://charm.sh/crush",
    "repository": "https://github.com/charmbracelet/crush",
-   "tutorial_url": "https://omarchyapps.com/crush-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/crush-bin.html",
    "url": "https://omarchyapps.com/apps/crush-bin.html"
   },
   {
@@ -239,7 +239,7 @@
    "category": "Developer Tools",
    "description": "AI-first coding environment",
    "homepage": "https://www.cursor.com",
-   "tutorial_url": "https://omarchyapps.com/cursor-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/cursor-bin.html",
    "url": "https://omarchyapps.com/apps/cursor-bin.html"
   },
   {
@@ -250,7 +250,7 @@
    "category": "AI & Agents",
    "description": "CLI tool for Cursor, the AI-first coding agent",
    "homepage": "https://cursor.com/cli",
-   "tutorial_url": "https://omarchyapps.com/cursor-cli-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/cursor-cli.html",
    "url": "https://omarchyapps.com/apps/cursor-cli.html"
   },
   {
@@ -261,7 +261,7 @@
    "category": "Utilities",
    "description": "A command line client for Dropbox built using the Go SDK",
    "homepage": "https://github.com/dropbox/dbxcli",
-   "tutorial_url": "https://omarchyapps.com/dbxcli-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/dbxcli-bin.html",
    "url": "https://omarchyapps.com/apps/dbxcli-bin.html"
   },
   {
@@ -281,7 +281,7 @@
    "install_command": "omarchy pkg add dell-xps13-sidecar-amps",
    "category": "Utilities",
    "description": "Temporary sidecar speaker amplifier enablement for the Dell XPS 13 DX13260",
-   "tutorial_url": "https://omarchyapps.com/dell-xps13-sidecar-amps-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/dell-xps13-sidecar-amps.html",
    "url": "https://omarchyapps.com/apps/dell-xps13-sidecar-amps.html"
   },
   {
@@ -292,7 +292,7 @@
    "category": "Utilities",
    "description": "DingTalk (钉钉), the official Linux client",
    "homepage": "https://www.dingtalk.com/",
-   "tutorial_url": "https://omarchyapps.com/dingtalk-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/dingtalk-bin.html",
    "url": "https://omarchyapps.com/apps/dingtalk-bin.html"
   },
   {
@@ -325,7 +325,7 @@
    "category": "Utilities",
    "description": "Command line interface for Dropbox",
    "homepage": "https://www.dropbox.com",
-   "tutorial_url": "https://omarchyapps.com/dropbox-cli-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/dropbox-cli.html",
    "url": "https://omarchyapps.com/apps/dropbox-cli.html"
   },
   {
@@ -336,7 +336,7 @@
    "category": "Utilities",
    "description": "World clock plugin for the Omarchy shell",
    "homepage": "https://github.com/omacom/elsewhen",
-   "tutorial_url": "https://omarchyapps.com/elsewhen-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/elsewhen.html",
    "url": "https://omarchyapps.com/apps/elsewhen.html"
   },
   {
@@ -358,7 +358,7 @@
    "category": "Utilities",
    "description": "Fast, keyboard-first file manager for Omarchy",
    "homepage": "https://github.com/thisisgm/flea",
-   "tutorial_url": "https://omarchyapps.com/flea-file-manager-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/flea.html",
    "url": "https://omarchyapps.com/apps/flea.html"
   },
   {
@@ -391,7 +391,7 @@
    "category": "Utilities",
    "description": "Fast, native, feature-rich terminal emulator pushing modern features",
    "homepage": "https://github.com/ghostty-org/ghostty",
-   "tutorial_url": "https://omarchyapps.com/ghostty-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/ghostty.html",
    "url": "https://omarchyapps.com/apps/ghostty.html"
   },
   {
@@ -424,7 +424,7 @@
    "category": "Utilities",
    "description": "Terminfo for Ghostty",
    "homepage": "https://github.com/ghostty-org/ghostty",
-   "tutorial_url": "https://omarchyapps.com/ghostty-terminfo-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/ghostty-terminfo.html",
    "url": "https://omarchyapps.com/apps/ghostty-terminfo.html"
   },
   {
@@ -435,7 +435,7 @@
    "category": "AI & Agents",
    "description": "GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal.",
    "homepage": "https://github.com/github/copilot-cli",
-   "tutorial_url": "https://omarchyapps.com/github-copilot-cli-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/github-copilot-cli.html",
    "url": "https://omarchyapps.com/apps/github-copilot-cli.html"
   },
   {
@@ -446,7 +446,7 @@
    "category": "Utilities",
    "description": "Hyprland remote desktop over SSH (GPU H.264, 4:4:4)",
    "homepage": "https://github.com/omacom/gliff",
-   "tutorial_url": "https://omarchyapps.com/gliff-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/gliff.html",
    "url": "https://omarchyapps.com/apps/gliff.html"
   },
   {
@@ -457,7 +457,7 @@
    "category": "Utilities",
    "description": "The popular web browser by Google (Stable Channel)",
    "homepage": "https://www.google.com/chrome",
-   "tutorial_url": "https://omarchyapps.com/google-chrome-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/google-chrome.html",
    "url": "https://omarchyapps.com/apps/google-chrome.html"
   },
   {
@@ -468,7 +468,7 @@
    "category": "Utilities",
    "description": "Clean-room spreadsheet in pure Rust that opens and saves Excel workbooks",
    "homepage": "https://github.com/storytold/gridcraft",
-   "tutorial_url": "https://omarchyapps.com/gridcraft-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/gridcraft-bin.html",
    "url": "https://omarchyapps.com/apps/gridcraft-bin.html"
   },
   {
@@ -501,7 +501,7 @@
    "category": "AI & Agents",
    "description": "Herdr terminal workspace manager for AI coding agents",
    "homepage": "https://github.com/herdrdev/herdr",
-   "tutorial_url": "https://omarchyapps.com/herdr-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/herdr.html",
    "url": "https://omarchyapps.com/apps/herdr.html"
   },
   {
@@ -512,7 +512,7 @@
    "category": "Utilities",
    "description": "Herdr desktop app: terminals and coding agents that keep running",
    "homepage": "https://github.com/herdrdev/herdr-app",
-   "tutorial_url": "https://omarchyapps.com/herdr-app-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/herdr-app.html",
    "url": "https://omarchyapps.com/apps/herdr-app.html"
   },
   {
@@ -523,7 +523,7 @@
    "category": "Utilities",
    "description": "Herdr core (hc): the server that keeps Herdr terminals and coding agents running",
    "homepage": "https://github.com/herdrdev/herdr-core",
-   "tutorial_url": "https://omarchyapps.com/herdr-core-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/herdr-core.html",
    "url": "https://omarchyapps.com/apps/herdr-core.html"
   },
   {
@@ -534,7 +534,7 @@
    "category": "AI & Agents",
    "description": "Native desktop shell for Hermes Agent",
    "homepage": "https://github.com/NousResearch/hermes-agent",
-   "tutorial_url": "https://omarchyapps.com/hermes-desktop-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/hermes-desktop.html",
    "url": "https://omarchyapps.com/apps/hermes-desktop.html"
   },
   {
@@ -546,7 +546,7 @@
    "description": "An Open source Launcher for Epic, Amazon and GOG Games",
    "homepage": "https://heroicgameslauncher.com/",
    "repository": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher",
-   "tutorial_url": "https://omarchyapps.com/heroic-games-launcher-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/heroic-games-launcher-bin.html",
    "url": "https://omarchyapps.com/apps/heroic-games-launcher-bin.html"
   },
   {
@@ -557,7 +557,7 @@
    "category": "Utilities",
    "description": "Hex voice dictation app by Anomaly: hold a key, speak, and it types (Linux beta; not the hex dump tool)",
    "homepage": "https://github.com/anomalyco/hex",
-   "tutorial_url": "https://omarchyapps.com/hex-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/hex-bin.html",
    "url": "https://omarchyapps.com/apps/hex-bin.html"
   },
   {
@@ -568,7 +568,7 @@
    "category": "Communication",
    "description": "CLI for HEY email",
    "homepage": "https://github.com/basecamp/hey-cli",
-   "tutorial_url": "https://omarchyapps.com/hey-cli-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/hey-cli.html",
    "url": "https://omarchyapps.com/apps/hey-cli.html"
   },
   {
@@ -590,7 +590,7 @@
    "category": "Themes & Desktop",
    "description": "An alternative share picker for hyprland with window and monitor previews",
    "homepage": "https://github.com/WhySoBad/hyprland-preview-share-picker",
-   "tutorial_url": "https://omarchyapps.com/hyprland-preview-share-picker-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/hyprland-preview-share-picker.html",
    "url": "https://omarchyapps.com/apps/hyprland-preview-share-picker.html"
   },
   {
@@ -612,7 +612,7 @@
    "category": "Themes & Desktop",
    "description": "Hyprland shade configuration tool",
    "homepage": "https://github.com/loqusion/hyprshade",
-   "tutorial_url": "https://omarchyapps.com/hyprshade-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/hyprshade.html",
    "url": "https://omarchyapps.com/apps/hyprshade.html"
   },
   {
@@ -623,7 +623,7 @@
    "category": "System & Drivers",
    "description": "Intel IPU7 MIPI camera stack for Hurrican/Performance (OV08X40 + hardware ISP)",
    "homepage": "https://github.com/TsaiGaggery/hurrican_omarchy_enabling",
-   "tutorial_url": "https://omarchyapps.com/intel-ipu7-camera-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/intel-ipu7-camera.html",
    "url": "https://omarchyapps.com/apps/intel-ipu7-camera.html"
   },
   {
@@ -635,7 +635,7 @@
    "description": "Programming language and runtime for AI-native software",
    "homepage": "https://kujolang.ai",
    "repository": "https://github.com/kujolang/kujo",
-   "tutorial_url": "https://omarchyapps.com/kujo-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/kujo.html",
    "url": "https://omarchyapps.com/apps/kujo.html"
   },
   {
@@ -646,7 +646,7 @@
    "category": "Utilities",
    "description": "Interactive, theme-aware courses for learning Omarchy",
    "homepage": "https://github.com/DanWahlin/learn-omarchy",
-   "tutorial_url": "https://omarchyapps.com/learn-omarchy-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/learn-omarchy.html",
    "url": "https://omarchyapps.com/apps/learn-omarchy.html"
   },
   {
@@ -657,7 +657,7 @@
    "category": "System & Drivers",
    "description": "NVIDIA drivers utilities (32-bit) (580xx)",
    "homepage": "https://www.nvidia.com/",
-   "tutorial_url": "https://omarchyapps.com/lib32-nvidia-580xx-utils-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/lib32-nvidia-580xx-utils.html",
    "url": "https://omarchyapps.com/apps/lib32-nvidia-580xx-utils.html"
   },
   {
@@ -668,7 +668,7 @@
    "category": "System & Drivers",
    "description": "OpenCL implemention for NVIDIA (32-bit) (580xx)",
    "homepage": "https://www.nvidia.com/",
-   "tutorial_url": "https://omarchyapps.com/lib32-opencl-nvidia-580xx-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/lib32-opencl-nvidia-580xx.html",
    "url": "https://omarchyapps.com/apps/lib32-opencl-nvidia-580xx.html"
   },
   {
@@ -679,7 +679,7 @@
    "category": "System & Drivers",
    "description": "Library for fingerprint readers (pinned upstream snapshot with FocalTech and Synaptics 06cb:010b support, and Apple Touch ID on aarch64)",
    "homepage": "https://fprint.freedesktop.org/",
-   "tutorial_url": "https://omarchyapps.com/libfprint-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libfprint-git.html",
    "url": "https://omarchyapps.com/apps/libfprint-git.html"
   },
   {
@@ -690,7 +690,7 @@
    "category": "Gaming & Emulation",
    "description": "Amstrad CPC core",
    "homepage": "https://github.com/libretro/libretro-cap32",
-   "tutorial_url": "https://omarchyapps.com/libretro-cap32-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-cap32-git.html",
    "url": "https://omarchyapps.com/apps/libretro-cap32-git.html"
   },
   {
@@ -723,7 +723,7 @@
    "category": "Gaming & Emulation",
    "description": "A port of the Commodore Amiga Emulator to libretro (WIP)",
    "homepage": "https://github.com/libretro/libretro-uae",
-   "tutorial_url": "https://omarchyapps.com/libretro-uae-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-uae-git.html",
    "url": "https://omarchyapps.com/apps/libretro-uae-git.html"
   },
   {
@@ -745,7 +745,7 @@
    "category": "Gaming & Emulation",
    "description": "Commodore C64 core (fast)",
    "homepage": "https://github.com/libretro/vice-libretro",
-   "tutorial_url": "https://omarchyapps.com/libretro-vice-x64-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-vice-x64-git.html",
    "url": "https://omarchyapps.com/apps/libretro-vice-x64-git.html"
   },
   {
@@ -756,7 +756,7 @@
    "category": "Gaming & Emulation",
    "description": "Commodore C64DTV core",
    "homepage": "https://github.com/libretro/vice-libretro",
-   "tutorial_url": "https://omarchyapps.com/libretro-vice-x64dtv-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-vice-x64dtv-git.html",
    "url": "https://omarchyapps.com/apps/libretro-vice-x64dtv-git.html"
   },
   {
@@ -767,7 +767,7 @@
    "category": "Gaming & Emulation",
    "description": "Commodore C64 core (accurate)",
    "homepage": "https://github.com/libretro/vice-libretro",
-   "tutorial_url": "https://omarchyapps.com/libretro-vice-x64sc-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-vice-x64sc-git.html",
    "url": "https://omarchyapps.com/apps/libretro-vice-x64sc-git.html"
   },
   {
@@ -778,7 +778,7 @@
    "category": "Gaming & Emulation",
    "description": "Commodore CBM-II 6x0/7x0 core",
    "homepage": "https://github.com/libretro/vice-libretro",
-   "tutorial_url": "https://omarchyapps.com/libretro-vice-xcbm2-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-vice-xcbm2-git.html",
    "url": "https://omarchyapps.com/apps/libretro-vice-xcbm2-git.html"
   },
   {
@@ -789,7 +789,7 @@
    "category": "Gaming & Emulation",
    "description": "Commodore CBM-II 5x0 core",
    "homepage": "https://github.com/libretro/vice-libretro",
-   "tutorial_url": "https://omarchyapps.com/libretro-vice-xcbm5x0-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-vice-xcbm5x0-git.html",
    "url": "https://omarchyapps.com/apps/libretro-vice-xcbm5x0-git.html"
   },
   {
@@ -800,7 +800,7 @@
    "category": "Gaming & Emulation",
    "description": "Commodore PET core",
    "homepage": "https://github.com/libretro/vice-libretro",
-   "tutorial_url": "https://omarchyapps.com/libretro-vice-xpet-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-vice-xpet-git.html",
    "url": "https://omarchyapps.com/apps/libretro-vice-xpet-git.html"
   },
   {
@@ -811,7 +811,7 @@
    "category": "Gaming & Emulation",
    "description": "Commodore Plus/4 core",
    "homepage": "https://github.com/libretro/vice-libretro",
-   "tutorial_url": "https://omarchyapps.com/libretro-vice-xplus4-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-vice-xplus4-git.html",
    "url": "https://omarchyapps.com/apps/libretro-vice-xplus4-git.html"
   },
   {
@@ -822,7 +822,7 @@
    "category": "Gaming & Emulation",
    "description": "Commodore C64 SuperCPU core",
    "homepage": "https://github.com/libretro/vice-libretro",
-   "tutorial_url": "https://omarchyapps.com/libretro-vice-xscpu64-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-vice-xscpu64-git.html",
    "url": "https://omarchyapps.com/apps/libretro-vice-xscpu64-git.html"
   },
   {
@@ -833,7 +833,7 @@
    "category": "Gaming & Emulation",
    "description": "Commodore VIC-20 core",
    "homepage": "https://github.com/libretro/vice-libretro",
-   "tutorial_url": "https://omarchyapps.com/libretro-vice-xvic-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/libretro-vice-xvic-git.html",
    "url": "https://omarchyapps.com/apps/libretro-vice-xvic-git.html"
   },
   {
@@ -844,7 +844,7 @@
    "category": "System & Drivers",
    "description": "Install kernels for the Limine bootloader.",
    "homepage": "https://gitlab.com/Zesko/limine-entry-tool",
-   "tutorial_url": "https://omarchyapps.com/limine-mkinitcpio-hook-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/limine-mkinitcpio-hook.html",
    "url": "https://omarchyapps.com/apps/limine-mkinitcpio-hook.html"
   },
   {
@@ -855,7 +855,7 @@
    "category": "System & Drivers",
    "description": "Integrates Limine boot entries with Snapper snapshots.",
    "homepage": "https://gitlab.com/Zesko/limine-snapper-sync",
-   "tutorial_url": "https://omarchyapps.com/limine-snapper-sync-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/limine-snapper-sync.html",
    "url": "https://omarchyapps.com/apps/limine-snapper-sync.html"
   },
   {
@@ -867,7 +867,7 @@
    "description": "Native Linux controller for Insta360 Link webcams",
    "homepage": "https://jweaver60.github.io/link-studio/",
    "repository": "https://github.com/jweaver60/link-studio",
-   "tutorial_url": "https://omarchyapps.com/link-studio-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/link-studio.html",
    "url": "https://omarchyapps.com/apps/link-studio.html"
   },
   {
@@ -900,7 +900,7 @@
    "category": "Utilities",
    "description": "Transitional package: installs linux-omarchy, the Omarchy kernel this package became",
    "homepage": "https://omarchy.org",
-   "tutorial_url": "https://omarchyapps.com/linux-omarchy-bore-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/linux-omarchy-bore.html",
    "url": "https://omarchyapps.com/apps/linux-omarchy-bore.html"
   },
   {
@@ -933,7 +933,7 @@
    "category": "Utilities",
    "description": "Headers and scripts for building modules for the Omarchy Linux kernel",
    "homepage": "https://omarchy.org",
-   "tutorial_url": "https://omarchyapps.com/linux-omarchy-eevdf-headers-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/linux-omarchy-eevdf-headers.html",
    "url": "https://omarchyapps.com/apps/linux-omarchy-eevdf-headers.html"
   },
   {
@@ -944,7 +944,7 @@
    "category": "Utilities",
    "description": "Headers and scripts for building modules for the Omarchy Linux (BORE CPU scheduler, ADIOS I/O scheduler) kernel",
    "homepage": "https://omarchy.org",
-   "tutorial_url": "https://omarchyapps.com/linux-omarchy-headers-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/linux-omarchy-headers.html",
    "url": "https://omarchyapps.com/apps/linux-omarchy-headers.html"
   },
   {
@@ -955,7 +955,7 @@
    "category": "Utilities",
    "description": "The Omarchy Linux (MuQSS CPU scheduler) kernel and modules",
    "homepage": "https://omarchy.org",
-   "tutorial_url": "https://omarchyapps.com/linux-omarchy-muqss-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/linux-omarchy-muqss.html",
    "url": "https://omarchyapps.com/apps/linux-omarchy-muqss.html"
   },
   {
@@ -966,7 +966,7 @@
    "category": "Utilities",
    "description": "Headers and scripts for building modules for the Omarchy Linux (MuQSS CPU scheduler) kernel",
    "homepage": "https://omarchy.org",
-   "tutorial_url": "https://omarchyapps.com/linux-omarchy-muqss-headers-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/linux-omarchy-muqss-headers.html",
    "url": "https://omarchyapps.com/apps/linux-omarchy-muqss-headers.html"
   },
   {
@@ -1010,7 +1010,7 @@
    "category": "Utilities",
    "description": "An open source cross-platform alternative to AirDrop",
    "homepage": "https://github.com/localsend/localsend",
-   "tutorial_url": "https://omarchyapps.com/localsend-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/localsend.html",
    "url": "https://omarchyapps.com/apps/localsend.html"
   },
   {
@@ -1021,7 +1021,7 @@
    "category": "Utilities",
    "description": "An open source cross-platform alternative to AirDrop",
    "homepage": "https://github.com/localsend/localsend",
-   "tutorial_url": "https://omarchyapps.com/localsend-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/localsend-bin.html",
    "url": "https://omarchyapps.com/apps/localsend-bin.html"
   },
   {
@@ -1032,7 +1032,7 @@
    "category": "System & Drivers",
    "description": "Driver for the keyboard, touchpad and touchbar found in newer MacBook (Pro) models",
    "homepage": "https://github.com/marc-git/macbook12-spi-driver",
-   "tutorial_url": "https://omarchyapps.com/macbook12-spi-driver-dkms-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/macbook12-spi-driver-dkms.html",
    "url": "https://omarchyapps.com/apps/macbook12-spi-driver-dkms.html"
   },
   {
@@ -1043,7 +1043,7 @@
    "category": "System & Drivers",
    "description": "Patched SPI PXA2xx PCI driver forcing PIO mode for MacBook8,1 Wildcat Point GSPI (8086:9ce6)",
    "homepage": "https://github.com/basecamp/omarchy",
-   "tutorial_url": "https://omarchyapps.com/macbook8-spi-pxa2xx-nodma-dkms-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/macbook8-spi-pxa2xx-nodma-dkms.html",
    "url": "https://omarchyapps.com/apps/macbook8-spi-pxa2xx-nodma-dkms.html"
   },
   {
@@ -1076,7 +1076,7 @@
    "category": "Utilities",
    "description": "A browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier",
    "homepage": "https://www.microsoftedgeinsider.com/en-us/download",
-   "tutorial_url": "https://omarchyapps.com/microsoft-edge-stable-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/microsoft-edge-stable-bin.html",
    "url": "https://omarchyapps.com/apps/microsoft-edge-stable-bin.html"
   },
   {
@@ -1087,7 +1087,7 @@
    "category": "Gaming & Emulation",
    "description": "Official Minecraft Launcher",
    "homepage": "https://mojang.com/",
-   "tutorial_url": "https://omarchyapps.com/minecraft-launcher-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/minecraft-launcher.html",
    "url": "https://omarchyapps.com/apps/minecraft-launcher.html"
   },
   {
@@ -1154,7 +1154,7 @@
    "category": "Utilities",
    "description": "Official Notion desktop app",
    "homepage": "https://www.notion.com/desktop",
-   "tutorial_url": "https://omarchyapps.com/notion-desktop-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/notion-desktop.html",
    "url": "https://omarchyapps.com/apps/notion-desktop.html"
   },
   {
@@ -1165,7 +1165,7 @@
    "category": "System & Drivers",
    "description": "NVIDIA kernel modules - module sources (580xx)",
    "homepage": "https://www.nvidia.com/",
-   "tutorial_url": "https://omarchyapps.com/nvidia-580xx-dkms-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/nvidia-580xx-dkms.html",
    "url": "https://omarchyapps.com/apps/nvidia-580xx-dkms.html"
   },
   {
@@ -1176,7 +1176,7 @@
    "category": "System & Drivers",
    "description": "NVIDIA drivers utilities (580xx)",
    "homepage": "https://www.nvidia.com/",
-   "tutorial_url": "https://omarchyapps.com/nvidia-580xx-utils-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/nvidia-580xx-utils.html",
    "url": "https://omarchyapps.com/apps/nvidia-580xx-utils.html"
   },
   {
@@ -1187,7 +1187,7 @@
    "category": "Utilities",
    "description": "Dead-simple calculator built with Qt Quick",
    "homepage": "https://github.com/omacom-io/omacalc",
-   "tutorial_url": "https://omarchyapps.com/omacalc-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omacalc.html",
    "url": "https://omarchyapps.com/apps/omacalc.html"
   },
   {
@@ -1198,7 +1198,7 @@
    "category": "Utilities",
    "description": "Fast, beautiful charting software for Omarchy",
    "homepage": "https://github.com/jorgemanrubia/omacharts",
-   "tutorial_url": "https://omarchyapps.com/omacharts-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omacharts.html",
    "url": "https://omarchyapps.com/apps/omacharts.html"
   },
   {
@@ -1209,7 +1209,7 @@
    "category": "Media & Creative",
    "description": "Dead-simple video length trimmer built with Qt Quick and ffmpeg",
    "homepage": "https://github.com/omacom/omacut",
-   "tutorial_url": "https://omarchyapps.com/omacut-video-editor-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omacut.html",
    "url": "https://omarchyapps.com/apps/omacut.html"
   },
   {
@@ -1220,7 +1220,7 @@
    "category": "Utilities",
    "description": "Native Linux studio for design, layout, painting, photography, and motion",
    "homepage": "https://github.com/michaelmonetized/omadesign",
-   "tutorial_url": "https://omarchyapps.com/omadesign-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omadesign-bin.html",
    "url": "https://omarchyapps.com/apps/omadesign-bin.html"
   },
   {
@@ -1231,7 +1231,7 @@
    "category": "Utilities",
    "description": "A native Rust RSS reader for Linux and Omarchy",
    "homepage": "https://github.com/pch/omafeed",
-   "tutorial_url": "https://omarchyapps.com/omafeed-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omafeed.html",
    "url": "https://omarchyapps.com/apps/omafeed.html"
   },
   {
@@ -1242,7 +1242,7 @@
    "category": "Utilities",
    "description": "Dead-simple IRC client for Omarchy",
    "homepage": "https://github.com/fredimachado/omairc",
-   "tutorial_url": "https://omarchyapps.com/omairc-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omairc.html",
    "url": "https://omarchyapps.com/apps/omairc.html"
   },
   {
@@ -1254,7 +1254,7 @@
    "description": "A beautiful, local-first game library for Omarchy",
    "homepage": "https://btsouth.github.io/omakade/",
    "repository": "https://github.com/btsouth/omakade",
-   "tutorial_url": "https://omarchyapps.com/omakade-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omakade.html",
    "url": "https://omarchyapps.com/apps/omakade.html"
   },
   {
@@ -1276,7 +1276,7 @@
    "category": "Productivity & Notes",
    "description": "Dead-simple, Markdown-only presentation app built with Qt Quick",
    "homepage": "https://github.com/jethrojones/omapresent",
-   "tutorial_url": "https://omarchyapps.com/omapresent-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omapresent.html",
    "url": "https://omarchyapps.com/apps/omapresent.html"
   },
   {
@@ -1287,7 +1287,7 @@
    "category": "System & Drivers",
    "description": "Beautiful, modern, and opinionated Arch Linux by DHH",
    "homepage": "https://github.com/omacom/omarchy",
-   "tutorial_url": "https://omarchyapps.com/omarchy-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy.html",
    "url": "https://omarchyapps.com/apps/omarchy.html"
   },
   {
@@ -1309,7 +1309,7 @@
    "category": "Utilities",
    "description": "Desktop app and CLI that renders animated OMARCHY domain videos",
    "homepage": "https://github.com/llstrk/omarchy-billboard-generator",
-   "tutorial_url": "https://omarchyapps.com/omarchy-billboard-generator-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-billboard-generator.html",
    "url": "https://omarchyapps.com/apps/omarchy-billboard-generator.html"
   },
   {
@@ -1320,7 +1320,7 @@
    "category": "Browsers & Web",
    "description": "A web browser built for speed, simplicity, and security, with patches for Omarchy",
    "homepage": "https://github.com/omacom-io/omarchy-chromium",
-   "tutorial_url": "https://omarchyapps.com/omarchy-chromium-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-chromium.html",
    "url": "https://omarchyapps.com/apps/omarchy-chromium.html"
   },
   {
@@ -1343,7 +1343,7 @@
    "category": "System & Drivers",
    "description": "Beautiful, modern, and opinionated Arch Linux by DHH (quattro branch tip)",
    "homepage": "https://github.com/omacom/omarchy",
-   "tutorial_url": "https://omarchyapps.com/omarchy-dev-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-dev.html",
    "url": "https://omarchyapps.com/apps/omarchy-dev.html"
   },
   {
@@ -1354,7 +1354,7 @@
    "category": "Developer Tools",
    "description": "Emacs integration for Omarchy with automatic theme and font syncing",
    "homepage": "https://github.com/scottjones/omarchy-emacs",
-   "tutorial_url": "https://omarchyapps.com/omarchy-emacs-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-emacs.html",
    "url": "https://omarchyapps.com/apps/omarchy-emacs.html"
   },
   {
@@ -1365,7 +1365,7 @@
    "category": "Terminal & Shell",
    "description": "Omarchy shell configuration for Fish",
    "homepage": "https://github.com/omacom-io/omarchy-fish",
-   "tutorial_url": "https://omarchyapps.com/omarchy-fish-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-fish.html",
    "url": "https://omarchyapps.com/apps/omarchy-fish.html"
   },
   {
@@ -1376,7 +1376,7 @@
    "category": "AI & Agents",
    "description": "Herdr terminal workspace manager with Omarchy pane border support",
    "homepage": "https://github.com/dhh/herdr",
-   "tutorial_url": "https://omarchyapps.com/omarchy-herdr-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-herdr.html",
    "url": "https://omarchyapps.com/apps/omarchy-herdr.html"
   },
   {
@@ -1398,7 +1398,7 @@
    "category": "System & Drivers",
    "description": "Omarchy keyring",
    "homepage": "https://omarchy.org",
-   "tutorial_url": "https://omarchyapps.com/omarchy-keyring-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-keyring.html",
    "url": "https://omarchyapps.com/apps/omarchy-keyring.html"
   },
   {
@@ -1409,7 +1409,7 @@
    "category": "Utilities",
    "description": "Meeting Recorder for Omarchy: record the mic and the computer audio, transcribed on your own machine with speakers, chapters and a player",
    "homepage": "https://github.com/jankeesvw/omarchy-meeting-recorder",
-   "tutorial_url": "https://omarchyapps.com/meeting-recorder-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-meeting-recorder-bin.html",
    "url": "https://omarchyapps.com/apps/omarchy-meeting-recorder-bin.html"
   },
   {
@@ -1420,7 +1420,7 @@
    "category": "Developer Tools",
    "description": "Pre-built LazyVim configuration with cached plugins",
    "homepage": "https://github.com/LazyVim/LazyVim",
-   "tutorial_url": "https://omarchyapps.com/omarchy-nvim-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-nvim.html",
    "url": "https://omarchyapps.com/apps/omarchy-nvim.html"
   },
   {
@@ -1442,7 +1442,7 @@
    "category": "Themes & Desktop",
    "description": "Omarchy user defaults, /etc/skel content, fonts, plymouth theme, and support helpers",
    "homepage": "https://github.com/omacom/omarchy",
-   "tutorial_url": "https://omarchyapps.com/omarchy-settings-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-settings.html",
    "url": "https://omarchyapps.com/apps/omarchy-settings.html"
   },
   {
@@ -1475,7 +1475,7 @@
    "category": "Utilities",
    "description": "Floating native task manager for Omarchy",
    "homepage": "https://github.com/tcballard/omarchy-task-manager",
-   "tutorial_url": "https://omarchyapps.com/omarchy-task-manager-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-task-manager.html",
    "url": "https://omarchyapps.com/apps/omarchy-task-manager.html"
   },
   {
@@ -1486,7 +1486,7 @@
    "category": "Utilities",
    "description": "Background intro videos for the Omarchy themes",
    "homepage": "https://github.com/basecamp/omarchy",
-   "tutorial_url": "https://omarchyapps.com/omarchy-themes-intros-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/omarchy-theme-intros.html",
    "url": "https://omarchyapps.com/apps/omarchy-themes-intros.html"
   },
   {
@@ -1497,7 +1497,7 @@
    "category": "Terminal & Shell",
    "description": "Omarchy shell configuration for Zsh",
    "homepage": "https://github.com/omacom-io/omarchy-zsh",
-   "tutorial_url": "https://omarchyapps.com/how-to-use-omarchy-zsh.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omarchy-zsh.html",
    "url": "https://omarchyapps.com/apps/omarchy-zsh.html"
   },
   {
@@ -1508,7 +1508,7 @@
    "category": "Utilities",
    "description": "Screen recorder and editor for Omarchy with a synthetic cursor, auto zooms, and a camera bubble",
    "homepage": "https://github.com/omacom/omareel",
-   "tutorial_url": "https://omarchyapps.com/omareel-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omareel.html",
    "url": "https://omarchyapps.com/apps/omareel.html"
   },
   {
@@ -1519,7 +1519,7 @@
    "category": "Media & Creative",
    "description": "Native Wayland screenshot and annotation overlay for Hyprland",
    "homepage": "https://github.com/omacom/omasnap",
-   "tutorial_url": "https://omarchyapps.com/omasnap-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omasnap.html",
    "url": "https://omarchyapps.com/apps/omasnap.html"
   },
   {
@@ -1530,7 +1530,7 @@
    "category": "Utilities",
    "description": "Native Wayland screenshot and annotation overlay for Hyprland (main branch)",
    "homepage": "https://github.com/omacom/omasnap",
-   "tutorial_url": "https://omarchyapps.com/omasnap-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omasnap-git.html",
    "url": "https://omarchyapps.com/apps/omasnap-git.html"
   },
   {
@@ -1541,7 +1541,7 @@
    "category": "Utilities",
    "description": "Local-first text-to-speech application and daemon (pre-built binary)",
    "homepage": "https://github.com/jacob-vincent-mink/omaspeak",
-   "tutorial_url": "https://omarchyapps.com/omaspeak-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omaspeak-bin.html",
    "url": "https://omarchyapps.com/apps/omaspeak-bin.html"
   },
   {
@@ -1552,7 +1552,7 @@
    "category": "Utilities",
    "description": "Cross-format motorsport telemetry analysis workstation",
    "homepage": "https://github.com/tobi/omatrack",
-   "tutorial_url": "https://omarchyapps.com/omatrack-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omatrack.html",
    "url": "https://omarchyapps.com/apps/omatrack.html"
   },
   {
@@ -1574,7 +1574,7 @@
    "category": "Productivity & Notes",
    "description": "Dead-simple Markdown writing app built with Qt Quick",
    "homepage": "https://github.com/omacom/omawrite",
-   "tutorial_url": "https://omarchyapps.com/omawrite-writing-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omawrite.html",
    "url": "https://omarchyapps.com/apps/omawrite.html"
   },
   {
@@ -1585,7 +1585,7 @@
    "category": "Developer Tools",
    "description": "Live theme switching for Zed in Omarchy - automatically synchronize your Zed editor theme with your Omarchy system theme",
    "homepage": "https://github.com/aps6/omazed",
-   "tutorial_url": "https://omarchyapps.com/omazed-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/omazed.html",
    "url": "https://omarchyapps.com/apps/omazed.html"
   },
   {
@@ -1607,7 +1607,7 @@
    "category": "AI & Agents",
    "description": "Arch Linux package for OpenAI's Codex CLI - Auto Updated",
    "homepage": "https://github.com/openai/codex",
-   "tutorial_url": "https://omarchyapps.com/openai-codex-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/openai-codex-bin.html",
    "url": "https://omarchyapps.com/apps/openai-codex-bin.html"
   },
   {
@@ -1629,7 +1629,7 @@
    "category": "System & Drivers",
    "description": "OpenCL implemention for NVIDIA (580xx)",
    "homepage": "https://www.nvidia.com/",
-   "tutorial_url": "https://omarchyapps.com/opencl-nvidia-580xx-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/opencl-nvidia-580xx.html",
    "url": "https://omarchyapps.com/apps/opencl-nvidia-580xx.html"
   },
   {
@@ -1640,7 +1640,7 @@
    "category": "Utilities",
    "description": "Multi-channel AI gateway with extensible messaging integrations",
    "homepage": "https://github.com/openclaw/openclaw",
-   "tutorial_url": "https://omarchyapps.com/openclaw-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/openclaw.html",
    "url": "https://omarchyapps.com/apps/openclaw.html"
   },
   {
@@ -1651,7 +1651,7 @@
    "category": "Utilities",
    "description": "OpenVINO GenAI C and C++ runtime libraries",
    "homepage": "https://github.com/openvinotoolkit/openvino.genai",
-   "tutorial_url": "https://omarchyapps.com/openvino-genai-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/openvino-genai.html",
    "url": "https://omarchyapps.com/apps/openvino-genai.html"
   },
   {
@@ -1662,7 +1662,7 @@
    "category": "Utilities",
    "description": "High-performance wallpaper engine for Omarchy (mp4, gif, stills)",
    "homepage": "https://github.com/omacom/owe",
-   "tutorial_url": "https://omarchyapps.com/owe-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/owe.html",
    "url": "https://omarchyapps.com/apps/owe.html"
   },
   {
@@ -1673,7 +1673,7 @@
    "category": "Utilities",
    "description": "Lock screen video feed module for the OWE wallpaper engine",
    "homepage": "https://github.com/omacom/owe",
-   "tutorial_url": "https://omarchyapps.com/owe-lockfeed-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/owe-lockfeed.html",
    "url": "https://omarchyapps.com/apps/owe-lockfeed.html"
   },
   {
@@ -1684,7 +1684,7 @@
    "category": "AI & Agents",
    "description": "Official Perplexity desktop app",
    "homepage": "https://www.perplexity.ai",
-   "tutorial_url": "https://omarchyapps.com/perplexity-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/perplexity.html",
    "url": "https://omarchyapps.com/apps/perplexity.html"
   },
   {
@@ -1706,7 +1706,7 @@
    "category": "Developer Tools",
    "description": "Record and play back sound",
    "homepage": "https://python-sounddevice.rtfd.io/",
-   "tutorial_url": "https://omarchyapps.com/python-sounddevice-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/python-sounddevice.html",
    "url": "https://omarchyapps.com/apps/python-sounddevice.html"
   },
   {
@@ -1717,7 +1717,7 @@
    "category": "Terminal & Shell",
    "description": "Visual effects engine applied to text in the terminal.",
    "homepage": "https://github.com/ChrisBuilds/terminaltexteffects",
-   "tutorial_url": "https://omarchyapps.com/python-terminaltexteffects-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/python-terminaltexteffects.html",
    "url": "https://omarchyapps.com/apps/python-terminaltexteffects.html"
   },
   {
@@ -1738,7 +1738,7 @@
    "category": "System & Drivers",
    "description": "Commandline tool for interacting with QMK devices over HID",
    "homepage": "https://github.com/FrameworkComputer/qmk_hid",
-   "tutorial_url": "https://omarchyapps.com/qmk-hid-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/qmk-hid.html",
    "url": "https://omarchyapps.com/apps/qmk-hid.html"
   },
   {
@@ -1771,7 +1771,7 @@
    "category": "Utilities",
    "description": "Fast, Lightroom-compatible RAW photo editor (binary release)",
    "homepage": "https://github.com/pch/rawmakase",
-   "tutorial_url": "https://omarchyapps.com/rawmakase-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/rawmakase-bin.html",
    "url": "https://omarchyapps.com/apps/rawmakase-bin.html"
   },
   {
@@ -1782,7 +1782,7 @@
    "category": "Gaming & Emulation",
    "description": "RetroArch joypad autoconfig files",
    "homepage": "https://github.com/libretro/retroarch-joypad-autoconfig",
-   "tutorial_url": "https://omarchyapps.com/retroarch-joypad-autoconfig-git-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/retroarch-joypad-autoconfig-git.html",
    "url": "https://omarchyapps.com/apps/retroarch-joypad-autoconfig-git.html"
   },
   {
@@ -1793,7 +1793,7 @@
    "category": "Utilities",
    "description": "Read-only dashboard of pending updates and current problems on Arch and Omarchy",
    "homepage": "https://github.com/HANCORE-linux/rumb",
-   "tutorial_url": "https://omarchyapps.com/rumb-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/rumb.html",
    "url": "https://omarchyapps.com/apps/rumb.html"
   },
   {
@@ -1804,7 +1804,7 @@
    "category": "Utilities",
    "description": "Yet another remote desktop software, written in Rust. Works out of the box, no configuration required. Great alternative to TeamViewer and AnyDesk!",
    "homepage": "https://rustdesk.com/",
-   "tutorial_url": "https://omarchyapps.com/rustdesk-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/rustdesk.html",
    "url": "https://omarchyapps.com/apps/rustdesk.html"
   },
   {
@@ -1815,7 +1815,7 @@
    "category": "Media & Creative",
    "description": "Layered image editor with PSD and Affinity support (binary release)",
    "homepage": "https://github.com/Infrawrench/schist",
-   "tutorial_url": "https://omarchyapps.com/schist-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/schist-bin.html",
    "url": "https://omarchyapps.com/apps/schist-bin.html"
   },
   {
@@ -1826,7 +1826,7 @@
    "category": "Utilities",
    "description": "Sign PDFs and fill them in with text and dates",
    "homepage": "https://github.com/omacom/signed",
-   "tutorial_url": "https://omarchyapps.com/signed-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/signed.html",
    "url": "https://omarchyapps.com/apps/signed.html"
   },
   {
@@ -1837,7 +1837,7 @@
    "category": "Utilities",
    "description": "Slack Desktop for Linux",
    "homepage": "https://slack.com/downloads",
-   "tutorial_url": "https://omarchyapps.com/slack-desktop-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/slack-desktop.html",
    "url": "https://omarchyapps.com/apps/slack-desktop.html"
   },
   {
@@ -1860,7 +1860,7 @@
    "category": "Utilities",
    "description": "Persistent Wayland terminal for humans and bounded automation",
    "homepage": "https://github.com/ministry-of-taste/splinterm",
-   "tutorial_url": "https://omarchyapps.com/splinterm-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/splinterm.html",
    "url": "https://omarchyapps.com/apps/splinterm.html"
   },
   {
@@ -1871,7 +1871,7 @@
    "category": "Utilities",
    "description": "Policy-scoped MCP stdio adapter for Splinterm",
    "homepage": "https://github.com/ministry-of-taste/splinterm",
-   "tutorial_url": "https://omarchyapps.com/splinterm-mcp-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/splinterm-mcp.html",
    "url": "https://omarchyapps.com/apps/splinterm-mcp.html"
   },
   {
@@ -1882,7 +1882,7 @@
    "category": "Media & Creative",
    "description": "A proprietary music streaming service",
    "homepage": "https://www.spotify.com",
-   "tutorial_url": "https://omarchyapps.com/spotify-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/spotify.html",
    "url": "https://omarchyapps.com/apps/spotify.html"
   },
   {
@@ -1893,7 +1893,7 @@
    "category": "Utilities",
    "description": "Fast, keyboard-first file manager for modern Linux desktops",
    "homepage": "https://github.com/lgse/strata",
-   "tutorial_url": "https://omarchyapps.com/strata-file-manager-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/strata.html",
    "url": "https://omarchyapps.com/apps/strata.html"
   },
   {
@@ -1916,7 +1916,7 @@
    "description": "Self-hosted game stream host for Moonlight",
    "homepage": "https://app.lizardbyte.dev/Sunshine",
    "repository": "https://github.com/LizardByte/Sunshine",
-   "tutorial_url": "https://omarchyapps.com/sunshine-game-streaming-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/sunshine.html",
    "url": "https://omarchyapps.com/apps/sunshine.html"
   },
   {
@@ -1927,7 +1927,7 @@
    "category": "System & Drivers",
    "description": "A utility for Linux graphics switching on Intel/AMD iGPU + nVidia dGPU laptops",
    "homepage": "https://gitlab.com/asus-linux/supergfxctl",
-   "tutorial_url": "https://omarchyapps.com/supergfxctl-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/supergfxctl.html",
    "url": "https://omarchyapps.com/apps/supergfxctl.html"
   },
   {
@@ -1962,7 +1962,7 @@
    "description": "Open-source control plane for coding agents",
    "homepage": "https://t3.codes",
    "repository": "https://github.com/pingdotgg/t3code",
-   "tutorial_url": "https://omarchyapps.com/t3code-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/t3code-bin.html",
    "url": "https://omarchyapps.com/apps/t3code-bin.html"
   },
   {
@@ -1974,7 +1974,7 @@
    "description": "Open-source control plane for coding agents (nightly)",
    "homepage": "https://t3.codes",
    "repository": "https://github.com/pingdotgg/t3code",
-   "tutorial_url": "https://omarchyapps.com/t3code-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/t3code-bin.html",
    "url": "https://omarchyapps.com/apps/t3code-nightly-bin.html"
   },
   {
@@ -1985,7 +1985,7 @@
    "category": "Media & Creative",
    "description": "Modern screenshot annotation tool for Wayland",
    "homepage": "https://github.com/jondkinney/tensaku",
-   "tutorial_url": "https://omarchyapps.com/tensaku-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/tensaku.html",
    "url": "https://omarchyapps.com/apps/tensaku.html"
   },
   {
@@ -2007,7 +2007,7 @@
    "category": "Utilities",
    "description": "Native system monitor and task manager",
    "homepage": "https://tmog.org/",
-   "tutorial_url": "https://omarchyapps.com/tmog-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/tmog-bin.html",
    "url": "https://omarchyapps.com/apps/tmog-bin.html"
   },
   {
@@ -2018,7 +2018,7 @@
    "category": "Developer Tools",
    "description": "Fresh directories for every vibe.",
    "homepage": "https://github.com/tobi/try",
-   "tutorial_url": "https://omarchyapps.com/tobi-try-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/tobi-try.html",
    "url": "https://omarchyapps.com/apps/tobi-try.html"
   },
   {
@@ -2029,7 +2029,7 @@
    "category": "Themes & Desktop",
    "description": "Subset of the fonts provided by iA Writer",
    "homepage": "https://github.com/iaolo/iA-Fonts",
-   "tutorial_url": "https://omarchyapps.com/ttf-ia-writer-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/ttf-ia-writer.html",
    "url": "https://omarchyapps.com/apps/ttf-ia-writer.html"
   },
   {
@@ -2040,7 +2040,7 @@
    "category": "Themes & Desktop",
    "description": "Basic JetBrains Mono Nerd Font family",
    "homepage": "https://github.com/ryanoasis/nerd-fonts",
-   "tutorial_url": "https://omarchyapps.com/ttf-jetbrains-mono-nerd-basic-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/ttf-jetbrains-mono-nerd-basic.html",
    "url": "https://omarchyapps.com/apps/ttf-jetbrains-mono-nerd-basic.html"
   },
   {
@@ -2062,7 +2062,7 @@
    "category": "System & Drivers",
    "description": "TUXEDO Computers kernel module drivers. Compatibility check disabled - works when using identical models from other brands, example being TUXEDO Pulse 14 Gen 4 and Schenker Via 14 Pro (M24)",
    "homepage": "https://gitlab.com/kronerm/tuxedo-drivers-nocompatcheck",
-   "tutorial_url": "https://omarchyapps.com/tuxedo-drivers-nocompatcheck-dkms-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/tuxedo-drivers-nocompatcheck-dkms.html",
    "url": "https://omarchyapps.com/apps/tuxedo-drivers-nocompatcheck-dkms.html"
   },
   {
@@ -2073,7 +2073,7 @@
    "category": "Productivity & Notes",
    "description": "A minimal markdown editor and reader.",
    "homepage": "https://typora.io/",
-   "tutorial_url": "https://omarchyapps.com/typora-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/typora.html",
    "url": "https://omarchyapps.com/apps/typora.html"
   },
   {
@@ -2106,7 +2106,7 @@
    "category": "System & Drivers",
    "description": "Plays gstreamer sources into v4l2loopback devices.",
    "homepage": "https://gitlab.com/vicamo/v4l2-relayd",
-   "tutorial_url": "https://omarchyapps.com/v4l2-relayd-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/v4l2-relayd.html",
    "url": "https://omarchyapps.com/apps/v4l2-relayd.html"
   },
   {
@@ -2161,7 +2161,7 @@
    "category": "Utilities",
    "description": "Tool to freeze the screen of a Wayland compositor",
    "homepage": "https://github.com/Jappie3/wayfreeze",
-   "tutorial_url": "https://omarchyapps.com/wayfreeze-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/wayfreeze.html",
    "url": "https://omarchyapps.com/apps/wayfreeze.html"
   },
   {
@@ -2183,7 +2183,7 @@
    "category": "Utilities",
    "description": "Clean-room word processor in pure Rust that opens and saves Word documents",
    "homepage": "https://github.com/storytold/wordcraft",
-   "tutorial_url": "https://omarchyapps.com/wordcraft-bin-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/wordcraft-bin.html",
    "url": "https://omarchyapps.com/apps/wordcraft-bin.html"
   },
   {
@@ -2205,7 +2205,7 @@
    "category": "System & Drivers",
    "description": "Advanced Linux Driver for Xbox One Wireless Gamepad",
    "homepage": "https://github.com/atar-axis/xpadneo",
-   "tutorial_url": "https://omarchyapps.com/xpadneo-dkms-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/xpadneo-dkms.html",
    "url": "https://omarchyapps.com/apps/xpadneo-dkms.html"
   },
   {
@@ -2227,7 +2227,7 @@
    "category": "Themes & Desktop",
    "description": "Yaru default ubuntu gtk theme",
    "homepage": "https://github.com/ubuntu/yaru",
-   "tutorial_url": "https://omarchyapps.com/yaru-gtk-theme-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/yaru-gtk-theme.html",
    "url": "https://omarchyapps.com/apps/yaru-gtk-theme.html"
   },
   {
@@ -2238,7 +2238,7 @@
    "category": "Themes & Desktop",
    "description": "Yaru default ubuntu gtksourceview theme",
    "homepage": "https://github.com/ubuntu/yaru",
-   "tutorial_url": "https://omarchyapps.com/yaru-gtksourceview-theme-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/yaru-gtksourceview-theme.html",
    "url": "https://omarchyapps.com/apps/yaru-gtksourceview-theme.html"
   },
   {
@@ -2249,7 +2249,7 @@
    "category": "Themes & Desktop",
    "description": "Yaru default ubuntu icon theme",
    "homepage": "https://github.com/ubuntu/yaru",
-   "tutorial_url": "https://omarchyapps.com/yaru-icon-theme-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/yaru-icon-theme.html",
    "url": "https://omarchyapps.com/apps/yaru-icon-theme.html"
   },
   {
@@ -2260,7 +2260,7 @@
    "category": "Themes & Desktop",
    "description": "Yaru default ubuntu metacity theme",
    "homepage": "https://github.com/ubuntu/yaru",
-   "tutorial_url": "https://omarchyapps.com/yaru-metacity-theme-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/yaru-metacity-theme.html",
    "url": "https://omarchyapps.com/apps/yaru-metacity-theme.html"
   },
   {
@@ -2282,7 +2282,7 @@
    "category": "Themes & Desktop",
    "description": "Yaru default ubuntu sound theme",
    "homepage": "https://github.com/ubuntu/yaru",
-   "tutorial_url": "https://omarchyapps.com/yaru-sound-theme-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/yaru-sound-theme.html",
    "url": "https://omarchyapps.com/apps/yaru-sound-theme.html"
   },
   {
@@ -2304,7 +2304,7 @@
    "category": "Themes & Desktop",
    "description": "Yaru default ubuntu xfwm4 theme",
    "homepage": "https://github.com/ubuntu/yaru",
-   "tutorial_url": "https://omarchyapps.com/yaru-xfwm4-theme-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/yaru-xfwm4-theme.html",
    "url": "https://omarchyapps.com/apps/yaru-xfwm4-theme.html"
   },
   {
@@ -2326,7 +2326,7 @@
    "category": "System & Drivers",
    "description": "Kernel module for Motorcomm YT6801 ethernet controller (DKMS)",
    "homepage": "https://www.motor-comm.com/product/ethernet-control-chip",
-   "tutorial_url": "https://omarchyapps.com/yt6801-dkms-on-omarchy.html",
+   "tutorial_url": "https://omarchyapps.com/apps/yt6801-dkms.html",
    "url": "https://omarchyapps.com/apps/yt6801-dkms.html"
   },
   {

@@ -1377,12 +1377,71 @@ PRIMARY_GUIDE = {  # apps taught by more than one guide: the one the profile lin
 }
 
 
+def canonical_path(path: str) -> str:
+    """The live URL for a path, after one-hop merges in data/merged-pages.json."""
+    return MERGED.get(path, path)
+
+
 def tutorial_url(name: str) -> str:
     for guide_slug, names in GUIDE_PACKAGES.items():
         if name in names and PRIMARY_GUIDE.get(name, guide_slug) == guide_slug:
-            return f"/{guide_slug}.html"
-    path = f"/{slug(name)}-on-omarchy.html"
-    return MERGED.get(path, path)
+            return canonical_path(f"/{guide_slug}.html")
+    return canonical_path(f"/{slug(name)}-on-omarchy.html")
+
+
+def folded_guides_for(app_path: str) -> list[tuple[str, str, str]]:
+    """Hand-written guides (parts/guides) that 301 to this app page: (slug, anchor, body)."""
+    out = []
+    used = set()
+    for src, dst in MERGED.items():
+        if dst != app_path:
+            continue
+        slug_ = src.strip("/").removesuffix(".html")
+        part = ROOT / "parts" / "guides" / f"{slug_}.html"
+        if not part.exists():
+            continue
+        body = re.sub(r"<!--.*?-->", "", part.read_text(encoding="utf-8"), flags=re.S).strip()
+        if not body:
+            continue
+        if slug_.endswith("-faq"):
+            anchor = "faq"
+        elif slug_.startswith("what-is-"):
+            anchor = "what-is"
+        elif "guide" not in used:
+            anchor = "guide"
+        else:
+            anchor = slug_
+        used.add(anchor)
+        out.append((slug_, anchor, body))
+    return out
+
+
+def rewrite_merged_links(dist: pathlib.Path) -> int:
+    """Point every internal href at a merged URL to the kept page (one hop, no chains)."""
+    variants = {}
+    for src, dst in MERGED.items():
+        clean = src.removesuffix(".html")
+        variants[src] = dst
+        variants[clean] = dst
+        variants[clean + "/"] = dst
+        variants[SITE_URL + src] = SITE_URL + dst
+        variants[SITE_URL + clean] = SITE_URL + dst
+    href_re = re.compile(r'(href=")([^"#?]+)([#?][^"]*)?(")')
+
+    def sub(m):
+        url = m.group(2)
+        if url in variants:
+            return f"{m.group(1)}{variants[url]}{m.group(3) or ''}{m.group(4)}"
+        return m.group(0)
+
+    changed = 0
+    for page in list(dist.rglob("*.html")) + ([dist / "llms.txt"] if (dist / "llms.txt").exists() else []):
+        text = page.read_text(encoding="utf-8")
+        new_text = href_re.sub(sub, text)
+        if new_text != text:
+            page.write_text(new_text, encoding="utf-8")
+            changed += 1
+    return changed
 
 
 def app_title(p: dict) -> str:
@@ -1440,7 +1499,16 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
     if p.get("github"):
         links.append(f'<a class="button ghost" href="{html.escape(p["github"])}" target="_blank" rel="noopener">GitHub ↗</a>')
     links.append(f'<a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/{urllib.parse.quote(p["dir"])}" target="_blank" rel="noopener">PKGBUILD ↗</a>')
-    links.insert(0, f'<a class="button" href="{tutorial_url(p["name"])}">Tutorial: how to use {html.escape(tutorials.display_name(p["name"]))} on Omarchy</a>')
+    app_path = f"/apps/{slug(p['name'])}.html"
+    # Fold unique hand-written guide bodies into the winning app page so a 301 does not drop the content.
+    # Skip when this package already has a hand-expanded app body (data/app-extras.json).
+    folded = [] if (APP_EXTRAS.get(p["name"]) or {}).get("body_file") else folded_guides_for(app_path)
+    tut_href = tutorial_url(p["name"])
+    if tut_href == app_path:
+        if folded:
+            links.insert(0, f'<a class="button" href="#guide">Guide: how to use {html.escape(tutorials.display_name(p["name"]))} on Omarchy</a>')
+    else:
+        links.insert(0, f'<a class="button" href="{html.escape(tut_href)}">Tutorial: how to use {html.escape(tutorials.display_name(p["name"]))} on Omarchy</a>')
     gallery = ""
     if images:
         tiles = "".join(
@@ -1507,6 +1575,11 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
         assert anchor in page, "app template lost its What is section"
         page = page.replace(anchor, (ROOT / extra["body_file"]).read_text(encoding="utf-8") + anchor, 1)
         page = page.replace('    <div class="actions">', faq + '    <div class="actions">', 1)
+    if folded:
+        blocks = []
+        for slug_, anchor, body in folded:
+            blocks.append(f'<section class="folded-guide" id="{html.escape(anchor)}">{body}</section>')
+        page = page.replace('    <div class="actions">', "\n".join(blocks) + '\n    <div class="actions">', 1)
     return page
 
 
@@ -1797,18 +1870,19 @@ def main() -> None:
     (DIST / "sponsor.html").write_text(advertise, encoding="utf-8")
     press.build(root=ROOT, dist=DIST, site=SITE_URL, site_name=SITE_NAME, synced=synced, css=css.replace("__CATVARS__", cat_vars))
 
+    live_guides = [g for g in GUIDES if f"/{g['slug']}.html" not in MERGED]
     guide_cards = "\n".join(
         f'<a class="guide-card" href="/{g["slug"]}.html"><p class="eyebrow">{html.escape(g["eyebrow"])}</p>'
         f'<strong>{html.escape(g["title"])}</strong><span>{html.escape(g["description"])}</span></a>'
-        for g in GUIDES
+        for g in live_guides
     )
     guides_schema = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Omarchy Guides",
                      "url": SITE_URL + "/guides.html", "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/"},
-                     "hasPart": [{"@type": "Article", "name": g["title"], "url": f"{SITE_URL}/{g['slug']}.html"} for g in GUIDES]}
+                     "hasPart": [{"@type": "Article", "name": g["title"], "url": f"{SITE_URL}/{g['slug']}.html"} for g in live_guides]}
     guides_index = ((ROOT / "parts" / "guides.html").read_text(encoding="utf-8")
                     .replace("__NAV__", nav_html("guides.html"))
                     .replace("__GUIDE_CARDS__", guide_cards)
-                    .replace("__GUIDE_COUNT__", str(len(GUIDES)))
+                    .replace("__GUIDE_COUNT__", str(len(live_guides)))
                     .replace("__STRUCTURED_DATA__", json_script(guides_schema))
                     .replace("__SYNCED__", synced)
                     .replace("__CONTACT__", html.escape(CONTACT_URL))
@@ -1819,9 +1893,11 @@ def main() -> None:
     guide_template = (ROOT / "parts" / "guide.html").read_text(encoding="utf-8")
     page_css = css.replace("__CATVARS__", cat_vars)
     for guide in GUIDES:
+        if f"/{guide['slug']}.html" in MERGED:
+            continue
         related = "\n".join(
             f'<a class="related-guide" href="/{item["slug"]}.html"><strong>{html.escape(item["title"])}</strong><span>{html.escape(item["description"])}</span></a>'
-            for item in GUIDES if item["slug"] != guide["slug"]
+            for item in live_guides if item["slug"] != guide["slug"]
         )
         guide_body = (ROOT / "parts" / "guides" / f"{guide['slug']}.html").read_text(encoding="utf-8")
         guide_body = fill_package_watch(guide, guide_body, pkgs)
@@ -1866,6 +1942,8 @@ def main() -> None:
             f'<a class="related-guide" href="{href}"><strong>{label} on Omarchy</strong><span>Tutorial</span></a>'
             for href, label in sibs[:3]
         ) + f'\n<a class="related-guide" href="{t["profile"]}"><strong>{html.escape(t["display"])} package page</strong><span>Version, size, license and install command</span></a>'
+        if f"/{t['slug']}.html" in MERGED:
+            continue
         tut_page = render_seo_page(
             guide_template, page_css, t, t["body"], related, synced, ("Tutorials", "/tutorials.html"),
             "Generated from the official Omarchy package repo", [howto, app])
@@ -1873,8 +1951,9 @@ def main() -> None:
             tut_page = tut_page.replace(ROBOTS_INDEX, ROBOTS_NOINDEX)
         (DIST / f"{t['slug']}.html").write_text(tut_page, encoding="utf-8")
 
+    live_tuts = [t for t in tuts if f"/{t['slug']}.html" not in MERGED]
     by_cat_t: dict[str, list[dict]] = {}
-    for t in tuts:
+    for t in live_tuts:
         by_cat_t.setdefault(t["category"], []).append(t)
     tut_sections = "\n".join(
         f'<section class="tutorial-group"><h2>{html.escape(c)}</h2><div class="guide-grid">'
@@ -1885,12 +1964,12 @@ def main() -> None:
     )
     tut_schema = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Omarchy app tutorials",
                   "url": SITE_URL + "/tutorials.html", "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/"},
-                  "hasPart": [{"@type": "Article", "name": t["title"], "url": f"{SITE_URL}/{t['slug']}.html"} for t in tuts]}
+                  "hasPart": [{"@type": "Article", "name": t["title"], "url": f"{SITE_URL}/{t['slug']}.html"} for t in live_tuts]}
     (DIST / "tutorials.html").write_text(
         (ROOT / "parts" / "tutorials.html").read_text(encoding="utf-8")
         .replace("__NAV__", nav_html("guides.html"))
         .replace("__TUTORIAL_SECTIONS__", tut_sections)
-        .replace("__TUTORIAL_COUNT__", str(len(tuts)))
+        .replace("__TUTORIAL_COUNT__", str(len(live_tuts)))
         .replace("__STRUCTURED_DATA__", json_script(tut_schema))
         .replace("__SYNCED__", synced).replace("__CONTACT__", html.escape(CONTACT_URL))
         .replace("__SITE_URL__", SITE_URL).replace("__STYLE__", page_css), encoding="utf-8")
@@ -1902,6 +1981,8 @@ def main() -> None:
     app_template = (ROOT / "parts" / "app.html").read_text(encoding="utf-8")
     resolved_css = css.replace("__CATVARS__", cat_vars).replace("url(fonts/", "url(../fonts/")
     for p in pkgs:
+        if f"/apps/{slug(p['name'])}.html" in MERGED:
+            continue
         (apps_dir / f"{slug(p['name'])}.html").write_text(
             render_app_page(app_template, resolved_css, p, synced, app_banners).replace(ROBOTS_INDEX, ROBOTS_NOINDEX) if p["name"] in THIN_APPS
             else render_app_page(app_template, resolved_css, p, synced, app_banners), encoding="utf-8"
@@ -1969,10 +2050,10 @@ def main() -> None:
     def lastmod(path: str) -> str:
         return page_dates[(path.lstrip("/") or "index.html")]
     paths = ["/"] + [f"/{name}.html" for name in ("leaderboard", "develop", "about", "press", "faq", "sponsor", "guides", "terms")]
-    paths += [f"/{guide['slug']}.html" for guide in GUIDES]
-    paths += [f"/apps/{slug(p['name'])}.html" for p in pkgs if p["name"] not in THIN_APPS]
-    paths += [path for path, _ in seo_pages] + [path for path, _ in catalog_pages]
-    paths += ["/tutorials.html"] + [f"/{t['slug']}.html" for t in tuts if not t.get("canonical") and not t.get("noindex")]
+    paths += [f"/{guide['slug']}.html" for guide in GUIDES if f"/{guide['slug']}.html" not in MERGED]
+    paths += [f"/apps/{slug(p['name'])}.html" for p in pkgs if p["name"] not in THIN_APPS and f"/apps/{slug(p['name'])}.html" not in MERGED]
+    paths += [path for path, _ in seo_pages if path not in MERGED] + [path for path, _ in catalog_pages if path not in MERGED]
+    paths += ["/tutorials.html"] + [f"/{t['slug']}.html" for t in tuts if not t.get("canonical") and not t.get("noindex") and f"/{t['slug']}.html" not in MERGED]
     sitemap_entries = [(SITE_URL + path, lastmod(path)) for path in paths]
     sitemap_urls = [u for u, _ in sitemap_entries]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -2003,11 +2084,11 @@ def main() -> None:
         f"- [Q&A]({SITE_URL}/faq.html)\n"
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
         "## Guides and comparisons\n"
-        + "".join(f"- [{guide['title']}]({SITE_URL}/{guide['slug']}.html)\n" for guide in GUIDES)
+        + "".join(f"- [{guide['title']}]({SITE_URL}/{guide['slug']}.html)\n" for guide in GUIDES if f"/{guide['slug']}.html" not in MERGED)
         + f"- [Omarchy apps list (all packages)]({SITE_URL}/omarchy-apps-list.html)\n"
-        + "".join(f"- [{SITE_URL}{path}]({SITE_URL}{path})\n" for path, _ in seo_pages if not path.startswith("/omarchy-apps-list"))
+        + "".join(f"- [{SITE_URL}{path}]({SITE_URL}{path})\n" for path, _ in seo_pages if not path.startswith("/omarchy-apps-list") and path not in MERGED)
         + "\n## App tutorials\n"
-        + "".join(f"- [{t['title']}]({SITE_URL}/{t['slug']}.html)\n" for t in tuts)
+        + "".join(f"- [{t['title']}]({SITE_URL}/{t['slug']}.html)\n" for t in tuts if f"/{t['slug']}.html" not in MERGED)
         + "\n"
         "Contact: https://x.com/jessyka_boat\n", encoding="utf-8"
     )
@@ -2024,6 +2105,10 @@ def main() -> None:
         "// Generated by build.py from inhouse_ads.py. Do not edit by hand.\nexport default "
         + json.dumps({a["rank"]: a["name"] for a in inhouse_ads.ADS}) + ";\n", encoding="utf-8")
     print(f"dist/ad1..ad{len(inhouse_ads.ADS)}.html noindex waitlist pages · house ads in sponsor slots: " + ", ".join(f"{k} {n}" for k, n in ad_slots.items()))
+    rewrites = rewrite_merged_links(DIST)
+    for path in MERGED:
+        (DIST / path.lstrip("/")).unlink(missing_ok=True)
+    print(f"merged pages:     {len(MERGED)} one-hop 301s · rewrote links on {rewrites} files")
 
     print(f"seo pages:        {len(seo_pages)} (categories, apps list, comparisons, install guides)")
 

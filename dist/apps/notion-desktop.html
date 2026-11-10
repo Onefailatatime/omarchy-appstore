@@ -61,7 +61,133 @@
     <section><h2>Install notion-desktop on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add notion-desktop</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>No special requirements documented.</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>Check the project site for current pricing.</dd><dt>Licence</dt><dd>custom</dd><dt>Download</dt><dd>99.6 MB</dd><dt>Installed</dt><dd>397.6 MB</dd></dl></div></section>
 
-    <div class="actions"><a class="button" href="/notion-desktop-on-omarchy.html">Tutorial: how to use notion-desktop on Omarchy</a><a class="button ghost" href="https://www.notion.com/desktop" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/notion-desktop" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
+<section class="folded-guide" id="guide"><nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">How to switch</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+<section id="install">
+  <h2>Notion on Omarchy</h2>
+  <p>Notion is the all-in-one workspace — docs, wikis, databases, tasks, and calendars in one app — and this is the <strong>official</strong> Notion desktop app, repackaged by David Heinemeier Hansson himself from Notion's own Linux Flatpak into a native Omarchy package, with a launcher that forces native Wayland rendering on Omarchy.</p>
+  <h3>TL;DR</h3>
+  <pre><code class="language-bash">omarchy pkg add notion-desktop</code></pre>
+  <p>Install the official Notion desktop app on Omarchy with one command. 98.9 MB download, 394 MB installed, version 7.41.1-1. That's a full Chromium runtime under the hood — the price of an Electron app. Launch from the app launcher or <code>notion-desktop</code> in a terminal, sign in with your Notion account (email magic link), and your workspace syncs down.</p>
+</section>
+
+<section id="getting-started">
+  <h2>Getting started (5 minutes)</h2>
+  <h3>1. First launch.</h3>
+  <p>Open Notion from the launcher (or run <code>notion-desktop</code>). It asks you to sign in — enter your email and Notion sends a magic link / code; complete it in the browser and the app picks up your session (confirm the exact flow on Omarchy during the verify pass). Pick your workspace and you're in: sidebar on the left, your pages, and the "New page" button.</p>
+  <h3>2. The 3 things you need to know:</h3>
+  <ul>
+    <li><strong>It's cloud-first.</strong> Your data lives on Notion's servers, not on your machine — every page syncs, collaboration is live, and you need a network connection. If you want notes that are yours even when offline, that's what <a href="/apps/slap-notes-bin.html">Slap Notes</a> (local-first, also in the store) is for.</li>
+    <li><strong>The launcher already handles Wayland.</strong> The package's launcher script passes <code>--ozone-platform=wayland</code> so the app renders natively instead of falling back to blurry XWayland on scaled displays — no flags needed on a stock Omarchy box. If you ever need to override it (or pass other Chromium flags), each line of <code>~/.config/notion-desktop-flags.conf</code> becomes an extra argument, and your own <code>--ozone-platform</code> choice wins over the default.</li>
+    <li><strong>The window's app id is <code>notion</code>.</strong> The package is built from Notion's Flatpak, whose id is <code>com.notion.app.desktop.notion</code> — but outside a Flatpak the window reports <code>notion</code>, and the .desktop entry sets <code>StartupWMClass=notion</code> to match. So Hyprland rules target <code>notion</code>:
+      <pre><code class="language-ini">windowrule = float, class:^(notion)$</code></pre></li>
+  </ul>
+  <h3>3. Config location.</h3>
+  <p>Electron apps keep state under <code>~/.config/Notion</code> (unverified — confirm on the box; the flags file <code>~/.config/notion-desktop-flags.conf</code> is confirmed by the launcher script). The actual app binary lives at <code>/opt/notion-desktop/Notion</code> if you ever need to point something at it directly.</p>
+</section>
+
+<section id="issues">
+  <h2>Common issues &amp; fixes</h2>
+  <p>All sourced from the Omarchy packaging (PKGBUILD, launcher script, upstream tracking) and Notion's public product docs. Nothing below was reproduced on Omarchy — confirm each fix on-machine before relying on it.</p>
+  <h3>The app looks blurry on a scaled (HiDPI) display</h3>
+  <p>The package launcher forces native Wayland (<code>--ozone-platform=wayland</code>) precisely because Chromium's auto-detection falls back to XWayland "often enough to matter," per the launcher's own comments.</p>
+  <p><strong>Fix:</strong> If it's blurry anyway, something overrode the platform: check <code>~/.config/notion-desktop-flags.conf</code> for a conflicting <code>--ozone-platform</code> line (user-set platform flags win), remove it, and relaunch. If native Wayland itself glitches, force XWayland deliberately by adding <code>--ozone-platform=x11</code> to that flags file instead of guessing. (Source: <code>notion-desktop-launcher.sh</code> in <a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/notion-desktop" target="_blank" rel="noopener">omacom/omarchy-pkgs</a>.)</p>
+  <h3>Window rules or dock pinning don't match the app</h3>
+  <p>The Flatpak id (<code>com.notion.app.desktop.notion</code>) is the .desktop <em>filename</em>, but the window's app id is <code>notion</code>.</p>
+  <p><strong>Fix:</strong> The package's PKGBUILD rewrites the entry to <code>Exec=notion-desktop %U</code> and adds <code>StartupWMClass=notion</code> for exactly this reason — write Hyprland rules against <code>class:^(notion)$</code>, verified with <code>hyprctl clients</code>. If you pinned the app before this package existed (old unofficial wrappers), unpin and re-pin.</p>
+  <h3>Notion needs an account and a connection — nothing works offline the way local notes apps do</h3>
+  <p>That's the product, not a bug: Notion is a cloud workspace; the Linux app is a full client of it, not a sync engine you can point at local files.</p>
+  <p><strong>Fix:</strong> The free plan covers unlimited pages and blocks for individuals, so the install costs nothing — paid Plus/Business tiers are per-user on notion.com/pricing. If your notes must work on a plane, pair Notion with a local-first app (<a href="/apps/slap-notes-bin.html">Slap Notes</a>) rather than fighting this.</p>
+  <h3>394 MB installed feels enormous for a notes app</h3>
+  <p>It is — that's a bundled Chromium plus Notion's app bundle.</p>
+  <p><strong>Fix:</strong> The package is built with maximum zstd compression specifically to keep the <em>download</em> at 98.9 MB (noted in the PKGBUILD). If disk space matters and you only need Notion occasionally, the web app at notion.com is the same product with zero install; the desktop app's wins are the tray, global shortcuts, and not living in a browser tab.</p>
+  <h3>The package lags a Notion release you just read about</h3>
+  <p>Updates are automatic but deliberate: a sync script (<code>.omarchy/upstream.sh</code>) polls Notion's own OSTree repo, and a version only ships when <strong>both</strong> the x86_64 and aarch64 commits agree — if Notion releases one architecture first, the package waits rather than shipping a half-release.</p>
+  <p><strong>Fix:</strong> Maintainer is David Heinemeier Hansson, so it tracks upstream closely; give it a day or two.</p>
+</section>
+
+<section id="pairs">
+  <h2>Pairs well with / If you hate this, try</h2>
+  <h3>Pairs well with</h3>
+  <ul>
+    <li><a href="/apps/omawrite.html">omawrite</a> (distraction-free drafting before anything deserves a database)</li>
+    <li><a href="/apps/slap-notes-bin.html">Slap Notes</a> (local-first capture that works offline)</li>
+    <li>A browser you trust for the magic-link sign-in step</li>
+  </ul>
+  <h3>If you hate this, try</h3>
+  <ul>
+    <li><a href="/apps/slap-notes-bin.html">Slap Notes</a> — local-first block notes with a wiki-link graph, free, and built for exactly the "my notes live on my machine" philosophy Notion doesn't share (<code>omarchy pkg add slap-notes-bin</code>); or Logseq, the open-source local-first outliner (AUR: <code>yay -S logseq-desktop-bin</code> — not in the Omarchy store).</li>
+  </ul>
+</section>
+
+<section id="comparison">
+  <h2>Comparison: Notion vs similar apps</h2>
+  <div class="table-scroll">
+    <table class="compare-table">
+      <thead>
+        <tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Notion</strong></td><td>Free tier; Plus/Business paid per user</td><td>Teams and individuals who want docs + databases + wikis in one synced, collaborative workspace</td><td><code>omarchy pkg add notion-desktop</code></td></tr>
+        <tr><td><strong>Slap Notes</strong></td><td>Free</td><td>Local-first notes with wiki links and an AI research agent; your data stays on your machine</td><td><code>omarchy pkg add slap-notes-bin</code></td></tr>
+        <tr><td><strong>Logseq</strong></td><td>Free (open source)</td><td>Local-first outliner/PKM with backlinks, for markdown-files people</td><td>AUR (<code>yay -S logseq-desktop-bin</code>); not in the Omarchy store</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Verdict:</strong> If your team lives in Notion, this official client is the only sane way to run it on Omarchy — native Wayland, one command, maintained by DHH; if your notes are personal and you want them local-first and offline, Slap Notes is the Omarchy-native answer.</p>
+</section>
+
+<aside class="guide-callout">
+  <h2>Notion is free for individuals — the desktop app costs $0</h2>
+  <p><strong>Notion is free for individuals.</strong> What you give up: nothing to start — the free plan covers unlimited pages and blocks for individuals, and the app install itself costs nothing. What costs money: the Plus/Business tiers (per-user pricing on notion.com/pricing) — that's for teams that need admin controls and collaboration at scale. What you keep: the whole workspace — docs, wikis, databases, tasks, calendars — in an official native Linux client with native Wayland rendering.</p>
+</aside>
+
+<section id="switch">
+  <h2>How to switch to the desktop client (~5 minutes)</h2>
+  <ol>
+    <li><strong>If you already use Notion in the browser:</strong> there is nothing to export — the desktop app is the same product. Install it, sign in with the same email magic link, and your entire workspace syncs down.</li>
+    <li><strong>Set up window rules:</strong> add <code>windowrule = float, class:^(notion)$</code> to your Hyprland config if you want it floating, and confirm with <code>hyprctl clients</code> that the app id is <code>notion</code>.</li>
+    <li><strong>Check scaling:</strong> the launcher forces native Wayland, so text should be sharp on a HiDPI display. If it's blurry, check <code>~/.config/notion-desktop-flags.conf</code> for a conflicting <code>--ozone-platform</code> line (see Common issues).</li>
+    <li><strong>Time estimate:</strong> ~5 minutes from install to a signed-in, synced workspace. Your data already lives on Notion's servers — the client is just a new window onto it.</li>
+  </ol>
+</section>
+
+<div class="guide-cta">
+  <div><h2>Open the notion-desktop package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+  <a class="button" href="/apps/notion-desktop.html">View notion-desktop →</a>
+</div>
+
+<section class="guide-faq" id="faq">
+  <h2>Frequently asked questions</h2>
+  <details><summary>Does Notion work on Omarchy?</summary><p>Yes — this package repackages Notion's official Linux Flatpak (built from Notion's own OSTree repository at app.linux-packages.notion.com) as a native Arch package, for both x86_64 and aarch64. Install with <code>omarchy pkg add notion-desktop</code>.</p></details>
+  <details><summary>Is Notion free?</summary><p>The app install is free and Notion has a free plan (unlimited pages/blocks for individuals). Plus and Business are paid per user — check notion.com/pricing for current numbers. License of the app itself is proprietary ("custom" — Notion ships no license text; terms at notion.com/terms).</p></details>
+  <details><summary>Does the Notion desktop app work offline on Linux?</summary><p>Notion is cloud-first: your workspace syncs from Notion's servers, and you need a connection. Treat it as an online app, not a local notes store. (Confirm exact offline behavior on Omarchy during the verify pass.)</p></details>
+  <details><summary>Why is the download 99 MB and the install 394 MB?</summary><p>It's an Electron app — a full Chromium runtime plus the Notion bundle. The download stays small because the package is compressed with maximum zstd; the install size is the real footprint.</p></details>
+  <details><summary>How do I uninstall it cleanly?</summary><p><code>omarchy pkg drop notion-desktop</code>. Electron state under <code>~/.config/Notion</code> is left behind (unverified path — confirm during verify pass); remove it if you want a fully clean slate.</p></details>
+</section>
+
+<section class="sources">
+  <h2>Official sources</h2>
+  <ul>
+    <li><a href="https://omarchyapps.com/apps/notion-desktop.html" target="_blank" rel="noopener">omarchyapps.com — notion-desktop listing (version 7.41.1-1, 98.9 MB / 394 MB, install command)</a></li>
+    <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/notion-desktop" target="_blank" rel="noopener">omacom/omarchy-pkgs/pkgbuilds/notion-desktop — PKGBUILD (Flatpak repackage, chrome-sandbox setuid, StartupWMClass=notion, max-zstd compression)</a></li>
+    <li><a href="https://github.com/omacom/omarchy-pkgs/blob/master/pkgbuilds/notion-desktop/notion-desktop-launcher.sh" target="_blank" rel="noopener">notion-desktop-launcher.sh — Wayland forcing + flags file</a></li>
+    <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/notion-desktop/.omarchy" target="_blank" rel="noopener">.omarchy/upstream.sh — update tracking against Notion's OSTree repo</a></li>
+    <li><a href="https://www.notion.com/desktop" target="_blank" rel="noopener">Notion desktop download page</a></li>
+    <li><a href="https://www.notion.com/terms" target="_blank" rel="noopener">Notion terms (no license text shipped with the app)</a></li>
+  </ul>
+  <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+</section></section>
+    <div class="actions"><a class="button" href="#guide">Guide: how to use notion-desktop on Omarchy</a><a class="button ghost" href="https://www.notion.com/desktop" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/notion-desktop" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
 <div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="app" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div><script src="/oa-ads.js"></script></div>

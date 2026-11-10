@@ -61,7 +61,139 @@
     <section><h2>Install hex-bin on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add hex-bin</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>No special requirements documented.</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>Check the project site for current pricing.</dd><dt>Licence</dt><dd>MIT</dd><dt>Download</dt><dd>25.9 MB</dd><dt>Installed</dt><dd>72.6 MB</dd></dl></div></section>
 
-    <div class="actions"><a class="button" href="/hex-bin-on-omarchy.html">Tutorial: how to use hex on Omarchy</a><a class="button ghost" href="https://github.com/anomalyco/hex" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/hex-bin" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
+<section class="folded-guide" id="guide"><nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">How to switch</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+<section id="install">
+  <h2>Hex voice dictation on Omarchy</h2>
+  <p>Hex is local-first voice dictation by Anomaly (the new Rust rewrite of Kit Langton's dictation app): hold a key, speak, release, and Hex transcribes on your machine with a local speech model and pastes the text into whatever app you're in. The Linux build is a beta that covers x86_64/ARM64, X11, and wlroots Wayland compositors like Omarchy's Hyprland.</p>
+  <h3>TL;DR</h3>
+  <pre><code class="language-bash">omarchy pkg add hex-bin</code></pre>
+  <p>Install Hex on Omarchy with one command. 21.8 MB download, 57 MB installed, version 3.0.0-1. Launch it from the app launcher or <code>hex</code> in a terminal. First launch downloads a speech model (the app needs <code>huggingface.co</code> reachable for that) — after that, dictation runs fully on-device. Start Hex at login with <code>systemctl --user enable hex.service</code>. MIT-licensed, free, no account.</p>
+  <p>Not the hex-dump tool: Arch's <code>hex</code> package installs <code>/usr/bin/hx</code>. This package is <code>hex-bin</code>, the dictation app, and installs <code>/usr/bin/hex</code> — they don't conflict.</p>
+</section>
+
+<section id="getting-started">
+  <h2>Getting started (5 minutes)</h2>
+  <h3>1. First launch.</h3>
+  <p>Open Hex from the launcher (or run <code>hex</code>). It opens a 980×760 window with Settings, Modes, and History. The first thing it does is download a speech model for on-device transcription — pick a language and model (English + Parakeet is a good default), then let it finish. Per the docs, Hex is <strong>one process per user</strong>: closing the window doesn't stop dictation or a model download; quit from the tray menu or with <code>hex quit</code>.</p>
+  <h3>2. The 3 things you need to know:</h3>
+  <ul>
+    <li><strong>The shortcut does nothing on Omarchy until you bind it.</strong> Hyprland accepts the GlobalShortcuts portal but delivers nothing unless you bind the key yourself — the key you record in Hex's Settings is ignored. Add this to your Hyprland config (prefer keys <em>without</em> modifiers; modifiers can leak into the paste keystroke):
+      <pre><code class="language-ini">bind = , End, global, hex:dictation
+bind = F9, global, hex:paste-last</code></pre>
+      Then: press End, speak, press End again (Toggle mode) — or bind <code>hex dictation start</code> / <code>hex dictation stop</code> to key press/release for hold-to-dictate. Double-press the key to keep recording; press again to finish. Option-Shift-V (or <code>hex paste-last</code>) re-pastes the last dictation.</li>
+    <li><strong>Everything is paste, not typing.</strong> Hex copies the transcript, then pastes with Ctrl+V through <code>wtype</code> (wlroots compositors) or the desktop's RemoteDesktop portal. If paste fails, the transcript stays on your clipboard with "Copied to the clipboard; press Ctrl+V to paste" — see the fixes below.</li>
+    <li><strong>The tray runs the show.</strong> When the desktop has a StatusNotifierItem host (Omarchy's bar qualifies), Hex shows a tray icon: click to open the window, or use the menu — <strong>Show Hex</strong>, <strong>Paste last dictation</strong>, model list, update (<strong>Restart to update</strong>), <strong>Enable / Disable Hex</strong>, <strong>Quit Hex</strong>. While recording or transcribing, the menu and tooltip say so.</li>
+  </ul>
+  <h3>3. Config location.</h3>
+  <p>App settings live in <code>settings.json</code> in Hex's data directory (run <code>hex logs</code> to find the path — unverified on Omarchy). Power-user transforms go in <code>~/.config/hex/hex.config.ts</code> (TypeScript/JavaScript, reloaded on save; no filesystem/network/process access). Launch-at-login is <code>systemctl --user enable hex.service</code>; the docs also suggest this Hyprland line so the service inherits your session display:</p>
+  <pre><code class="language-ini">exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP</code></pre>
+</section>
+
+<section id="issues">
+  <h2>Common issues &amp; fixes</h2>
+  <p>All sourced from the project's docs and issue tracker. Nothing below was reproduced on Omarchy — confirm each fix on-machine before relying on it.</p>
+  <h3>Pressing the shortcut does nothing on Omarchy</h3>
+  <p>Expected — Hyprland "takes every shortcut without a key," so Hex can't bind anything itself (<a href="https://github.com/anomalyco/hex/blob/master/docs/linux.md#shortcuts" target="_blank" rel="noopener">docs/linux.md</a>).</p>
+  <p><strong>Fix:</strong> Bind it in <code>~/.config/hypr/hyprland.conf</code>: <code>bind = , End, global, hex:dictation</code> for toggle, or press/release binds of <code>hex dictation start</code> / <code>hex dictation stop</code> for hold-to-dictate. If it still does nothing, confirm Hex is running (<code>hex status</code>) — the <code>hex</code> control commands never start it, they only talk to the running process.</p>
+  <h3>Dictation finishes but nothing pastes ("Copied to the clipboard")</h3>
+  <p>Per the docs, this happens when neither paste path is available: on Hyprland you need <code>wl-clipboard</code> <strong>and</strong> <code>wtype</code> installed (they're <code>optdepends</code> of the package).</p>
+  <p><strong>Fix:</strong> Install them: <code>sudo pacman -S --needed wl-clipboard wtype</code>. The first paste on some desktops asks you to approve keyboard control via the RemoteDesktop portal; approve it once and Hex keeps the restore token. (<a href="https://github.com/anomalyco/hex/blob/master/docs/linux.md#native-wayland-requirements" target="_blank" rel="noopener">docs/linux.md: Native Wayland Requirements</a>)</p>
+  <h3>The pasted text arrives wrong</h3>
+  <p>Documented Wayland behavior: Hex can't see held keys, and Hyprland merges still-held modifiers into the paste keystroke — e.g. you held Alt+Z and the paste became Ctrl+Alt+V. Hex waits for the shortcut's release plus 250 ms before pasting (fixed path for <a href="https://github.com/anomalyco/hex/issues/354" target="_blank" rel="noopener">issue #354</a>).</p>
+  <p><strong>Fix:</strong> <strong>Release the modifiers before the transcript arrives</strong>, or bind modifier-less keys (End, F-keys). A modifier held past ~2 s still changes the paste.</p>
+  <h3>The recording HUD/overlay never appears on Omarchy</h3>
+  <p>Known open issue: <a href="https://github.com/anomalyco/hex/issues/756" target="_blank" rel="noopener">issue #756</a> — on pure Wayland without layer-shell support for Hex's overlay, the HUD is unavailable. Also see <a href="https://github.com/anomalyco/hex/issues/814" target="_blank" rel="noopener">issue #814</a> — the Hex window maps too small on Linux/Wayland (the app is meant to auto-float at 980×760). Both open as of 2026-11-01.</p>
+  <p><strong>Fix:</strong> The window itself and dictation still work; use the tray icon's recording indicator instead. Monitor both issues before claiming anything is fixed.</p>
+  <h3>Hex quits immediately on launch, or says your processor is unsupported</h3>
+  <p>Two separate causes from the docs: x86_64 builds require a 2013-or-newer CPU with AVX2 (Intel Haswell / AMD Excavator or later) — the app shows a message and quits otherwise. Separately, even with CPU inference the <em>window</em> needs a Vulkan driver; <code>vulkan-icd-loader</code> alone isn't a driver.</p>
+  <p><strong>Fix:</strong> Install your GPU's Vulkan driver or a software one (mesa provides lavapipe) before reporting a black/blank window.</p>
+  <h3>First-run model download fails on a restricted network</h3>
+  <p>App downloads come from <code>anoma.ly</code>, but model setup needs <code>huggingface.co</code> and its model CDN — a successful app download doesn't prove those are reachable (docs).</p>
+  <p><strong>Fix:</strong> Allow both hosts, then retry model preparation in Settings › Transcription Model. Diagnostic view: <code>hex logs -n 40</code> or <code>journalctl --user -u hex.service</code>.</p>
+</section>
+
+<section id="pairs">
+  <h2>Pairs well with / If you hate this, try</h2>
+  <h3>Pairs well with</h3>
+  <ul>
+    <li><a href="/apps/omawrite.html">omawrite</a> (dictate your draft, edit it in a real writing app)</li>
+    <li><a href="/apps/omarchy-meeting-recorder-bin.html">omarchy-meeting-recorder-bin</a> (capture the audio for meetings, Hex-style)</li>
+    <li><code>wl-clipboard</code> (the clipboard backend Hex pastes through)</li>
+  </ul>
+  <h3>If you hate this, try</h3>
+  <ul>
+    <li>Nerd Dictation — free, open-source Linux dictation built on Vosk (<code>yay -S nerd-dictation-git</code>; needs a <code>vosk-model</code>) — fully offline, but raw word accuracy is a step below Hex's models and there's no app like Hex's window/tray.</li>
+  </ul>
+</section>
+
+<section id="comparison">
+  <h2>Comparison: Hex vs similar apps</h2>
+  <div class="table-scroll">
+    <table class="compare-table">
+      <thead>
+        <tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Hex</strong></td><td>Free (MIT, open source; Linux beta)</td><td>Omarchy users who want hold-a-key voice typing anywhere, transcribed on-device, with a real settings window and tray</td><td><code>omarchy pkg add hex-bin</code></td></tr>
+        <tr><td><strong>Nerd Dictation</strong></td><td>Free (GPL, Vosk-based)</td><td>Fully offline Linux dictation via a hotkey, no GUI, no cloud</td><td><code>yay -S nerd-dictation-git</code> (AUR; not in the Omarchy store)</td></tr>
+        <tr><td><strong>Superwhisper</strong></td><td>From $8.33/mo (Mac only)</td><td>Mac users wanting LLM-polished dictation and meeting transcription</td><td>Not available on Linux</td></tr>
+        <tr><td><strong>Wispr Flow</strong></td><td>$20/mo (Mac/Windows)</td><td>Polished commercial dictation with AI editing</td><td>Not available on Linux</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Verdict:</strong> If you want Superwhisper-style "hold a key and talk" dictation on an Omarchy box without paying or sending audio to a cloud, Hex is the only serious option; Nerd Dictation is the fallback if you insist on zero setup UI.</p>
+</section>
+
+<aside class="guide-callout">
+  <h2>Hex is a free alternative to Superwhisper ($8.33/mo) and Wispr Flow ($20/mo)</h2>
+  <p><strong>Hex is a free alternative to Superwhisper ($8.33/mo) and Wispr Flow ($20/mo) — on Linux, where neither runs.</strong> What you give up: their LLM rewrite/polish passes on every dictation (Hex has optional Modes text processing, plus optional OpenCode post-processing if you run OpenCode — not the same as a built-in AI editor), and meeting transcription (macOS-only in Hex). What you keep: the core loop — hold a key, speak, get pasted text anywhere — with on-device transcription, so your audio never leaves the machine. Free and MIT-licensed.</p>
+</aside>
+
+<section id="switch">
+  <h2>How to switch from commercial dictation</h2>
+  <p>No migration needed: commercial dictation tools keep no exportable state worth migrating — your habit transfers, nothing else. Install Hex, bind the shortcut in your Hyprland config, install <code>wl-clipboard</code> + <code>wtype</code>, and the core loop (hold a key, speak, get text) works the same from day one. What you leave behind: per-dictation LLM polish (Superwhisper/Wispr Flow) and meeting transcription (macOS-only anyway). What you gain: no subscription, no cloud, and dictation inside any Omarchy app — not just the browser.</p>
+</section>
+
+<div class="guide-cta">
+  <div><h2>Open the hex-bin package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+  <a class="button" href="/apps/hex-bin.html">View hex-bin →</a>
+</div>
+
+<section class="guide-faq" id="faq">
+  <h2>Frequently asked questions</h2>
+  <details><summary>Does Hex work on Omarchy?</summary><p>Yes — the Linux beta targets exactly this stack: wlroots Wayland compositors including Hyprland. Install with <code>omarchy pkg add hex-bin</code>, bind the shortcut in your Hyprland config (the in-app shortcut recorder is ignored on Hyprland), and install <code>wl-clipboard</code> + <code>wtype</code> so pasting works.</p></details>
+  <details><summary>Is Hex free?</summary><p>Yes. MIT-licensed open source by Anomaly (<code>anomalyco/hex</code>). Ordinary dictation needs no account and no cloud service; the store listing says to check the project site for current pricing, so confirm before treating this as permanent.</p></details>
+  <details><summary>Does dictation work offline?</summary><p>Yes, after the one-time model download — transcription runs on-device (Vulkan GPU when available, CPU fallback). No audio is saved by default, and history keeps only pasted text for 7 days (configurable, can be turned off).</p></details>
+  <details><summary>Is this the same as the hex hex-dump tool?</summary><p>No. The Arch package <code>hex</code> is a hex viewer (installs <code>/usr/bin/hx</code>). <code>hex-bin</code> is the dictation app (installs <code>/usr/bin/hex</code>). The PKGBUILD explicitly documents this distinction; they don't conflict.</p></details>
+  <details><summary>Can I cancel a dictation?</summary><p>No — Escape never cancels; every dictation finishes and pastes (documented behavior; see the discussion in <a href="https://github.com/anomalyco/hex/issues/786" target="_blank" rel="noopener">issue #786</a>). To drop one, finish it and delete the text.</p></details>
+  <details><summary>How do I uninstall it cleanly?</summary><p><code>omarchy pkg drop hex-bin</code>, then <code>systemctl --user disable --now hex.service</code> if you enabled it, and remove the data directory (<code>hex logs</code> shows the path; model downloads live there — unverified, confirm during the verify pass).</p></details>
+</section>
+
+<section class="sources">
+  <h2>Official sources</h2>
+  <ul>
+    <li><a href="https://github.com/anomalyco/hex" target="_blank" rel="noopener">anomalyco/hex — README (install, dictate, modes, annotate, privacy)</a></li>
+    <li><a href="https://github.com/anomalyco/hex/blob/master/docs/linux.md" target="_blank" rel="noopener">anomalyco/hex — docs/linux.md (One Hex Process, Shortcuts, Native Wayland Requirements, Updates)</a></li>
+    <li><a href="https://omarchyapps.com/apps/hex-bin.html" target="_blank" rel="noopener">omarchyapps.com — hex-bin listing (version 3.0.0-1, 21.8 MB / 57 MB, MIT, install command)</a></li>
+    <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/hex-bin" target="_blank" rel="noopener">omacom/omarchy-pkgs/pkgbuilds/hex-bin — PKGBUILD (deps, optdepends wl-clipboard/wtype, systemd unit, desktop entry)</a></li>
+    <li><a href="https://github.com/anomalyco/hex/issues/756" target="_blank" rel="noopener">issue #756 — Linux/Hyprland: HUD overlay unavailable on pure Wayland (open)</a></li>
+    <li><a href="https://github.com/anomalyco/hex/issues/814" target="_blank" rel="noopener">issue #814 — Hex window is too small on Linux/Wayland (open)</a></li>
+    <li><a href="https://github.com/anomalyco/hex/issues/354" target="_blank" rel="noopener">issue #354 — fix(linux): wait for shortcut modifiers before the Wayland paste (closed)</a></li>
+    <li><a href="https://github.com/anomalyco/hex/issues/786" target="_blank" rel="noopener">issue #786 — dictation has no cancel (referenced in docs)</a></li>
+  </ul>
+  <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+</section></section>
+    <div class="actions"><a class="button" href="#guide">Guide: how to use hex on Omarchy</a><a class="button ghost" href="https://github.com/anomalyco/hex" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/hex-bin" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
 <div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="app" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div><script src="/oa-ads.js"></script></div>

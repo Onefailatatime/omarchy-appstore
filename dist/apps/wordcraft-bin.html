@@ -61,7 +61,151 @@
     <section><h2>Install wordcraft-bin on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add wordcraft-bin</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>No special requirements documented.</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>Check the project site for current pricing.</dd><dt>Licence</dt><dd>Apache-2.0 OR MIT, OFL-1.1</dd><dt>Download</dt><dd>111.6 MB</dd><dt>Installed</dt><dd>231.6 MB</dd></dl></div></section>
 
-    <div class="actions"><a class="button" href="/wordcraft-bin-on-omarchy.html">Tutorial: how to use wordcraft on Omarchy</a><a class="button ghost" href="https://github.com/storytold/wordcraft" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/wordcraft-bin" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
+<section class="folded-guide" id="guide"><nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">How to switch</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+<section id="install">
+  <h2>WordCraft on Omarchy</h2>
+  <p>WordCraft is a free, open-source (Apache-2.0 or MIT) Microsoft Word clone written from scratch in pure Rust — the ribbon, styles, tables, track changes, and mail merge you already know, with <code>.docx</code> as its native format. It is alpha software: its authors estimate ~60% readiness for real work.</p>
+  <h3>TL;DR</h3>
+  <pre><code class="language-bash">omarchy pkg add wordcraft-bin</code></pre>
+  <p>Install WordCraft on Omarchy with one command. 104.2 MB download, 210.1 MB installed, version 0.12.0-1. Launch from the app launcher or <code>wordcraft</code> in a terminal, open any <code>.docx</code> directly — no conversion, no import wizard. No account, no license key, no telemetry. Apache-2.0 or MIT licensed, free forever.</p>
+  <p>One note: on Hyprland it runs through XWayland by default; start it with <code>WORDCRAFT_WAYLAND=1 wordcraft</code> for native Wayland (see Common issues).</p>
+</section>
+
+<section id="getting-started">
+  <h2>Getting started (5 minutes)</h2>
+  <h3>1. Install and launch.</h3>
+  <p>Run the command above, then launch WordCraft from the app launcher or with <code>wordcraft</code> in a terminal. The first screen is the Word workflow you know: a ribbon of tabs (Home, Insert, Layout, References, Review, View), a styles gallery, and a page canvas.</p>
+  <h3>2. The 3 things you need to know:</h3>
+  <ul>
+    <li><strong><code>.docx</code> is the native format.</strong> It opens and saves Word documents directly — including password-protected ones — and also opens Word 97–2003 <code>.doc</code> files. It reads and writes <code>.odt</code>, <code>.rtf</code>, HTML, Markdown, LaTeX and plain text, and exports PDF with real selectable text, links, and bookmarks.</li>
+    <li><strong>Use Styles, not manual formatting.</strong> 505 of Word's 520 ribbon commands are implemented (counted at the 0.12.0 tag), and styles are the fastest way to make a document look right and stay consistent. Track Changes and Comments live on the Review tab.</li>
+    <li><strong>The interface speaks your language.</strong> As of recent builds the UI ships in 26 languages and follows your system language automatically — handy on a multi-language machine.</li>
+  </ul>
+  <h3>3. Config location.</h3>
+  <p>Settings and logs live at <code>~/.config/wordcraft/</code> — the log at <code>~/.config/wordcraft/logs/wordcraft.log</code> is what you attach to a bug report (it never contains your document text), and auto-recovery copies of unsaved work sit in <code>~/.config/wordcraft/recovery</code>. Run <code>RUST_LOG=debug wordcraft</code> for verbose logs.</p>
+</section>
+
+<section id="issues">
+  <h2>Common issues &amp; fixes</h2>
+  <p>All sourced from the project's own docs, release notes, and changelog. Nothing below was reproduced on Omarchy — confirm each fix on-machine before relying on it.</p>
+  <h3>Text looks blurry with fractional scaling on Hyprland</h3>
+  <p>On a Wayland desktop like Omarchy's Hyprland, WordCraft runs through <strong>XWayland</strong> by default, because the windowing library it uses only supports dragging files into a window on X11. XWayland means the app is upscaled by the compositor, so at fractional scales (1.25x, 1.5x) text looks softer than native apps (<a href="https://getwordcraft.org/download/linux" target="_blank" rel="noopener">source</a>).</p>
+  <p><strong>Fix:</strong> Launch it natively on Wayland:</p>
+  <pre><code class="language-bash">WORDCRAFT_WAYLAND=1 wordcraft</code></pre>
+  <p>Text gets sharp, but you lose drag-and-drop into the window (open files via File → Open instead). Pick whichever trade-off bugs you less; there's no perfect setting yet.</p>
+  <h3>A saved .docx looks wrong when reopened in real Word</h3>
+  <p>WordCraft's <code>.docx</code> round-trip has documented limits. Since v0.5.0, charts, SmartArt and OLE objects are <strong>preserved on save but can't be edited</strong>; Office 2016 charts with their data and the glossary survive since 0.8.0; drawing canvases survive, but <strong>ink inside groups and canvases is lost</strong>. And the team has never measured the round trip against a corpus of real documents — only their own files (<a href="https://pasqualepillitteri.it/en/news/23272/wordcraft-guide-free-word-alternative-rust" target="_blank" rel="noopener">source</a>).</p>
+  <p><strong>Fix:</strong> Before sending an important file, open the WordCraft-saved copy in real Word or LibreOffice Writer and check it — especially anything with charts, SmartArt, ink annotations, or heavy styling. Since v0.8.0 a failed save tells you why and keeps the document open (previously you could lose work silently), so at least the failure mode is honest now (<a href="https://github.com/storytold/wordcraft/releases/tag/v0.8.0" target="_blank" rel="noopener">v0.8.0 changelog</a>).</p>
+  <h3>First keystroke gets dropped after clicking the toolbar</h3>
+  <p>In builds around 0.8.0, the first keystroke after clicking a ribbon/chrome element could be swallowed, and pressing Space or Enter could reset the X11 input context (breaking IME/compose input). Both were fixed upstream in 0.8.0 (<a href="https://github.com/storytold/wordcraft/releases/tag/v0.8.0" target="_blank" rel="noopener">changelog</a>).</p>
+  <p><strong>Fix:</strong> Make sure you're on the current Omarchy build (<code>omarchy pkg add wordcraft-bin</code> — the store is at 0.12.0-1 as of 2026-10-29). If input still misbehaves on Hyprland, the native-Wayland launch (<code>WORDCRAFT_WAYLAND=1</code>) uses a different input path and is worth trying; if it persists, it's an upstream bug — file it at storytold/wordcraft with your compositor and build version.</p>
+  <h3>The app offers to update itself at startup</h3>
+  <p>Since 0.12.0, WordCraft shows an update prompt at startup that can install a new version by itself. On Omarchy the package is managed by pacman (<code>omarchy pkg</code>), so a self-update can put the app out of sync with your package manager.</p>
+  <p><strong>Fix:</strong> Dismiss the in-app update prompt and update through Omarchy instead (<code>omarchy pkg add wordcraft-bin</code> pulls the newest packaged build). Two copies of the truth — the package manager's version and the self-installed one — is how you end up with two conflicting WordCrafts.</p>
+</section>
+
+<section id="pairs">
+  <h2>Pairs well with / If you hate this, try</h2>
+  <h3>Pairs well with</h3>
+  <ul>
+    <li><code>gridcraft-bin</code> (its office-suite sibling — same ArtCraft family, same one-command install; see the GridCraft guide)</li>
+    <li><code>typora</code> or <code>omawrite</code> (for Markdown-first drafting before final layout in WordCraft)</li>
+    <li><code>localsend-bin</code> (send the finished .docx to your phone)</li>
+  </ul>
+  <h3>If you hate this, try</h3>
+  <ul>
+    <li>LibreOffice Writer (<code>sudo pacman -S libreoffice-fresh</code>) — the 30-year incumbent: mature .docx fidelity, macros, and the full office suite, at the cost of a clunkier UI and slower startup.</li>
+  </ul>
+</section>
+
+<section id="comparison">
+  <h2>Comparison: WordCraft vs Word vs LibreOffice Writer</h2>
+  <div class="table-scroll">
+    <table class="compare-table">
+      <thead>
+        <tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>WordCraft</strong></td><td>Free (Apache-2.0 or MIT)</td><td>New documents where you want the Word workflow at native-Rust speed, offline, with zero cost</td><td><code>omarchy pkg add wordcraft-bin</code></td></tr>
+        <tr><td><strong>Microsoft Word</strong></td><td>$9.99/mo (Microsoft 365 Personal, billed monthly)</td><td>Client documents, tracked-change collaboration, guaranteed fidelity, macros</td><td>Web only via Microsoft 365, or Windows VM</td></tr>
+        <tr><td><strong>LibreOffice Writer</strong></td><td>Free (MPL-2.0)</td><td>Legacy .docx files and complex layouts that need a mature engine</td><td><code>sudo pacman -S libreoffice-fresh</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Verdict:</strong> Pick WordCraft for documents you create yourself — it's fast, free, and the ribbon workflow needs zero relearning. Keep LibreOffice Writer (or real Word) for files that arrive from clients, lawyers, or anyone with SmartArt, heavy tracked changes, or macros.</p>
+</section>
+
+<aside class="guide-callout">
+  <h2>WordCraft is a free alternative to Microsoft Word ($9.99/mo)</h2>
+  <p><strong>WordCraft is a free alternative to Microsoft Word ($9.99/mo).</strong> What you give up: VBA macros, real-time co-authoring, and guaranteed fidelity on complex documents (charts, SmartArt and OLE survive saves but can't be edited; ink in grouped canvases is lost). What you keep: the ribbon, styles, tables, track changes, mail merge, .docx round-tripping for normal documents, and PDF export with selectable text — for $0, forever, offline.</p>
+</aside>
+
+<section id="switch">
+  <h2>How to switch from Word (~15 minutes)</h2>
+  <ol>
+    <li><strong>Export from Word:</strong> nothing to export — <code>.docx</code> is WordCraft's native format. Just open your existing files.</li>
+    <li><strong>Open your files:</strong> File → Open. Normal documents (text, styles, tables, footnotes, track changes) transfer cleanly.</li>
+    <li><strong>What doesn't transfer:</strong> macros/VBA, ink in grouped canvases, editability of charts/SmartArt/OLE objects (they're preserved, not editable), and your Word templates/add-ins.</li>
+    <li><strong>Time estimate:</strong> instant for most personal documents. Budget ~15 minutes per complex file for a verify pass against real Word before you trust it.</li>
+  </ol>
+</section>
+
+<div class="guide-cta">
+  <h2>Open the wordcraft-bin package</h2>
+  <p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p>
+  <a class="button" href="/apps/wordcraft-bin.html">View wordcraft-bin →</a>
+</div>
+
+<section class="guide-faq" id="faq">
+  <h2>Frequently asked questions</h2>
+  <details>
+    <summary>Does WordCraft work on Omarchy?</summary>
+    <p>Yes — it's in the Omarchy package store as <code>wordcraft-bin</code> (0.12.0-1, built 2026-10-29). One command: <code>omarchy pkg add wordcraft-bin</code>. It's a native Rust app on the GPU (no Electron), and the store lists no special requirements.</p>
+  </details>
+  <details>
+    <summary>Is WordCraft really free?</summary>
+    <p>Yes. Apache-2.0 or MIT license, no account, no payment, no telemetry, and you can build it yourself from the public repo. It's made by the ArtCraft team (GitHub org <code>storytold</code>), part of their 13-app "Crafting Apps" suite alongside GridCraft (Excel) and DeckCraft (PowerPoint).</p>
+  </details>
+  <details>
+    <summary>Can it replace Word for real work?</summary>
+    <p>For new documents and everyday writing: genuinely yes — its authors estimate ~60% readiness for real work. For documents where fidelity is contractual (client filings, resumes, anything with complex layout or macros): keep Word or LibreOffice Writer in the loop for a final check.</p>
+  </details>
+  <details>
+    <summary>Does it run natively on Wayland?</summary>
+    <p>By default it runs through XWayland (drag-and-drop works, fractional scaling is soft). Launch with <code>WORDCRAFT_WAYLAND=1 wordcraft</code> for native Wayland with sharper text, at the cost of drag-and-drop.</p>
+  </details>
+  <details>
+    <summary>Can AI agents use my documents?</summary>
+    <p>Yes — like its sibling GridCraft, WordCraft ships a CLI and an MCP server, so scripts and AI agents can read, write, and transform documents programmatically.</p>
+  </details>
+</section>
+
+<section class="sources">
+  <h2>Official sources</h2>
+  <ul>
+    <li><a href="https://omarchyapps.com/apps/wordcraft-bin.html" target="_blank" rel="noopener">omarchyapps.com — wordcraft-bin listing (0.12.0-1, Apache-2.0 OR MIT, 104.2 MB / 210.1 MB)</a></li>
+    <li><a href="https://github.com/storytold/wordcraft" target="_blank" rel="noopener">storytold/wordcraft — repo (features, install)</a></li>
+    <li><a href="https://getwordcraft.org/download/linux" target="_blank" rel="noopener">getwordcraft.org/download/linux — Wayland notes, config/log paths</a></li>
+    <li><a href="https://getwordcraft.org/" target="_blank" rel="noopener">getwordcraft.org — WordCraft project site</a></li>
+    <li><a href="https://pasqualepillitteri.it/en/news/23272/wordcraft-guide-free-word-alternative-rust" target="_blank" rel="noopener">WordCraft guide (feature audit, .docx fidelity)</a></li>
+    <li><a href="https://pasqualepillitteri.it/en/news/22194/artcraft-wordcraft-gridcraft-deckcraft-office-clones-rust" target="_blank" rel="noopener">ArtCraft suite launch (WordCraft/GridCraft/DeckCraft, Oct 2026)</a></li>
+    <li><a href="https://github.com/storytold/wordcraft/releases/tag/v0.8.0" target="_blank" rel="noopener">v0.8.0 release notes (save behavior, input fixes)</a></li>
+    <li><a href="https://dev.to/faizan050/wordcraft-explained-install-edit-docx-and-export-pdf-h1a" target="_blank" rel="noopener">dev.to — WordCraft install walkthrough</a></li>
+    <li><a href="https://www.getpricepulse.com/companies/microsoft-365-pricing.html" target="_blank" rel="noopener">getpricepulse.com — Microsoft 365 Personal pricing ($9.99/mo)</a></li>
+  </ul>
+  <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+</section></section>
+    <div class="actions"><a class="button" href="#guide">Guide: how to use wordcraft on Omarchy</a><a class="button ghost" href="https://github.com/storytold/wordcraft" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/wordcraft-bin" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
 <div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="app" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div><script src="/oa-ads.js"></script></div>

@@ -61,7 +61,181 @@
     <section><h2>Install splinterm on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add splinterm</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>No special requirements documented.</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>Check the project site for current pricing.</dd><dt>Licence</dt><dd>MIT</dd><dt>Download</dt><dd>11.9 MB</dd><dt>Installed</dt><dd>29 MB</dd></dl></div></section>
 
-    <div class="actions"><a class="button" href="/splinterm-on-omarchy.html">Tutorial: how to use splinterm on Omarchy</a><a class="button ghost" href="https://github.com/ministry-of-taste/splinterm" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/splinterm" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
+<section class="folded-guide" id="guide"><nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues &amp; fixes</a>
+      <a href="#pairs">Pairs &amp; alternatives</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">How to switch</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+<section id="install">
+  <h2>Splinterm on Omarchy</h2>
+  <p>Splinterm is a persistent Wayland terminal for Omarchy where your shells keep running even after you close the window — a <code>splinterd</code> daemon owns sessions, layouts, and terminal state, so detaching is safe and your work is still there when you come back.</p>
+  <h3>TL;DR</h3>
+  <pre><code class="language-bash">omarchy pkg add splinterm</code></pre>
+  <p>Install splinterm on Omarchy with one command. It takes ~2 minutes. MIT-licensed open source, free forever, no paid tier. Guide drafted against stable v0.1.1 (Omarchy package 0.1.1-1; store listing reports 8.4 MB).</p>
+  <p>One caution from upstream: the AUR packages (<code>splinterm-bin</code>, <code>splinterm</code>) are prerelease-capable channels, not stable-only — they can advance to release candidates. The Omarchy package (<code>splinterm</code>, version 0.1.1-1) tracks the stable release. Prefer the Omarchy package unless you want to test prereleases.</p>
+</section>
+
+<section id="getting-started">
+  <h2>Getting started (5 minutes)</h2>
+  <h3>1. First launch.</h3>
+  <p>Launch Splinterm from the app launcher or run <code>splinterm</code> in a terminal. You get an ordinary-looking terminal window — the magic is invisible: this window is a disposable view into <code>splinterd</code>, the daemon that actually owns your shell. Close the window and the shell keeps running.</p>
+  <h3>2. Wire it into Omarchy (recommended).</h3>
+  <p>Install does NOT change your default terminal or touch Omarchy/Hyprland config. Opt in explicitly:</p>
+  <pre><code class="language-bash">splinterm integration omarchy enable</code></pre>
+  <p>This sets Splinterm as your default terminal, tags it as a terminal so Omarchy treats Super+C correctly (until then, universal <code>Super+C</code> sends <code>Ctrl+C</code> — interrupt), and hooks up theme following. It's reversible.</p>
+  <h3>3. The three things you need to know:</h3>
+  <ul>
+    <li><strong>Windows are views, not owners.</strong> The topology is daemon-owned: <strong>Lairs</strong> (named projects/persistent sessions) contain <strong>Dojos</strong> (terminal layouts), which contain <strong>Splints</strong> (shells/panes). A Window is just a native Wayland view onto that topology. Learn this vocabulary once and the whole CLI makes sense.</li>
+    <li><strong>Detaching is the default.</strong> Close a window and the work keeps running. Reopen through the Dojo picker: <code>splinterm dojos</code> (pick a running Dojo or start fresh) or <code>splinterm reopen</code> (reopen the last one). Reopening attaches to processes that are still running — exited processes restart only through an explicit restore, never automatically.</li>
+    <li><strong>It's Foot under the hood.</strong> The terminal kernel is a Rust translation of Foot (pinned to Foot 1.27.0), so if you've used Foot, behavior is familiar: Sixel, static Kitty images, and inline iTerm2 PNG are supported; full Kitty graphics is not.</li>
+  </ul>
+  <h3>4. Essential controls.</h3>
+  <p>Inside a Splinterm window:</p>
+  <div class="table-scroll">
+    <table class="compare-table">
+      <thead><tr><th>Action</th><th>Control</th></tr></thead>
+      <tbody>
+        <tr><td>Command palette</td><td><code>Ctrl+Shift+P</code></td></tr>
+        <tr><td>Recent Dojos</td><td><code>Ctrl+Shift+S</code></td></tr>
+        <tr><td>Split horizontally</td><td><code>Ctrl+Shift+Enter</code></td></tr>
+        <tr><td>Split vertically</td><td><code>Ctrl+Shift+\</code></td></tr>
+        <tr><td>Move between panes</td><td><code>Ctrl+Shift+Arrow</code></td></tr>
+        <tr><td>Cycle Dojo tabs</td><td><code>Ctrl+Tab</code> / <code>Ctrl+Shift+Tab</code></td></tr>
+        <tr><td>New Dojo tab</td><td><code>Ctrl+Shift+D</code></td></tr>
+        <tr><td>Detach active tab</td><td><code>Ctrl+Shift+Q</code></td></tr>
+        <tr><td>Search scrollback</td><td><code>Ctrl+Shift+F</code></td></tr>
+        <tr><td>Copy / paste</td><td><code>Ctrl+Shift+C</code> / <code>V</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>There's also an optional <code>omarchy-tmux</code> profile that adds familiar Ctrl+Space / Ctrl+B prefixes if you're coming from tmux.</p>
+  <h3>5. Config location.</h3>
+  <p>Settings live in <code>~/.config/splinterm/config.ini</code> (fonts, shell, scrollback, cursor, keymap overlays, theme overrides). On Omarchy, Splinterm reads your active theme's <code>foot.ini</code> and <code>colors.toml</code> and reloads palette changes live, no restart needed. Leave <code>main.font</code> unset and it also follows your fontconfig <code>monospace</code> family live.</p>
+</section>
+
+<section id="issues">
+  <h2>Common issues &amp; fixes</h2>
+  <p>All sourced from the project's own docs, troubleshooting page, status doc, and issue tracker. Nothing below was reproduced on Omarchy — confirm each fix on-machine before relying on it.</p>
+  <h3>Upgrading from an old install leaves theme generation broken</h3>
+  <p>e.g. <code>omarchy theme set astra</code> fails with <code>ValueError: missing Omarchy roles: darker_bg, lighter_bg, bright_fg, active_tab_background</code>.</p>
+  <p><strong>Fix:</strong> Open as of 2026-10-20 (<a href="https://github.com/ministry-of-taste/splinterm/issues/183" target="_blank" rel="noopener">issue #183</a>): the theme generator expects older short-form Omarchy role names, and some themes (like Astra) only supply long-form names. The other theme hooks continue, but the Splinterm theme JSON isn't written. No fixed release yet — if you hit it, add your theme to the issue; meanwhile themes with short-form role names generate fine.</p>
+  <h3><code>yay -S splinterm-bin</code> fails on aarch64 (Asahi/Arch ARM)</h3>
+  <p>Package not available, or a 404 downloading an aarch64 asset.</p>
+  <p><strong>Fix:</strong> Open as of 2026-09-06 (<a href="https://github.com/ministry-of-taste/splinterm/issues/76" target="_blank" rel="noopener">issue #76</a>): the prebuilt package declares <code>arch=('x86_64')</code> only. The stable release is validated for x86_64 Omarchy/Arch with native Wayland under Hyprland — ARM is not a current compatibility promise. On Apple Silicon, use the source-built package (<code>yay -S splinterm</code>) instead of the prebuilt.</p>
+  <h3>A Splinterm window exits immediately with "unauthorized"</h3>
+  <p><strong>Fix:</strong> Per the <a href="https://splinterm.com/docs/troubleshooting/" target="_blank" rel="noopener">troubleshooting page</a>: the trusted client must be the packaged <code>/usr/bin/splinterm</code> adjacent to the running <code>/usr/bin/splinterd</code> — a user-local <code>splinterm</code> earlier in PATH does not match the daemon's trusted-UI identity. Check <code>command -v splinterm</code> resolves to <code>/usr/bin/splinterm</code>, that client and daemon come from the same package build, and that old windows were reopened after any upgrade.</p>
+  <h3>Daemon restarted after a heavy workload and sessions are gone</h3>
+  <p><strong>Fix:</strong> Per the <a href="https://splinterm.com/docs/troubleshooting/" target="_blank" rel="noopener">troubleshooting page</a>: check <code>systemctl --user show splinterd.service -p Result,NRestarts,MemoryCurrent</code> for an out-of-memory result. Terminal workloads run in a separate aggregate slice so they don't share the daemon's budget, but if the daemon itself restarts, restoration is explicit by design — Splinterm never reruns saved commands automatically. Inspect exited topology with <code>splinterm list --all</code> and restore what you need.</p>
+  <h3>A new Splint reports an internal launch failure</h3>
+  <p><strong>Fix:</strong> Per the <a href="https://splinterm.com/docs/troubleshooting/" target="_blank" rel="noopener">troubleshooting page</a>: the daemon fails closed when it can't place the terminal helper in its exact systemd scope before executing the shell. Check <code>journalctl --user-unit splinterd.service -n 40 --no-pager</code> and <code>systemctl --user status app-splinterm.slice</code>. Do not "fix" it by launching the packaged daemon manually — that removes the package's required-containment contract.</p>
+  <h3>Stopping or upgrading the daemon ends all child processes, and there's no way to upgrade live</h3>
+  <p><strong>Fix:</strong> By design, not a bug: 0.1.1 has no live daemon-upgrade handoff. Save your work and always upgrade from a terminal not owned by <code>splinterd</code> (e.g. plain foot or ghostty), then reopen Splinterm windows. See <a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/packaging.md" target="_blank" rel="noopener">Packaging</a> for the upgrade and recovery workflow.</p>
+</section>
+
+<section id="pairs">
+  <h2>Pairs well with / If you hate this, try</h2>
+  <h3>Pairs well with</h3>
+  <ul>
+    <li><code>splinterm-mcp</code> (the policy-scoped MCP adapter that lets coding agents reach your sessions safely — separate package; see the Splinterm-MCP guide)</li>
+    <li><code>herdr</code> (Omarchy's agent-status watcher, for the same automation crowd)</li>
+    <li><code>tmog-bin</code> (if you like multiple terminal front-ends on the Omarchy store)</li>
+  </ul>
+  <h3>If you hate this, try</h3>
+  <ul>
+    <li><code>ghostty</code> (Omarchy's default-feel GPU terminal, no daemon, no persistence layer)</li>
+    <li><code>tmux</code> (the classic: persistent sessions with zero new vocabulary, but no native windows or agent interfaces)</li>
+    <li><code>foot</code> (the pure upstream emulator Splinterm is derived from — minimal, fast, no daemon)</li>
+  </ul>
+</section>
+
+<section id="comparison">
+  <h2>Comparison: Splinterm vs similar terminals</h2>
+  <div class="table-scroll">
+    <table class="compare-table">
+      <thead>
+        <tr><th>App</th><th>Price</th><th>Best for</th><th>Omarchy install</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Splinterm</strong></td><td>Free (MIT)</td><td>Terminals that survive closed windows, plus a bounded way to let coding agents reach your shells</td><td><code>omarchy pkg add splinterm</code></td></tr>
+        <tr><td><strong>Ghostty</strong></td><td>Free</td><td>A fast modern terminal with no daemon and no new concepts; just open and type</td><td><code>omarchy pkg add ghostty</code></td></tr>
+        <tr><td><strong>tmux</strong></td><td>Free</td><td>The battle-tested classic for persistent sessions inside any terminal; steeper vocabulary, no native windows</td><td><code>omarchy pkg add tmux</code></td></tr>
+        <tr><td><strong>Foot</strong></td><td>Free</td><td>Minimal upstream emulator — everything Splinterm's kernel is derived from, minus persistence and automation</td><td><code>omarchy pkg add foot</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Verdict:</strong> Pick Splinterm if you want tmux-style persistence with native Wayland windows and a safe automation story; pick tmux if you want the industry-standard multiplexer that works everywhere; pick Ghostty if you just want a fast terminal and never think about session lifetimes.</p>
+</section>
+
+<aside class="guide-callout">
+  <h2>Splinterm is a free alternative to Warp ($15/mo Pro)</h2>
+  <p><strong>Splinterm is a free alternative to Warp ($15/mo Pro).</strong> What you give up: Warp's proprietary cloud sync and built-in AI blocks. What you keep: persistent sessions, tabs and panes, command palette, Omarchy theme integration, and an MCP adapter for coding agents that Warp doesn't offer in this form. For the Omarchy user who wants Warp-style workflow features without the subscription or the cloud, Splinterm is the native answer.</p>
+</aside>
+
+<section id="switch">
+  <h2>How to switch from Warp (~15 minutes)</h2>
+  <ol>
+    <li><strong>Export from Warp:</strong> Warp keeps settings in its cloud account — per the free-alternative math above, you give up "proprietary cloud sync," so plan on rebuilding your setup fresh rather than importing it. Note down your key bindings and themes if you customized them.</li>
+    <li><strong>Install Splinterm:</strong> On Omarchy: <code>omarchy pkg add splinterm</code>, then run <code>splinterm integration omarchy enable</code> to make it your default terminal with theme following.</li>
+    <li><strong>Recreate your workflows as Lairs and Dojos:</strong> a Lair is your project/session, a Dojo is a layout inside it, a Splint is a shell/pane. Recreate the layouts you lived in with <code>Ctrl+Shift+Enter</code> splits and <code>Ctrl+Shift+D</code> Dojo tabs.</li>
+    <li><strong>What doesn't transfer:</strong> Warp's cloud-synced settings, AI blocks, and any cloud workflows. What you gain in return: daemon-owned persistence (close the window, the work survives) and a local, consent-gated automation surface instead of a cloud service.</li>
+  </ol>
+</section>
+
+<div class="guide-cta">
+  <h2>Open the splinterm package</h2>
+  <p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p>
+  <a class="button" href="/apps/splinterm.html">View splinterm →</a>
+</div>
+
+<section class="guide-faq" id="faq">
+  <h2>Frequently asked questions</h2>
+  <details>
+    <summary>Does Splinterm work on Omarchy?</summary>
+    <p>Yes — it's designed first for Omarchy. The stable release is validated on x86_64 Omarchy/Arch with native Wayland under Hyprland. The Omarchy package ships version 0.1.1-1.</p>
+  </details>
+  <details>
+    <summary>Is Splinterm free?</summary>
+    <p>Yes, MIT-licensed open source. No paid tier, no trial, no feature gates. There's an optional Ko-fi link to support the maintainer.</p>
+  </details>
+  <details>
+    <summary>Do I need to learn new vocabulary (Lair, Dojo, Splint)?</summary>
+    <p>To get real value out of persistence, yes — it's the core model. A Lair is your project/session, a Dojo is a layout inside it, a Splint is an individual shell/pane. It maps roughly to tmux's session/window/pane, so tmux users will adapt in minutes.</p>
+  </details>
+  <details>
+    <summary>What happens when I close a Splinterm window?</summary>
+    <p>Nothing bad — by default, unnamed graphical terminals are persistent. The window detaches; the shells keep running. Reopen with <code>splinterm reopen</code> or pick from <code>splinterm dojos</code>.</p>
+  </details>
+  <details>
+    <summary>Does it change my default terminal or Hyprland config on install?</summary>
+    <p>No. Installation changes nothing about defaults; run <code>splinterm integration omarchy enable</code> to opt into the complete Omarchy integration (reversible).</p>
+  </details>
+  <details>
+    <summary>Can coding agents use my Splinterm sessions?</summary>
+    <p>Through the bounded automation surface, yes — JSON/NDJSON CLI, SSH stdio relay, or the MCP adapter (<code>splinterm-mcp</code>, separate package). Machine clients never inherit human graphical authority, and terminal output is treated as untrusted data. See the Splinterm-MCP guide for the safe path.</p>
+  </details>
+</section>
+
+<section class="sources">
+  <h2>Official sources</h2>
+  <ul>
+    <li><a href="https://github.com/ministry-of-taste/splinterm" target="_blank" rel="noopener">ministry-of-taste/splinterm — README (features, install, topology)</a></li>
+    <li><a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/status.md" target="_blank" rel="noopener">docs/status.md — current maturity, boundaries, agent-status on main</a></li>
+    <li><a href="https://splinterm.com/docs/troubleshooting/" target="_blank" rel="noopener">splinterm.com/docs/troubleshooting/ — daemon checks, placement, unauthorized windows</a></li>
+    <li><a href="https://github.com/ministry-of-taste/splinterm/blob/HEAD/docs/mcp.md" target="_blank" rel="noopener">docs/mcp.md — MCP adapter setup and security</a></li>
+    <li><a href="https://github.com/ministry-of-taste/splinterm/issues/183" target="_blank" rel="noopener">issue #183 — Omarchy theme generator role aliases (open)</a></li>
+    <li><a href="https://github.com/ministry-of-taste/splinterm/issues/76" target="_blank" rel="noopener">issue #76 — aarch64 build missing (open)</a></li>
+    <li><a href="https://github.com/ministry-of-taste/splinterm/issues/78" target="_blank" rel="noopener">issue #78 — agents notification request (open)</a></li>
+    <li><a href="https://omarchyapps.com/apps/splinterm.html" target="_blank" rel="noopener">omarchyapps.com — splinterm listing (0.1.1-1, MIT, 8.4 MB)</a></li>
+  </ul>
+  <p class="editorial-note">Commands and fixes verified against official sources October 2026; on-machine verification pending.</p>
+</section></section>
+    <div class="actions"><a class="button" href="#guide">Guide: how to use splinterm on Omarchy</a><a class="button ghost" href="https://github.com/ministry-of-taste/splinterm" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/splinterm" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
 <div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="app" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div><script src="/oa-ads.js"></script></div>
