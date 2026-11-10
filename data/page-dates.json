@@ -50,8 +50,8 @@
   "v": 3
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-08",
-  "hash": "8ff70ea7cce0bd97bd088eb9e271037aa418f816f0597dbca9456bd04fbc9b5c",
+  "date": "2026-11-09",
+  "hash": "a51f4230c46e55594ef5b262b93912196fc0c561bdc37bcbdfdbb2b7376ac5de",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -60,8 +60,8 @@
   "v": 3
  },
  "apps/bambustudio-bin.html": {
-  "date": "2026-10-20",
-  "hash": "5acac2ebe7397b79fa9d41a496def298a111744cbee69be10ac33ad6e30513d6",
+  "date": "2026-11-09",
+  "hash": "30bbeca106da61d6147a1f9167a04e698bc8a814b9af984faee0d714e1a91850",
   "v": 3
  },
  "apps/basecamp-cli.html": {
@@ -95,13 +95,13 @@
   "v": 3
  },
  "apps/claude-code.html": {
-  "date": "2026-11-06",
-  "hash": "ac12edac0ed24c1fce03b9d99ad0e5efdfafbba7deb5f664c0435503687a2926",
+  "date": "2026-11-09",
+  "hash": "c163fb0cee8e480990f16efc92bc844a4e97b3d40fd5f68961ffe100e0616e67",
   "v": 3
  },
  "apps/claude-desktop.html": {
-  "date": "2026-11-05",
-  "hash": "07bc888849eaa16d757b173ef694a264f455b584ded99ec4cf2fc6bc0cca5aef",
+  "date": "2026-11-09",
+  "hash": "50817a89490dad4cce20660e3eefc0315dedf6f57ac58ae6518a8bc723f7d556",
   "v": 3
  },
  "apps/cliamp.html": {
@@ -130,8 +130,8 @@
   "v": 3
  },
  "apps/cursor-bin.html": {
-  "date": "2026-11-05",
-  "hash": "00efddf81434041dee75fdfcbb0bd0c920d82d24675d004bde3a4ceb395c6437",
+  "date": "2026-11-09",
+  "hash": "79dd39e8bc351da942558c4cddfb548062965d9e8ed5ed903f2b63c0da76041d",
   "v": 3
  },
  "apps/cursor-cli.html": {
@@ -230,8 +230,8 @@
   "v": 3
  },
  "apps/google-chrome.html": {
-  "date": "2026-11-03",
-  "hash": "16410702973de6d15fbffe4b4bd3ecb8e72b5c76a9da9c5ac7a2c587c54b84ce",
+  "date": "2026-11-09",
+  "hash": "6cb2fd4edb5b6acd87ddc5157c043aa2ef2a3cede7b4ed39fe6e163d2ae998ff",
   "v": 3
  },
  "apps/gridcraft-bin.html": {
@@ -510,8 +510,8 @@
   "v": 3
  },
  "apps/microsoft-edge-stable-bin.html": {
-  "date": "2026-11-05",
-  "hash": "990c269d302f9989b867d72384cbfd105c3245e822e29f3373a3639c1fa67e4a",
+  "date": "2026-11-09",
+  "hash": "36e911485b9f1f65b4712b4d94f04b12cd83bee272fb284272b1f5e6ee5fbcbf",
   "v": 3
  },
  "apps/minecraft-launcher.html": {
@@ -780,8 +780,8 @@
   "v": 3
  },
  "apps/owe.html": {
-  "date": "2026-10-30",
-  "hash": "d329cbd6ab133031fde5de6687f91768ca22068ab767a23a9e48e17f234d037c",
+  "date": "2026-11-09",
+  "hash": "c1ccedf7dc963441be13b53ac8dfbffabf47b52d9ac5d991a396327167dbacdc",
   "v": 3
  },
  "apps/perplexity.html": {
@@ -910,13 +910,13 @@
   "v": 3
  },
  "apps/t3code-bin.html": {
-  "date": "2026-11-04",
-  "hash": "681a0fd2bc1043c264d87d5eeb38474de29b69041f7c5fbcad10bca90c1a7203",
+  "date": "2026-11-09",
+  "hash": "413f55cc7e012d469a25c6e54abd080fba9f3bc26be326545f16ee3876e8e394",
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-09",
-  "hash": "82ebbe7f68e9f703dfefee3923af664ea7c7e2b935ae9abce4f944a65b472010",
+  "hash": "dca2dc557880f81c0676e8583588c3b4be1b53d00a0cc28d65995cc425117d70",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -1095,8 +1095,8 @@
   "v": 3
  },
  "bambustudio-bin-on-omarchy.html": {
-  "date": "2026-11-02",
-  "hash": "36d42a8950e04fe203685c8b4e3226466f37764be1744a63fad35532bdfc3eb1",
+  "date": "2026-11-09",
+  "hash": "4dd60f17d451691c67cd3242b11f898fb5a65612f26be2a3bc7b7974b0dade2a",
   "v": 3
  },
  "basecamp-cli-on-omarchy.html": {
@@ -1200,8 +1200,8 @@
   "v": 3
  },
  "claude-code-on-omarchy.html": {
-  "date": "2026-11-06",
-  "hash": "026c62e371662bd034068969cac90179757da09a84bbfc67071429d693557c36",
+  "date": "2026-11-09",
+  "hash": "837895b0b283bed5de706ac82ee4b587da5a16cd2ce6aaab813cedd979f67d0d",
   "v": 3
  },
  "claude-desktop-omarchy.html": {
@@ -1235,8 +1235,8 @@
   "v": 3
  },
  "cursor-bin-on-omarchy.html": {
-  "date": "2026-11-05",
-  "hash": "760aa284b65dc080454ae37ba77749e0136927afe2bdaf399f05c63d86487e22",
+  "date": "2026-11-09",
+  "hash": "bf5f5bd85dfa09f934d09f42a6304fdf0388318e585c6964c82f43dad135f0ca",
   "v": 3
  },
  "cursor-cli-on-omarchy.html": {
@@ -1390,8 +1390,8 @@
   "v": 3
  },
  "google-chrome-on-omarchy.html": {
-  "date": "2026-11-05",
-  "hash": "960545b17610d549950f00c32aa313fa9d16d67f080ac1eae35aeb3c690dddbd",
+  "date": "2026-11-09",
+  "hash": "217f63b47bc82e10fee3a22361d0cbd4e3934476d6947954f4848f5064a53ad3",
   "v": 3
  },
  "gpu-screen-recorder-on-omarchy.html": {
@@ -1805,8 +1805,8 @@
   "v": 3
  },
  "microsoft-edge-stable-bin-on-omarchy.html": {
-  "date": "2026-11-05",
-  "hash": "00dba71814895b422bf92d1928589a7c75bd35ae683a55525ae60eb295923a4f",
+  "date": "2026-11-09",
+  "hash": "10167af4831e645cbcef2ae0290b78dfcd6345db7a1aadf2674752fc4f85eb4e",
   "v": 3
  },
  "minecraft-launcher-on-omarchy.html": {
@@ -2100,8 +2100,8 @@
   "v": 3
  },
  "owe-on-omarchy.html": {
-  "date": "2026-11-02",
-  "hash": "d9a64d3c0a5a59004fdff6018e27cd7c5b75edaf8fda2bec7442abfeffdb6855",
+  "date": "2026-11-09",
+  "hash": "b8334e9e978c82d1a8aeb0ff61a9587deb148ff5bb9ddbe547ccc022feaf6a29",
   "v": 3
  },
  "perplexity-on-omarchy.html": {
@@ -2285,8 +2285,8 @@
   "v": 3
  },
  "t3code-bin-on-omarchy.html": {
-  "date": "2026-11-04",
-  "hash": "eeea600496bad32eb8192003cb22402f823d93940ce06112a3c82c1bda680c6d",
+  "date": "2026-11-09",
+  "hash": "904aa48739cef09fc639c9e2067a8028b430aa07698e99f9d53fc53bfa0f5b72",
   "v": 3
  },
  "tensaku-on-omarchy.html": {
