@@ -1,0 +1,11 @@
+{
+  "name": "omarchy-screenshot-optimizer",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "sharp": "0.35.5"
+  }
+}

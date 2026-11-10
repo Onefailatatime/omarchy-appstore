@@ -238,7 +238,7 @@
     var gallerySource = document.getElementById("d-gallery-source");
     var images = (x.gallery || []);
     gallery.textContent = "";
-    images.forEach(function (image) {
+    images.forEach(function (image, index) {
       var link = document.createElement("a");
       link.className = "shot-wrap";
       link.href = image.url;
@@ -247,11 +247,33 @@
       link.setAttribute("aria-label", "Open full-size " + (image.alt || d.name + " screenshot"));
       var shot = document.createElement("img");
       shot.src = image.url;
+      if (image.srcset) shot.srcset = image.srcset;
+      if (image.sizes && image.srcset) shot.sizes = image.sizes;
+      if (image.width) shot.width = image.width;
+      if (image.height) shot.height = image.height;
       shot.alt = image.alt || (d.name + " screenshot");
-      shot.loading = "lazy";
       shot.decoding = "async";
-      shot.referrerPolicy = "no-referrer";
-      link.appendChild(shot);
+      if (index === 0) {
+        shot.fetchPriority = "high";
+      } else {
+        shot.loading = "lazy";
+      }
+      if (!image.local) shot.referrerPolicy = "no-referrer";
+      var sources = image.sources || [];
+      if (sources.length) {
+        var picture = document.createElement("picture");
+        sources.forEach(function (item) {
+          var source = document.createElement("source");
+          source.type = item.type;
+          source.srcset = item.srcset;
+          if (image.sizes) source.sizes = image.sizes;
+          picture.appendChild(source);
+        });
+        picture.appendChild(shot);
+        link.appendChild(picture);
+      } else {
+        link.appendChild(shot);
+      }
       gallery.appendChild(link);
     });
     gallerySource.textContent = "";

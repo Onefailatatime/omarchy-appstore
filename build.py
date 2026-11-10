@@ -5,7 +5,8 @@ Reads the pacman database from pkgs.omarchy.org (falling back to the cached
 copy in data/), joins it with the omarchy-pkgs git history for first-added
 dates and PKGBUILD locations, joins it with the curated data/categories.json,
 and writes one self-contained page plus fonts to dist/. No framework, no
-tracker. Remote profile images stay on their upstream hosts; the store serves
+tracker. App screenshots are downloaded at build time, resized, and served
+from this origin; a failed download keeps the upstream URL. The store serves
 no packages itself and only prints the official install command.
 """
 
@@ -19,6 +20,7 @@ import subprocess
 import hashlib
 
 import seo
+import screenshots
 import tarfile
 import urllib.parse
 import urllib.request
@@ -1225,7 +1227,7 @@ def profile_images(p: dict) -> list[dict]:
         if not url or url in seen:
             continue
         seen.add(url)
-        unique.append(image)
+        unique.append(screenshots.apply(image))
     return unique[:4]
 
 
@@ -1581,7 +1583,10 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
         schema["@graph"][0]["abstract"] = p["tagline"]
     images = profile_images(p)
     if images:
-        schema["@graph"][0]["screenshot"] = [image["url"] for image in images]
+        schema["@graph"][0]["screenshot"] = [
+            (SITE_URL + image["url"]) if image.get("local") and image["url"].startswith("/") else image["url"]
+            for image in images
+        ]
     if p.get("pricing") in ("free", "free-libre"):
         schema["@graph"][0]["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     reqs = "".join(f"<li>{html.escape(str(r))}</li>" for r in p.get("requirements", []))
@@ -1606,9 +1611,8 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
         tiles = "".join(
             f'<a class="shot-wrap" href="{html.escape(image["url"])}" target="_blank" rel="noopener" '
             f'aria-label="Open full-size {html.escape(image.get("alt") or p["name"] + " screenshot")}">'
-            f'<img src="{html.escape(image["url"])}" alt="{html.escape(image.get("alt") or p["name"] + " screenshot")}" '
-            f'loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>'
-            for image in images
+            f'{screenshots.img_tag(image, first=(index == 0), alt=image.get("alt") or p["name"] + " screenshot")}</a>'
+            for index, image in enumerate(images)
         )
         source_url = next((image.get("source_url") for image in images if image.get("source_url")), "")
         source = (f'<p class="media-source">Loaded from the upstream project · '
@@ -1957,6 +1961,13 @@ def main() -> None:
     for f in (ROOT / "assets" / "images").glob("*"):
         if f.is_file():
             (images / f.name).write_bytes(f.read_bytes())
+    shot_urls = [im.get("url", "") for p in pkgs for im in profile_images(p)]
+    shot_summary = screenshots.prepare(DIST, shot_urls)
+    print(
+        f"screenshots:      {shot_summary['converted']} converted · "
+        f"{shot_summary['reused']} cached · {shot_summary['failed']} left at upstream "
+        f"of {shot_summary['total']} unique"
+    )
     for f in (ROOT / "assets" / "indexnow").glob("*.txt"):
         (DIST / f.name).write_bytes(f.read_bytes())  # IndexNow key file (public by design)
     (DIST / "favicon.ico").write_bytes((ROOT / "assets" / "images" / "favicon.ico").read_bytes())

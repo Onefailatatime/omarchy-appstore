@@ -5,6 +5,7 @@ enrichment file; commands are the ones that work for any Omarchy package. Apps
 that already have a hand-researched guide keep it and get no generated page.
 """
 import datetime
+import screenshots
 import html
 import re
 
@@ -175,8 +176,9 @@ def _media(p: dict, images: list[dict]) -> str:
         img = images[0]
         src = img.get("source_url") or p.get("github") or p.get("url") or ""
         credit = (f'<p class="media-source">Image loaded from the upstream project · <a href="{_e(src)}" target="_blank" rel="noopener">source ↗</a></p>' if src else "")
-        out += (f'<figure><img src="{_e(img["url"])}" alt="{_e(img.get("alt") or p["name"] + " screenshot")}" '
-                f'loading="lazy" decoding="async" referrerpolicy="no-referrer" style="max-width:100%;height:auto">{credit}</figure>')
+        alt = img.get("alt") or p["name"] + " screenshot"
+        out += (f'<figure>{screenshots.img_tag(img, first=True, alt=alt)}'
+                f'{credit}</figure>')
     if p.get("youtube_id"):
         out += (f'<p><a href="https://www.youtube.com/watch?v={_e(p["youtube_id"])}" target="_blank" rel="noopener">'
                 f'Watch: {_e(p.get("youtube_title") or p["name"] + " demo")} ↗</a></p>')
