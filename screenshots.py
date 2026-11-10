@@ -1,14 +1,17 @@
 """Download upstream app screenshots and resize them for our own origin.
 
 Converted files live in dist/images/screenshots/ and are reused across the
-twice-daily refresh when the upstream bytes have not changed. A failed
-download keeps the original upstream URL.
+twice-daily refresh when the upstream bytes have not changed. Animated GIF
+or WebP files over about 300 KB become a muted looping video (MP4 and WebM)
+with a still poster. A failed download or transcode keeps the current image
+or the original upstream URL.
 """
 from __future__ import annotations
 
 import hashlib
 import json
 import os
+import shutil
 import subprocess
 import tempfile
 import urllib.error
@@ -26,6 +29,9 @@ WIDTHS = (1200, 600)
 MAX_BYTES = 40 * 1024 * 1024
 TIMEOUT = 25
 USER_AGENT = "omarchyapps-screenshot-optimizer/1.0 (https://omarchyapps.com/about.html)"
+VIDEO_MIN_BYTES = 300 * 1024
+FFMPEG = os.environ.get("FFMPEG") or shutil.which("ffmpeg") or "/opt/homebrew/bin/ffmpeg"
+FFPROBE = os.environ.get("FFPROBE") or shutil.which("ffprobe") or "/opt/homebrew/bin/ffprobe"
 
 # url -> localized fields (url, srcset, sources, width, height, local)
 _localized: dict[str, dict] = {}
@@ -105,7 +111,190 @@ def _is_raster(content_type: str, url: str, data: bytes) -> bool:
     return True
 
 
+def _ffmpeg_version() -> str:
+    try:
+        out = subprocess.check_output([FFMPEG, "-version"], text=True, timeout=10)
+        return out.splitlines()[0].replace("ffmpeg version ", "").split()[0]
+    except Exception:
+        return ""
+
+
+def _probe_video(path: Path) -> dict:
+    out = subprocess.check_output(
+        [
+            FFPROBE, "-v", "error", "-select_streams", "v:0",
+            "-show_entries", "stream=width,height,nb_frames",
+            "-of", "json", str(path),
+        ],
+        text=True, timeout=60,
+    )
+    streams = json.loads(out).get("streams") or [{}]
+    stream = streams[0]
+    frames = stream.get("nb_frames")
+    try:
+        frames = int(frames) if frames and frames != "N/A" else 0
+    except (TypeError, ValueError):
+        frames = 0
+    return {
+        "width": int(stream.get("width") or 0),
+        "height": int(stream.get("height") or 0),
+        "frames": frames,
+    }
+
+
+def _is_animated_bytes(data: bytes, ctype: str, path: Path | None = None) -> bool:
+    if data.startswith(b"GIF8"):
+        if path:
+            try:
+                return _probe_video(path).get("frames", 0) != 1
+            except Exception:
+                return len(data) > VIDEO_MIN_BYTES
+        return True
+    if b"ANIM" in data[:256] or (ctype or "").lower() in {"image/gif", "video/webp"}:
+        return True
+    if path and (ctype or "").lower() in {"image/webp", "image/gif"}:
+        try:
+            return _probe_video(path).get("frames", 0) > 1
+        except Exception:
+            return False
+    return False
+
+
+def _largest_local_still(dist: Path, entry: dict) -> Path | None:
+    files = entry.get("files") or []
+    paths = []
+    for variant in files:
+        rel = variant.get("webp") or variant.get("avif")
+        if rel and (dist / rel).is_file():
+            paths.append((variant.get("width") or 0, dist / rel))
+    if not paths:
+        return None
+    paths.sort()
+    return paths[-1][1]
+
+
+def _video_complete(dist: Path, entry: dict) -> bool:
+    video = entry.get("video") or {}
+    if not video.get("poster"):
+        return False
+    if not video.get("mp4") and not video.get("webm"):
+        return False
+    for key in ("mp4", "webm", "poster"):
+        rel = video.get(key)
+        if rel and not (dist / rel).is_file():
+            return False
+    return True
+
+
+def _wants_video(entry: dict | None, data: bytes | None = None, ctype: str = "", path: Path | None = None) -> bool:
+    size = len(data) if data is not None else 0
+    if data is not None:
+        if size < VIDEO_MIN_BYTES:
+            return False
+        return _is_animated_bytes(data, ctype, path)
+    if not entry:
+        return False
+    if entry.get("video") and not entry.get("video").get("mp4"):
+        return True
+    if not entry.get("animated"):
+        return False
+    # Fall back to the size of the current served still or animation.
+    total = 0
+    for variant in entry.get("files") or []:
+        for key in ("webp", "avif"):
+            rel = variant.get(key)
+            # Size is checked later against dist; treat animated entries as candidates.
+            if rel:
+                total = 1
+    return bool(entry.get("animated") and total)
+
+
+def _transcode_video(src: Path, dist: Path, stem: str) -> dict | None:
+    """Write MP4, WebM and a still poster. Returns relative paths or None."""
+    if not Path(FFMPEG).is_file() and not shutil.which("ffmpeg"):
+        return None
+    dest = dist / DIST_IMAGES
+    dest.mkdir(parents=True, exist_ok=True)
+    vf = "scale='min(1200,iw)':-2:flags=lanczos"
+    mp4 = dest / f"{stem}-1200.mp4"
+    webm = dest / f"{stem}-1200.webm"
+    try:
+        subprocess.run(
+            [
+                FFMPEG, "-y", "-i", str(src), "-an", "-vf", vf,
+                "-c:v", "libx264", "-pix_fmt", "yuv420p",
+                "-movflags", "+faststart", "-crf", "28", "-preset", "medium",
+                str(mp4),
+            ],
+            check=True, timeout=180, capture_output=True,
+        )
+        subprocess.run(
+            [
+                FFMPEG, "-y", "-i", str(src), "-an", "-vf", vf,
+                "-c:v", "libvpx-vp9", "-pix_fmt", "yuv420p",
+                "-crf", "32", "-b:v", "0", "-row-mt", "1", "-deadline", "good",
+                str(webm),
+            ],
+            check=True, timeout=240, capture_output=True,
+        )
+    except Exception:
+        mp4.unlink(missing_ok=True)
+        webm.unlink(missing_ok=True)
+        return None
+    if not mp4.is_file() or not webm.is_file():
+        return None
+    try:
+        with tempfile.TemporaryDirectory(prefix="oa-poster-") as tmp:
+            poster_png = Path(tmp) / "poster.png"
+            subprocess.run(
+                [
+                    FFMPEG, "-y", "-i", str(src), "-frames:v", "1", "-vf", vf,
+                    str(poster_png),
+                ],
+                check=True, timeout=60, capture_output=True,
+            )
+            result = _optimize(poster_png, f"{stem}-poster", dest)
+        files = _relative_files(dist, result)
+        largest = sorted(files, key=lambda f: f["width"])[-1]
+        poster = largest.get("webp") or largest.get("avif")
+        if not poster:
+            raise RuntimeError("poster missing")
+        info = _probe_video(mp4)
+        return {
+            "mp4": f"{DIST_IMAGES}/{mp4.name}",
+            "webm": f"{DIST_IMAGES}/{webm.name}",
+            "poster": poster,
+            "poster_avif": largest.get("avif"),
+            "poster_files": files,
+            "width": info.get("width") or result.get("width"),
+            "height": info.get("height") or result.get("height"),
+            "ffmpeg": _ffmpeg_version(),
+        }
+    except Exception:
+        mp4.unlink(missing_ok=True)
+        webm.unlink(missing_ok=True)
+        return None
+
+
+def _attach_video(entry: dict, dist: Path, source: Path) -> bool:
+    video = _transcode_video(source, dist, entry.get("sha256", "clip")[:16])
+    if not video:
+        return False
+    entry["video"] = {k: v for k, v in video.items() if k != "poster_files"}
+    if video.get("width"):
+        entry["width"] = video["width"]
+    if video.get("height"):
+        entry["height"] = video["height"]
+    entry["animated"] = True
+    # Prefer the still poster in "files" so the huge animated stills can be pruned.
+    if video.get("poster_files"):
+        entry["files"] = video["poster_files"]
+    return True
+
+
 def _files_exist(dist: Path, entry: dict) -> bool:
+    if _video_complete(dist, entry):
+        return True
     for variant in entry.get("files") or []:
         for key in ("webp", "avif"):
             rel = variant.get(key)
@@ -117,25 +306,43 @@ def _files_exist(dist: Path, entry: dict) -> bool:
 
 
 def _fields_from_entry(entry: dict) -> dict:
-    files = sorted(entry["files"], key=lambda f: f["width"])
-    largest = files[-1]
+    files = sorted(entry.get("files") or [], key=lambda f: f["width"])
     sources = []
-    avif_bits = [f"{'/' + f['avif']} {f['width']}w" for f in files if f.get("avif")]
-    webp_bits = [f"{'/' + f['webp']} {f['width']}w" for f in files if f.get("webp")]
-    if avif_bits:
-        sources.append({"type": "image/avif", "srcset": ", ".join(avif_bits)})
-    if webp_bits:
-        sources.append({"type": "image/webp", "srcset": ", ".join(webp_bits)})
-    return {
-        "url": "/" + largest["webp"],
-        "srcset": ", ".join(webp_bits),
-        "sizes": "(max-width: 700px) 100vw, 1200px",
+    url = ""
+    srcset = ""
+    if files:
+        largest = files[-1]
+        avif_bits = [f"{'/' + f['avif']} {f['width']}w" for f in files if f.get("avif")]
+        webp_bits = [f"{'/' + f['webp']} {f['width']}w" for f in files if f.get("webp")]
+        if avif_bits:
+            sources.append({"type": "image/avif", "srcset": ", ".join(avif_bits)})
+        if webp_bits:
+            sources.append({"type": "image/webp", "srcset": ", ".join(webp_bits)})
+        url = "/" + (largest.get("webp") or largest.get("avif") or "")
+        srcset = ", ".join(webp_bits)
+    video = entry.get("video") or {}
+    if video.get("poster") and not url:
+        url = "/" + video["poster"]
+    fields = {
+        "url": url,
+        "srcset": srcset,
+        "sizes": "(max-width: 700px) 100vw, 1200px" if srcset else "",
         "sources": sources,
-        "width": entry["width"],
-        "height": entry["height"],
+        "width": (video.get("width") if video else None) or entry.get("width"),
+        "height": (video.get("height") if video else None) or entry.get("height"),
         "local": True,
-        "animated": bool(entry.get("animated")),
+        "animated": bool(entry.get("animated") or video),
     }
+    if video.get("mp4") or video.get("webm"):
+        if video.get("mp4"):
+            fields["mp4"] = "/" + video["mp4"]
+        if video.get("webm"):
+            fields["webm"] = "/" + video["webm"]
+        if video.get("poster"):
+            fields["poster"] = "/" + video["poster"]
+        if video.get("poster_avif"):
+            fields["poster_avif"] = "/" + video["poster_avif"]
+    return fields
 
 
 def _relative_files(dist: Path, result: dict) -> list[dict]:
@@ -180,37 +387,89 @@ def _optimize(input_path: Path, stem: str, dest_dir: Path) -> dict:
     return result
 
 
+def _ensure_video(entry: dict, dist: Path, data: bytes | None = None, ctype: str = "", src: Path | None = None) -> None:
+    if _video_complete(dist, entry):
+        return
+    if data is not None and src is not None:
+        if _wants_video(entry, data=data, ctype=ctype, path=src):
+            _attach_video(entry, dist, src)
+        return
+    if not _wants_video(entry) and not entry.get("animated"):
+        return
+    # Re-download, or transcode a local animated still if the host is unreachable.
+    local = _largest_local_still(dist, entry)
+    if local and local.stat().st_size >= VIDEO_MIN_BYTES and entry.get("animated"):
+        # Only use the local file when we cannot or do not need a fresh original.
+        if _attach_video(entry, dist, local):
+            return
+    # Caller may pass no data; give up quietly and keep the current image.
+
+
 def localize_url(url: str, dist: Path, manifest: dict) -> dict | None:
     """Return localized fields, or None to keep the upstream URL."""
     images = manifest.setdefault("images", {})
     existing = images.get(url)
+
+    def reused(entry: dict, data: bytes | None = None, ctype: str = "", src: Path | None = None) -> dict:
+        if data is not None and src is not None:
+            _ensure_video(entry, dist, data=data, ctype=ctype, src=src)
+        elif not _video_complete(dist, entry) and entry.get("animated"):
+            # Need the original bytes to transcode. Download, then attach.
+            try:
+                fresh, fresh_ctype, _etag = _download(url)
+                with tempfile.TemporaryDirectory(prefix="oa-shot-src-") as tmp:
+                    path = Path(tmp) / "src.bin"
+                    path.write_bytes(fresh)
+                    _ensure_video(entry, dist, data=fresh, ctype=fresh_ctype, src=path)
+            except Exception:
+                _ensure_video(entry, dist)
+        return _fields_from_entry(entry)
+
     etag = _head_etag(url)
     if existing and existing.get("etag") and etag and existing["etag"] == etag and _files_exist(dist, existing):
-        return _fields_from_entry(existing)
+        return reused(existing)
     if existing and not etag and _files_exist(dist, existing):
-        # Upstream did not answer HEAD; keep the converted files we already have
-        # unless a later GET shows a new hash.
         try:
             data, ctype, new_etag = _download(url)
         except Exception:
-            return _fields_from_entry(existing)
+            return reused(existing)
         digest = hashlib.sha256(data).hexdigest()
         if digest == existing.get("sha256"):
             if new_etag and new_etag != existing.get("etag"):
                 existing["etag"] = new_etag
-            return _fields_from_entry(existing)
+            with tempfile.TemporaryDirectory(prefix="oa-shot-src-") as tmp:
+                src = Path(tmp) / "src.bin"
+                src.write_bytes(data)
+                return reused(existing, data=data, ctype=ctype, src=src)
         return _convert(url, dist, manifest, data, ctype, new_etag, digest)
     try:
         data, ctype, new_etag = _download(url)
     except Exception:
         if existing and _files_exist(dist, existing):
-            return _fields_from_entry(existing)
+            return reused(existing)
         return None
     digest = hashlib.sha256(data).hexdigest()
     if existing and digest == existing.get("sha256") and _files_exist(dist, existing):
         existing["etag"] = new_etag or existing.get("etag")
-        return _fields_from_entry(existing)
+        with tempfile.TemporaryDirectory(prefix="oa-shot-src-") as tmp:
+            src = Path(tmp) / "src.bin"
+            src.write_bytes(data)
+            return reused(existing, data=data, ctype=ctype, src=src)
     return _convert(url, dist, manifest, data, ctype, new_etag, digest)
+
+
+def _suffix_for(ctype: str) -> str:
+    if "jpeg" in ctype or "jpg" in ctype:
+        return ".jpg"
+    if "png" in ctype:
+        return ".png"
+    if "webp" in ctype:
+        return ".webp"
+    if "gif" in ctype:
+        return ".gif"
+    if "avif" in ctype:
+        return ".avif"
+    return ".bin"
 
 
 def _convert(url: str, dist: Path, manifest: dict, data: bytes, ctype: str, etag: str | None, digest: str) -> dict | None:
@@ -218,33 +477,26 @@ def _convert(url: str, dist: Path, manifest: dict, data: bytes, ctype: str, etag
         return None
     stem = digest[:16]
     with tempfile.TemporaryDirectory(prefix="oa-shot-src-") as tmp:
-        suffix = ".bin"
-        if "jpeg" in ctype or "jpg" in ctype:
-            suffix = ".jpg"
-        elif "png" in ctype:
-            suffix = ".png"
-        elif "webp" in ctype:
-            suffix = ".webp"
-        elif "gif" in ctype:
-            suffix = ".gif"
-        elif "avif" in ctype:
-            suffix = ".avif"
-        src = Path(tmp) / f"src{suffix}"
+        src = Path(tmp) / f"src{_suffix_for(ctype)}"
         src.write_bytes(data)
+        result = None
         try:
             result = _optimize(src, stem, dist / DIST_IMAGES)
         except Exception:
+            result = None
+        files = _relative_files(dist, result) if result else []
+        entry = {
+            "etag": etag,
+            "sha256": digest,
+            "content_type": ctype,
+            "width": (result or {}).get("width") or 0,
+            "height": (result or {}).get("height") or 0,
+            "animated": bool((result or {}).get("animated")) or _is_animated_bytes(data, ctype, src),
+            "files": files,
+        }
+        _ensure_video(entry, dist, data=data, ctype=ctype, src=src)
+        if not entry.get("files") and not entry.get("video"):
             return None
-    files = _relative_files(dist, result)
-    entry = {
-        "etag": etag,
-        "sha256": digest,
-        "content_type": ctype,
-        "width": result["width"],
-        "height": result["height"],
-        "animated": result.get("animated", False),
-        "files": files,
-    }
     manifest.setdefault("images", {})[url] = entry
     return _fields_from_entry(entry)
 
@@ -276,10 +528,15 @@ def prepare(dist: Path, urls: list[str]) -> dict:
     # Drop converted files no longer referenced.
     keep = set()
     for url in seen:
-        for variant in manifest.get("images", {}).get(url, {}).get("files") or []:
+        entry = manifest.get("images", {}).get(url, {})
+        for variant in entry.get("files") or []:
             for key in ("webp", "avif"):
                 if variant.get(key):
                     keep.add(variant[key])
+        for key in ("mp4", "webm", "poster", "poster_avif"):
+            rel = (entry.get("video") or {}).get(key)
+            if rel:
+                keep.add(rel)
     shot_dir = dist / DIST_IMAGES
     if shot_dir.is_dir():
         for path in shot_dir.iterdir():
@@ -306,10 +563,38 @@ def apply(image: dict) -> dict:
     return out
 
 
+def gallery_tile(image: dict, *, first: bool = False, alt: str = "") -> str:
+    """One gallery item: a video, or a link to the still screenshot."""
+    from html import escape
+    tag = img_tag(image, first=first, alt=alt)
+    if image.get("mp4") or image.get("webm"):
+        return f'<div class="shot-wrap">{tag}</div>'
+    href = escape(image["url"])
+    label = escape(alt or image.get("alt") or "App screenshot")
+    return (
+        f'<a class="shot-wrap" href="{href}" target="_blank" rel="noopener" '
+        f'aria-label="Open full-size {label}">{tag}</a>'
+    )
+
+
 def img_tag(image: dict, *, first: bool = False, alt: str = "") -> str:
     """HTML for one screenshot, with srcset, dimensions, and load hints."""
     from html import escape
     alt = escape(alt or image.get("alt") or "App screenshot")
+    if image.get("mp4") or image.get("webm"):
+        width = image.get("width")
+        height = image.get("height")
+        dims = f' width="{int(width)}" height="{int(height)}"' if width and height else ""
+        poster = f' poster="{escape(image["poster"])}"' if image.get("poster") else ""
+        sources = []
+        if image.get("mp4"):
+            sources.append(f'<source src="{escape(image["mp4"])}" type="video/mp4">')
+        if image.get("webm"):
+            sources.append(f'<source src="{escape(image["webm"])}" type="video/webm">')
+        return (
+            f'<video{dims} autoplay muted loop playsinline preload="metadata"'
+            f'{poster} aria-label="{alt}">{"".join(sources)}</video>'
+        )
     src = escape(image["url"])
     width = image.get("width")
     height = image.get("height")

@@ -1143,7 +1143,8 @@ dialog::backdrop { background: rgb(var(--rgb-black) / 0.6); backdrop-filter: blu
   overflow: hidden;
   background: var(--color-background-storm);
 }
-.shot-wrap img { display: block; width: 100%; height: auto; }
+.shot-wrap img,
+.shot-wrap video { display: block; width: 100%; height: auto; }
 .shot-gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

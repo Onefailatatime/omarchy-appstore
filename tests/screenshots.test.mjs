@@ -63,4 +63,20 @@ for (const image of details.flea.gallery) {
 
 const sitemap = readFileSync(new URL("sitemap.xml", dist), "utf8");
 assert.doesNotMatch(sitemap, /images\/screenshots/, "screenshots stay out of the sitemap");
+
+const crush = readFileSync(new URL("apps/crush-bin.html", dist), "utf8");
+assert.equal((crush.match(/<video /g) || []).length, 2, "crush has two looping videos");
+assert.match(crush, /autoplay muted loop playsinline preload="metadata"/);
+assert.match(crush, /type="video\/mp4"/);
+assert.match(crush, /type="video\/webm"/);
+assert.match(crush, /poster="\/images\/screenshots\/[^"]+/);
+assert.match(crush, /<video width="\d+" height="\d+"/);
+
+const mise = readFileSync(new URL("mise-bin-on-omarchy.html", dist), "utf8");
+assert.match(mise, /<video /, "mise demo is a video");
+assert.match(mise, /type="video\/webm"/);
+assert.match(mise, /type="video\/mp4"/);
+assert.doesNotMatch(mise, /raw\.githubusercontent\.com\/jdx\/mise\/main\/docs\/tapes\/demo\.gif/);
+
+assert.doesNotMatch(flea, /<video /, "flea stills stay images");
 console.log("screenshots-tests-ok");

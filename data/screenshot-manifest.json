@@ -161,18 +161,27 @@
       "etag": "\"514c0fcbe6057624d0fb507605cb3319\"",
       "files": [
         {
-          "avif": null,
-          "webp": "images/screenshots/7d84057e168f710e-1200.webp",
+          "avif": "images/screenshots/7d84057e168f710e-poster-1200.avif",
+          "webp": "images/screenshots/7d84057e168f710e-poster-1200.webp",
           "width": 1200
         },
         {
-          "avif": null,
-          "webp": "images/screenshots/7d84057e168f710e-600.webp",
+          "avif": "images/screenshots/7d84057e168f710e-poster-600.avif",
+          "webp": "images/screenshots/7d84057e168f710e-poster-600.webp",
           "width": 600
         }
       ],
-      "height": 675,
+      "height": 676,
       "sha256": "7d84057e168f710e686c8bcbb48c87897a1908142109314058afa10243691842",
+      "video": {
+        "ffmpeg": "9.0.2",
+        "height": 676,
+        "mp4": "images/screenshots/7d84057e168f710e-1200.mp4",
+        "poster": "images/screenshots/7d84057e168f710e-poster-1200.webp",
+        "poster_avif": "images/screenshots/7d84057e168f710e-poster-1200.avif",
+        "webm": "images/screenshots/7d84057e168f710e-1200.webm",
+        "width": 1200
+      },
       "width": 1200
     },
     "https://github.com/user-attachments/assets/8ced7c26-961b-4ded-b263-84403001a951": {
@@ -236,18 +245,27 @@
       "etag": "\"24e87c4b92e1ded845276353a4ee86db\"",
       "files": [
         {
-          "avif": null,
-          "webp": "images/screenshots/ae9bf0f7c6c4ea14-900.webp",
+          "avif": "images/screenshots/ae9bf0f7c6c4ea14-poster-900.avif",
+          "webp": "images/screenshots/ae9bf0f7c6c4ea14-poster-900.webp",
           "width": 900
         },
         {
-          "avif": null,
-          "webp": "images/screenshots/ae9bf0f7c6c4ea14-600.webp",
+          "avif": "images/screenshots/ae9bf0f7c6c4ea14-poster-600.avif",
+          "webp": "images/screenshots/ae9bf0f7c6c4ea14-poster-600.webp",
           "width": 600
         }
       ],
-      "height": 531,
+      "height": 532,
       "sha256": "ae9bf0f7c6c4ea1452330d41d955b4773c5a5faa692821dee03509650a131d6b",
+      "video": {
+        "ffmpeg": "9.0.2",
+        "height": 532,
+        "mp4": "images/screenshots/ae9bf0f7c6c4ea14-1200.mp4",
+        "poster": "images/screenshots/ae9bf0f7c6c4ea14-poster-900.webp",
+        "poster_avif": "images/screenshots/ae9bf0f7c6c4ea14-poster-900.avif",
+        "webm": "images/screenshots/ae9bf0f7c6c4ea14-1200.webm",
+        "width": 900
+      },
       "width": 900
     },
     "https://heroicgameslauncher.com/_next/static/images/01-home-350a8d44c674a888040a577e9656fecc.webp": {
@@ -496,18 +514,27 @@
       "etag": "\"305897befca9a065c67de4c495062eecc73ebfcb4c0a01b6c4df5b07440bb57e\"",
       "files": [
         {
-          "avif": null,
-          "webp": "images/screenshots/6b51bab5ef5bbf5d-960.webp",
+          "avif": "images/screenshots/6b51bab5ef5bbf5d-poster-960.avif",
+          "webp": "images/screenshots/6b51bab5ef5bbf5d-poster-960.webp",
           "width": 960
         },
         {
-          "avif": null,
-          "webp": "images/screenshots/6b51bab5ef5bbf5d-600.webp",
+          "avif": "images/screenshots/6b51bab5ef5bbf5d-poster-600.avif",
+          "webp": "images/screenshots/6b51bab5ef5bbf5d-poster-600.webp",
           "width": 600
         }
       ],
-      "height": 527,
+      "height": 528,
       "sha256": "6b51bab5ef5bbf5d3ee811eebf527a63f50b4601bca049b50f51d7b25c19edf1",
+      "video": {
+        "ffmpeg": "9.0.2",
+        "height": 528,
+        "mp4": "images/screenshots/6b51bab5ef5bbf5d-1200.mp4",
+        "poster": "images/screenshots/6b51bab5ef5bbf5d-poster-960.webp",
+        "poster_avif": "images/screenshots/6b51bab5ef5bbf5d-poster-960.avif",
+        "webm": "images/screenshots/6b51bab5ef5bbf5d-1200.webm",
+        "width": 960
+      },
       "width": 960
     },
     "https://raw.githubusercontent.com/btsouth/omakade/main/docs/assets/game-details.webp": {
@@ -548,6 +575,35 @@
       ],
       "height": 675,
       "sha256": "b5b3a244385fe117bb2c8e7acba0547dcaac43db3a608849ec2d892624014b0a",
+      "width": 1200
+    },
+    "https://raw.githubusercontent.com/jdx/mise/main/docs/tapes/demo.gif": {
+      "animated": true,
+      "content_type": "image/gif",
+      "etag": "\"da020298b7545a24af26830a8bf824f9cdef11f8c2fe2616073f723dc02ff263\"",
+      "files": [
+        {
+          "avif": "images/screenshots/480965491b20c284-poster-1200.avif",
+          "webp": "images/screenshots/480965491b20c284-poster-1200.webp",
+          "width": 1200
+        },
+        {
+          "avif": "images/screenshots/480965491b20c284-poster-600.avif",
+          "webp": "images/screenshots/480965491b20c284-poster-600.webp",
+          "width": 600
+        }
+      ],
+      "height": 600,
+      "sha256": "480965491b20c2849c8b0a9b63d8778de019acfc8974ea67cdc172db27eafd25",
+      "video": {
+        "ffmpeg": "9.0.2",
+        "height": 600,
+        "mp4": "images/screenshots/480965491b20c284-1200.mp4",
+        "poster": "images/screenshots/480965491b20c284-poster-1200.webp",
+        "poster_avif": "images/screenshots/480965491b20c284-poster-1200.avif",
+        "webm": "images/screenshots/480965491b20c284-1200.webm",
+        "width": 1200
+      },
       "width": 1200
     },
     "https://raw.githubusercontent.com/jethrojones/omapresent/master/welcome/screenshot.png": {
@@ -671,13 +727,22 @@
       "etag": "\"64d1d4835e1e6a9f1233511896a65921277b3bab43ce998917a36615f811b01c\"",
       "files": [
         {
-          "avif": null,
-          "webp": "images/screenshots/349ba4d62fe842b8-588.webp",
+          "avif": "images/screenshots/349ba4d62fe842b8-poster-588.avif",
+          "webp": "images/screenshots/349ba4d62fe842b8-poster-588.webp",
           "width": 588
         }
       ],
-      "height": 169,
+      "height": 170,
       "sha256": "349ba4d62fe842b864bcd7b7d0977329c87de66b299d82e8bc26da98b3c44ac3",
+      "video": {
+        "ffmpeg": "9.0.2",
+        "height": 170,
+        "mp4": "images/screenshots/349ba4d62fe842b8-1200.mp4",
+        "poster": "images/screenshots/349ba4d62fe842b8-poster-588.webp",
+        "poster_avif": "images/screenshots/349ba4d62fe842b8-poster-588.avif",
+        "webm": "images/screenshots/349ba4d62fe842b8-1200.webm",
+        "width": 588
+      },
       "width": 588
     },
     "https://raw.githubusercontent.com/omacom/ttfx/master/docs/effects/blackhole.gif": {
@@ -701,13 +766,22 @@
       "etag": "\"d42435406cef9c2c68543a25a6e56bfd4b808ca340e765aab13a4e796001ea41\"",
       "files": [
         {
-          "avif": null,
-          "webp": "images/screenshots/9b4abee01e1894ec-588.webp",
+          "avif": "images/screenshots/9b4abee01e1894ec-poster-588.avif",
+          "webp": "images/screenshots/9b4abee01e1894ec-poster-588.webp",
           "width": 588
         }
       ],
-      "height": 169,
+      "height": 170,
       "sha256": "9b4abee01e1894ecd18a1f6a954f59ae216e136188847b8129be9e0eac4ebc5d",
+      "video": {
+        "ffmpeg": "9.0.2",
+        "height": 170,
+        "mp4": "images/screenshots/9b4abee01e1894ec-1200.mp4",
+        "poster": "images/screenshots/9b4abee01e1894ec-poster-588.webp",
+        "poster_avif": "images/screenshots/9b4abee01e1894ec-poster-588.avif",
+        "webm": "images/screenshots/9b4abee01e1894ec-1200.webm",
+        "width": 588
+      },
       "width": 588
     },
     "https://raw.githubusercontent.com/thisisgm/flea/main/docs/images/columns.png": {
@@ -796,18 +870,27 @@
       "etag": "\"fe53084b07287665ccbc7ae08acccb09eb62704d4c8a0e049dd0daa7c3838935\"",
       "files": [
         {
-          "avif": null,
-          "webp": "images/screenshots/c5f22a6b2690b43c-960.webp",
+          "avif": "images/screenshots/c5f22a6b2690b43c-poster-960.avif",
+          "webp": "images/screenshots/c5f22a6b2690b43c-poster-960.webp",
           "width": 960
         },
         {
-          "avif": null,
-          "webp": "images/screenshots/c5f22a6b2690b43c-600.webp",
+          "avif": "images/screenshots/c5f22a6b2690b43c-poster-600.avif",
+          "webp": "images/screenshots/c5f22a6b2690b43c-poster-600.webp",
           "width": 600
         }
       ],
       "height": 540,
       "sha256": "c5f22a6b2690b43c922e07fcdb022b4b879462f231053650e010228238293690",
+      "video": {
+        "ffmpeg": "9.0.2",
+        "height": 540,
+        "mp4": "images/screenshots/c5f22a6b2690b43c-1200.mp4",
+        "poster": "images/screenshots/c5f22a6b2690b43c-poster-960.webp",
+        "poster_avif": "images/screenshots/c5f22a6b2690b43c-poster-960.avif",
+        "webm": "images/screenshots/c5f22a6b2690b43c-1200.webm",
+        "width": 960
+      },
       "width": 960
     },
     "https://raw.githubusercontent.com/ubuntu/yaru/master/.github/readme_pics/appgrid.png": {

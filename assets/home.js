@@ -239,12 +239,42 @@
     var images = (x.gallery || []);
     gallery.textContent = "";
     images.forEach(function (image, index) {
-      var link = document.createElement("a");
-      link.className = "shot-wrap";
-      link.href = image.url;
-      link.target = "_blank";
-      link.rel = "noopener";
-      link.setAttribute("aria-label", "Open full-size " + (image.alt || d.name + " screenshot"));
+      var wrap;
+      if (image.mp4 || image.webm) {
+        wrap = document.createElement("div");
+        wrap.className = "shot-wrap";
+        var video = document.createElement("video");
+        video.autoplay = true;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = "metadata";
+        if (image.width) video.width = image.width;
+        if (image.height) video.height = image.height;
+        if (image.poster) video.poster = image.poster;
+        video.setAttribute("aria-label", image.alt || (d.name + " screenshot"));
+        if (image.mp4) {
+          var mp4 = document.createElement("source");
+          mp4.src = image.mp4;
+          mp4.type = "video/mp4";
+          video.appendChild(mp4);
+        }
+        if (image.webm) {
+          var webm = document.createElement("source");
+          webm.src = image.webm;
+          webm.type = "video/webm";
+          video.appendChild(webm);
+        }
+        wrap.appendChild(video);
+        gallery.appendChild(wrap);
+        return;
+      }
+      wrap = document.createElement("a");
+      wrap.className = "shot-wrap";
+      wrap.href = image.url;
+      wrap.target = "_blank";
+      wrap.rel = "noopener";
+      wrap.setAttribute("aria-label", "Open full-size " + (image.alt || d.name + " screenshot"));
       var shot = document.createElement("img");
       shot.src = image.url;
       if (image.srcset) shot.srcset = image.srcset;
@@ -270,11 +300,11 @@
           picture.appendChild(source);
         });
         picture.appendChild(shot);
-        link.appendChild(picture);
+        wrap.appendChild(picture);
       } else {
-        link.appendChild(shot);
+        wrap.appendChild(shot);
       }
-      gallery.appendChild(link);
+      gallery.appendChild(wrap);
     });
     gallerySource.textContent = "";
     var sourceImage = images.find(function (image) { return image.source_url; });

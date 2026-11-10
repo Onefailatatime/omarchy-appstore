@@ -61,7 +61,7 @@
  },
  "apps/crush-bin.html": {
   "date": "2026-11-10",
-  "hash": "dcec2e47755d317ba45c99189861db8e787aee0e38d8041955a8afc6b30ead9b",
+  "hash": "7ab7e135a03df6cd89d28abbbbd13838da006b29202146627efc04c9a0910aca",
   "v": 3
  },
  "apps/cursor-bin.html": {
@@ -466,7 +466,7 @@
  },
  "apps/omasnap.html": {
   "date": "2026-11-10",
-  "hash": "b2e670ef70bc8df73ad6f059540e2bcb0508dee3c7e96292f1a72883d86e22fb",
+  "hash": "ec7fb7049135c00c4494c6408a044154b9804dc0929dfe23bfa5b40d6146f4ad",
   "v": 3
  },
  "apps/omaspeak-bin.html": {
@@ -1071,7 +1071,7 @@
  },
  "mise-bin-on-omarchy.html": {
   "date": "2026-11-10",
-  "hash": "e81f9819f7dafa901df0aa9d92470847c541ed3c31e8cfd4ce6a150d6753a0cf",
+  "hash": "20d97ffd19d6a8f19179ce86365c890affa4a97a23164509803fa3a08adad7da",
   "v": 3
  },
  "monologue-on-omarchy.html": {
@@ -1156,7 +1156,7 @@
  },
  "once-bin-on-omarchy.html": {
   "date": "2026-11-10",
-  "hash": "b60ebf6d7bc4bd0ecaf25f96537119937b3ae0f9a90e76ba19e57a6b962c1d22",
+  "hash": "7687bbadf947010f4a2b6288bde16f5708ecc23981de23a00b0c573b549e4f97",
   "v": 3
  },
  "openai-codex-desktop-on-omarchy.html": {
@@ -1251,7 +1251,7 @@
  },
  "ttfx-on-omarchy.html": {
   "date": "2026-11-10",
-  "hash": "17a8c3ad39b94fffe3ffb85b17c02e0cc5e08c2e331603e4fa1d21f3c82e6838",
+  "hash": "6e80c5c51446eb18ab9cb21299073118ba1220f7e4263c10fd7d048065b73489",
   "v": 3
  },
  "tutorials.html": {

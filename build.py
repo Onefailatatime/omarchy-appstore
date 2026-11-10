@@ -1609,9 +1609,11 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
     gallery = ""
     if images:
         tiles = "".join(
-            f'<a class="shot-wrap" href="{html.escape(image["url"])}" target="_blank" rel="noopener" '
-            f'aria-label="Open full-size {html.escape(image.get("alt") or p["name"] + " screenshot")}">'
-            f'{screenshots.img_tag(image, first=(index == 0), alt=image.get("alt") or p["name"] + " screenshot")}</a>'
+            screenshots.gallery_tile(
+                image,
+                first=(index == 0),
+                alt=image.get("alt") or p["name"] + " screenshot",
+            )
             for index, image in enumerate(images)
         )
         source_url = next((image.get("source_url") for image in images if image.get("source_url")), "")
