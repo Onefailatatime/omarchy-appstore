@@ -325,8 +325,22 @@ def slot_count(kind: str, pos: str) -> int:
 
 def slot_html(kind: str, pos: str, unit_class: str) -> str:
     count = slot_count(kind, pos)
-    return (f'<div class="oa-house" data-oa-slot="{kind}" data-oa-pos="{pos}" data-oa-class="{unit_class}" data-oa-count="{count}"></div>'
-            '<script src="/oa-ads.js"></script>')
+    return f'<div class="oa-house" data-oa-slot="{kind}" data-oa-pos="{pos}" data-oa-class="{unit_class}" data-oa-count="{count}"></div>'
+
+
+ADS_SCRIPT = '<script src="/oa-ads.js" defer></script>'
+
+
+def ensure_ads_script(text: str) -> str:
+    """One deferred copy of the rotator, in the head, no matter how many slots."""
+    if "data-oa-slot" not in text:
+        return text
+    # Drop any in-body copies left from older builds, then place one in <head>.
+    text = text.replace('<script src="/oa-ads.js"></script>', '')
+    text = text.replace('<script src="/oa-ads.js" defer></script>', '')
+    if "</head>" in text:
+        return text.replace("</head>", "  " + ADS_SCRIPT + "\n</head>", 1)
+    return text + ADS_SCRIPT
 
 
 # The site's designated sponsor slots (sponsors.py) and how an empty one looks
@@ -360,8 +374,9 @@ def page_slot(kind: str, pos: str) -> str:
 # the old bar under the top bar (v1), plus anything this module adds now.
 SLOT_STRIP = [
     re.compile(r'\n<div class="oa-house" data-oa-slot="[a-z]+" hidden></div><script src="/oa-ads.js"></script>'),
-    re.compile(r'<div class="ad-app-banner"><div class="oa-house"[^>]*></div><script src="/oa-ads.js"></script></div>\n'),
-    re.compile(r'<div class="ad-(?:header|footer)" data-oa-page><div class="oa-house"[^>]*></div><script src="/oa-ads.js"></script></div>\n'),
+    re.compile(r'<div class="ad-app-banner"><div class="oa-house"[^>]*></div>(?:<script src="/oa-ads.js"></script>)?</div>\n'),
+    re.compile(r'<div class="ad-(?:header|footer)" data-oa-page><div class="oa-house"[^>]*></div>(?:<script src="/oa-ads.js"></script>)?</div>\n'),
+    re.compile(r'\s*<script src="/oa-ads.js"(?: defer)?></script>'),
 ]
 
 
@@ -399,7 +414,7 @@ def build(dist: pathlib.Path, tutorials: set[str], guides: set[str]) -> dict:
         text, n = rx.subn(lambda m, pos=pos, cls=cls: m.group(1) + slot_html("home", pos, cls) + m.group(2), text, count=1)
         counts[f"home_{pos}"] += n
         counts["sponsor_held"] += 1 - n
-    home.write_text(text, encoding="utf-8")
+    home.write_text(ensure_ads_script(text), encoding="utf-8")
 
     for page in sorted((dist / "apps").glob("*.html")):
         text = page.read_text(encoding="utf-8")
@@ -410,7 +425,7 @@ def build(dist: pathlib.Path, tutorials: set[str], guides: set[str]) -> dict:
             lambda m: m.group(1) + '<div class="ad-app-banner">' + slot_html("app", "banner", "ad text") + "</div>\n",
             text, count=1)
         if n:
-            page.write_text(new, encoding="utf-8")
+            page.write_text(ensure_ads_script(new), encoding="utf-8")
             counts["app_banner"] += 1
 
     ad_pages = {f"ad{a['rank']}.html" for a in ADS}
@@ -429,5 +444,5 @@ def build(dist: pathlib.Path, tutorials: set[str], guides: set[str]) -> dict:
         counts["page_footer"] += n
         if not n:
             counts["no_slot"].append(rel + " (footer)")
-        page.write_text(text, encoding="utf-8")
+        page.write_text(ensure_ads_script(text), encoding="utf-8")
     return counts

@@ -76,6 +76,7 @@ export default {
       }
       // The homepage has one URL: /index.html folds into /.
       if (pathname === "/index.html") return Response.redirect(new URL("/" + url.search, request.url).toString(), 301);
+      if (pathname === "/apps" || pathname === "/apps/") return Response.redirect(new URL("/" + url.search, request.url).toString(), 301);
       // Sister site: /cachyos, /cachyos/ and /cachyos/* go to cachyosapps.com.
       if (pathname === "/cachyos" || pathname.startsWith("/cachyos/")) return Response.redirect("https://cachyosapps.com/", 301);
       if (pathname.startsWith("/stats/")) return await proxyStats(request, pathname, env.UMAMI_UPSTREAM);

@@ -11,6 +11,14 @@ assert.equal(mergedTarget("/helium-browser-bin-on-omarchy.html"), "/helium-on-om
 assert.equal(mergedTarget("/helium-browser-bin-on-omarchy"), "/helium-on-omarchy.html");
 assert.equal(mergedTarget("/apps/t3code/"), "/apps/t3code-bin.html");
 assert.equal(mergedTarget("/helium-on-omarchy.html"), null);
+assert.equal(mergedTarget("/apps/elephant.html"), "/walker-on-omarchy.html");
+assert.equal(mergedTarget("/apps/elephant-all"), "/walker-on-omarchy.html");
+assert.equal(mergedTarget("/apps/omarchy-walker.html"), "/walker-on-omarchy.html");
+assert.equal(mergedTarget("/apps/t3code-patched-bin.html"), "/apps/t3code-bin.html");
+assert.equal(mergedTarget("/t3code-nightly-bin-on-omarchy.html"), "/apps/t3code-nightly-bin.html");
+assert.equal(mergedTarget("/apps/linux-ptl-headers.html"), "/linux-ptl-headers-on-omarchy.html");
+assert.equal(mergedTarget("/store.html"), "/omarchy-store.html");
+
 
 const sitemap = await readFile(new URL("sitemap.xml", dist), "utf8");
 const llms = await readFile(new URL("llms.txt", dist), "utf8");

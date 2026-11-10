@@ -118,19 +118,21 @@ for (const f of pages) {
   if (slots.length) withSlots++;
   if (rel === "index.html") {
     assert.deepEqual(slots, ["home_header", "home_footer"]);
-    assert.match(html, /<div class="ad-header"><div class="oa-house" data-oa-slot="home" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"><\/div><script src="\/oa-ads.js"><\/script><\/div>/);
+    assert.match(html, /<div class="ad-header"><div class="oa-house" data-oa-slot="home" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"><\/div><\/div>/);
+    assert.match(html, /<script src="\/oa-ads.js" defer><\/script>/);
+    assert.equal([...html.matchAll(/src="\/oa-ads.js"/g)].length, 1, "homepage loads oa-ads.js once");
     assert.doesNotMatch(html, /href="\/sponsor\.html#(header|footer)"/, "open cards replaced");
-    assert.match(html, /<div class="ad-footer"><div class="oa-house" data-oa-slot="home" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"><\/div><script src="\/oa-ads.js"><\/script><\/div>/, "no Sponsors heading over a house ad, three house ads");
+    assert.match(html, /<div class="ad-footer"><div class="oa-house" data-oa-slot="home" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"><\/div><\/div>/, "no Sponsors heading over a house ad, three house ads");
   } else if (rel.startsWith("apps/")) {
     assert.deepEqual(slots, ["app_banner", "app_footer"], rel);
     assert.match(html, /<\/header>\n<div class="ad-app-banner"><div class="oa-house"/);
-    assert.match(html, /<\/main>\n+<div class="ad-footer" data-oa-page><div class="oa-house"[^>]*><\/div><script src="\/oa-ads.js"><\/script><\/div>\n<footer class="site">/);
+    assert.match(html, /<\/main>\n+<div class="ad-footer" data-oa-page><div class="oa-house"[^>]*><\/div><\/div>\n<footer class="site">/);
   } else {
     assert.equal(slots.length, 2, `header and footer slot in ${rel}`);
     const [h, ft] = slots;
     assert.ok(TYPES.some((t) => h === t + "_header" && ft === t + "_footer"), `${rel}: ${slots}`);
-    assert.match(html, /<\/header>\n<div class="ad-header" data-oa-page><div class="oa-house"[^>]*><\/div><script src="\/oa-ads.js"><\/script><\/div>\n\n*<main class="wrap/, `header slot under the title block in ${rel}`);
-    assert.match(html, /<\/main>\n+<div class="ad-footer" data-oa-page><div class="oa-house"[^>]*><\/div><script src="\/oa-ads.js"><\/script><\/div>\n<footer class="site">/, `footer slot above the site footer in ${rel}`);
+    assert.match(html, /<\/header>\n<div class="ad-header" data-oa-page><div class="oa-house"[^>]*><\/div><\/div>\n\n*<main class="wrap/, `header slot under the title block in ${rel}`);
+    assert.match(html, /<\/main>\n+<div class="ad-footer" data-oa-page><div class="oa-house"[^>]*><\/div><\/div>\n<footer class="site">/, `footer slot above the site footer in ${rel}`);
     assert.doesNotMatch(html, /Sponsors<\/h2><div class="oa-house"/);
   }
 }

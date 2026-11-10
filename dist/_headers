@@ -15,3 +15,42 @@
 /catalog/*
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=3600
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/package-details.json
+  Cache-Control: public, max-age=3600
+
+/home-catalog.json
+  Cache-Control: public, max-age=3600
+
+/home.js
+  Cache-Control: public, max-age=3600
+
+/votes.js
+  Cache-Control: public, max-age=3600
+
+/home-leaders.js
+  Cache-Control: public, max-age=3600
+
+/hero-field.js
+  Cache-Control: public, max-age=3600
+
+/share.js
+  Cache-Control: public, max-age=3600
+
+/newsletter.js
+  Cache-Control: public, max-age=3600
+
+/sponsors.js
+  Cache-Control: public, max-age=3600
+
+/leaderboard.js
+  Cache-Control: public, max-age=3600
+
+/oa-ads.js
+  Cache-Control: public, max-age=3600

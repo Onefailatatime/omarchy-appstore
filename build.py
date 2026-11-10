@@ -1289,6 +1289,90 @@ def package_details(pkgs: list[dict]) -> dict:
 GROUP_PREVIEW = 6  # cards shown per category until the reader asks for the rest
 
 
+def card_record(p: dict) -> dict:
+    """Fields the homepage needs to render a card after first paint."""
+    added_date = datetime.date.fromtimestamp(p["added"]) if p.get("added") else None
+    rec = {
+        "name": p["name"],
+        "dir": p["dir"],
+        "version": p["version"],
+        "desc": p.get("desc") or "",
+        "url": p.get("url") or "",
+        "github": p.get("github") or "",
+        "license": p.get("license") or "",
+        "csize": p["csize"],
+        "isize": p["isize"],
+        "built": datetime.date.fromtimestamp(p["built"]).isoformat(),
+        "builtTs": p["built"],
+        "added": added_date.isoformat() if added_date else "",
+        "addedTs": p.get("added") or 0,
+        "category": p["category"],
+        "cat": slug(p["category"]),
+        "pricing": p.get("pricing") or "",
+        "youtubeId": p.get("youtube_id") or "",
+        "youtubeTitle": p.get("youtube_title") or "",
+        "detailUrl": MERGED.get(f"/apps/{slug(p['name'])}.html", f"/apps/{slug(p['name'])}.html").lstrip("/"),
+    }
+    if p.get("author_name") and p.get("author_url"):
+        rec["authorName"] = p["author_name"]
+        rec["authorUrl"] = p["author_url"]
+    if p.get("indie_note"):
+        rec["indieNote"] = p["indie_note"]
+    return rec
+
+
+def related_apps_html(p: dict, pkgs: list[dict]) -> str:
+    """Same-category packages, linking to the live URL for each."""
+    others = [o for o in pkgs if o["category"] == p["category"] and o["name"] != p["name"]]
+    others.sort(key=lambda o: (0 if (o.get("desc") or o.get("full_desc")) else 1, o["name"]))
+    others = others[:6]
+    if not others:
+        return ""
+    items = []
+    for o in others:
+        href = f"/apps/{slug(o['name'])}.html"
+        href = MERGED.get(href, href)
+        desc = html.escape(o.get("desc") or o.get("tagline") or o["category"])
+        items.append(
+            f'<a class="related-guide" href="{html.escape(href)}"><strong>{html.escape(o["name"])}</strong>'
+            f'<span>{desc}</span></a>'
+        )
+    return (
+        f'<section class="related-guides" id="related"><h2>Related packages in {html.escape(p["category"])}</h2>'
+        f'<div class="related-guide-grid">{"".join(items)}</div></section>\n'
+    )
+
+
+def package_facts_faq(p: dict) -> list[tuple[str, str]]:
+    """FAQ entries built only from package facts already on the page."""
+    name = p["name"]
+    faqs = [(
+        f"How do I install {name} on Omarchy?",
+        f"From a terminal, run omarchy pkg add {name}. The package comes from the official Omarchy repository.",
+    )]
+    desc = (p.get("full_desc") or p.get("desc") or "").strip()
+    if desc:
+        faqs.append((f"What does {name} do?", desc))
+    faqs.append((
+        f"Which category is {name} in?",
+        f"{name} is listed under {p['category']} in the Unofficial Omarchy App Store.",
+    ))
+    if p.get("author_name"):
+        faqs.append((f"Who makes {name}?", f"{name} is listed as made by {p['author_name']}."))
+    if p.get("license") and p["license"] != "unknown":
+        faqs.append((f"What licence does {name} use?", f"The package lists its licence as {p['license']}."))
+    faqs.append((
+        f"How big is {name}?",
+        f"The download is {p['csize']} and the installed size is {p['isize']}.",
+    ))
+    deps = p.get("deps") or []
+    if deps:
+        shown = ", ".join(deps[:12])
+        more = f" and {len(deps) - 12} more" if len(deps) > 12 else ""
+        faqs.append((f"What does {name} depend on?", f"{name} depends on {shown}{more}."))
+    return faqs
+
+
 def nav_html(current_href: str) -> str:
     """The shared top bar, read from body.html so every page has one source."""
     body = (ROOT / "parts" / "body.html").read_text(encoding="utf-8")
@@ -1297,18 +1381,21 @@ def nav_html(current_href: str) -> str:
     return bar.replace(f'href="{current_href}"', f'href="{current_href}" aria-current="page"', 1)
 
 
-def group_section(category: str, pkgs: list[dict]) -> str:
+def group_section(category: str, pkgs: list[dict]) -> tuple[str, list[dict]]:
+    """HTML for the first preview cards, plus records for the rest (loaded after paint)."""
     cat_slug = slug(category)
-    cards = "\n".join(card(p) for p in pkgs)
     collapsed = len(pkgs) > GROUP_PREVIEW
+    preview, rest = (pkgs[:GROUP_PREVIEW], pkgs[GROUP_PREVIEW:]) if collapsed else (pkgs, [])
+    cards = "\n".join(card(p) for p in preview)
     more = (f'  <button class="button ghost group-more" type="button" data-group-more aria-expanded="false">'
             f'Show all {len(pkgs)} {html.escape(category)} apps</button>\n') if collapsed else ""
-    return f"""<section class="group cat-{cat_slug}{' collapsed' if collapsed else ''}" data-cat="{cat_slug}" data-preview="{GROUP_PREVIEW}">
+    html_out = f"""<section class="group cat-{cat_slug}{' collapsed' if collapsed else ''}" data-cat="{cat_slug}" data-preview="{GROUP_PREVIEW}">
   <h2><span class="dot" aria-hidden="true"></span>{html.escape(category)} <b>{len(pkgs)}</b></h2>
   <div class="grid">
 {cards}
   </div>
 {more}</section>"""
+    return html_out, [card_record(p) for p in rest]
 
 
 def leaderboard_row(p: dict) -> str:
@@ -1451,7 +1538,7 @@ def app_title(p: dict) -> str:
     return f"{base} | {line}" if line and len(base) + 3 + len(line) <= 65 else base
 
 
-def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: dict | None = None) -> str:
+def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: dict | None = None, pkgs: list[dict] | None = None) -> str:
     canonical = f"{SITE_URL}/apps/{slug(p['name'])}.html"
     desc = description_for(p)
     project_url = p.get("url") or p.get("github") or f"https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/{urllib.parse.quote(p['dir'])}"
@@ -1553,6 +1640,7 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
         "__INDIE_STICKER__": indie_sticker,
         "__AUTHOR__": author,
         "__REQUIREMENTS__": reqs or "<li>No special requirements documented.</li>",
+        "__DEPS__": (("<dt>Depends on</dt><dd>" + html.escape(", ".join(p["deps"][:20])) + "</dd>") if p.get("deps") else ""),
         "__SCREENSHOT__": gallery,
         "__APP_BANNER__": ads.render_app_banner(app_banners or {}, slug(p["name"])),
         "__VIDEO__": video,
@@ -1580,6 +1668,25 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
         for slug_, anchor, body in folded:
             blocks.append(f'<section class="folded-guide" id="{html.escape(anchor)}">{body}</section>')
         page = page.replace('    <div class="actions">', "\n".join(blocks) + '\n    <div class="actions">', 1)
+    related = related_apps_html(p, pkgs or [])
+    if related:
+        page = page.replace('    <div class="actions">', related + '    <div class="actions">', 1)
+    # Hand-written or folded FAQs already cover the app; only add package-fact
+    # questions when this page would otherwise have none.
+    if not extra and not folded:
+        facts = package_facts_faq(p)
+        faq = ('<section class="guide-faq" id="faq"><h2>Frequently asked questions</h2>'
+               + "".join(f"<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>" for q, a in facts)
+               + "</section>\n")
+        page = page.replace('    <div class="actions">', faq + '    <div class="actions">', 1)
+        faq_schema = {"@type": "FAQPage", "@id": canonical + "#faq", "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in facts]}
+        # Insert the FAQPage into the existing JSON-LD graph.
+        page = page.replace(
+            '"@graph":[',
+            '"@graph":[' + json_script(faq_schema) + ",",
+            1,
+        )
     return page
 
 
@@ -1717,7 +1824,16 @@ def main() -> None:
         if p["name"] in newest_names:
             continue
         by_cat.setdefault(p["category"], []).append(p)
-    groups = "\n".join(group_section(c, by_cat[c]) for c in CATEGORY_ORDER if by_cat.get(c))
+    home_catalog: dict[str, list[dict]] = {}
+    group_bits = []
+    for c in CATEGORY_ORDER:
+        if not by_cat.get(c):
+            continue
+        section, rest = group_section(c, by_cat[c])
+        group_bits.append(section)
+        if rest:
+            home_catalog[slug(c)] = rest
+    groups = "\n".join(group_bits)
 
     chips = "\n".join(
         f'<button class="chip cat-{slug(c)}" type="button" data-cat="{slug(c)}" aria-pressed="false">'
@@ -1742,7 +1858,7 @@ def main() -> None:
             {"@type": "WebSite", "@id": SITE_URL + "/#website", "url": SITE_URL + "/", "name": SITE_NAME, "alternateName": "Omarchy Apps", "description": "Searchable directory of packages in the official Omarchy repository. An independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David's blessing."},
             {"@type": "CollectionPage", "@id": SITE_URL + "/#webpage", "url": SITE_URL + "/", "name": SITE_NAME, "isPartOf": {"@id": SITE_URL + "/#website"}, "mainEntity": {"@type": "ItemList", "numberOfItems": len(pkgs), "itemListElement": [
                 {"@type": "ListItem", "position": i, "url": f"{SITE_URL}/apps/{slug(p['name'])}.html", "name": p["name"]}
-                for i, p in enumerate(pkgs, 1)
+                for i, p in enumerate(newest, 1)
             ]}},
             {"@type": "FAQPage", "@id": SITE_URL + "/#faq", "mainEntity": [
                 {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
@@ -1830,6 +1946,8 @@ def main() -> None:
     (DIST / "sponsors.js").write_text((ROOT / "assets" / "sponsors.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "votes.js").write_text((ROOT / "assets" / "votes.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "package-details.json").write_text(json.dumps(package_details(pkgs), separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
+    (DIST / "home-catalog.json").write_text(json.dumps({"groups": home_catalog}, separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
+    (DIST / "home.js").write_text((ROOT / "assets" / "home.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "home-leaders.js").write_text((ROOT / "assets" / "home-leaders.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "hero-field.js").write_text((ROOT / "assets" / "hero-field.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "leaderboard.js").write_text((ROOT / "assets" / "leaderboard.js").read_text(encoding="utf-8"), encoding="utf-8")
@@ -1984,8 +2102,8 @@ def main() -> None:
         if f"/apps/{slug(p['name'])}.html" in MERGED:
             continue
         (apps_dir / f"{slug(p['name'])}.html").write_text(
-            render_app_page(app_template, resolved_css, p, synced, app_banners).replace(ROBOTS_INDEX, ROBOTS_NOINDEX) if p["name"] in THIN_APPS
-            else render_app_page(app_template, resolved_css, p, synced, app_banners), encoding="utf-8"
+            render_app_page(app_template, resolved_css, p, synced, app_banners, pkgs).replace(ROBOTS_INDEX, ROBOTS_NOINDEX) if p["name"] in THIN_APPS
+            else render_app_page(app_template, resolved_css, p, synced, app_banners, pkgs), encoding="utf-8"
         )
 
     for d in ("category", "vs", "install"):
