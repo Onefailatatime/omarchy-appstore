@@ -6,6 +6,7 @@ import { handleVoteRequest, D1VoteStore } from "./votes.mjs";
 import { handleSubscribeRequest } from "./subscribe.mjs";
 import { handleAdEvent, handleWaitlist, handleStats } from "./ads.mjs";
 import merged from "../data/merged-pages.json" with { type: "json" };
+import gone from "../data/gone-pages.json" with { type: "json" };
 
 async function sha256Hex(text) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
@@ -55,6 +56,12 @@ export function mergedTarget(pathname, redirects = merged.redirects) {
   return redirects[clean] || redirects[clean + ".html"] || null;
 }
 
+export function goneTarget(pathname, pages = gone.pages) {
+  const clean = pathname.replace(/\/+$/, "").replace(/\.html$/, "");
+  return pages.some((p) => p.replace(/\/+$/, "").replace(/\.html$/, "") === clean);
+}
+
+
 const tooMany = () => new Response(JSON.stringify({ error: "Too many requests. Try again in a minute." }), {
   status: 429, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
 });
@@ -65,7 +72,7 @@ export default {
     const { pathname } = url;
     try {
       // omarchystore.omarchyapps.com is a vanity host: every path goes to the Omarchy store page.
-      if (url.hostname === "omarchystore.omarchyapps.com") return Response.redirect("https://omarchyapps.com/omarchy-store.html", 301);
+      if (url.hostname === "omarchystore.omarchyapps.com") return Response.redirect("https://omarchyapps.com/" + url.search, 301);
       // One canonical origin: http and www both go to https://omarchyapps.com in a single 301.
       // Cloudflare's Always Use HTTPS is a zone setting, so the worker does it. Local dev stays on http.
       const local = url.hostname === "localhost" || url.hostname === "127.0.0.1";
@@ -109,6 +116,17 @@ export default {
         return pathname === "/api/waitlist" ? await handleWaitlist(request, env, ctx) : await handleAdEvent(request, env);
       }
       if (pathname === "/api/ads/stats") return await handleStats(request, env);
+      // Retired package tutorials and their /apps/ aliases (data/gone-pages.json).
+      if (goneTarget(pathname)) {
+        return new Response("This page has been removed.\n", {
+          status: 410,
+          headers: {
+            "content-type": "text/plain; charset=utf-8",
+            "x-robots-tag": "noindex, follow",
+            "cache-control": "public, max-age=300",
+          },
+        });
+      }
       // One page per app: merged duplicates 301 to the page that owns the query (data/merged-pages.json).
       const mergedTo = mergedTarget(pathname);
       if (mergedTo) return Response.redirect(new URL(mergedTo + url.search, request.url).toString(), 301);

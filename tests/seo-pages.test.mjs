@@ -72,6 +72,25 @@ for (const p of apps) {
 }
 for (const keep of ["flea", "strata", "slap-notes-bin", "omarchy-task-manager"]) assert.ok(!thinApps.has(keep), `${keep} stays indexed`);
 
+const mergedRedirects = JSON.parse(await readFile(new URL("../data/merged-pages.json", import.meta.url), "utf8")).redirects;
+const liveOf = (path) => {
+  let cur = path;
+  const seen = new Set();
+  while (mergedRedirects[cur] && !seen.has(cur)) { seen.add(cur); cur = mergedRedirects[cur]; }
+  return cur;
+};
+for (const name of thinApps) {
+  const appPath = `/apps/${name}.html`;
+  const live = liveOf(appPath);
+  if (live !== appPath) {
+    const file = live.slice(1);
+    assert.ok(existsSync(new URL(file, dist)), `${name} live page ${live} missing`);
+    const html = await read(file);
+    assert.match(html, /<meta name="robots" content="noindex,follow">/, `${live} noindex`);
+    assert.doesNotMatch(sitemap, new RegExp(live.replace(/[.+]/g, "\\$&") + "<"), `${live} not in sitemap`);
+  }
+}
+
 // No build time freshness: no footer sync stamp and no review stamp on generated pages.
 for (const p of pages) {
   const html = await read(p);
@@ -81,23 +100,40 @@ for (const p of pages) {
 
 const cats = pages.filter((p) => p.startsWith("category/"));
 assert.equal(cats.length, 12, "12 category pages");
-const list = await read("omarchy-apps-list.html");
-assert.equal((list.match(/<li><a href="\/apps\//g) || []).length, apps.length, "apps list links every app once");
-for (const k of ["ubuntu", "cachyos", "arch", "fedora", "mint", "popos", "bazzite"]) {
-  const html = await read(`vs/omarchy-vs-${k}.html`);
-  assert.ok((html.match(/class="src"/g) || []).length >= 4, `${k} comparison cites sources`);
+for (const p of cats) {
+  const html = await read(p);
+  assert.ok(html.includes("<p>") || html.includes("<p "), `${p} has an intro`);
 }
+assert.ok(!existsSync(new URL("omarchy-apps-list.html", dist)), "apps list is merged into /");
+const compared = await read("vs/omarchy-compared.html");
+assert.ok((compared.match(/class="src"/g) || []).length >= 4, "comparison hub cites sources");
+assert.doesNotMatch(compared, /<!-- (TABLE|FAQ) -->/, "comparison hub filled its slots");
 const cachy = await read("vs/omarchy-vs-cachyos.html");
 assert.match(cachy, /<title>Omarchy vs CachyOS \(2026\): Which Arch Distro Fits You\?<\/title>/);
 assert.match(cachy, /"@type":"FAQPage"/, "cachyos comparison has FAQ schema");
 assert.doesNotMatch(cachy, /<!-- (TABLE|FAQ) -->/, "cachyos comparison filled its slots");
 const installs = pages.filter((p) => p.startsWith("install/"));
 assert.ok(installs.length >= 8);
+assert.ok(installs.includes("install/gaming-on-omarchy.html"), "gaming install hub exists");
+assert.ok(!existsSync(new URL("install/lutris-on-omarchy.html", dist)));
+assert.ok(!existsSync(new URL("install/heroic-epic-games-on-omarchy.html", dist)));
 for (const p of installs) assert.match(await read(p), /omarchy\.org\/manual\//, `${p} cites the manual`);
-for (const p of [...cats, ...installs, "omarchy-apps-list.html"]) assert.match(sitemap, new RegExp(p.replace(/\./g, "\\.")));
+for (const p of [...cats, ...installs, "vs/omarchy-compared.html", "vs/omarchy-vs-cachyos.html"]) {
+  assert.match(sitemap, new RegExp(p.replace(/\./g, "\\.")));
+}
+
+assert.match(await read("catalog.html"), /<meta name="robots" content="noindex,follow">/, "catalog is noindex");
+assert.doesNotMatch(sitemap, /catalog\.html</, "catalog is out of the sitemap");
+
+// Sitemap URLs are indexable.
+for (const [, path] of locs) {
+  const file = path || "index.html";
+  const html = await read(file);
+  assert.doesNotMatch(html, /<meta name="robots" content="noindex/, `sitemap ${file} is noindex`);
+}
 
 // Internal links on new pages resolve.
-for (const p of [...cats, ...installs, "omarchy-apps-list.html", "vs/omarchy-vs-ubuntu.html"]) {
+for (const p of [...cats, ...installs, "vs/omarchy-compared.html", "vs/omarchy-vs-cachyos.html"]) {
   for (const [, href] of (await read(p)).matchAll(/href="(\/[^"?#]*)/g)) {
     assert.ok(existsSync(new URL((href === "/" ? "index.html" : href.slice(1)), dist)), `${p} links to missing ${href}`);
   }

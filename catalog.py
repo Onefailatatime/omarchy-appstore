@@ -34,9 +34,10 @@ FIELDS = [
 ]
 
 
-def app_entry(p: dict, site: str, slug, tutorial_path) -> dict:
+def app_entry(p: dict, site: str, slug, tutorial_path, live_url=None) -> dict:
     """One app. slug() and tutorial_path() come from build.py so URLs match the site exactly."""
     app_id = slug(p["name"])
+    page = live_url(p["name"]) if live_url else f"/apps/{app_id}.html"
     entry = {
         "id": app_id,
         "name": p["name"],
@@ -47,13 +48,13 @@ def app_entry(p: dict, site: str, slug, tutorial_path) -> dict:
         "homepage": p.get("url") or "",
         "repository": p.get("github") or "",
         "tutorial_url": site + tutorial_path(p["name"]) if tutorial_path(p["name"]) else "",
-        "url": f"{site}/apps/{app_id}.html",
+        "url": site + page,
     }
     return {k: v for k, v in entry.items() if v}
 
 
-def feed(pkgs: list[dict], site: str, slug, tutorial_path) -> dict:
-    apps = [app_entry(p, site, slug, tutorial_path) for p in pkgs]
+def feed(pkgs: list[dict], site: str, slug, tutorial_path, live_url=None) -> dict:
+    apps = [app_entry(p, site, slug, tutorial_path, live_url) for p in pkgs]
     return {
         "schema_version": VERSION,
         "status": STATUS,
@@ -140,9 +141,9 @@ def page(data: dict, site: str) -> tuple[dict, str]:
     return guide, body
 
 
-def build(dist, pkgs: list[dict], site: str, slug, tutorial_path, render_page) -> list[tuple[str, list[str]]]:
+def build(dist, pkgs: list[dict], site: str, slug, tutorial_path, render_page, live_url=None) -> list[tuple[str, list[str]]]:
     """Write the feed, its alias and the page. Returns sitemap entries (path, source files)."""
-    data = feed(pkgs, site, slug, tutorial_path)
+    data = feed(pkgs, site, slug, tutorial_path, live_url)
     text = json.dumps(data, ensure_ascii=False, indent=1) + "\n"
     (dist / "catalog").mkdir(exist_ok=True)
     (dist / "catalog" / f"v{VERSION}.json").write_text(text, encoding="utf-8")

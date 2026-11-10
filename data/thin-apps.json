@@ -1,21 +1,34 @@
 {
- "note": "Thin app pages: noindex, follow and left out of the sitemap. A generated tutorial that points its canonical at one of these is noindexed too. Add real content (data/enrichment.json or data/app-extras.json) and remove the name here to index it again.",
- "rule": "A page counts as thin when all of these hold: (1) it is generated only from package database facts, with no reviewed description, no screenshot, no demo video and no hand written FAQ; (2) the app has no hand written guide; (3) the package was added to the repo more than 30 days ago; (4) Search Console page data for the last 60 days (Sep 3 to Nov 1, 2026 PT, web search) shows no clicks and under 30 impressions. Hand guides, the homepage, leaderboard, press and flea, strata, slap-notes-bin and omarchy-task-manager are never listed.",
- "decided": "2026-11-02",
- "apps": [
-  "bambustudio-bin",
-  "cua-driver-bin",
-  "dell-xps13-sidecar-amps",
-  "ghostty",
-  "ghostty-shell-integration",
-  "ghostty-terminfo",
-  "linux-omarchy",
-  "linux-omarchy-bore-headers",
-  "linux-omarchy-headers",
-  "omarchy-billboard-generator",
-  "omareel",
-  "omawake-bin",
-  "owe-lockfeed",
-  "vi"
- ]
+  "note": "Thin package pages: noindex, follow and left out of the sitemap. The live URL is noindexed, whether that is /apps/<name>.html or the winning tutorial. Add real content (data/enrichment.json or data/app-extras.json) and remove the name here to index it again.",
+  "rule": "A page counts as thin when all of these hold: (1) it is generated only from package database facts, with no reviewed description, no screenshot, no demo video and no hand written FAQ or guide; (2) the package was added to the repo more than 30 days ago; (3) Search Console page data for the last 90 days (Aug 10 to Nov 7, 2026 PT, web search) shows no clicks and under 30 impressions. The 9 Nov 2026 audit also noindexes generated X on Omarchy templates that have 0 clicks and under 30 impressions in that window. Hand guides, the homepage, leaderboard, press and flea, strata, slap-notes-bin and omarchy-task-manager are never listed.",
+  "decided": "2026-11-09",
+  "window": {
+    "start": "2026-08-10",
+    "end": "2026-11-07",
+    "days": 90,
+    "type": "web"
+  },
+  "apps": [
+    "buzz",
+    "cua-driver-bin",
+    "dell-xps13-sidecar-amps",
+    "ghost-runtime",
+    "ghostty",
+    "ghostty-terminfo",
+    "hyprland-preview-share-picker-git",
+    "linux-omarchy-bore-headers",
+    "linux-omarchy-eevdf-headers",
+    "linux-omarchy-muqss-headers",
+    "omarchy-billboard-generator",
+    "omarchy-chromium-bin",
+    "omarchy-settings-dev",
+    "omasnap-git",
+    "omawake-bin",
+    "openvino-genai",
+    "owe-lockfeed",
+    "rawmakase-bin",
+    "sublime-text-4",
+    "tzupdate",
+    "yaru-session"
+  ]
 }

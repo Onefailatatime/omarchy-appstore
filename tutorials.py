@@ -91,6 +91,9 @@ def _body(p: dict, d: str, faqs: list[tuple[str, str]], siblings: list[dict], pr
     facts = [("Package", f"<code>{_e(n)}</code>"), ("Version", _e(p["version"])), ("Category", _e(p["category"])),
              ("License", _e(p["license"])), ("Download", _e(p["csize"])), ("Installed size", _e(p["isize"])),
              ("Built", built), ("Pricing", _e(_pricing(p)))]
+    if p.get("added"):
+        added = datetime.datetime.fromtimestamp(p["added"], datetime.timezone.utc).strftime("%Y-%m-%d")
+        facts.append(("Added to the official repo", added))
     if p.get("author_name"):
         facts.append(("Made by", _e(p["author_name"])))
     rows = "".join(f"<tr><th scope='row'>{k}</th><td>{v}</td></tr>" for k, v in facts)
@@ -114,6 +117,7 @@ def _body(p: dict, d: str, faqs: list[tuple[str, str]], siblings: list[dict], pr
     <section id="install">
       <h2>Install {_e(d)} on Omarchy</h2>
       <p>{_e(what)}</p>
+      {f"<p>The official repository lists this package in {_e(p['category'])}." + (f" It was added on {datetime.datetime.fromtimestamp(p['added'], datetime.timezone.utc).strftime('%Y-%m-%d')}." if p.get("added") else "") + "</p>" if (p.get("category") or p.get("added")) else ""}
       {media}
       <ol>
         <li>Open a terminal.</li>

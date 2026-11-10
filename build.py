@@ -50,6 +50,8 @@ ROBOTS_INDEX = '<meta name="robots" content="index,follow,max-image-preview:larg
 ROBOTS_NOINDEX = '<meta name="robots" content="noindex,follow">'
 MERGED_PAGES_FILE = ROOT / "data" / "merged-pages.json"  # old URL -> the one page that owns its query (301 in src/worker.js)
 MERGED = json.loads(MERGED_PAGES_FILE.read_text(encoding="utf-8"))["redirects"] if MERGED_PAGES_FILE.exists() else {}
+GONE_PAGES_FILE = ROOT / "data" / "gone-pages.json"
+GONE = set(json.loads(GONE_PAGES_FILE.read_text(encoding="utf-8"))["pages"]) if GONE_PAGES_FILE.exists() else set()
 DB_URL = "https://pkgs.omarchy.org/stable/x86_64/omarchy.db"
 DB_CACHE = ROOT / "data" / "omarchy.db"
 PKGS_REMOTE = "https://github.com/omacom/omarchy-pkgs"
@@ -1179,11 +1181,13 @@ def json_script(value: object) -> str:
     return json.dumps(value, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
 
-def description_for(p: dict, limit: int = 158) -> str:
+def description_for(p: dict, limit: int = 160) -> str:
     text = re.sub(r"\s+", " ", p.get("full_desc") or p.get("desc") or "").strip()
-    if len(text) <= limit:
-        return text
-    return text[:limit - 1].rsplit(" ", 1)[0] + "…"
+    if len(text) < 80:
+        fact = f"Install {p['name']} from the official Omarchy repository with omarchy pkg add {p['name']}."
+        text = f"{text.rstrip('.')}." if text else ""
+        text = f"{text} {fact}".strip() if text else fact
+    return seo.clamp_description(text, limit)
 
 
 def claim_url(name: str) -> str:
@@ -1239,7 +1243,7 @@ def card(p: dict, featured: bool = False) -> str:
         if featured else
         f'<span class="card-facts"><span class="cat-dot" aria-hidden="true"></span><span class="size">{e["csize"]}</span></span>'
     )
-    detail_url = f"apps/{slug(p['name'])}.html"
+    detail_url = canonical_path(f"/apps/{slug(p['name'])}.html").lstrip("/")
     share_url = f"{SITE_URL}/{detail_url}"
     indie_sticker = (f'<span class="indie-sticker card-sticker" title="{e["indie_note"]}">Indie app</span>'
                       if p.get("indie_note") else "")
@@ -1535,7 +1539,8 @@ def app_title(p: dict) -> str:
     """'Install <name> on Omarchy', plus the real one-line tagline when it fits."""
     base = f"Install {p['name']} on Omarchy"
     line = (p.get("tagline") or "").strip().rstrip(".")
-    return f"{base} | {line}" if line and len(base) + 3 + len(line) <= 65 else base
+    title = f"{base} | {line}" if line and len(base) + 3 + len(line) <= 65 else base
+    return seo.clamp_title(title)
 
 
 def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: dict | None = None, pkgs: list[dict] | None = None) -> str:
@@ -1671,23 +1676,28 @@ def render_app_page(template: str, css: str, p: dict, synced: str, app_banners: 
     related = related_apps_html(p, pkgs or [])
     if related:
         page = page.replace('    <div class="actions">', related + '    <div class="actions">', 1)
-    # Hand-written or folded FAQs already cover the app; only add package-fact
-    # questions when this page would otherwise have none.
-    if not extra and not folded:
-        facts = package_facts_faq(p)
-        faq = ('<section class="guide-faq" id="faq"><h2>Frequently asked questions</h2>'
-               + "".join(f"<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>" for q, a in facts)
-               + "</section>\n")
-        page = page.replace('    <div class="actions">', faq + '    <div class="actions">', 1)
-        faq_schema = {"@type": "FAQPage", "@id": canonical + "#faq", "mainEntity": [
-            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in facts]}
-        # Insert the FAQPage into the existing JSON-LD graph.
-        page = page.replace(
-            '"@graph":[',
-            '"@graph":[' + json_script(faq_schema) + ",",
-            1,
-        )
+    # Package facts already appear in the page body. Repeated install/licence/size
+    # questions are not added as FAQ schema or as a second FAQ block.
     return page
+
+
+
+def related_guide_cards(current_slug: str, live_guides: list[dict], limit: int = 4) -> str:
+    """A short, page-specific related list instead of every editorial guide."""
+    others = [g for g in live_guides if g["slug"] != current_slug and f"/{g['slug']}.html" not in MERGED]
+    current_pkgs = set(GUIDE_PACKAGES.get(current_slug, []))
+    def score(g):
+        overlap = len(current_pkgs & set(GUIDE_PACKAGES.get(g["slug"], [])))
+        return (-overlap, g["slug"])
+    others.sort(key=score)
+    cards = []
+    for item in others[:limit]:
+        href = canonical_path(f"/{item['slug']}.html")
+        cards.append(
+            f'<a class="related-guide" href="{html.escape(href)}"><strong>{html.escape(item["title"])}</strong>'
+            f'<span>{html.escape(item["description"])}</span></a>'
+        )
+    return "\n".join(cards)
 
 
 def render_seo_page(template: str, css: str, guide: dict, body: str, related: str, synced: str,
@@ -1698,14 +1708,14 @@ def render_seo_page(template: str, css: str, guide: dict, body: str, related: st
         template = (template
                     .replace('<link rel="canonical" href="__SITE_URL__/__SLUG__.html">', f'<link rel="canonical" href="{guide["canonical"]}">')
                     .replace('<meta property="og:url" content="__SITE_URL__/__SLUG__.html">', f'<meta property="og:url" content="{guide["canonical"]}">'))
-    schema = {
-        "@context": "https://schema.org",
-        "@graph": [
+    title = seo.clamp_title(guide["title"])
+    description = seo.clamp_description(guide["description"])
+    graph = [
             {
                 "@type": "Article",
                 "@id": guide_url + "#article",
-                "headline": guide["title"],
-                "description": guide["description"],
+                "headline": title,
+                "description": description,
                 "url": guide_url,
                 "dateModified": synced,
                 "author": {"@type": "Person", "name": "Jessyka", "url": SITE_URL + "/about.html"},
@@ -1720,19 +1730,20 @@ def render_seo_page(template: str, css: str, guide: dict, body: str, related: st
                     {"@type": "ListItem", "position": 3, "name": guide["title"], "item": guide_url},
                 ],
             },
-            {
-                "@type": "FAQPage",
-                "mainEntity": [
-                    {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
-                    for question, answer in guide["faqs"]
-                ],
-            },
-            *(extra_graph or []),
-        ],
-    }
+        ]
+    if guide.get("faqs") and guide.get("schema_faq", True):
+        graph.append({
+            "@type": "FAQPage",
+            "mainEntity": [
+                {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
+                for question, answer in guide["faqs"]
+            ],
+        })
+    graph.extend(extra_graph or [])
+    schema = {"@context": "https://schema.org", "@graph": graph}
     return (template
-            .replace("__TITLE__", html.escape(guide["title"]))
-            .replace("__DESCRIPTION__", html.escape(guide["description"]))
+            .replace("__TITLE__", html.escape(title))
+            .replace("__DESCRIPTION__", html.escape(description))
             .replace("__SLUG__", guide["slug"])
             .replace("__EYEBROW__", html.escape(guide["eyebrow"]))
             .replace("__CRUMB__", f'<a href="{crumb[1]}">{crumb[0]}</a>')
@@ -1960,6 +1971,7 @@ def main() -> None:
     (DIST / "leaderboard.js").write_text((ROOT / "assets" / "leaderboard.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "share.js").write_text((ROOT / "assets" / "share.js").read_text(encoding="utf-8"), encoding="utf-8")
     about = ((ROOT / "parts" / "about.html").read_text(encoding="utf-8")
+             .replace("__COUNT__", str(len(pkgs)))
              .replace("__SYNCED__", synced)
              .replace("__CONTACT__", html.escape(CONTACT_URL))
              .replace("__SITE_URL__", SITE_URL)
@@ -2020,10 +2032,7 @@ def main() -> None:
     for guide in GUIDES:
         if f"/{guide['slug']}.html" in MERGED:
             continue
-        related = "\n".join(
-            f'<a class="related-guide" href="/{item["slug"]}.html"><strong>{html.escape(item["title"])}</strong><span>{html.escape(item["description"])}</span></a>'
-            for item in live_guides if item["slug"] != guide["slug"]
-        )
+        related = related_guide_cards(guide["slug"], live_guides)
         guide_body = (ROOT / "parts" / "guides" / f"{guide['slug']}.html").read_text(encoding="utf-8")
         guide_body = fill_package_watch(guide, guide_body, pkgs)
         guide_body = guide_body.replace("__PKG_COUNT__", str(len(pkgs)))
@@ -2036,42 +2045,45 @@ def main() -> None:
     # Merged URLs are reserved too, so no generated page takes them and no related list links to them.
     merged_slugs = {path.strip("/").removesuffix(".html") for path in MERGED}
     tuts = tutorials.build(pkgs, guided, {g["slug"] for g in GUIDES} | merged_slugs, SITE_URL, profile_images)
-    for path in MERGED:  # the worker 301s these; drop the copy an earlier build left in dist
+    for path in list(MERGED) + list(GONE):  # 301 and 410 URLs must not stay in dist
         (DIST / path.lstrip("/")).unlink(missing_ok=True)
     canonical_to_app = set(json.loads(TUTORIAL_CANONICALS_FILE.read_text())["pages"]) if TUTORIAL_CANONICALS_FILE.exists() else set()
     for t in tuts:
         p = t["pkg"]
-        if t["slug"] in canonical_to_app and p["name"] in THIN_APPS:
-            t["noindex"] = True  # its app page is noindexed, so a canonical there would point at a page Google drops
-        elif t["slug"] in canonical_to_app:
+        app_path = f"/apps/{slug(p['name'])}.html"
+        tut_path = f"/{t['slug']}.html"
+        tutorial_won = MERGED.get(app_path) == tut_path
+        if p["name"] in THIN_APPS:
+            t["noindex"] = True
+        elif t["slug"] in canonical_to_app and not tutorial_won:
             t["canonical"] = SITE_URL + t["profile"]
+        t["schema_faq"] = False  # install FAQs are repeated package facts, not unique questions
         canonical = f"{SITE_URL}/{t['slug']}.html"
-        howto = {
-            "@type": "HowTo", "@id": canonical + "#howto", "name": f"How to install {t['display']} on Omarchy",
-            "step": [
-                {"@type": "HowToStep", "position": 1, "name": "Open a terminal", "text": "Open a terminal in your Omarchy session."},
-                {"@type": "HowToStep", "position": 2, "name": "Install the package", "text": f"Run omarchy pkg add {p['name']}."},
-                {"@type": "HowToStep", "position": 3, "name": "Check the install", "text": f"Run pacman -Qi {p['name']} and confirm version {p['version']}."},
-            ],
-        }
         app = {
             "@type": "SoftwareApplication", "@id": canonical + "#app", "name": p["name"],
             "description": p.get("full_desc") or p.get("desc"), "applicationCategory": p["category"],
             "operatingSystem": "Omarchy Linux", "softwareVersion": p["version"], "license": p["license"],
-            "url": f"{SITE_URL}/apps/{slug(p['name'])}.html",
+            "url": SITE_URL + canonical_path(app_path),
         }
         if p.get("pricing") in ("free", "free-libre"):
             app["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
         sibs = [x for x in re.findall(r'href="(/[a-z0-9-]+-on-omarchy\.html)"[^>]*>([^<]+)<', t["body"])]
-        related = "\n".join(
-            f'<a class="related-guide" href="{href}"><strong>{label} on Omarchy</strong><span>Tutorial</span></a>'
+        related_links = [
+            f'<a class="related-guide" href="{canonical_path(href)}"><strong>{label} on Omarchy</strong><span>Tutorial</span></a>'
             for href, label in sibs[:3]
-        ) + f'\n<a class="related-guide" href="{t["profile"]}"><strong>{html.escape(t["display"])} package page</strong><span>Version, size, license and install command</span></a>'
-        if f"/{t['slug']}.html" in MERGED:
+            if canonical_path(href) != tut_path
+        ]
+        profile_live = canonical_path(t["profile"])
+        if profile_live != tut_path:
+            related_links.append(
+                f'<a class="related-guide" href="{profile_live}"><strong>{html.escape(t["display"])} package page</strong><span>Version, size, license and install command</span></a>'
+            )
+        related = "\n".join(related_links)
+        if tut_path in MERGED or tut_path in GONE:
             continue
         tut_page = render_seo_page(
-            guide_template, page_css, t, t["body"], related, synced, ("Tutorials", "/tutorials.html"),
-            "Generated from the official Omarchy package repo", [howto, app])
+            guide_template, page_css, t, t["body"], related, synced, ("Guides", "/guides.html"),
+            "Generated from the official Omarchy package repo", [app])
         if t.get("noindex"):
             tut_page = tut_page.replace(ROBOTS_INDEX, ROBOTS_NOINDEX)
         (DIST / f"{t['slug']}.html").write_text(tut_page, encoding="utf-8")
@@ -2118,7 +2130,8 @@ def main() -> None:
             old.unlink()
     seo_pages = seo.build(root=ROOT, dist=DIST, pkgs=pkgs, categories=CATEGORY_ORDER, slug=slug,
                           display_name=lambda p: p["name"], guide_template=guide_template,
-                          site=SITE_URL, site_name=SITE_NAME, synced=synced)
+                          site=SITE_URL, site_name=SITE_NAME, synced=synced,
+                          merged=MERGED, live_path=canonical_path)
     # Public JSON catalog feed + its docs page. All feed logic lives in catalog.py.
     catalog_related = (
         '<a class="related-guide" href="/develop.html"><strong>Develop for Omarchy</strong><span>Package your app for the official Omarchy repository so it shows up here and in the feed.</span></a>\n'
@@ -2128,7 +2141,11 @@ def main() -> None:
         DIST, pkgs, SITE_URL, slug,
         lambda name: tutorial_url(name) if (DIST / tutorial_url(name).lstrip("/")).exists() else "",
         lambda guide, body: render_seo_page(guide_template, page_css, guide, body, catalog_related, synced,
-                                            ("Develop", "/develop.html"), f"Updated {synced} · early preview"))
+                                            ("Develop", "/develop.html"), f"Updated {synced} · early preview"),
+        live_url=lambda name: canonical_path(f"/apps/{slug(name)}.html"))
+    catalog_html = DIST / "catalog.html"
+    if catalog_html.exists():
+        catalog_html.write_text(catalog_html.read_text(encoding="utf-8").replace(ROBOTS_INDEX, ROBOTS_NOINDEX), encoding="utf-8")
 
     # One cached, content-hashed stylesheet instead of the same CSS inlined in
     # every page. Pages were rendered with the full block; swap it for a link.
@@ -2180,8 +2197,10 @@ def main() -> None:
     paths = ["/"] + [f"/{name}.html" for name in ("leaderboard", "develop", "about", "press", "faq", "sponsor", "guides", "terms")]
     paths += [f"/{guide['slug']}.html" for guide in GUIDES if f"/{guide['slug']}.html" not in MERGED]
     paths += [f"/apps/{slug(p['name'])}.html" for p in pkgs if p["name"] not in THIN_APPS and f"/apps/{slug(p['name'])}.html" not in MERGED]
-    paths += [path for path, _ in seo_pages if path not in MERGED] + [path for path, _ in catalog_pages if path not in MERGED]
-    paths += ["/tutorials.html"] + [f"/{t['slug']}.html" for t in tuts if not t.get("canonical") and not t.get("noindex") and f"/{t['slug']}.html" not in MERGED]
+    noindex_paths = {"/catalog.html"}
+    paths += [path for path, _ in seo_pages if path not in MERGED and path not in GONE]
+    paths += [path for path, _ in catalog_pages if path not in MERGED and path not in GONE and path not in noindex_paths]
+    paths += [f"/{t['slug']}.html" for t in tuts if not t.get("canonical") and not t.get("noindex") and f"/{t['slug']}.html" not in MERGED and f"/{t['slug']}.html" not in GONE]
     sitemap_entries = [(SITE_URL + path, lastmod(path)) for path in paths]
     sitemap_urls = [u for u, _ in sitemap_entries]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -2206,17 +2225,15 @@ def main() -> None:
         f"- [Develop for Omarchy]({SITE_URL}/develop.html)\n"
         f"- [About]({SITE_URL}/about.html)\n"
         f"- [Guides]({SITE_URL}/guides.html)\n"
-        f"- [App tutorials]({SITE_URL}/tutorials.html)\n"
         f"- [Sponsor]({SITE_URL}/sponsor.html)\n"
         f"- [Press and press kit]({SITE_URL}/press.html)\n"
         f"- [Q&A]({SITE_URL}/faq.html)\n"
         f"- [Terms of Use]({SITE_URL}/terms.html)\n\n"
         "## Guides and comparisons\n"
         + "".join(f"- [{guide['title']}]({SITE_URL}/{guide['slug']}.html)\n" for guide in GUIDES if f"/{guide['slug']}.html" not in MERGED)
-        + f"- [Omarchy apps list (all packages)]({SITE_URL}/omarchy-apps-list.html)\n"
-        + "".join(f"- [{SITE_URL}{path}]({SITE_URL}{path})\n" for path, _ in seo_pages if not path.startswith("/omarchy-apps-list") and path not in MERGED)
+        + "".join(f"- [{SITE_URL}{path}]({SITE_URL}{path})\n" for path, _ in seo_pages if path not in MERGED and path not in GONE)
         + "\n## App tutorials\n"
-        + "".join(f"- [{t['title']}]({SITE_URL}/{t['slug']}.html)\n" for t in tuts if f"/{t['slug']}.html" not in MERGED)
+        + "".join(f"- [{t['title']}]({SITE_URL}/{t['slug']}.html)\n" for t in tuts if f"/{t['slug']}.html" not in MERGED and f"/{t['slug']}.html" not in GONE and not t.get("noindex") and not t.get("canonical"))
         + "\n"
         "Contact: https://x.com/jessyka_boat\n", encoding="utf-8"
     )
@@ -2234,9 +2251,10 @@ def main() -> None:
         + json.dumps({a["rank"]: a["name"] for a in inhouse_ads.ADS}) + ";\n", encoding="utf-8")
     print(f"dist/ad1..ad{len(inhouse_ads.ADS)}.html noindex waitlist pages · house ads in sponsor slots: " + ", ".join(f"{k} {n}" for k, n in ad_slots.items()))
     rewrites = rewrite_merged_links(DIST)
-    for path in MERGED:
+    for path in list(MERGED) + list(GONE):
         (DIST / path.lstrip("/")).unlink(missing_ok=True)
     print(f"merged pages:     {len(MERGED)} one-hop 301s · rewrote links on {rewrites} files")
+    print(f"gone pages:       {len(GONE)} 410s")
 
     print(f"seo pages:        {len(seo_pages)} (categories, apps list, comparisons, install guides)")
 
