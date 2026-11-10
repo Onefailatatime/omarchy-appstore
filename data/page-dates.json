@@ -25,8 +25,8 @@
   "v": 3
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-09",
-  "hash": "4797e65311e5ccc89023501ff460a0c72d286697ebf1fa3eb7c86914aadb807d",
+  "date": "2026-11-10",
+  "hash": "c7c8d58c199d52577ab4569a3d1e2f42d71e940e27825cbacae830e5649b7633",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -130,8 +130,8 @@
   "v": 3
  },
  "apps/gridcraft-bin.html": {
-  "date": "2026-11-09",
-  "hash": "29493964ef4fe56ad04be90093afcd5ca34916d98324fbe5587a9ba0f1e60d79",
+  "date": "2026-11-10",
+  "hash": "3e766f5b36f3d6f0c3bcd6d34cf493560235afd67c7d93863eaf704d5cb123e2",
   "v": 3
  },
  "apps/herdr-app.html": {
@@ -145,8 +145,8 @@
   "v": 3
  },
  "apps/herdr.html": {
-  "date": "2026-11-09",
-  "hash": "501a25962b125a3d7565319a057d0d8ebcd8aa8cb28c3f2e7df26dd8d9c3443e",
+  "date": "2026-11-10",
+  "hash": "445e7fb89b346ddd757ff12ec0fb4c06515d3891a732656b91c53b7229419318",
   "v": 3
  },
  "apps/hermes-desktop.html": {
@@ -615,8 +615,8 @@
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-09",
-  "hash": "c53237b3c4153b3882ff3e94a0cf4c18963ac733b87eb9f9679f0c77740f8548",
+  "date": "2026-11-10",
+  "hash": "c2e5ebc912bef21298ed308a04b2fde9c059fda20c82fd1d31ac1bb5a2c78b43",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -665,8 +665,8 @@
   "v": 3
  },
  "apps/wordcraft-bin.html": {
-  "date": "2026-11-09",
-  "hash": "89e14d18a846d757acb9df3051c5c1debab64b9abe331654131246555abea6c9",
+  "date": "2026-11-10",
+  "hash": "0ece898d270aeed3264639193404c770d2b88d00db71e65c81ca191038ee27fa",
   "v": 3
  },
  "apps/xpadneo-dkms.html": {
@@ -836,7 +836,7 @@
  },
  "dropbox-on-omarchy.html": {
   "date": "2026-11-10",
-  "hash": "a3249b00f53ba106d41c1e1acf1ce8edc819965b51f02c056a2c2d54bfbf0d7f",
+  "hash": "dd8d8f2c9285e4c1070543395d7eec0ec488e6e496fcbddac1a507299ed1c409",
   "v": 3
  },
  "dual-boot-windows-and-omarchy.html": {
