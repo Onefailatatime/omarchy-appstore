@@ -25,8 +25,8 @@
   "v": 3
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-10",
-  "hash": "1ddf55f374c8d50a3756ed3b1432d51127209c704d026f8725273f2f03f5696a",
+  "date": "2026-11-11",
+  "hash": "4d108e64f50c43249d49b570c7d3190ae46d445c6f3f6025fee826921b97f022",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -55,8 +55,8 @@
   "v": 3
  },
  "apps/claude-desktop.html": {
-  "date": "2026-11-10",
-  "hash": "376545d9411dc665d3441a2bc20212f8edff21a0fa7bc2ab6f07ba7d9e6282b1",
+  "date": "2026-11-11",
+  "hash": "6d915972d591f52c4d03b1c251dfb039b1898602619c77b01e8b139151012d5d",
   "v": 3
  },
  "apps/crush-bin.html": {
@@ -70,8 +70,8 @@
   "v": 3
  },
  "apps/cursor-cli.html": {
-  "date": "2026-11-10",
-  "hash": "119bc44848eebff4099b63da44e769a3976c5681da38b5ca80b1d956a9afa2ca",
+  "date": "2026-11-11",
+  "hash": "19ec2568cb85883e98620b1e303805151da863d12b8b76d589ba811c361fb84b",
   "v": 3
  },
  "apps/dbxcli-bin.html": {
@@ -595,8 +595,8 @@
   "v": 3
  },
  "apps/strata.html": {
-  "date": "2026-11-10",
-  "hash": "ecc931bb0a7532f79a57f294e93850416dff9f9a65d741934a7dc1f8e623690d",
+  "date": "2026-11-11",
+  "hash": "6de75a5c8a1f1bdb703c3a53080d029acf020729215be574f5e090cf82445ed8",
   "v": 3
  },
  "apps/sunshine.html": {
@@ -615,8 +615,8 @@
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-10",
-  "hash": "3c8779dc77ff0b3546d4020babe70d744ee614e36ac83ef05277e57a20f340a5",
+  "date": "2026-11-11",
+  "hash": "f71ced49b7828342df922e9532026f6c2f1e76f829dedb17a8486cbfbf1e089e",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -1275,8 +1275,8 @@
   "v": 3
  },
  "visual-studio-code-bin-on-omarchy.html": {
-  "date": "2026-11-10",
-  "hash": "2a0f07253a187e72697c53d0b22eae066dfc4be274286335c8b9934ee2190793",
+  "date": "2026-11-11",
+  "hash": "821fefa8738809511c216e6bfeac81c06facf0df6343ffc3554960aa34aaa27a",
   "v": 3
  },
  "voxtype-bin-on-omarchy.html": {
