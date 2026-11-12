@@ -66,14 +66,14 @@
   <url><loc>https://omarchyapps.com/apps/crush-bin.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/cursor-bin.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/cursor-cli.html</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/dbxcli-bin.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/dbxcli-bin.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/dingtalk-bin.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/dropbox-cli.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/elsewhen.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/flea.html</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/flea.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/github-copilot-cli.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/gliff.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/google-chrome.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/google-chrome.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/gridcraft-bin.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/herdr.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/herdr-app.html</loc><lastmod>2026-11-10</lastmod></url>
@@ -163,7 +163,7 @@
   <url><loc>https://omarchyapps.com/apps/strata.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/sunshine.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/supergfxctl.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/t3code-bin.html</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/t3code-bin.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-nightly-bin.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tensaku.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tmog-bin.html</loc><lastmod>2026-11-09</lastmod></url>
@@ -216,7 +216,7 @@
   <url><loc>https://omarchyapps.com/ghost-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/ghostty-nautilus-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/ghostty-shell-integration-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/grok-bot-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://omarchyapps.com/grok-bot-on-omarchy.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://omarchyapps.com/libretro-database-git-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/libretro-fbneo-git-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/libretro-vice-x128-git-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
@@ -225,7 +225,7 @@
   <url><loc>https://omarchyapps.com/lmstudio-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/lmstudio-bin-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/makima-bin-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/mise-bin-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://omarchyapps.com/mise-bin-on-omarchy.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://omarchyapps.com/nautilus-dropbox-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/nautilus-open-any-terminal-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/nordvpn-bin-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
@@ -240,7 +240,7 @@
   <url><loc>https://omarchyapps.com/ufw-docker-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/vi-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/visual-studio-code-bin-on-omarchy.html</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://omarchyapps.com/voxtype-bin-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://omarchyapps.com/voxtype-bin-on-omarchy.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://omarchyapps.com/walker-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/yaru-gnome-shell-theme-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/yaru-unity-theme-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>

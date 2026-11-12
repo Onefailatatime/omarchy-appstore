@@ -71,12 +71,12 @@
  },
  "apps/cursor-cli.html": {
   "date": "2026-11-11",
-  "hash": "19ec2568cb85883e98620b1e303805151da863d12b8b76d589ba811c361fb84b",
+  "hash": "028ffbc0633f47017f68e3966e66c39710afafeb71ececf58f75e8091b7e1a89",
   "v": 3
  },
  "apps/dbxcli-bin.html": {
-  "date": "2026-11-09",
-  "hash": "5b2206d63474a58a2e7805df0a57f111148e1e9587df44994ff0945f98db09c6",
+  "date": "2026-11-11",
+  "hash": "cacbb90fe57995009010e782c972bb1531f57c21e2e5af94eae0bc1f9482defd",
   "v": 3
  },
  "apps/dell-xps13-sidecar-amps.html": {
@@ -100,8 +100,8 @@
   "v": 3
  },
  "apps/flea.html": {
-  "date": "2026-11-10",
-  "hash": "17b7a4b9bd9fb74e0754c61d03145020f342836e6bf039f69a9a59a24e9d2fc6",
+  "date": "2026-11-11",
+  "hash": "1abd8cd792d4cbb2c7ed784a28f7a9a67e9936b4df7314ecf7c677d0ce6f01b7",
   "v": 3
  },
  "apps/ghostty-terminfo.html": {
@@ -125,8 +125,8 @@
   "v": 3
  },
  "apps/google-chrome.html": {
-  "date": "2026-11-09",
-  "hash": "395745de20ba26d6cf06a090b8542d9e12661f1ffc72ea5b5c94dfd11fb4869d",
+  "date": "2026-11-11",
+  "hash": "b8e270c5f7eb0bbe9fd106183d4f8e8fbe3f9d83c6678ea6d448678b507b9bdb",
   "v": 3
  },
  "apps/gridcraft-bin.html": {
@@ -610,13 +610,13 @@
   "v": 3
  },
  "apps/t3code-bin.html": {
-  "date": "2026-11-10",
-  "hash": "551f35e4493504381c1c09c9ca5e535909fb3b506642efd9aee7b4a1ec578c3a",
+  "date": "2026-11-11",
+  "hash": "5f4c61d210c90a67af7ec2c71baa89eec66f2dadde635c27f97093c2f6e47fd8",
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-11",
-  "hash": "f71ced49b7828342df922e9532026f6c2f1e76f829dedb17a8486cbfbf1e089e",
+  "hash": "3628ce67a7668fb2ea70e905bd3dfb2860b3966dd30a4c57443dd54522c5c2bb",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -915,8 +915,8 @@
   "v": 3
  },
  "grok-bot-on-omarchy.html": {
-  "date": "2026-11-10",
-  "hash": "8defaf91d9cb96190753952d486a4c0e5b052e82b9ae17967b65c064aa9a93fa",
+  "date": "2026-11-11",
+  "hash": "2559a8f0fcaa0b255ad46a64821894f421ff046c8b218d5369736c4af8cb5fa8",
   "v": 3
  },
  "guides.html": {
@@ -1070,8 +1070,8 @@
   "v": 3
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-11-10",
-  "hash": "20d97ffd19d6a8f19179ce86365c890affa4a97a23164509803fa3a08adad7da",
+  "date": "2026-11-11",
+  "hash": "4fad2535ee7334f71880adfad954d4da18897da58b0035f4bd727c910b41da75",
   "v": 3
  },
  "monologue-on-omarchy.html": {
@@ -1280,8 +1280,8 @@
   "v": 3
  },
  "voxtype-bin-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "1f33fed95cf250c0e31d82c6f2da374101d36bec651a2451a6f1a8568bec9523",
+  "date": "2026-11-11",
+  "hash": "9bf87c1f69413f0e5f25c36c0b5af3cc5826f2920aeb4a05a7687e918a191499",
   "v": 3
  },
  "vs/omarchy-compared.html": {
