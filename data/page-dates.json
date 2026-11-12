@@ -1,7 +1,7 @@
 {
  "about.html": {
-  "date": "2026-11-09",
-  "hash": "118f1df7c2b2860629ee44103c6f1ab8fa7b1ab62abc5a57d5fb440973bef29f",
+  "date": "2026-11-12",
+  "hash": "a9b5f9173fa3a90fd6d6ac4b544b620e9b434bb1ec0263674b3c2f5d6050f528",
   "v": 3
  },
  "apps/1password-beta.html": {
@@ -25,8 +25,8 @@
   "v": 3
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-11",
-  "hash": "4d108e64f50c43249d49b570c7d3190ae46d445c6f3f6025fee826921b97f022",
+  "date": "2026-11-12",
+  "hash": "f88386a10b1480d0081cb8a21cf6cf9e424338be4b14d2531fc4d514cefa36ce",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -160,8 +160,8 @@
   "v": 3
  },
  "apps/hex-bin.html": {
-  "date": "2026-11-09",
-  "hash": "2c371e8a6c4f90d4578837086f96432a51f992c914b42ab9ddb4b65de68b76f8",
+  "date": "2026-11-12",
+  "hash": "cc4d539466009da3706100fa5f579b07fd1b0d3d91b8e4846d856f67819cd0a0",
   "v": 3
  },
  "apps/hey-cli.html": {
@@ -570,8 +570,8 @@
   "v": 3
  },
  "apps/slack-desktop.html": {
-  "date": "2026-11-09",
-  "hash": "f39e864d17be61adfb75eeec7b4113520894836a2ccb0bff06078e854804f205",
+  "date": "2026-11-12",
+  "hash": "4c99d8d9ed84ee9428fe35a0984a9dd3d047e43f39b4b9790552483c97186a5b",
   "v": 3
  },
  "apps/slap-notes-bin.html": {
@@ -615,8 +615,8 @@
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-11",
-  "hash": "3628ce67a7668fb2ea70e905bd3dfb2860b3966dd30a4c57443dd54522c5c2bb",
+  "date": "2026-11-12",
+  "hash": "76eb643c714284e783a2b0aedf98bba2bb2a40fd763b89a27ad91ef1e6874c7f",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -704,6 +704,11 @@
   "hash": "561ed3284c5c64dd3d7c357e7c767eb38a04a69ca3396fe04515648e5c5ac8f6",
   "v": 3
  },
+ "apps/yt-dlp.html": {
+  "date": "2026-11-12",
+  "hash": "b2d82a088d7755a15f60b3e369b7578b1f041990f0771ef3058a2396a5238dad",
+  "v": 3
+ },
  "apps/yt6801-dkms.html": {
   "date": "2026-11-09",
   "hash": "636bd9e1628af799e19bc1151ffddfea00ab9401610b483eca8f4794eaf88d0c",
@@ -730,8 +735,8 @@
   "v": 3
  },
  "catalog.html": {
-  "date": "2026-11-09",
-  "hash": "fb692cff922418c9fc1b3e3dbc715cd62ccbf852f76d6b672826a626d6fd02ef",
+  "date": "2026-11-12",
+  "hash": "36163a4ff3315f5f92d8aa2b09afc04f72c881ce84190906455183a205bb9e01",
   "v": 3
  },
  "category/ai-agents.html": {
@@ -790,8 +795,8 @@
   "v": 3
  },
  "category/utilities.html": {
-  "date": "2026-11-09",
-  "hash": "01fafb95bb8bba59a819a1a8cae113f0a52fa774c6ab0c73acd78f8acbb09c63",
+  "date": "2026-11-12",
+  "hash": "c8fde05438975171daf3e06a7925b4102e35b4d609b2eddcbd819c1ad1a1a27d",
   "v": 3
  },
  "claude-code-on-omarchy.html": {
@@ -945,8 +950,8 @@
   "v": 3
  },
  "index.html": {
-  "date": "2026-11-09",
-  "hash": "583271030b8c71111042e0a73e63b39af2d57cf6ca52a31fef0615d7c6f0f189",
+  "date": "2026-11-12",
+  "hash": "1fbebb6e105b7ca2db5947dd5aef05502c16815c2ba877858fbd7137dca19664",
   "v": 3
  },
  "install-omarchy-on-intel-mac.html": {
@@ -1005,8 +1010,8 @@
   "v": 3
  },
  "leaderboard.html": {
-  "date": "2026-11-04",
-  "hash": "c170f919f88b182591290baeac29dfd67a36b81a1ba3d460648989025dfd69e1",
+  "date": "2026-11-12",
+  "hash": "8a3689d356d5170c64421958d8059cebb7fef8430ac55b7e62efdf8df54e1474",
   "v": 3
  },
  "libretro-database-git-on-omarchy.html": {
@@ -1150,8 +1155,8 @@
   "v": 3
  },
  "omawake-bin-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "5c6ac837adc611736f764931311a7f175520f18bee075629c3be35a551d9321a",
+  "date": "2026-11-12",
+  "hash": "6b0ed70e9a07dad86627eee5ab19764dac8829932b1031db35ad2187bad893c4",
   "v": 3
  },
  "once-bin-on-omarchy.html": {
@@ -1210,8 +1215,8 @@
   "v": 3
  },
  "sponsor.html": {
-  "date": "2026-11-04",
-  "hash": "eb629206462660ddbf69d0786554641bb0bd2c5a72e1be77ed9489c5d7d53d74",
+  "date": "2026-11-12",
+  "hash": "30f3a39b9751f9a2e80668afccc0e0a67ea7a0baf0f2966e1edb755811c5e2e9",
   "v": 3
  },
  "sublime-text-4-on-omarchy.html": {
@@ -1220,8 +1225,8 @@
   "v": 3
  },
  "superwhisper-bin-on-omarchy.html": {
-  "date": "2026-11-10",
-  "hash": "30e94f21c935222699f248a7ea129c45e2e913bad0787ec22578b368d1123b98",
+  "date": "2026-11-12",
+  "hash": "a7f19d817742e0f87d00c0eeabd000227d87f8f276dab4940a87b8bf52562bfc",
   "v": 3
  },
  "switch-from-mac-to-omarchy-safely.html": {
@@ -1255,13 +1260,13 @@
   "v": 3
  },
  "tutorials.html": {
-  "date": "2026-11-09",
-  "hash": "2e5e0d5cd1490479fc804531f6c7bf5c08d665ae24fcce957b0f3dc16d0da11c",
+  "date": "2026-11-12",
+  "hash": "c4aaefefb637e7d9a72ff6deeb9b9c4a0bea44da7e5e69486102e7ae046f536c",
   "v": 3
  },
  "tzupdate-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "7fb461243f8b333d80ab6729cfb62b02f53500d47506bcd18e02543f418f3836",
+  "date": "2026-11-12",
+  "hash": "1b937e7f646ce1d92b2a513cc30b3f5e9aba9d52efdd13ef7f58bc42b1c1590e",
   "v": 3
  },
  "ufw-docker-on-omarchy.html": {
@@ -1270,8 +1275,8 @@
   "v": 3
  },
  "vi-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "d3d172e3e0892a881cee5ea4441b929951c7a2cbaf7ef2618972e0b1f9786c22",
+  "date": "2026-11-12",
+  "hash": "235deced3058626d2742d1714d3d38f79eb958443600c3793e487467a4ec5dd1",
   "v": 3
  },
  "visual-studio-code-bin-on-omarchy.html": {
@@ -1280,8 +1285,8 @@
   "v": 3
  },
  "voxtype-bin-on-omarchy.html": {
-  "date": "2026-11-11",
-  "hash": "9bf87c1f69413f0e5f25c36c0b5af3cc5826f2920aeb4a05a7687e918a191499",
+  "date": "2026-11-12",
+  "hash": "ec0c4261608696a23edaec1ba4dd96711363c5555387e6bb1a4fdd68409526f3",
   "v": 3
  },
  "vs/omarchy-compared.html": {
@@ -1335,13 +1340,18 @@
   "v": 3
  },
  "yay-on-omarchy.html": {
-  "date": "2026-11-10",
-  "hash": "79f41e35cd03feeb28037adb645b47922d16cc2dd17cc81e220199db2be6d586",
+  "date": "2026-11-12",
+  "hash": "4a94f678125c8a184a1707538356b652bb1b1a0fd7d91f268234af797bc1cee5",
+  "v": 3
+ },
+ "yt-dlp-on-omarchy.html": {
+  "date": "2026-11-12",
+  "hash": "241ea6a37cd1151f859939369732fca260c5bc17926f1b468e546b187b9cbc20",
   "v": 3
  },
  "zen-browser-bin-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "20b74f3e0aa13f372f33b43398a9d8b4c8d1481e9131fb6d1fe9a6593f289ab4",
+  "date": "2026-11-12",
+  "hash": "9bb3ea6a538b33feb846453c1606b2c960c224e66d78e022ce0b063581349411",
   "v": 3
  }
 }

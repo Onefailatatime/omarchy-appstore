@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://omarchyapps.com/</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/leaderboard.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://omarchyapps.com/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://omarchyapps.com/leaderboard.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/develop.html</loc><lastmod>2026-10-20</lastmod></url>
-  <url><loc>https://omarchyapps.com/about.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://omarchyapps.com/about.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/press.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/faq.html</loc><lastmod>2026-10-20</lastmod></url>
-  <url><loc>https://omarchyapps.com/sponsor.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://omarchyapps.com/sponsor.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/guides.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/terms.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/omarchy-vs-macos-windows-ubuntu.html</loc><lastmod>2026-09-05</lastmod></url>
@@ -56,7 +56,7 @@
   <url><loc>https://omarchyapps.com/apps/1password-beta.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/1password-cli.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/aether.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/amp-desktop-bin.html</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/amp-desktop-bin.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/asdcontrol.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/brave-bin.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/brave-origin-bin.html</loc><lastmod>2026-11-10</lastmod></url>
@@ -80,7 +80,7 @@
   <url><loc>https://omarchyapps.com/apps/herdr-core.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/hermes-desktop.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/heroic-games-launcher-bin.html</loc><lastmod>2026-11-10</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/hex-bin.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/hex-bin.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/hey-cli.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/hyprland-preview-share-picker.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/hyprshade.html</loc><lastmod>2026-11-09</lastmod></url>
@@ -155,7 +155,7 @@
   <url><loc>https://omarchyapps.com/apps/rustdesk.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/schist-bin.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/signed.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/slack-desktop.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/slack-desktop.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/slap-notes-bin.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/splinterm.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/splinterm-mcp.html</loc><lastmod>2026-11-09</lastmod></url>
@@ -164,7 +164,7 @@
   <url><loc>https://omarchyapps.com/apps/sunshine.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/supergfxctl.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/t3code-bin.html</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/t3code-nightly-bin.html</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/t3code-nightly-bin.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tensaku.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tmog-bin.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/tobi-try.html</loc><lastmod>2026-11-09</lastmod></url>
@@ -182,6 +182,7 @@
   <url><loc>https://omarchyapps.com/apps/yaru-metacity-theme.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/yaru-sound-theme.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/yaru-xfwm4-theme.html</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/yt-dlp.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/yt6801-dkms.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/category/ai-agents.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/category/developer-tools.html</loc><lastmod>2026-11-09</lastmod></url>
@@ -194,7 +195,7 @@
   <url><loc>https://omarchyapps.com/category/security-privacy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/category/browsers-web.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/category/communication.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/category/utilities.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://omarchyapps.com/category/utilities.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/vs/omarchy-vs-cachyos.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/vs/omarchy-compared.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/install/steam-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
@@ -234,16 +235,17 @@
   <url><loc>https://omarchyapps.com/openai-codex-desktop-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/python-mediapipe-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/quickshell-git-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/superwhisper-bin-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://omarchyapps.com/superwhisper-bin-on-omarchy.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/symfony-cli-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/ttfx-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/ufw-docker-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/vi-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://omarchyapps.com/vi-on-omarchy.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/visual-studio-code-bin-on-omarchy.html</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://omarchyapps.com/voxtype-bin-on-omarchy.html</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://omarchyapps.com/voxtype-bin-on-omarchy.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://omarchyapps.com/walker-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/yaru-gnome-shell-theme-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/yaru-unity-theme-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
-  <url><loc>https://omarchyapps.com/yay-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
-  <url><loc>https://omarchyapps.com/zen-browser-bin-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://omarchyapps.com/yay-on-omarchy.html</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://omarchyapps.com/yt-dlp-on-omarchy.html</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://omarchyapps.com/zen-browser-bin-on-omarchy.html</loc><lastmod>2026-11-12</lastmod></url>
 </urlset>

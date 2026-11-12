@@ -125,6 +125,7 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [Install & Use yaru-gnome-shell-theme on Omarchy (2026)](https://omarchyapps.com/yaru-gnome-shell-theme-on-omarchy.html)
 - [How to Install & Use yaru-unity-theme on Omarchy (2026)](https://omarchyapps.com/yaru-unity-theme-on-omarchy.html)
 - [How to Install & Use yay on Omarchy (2026)](https://omarchyapps.com/yay-on-omarchy.html)
+- [How to Install & Use yt-dlp on Omarchy (2026)](https://omarchyapps.com/yt-dlp-on-omarchy.html)
 - [How to Install & Use zen-browser on Omarchy (2026)](https://omarchyapps.com/zen-browser-bin-on-omarchy.html)
 
 Contact: https://x.com/jessyka_boat
