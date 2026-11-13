@@ -892,6 +892,22 @@ GUIDES = [
             ("How do agents talk to it?", "hc --skill prints the agent guide in one read. Agents start workers with hc run --bg, coordinate with hc send / hc wait --children all, and report status via OSC 7501."),
         ],
     },
+    {
+        "slug": "yt-dlp-on-omarchy",
+        "title": "How to Install & Use yt-dlp on Omarchy (2026) — Free YouTube Downloader",
+        "description": "Install yt-dlp on Omarchy with one command. Download YouTube videos and audio from the terminal: best-quality formats, ffmpeg merging, and fixes for the 'Sign in to confirm you're not a bot' error.",
+        "eyebrow": "Video downloader guide",
+        "heading": "yt-dlp on <span>Omarchy</span>",
+        "tagline": "Free, open-source video downloader — the $0 answer to YouTube Premium's $13.99/mo.",
+        "answer": "Install yt-dlp with omarchy pkg add yt-dlp, then download any video with yt-dlp <URL>. Add ffmpeg for best-quality merges. No account, no payment.",
+        "faqs": [
+            ("Does yt-dlp work on Omarchy?", "Yes — it's in the official Omarchy repo as yt-dlp (version 2026.10.26-1, added Nov 12, 2026) and installs with omarchy pkg add yt-dlp. It's a terminal tool, so there's no app window."),
+            ("Is yt-dlp really free?", "Yes. It's released under the Unlicense (public domain) with no paid tier, no account, and no ads. The Omarchy package is 2.9 MB to download and 3.1 MB installed."),
+            ("Is yt-dlp legal?", "The tool itself is legal open-source software, a maintained fork of youtube-dl. Only save videos you have the right to download — your own uploads, Creative Commons or public-domain content, or videos where the creator permits it."),
+            ("How do I update yt-dlp?", "Through the package manager (sudo pacman -Syu yt-dlp), not yt-dlp -U — that flag only works for standalone binaries, not repo installs."),
+            ("Why does YouTube sometimes say 'Sign in to confirm you're not a bot'?", "YouTube's anti-abuse system flagged the request — usually IP reputation or a missing PO token. Update yt-dlp, make sure a JS runtime is available (--js-runtimes node), and retry. Cookies from a signed-in session are the last resort, and only from a throwaway account."),
+        ],
+    },
 ]
 GUIDES += seo_guides.GUIDES
 
@@ -1464,6 +1480,7 @@ GUIDE_PACKAGES = {
     "1password-omarchy": ["1password"],
     "how-to-use-omarchy-zsh": ["omarchy-zsh"],
     "free-notion-alternative-linux-slap-notes": ["slap-notes-bin"],
+    "yt-dlp-on-omarchy": ["yt-dlp"],
 }
 PRIMARY_GUIDE = {  # apps taught by more than one guide: the one the profile links to
     "omacut": "omacut-video-editor-omarchy",

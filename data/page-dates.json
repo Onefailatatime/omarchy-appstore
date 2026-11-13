@@ -115,8 +115,8 @@
   "v": 3
  },
  "apps/github-copilot-cli.html": {
-  "date": "2026-11-12",
-  "hash": "76ec62a0d6365041f314bc0680be6683e299c2808630e6abefd14d229b347574",
+  "date": "2026-11-13",
+  "hash": "491594e42e7d81b3a86b96003094609f4a2a94c52b568d259fc18c907c293008",
   "v": 3
  },
  "apps/gliff.html": {
@@ -925,8 +925,8 @@
   "v": 3
  },
  "guides.html": {
-  "date": "2026-11-09",
-  "hash": "1d2de45b4e8a69c3ce5dce84fee25fb0ae017654d3a2a83a248e5156d5f761ac",
+  "date": "2026-11-13",
+  "hash": "0e5b98ff1b19b80276a34408908cea8d2b5bad9abd0744d4d2ccd7ae522d4ea7",
   "v": 3
  },
  "helium-on-omarchy.html": {
@@ -950,8 +950,8 @@
   "v": 3
  },
  "index.html": {
-  "date": "2026-11-12",
-  "hash": "1fbebb6e105b7ca2db5947dd5aef05502c16815c2ba877858fbd7137dca19664",
+  "date": "2026-11-13",
+  "hash": "06ee0502bf4efbb8f88b91414b82f7dedffe692e1e952bd96ddae57ef547e59f",
   "v": 3
  },
  "install-omarchy-on-intel-mac.html": {
@@ -1155,8 +1155,8 @@
   "v": 3
  },
  "omawake-bin-on-omarchy.html": {
-  "date": "2026-11-12",
-  "hash": "6b0ed70e9a07dad86627eee5ab19764dac8829932b1031db35ad2187bad893c4",
+  "date": "2026-11-13",
+  "hash": "5c6ac837adc611736f764931311a7f175520f18bee075629c3be35a551d9321a",
   "v": 3
  },
  "once-bin-on-omarchy.html": {
@@ -1225,8 +1225,8 @@
   "v": 3
  },
  "superwhisper-bin-on-omarchy.html": {
-  "date": "2026-11-12",
-  "hash": "a7f19d817742e0f87d00c0eeabd000227d87f8f276dab4940a87b8bf52562bfc",
+  "date": "2026-11-13",
+  "hash": "d72c05d5a8436bd9a284ad355e7f9da06433e74d9fe7d703fa79a975dfd90e0c",
   "v": 3
  },
  "switch-from-mac-to-omarchy-safely.html": {
@@ -1260,13 +1260,13 @@
   "v": 3
  },
  "tutorials.html": {
-  "date": "2026-11-12",
-  "hash": "c4aaefefb637e7d9a72ff6deeb9b9c4a0bea44da7e5e69486102e7ae046f536c",
+  "date": "2026-11-13",
+  "hash": "2e5e0d5cd1490479fc804531f6c7bf5c08d665ae24fcce957b0f3dc16d0da11c",
   "v": 3
  },
  "tzupdate-on-omarchy.html": {
-  "date": "2026-11-12",
-  "hash": "1b937e7f646ce1d92b2a513cc30b3f5e9aba9d52efdd13ef7f58bc42b1c1590e",
+  "date": "2026-11-13",
+  "hash": "7fb461243f8b333d80ab6729cfb62b02f53500d47506bcd18e02543f418f3836",
   "v": 3
  },
  "ufw-docker-on-omarchy.html": {
@@ -1275,8 +1275,8 @@
   "v": 3
  },
  "vi-on-omarchy.html": {
-  "date": "2026-11-12",
-  "hash": "235deced3058626d2742d1714d3d38f79eb958443600c3793e487467a4ec5dd1",
+  "date": "2026-11-13",
+  "hash": "d3d172e3e0892a881cee5ea4441b929951c7a2cbaf7ef2618972e0b1f9786c22",
   "v": 3
  },
  "visual-studio-code-bin-on-omarchy.html": {
@@ -1285,8 +1285,8 @@
   "v": 3
  },
  "voxtype-bin-on-omarchy.html": {
-  "date": "2026-11-12",
-  "hash": "ec0c4261608696a23edaec1ba4dd96711363c5555387e6bb1a4fdd68409526f3",
+  "date": "2026-11-13",
+  "hash": "9bf87c1f69413f0e5f25c36c0b5af3cc5826f2920aeb4a05a7687e918a191499",
   "v": 3
  },
  "vs/omarchy-compared.html": {
@@ -1340,13 +1340,13 @@
   "v": 3
  },
  "yay-on-omarchy.html": {
-  "date": "2026-11-12",
-  "hash": "4a94f678125c8a184a1707538356b652bb1b1a0fd7d91f268234af797bc1cee5",
+  "date": "2026-11-13",
+  "hash": "79f41e35cd03feeb28037adb645b47922d16cc2dd17cc81e220199db2be6d586",
   "v": 3
  },
  "yt-dlp-on-omarchy.html": {
-  "date": "2026-11-12",
-  "hash": "241ea6a37cd1151f859939369732fca260c5bc17926f1b468e546b187b9cbc20",
+  "date": "2026-11-13",
+  "hash": "d1a440e0bb40bb6f3e57db40b02905fcf158354e473416b48bc68e743b54db45",
   "v": 3
  },
  "zen-browser-bin-on-omarchy.html": {

@@ -1,0 +1,180 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add yt-dlp` installs version 2026.10.26-1 from Omarchy's repo, and that the store listing slug is `yt-dlp`.
+- First run: `yt-dlp --version` prints 2026.10.26; a plain `yt-dlp <public YouTube URL>` downloads best video+audio to the current directory.
+- ffmpeg gap: the store package declares only `python` and `nodejs` as dependencies — confirm a best-quality download warns about missing ffmpeg until `sudo pacman -S ffmpeg` is installed, and merges cleanly after.
+- JS runtime: confirm whether `--js-runtimes node` works out of the box (Node ships as a package dependency) or whether Deno must be installed separately for full YouTube extraction.
+- `yt-dlp -U` behavior on a repo install: confirm it refuses / tells you to use the package manager instead of updating in place.
+- Config location: `~/.config/yt-dlp/config` is the standard upstream path — confirm the Omarchy build reads it.
+- No GUI: confirm the package installs no desktop entry / app icon (CLI-only tool) — `pacman -Ql yt-dlp` should show just the binary and docs.
+- Each "Common issue" below reproduces as described, and each fix works on a current install.
+- Comparison install commands: confirm `omarchy pkg add ffmpeg` resolves; 4K Video Downloader and YouTube Premium are not in the store (web-only / subscription).
+- License: Unlicense (confirmed on store listing). Free, no paid tier exists.
+- Version at publish time: check `yt-dlp --version` and note it; guide drafted against 2026.10.26 (released Oct 26, 2026; added to the store Nov 12, 2026).
+
+SEO notes:
+- URL: /guides/yt-dlp-on-omarchy
+- Title tag: "How to Install & Use yt-dlp on Omarchy (2026) — Free YouTube Downloader"
+- Meta description: "Install yt-dlp on Omarchy with one command. Download YouTube videos and audio from the terminal: best-quality formats, ffmpeg merging, and fixes for the 'Sign in to confirm you're not a bot' error."
+- Keywords: yt-dlp omarchy, yt-dlp linux, yt-dlp install, download youtube videos linux, yt-dlp sign in to confirm you're not a bot, yt-dlp ffmpeg not installed, free youtube premium alternative
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from YouTube Premium</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>yt-dlp on Omarchy</h2>
+      <p>yt-dlp is the free, open-source (Unlicense) command-line downloader for YouTube and 1,000+ other sites — paste a URL, get the video (or just the audio) saved locally, in the quality and format you choose.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add yt-dlp
+yt-dlp --version   # should print 2026.10.26</code></pre>
+      <p>Then download your first video:</p>
+      <pre><code class="language-bash">yt-dlp "https://www.youtube.com/watch?v=dQw4w9WgXcQ"</code></pre>
+      <p>That’s it — the best available video+audio lands in your current directory. No account, no signup, no payment.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and check the version.</h3>
+      <p>Run the command above. If <code>yt-dlp --version</code> prints something older than 2026.10.26, update through the package manager (see the update note in the FAQ — <code>yt-dlp -U</code> is for standalone binaries, not repo installs).</p>
+      <h3>2. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>It’s a terminal tool, not an app.</strong> There is no window to open and no icon in your launcher. Everything happens in a terminal: <code>yt-dlp &lt;URL&gt;</code>. If you want a GUI, that’s a different tool (see comparisons).</li>
+        <li><strong>Best quality needs ffmpeg.</strong> YouTube serves its best picture and sound as separate streams, and yt-dlp merges them with ffmpeg — which the Omarchy package does <em>not</em> pull in. Install it once: <code>sudo pacman -S ffmpeg</code>. Without it you get a warning and a lower-quality single file instead of the merge.</li>
+        <li><strong>YouTube fights back sometimes.</strong> YouTube changes its player code regularly, and its bot checks occasionally block anonymous downloads. When a command that worked yesterday fails today, the answer is almost always: update yt-dlp, then check the Common issues below. Only download videos you have the right to save.</li>
+      </ul>
+      <h3>3. Config location.</h3>
+      <p>yt-dlp reads <code>~/.config/yt-dlp/config</code> — one flag per line, applied to every run. A good starter config:</p>
+      <pre><code class="language-bash"># ~/.config/yt-dlp/config
+--format bv*+ba/b
+--merge-output-format mp4
+--embed-metadata
+--output ~/Videos/%(title)s.%(ext)s</code></pre>
+      <p><strong>Practical notes:</strong> List a video’s available formats with <code>yt-dlp -F URL</code>, then pick one with <code>-f &lt;id&gt;</code>. Grab audio only with <code>yt-dlp -x --audio-format mp3 URL</code>. Download a whole playlist with the playlist URL (add <code>--no-playlist</code> when you only want one video from it). Subtitles: <code>--write-subs --sub-langs en</code>.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>“Sign in to confirm you’re not a bot”</h3>
+      <p><strong>Problem:</strong> <code>ERROR: [youtube] &lt;id&gt;: Sign in to confirm you're not a bot. Use --cookies-from-browser or --cookies for the authentication.</code> This is YouTube’s bot wall, not a yt-dlp bug: YouTube decided the request looks automated and wants a verified, signed-in session. The canonical report is <a href="https://github.com/yt-dlp/yt-dlp/issues/10128" target="_blank" rel="noopener">yt-dlp issue #10128</a> (June 2024), and the failure is driven by IP reputation, a missing Proof-of-Origin (PO) token, and whether a session cookie is present. Home connections hit it far less than datacenter/VPS IPs. (<a href="https://tunelio.dev/blog/yt-dlp-sign-in-to-confirm-not-a-bot/" target="_blank" rel="noopener">tunelio.dev</a>, <a href="https://hproxy.com/blog/sign-in-to-confirm-youre-not-a-bot-youtube" target="_blank" rel="noopener">hproxy.com</a>)</p>
+      <p><strong>Fix:</strong> Work through these in order:</p>
+      <pre><code class="language-bash"># 1. Update — YouTube changes break older builds fast
+sudo pacman -Syu yt-dlp
+
+# 2. Make sure a JS runtime is available (needed since 2025.11.12 for
+#    full YouTube support; Deno is recommended, Node 22+ also works)
+yt-dlp --js-runtimes node "URL"
+
+# 3. Force IPv4 — YouTube scores whole IPv6 /64 ranges as one unit
+yt-dlp -4 --rm-cache-dir "URL"
+
+# 4. Cookies, last resort — from a throwaway account, never your main one
+yt-dlp --cookies-from-browser firefox "URL"</code></pre>
+      <p>For the cookie method, the project’s wiki recommends signing in inside a <em>private</em> browser window, exporting the youtube.com cookies to a Netscape-format file, then closing that window so the browser doesn’t rotate the session — then <code>yt-dlp --cookies cookies.txt URL</code>. Treat a cookies file like a password, and know the wiki’s warning: using your account with the tool risks the account being restricted. (<a href="https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp" target="_blank" rel="noopener">yt-dlp FAQ — passing cookies</a>)</p>
+      <h3>“You have requested merging of multiple formats but ffmpeg is not installed”</h3>
+      <p><strong>Problem:</strong> You asked for best video + best audio and got a warning instead of one finished file: <code>WARNING: You have requested merging of multiple formats but ffmpeg is not installed. The formats won't be merged</code>. yt-dlp and ffmpeg are separate programs — installing yt-dlp does not install ffmpeg, and the Omarchy package doesn’t declare it as a dependency (only <code>python</code> and <code>nodejs</code>).</p>
+      <p><strong>Fix:</strong> Install ffmpeg and confirm it’s on your PATH:</p>
+      <pre><code class="language-bash">sudo pacman -S ffmpeg
+ffmpeg -version   # should print a version, not "command not found"</code></pre>
+      <p>Retry the download — the video and audio streams now merge into one file. This also fixes audio extraction (<code>-x --audio-format mp3</code>), which needs ffmpeg for conversion.</p>
+      <h3>“Requested format is not available”</h3>
+      <p><strong>Problem:</strong> <code>ERROR: [youtube] &lt;id&gt;: Requested format is not available. Use --list-formats for a list of available formats</code>. A format ID copied from another video (or an old guide) doesn’t exist for this video — available formats vary by video, quality, and codec.</p>
+      <p><strong>Fix:</strong> Don’t guess IDs. List what’s actually there and pick from it:</p>
+      <pre><code class="language-bash">yt-dlp -F "URL"
+yt-dlp -f 137+140 "URL"   # example: pick IDs from the list above</code></pre>
+      <p>Or stop pinning formats entirely and let yt-dlp choose: <code>yt-dlp -f "bv*+ba/b" "URL"</code> (best video + best audio, falling back to the best single file).</p>
+      <h3>HTTP 403 Forbidden on videos that worked before</h3>
+      <p><strong>Problem:</strong> Downloads that worked yesterday now fail with 403. This is the classic “YouTube changed something” failure — a recent instance: in August 2026 the <code>android_vr</code> client in yt-dlp 2026.07.04 started throwing 403s until it was patched in the 2026.08.19 release. Missing PO tokens can also surface as 403s or as missing formats. (<a href="https://www.videoproc.com/resource/yt-dlp-not-working.htm" target="_blank" rel="noopener">videoproc.com</a>)</p>
+      <p><strong>Fix:</strong> Update first — most 403 waves are fixed within days by a new release:</p>
+      <pre><code class="language-bash">sudo pacman -Syu yt-dlp
+yt-dlp --rm-cache-dir "URL"</code></pre>
+      <p>If it persists on the newest release, check the <a href="https://github.com/yt-dlp/yt-dlp/issues" target="_blank" rel="noopener">yt-dlp GitHub issues</a> for the video/site — a YouTube-side change usually has an open issue within hours, and the fix is the next release, not a flag you can add.</p>
+      <h3>Downloads land in the wrong place / filenames are a mess</h3>
+      <p><strong>Problem:</strong> Files pile up in whatever directory you happened to run the command from, with YouTube’s default <code>Title [id].ext</code> naming.</p>
+      <p><strong>Fix:</strong> Set a permanent output template once, in <code>~/.config/yt-dlp/config</code> (see Getting Started) or per-command with <code>-o</code>:</p>
+      <pre><code class="language-bash">yt-dlp -o "~/Videos/%(title)s.%(ext)s" "URL"</code></pre>
+      <p><code>%(title)s</code>, <code>%(uploader)s</code>, <code>%(upload_date)s</code>, and <code>%(playlist)s</code> are the useful placeholders — <code>~/Videos/%(uploader)s/%(title)s.%(ext)s</code> sorts everything by channel automatically.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>ffmpeg</code> (<code>sudo pacman -S ffmpeg</code> — required for merging and audio extraction), <code>mpv</code> (plays anything yt-dlp can fetch, and can stream a URL through yt-dlp directly: <code>mpv "URL"</code>), and <code>aria2c</code> as a faster external downloader (<code>yt-dlp --external-downloader aria2c --downloader-args aria2c:"-x 8" "URL"</code>).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>4K Video Downloader</code> — a GUI app with a click-and-paste workflow and playlist support, if you want buttons instead of a terminal. The free tier caps playlists and quality; the paid tier is ~$15–25/yr. Or yt-dlp’s own front-ends (e.g. <code>ytdlp-gui</code> / <code>Parabolic</code>) if you want a window on top of the same engine. None of them match yt-dlp’s format control or site coverage.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: yt-dlp vs YouTube Premium vs 4K Video Downloader</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>yt-dlp</th><th>YouTube Premium</th><th>4K Video Downloader</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free forever (Unlicense)</td><td><strong>$13.99/mo</strong> (individual)</td><td>Free tier (limited); paid ~$15–25/yr</td></tr>
+            <tr><td>Best for</td><td>Anyone comfortable in a terminal who wants maximum control: exact formats, playlists, subtitles, audio extraction</td><td>Paying for ad-free YouTube + official offline downloads inside the YouTube app</td><td>People who want a GUI: paste a link, click download</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add yt-dlp</code></td><td>Not in the store; subscription on youtube.com</td><td>Not in the store; download from 4kdownload.com</td></tr>
+            <tr><td>Offline viewing</td><td>Yes — real files you own, any player</td><td>Yes — inside YouTube’s app only, expires if you cancel</td><td>Yes — real files</td></tr>
+            <tr><td>Audio extraction / MP3</td><td>Yes (<code>-x --audio-format mp3</code>)</td><td>No (music downloads stay in YouTube Music)</td><td>Yes, on paid tier</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you just want a video file on your disk, yt-dlp does it for $0 with more control than either paid option. Pay YouTube Premium only if you also want ad-free YouTube and official in-app downloads — not for the downloads alone.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>yt-dlp is a free alternative to YouTube Premium downloads ($13.99/mo)</h2>
+      <p><strong>yt-dlp is a free alternative to YouTube Premium downloads ($13.99/mo).</strong> What you give up: the official in-app download button, ad-free YouTube, and YouTube Music. What you keep: offline viewing — as real files you own, playable in any player, forever, with no expiry if you cancel anything (there’s nothing to cancel). For someone who only wants to save a few videos for offline watching, that’s the entire download feature of a $168/year subscription at zero cost.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from YouTube Premium downloads (~10 minutes)</h2>
+      <ol>
+        <li><strong>Install yt-dlp:</strong> On Omarchy: <code>omarchy pkg add yt-dlp</code>, plus <code>sudo pacman -S ffmpeg</code> for best-quality merges.</li>
+        <li><strong>Re-download what matters:</strong> Premium downloads live inside YouTube’s app and vanish when you cancel. For each video you want to keep, run <code>yt-dlp "URL"</code> — the URL is in the video’s Share menu. Playlists download in one command with the playlist URL.</li>
+        <li><strong>Set your library folder once:</strong> Add <code>--output ~/Videos/%(title)s.%(ext)s</code> to <code>~/.config/yt-dlp/config</code> so everything lands in one place.</li>
+        <li><strong>What doesn’t transfer:</strong> Your in-app download list itself (there’s no export — re-download from the URLs), ad-free playback, and background play in the YouTube app. If you watch mostly in a browser, an ad-blocker covers the ads; if you watch on your phone, that’s the actual cost of switching.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the yt-dlp package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/yt-dlp.html">View yt-dlp →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does yt-dlp work on Omarchy?</summary><p>Yes. It’s in the official Omarchy repo as <code>yt-dlp</code> (version 2026.10.26-1, added Nov 12, 2026) and installs with one command: <code>omarchy pkg add yt-dlp</code>. It’s a terminal tool — there’s no app window, you run it from any terminal.</p></details>
+      <details><summary>Is yt-dlp really free?</summary><p>Yes. It’s released under the Unlicense (public domain) with no paid tier, no account, and no ads. The Omarchy package is 2.9 MB to download and 3.1 MB installed.</p></details>
+      <details><summary>Is yt-dlp legal?</summary><p>The tool itself is legal open-source software — a maintained fork of youtube-dl. What matters is what you download: only save videos you have the right to download (your own uploads, Creative Commons / public-domain content, or videos where the creator permits it). Downloading copyrighted material you don’t have rights to can violate YouTube’s terms and copyright law.</p></details>
+      <details><summary>Why is there no yt-dlp icon in my app launcher?</summary><p>Because there’s nothing to launch — yt-dlp is a command-line program. Open a terminal and type <code>yt-dlp &lt;URL&gt;</code>. If you want a window, look at a GUI front-end (see “If you hate this, try” above).</p></details>
+      <details><summary>How do I update yt-dlp?</summary><p>Through the package manager (<code>sudo pacman -Syu yt-dlp</code>), not <code>yt-dlp -U</code> — that flag only works for standalone binaries, not repo installs. YouTube changes break old builds quickly, so update whenever a download starts failing for no apparent reason.</p></details>
+      <details><summary>Why does YouTube sometimes say “Sign in to confirm you’re not a bot”?</summary><p>YouTube’s anti-abuse system flagged the request — usually IP reputation or a missing PO token, not anything you did wrong. Update yt-dlp, make sure a JS runtime is available (<code>--js-runtimes node</code>), and retry. Cookies from a signed-in session are the last resort, and only from a throwaway account.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/yt-dlp.html" target="_blank" rel="noopener">Omarchy App Store — yt-dlp package page (version, size, deps, added date)</a></li>
+        <li><a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener">yt-dlp project (README, FAQ, wiki)</a></li>
+        <li><a href="https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp" target="_blank" rel="noopener">yt-dlp FAQ — how to pass cookies</a></li>
+        <li><a href="https://github.com/yt-dlp/yt-dlp/issues/10128" target="_blank" rel="noopener">yt-dlp issue #10128 — canonical “Sign in to confirm you’re not a bot” report</a></li>
+        <li><a href="https://tunelio.dev/blog/yt-dlp-sign-in-to-confirm-not-a-bot/" target="_blank" rel="noopener">“Fix yt-dlp Sign in to confirm you’re not a bot” (update / JS runtime / IPv4 / cookies order)</a></li>
+        <li><a href="https://hproxy.com/blog/sign-in-to-confirm-youre-not-a-bot-youtube" target="_blank" rel="noopener">“YouTube Sign in to Confirm You’re Not a Bot: yt-dlp Fixes” (51 bug reports surveyed; Deno 2.3.0+ / Node 22+; wiki cookie method)</a></li>
+        <li><a href="https://www.videoproc.com/resource/yt-dlp-not-working.htm" target="_blank" rel="noopener">“yt-dlp Not Working? Fix 403 Forbidden, 503 &amp; Other Errors” (Aug 2026 android_vr 403s, fixed in 2026.08.19)</a></li>
+        <li><a href="https://ytdlp.org/guides/fix-yt-dlp-errors" target="_blank" rel="noopener">“How to fix common yt-dlp errors” (format / ffmpeg buckets)</a></li>
+        <li><a href="https://apps.serp.co/blog/how-to-download-youtube-videos-for-free-with-yt-dlp" target="_blank" rel="noopener">“How to Download YouTube Videos With yt-dlp” (ffmpeg merging, EJS/JS runtime)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>
