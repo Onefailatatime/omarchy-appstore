@@ -55,8 +55,8 @@
   "v": 3
  },
  "apps/claude-desktop.html": {
-  "date": "2026-11-12",
-  "hash": "18df341a1ddedb27f3ad91b36505b2f5ccad4db599dd6362d64bd0eb14f31340",
+  "date": "2026-11-13",
+  "hash": "631361c4e393927b1dcb69ba028f8c7e99aa40fe397c335b543ee0fb08b0ce0d",
   "v": 3
  },
  "apps/crush-bin.html": {
@@ -370,8 +370,8 @@
   "v": 3
  },
  "apps/omafeed.html": {
-  "date": "2026-11-09",
-  "hash": "a88edf3ed79d85cdf8094d8ed3fc89819e14bf7842e72d11f0c7fc7652102f9b",
+  "date": "2026-11-13",
+  "hash": "71c27503f5a12cb401879a176cd8fbc34151d3c1d87749fe758eeec67d97237c",
   "v": 3
  },
  "apps/omairc.html": {
@@ -540,8 +540,8 @@
   "v": 3
  },
  "apps/rawmakase-bin.html": {
-  "date": "2026-11-09",
-  "hash": "cee3e522eb528c493821b742b93d1a97fd3cc0acabb47be9531f9bcc7dc9cdb4",
+  "date": "2026-11-13",
+  "hash": "f6d0d8fa3909e1dabb00e4cb5736980bd3dc512afa578c5ff127295775892945",
   "v": 3
  },
  "apps/retroarch-joypad-autoconfig-git.html": {
@@ -615,8 +615,8 @@
   "v": 3
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-12",
-  "hash": "ac03ddf8832c358fc68815d8c1078c454908fd89b2fc12f3ee68dec74836a57d",
+  "date": "2026-11-13",
+  "hash": "bd0ac4d21763da0e5c59d5c2ea22aae3e4ca3fa454990c5eaba53a08a75f66cd",
   "v": 3
  },
  "apps/tensaku.html": {
@@ -1165,8 +1165,8 @@
   "v": 3
  },
  "openai-codex-desktop-on-omarchy.html": {
-  "date": "2026-11-10",
-  "hash": "5e8ee7d98dbea76dc0a646503ad1cd2d463fb9fb17be15b4f9dc61fde320620b",
+  "date": "2026-11-13",
+  "hash": "256811ac47b9c693746f136a675718eb08dfd1053d67d337e33d6190836601cb",
   "v": 3
  },
  "power-profiles-daemon-on-omarchy.html": {
