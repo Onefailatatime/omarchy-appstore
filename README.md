@@ -235,3 +235,10 @@ new migration with `npm run migrate:remote`. Secrets: `IP_SALT` (rate limit
 hashing), and for the newsletter `RESEND_API_KEY`, `NEWSLETTER_FROM`,
 optional `RESEND_SEGMENT_ID` and `NEWSLETTER_REPLY_TO`, all via
 `npx wrangler secret put NAME`.
+
+## Sticky Grove (separate project)
+
+`sticky-grove/` is unrelated to the app store: it is custom firmware for the
+Seeed reTerminal Sticky e-paper display, parked in this repository until it
+gets a home of its own. It has its own README, build and license. The site
+build and tests ignore it.
