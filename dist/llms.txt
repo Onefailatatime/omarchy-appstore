@@ -123,6 +123,7 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [How to Install & Use visual-studio-code on Omarchy (2026)](https://omarchyapps.com/visual-studio-code-bin-on-omarchy.html)
 - [How to Install & Use voxtype on Omarchy (2026)](https://omarchyapps.com/voxtype-bin-on-omarchy.html)
 - [How to Install & Use walker on Omarchy (2026)](https://omarchyapps.com/walker-on-omarchy.html)
+- [How to Install & Use wayshare on Omarchy (2026)](https://omarchyapps.com/wayshare-on-omarchy.html)
 - [Install & Use yaru-gnome-shell-theme on Omarchy (2026)](https://omarchyapps.com/yaru-gnome-shell-theme-on-omarchy.html)
 - [How to Install & Use yaru-unity-theme on Omarchy (2026)](https://omarchyapps.com/yaru-unity-theme-on-omarchy.html)
 - [How to Install & Use yay on Omarchy (2026)](https://omarchyapps.com/yay-on-omarchy.html)
