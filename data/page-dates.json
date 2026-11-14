@@ -100,8 +100,8 @@
   "v": 3
  },
  "apps/flea.html": {
-  "date": "2026-11-11",
-  "hash": "1abd8cd792d4cbb2c7ed784a28f7a9a67e9936b4df7314ecf7c677d0ce6f01b7",
+  "date": "2026-11-14",
+  "hash": "6f059a240ae75e431ceb71c42e731fb6b9846a8c8184d4f39a1806dae954de8e",
   "v": 3
  },
  "apps/ghostty-terminfo.html": {
@@ -735,8 +735,8 @@
   "v": 3
  },
  "buzz-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "f45d7ac6e2266e008457c106b34664f6e30a15431909f7ed6fe0497072ed0fba",
+  "date": "2026-11-14",
+  "hash": "c4074661bd1cb2cf96299dcc5cd0d70b5b34a1ba084f7b53b62d7bd5a7195f2b",
   "v": 3
  },
  "catalog.html": {
@@ -905,13 +905,13 @@
   "v": 3
  },
  "ghost-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "177f43460878686282170ddb9c0676be671c75d62771f622ba046123db6374fc",
+  "date": "2026-11-14",
+  "hash": "175217cd516d9daf7efe26f0f883f59202d20748a521b30e28272b716a276a8d",
   "v": 3
  },
  "ghost-runtime-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "a020dec093d37d3a615bcfe626a32b788324a047826481af90a8d5ea7b56f51a",
+  "date": "2026-11-14",
+  "hash": "fd07e559fbb3c4e50fd458eace1378061e6a220c1d32d8c55856c275159f9c19",
   "v": 3
  },
  "ghostty-nautilus-on-omarchy.html": {
@@ -1080,8 +1080,8 @@
   "v": 3
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-11-12",
-  "hash": "e63e44772150c8f5babb1f905b524ef72fab69d7a6ba72b32dc8fead7dcac804",
+  "date": "2026-11-14",
+  "hash": "34517451a0de24a4a52226f2354218836f9257e808d0785633d89f7c2a90ba3e",
   "v": 3
  },
  "monologue-on-omarchy.html": {
