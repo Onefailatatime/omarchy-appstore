@@ -1,0 +1,184 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add wayshare` installs version 0.4.0-2 from Omarchy's repo, and that the store listing slug is `wayshare`.
+- Edge-channel caveat: the upstream README says "for now the package is only on Omarchy's edge channel" and that `pacman -Si wayshare` on stable says it isn't found. Confirm whether the store's 0.4.0-2 build (built 2026-11-13) installs on a stable Omarchy install, or whether edge is still required.
+- First run: `wayshare setup` inside a Hyprland session prompts for a password, the monitor to share, and the network — confirm it starts the service and prints the address and username.
+- Mac connect: a Mac's Screen Sharing app connects to the setup address with the setup username + wayshare password, in Standard mode.
+- High Performance mode: confirm the Mac can switch to High Performance (HEVC video + sound) and that `wayshare doctor` reports the encoder as OK.
+- RDP connect: an RDP client (Windows App or FreeRDP) connects to the same address on port 3389 with the same username, empty domain, after checking the SHA-256 fingerprint against the startup log.
+- Firewall: confirm `wayshare setup` offers the ufw rules for TCP 5900 and TCP 3389, and that `wayshare doctor` checks them.
+- Service autostart: confirm the wayshare user service starts at login on Omarchy (Omarchy launches Hyprland through UWSM, which should reach `graphical-session.target`).
+- Config location: `~/.config/wayshare/config.toml` is created by setup — confirm editing it + `wayshare restart` applies changes.
+- Each "Common issue" below reproduces as described, and each fix works on a current install.
+- Comparison install commands: confirm `omarchy pkg add gliff`, `omarchy pkg add rustdesk`, and `omarchy pkg add sunshine` all resolve (all three are in the store).
+- License: Apache-2.0 (confirmed on store listing and GitHub). Free, no paid tier exists.
+- Version at publish time: check `pacman -Qi wayshare` and note it; guide drafted against 0.4.0-2 (added to the official repo Oct 23, 2026; store build Nov 13, 2026).
+
+SEO notes:
+- URL: /guides/wayshare-on-omarchy
+- Title tag: "How to Install & Use wayshare on Omarchy (2026) — Share Your Hyprland Desktop with a Mac"
+- Meta description: "Install wayshare on Omarchy with one command. Share your Hyprland desktop with a Mac's Screen Sharing app or any RDP client: setup, High Performance mode, firewall ports, and fixes for login, RDP, and certificate problems."
+- Keywords: wayshare omarchy, wayshare linux, share hyprland desktop mac, mac screen sharing linux, hyprland rdp server, wayshare setup, wayshare high performance, free teamviewer alternative linux
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from TeamViewer</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>wayshare on Omarchy</h2>
+      <p>wayshare is a free, open-source (Apache-2.0) screen-sharing server for Hyprland — it lets you open your Omarchy desktop from a Mac's built-in Screen Sharing app or from any RDP client (Windows App, Remote Desktop Connection, FreeRDP), with no extra software on the viewer side.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add wayshare
+wayshare setup</code></pre>
+      <p>Run setup once, inside your Hyprland session. It asks for a password, which monitor to share, and which network to listen on — then it starts the service and shows you the address and username to connect with. That's the whole install; there is no window to open on the Omarchy side, wayshare runs as a background service.</p>
+      <p><strong>Edge-channel note (unverified):</strong> the upstream README says the package is currently only on Omarchy's edge channel and that <code>pacman -Si wayshare</code> on stable reports it as not found. The store lists a 0.4.0-2 build from Nov 13, 2026 — confirm on a real machine whether stable installs it directly or edge is still required.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and run setup.</h3>
+      <p>Run the two commands above from a terminal inside your Hyprland session (not over SSH — setup needs a live Hyprland session to pick a monitor). Setup saves your choices, starts wayshare, and displays the address and username. It also offers to add ufw firewall rules for TCP 5900 (Apple Screen Sharing) and TCP 3389 (RDP).</p>
+      <h3>2. Connect from a Mac.</h3>
+      <p>Open the Screen Sharing app on your Mac and connect to the address setup printed. Sign in with the username from setup and your wayshare password. Your Hyprland desktop appears, and your Omarchy keyboard shortcuts still work — the Mac's Command key maps to Super by default, which is where Omarchy's shortcuts live. For the best picture and sound, switch the Mac to High Performance mode (see below).</p>
+      <h3>3. Or connect over RDP.</h3>
+      <p>In any RDP client, use your Hyprland machine's address and port 3389, the same username, and an <strong>empty domain</strong>. Before you send your password, check the certificate's SHA-256 fingerprint against the startup log (<code>journalctl --user -u wayshare -b</code>) — if it differs, stop. RDP has no clipboard or sound support, and login is TLS-only (no NLA or CredSSP).</p>
+      <h3>4. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Two protocols, one password.</strong> Apple Screen Sharing (TCP 5900) and RDP (TCP 3389) are both on by default and share the same username and password from setup. The network you pick in setup applies to both.</li>
+        <li><strong>Your monitor follows the viewer.</strong> By default wayshare resizes the shared monitor to match the viewer's window and restores it on disconnect. One session owns size changes at a time, and live resize/rotation is only verified on Windows App for iPhone.</li>
+        <li><strong>It runs as a service, not an app.</strong> There is no wayshare window. Control it with <code>wayshare start</code>, <code>wayshare stop</code>, <code>wayshare restart</code>, and diagnose it with <code>wayshare doctor</code>. Config lives in <code>~/.config/wayshare/config.toml</code> — edit it, then run <code>wayshare restart</code>.</li>
+      </ul>
+      <h3>5. Config location.</h3>
+      <p><code>~/.config/wayshare/config.toml</code>. Every key is optional; a full example ships in <code>/usr/share/doc/wayshare/</code>. The useful basics:</p>
+      <pre><code class="language-bash">output = "DP-1"          # the monitor to share; `hyprctl monitors` lists them
+name = "studio"          # how the machine appears on the Mac; default: hostname
+listen = "0.0.0.0:5900"  # all networks; use one address to listen only there
+resize = true            # match the viewer's size, restore the monitor afterwards</code></pre>
+      <p><strong>Practical notes:</strong> Change the password any time with <code>wayshare set-password</code> + <code>wayshare restart</code>. Pick a different login name with <code>wayshare set-password --user NAME</code> (then point <code>srp_file</code> at the matching file in the config — see the project's configuration doc). On Omarchy, <code>omarchy-update</code> upgrades wayshare with the rest of the system; run <code>wayshare restart</code> afterwards. To remove it: <code>wayshare uninstall</code>, then <code>omarchy pkg drop wayshare</code> (your config in <code>~/.config/wayshare</code> is kept).</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>All of these come from the project's own <a href="https://github.com/wesleygrimes/wayshare/blob/main/docs/troubleshooting.md" target="_blank" rel="noopener">troubleshooting doc</a> — they are the maintainer's documented failure modes, not guesses. Each one is still marked for on-machine confirmation in the checklist above.</p>
+      <h3>The service does not start at login</h3>
+      <p>wayshare doesn't come up after you log in. The service starts with <code>graphical-session.target</code> — Omarchy and other setups that launch Hyprland through UWSM reach that target, but a plain <code>Hyprland</code> launch does not.</p>
+      <p><strong>Fix:</strong> If you launch Hyprland directly (not through UWSM), add this to <code>hyprland.conf</code>:</p>
+      <pre><code class="language-bash">exec-once = systemctl --user start wayshare</code></pre>
+      <p>If it still fails, read the log for a config error or a missing monitor (<code>journalctl --user -u wayshare -b</code>), and run <code>wayshare setup</code> inside your Hyprland session to pick an enabled monitor.</p>
+      <h3>“The password is rejected”</h3>
+      <p>The viewer won't accept your login. Usually the wrong username, the wrong password, or (on RDP) a domain sneaking in.</p>
+      <p><strong>Fix:</strong> Use the exact username from setup and your wayshare password. To reset it:</p>
+      <pre><code class="language-bash">wayshare set-password
+wayshare restart</code></pre>
+      <p>On RDP, the username is case-sensitive and the domain must be empty — remove any saved domain, computer-name prefix, or Microsoft account. If you set a custom username with <code>srp_file</code>, use the matching <code>--srp-file</code> and <code>--user</code> options (see the project's configuration doc, “Login”).</p>
+      <h3>Mac Screen Sharing cannot connect</h3>
+      <p>The Mac's Screen Sharing app fails to connect or hangs. Screen Sharing allows only one window per address, and a stale window — including one hidden behind other windows — blocks a new connection.</p>
+      <p><strong>Fix:</strong> Close any open Screen Sharing window for this machine, including windows behind other windows, and dismiss leftover alerts. Then try the Mac quickstart again. If it still fails, check the Apple port and firewall with <code>wayshare doctor</code>.</p>
+      <h3>The machine does not appear in Finder</h3>
+      <p>Your Omarchy box never shows up in the Mac Finder's sidebar, even though connecting by address works.</p>
+      <p><strong>Fix:</strong> Finder discovery needs mDNS: allow UDP 5353 on your LAN and check that <code>[mdns] enabled = true</code> in your config (it is the default). You can also skip discovery entirely and connect by address through <strong>Connection &gt; New</strong> in Screen Sharing. Note that RDP clients always use an address — wayshare does not advertise RDP through mDNS.</p>
+      <h3>High Performance is unavailable or falls back to Standard</h3>
+      <p>You select High Performance on the Mac but the connection stays in Standard mode, or HP starts and then drops back. Only one High Performance viewer can connect at a time; later viewers get Standard mode (except a reconnect from the same address, which takes over).</p>
+      <p><strong>Fix:</strong> Run <code>wayshare doctor</code> to check the encoder and install any missing libraries it names (see the project's High Performance doc). To see what's actually happening, follow the log while reconnecting:</p>
+      <pre><code class="language-bash">journalctl --user -u wayshare -f</code></pre>
+      <p>If the Mac never requests HP, the UDP feedback timer never starts — close the connection and select High Performance again. If HP falls back, look for <code>no valid video RTCP</code> before <code>HP media stopped; falling back to Standard mode</code>: video gives up after 15 seconds without initial authenticated RTCP feedback (or 10 seconds without further feedback). A common cause on a tailnet is the UDP media path: the default video and sound ports are 5960 and 5962, and <code>wayshare doctor</code> checks the ufw rule for them. One specific tell: if sound starts about 5 seconds after video, look for <code>no initial audio RTCP</code> in the log and a <code>[UFW BLOCK]</code> line with <code>PROTO=UDP</code> and <code>DPT=5962</code> in the kernel log — rerun <code>wayshare setup</code> to add the UDP rule.</p>
+      <h3>RDP connection is refused or times out</h3>
+      <p>The RDP client can't reach the server at all. RDP is on by default on port 3389 at the Apple listen address — unless it was turned off or the listener never came up.</p>
+      <p><strong>Fix:</strong> Check the startup log for <code>RDP listener ready</code> (or <code>RDP disabled</code>):</p>
+      <pre><code class="language-bash">journalctl --user -u wayshare -b | grep -i rdp</code></pre>
+      <p>If you turned RDP off, remove <code>--no-rdp</code> or set <code>[rdp] enabled = true</code>. If RDP bound to loopback, set <code>[rdp] listen</code> (or the top-level <code>listen</code>) to your LAN or VPN address. A <code>RDP disabled</code> line with a repair message tells you the exact fix: a missing SRP record needs <code>wayshare set-password</code>; a TLS identity error needs a valid <code>rdp.identity_file</code> with directory permissions that let wayshare read or create it — then <code>wayshare restart</code>. Once the listener is ready, allow TCP 3389 from your LAN or VPN in your firewall (setup offers the ufw rule; <code>wayshare doctor</code> checks it).</p>
+      <h3>The RDP client shows a certificate warning</h3>
+      <p>Your RDP client warns about the server certificate. wayshare creates a self-signed certificate on first use (<code>~/.config/wayshare/rdp-identity.pem</code>), and its names are <code>localhost</code>, <code>127.0.0.1</code>, and <code>::1</code> — so clients warn when you connect by a LAN address. That warning is expected, but you must verify it before trusting it.</p>
+      <p><strong>Fix:</strong> Check the certificate's SHA-256 fingerprint against the startup log before you send your password — stop if it differs. A SHA-1 thumbprint cannot match a SHA-256 fingerprint; they are different hashes. You can also get the fingerprint straight from the certificate file over a trusted connection:</p>
+      <pre><code class="language-bash">openssl x509 -in ~/.config/wayshare/rdp-identity.pem -noout -fingerprint -sha256</code></pre>
+      <p>Accepting the warning without checking identity can send your password to another server. For a client that shows only SHA-1, the same command with <code>-fingerprint -sha1</code> gives the matching value.</p>
+      <h3>RDP screen stays black or graphics fail</h3>
+      <p>The RDP session connects but the screen is black or graphics are broken. This is a codec negotiation issue, not a connection issue.</p>
+      <p><strong>Fix:</strong> Try the legacy RemoteFX path in <code>~/.config/wayshare/config.toml</code>:</p>
+      <pre><code class="language-bash">[rdp]
+codec = "remotefx"</code></pre>
+      <p>Then <code>wayshare restart</code> and reconnect. Avoid <code>egfx-remotefx</code> with the iOS Windows App — it causes protocol errors. For deeper logs, set <code>RUST_LOG=info,wayshare::rdp=debug</code> in the service environment (<code>systemctl --user edit wayshare</code>, add <code>Environment=RUST_LOG=info,wayshare::rdp=debug</code> under <code>[Service]</code>), restart, and watch <code>journalctl --user -u wayshare -f</code>.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>tailscale</code> (remote access over your tailnet without router port forwarding — pick <code>tailscale0</code> as the network in <code>wayshare setup</code> so both protocols bind to your Tailscale address; the store has a <a href="https://omarchyapps.com/install/tailscale-on-omarchy.html">Tailscale on Omarchy guide</a>), and <code>ufw</code> (wayshare setup offers the firewall rules for you — TCP 5900/3389, plus UDP 5960/5962 for High Performance).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>gliff</code> — Hyprland remote desktop over SSH with GPU H.264, if you want a single-protocol tool that tunnels over a connection you already have. Or <code>rustdesk</code> — a general remote-desktop app in the TeamViewer mold, if you want a GUI client on both ends instead of using the Mac's built-in Screen Sharing. Or <code>sunshine</code> — if what you actually want is game streaming to Moonlight, not a desktop you can work in.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: wayshare vs gliff vs rustdesk vs sunshine</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>wayshare</th><th>gliff</th><th>rustdesk</th><th>sunshine</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (Apache-2.0)</td><td>Free</td><td>Free (open source; paid hosted relay optional)</td><td>Free (open source)</td></tr>
+            <tr><td>Best for</td><td>Sharing your Hyprland desktop with a Mac (Screen Sharing) or any RDP client, with nothing to install on the viewer</td><td>Hyprland remote desktop over an SSH connection you already have</td><td>General remote desktop with a GUI client on both ends</td><td>Streaming games to Moonlight clients</td></tr>
+            <tr><td>Viewers</td><td>Mac Screen Sharing, Windows App, mstsc, FreeRDP</td><td>SSH-based client</td><td>RustDesk clients (all platforms)</td><td>Moonlight clients</td></tr>
+            <tr><td>Clipboard</td><td>Mac: text, rich text, images. RDP: none</td><td>—</td><td>Yes</td><td>—</td></tr>
+            <tr><td>Sound</td><td>Mac High Performance only; RDP: none</td><td>—</td><td>Yes</td><td>Yes</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add wayshare</code></td><td><code>omarchy pkg add gliff</code></td><td><code>omarchy pkg add rustdesk</code></td><td><code>omarchy pkg add sunshine</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If the viewer is a Mac, wayshare is the obvious pick — it speaks the Mac's native Screen Sharing protocol, so there's nothing to install on the Mac side and clipboard + High Performance video/sound just work. Pick gliff if you live in SSH anyway, rustdesk if you want a point-and-click client on both ends, and sunshine only if you're streaming games.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>wayshare is a free alternative to TeamViewer / AnyDesk ($50+/mo) and Apple Remote Desktop ($79.99)</h2>
+      <p><strong>wayshare is a free alternative to TeamViewer / AnyDesk ($50+/mo) and Apple Remote Desktop ($79.99) for sharing a Linux desktop with a Mac.</strong> What you give up: a polished GUI client on both ends, a hosted relay that punches through NAT for you, and generic VNC support — wayshare's Apple listener accepts only Apple RFB 3.888/3.889, so generic VNC clients are rejected outright. What you keep: the actual screen sharing, clipboard (on Mac), live resize, and RDP access from Windows and iOS — for $0, with no account and no subscription. The honest trade-off is setup effort: you open firewall ports and pick a network yourself instead of a relay doing it for you, and remote access over the internet means a VPN (Tailscale) rather than port forwarding.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from TeamViewer / AnyDesk (~15 minutes)</h2>
+      <ol>
+        <li><strong>Install wayshare:</strong> On Omarchy: <code>omarchy pkg add wayshare</code>, then <code>wayshare setup</code> inside your Hyprland session. Pick a strong password — this is your login now.</li>
+        <li><strong>Connect your Mac once:</strong> Open Screen Sharing, connect to the setup address, sign in. That's the whole client setup — there is nothing to install on the Mac.</li>
+        <li><strong>Open the firewall:</strong> Let setup add the ufw rules (TCP 5900 for Apple, TCP 3389 for RDP), or add them yourself. Verify with <code>wayshare doctor</code>.</li>
+        <li><strong>For access away from home:</strong> Don't port-forward 5900/3389 to the internet. Install Tailscale on both machines and pick <code>tailscale0</code> as the network in <code>wayshare setup</code> — same connection, no open ports.</li>
+        <li><strong>What doesn't transfer:</strong> Your TeamViewer/AnyDesk contact list and unattended-access setup (there's no account — the address + password <em>is</em> the access), generic VNC clients, and RDP clipboard/sound (Mac High Performance has both; RDP has neither). Uninstall the old client once wayshare is working so you don't have two remote-access doors open.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the wayshare package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/wayshare.html">View wayshare →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does wayshare work on Omarchy?</summary><p>Yes. It's in the official Omarchy repo as <code>wayshare</code> (version 0.4.0-2, built Nov 13, 2026) and installs with one command: <code>omarchy pkg add wayshare</code>. It needs Hyprland 0.56 or newer and systemd. Note the upstream README's edge-channel caveat (see the TL;DR) — confirm on a real machine whether stable installs it directly.</p></details>
+      <details><summary>Is wayshare really free?</summary><p>Yes. Apache-2.0, no paid tier, no account, no ads. The author accepts sponsorships/donations, but nothing is paywalled. The Omarchy package is 6.5 MB to download and 18.1 MB installed.</p></details>
+      <details><summary>What do I connect with?</summary><p>From a Mac: the built-in Screen Sharing app — nothing to install. From Windows or iOS: Windows App, Remote Desktop Connection (mstsc), or FreeRDP, all tested by the maintainer. Generic VNC clients do not work: the Apple listener only accepts Apple RFB 3.888 and 3.889.</p></details>
+      <details><summary>Is it safe to expose wayshare to the internet?</summary><p>No — don't port-forward it. Both listeners default to all IPv4 interfaces, and Apple Standard-mode screen updates and clipboard travel unencrypted, so anyone watching your network can see them. Keep it on your LAN or VPN: Tailscale is the documented path for remote access. On RDP, always check the certificate's SHA-256 fingerprint before sending your password.</p></details>
+      <details><summary>Why is there no wayshare icon in my app launcher?</summary><p>Because there's nothing to launch — wayshare is a background service. Open a terminal and run <code>wayshare doctor</code> to check it, <code>wayshare setup</code> to change it, <code>wayshare restart</code> after editing the config. If you want a window, that's a different tool (see “If you hate this, try” above).</p></details>
+      <details><summary>How do I update wayshare?</summary><p>On Omarchy, <code>omarchy-update</code> upgrades it with the rest of the system, then run <code>wayshare restart</code>. <code>wayshare upgrade</code> installs the latest upstream release directly (for non-repo installs).</p></details>
+      <details><summary>Does RDP support sound and clipboard?</summary><p>No. RDP has no sound or clipboard support in wayshare. For sound and clipboard, connect from a Mac with Screen Sharing — Standard mode has clipboard, High Performance mode adds HEVC video and sound.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/wayshare.html" target="_blank" rel="noopener">Omarchy App Store — wayshare package page (version, size, deps, license, added date)</a></li>
+        <li><a href="https://github.com/wesleygrimes/wayshare" target="_blank" rel="noopener">wayshare project on GitHub (README: install, setup, connect, commands, upgrade, uninstall)</a></li>
+        <li><a href="https://github.com/wesleygrimes/wayshare/blob/main/docs/troubleshooting.md" target="_blank" rel="noopener">wayshare troubleshooting doc (service start, password rejected, Mac connect, Finder, High Performance fallback, RDP refused, certificate warning, black screen)</a></li>
+        <li><a href="https://github.com/wesleygrimes/wayshare/blob/main/docs/security.md" target="_blank" rel="noopener">wayshare security doc (login/SRP, encryption table, certificate identity, VPN access, ports)</a></li>
+        <li><a href="https://github.com/wesleygrimes/wayshare/blob/main/docs/configuration.md" target="_blank" rel="noopener">wayshare configuration doc (config.toml keys, login, keyboard, High Performance, mDNS, RDP)</a></li>
+        <li><a href="https://github.com/wesleygrimes/wayshare/blob/main/docs/clients.md" target="_blank" rel="noopener">wayshare client compatibility doc (tested clients, protocol limits, generic VNC rejected)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

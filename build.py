@@ -908,6 +908,22 @@ GUIDES = [
             ("Why does YouTube sometimes say 'Sign in to confirm you're not a bot'?", "YouTube's anti-abuse system flagged the request — usually IP reputation or a missing PO token. Update yt-dlp, make sure a JS runtime is available (--js-runtimes node), and retry. Cookies from a signed-in session are the last resort, and only from a throwaway account."),
         ],
     },
+    {
+        "slug": "wayshare-on-omarchy",
+        "title": "How to Install & Use wayshare on Omarchy (2026) — Share Your Hyprland Desktop with a Mac",
+        "description": "Install wayshare on Omarchy with one command. Share your Hyprland desktop with a Mac's Screen Sharing app or any RDP client: setup, High Performance mode, firewall ports, and fixes for login, RDP, and certificate problems.",
+        "eyebrow": "Remote desktop guide",
+        "heading": "wayshare on <span>Omarchy</span>",
+        "tagline": "Free, open-source screen sharing — the $0 way to open your Hyprland desktop from a Mac.",
+        "answer": "Install wayshare with omarchy pkg add wayshare, run wayshare setup inside your Hyprland session, then connect from a Mac's built-in Screen Sharing app or any RDP client. No account, no payment.",
+        "faqs": [
+            ("Does wayshare work on Omarchy?", "Yes — it's in the official Omarchy repo as wayshare (version 0.4.0-2, built Nov 13, 2026) and installs with omarchy pkg add wayshare. It needs Hyprland 0.56 or newer and systemd."),
+            ("Is wayshare really free?", "Yes. Apache-2.0, no paid tier, no account, no ads. The Omarchy package is 6.5 MB to download and 18.1 MB installed."),
+            ("What do I connect with?", "From a Mac: the built-in Screen Sharing app — nothing to install. From Windows or iOS: Windows App, Remote Desktop Connection, or FreeRDP. Generic VNC clients do not work."),
+            ("Is it safe to expose wayshare to the internet?", "No — don't port-forward it. Keep it on your LAN or VPN; Tailscale is the documented path for remote access. On RDP, always check the certificate's SHA-256 fingerprint before sending your password."),
+            ("Why is there no wayshare icon in my app launcher?", "Because there's nothing to launch — wayshare is a background service. Run wayshare doctor to check it, wayshare setup to change it, wayshare restart after editing the config."),
+        ],
+    },
 ]
 GUIDES += seo_guides.GUIDES
 
@@ -1481,6 +1497,7 @@ GUIDE_PACKAGES = {
     "how-to-use-omarchy-zsh": ["omarchy-zsh"],
     "free-notion-alternative-linux-slap-notes": ["slap-notes-bin"],
     "yt-dlp-on-omarchy": ["yt-dlp"],
+    "wayshare-on-omarchy": ["wayshare"],
 }
 PRIMARY_GUIDE = {  # apps taught by more than one guide: the one the profile links to
     "omacut": "omacut-video-editor-omarchy",
