@@ -25,8 +25,8 @@
   "v": 3
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-12",
-  "hash": "c08b639f6f61556e1200bcb31565344315875209b3ab9310abc27bb38f674962",
+  "date": "2026-11-15",
+  "hash": "bb5b93c9194da24b2a102fb1bf27bf2760cf9107235b82d06ff504facefcbac3",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -135,8 +135,8 @@
   "v": 3
  },
  "apps/herdr-app.html": {
-  "date": "2026-11-10",
-  "hash": "feae6ac44eb6de088af8204e540063311b6d9579daee42e0c7ce43d163c82eb4",
+  "date": "2026-11-15",
+  "hash": "715bf18719dc54667edbd9778d10fe2aac2a552c260dd2a08552474ad08c3be0",
   "v": 3
  },
  "apps/herdr-core.html": {
@@ -1290,8 +1290,8 @@
   "v": 3
  },
  "voxtype-bin-on-omarchy.html": {
-  "date": "2026-11-14",
-  "hash": "9bf87c1f69413f0e5f25c36c0b5af3cc5826f2920aeb4a05a7687e918a191499",
+  "date": "2026-11-15",
+  "hash": "5cb2c7f7e37e08a3a18df0ef87cc12c1e49cbee72bd6e14c80732b88c31adf1d",
   "v": 3
  },
  "vs/omarchy-compared.html": {
