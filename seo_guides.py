@@ -768,45 +768,80 @@ GUIDES = [{'slug': 'strata-file-manager-faq',
                              'name': 'Keep a way back',
                              'text': 'Windows stays in the Limine boot menu.'}]}]}]
 
-# Omarchy store landing page for "omarchy store", "omarchystore" and "omarchy app store" searches.
+# Unofficial Omarchy store page for "omarchy store" searches (restored 2026-11-16 with its own job: explain
+# which "Omarchy store" is which, how to browse and install from the official repo, and link the comparison).
 # Body: parts/guides/omarchy-store.html. __PKG_COUNT__ is filled with the live package count at build time.
 GUIDES.append({
     'slug': 'omarchy-store',
-    'title': 'Omarchy Store: Browse and Install Omarchy Apps',
-    'description': 'Looking for an Omarchy store? Browse every package in the official Omarchy repository by category, '
-                   'see reader favorites, and copy the install command.',
-    'eyebrow': 'Omarchy app store',
-    'heading': 'The Omarchy <span>app store</span>',
+    'title': 'Unofficial Omarchy Store: Browse Official Repo Packages | Omarchy Apps',
+    'title_limit': 70,
+    'description': 'An unofficial Omarchy store for the official package repo: browse by category, check a package and copy '
+                   'its install command. Not omarchystore.com.',
+    'eyebrow': 'Unofficial store',
+    'heading': 'The Unofficial Omarchy <span>Store</span>',
     'tagline': 'Every package in the official Omarchy repository, sorted into categories, ranked by readers, '
                'with the install command on every page.',
-    'answer': 'Omarchy Apps is an unofficial store and catalog of apps for Omarchy. It lists every package in the official '
-              'Omarchy package repository, groups them into categories, and gives each one a profile with its source, '
-              'license and exact install command. Browse or search here, then install from your terminal with omarchy pkg add '
-              'followed by the package name.',
-    'search_terms': ['omarchy store', 'omarchystore', 'omarchy app store', 'app store', 'store', 'catalog'],
+    'answer': 'Omarchy Apps is an unofficial store front for the official Omarchy package repository. Browse or search '
+              'every package here, open its profile to check the source and license, then install it from a terminal with '
+              'omarchy pkg add and the package name. It is not the official Omarchy store and it is not omarchystore.com.',
+    'search_terms': ['omarchy store', 'unofficial omarchy store', 'store', 'browse', 'install'],
     'faqs': [
-        ('What is the Omarchy store?',
-         'Omarchy Apps is an unofficial store and catalog of apps for Omarchy. It lists every package in the official Omarchy '
-         'package repository, with a profile page for each one showing its source, license, requirements and install command.'),
-        ('How do I install an app from the Omarchy store?',
-         "Open the app's profile, check the project link and requirements, then run omarchy pkg add followed by the exact package "
-         'name in a terminal. The install runs through Omarchy and its package sources. This site does not host or download packages.'),
-        ('Is Omarchy Apps the official Omarchy store?',
-         'No. It is an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. '
-         'The packages it lists come from the official repository at pkgs.omarchy.org.'),
+        ('Is this the official Omarchy store?',
+         'No. Omarchy Apps is an independent community project, not affiliated with or endorsed by Omacom or David '
+         'Heinemeier Hansson. It lists the packages from the official repository at pkgs.omarchy.org. Omarchy\'s own way '
+         'to install software is the Install menu and the omarchy pkg add command.'),
+        ('Is this omarchystore.com?',
+         'No. omarchystore.com is a separate site run by other people, with its own desktop app and catalog. Omarchy Apps '
+         'lives at omarchyapps.com only.'),
+        ('How do I install an app from this store?',
+         "Open the app's profile, check the project link and requirements, then run omarchy pkg add followed by the exact "
+         'package name in a terminal. The install runs through Omarchy and its package sources. This site does not host or '
+         'download packages.'),
         ('How often is the catalog updated?',
-         'The catalog is rebuilt from pkgs.omarchy.org twice a day, so new packages show up shortly after they land in the '
-         'official repository.'),
-        ('Can I suggest an app that is missing?',
-         'Yes. You can suggest an app from the homepage, and the Develop page explains how packaging for the official Omarchy '
-         'repository works.'),
+         'It is rebuilt from pkgs.omarchy.org twice a day, so new packages show up shortly after they land in the official '
+         'repository.'),
+        ('Why is an app I use missing?',
+         'Only packages in the official Omarchy repository are listed. Many other apps install from Arch or the AUR instead; '
+         'the install guide shows how. Developers can read Develop for Omarchy to get a package into the official repo.'),
     ],
     'extra_graph': [{
         '@type': 'CollectionPage',
         '@id': 'https://omarchyapps.com/omarchy-store.html#collection',
-        'name': 'Omarchy Store: Browse and Install Omarchy Apps',
+        'name': 'The Unofficial Omarchy Store',
         'url': 'https://omarchyapps.com/omarchy-store.html',
         'about': {'@type': 'Thing', 'name': 'Omarchy', 'sameAs': 'https://omarchy.org/'},
         'isPartOf': {'@type': 'WebSite', 'name': 'Unofficial Omarchy App Store', 'url': 'https://omarchyapps.com/'},
     }],
+})
+
+# Fair, sourced comparison with omarchystore.com (added 2026-11-16). Names the other site only to identify it.
+# Body: parts/guides/vs/omarchy-apps-vs-omarchy-store.html. Facts are a dated snapshot, not refreshed by the build.
+GUIDES.append({
+    'slug': 'vs/omarchy-apps-vs-omarchy-store',
+    'facts': 'Figures checked November 16, 2026 · independent comparison',
+    'title': 'Omarchy Apps vs Omarchy Store (omarchystore.com)',
+    'description': 'Omarchy Apps and omarchystore.com are two different, independent sites. A dated, sourced side by side: '
+                   'who runs each, what they list and how you install.',
+    'eyebrow': 'Comparison',
+    'heading': 'Omarchy Apps vs <span>Omarchy Store</span>',
+    'tagline': 'Two independent sites with similar names. What each one lists, where installs come from, and which to use.',
+    'answer': 'Omarchy Apps (omarchyapps.com) and Omarchy Store (omarchystore.com) are separate, independent sites, and '
+              'neither is official. Omarchy Apps lists only the 213 packages in the official Omarchy repository and uses '
+              "Omarchy's own install command. Omarchy Store lists 1,583 apps and 292 themes, including Arch and AUR "
+              'software, and installs through its own desktop app. Figures checked November 16, 2026.',
+    'search_terms': ['omarchy store', 'omarchystore', 'omarchystore.com', 'compare', 'vs', 'comparison'],
+    'faqs': [
+        ('Are Omarchy Apps and Omarchy Store the same site?',
+         'No. Omarchy Apps is at omarchyapps.com and Omarchy Store is at omarchystore.com. They are run by different people '
+         'and are not connected.'),
+        ('Is either one the official Omarchy store?',
+         "No. Both are independent. Omarchy's own way to install software is the Install menu and the omarchy pkg add "
+         'command, which install from the official repository at pkgs.omarchy.org.'),
+        ('Why does Omarchy Store list so many more apps?',
+         'It also lists software from the Arch repositories and the AUR, plus themes. Omarchy Apps lists only the official '
+         'Omarchy repository, which had 213 packages on November 16, 2026.'),
+        ('Do I need a desktop app to use Omarchy Apps?',
+         "No. Omarchy Apps is a website. You copy the install command from a profile into a terminal, or use Omarchy's "
+         'Install menu.'),
+    ],
 })

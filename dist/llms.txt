@@ -63,6 +63,8 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [Revive an Old Laptop or PC with Omarchy: A Practical Guide](https://omarchyapps.com/revive-old-laptop-with-omarchy.html)
 - [How to Move from Mac to Omarchy Safely: Backup, Apps, Rollback](https://omarchyapps.com/switch-from-mac-to-omarchy-safely.html)
 - [Move from Windows to Omarchy Safely: Backup, Data, Apps, Rollback](https://omarchyapps.com/switch-from-windows-to-omarchy-safely.html)
+- [Unofficial Omarchy Store: Browse Official Repo Packages | Omarchy Apps](https://omarchyapps.com/omarchy-store.html)
+- [Omarchy Apps vs Omarchy Store (omarchystore.com)](https://omarchyapps.com/vs/omarchy-apps-vs-omarchy-store.html)
 - [https://omarchyapps.com/category/ai-agents.html](https://omarchyapps.com/category/ai-agents.html)
 - [https://omarchyapps.com/category/developer-tools.html](https://omarchyapps.com/category/developer-tools.html)
 - [https://omarchyapps.com/category/terminal-shell.html](https://omarchyapps.com/category/terminal-shell.html)

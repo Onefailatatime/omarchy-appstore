@@ -17,8 +17,9 @@ assert.equal(mergedTarget("/apps/omarchy-walker.html"), "/walker-on-omarchy.html
 assert.equal(mergedTarget("/apps/t3code-patched-bin.html"), "/apps/t3code-bin.html");
 assert.equal(mergedTarget("/t3code-nightly-bin-on-omarchy.html"), "/apps/t3code-nightly-bin.html");
 assert.equal(mergedTarget("/apps/linux-ptl-headers.html"), null);
-assert.equal(mergedTarget("/store.html"), "/");
-assert.equal(mergedTarget("/omarchy-store.html"), "/");
+assert.equal(mergedTarget("/store.html"), "/omarchy-store.html");
+assert.equal(mergedTarget("/store"), "/omarchy-store.html");
+assert.equal(mergedTarget("/omarchy-store.html"), null);
 assert.equal(mergedTarget("/omarchy-apps-list.html"), "/");
 assert.equal(mergedTarget("/tutorials.html"), "/guides.html");
 assert.equal(mergedTarget("/advertise.html"), "/sponsor.html");

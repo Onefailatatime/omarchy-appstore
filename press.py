@@ -113,6 +113,15 @@ FAQ_PAGE = [
     ("Is Omarchy Apps official?",
      "No. Omarchy Apps is unofficial. It is an independent community project, not affiliated with or endorsed by "
      "Omacom or David Heinemeier Hansson. Built with David's blessing."),
+    ("Is Omarchy Apps the official Omarchy store?",
+     "No. Omarchy Apps is an unofficial catalog of the official Omarchy repository, not affiliated with or endorsed by "
+     "Omacom. Omarchy itself installs software through its Install menu and the omarchy pkg add command, from "
+     "pkgs.omarchy.org.",
+     [("/omarchy-store.html", "How to browse and install from the unofficial Omarchy store")]),
+    ("Is Omarchy Apps the same as omarchystore.com?",
+     "No. omarchystore.com is a separate, independent site called Omarchy Store, run by other people, with its own desktop "
+     "app and a larger catalog that includes AUR software. Omarchy Apps lives only at omarchyapps.com and is not connected to it.",
+     [("/vs/omarchy-apps-vs-omarchy-store.html", "Omarchy Apps vs Omarchy Store, side by side")]),
     ("Where does the app catalog come from?",
      "Straight from the official Omarchy package repo. The store reads the package database published at "
      "pkgs.omarchy.org and hosts no packages of its own."),
@@ -254,14 +263,17 @@ def build(*, root: pathlib.Path, dist: pathlib.Path, site: str, site_name: str, 
     (dist / "press.html").write_text(press, encoding="utf-8")
 
     # ---- faq.html
+    def faq_links(item) -> str:  # optional third element: [(href, label)] shown after the answer, not in the schema
+        links = item[2] if len(item) > 2 else []
+        return "".join(f' <a href="{_e(href)}">{_e(label)}</a>.' for href, label in links)
     faq_html = "\n".join(
-        f'    <details{" open" if i < 2 else ""}><summary><h2>{_e(q)}</h2></summary><p>{_e(a)}</p></details>'
-        for i, (q, a) in enumerate(FAQ_PAGE))
+        f'    <details{" open" if i < 2 else ""}><summary><h2>{_e(item[0])}</h2></summary><p>{_e(item[1])}{faq_links(item)}</p></details>'
+        for i, item in enumerate(FAQ_PAGE))
     faq_schema = {"@context": "https://schema.org", "@graph": [
         org,
         {"@type": "FAQPage", "@id": site + "/faq.html#faq", "url": site + "/faq.html",
          "name": "Omarchy Apps Q&A", "dateModified": synced,
-         "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ_PAGE]},
+         "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a, *_ in FAQ_PAGE]},
     ]}
     faq = ((root / "parts" / "faq.html").read_text(encoding="utf-8")
            .replace("__FAQ_ITEMS__", faq_html)

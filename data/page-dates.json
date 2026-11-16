@@ -855,8 +855,8 @@
   "v": 4
  },
  "faq.html": {
-  "date": "2026-10-20",
-  "hash": "508f2b566e926be29afe3cccb8d792529d55ffc441b2bab9c2359d14c8437b81",
+  "date": "2026-11-16",
+  "hash": "7edc3b61cfa786e930681b942e0ad1a395b6d618365aa87e8c29d945701d3009",
   "v": 4
  },
  "feishu-bin-on-omarchy.html": {
@@ -930,8 +930,8 @@
   "v": 4
  },
  "guides.html": {
-  "date": "2026-11-14",
-  "hash": "2e43cdc51a95d90b857cb87259e960c67a838c13766754ff726b889955ff5179",
+  "date": "2026-11-16",
+  "hash": "151645db6c656183b3d06123978c077833e2d13f6f1ab3b395318cf3e9aee8af",
   "v": 4
  },
  "helium-on-omarchy.html": {
@@ -940,8 +940,8 @@
   "v": 4
  },
  "how-to-install-apps-on-omarchy.html": {
-  "date": "2026-11-02",
-  "hash": "657e2647736ec4fe5903a05f95d99b118f4a5e693bc81eb9061bd2496da31d55",
+  "date": "2026-11-16",
+  "hash": "a28cbce3568a6ce6e35208b905e9dd225694243873b6866a8a4174cd287bc8e4",
   "v": 4
  },
  "hype-on-omarchy.html": {
@@ -955,8 +955,8 @@
   "v": 4
  },
  "index.html": {
-  "date": "2026-11-14",
-  "hash": "7795c4348832e9026c98f773ee7b8e60b9fe66fb08342c3b873aa52bfa310afb",
+  "date": "2026-11-16",
+  "hash": "dd1ee4a876fc8248a929118897ff9e7c1ca296a4eb52098be18dc3abb6bad276",
   "v": 4
  },
  "install-omarchy-on-intel-mac.html": {
@@ -1149,6 +1149,11 @@
   "hash": "61e0a7b7b6f016a9f092ee62a9fb17d9f61e17e429f06a6e7b9eb18102906321",
   "v": 4
  },
+ "omarchy-store.html": {
+  "date": "2026-11-16",
+  "hash": "961a31b3e3037e023532092e861bb369124ef5e54b1530541da74b9ed9c2ace7",
+  "v": 4
+ },
  "omarchy-theme-intros.html": {
   "date": "2026-10-18",
   "hash": "a74917432f8e9fbab4530207825834d550e383a9cabc5e7bf90586c875d03d5f",
@@ -1292,6 +1297,11 @@
  "voxtype-bin-on-omarchy.html": {
   "date": "2026-11-15",
   "hash": "8de8440340f8eb9fc0aada6d1dec69b4133037a12455a49bf89464c1ec318666",
+  "v": 4
+ },
+ "vs/omarchy-apps-vs-omarchy-store.html": {
+  "date": "2026-11-16",
+  "hash": "1f767803cb388169e82b870480c59c9bb73508f52f99e633778fda68fae182f0",
   "v": 4
  },
  "vs/omarchy-compared.html": {

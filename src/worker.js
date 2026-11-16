@@ -72,7 +72,7 @@ export default {
     const { pathname } = url;
     try {
       // omarchystore.omarchyapps.com is a vanity host: every path goes to the Omarchy store page.
-      if (url.hostname === "omarchystore.omarchyapps.com") return Response.redirect("https://omarchyapps.com/" + url.search, 301);
+      if (url.hostname === "omarchystore.omarchyapps.com") return Response.redirect("https://omarchyapps.com/omarchy-store.html" + url.search, 301);
       // One canonical origin: http and www both go to https://omarchyapps.com in a single 301.
       // Cloudflare's Always Use HTTPS is a zone setting, so the worker does it. Local dev stays on http.
       const local = url.hostname === "localhost" || url.hostname === "127.0.0.1";

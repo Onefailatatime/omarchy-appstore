@@ -1748,7 +1748,7 @@ def render_seo_page(template: str, css: str, guide: dict, body: str, related: st
         template = (template
                     .replace('<link rel="canonical" href="__SITE_URL__/__SLUG__.html">', f'<link rel="canonical" href="{guide["canonical"]}">')
                     .replace('<meta property="og:url" content="__SITE_URL__/__SLUG__.html">', f'<meta property="og:url" content="{guide["canonical"]}">'))
-    title = seo.clamp_title(guide["title"])
+    title = seo.clamp_title(guide["title"], guide.get("title_limit", seo.TITLE_MAX))
     description = seo.clamp_description(guide["description"])
     graph = [
             {
@@ -1822,6 +1822,26 @@ def content_fingerprint(rel: str, text: str) -> str:
         s = re.sub(r'data-version="[^"]*"', "", s)
         s = re.sub(r'<span class="ver">[^<]*</span>', "", s)
     return s
+
+
+# Two site footer links added 2026-11-16 (the store guide and the comparison with
+# omarchystore.com). Footers are not content (see content_fingerprint), so this
+# does not move any page's lastmod.
+FOOTER_STORE_LINKS = '<a href="/omarchy-store.html">Store guide</a><a href="/vs/omarchy-apps-vs-omarchy-store.html">Compare stores</a>'
+FOOTER_SITE_NAV = re.compile(r'(<nav aria-label="Site"><h3>Site</h3>.*?<a href="(?:\.\./|/)?faq\.html">FAQ</a>)(.*?</nav>)', re.S)
+
+
+def add_footer_store_links(dist: pathlib.Path) -> int:
+    count = 0
+    for page in dist.rglob("*.html"):
+        text = page.read_text(encoding="utf-8")
+        if 'href="/omarchy-store.html">Store guide</a>' in text:
+            continue
+        new = FOOTER_SITE_NAV.sub(lambda m: m.group(1) + FOOTER_STORE_LINKS + m.group(2), text, count=1)
+        if new != text:
+            page.write_text(new, encoding="utf-8")
+            count += 1
+    return count
 
 
 def stamp_page_dates(today: str, fixed: dict[str, str]) -> dict[str, str]:
@@ -2088,7 +2108,7 @@ def main() -> None:
         guide_body = guide_body.replace("__PKG_COUNT__", str(len(pkgs)))
         (DIST / f"{guide['slug']}.html").write_text(render_seo_page(
             guide_template, page_css, guide, guide_body, related, synced,
-            ("Guides", "/#guides"), f"Reviewed {synced} · independent editorial guide",
+            ("Guides", "/#guides"), guide.get("facts") or f"Reviewed {synced} · independent editorial guide",
             extra_graph=guide.get("extra_graph")), encoding="utf-8")
 
     guided = {n for names in GUIDE_PACKAGES.values() for n in names}
@@ -2175,9 +2195,11 @@ def main() -> None:
             else render_app_page(app_template, resolved_css, p, synced, app_banners, pkgs), encoding="utf-8"
         )
 
+    guide_files = {f"{g['slug']}.html" for g in GUIDES}  # hand guides can live under /vs/ too; keep them
     for d in ("category", "vs", "install"):
         for old in (DIST / d).glob("*.html") if (DIST / d).exists() else []:
-            old.unlink()
+            if f"{d}/{old.name}" not in guide_files:
+                old.unlink()
     seo_pages = seo.build(root=ROOT, dist=DIST, pkgs=pkgs, categories=CATEGORY_ORDER, slug=slug,
                           display_name=lambda p: p["name"], guide_template=guide_template,
                           site=SITE_URL, site_name=SITE_NAME, synced=synced,
@@ -2238,6 +2260,8 @@ def main() -> None:
         text = leftover.read_text(encoding="utf-8")
         if "<span>Synced " in text:
             leftover.write_text(re.sub(r"<span>Synced \d{4}-\d\d-\d\d</span>", "", text), encoding="utf-8")
+    footer_links = add_footer_store_links(DIST)
+    print(f"footer links:     store guide + store comparison on {footer_links} pages")
     page_dates = stamp_page_dates(today, fixed)
     checklist = functions_dir / "checklist.mjs"
     checklist.write_text(checklist.read_text(encoding="utf-8").replace(DATE_TOKEN, page_dates.get("develop.html", today)), encoding="utf-8")
