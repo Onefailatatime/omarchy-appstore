@@ -25,8 +25,8 @@
   "v": 3
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-15",
-  "hash": "bb5b93c9194da24b2a102fb1bf27bf2760cf9107235b82d06ff504facefcbac3",
+  "date": "2026-11-16",
+  "hash": "c8177fb57294612f9e8c475b08b42aedd11daa29e38d65c9621f7be5dbb8e0eb",
   "v": 3
  },
  "apps/asdcontrol.html": {
@@ -335,8 +335,8 @@
   "v": 3
  },
  "apps/notion-desktop.html": {
-  "date": "2026-11-12",
-  "hash": "76eb43decaf9d6972b917496ba084cf74e314b4af249fdda50075b3e63aaa706",
+  "date": "2026-11-16",
+  "hash": "68adbd21c3a523be0408b1bc6d474f8b97e37f1964b5204184fecf302f4306d8",
   "v": 3
  },
  "apps/nvidia-580xx-dkms.html": {
@@ -905,13 +905,13 @@
   "v": 3
  },
  "ghost-on-omarchy.html": {
-  "date": "2026-11-14",
-  "hash": "175217cd516d9daf7efe26f0f883f59202d20748a521b30e28272b716a276a8d",
+  "date": "2026-11-16",
+  "hash": "2294bc363cd2204e648a4353061bf4a573fc1d0f77e5d33601f44f4dce459088",
   "v": 3
  },
  "ghost-runtime-on-omarchy.html": {
-  "date": "2026-11-14",
-  "hash": "fd07e559fbb3c4e50fd458eace1378061e6a220c1d32d8c55856c275159f9c19",
+  "date": "2026-11-16",
+  "hash": "253f5d2296f941cf5b29b929f04a303d6a68fcba615f0de9545b9adb0b91db8c",
   "v": 3
  },
  "ghostty-nautilus-on-omarchy.html": {
