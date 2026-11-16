@@ -1806,7 +1806,9 @@ def render_seo_page(template: str, css: str, guide: dict, body: str, related: st
 # either; it moves the app's own page instead. Bump LEDGER_VERSION whenever
 # this changes: stored dates are kept and only the hashes are refreshed.
 # v3: home links point at / instead of /index.html (a link target, not content).
-LEDGER_VERSION = 3
+# v4: the site footer is navigation, not page content; a footer link added to
+# every page must not move every page's lastmod.
+LEDGER_VERSION = 4
 LISTING_PAGES = re.compile(r"^(index|leaderboard|catalog|guides|tutorials|omarchy-apps-list|category/.*)\.html$")
 
 
@@ -1814,6 +1816,7 @@ def content_fingerprint(rel: str, text: str) -> str:
     s = re.sub(r"/style\.[0-9a-f]{10}\.css", "/style.css", text)
     s = re.sub(r"\d{4}-\d\d-\d\d(T\d\d:\d\d(:\d\d)?(\.\d+)?(Z|[+-]\d\d:?\d\d)?)?", "D", s)
     s = re.sub(r'data-(built|added)-ts="\d+"', "", s)
+    s = re.sub(r'<footer class="site">.*?</footer>', "<footer></footer>", s, flags=re.S)
     s = re.sub(r"\b\d+(\.\d+)? ?(B|KB|MB|GB|KiB|MiB|GiB)\b", "SIZE", s)
     if LISTING_PAGES.match(rel):
         s = re.sub(r'data-version="[^"]*"', "", s)
