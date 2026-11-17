@@ -1,0 +1,163 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add apple-t2-audio-config` installs version 0.4.r21.ga973d53-2 from Omarchy's repo, and that the store listing slug is `apple-t2-audio-config`.
+- Auto-installed already? The Omarchy manual says the installer automatically sets up "the T2 audio configuration" on T2 Macs. Confirm whether a fresh Omarchy install on a T2 Mac already has this package (`pacman -Qi apple-t2-audio-config`) — if so, this guide is mainly for people who installed manually or reinstalled without it.
+- Reboot requirement: confirm sound only appears after rebooting onto the `linux-t2` kernel (`uname -r` shows a `-t2` kernel), and that booting the stock Arch kernel leaves the T2 audio device silent.
+- Kernel parameters: confirm the T2 install carries `intel_iommu=on iommu=pt pcie_ports=compat` (the t2linux wiki requirement) — check `cat /proc/cmdline` on the Omarchy T2 install.
+- Driver check: confirm `lsmod | grep apple_bce` shows the driver loaded and the audio device appears as `AppleT2xN` (per the wiki) after installing this package + rebooting.
+- Output selection: confirm the T2 speakers show up as a selectable output in Omarchy's audio settings / `wpctl status`, and that picking them produces sound (test with `speaker-test -c 2`).
+- Mic test: confirm the internal mic records (`arecord -d 5 -f cd test.wav && aplay test.wav`) — or confirm it does NOT work without extra DSP config, per the wiki's warning.
+- Where the UCM config lives: run `pacman -Ql apple-t2-audio-config` and record the actual installed file paths (expected under `/usr/share/alsa/ucm2/`).
+- Each "Common issue" below reproduces as described, and each fix works on a current install.
+- Comparison install commands: confirm `omarchy pkg add linux-t2`, `omarchy pkg add apple-bcm-firmware-fetcher`, and `omarchy pkg add t2fanrd` all resolve (all three are sibling T2 packages in the store).
+- License: MIT (confirmed on store listing). Free, no paid tier exists.
+- Version at publish time: check `pacman -Qi apple-t2-audio-config` and note it; guide drafted against 0.4.r21.ga973d53-2 (added to the official repo Nov 16, 2026).
+- kaiT2en vs Arch lineage: confirm the Omarchy package is the Arch `apple-t2-audio-config` (UCM files, arch-mact2 lineage) and NOT kaiT2en's Fedora DKMS installer — i.e. do not follow the kaiT2en Fedora install guide on Omarchy.
+
+SEO notes:
+- URL: /guides/apple-t2-audio-config-on-omarchy
+- Title tag: "How to Install & Use apple-t2-audio-config on Omarchy (2026) — Fix Sound on a T2 Mac"
+- Meta description: "Install apple-t2-audio-config on Omarchy with one command and get working speakers and mic on your T2 Mac. Reboot onto the linux-t2 kernel, pick the T2 output, and fix no-sound, silent-mic, and wrong-device problems."
+- Keywords: apple-t2-audio-config omarchy, t2 mac no sound linux, omarchy macbook speakers not working, t2bce audio, linux-t2 audio config, macbook pro linux microphone not working, t2linux audio
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>apple-t2-audio-config on Omarchy</h2>
+      <p>apple-t2-audio-config is a tiny (5 KB) set of ALSA UCM configuration files that tells Linux how to talk to the speakers, headphone jack, and microphones on an Apple T2 Mac — without it, a T2 Mac running Omarchy has no working built-in audio at all.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add apple-t2-audio-config
+sudo reboot</code></pre>
+      <p>It takes under a minute (5 KB download, 5.1 KB installed). Then reboot onto the <code>linux-t2</code> kernel — the config only takes effect on a T2-patched kernel, and sound will not work until you do.</p>
+      <p><strong>Already installed?</strong> If you installed Omarchy on a T2 Mac through the normal installer, you probably already have this: the Omarchy manual says the installer automatically sets up the patched <code>linux-t2</code> kernel, "the T2 audio configuration," the Broadcom Wi-Fi/Bluetooth firmware, and fan control via <code>t2fanrd</code> on T2 models. Check first with <code>pacman -Qi apple-t2-audio-config</code> — this guide is for the people who installed manually, reinstalled, or are missing sound after the fact.</p>
+      <p><strong>Don't follow the Fedora guide.</strong> The store links the project site to kaiT2en's GitHub repo (kaiT2en/KaiT2en-Fedora), which brings T2 support to stock Fedora using DKMS kernel modules. That is the Fedora project, not the Omarchy one. On Omarchy you do not run their installer — the Arch <code>apple-t2-audio-config</code> package (UCM files only, from the arch-mact2 lineage) is all you need, and the kernel side comes from the separate <code>linux-t2</code> package.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and reboot onto the linux-t2 kernel.</h3>
+      <p>Run the install command above, then reboot. This package is configuration only — it contains no driver and no kernel. The actual audio driver is <code>apple-bce</code> (via the <code>t2bce</code> audio driver) inside the <code>linux-t2</code> kernel, and the UCM files in this package tell ALSA/PipeWire how to use it. After rebooting, confirm you're on the T2 kernel:</p>
+      <pre><code class="language-bash">uname -r</code></pre>
+      <p>You should see a kernel name containing <code>t2</code>. If you booted the stock Arch kernel instead, the T2 audio hardware simply isn't there — no config file can fix that. (Unverified on Omarchy: confirm the exact <code>uname -r</code> output on a real T2 install.)</p>
+      <h3>2. Confirm the driver and device are present.</h3>
+      <p>The t2linux wiki says the <code>apple-bce</code> driver must be loaded and the audio device should appear as <code>AppleT2xN</code>:</p>
+      <pre><code class="language-bash">lsmod | grep apple_bce
+aplay -l</code></pre>
+      <p>If <code>apple-bce</code> isn't loaded or nothing T2 shows up in <code>aplay -l</code>, the problem is below this package — the kernel or the driver, not the config. See "No sound at all" in Common issues.</p>
+      <h3>3. Pick the T2 output and test the speakers.</h3>
+      <p>Open Omarchy's audio settings (or <code>pavucontrol</code> / <code>wpctl status</code>) and select the T2 speakers as the output device. Then test:</p>
+      <pre><code class="language-bash">speaker-test -c 2</code></pre>
+      <p>You should hear a tone alternating left/right. Stop it with Ctrl+C. On T2 Macs the headphone jack and the internal speakers are <strong>separate devices</strong>, not one device that auto-switches — if sound comes out of the wrong place, you picked the wrong output, not a broken driver (see "Sound comes out of the wrong device" below).</p>
+      <h3>4. Test the microphone.</h3>
+      <p>Record five seconds and play it back:</p>
+      <pre><code class="language-bash">arecord -d 5 -f cd test.wav &amp;&amp; aplay test.wav</code></pre>
+      <p>If you hear yourself, you're done — the whole setup took five minutes. If the mic is silent or barely audible, that's the known weak spot of T2 audio on Linux, not a mistake you made: see "Speakers work but the internal mic doesn't" below.</p>
+      <h3>The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>This package is config, not a driver.</strong> It ships UCM (Use Case Manager) profiles — text files that describe the T2 audio hardware to ALSA so PipeWire can present "Speakers," "Headphones," and "Internal Microphone" as real devices. The driver lives in the <code>linux-t2</code> kernel. Installing this package without the T2 kernel does nothing.</li>
+        <li><strong>Reboot after installing.</strong> UCM profiles are read when the audio stack starts up against the hardware. Installing the files while running is not enough — reboot onto <code>linux-t2</code> so ALSA picks them up with the driver.</li>
+        <li><strong>Where the config lives.</strong> Run <code>pacman -Ql apple-t2-audio-config</code> to see exactly what it installed (expected: UCM profile files under <code>/usr/share/alsa/ucm2/</code>, the standard location ALSA reads UCM2 configs from). Don't edit the files under <code>/usr/share/</code> directly — if you need to override something, copy the relevant profile to <code>/etc/alsa/ucm2/</code> and edit the copy, since <code>/etc</code> takes priority and survives package updates. (Unverified: confirm the installed paths with <code>pacman -Ql</code> on a real install.)</li>
+      </ul>
+      <h3>Config location.</h3>
+      <p>The package's files live under <code>/usr/share/alsa/ucm2/</code> (confirm with <code>pacman -Ql apple-t2-audio-config</code>). There is no user config file and no app to open — this package has no commands, no window, and no settings of its own. Your audio settings live in PipeWire/WirePlumber, and per-user volume/device choices live in your desktop's sound settings.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>All of these come from the t2linux wiki's <a href="https://wiki.t2linux.org/docs/guides/audio-config/" target="_blank" rel="noopener">audio configuration guide</a> — they are the project's documented failure modes, not guesses. Each one is still marked for on-machine confirmation in the checklist above.</p>
+      <h3>No sound at all after installing</h3>
+      <p>You installed the package and rebooted, but there is no audio device at all — no speakers, no mic, nothing in settings.</p>
+      <p><strong>Fix:</strong> Work down the stack, because this package is the top layer, not the bottom. First, confirm you're actually on the T2 kernel (<code>uname -r</code> should contain <code>t2</code>) — if you booted the stock Arch kernel, the <code>t2bce</code> driver isn't present and no config will help. Second, check the driver is loaded (<code>lsmod | grep apple_bce</code>) and the device shows as <code>AppleT2xN</code> — the wiki says if you only see <code>AppleT2</code> without the <code>x</code>, your driver is out of date, and if there's no output at all, the BCE module isn't set up. Third, check the kernel parameters the wiki requires are present:</p>
+      <pre><code class="language-bash">cat /proc/cmdline</code></pre>
+      <p>They must include <code>intel_iommu=on iommu=pt pcie_ports=compat</code> — without them, the audio hardware can't communicate properly. If they're missing, add them to your bootloader config and reboot. Finally, confirm the config files actually landed (<code>pacman -Ql apple-t2-audio-config</code> should list UCM files) and that the <code>alsa-ucm-conf</code> dependency installed with it.</p>
+      <h3>Speakers work but the internal mic doesn't (or is barely audible)</h3>
+      <p>Output is fine, but the internal microphone records silence or is so quiet it's unusable. This is the single most-reported T2 audio problem, and the wiki is blunt about it: the internal mics "often require additional Digital Signal Processing (DSP) configuration to function optimally," and "some users may still experience issues with audio input and might need to use an external microphone as a workaround."</p>
+      <p><strong>Fix:</strong> First, rule out the simple stuff: check the mic isn't muted and the input volume is up in your sound settings or <code>alsamixer</code> (F4 for capture devices), and confirm the right input is selected — the internal mic and the headphone-jack mic are separate inputs. If the level is just low, the wiki's documented paths are EasyEffects with PipeWire (its Autogain plugin and pre-made presets, tested on MacBook Pro 15,1) or the PipeWire filterchain DSP configs from the <code>t2-apple-audio-dsp</code> repository. If it still doesn't work, use an external USB microphone as the fallback — the wiki presents that as a legitimate outcome, not a failure. (Unverified on Omarchy: whether the mic works out of the box with just this package, or needs the DSP step, on current installs.)</p>
+      <h3>Sound comes out of the wrong device / headphones don't switch automatically</h3>
+      <p>You plug in headphones and sound keeps coming from the speakers, or vice versa. On T2 Macs the headphone jack and the internal speakers are separate audio devices, so the auto-switching you expect from a normal laptop doesn't happen by itself.</p>
+      <p><strong>Fix:</strong> Set the device you want as the default sink explicitly — in your desktop's sound settings, <code>pavucontrol</code>, <code>pactl</code>, or <code>wpctl</code>. The wiki specifically recommends PipeWire over PulseAudio here, because PipeWire's device switching lets you select the speakers as the output even while headphones are plugged in. To make headphones switch automatically when plugged in, set them as the default sink in your desktop environment's settings app. (Unverified: confirm the exact device names PipeWire shows for the T2 speakers vs. headphone jack on a real install.)</p>
+      <h3>Audio broke after a kernel update</h3>
+      <p>Sound was working, you updated, and now it's gone — or you're back to silence after a reboot.</p>
+      <p><strong>Fix:</strong> This is almost always a kernel mismatch, not a config problem. After a <code>linux-t2</code> update you must reboot onto the new T2 kernel; if the bootloader entry still points at the old kernel — or you accidentally booted the stock Arch kernel — the <code>t2bce</code> driver and this package's UCM profiles have nothing to attach to. Check <code>uname -r</code> first: if there's no <code>t2</code> in it, reboot and pick the <code>linux-t2</code> entry. If you are on the new T2 kernel and still have no sound, check <code>pacman -Qi apple-t2-audio-config</code> is still installed (a partial update can leave it behind) and re-run the checks in "No sound at all" above. (Unverified on Omarchy: this is the standard T2 failure pattern from the wiki's prerequisites, not a reproduced Omarchy report — confirm the exact behavior after a real <code>linux-t2</code> update.)</p>
+      <h3>Sound is thin, tinny, or much quieter than macOS</h3>
+      <p>Audio plays, but it sounds flat and quiet compared to the same machine in macOS. Apple's speakers are specially tuned, and the plain UCM config doesn't reproduce macOS's DSP.</p>
+      <p><strong>Fix:</strong> This package gives you working speakers, not macOS-quality speakers. The wiki documents model-specific DSP configurations in the <code>t2-apple-audio-dsp</code> repository — including an experimental one for the MacBook Pro 16" (2019) with 6 speakers — that improve quality significantly. The warning matters: <strong>each Mac model needs its own DSP settings, and using another model's configuration could damage your speakers.</strong> Only use a DSP profile made for your exact model. For a quick volume lift without DSP, PipeWire users can try EasyEffects; the wiki also notes some desktops let you "raise maximum volume" beyond 100%. (Unverified on Omarchy: no DSP profile has been tested from this guide.)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/linux-t2.html">linux-t2</a> — the patched kernel this config is useless without; if sound is missing, the kernel is the first thing to check. <a href="https://omarchyapps.com/apps/apple-bcm-firmware-fetcher.html">apple-bcm-firmware-fetcher</a> — pulls the Broadcom Wi-Fi/Bluetooth firmware out of macOS; the other half of making a T2 Mac fully usable (the Omarchy installer sets both up automatically on T2 models). <a href="https://omarchyapps.com/apps/t2fanrd.html">t2fanrd</a> — the fan-control daemon for T2 Macs; same story, same installer bundle, same "you probably already have it" caveat. And <code>easyeffects</code> (in the store) if your mic needs the DSP/Autogain lift the wiki describes.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Installing the config manually from the <code>t2-better-audio</code> repository (kekrby's original config files, which the wiki points to) — same files, more steps, no package manager tracking them. Or a USB audio interface / USB DAC, which bypasses the T2 audio hardware entirely and works with the stock kernel — the pragmatic escape hatch if the internal speakers and mic fight you for more than an evening.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: apple-t2-audio-config vs the alternatives</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>apple-t2-audio-config</th><th>No config (stock setup)</th><th>Manual t2-better-audio install</th><th>USB DAC / audio interface</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free</td><td>Free</td><td>$10–100+ hardware</td></tr>
+            <tr><td>Best for</td><td>T2 Mac on Omarchy: working speakers, jack, and mic with one command</td><td>Nothing — no T2 audio at all</td><td>Tinkerers who want to hand-edit the UCM files</td><td>Anyone who gives up on internal audio</td></tr>
+            <tr><td>Speakers</td><td>Yes, via UCM profiles</td><td>No</td><td>Yes</td><td>N/A (external speakers)</td></tr>
+            <tr><td>Internal mic</td><td>Yes, but may need extra DSP (see above)</td><td>No</td><td>Yes, same DSP caveat</td><td>No (use a USB mic)</td></tr>
+            <tr><td>Headphone jack</td><td>Yes, as a separate device</td><td>No</td><td>Yes</td><td>Yes, on the DAC</td></tr>
+            <tr><td>Updates</td><td>Tracked by pacman, updates with the system</td><td>—</td><td>Manual re-copy on every change</td><td>None needed</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add apple-t2-audio-config</code></td><td>—</td><td>Clone repo, copy files by hand</td><td>Plug in, select it as output</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you're on a T2 Mac, this isn't a choice — it's the package that makes the speakers you already own produce sound. The only real decision is this package (one command, tracked by pacman) versus hand-installing the same files from <code>t2-better-audio</code>, and the package wins unless you specifically want to edit the UCM profiles yourself. A USB DAC is the fallback, not the alternative.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>It rescues hardware you already own</h2>
+      <p><strong>There is no paid version of this — it's a 5 KB config package, MIT-licensed, that replaces nothing you could buy. The honest framing is the reverse: it rescues hardware you already own.</strong> A 2018–2020 Intel Mac is officially obsolete — macOS 26 "Tahoe" ended support for T2 Intel Macs — and without this config plus the <code>linux-t2</code> kernel, that machine's speakers and mic are dead weight under Linux. Five kilobytes of config is what stands between a still-powerful laptop and e-waste. What you give up versus macOS: the tuned DSP sound quality (fixable per-model, with care) and the possibility that the internal mic needs extra work. What you keep: the machine, the speakers, the mic, and $0 spent.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the apple-t2-audio-config package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/apple-t2-audio-config.html">View apple-t2-audio-config →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does apple-t2-audio-config work on Omarchy?</summary><p>Yes. It's in the official Omarchy repo as <code>apple-t2-audio-config</code> (version 0.4.r21.ga973d53-2, built Nov 16, 2026) and installs with one command: <code>omarchy pkg add apple-t2-audio-config</code>. But it only works on a T2 Mac running the <code>linux-t2</code> kernel — it's configuration for that kernel's <code>t2bce</code> audio driver, not a driver itself. On a non-T2 machine it does nothing.</p></details>
+      <details><summary>Do I even need to install it?</summary><p>Probably not, if you installed Omarchy on a T2 Mac with the normal installer — the Omarchy manual says the installer sets up the T2 audio configuration automatically on T2 models. Check with <code>pacman -Qi apple-t2-audio-config</code> before installing. You need this guide if sound is missing, if you installed manually, or if you reinstalled and the audio setup didn't come along.</p></details>
+      <details><summary>Is apple-t2-audio-config really free?</summary><p>Yes. MIT-licensed, no paid tier, no account. The Omarchy package is 5 KB to download and 5.1 KB installed, with one dependency (<code>alsa-ucm-conf</code>), which Omarchy installs for you.</p></details>
+      <details><summary>Why does the project site point to a Fedora repo?</summary><p>The store lists kaiT2en's GitHub repo (kaiT2en/KaiT2en-Fedora), a project that brings T2 support to stock Fedora using DKMS modules. That's the Fedora project. The Omarchy package is the Arch <code>apple-t2-audio-config</code> — just the ALSA UCM files — and on Omarchy you should not follow the Fedora install guide. The kernel side comes from the separate <code>linux-t2</code> package.</p></details>
+      <details><summary>Why is there no app to open after installing?</summary><p>Because there's nothing to launch — this package is a set of config files, not a program. It has no commands and no window. You verify it worked by checking your sound settings: the T2 speakers and mic should appear as devices. Run <code>pacman -Ql apple-t2-audio-config</code> to see the files it installed.</p></details>
+      <details><summary>Will this make my MacBook sound as good as it did on macOS?</summary><p>Not by itself. It gives you working speakers; macOS-quality sound needs the model-specific DSP configs from the <code>t2-apple-audio-dsp</code> repository, and the internal mic may need DSP work too. Never use another model's DSP profile — the t2linux wiki warns it could damage your speakers.</p></details>
+      <details><summary>Does it work on Apple Silicon (M-series) Macs?</summary><p>No. This is for Intel Macs with the T2 security chip (2018–2020 models). Apple Silicon audio is a completely different subsystem, and Omarchy doesn't support installing on M-series Macs at this time.</p></details>
+      <details><summary>How do I update it?</summary><p>On Omarchy, <code>omarchy-update</code> upgrades it with the rest of the system — then reboot so the new config loads with the kernel. To remove it: <code>omarchy pkg drop apple-t2-audio-config</code> (sound will stop working until you reinstall it or hand-install the config another way).</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/apple-t2-audio-config.html" target="_blank" rel="noopener">Omarchy App Store — apple-t2-audio-config package page (version, size, deps, license, added date)</a></li>
+        <li><a href="https://omarchyapps.com/apple-t2-audio-config-on-omarchy.html" target="_blank" rel="noopener">Omarchy App Store — auto-generated apple-t2-audio-config guide stub</a></li>
+        <li><a href="https://omarchy.org/manual/mac-support/" target="_blank" rel="noopener">Omarchy Manual — Mac support (installer auto-sets up linux-t2, T2 audio config, Broadcom firmware, t2fanrd on T2 models; M-series not supported)</a></li>
+        <li><a href="https://wiki.t2linux.org/docs/guides/audio-config/" target="_blank" rel="noopener">t2linux wiki — Audio Configuration (apple-bce driver, AppleT2xN check, kernel parameters, t2-better-audio files, PipeWire recommendation, internal mic DSP, model-specific speaker configs, troubleshooting)</a></li>
+        <li><a href="https://deepwiki.com/t2linux/wiki/5.4-audio-configuration" target="_blank" rel="noopener">t2linux wiki via DeepWiki — Audio Configuration (same content, citable mirror)</a></li>
+        <li><a href="https://deepwiki.com/t2linux/fedora/4.2-audio-support" target="_blank" rel="noopener">t2linux Fedora — Audio Support (t2linux-audio package: fixes mic volume, enables internal speakers; udev rules and ALSA profile paths)</a></li>
+        <li><a href="https://github.com/kaiT2en/KaiT2en-Fedora" target="_blank" rel="noopener">kaiT2en/KaiT2en-Fedora (project site linked by the store; Fedora DKMS-based T2 support — NOT the Omarchy install path)</a></li>
+        <li><a href="https://gist.github.com/brndd/cb089a3fc3203b969b0abb4d6e9fbbee" target="_blank" rel="noopener">ALSA UCM guide (UCM2 file locations: /usr/share/alsa/ucm2/, overrides in /etc/alsa/ucm2/)</a></li>
+        <li><a href="https://deepwiki.com/t2linux/archiso-t2/6.2-t2-specific-packages" target="_blank" rel="noopener">t2linux archiso-t2 — T2-specific packages (apple-t2-audio-config as ALSA UCM profiles from the arch-mact2 repo; depends on sof-firmware)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

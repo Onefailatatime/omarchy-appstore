@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How to Install &amp; Use t2fanrd on Omarchy (2026)</title>
-<meta name="description" content="Install t2fanrd on Omarchy with one command: omarchy pkg add t2fanrd. Fan control daemon for Macs with the Apple T2 chip. Setup, requirements and FAQ.">
+<title>How to Install &amp; Use t2fanrd on Omarchy (2026) — Fan Control…</title>
+<meta name="description" content="Install t2fanrd on Omarchy with one command. Fan control for T2 Macs: systemd setup, the /etc/t2fand.conf curve, how to check fan speed with sensors, and…">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/t2fanrd-on-omarchy.html">
@@ -13,8 +13,8 @@
 <link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
 <link rel="manifest" href="/images/site.webmanifest?v=2">
-<meta property="og:title" content="How to Install &amp; Use t2fanrd on Omarchy (2026)">
-<meta property="og:description" content="Install t2fanrd on Omarchy with one command: omarchy pkg add t2fanrd. Fan control daemon for Macs with the Apple T2 chip. Setup, requirements and FAQ.">
+<meta property="og:title" content="How to Install &amp; Use t2fanrd on Omarchy (2026) — Fan Control…">
+<meta property="og:description" content="Install t2fanrd on Omarchy with one command. Fan control for T2 Macs: systemd setup, the /etc/t2fand.conf curve, how to check fan speed with sensors, and…">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://omarchyapps.com/t2fanrd-on-omarchy.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
@@ -24,10 +24,10 @@
 <meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@jessyka_boat">
-<meta name="twitter:title" content="How to Install &amp; Use t2fanrd on Omarchy (2026)">
-<meta name="twitter:description" content="Install t2fanrd on Omarchy with one command: omarchy pkg add t2fanrd. Fan control daemon for Macs with the Apple T2 chip. Setup, requirements and FAQ.">
+<meta name="twitter:title" content="How to Install &amp; Use t2fanrd on Omarchy (2026) — Fan Control…">
+<meta name="twitter:description" content="Install t2fanrd on Omarchy with one command. Fan control for T2 Macs: systemd setup, the /etc/t2fand.conf curve, how to check fan speed with sensors, and…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/t2fanrd-on-omarchy.html#article","headline":"How to Install & Use t2fanrd on Omarchy (2026)","description":"Install t2fanrd on Omarchy with one command: omarchy pkg add t2fanrd. Fan control daemon for Macs with the Apple T2 chip. Setup, requirements and FAQ.","url":"https://omarchyapps.com/t2fanrd-on-omarchy.html","dateModified":"2026-11-16","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/guides.html"},{"@type":"ListItem","position":3,"name":"How to Install & Use t2fanrd on Omarchy (2026)","item":"https://omarchyapps.com/t2fanrd-on-omarchy.html"}]},{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/t2fanrd-on-omarchy.html#app","name":"t2fanrd","description":"Fan control daemon for Macs with the Apple T2 chip","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"r16.48baf96-2","license":"GPL-3.0-only","url":"https://omarchyapps.com/apps/t2fanrd.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/t2fanrd-on-omarchy.html#article","headline":"How to Install & Use t2fanrd on Omarchy (2026) — Fan Control…","description":"Install t2fanrd on Omarchy with one command. Fan control for T2 Macs: systemd setup, the /etc/t2fand.conf curve, how to check fan speed with sensors, and…","url":"https://omarchyapps.com/t2fanrd-on-omarchy.html","dateModified":"2026-11-17","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"How to Install & Use t2fanrd on Omarchy (2026) — Fan Control for T2 Macs","item":"https://omarchyapps.com/t2fanrd-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does t2fanrd work on Omarchy?","acceptedAnswer":{"@type":"Answer","text":"Yes — it's in the official Omarchy repo as t2fanrd (version r16.48baf96-2, built Nov 16, 2026) and installs with one command: omarchy pkg add t2fanrd. It only works on Intel Macs with the Apple T2 chip, and only with a T2-patched kernel (the linux-t2 package)."}},{"@type":"Question","name":"Is t2fanrd really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. GPL-3.0, no paid tier, no account. The Omarchy package is 263 KB to download and 530.4 KB installed, with only gcc-libs and glibc as dependencies."}},{"@type":"Question","name":"Why is the project archived?","acceptedAnswer":{"@type":"Answer","text":"The maintainer archived it on Nov 16, 2026, because recent kernels expose T2 fans through the standard hwmon interface — the job no longer needs a T2-specific daemon. The README says standard userspace fan daemons 'should work' after writing 1 to /sys/module/macsmc_hwmon/parameters/fan_control, and points users who want the t2fand config format at the sharpenedblade fork."}},{"@type":"Question","name":"My fans are stuck at minimum after waking the laptop. Is the daemon broken?","acceptedAnswer":{"@type":"Answer","text":"Probably not broken — this is the known suspend bug (issue #16). The SMC clears manual fan control across suspend and the daemon never re-asserts it, silently. sudo systemctl restart t2fanrd restores control. Set up a post-resume restart so you don't have to remember."}},{"@type":"Question","name":"Does it work on a MacBookPro15,1 (2018 15\")?","acceptedAnswer":{"@type":"Answer","text":"Known not to: the daemon exits with 'Fan not found' on that model because its firmware doesn't expose the fan-identification keys t2fanrd reads (issue #17). Try the hwmon + fancontrol path instead."}}]}]}</script>
 <link rel="stylesheet" href="/style.75958c2d72.css">
   <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
   <script src="/oa-ads.js" defer></script>
@@ -50,75 +50,209 @@
 
 <header class="hero guide-hero seo-hero">
   <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/guides.html">Guides</a><span>›</span><span aria-current="page">Utilities tutorial</span></nav>
-    <p class="eyebrow">Utilities tutorial</p>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">T2 Mac fan control guide</span></nav>
+    <p class="eyebrow">T2 Mac fan control guide</p>
     <h1>t2fanrd on <span>Omarchy</span></h1>
-    <p class="tag">Fan control daemon for Macs with the Apple T2 chip</p>
-    <p class="facts">Generated from the official Omarchy package repo</p>
+    <p class="tag">Fan control for T2 Macs — one package, one config file, no more jet-engine fans.</p>
+    <p class="facts">Reviewed 2026-11-17 · independent editorial guide</p>
   </div>
 </header>
-<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
+<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
 
 <main class="wrap seo-guide-main">
   <article class="seo-article">
     <div class="guide-answer">
       <p class="answer-label">Short answer</p>
-      <p>To install t2fanrd on Omarchy, open a terminal and run omarchy pkg add t2fanrd. It is a 263 KB download (530.4 KB installed), version r16.48baf96-2, licensed GPL-3.0-only. Fan control daemon for Macs with the Apple T2 chip. Check the project site for current pricing.</p>
+      <p>Install t2fanrd with omarchy pkg add t2fanrd and start it with sudo systemctl enable --now t2fanrd. It drives the fans from your CPU temperature on a curve in /etc/t2fand.conf. Note: upstream was archived Nov 16, 2026 — the hwmon + fancontrol route is the maintained future.</p>
     </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add t2fanrd` installs version r16.48baf96-2 from Omarchy's repo, and that the store listing slug is `t2fanrd`.
+- Package origin: the version string contains commit `48baf96`, which matches the sharpenedblade/T2FanRD fork's current commit — confirm the Omarchy package is built from that fork, not the archived GnomedDev repo.
+- Archived upstream: GnomedDev archived the repo on Nov 16, 2026, saying recent kernels support the standard hwmon interface. Confirm on a real T2 Mac whether the hwmon path (`echo 1 > /sys/module/macsmc_hwmon/parameters/fan_control` + a standard daemon like fancontrol) actually works on Omarchy's T2 kernel, or whether t2fanrd is still the practical choice.
+- Service: confirm the package ships/enables a `t2fanrd.service` unit and that `sudo systemctl enable --now t2fanrd` starts it (the unit name is confirmed from GitHub issues, not from an Omarchy install).
+- First run: confirm the daemon auto-creates `/etc/t2fand.conf` on first start, and note the default low_temp/high_temp it writes (issue #1 shows 55/75 with a linear curve).
+- Monitoring: confirm `sensors` shows `applesmc-acpi-0` fan RPM and `coretemp` package temperature on a T2 Mac under Omarchy, and that `lm_sensors` is installed or installable via `omarchy pkg add lm_sensors`.
+- Suspend bug: confirm the issue #16 failure on Omarchy — after resume, `fan*_manual` reads 0, fans sit at minimum RPM at 70 °C while `systemctl is-active t2fanrd` still says `active` — and that `systemctl restart t2fanrd` restores control.
+- Boot race: confirm whether the issue #20 failure ("CPU temperature sensor not found" when coretemp loads after the service) happens on Omarchy, and whether the packaged service has a restart policy that survives it.
+- Config edit: confirm editing `/etc/t2fand.conf` (e.g. low_temp 45) + `sudo systemctl restart t2fanrd` applies the new curve.
+- Each "Common issue" below reproduces as described, and each fix works on a current install.
+- Crash behaviour: confirm what happens to fan speed if the daemon is killed mid-run (does the SMC reclaim control with its own curve, or do fans stick at the last written speed?). Unverified — do not publish a claim either way until tested.
+- Comparison install commands: confirm `omarchy pkg add lm_sensors` resolves (lm_sensors is in the store); fancontrol ships with lm_sensors, macfanctld and mbpfan are NOT in the store — confirm before linking them as one-command installs.
+- Sibling T2 apps: confirm the store slugs `linux-t2`, `apple-bcm-firmware-fetcher`, and `apple-t2-audio-config` exist and link correctly.
+- License: GPL-3.0-only (confirmed on store listing and GitHub). Free, no paid tier exists.
+- Version at publish time: check `pacman -Qi t2fanrd` and note it; guide drafted against r16.48baf96-2 (added to the official repo Nov 16, 2026).
+
+SEO notes:
+- URL: /guides/t2fanrd-on-omarchy
+- Title tag: "How to Install & Use t2fanrd on Omarchy (2026) — Fan Control for T2 Macs"
+- Meta description: "Install t2fanrd on Omarchy with one command. Fan control for T2 Macs: systemd setup, the /etc/t2fand.conf curve, how to check fan speed with sensors, and fixes for the suspend bug, boot failure, and GPU-blindness."
+- Keywords: t2fanrd omarchy, t2fanrd linux, fan control t2 mac linux, macbook fan control linux, t2 mac fan speed, linux-t2 fan control, t2fanrd config, macbookpro fan linux
+-->
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
       <a href="#install">Install</a>
-      <a href="#use">Open and use</a>
-      <a href="#requirements">Requirements</a>
-      <a href="#remove">Uninstall</a>
-      <a href="#facts">Package facts</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from macOS fan control</a>
       <a href="#faq">Questions</a>
     </nav>
 
     <section id="install">
-      <h2>Install t2fanrd on Omarchy</h2>
-      <p>Fan control daemon for Macs with the Apple T2 chip</p>
-      <p>The official repository lists this package in Utilities. It was added on 2026-11-16.</p>
-      
+      <h2>t2fanrd on Omarchy</h2>
+      <p>t2fanrd is a free, open-source fan control daemon for Intel Macs with the Apple T2 chip — it reads your CPU temperature and drives the fans on a curve you configure, so a T2 Mac running Omarchy stays cool without sounding like a jet engine.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add t2fanrd
+sudo systemctl enable --now t2fanrd</code></pre>
+      <p>It takes ~2 minutes (263 KB download, 530.4 KB installed). Then enable and start the service. That's the install. There is no window to open — t2fanrd is a background daemon. It creates its config automatically on first run.</p>
+      <p><strong>Read this before you install:</strong> the upstream project was archived on Nov 16, 2026 — the same day this package landed in the Omarchy store. The maintainer's reason: recent kernels expose the fans through the standard hwmon interface, so "standard userspace fan daemons should work" once you write <code>1</code> to <code>/sys/module/macsmc_hwmon/parameters/fan_control</code>. The Omarchy package (version <code>r16.48baf96-2</code>) is built from the <a href="https://github.com/sharpenedblade/T2FanRD" target="_blank" rel="noopener">sharpenedblade fork</a>, which the archived README points to for anyone who wants to keep the t2fand config format. t2fanrd is still the simplest path — one package, one config file, no hwmon wrangling — but it is effectively unmaintained upstream, and the hwmon + fancontrol route is the future the maintainer points to. Both paths are covered below.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and start the daemon.</h3>
+      <p>Run the two commands above. The service is <code>t2fanrd.service</code>; check it actually started:</p>
+      <pre><code class="language-bash">systemctl status t2fanrd</code></pre>
+      <p>If it says <code>active (running)</code>, the daemon is in control of your fans. If it failed, read the log before anything else — the two most common failures are covered in "Common issues" below:</p>
+      <pre><code class="language-bash">journalctl -xeu t2fanrd</code></pre>
+      <h3>2. See your fans and temperatures.</h3>
+      <p>t2fanrd itself prints nothing to your screen — watch it through <code>sensors</code> (from <code>lm_sensors</code>):</p>
+      <pre><code class="language-bash">sensors</code></pre>
+      <p>Look for two blocks: <code>coretemp-isa-0000</code> (CPU package temperature — this is the number the fan curve reads) and <code>applesmc-acpi-0</code> (fan RPM, min/max). A healthy idle looks roughly like CPU ~40–50 °C with fans near their minimum (~1200–2000 RPM depending on model). Under load the RPM should climb as the temperature passes your <code>low_temp</code>.</p>
+      <h3>3. Tune the curve.</h3>
+      <p>Config lives in <code>/etc/t2fand.conf</code> (note the name — <code>t2fand</code>, not <code>t2fanrd</code> — a leftover from the original Python daemon this was rewritten from). It's created automatically on first run, one section per fan:</p>
+      <pre><code class="language-bash">[Fan1]
+low_temp=55
+high_temp=75
+speed_curve=linear
+always_full_speed=false</code></pre>
+      <ul>
+        <li><code>low_temp</code> — the temperature where the fan starts speeding up (default 55 °C).</li>
+        <li><code>high_temp</code> — the temperature where the fan hits maximum speed (default 75 °C).</li>
+        <li><code>speed_curve</code> — <code>linear</code>, <code>exponential</code>, or <code>logarithmic</code>. Linear ramps evenly; exponential stays quiet longer then climbs fast; logarithmic climbs early then flattens. The README includes a curve graph if you want to see them.</li>
+        <li><code>always_full_speed</code> — set <code>true</code> and that fan runs at max no matter what. A panic button, not a daily setting.</li>
+      </ul>
+      <p>After editing, restart the daemon — it reads the config at startup:</p>
+      <pre><code class="language-bash">sudo systemctl restart t2fanrd</code></pre>
+      <h3>The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>It only watches the CPU.</strong> The daemon reads one temperature — the CPU package sensor (<code>coretemp</code> <code>temp1_input</code>) — and drives every fan from it. If your GPU is the hot part (gaming, rendering on a dual-GPU MacBook Pro or a Mac Pro), the fans may not respond. See issue #3 below.</li>
+        <li><strong>It takes manual control of the fans from the SMC.</strong> The daemon writes <code>1</code> to each fan's <code>fan*_manual</code> sysfs file and then sets speed through <code>fan*_output</code>. The firmware's own fan curve stops applying while the daemon runs — which is the point, and also why the suspend bug below matters.</li>
+        <li><strong>There is no GUI and no status command.</strong> Everything is <code>systemctl status t2fanrd</code>, <code>journalctl -xeu t2fanrd</code>, <code>sensors</code>, and <code>/etc/t2fand.conf</code>. If you want a window with dials, this is not that tool.</li>
+      </ul>
+      <h3>Config location.</h3>
+      <p><code>/etc/t2fand.conf</code> — created automatically on first run. There is no app to open and no per-user config.</p>
+      <p><strong>Practical notes:</strong> On Omarchy, <code>omarchy-update</code> upgrades t2fanrd with the rest of the system; restart the service afterwards (<code>sudo systemctl restart t2fanrd</code>) so the new binary is the one running. To remove it: <code>sudo systemctl disable --now t2fanrd</code>, then <code>omarchy pkg drop t2fanrd</code>. Your config in <code>/etc/t2fand.conf</code> is left behind — delete it by hand if you want a clean slate.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>All of these come from the project's own GitHub issues — they are real reports from T2 Mac owners, including one filed from Omarchy itself, not guesses. Each one is still marked for on-machine confirmation in the checklist above.</p>
+      <h3>"Error: Cannot write to fan controller" — service fails to start</h3>
+      <p><code>sudo systemctl enable --now t2fanrd</code> fails, and running <code>sudo t2fanrd</code> by hand ends with <code>Error: Cannot write to fan controller</code> (sometimes surfacing as an "Input/Output error"). The daemon found your fans but can't write to them.</p>
+      <p><strong>Fix:</strong> This is a kernel/driver problem, not a t2fanrd bug — the maintainer's own diagnosis, and a later contributor confirmed it as a kernel bug in the T2 patches that t2fanrd cannot work around. First, make sure you are actually running a T2-patched kernel (see the <code>linux-t2</code> sibling app — a stock Arch kernel has no T2 fan driver at all). If you are on the T2 kernel and still hit it, the issue thread points to the <a href="https://github.com/t2linux/linux" target="_blank" rel="noopener">t2linux patches repo</a> — there is no known fix inside t2fanrd, and the older Python <code>t2fand</code> hits the same error. Report it upstream with your model identifier (<code>MacBookPro16,1</code>, etc.) and kernel version.</p>
+      <h3>Fans stop responding after suspend — daemon looks fine but isn't</h3>
+      <p>After waking from suspend, the fans sit at their minimum RPM even as the CPU climbs (one reporter: 70 °C, fans at ~1700–1800 RPM), and the daemon is completely silent about it — <code>systemctl is-active t2fanrd</code> still reports <code>active</code>, same PID as before suspend, no new log lines. This was reported from Omarchy 4.0.4-1 on a MacBookPro16,1.</p>
+      <p><strong>Fix:</strong> The SMC clears the <code>fan*_manual</code> flag across suspend, and t2fanrd only writes that flag once at startup — so after resume the daemon keeps writing speeds the SMC ignores, and the firmware runs its own curve. Restart the service to re-assert manual control:</p>
+      <pre><code class="language-bash">sudo systemctl restart t2fanrd</code></pre>
+      <p>Verify it worked by checking the manual flag reads <code>1</code> again (under <code>/sys/devices/.../APP0001:00/fan1_manual</code>). As a standing workaround, the reporter runs a oneshot unit with <code>WantedBy=suspend.target</code> that restarts the service after resume — see <a href="https://github.com/omacom/omarchy/issues/12393" target="_blank" rel="noopener">omacom/omarchy#12393</a> for the same issue on a MacBookAir8,2. The proper upstream fix (re-writing the manual flag on every control-loop tick) was suggested but never landed before the repo was archived.</p>
+      <h3>Daemon exits at boot — "CPU temperature sensor not found"</h3>
+      <p>The service fails at boot with <code>Error: CPU temperature sensor not found</code>, and systemd gives up after hitting the start limit within about a second — leaving the fans on the firmware curve until someone restarts the service by hand (one reporter found their CPU at 88 °C with fans at ~2500 RPM).</p>
+      <p><strong>Fix:</strong> The daemon looks for <code>/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input</code> exactly once, and at boot the service can start before udev has loaded the <code>coretemp</code> module. Restart it once the system is up:</p>
+      <pre><code class="language-bash">sudo systemctl restart t2fanrd</code></pre>
+      <p>The suggested upstream fix — retrying the sensor lookup for ~30 seconds before exiting — was never implemented before archiving. If this bites you on every boot, the durable workaround is a service override that delays the start until the sensor exists (e.g. <code>systemctl edit t2fanrd</code> and an <code>ExecStartPre</code> that waits for the <code>temp1_input</code> path) — <strong>unverified on Omarchy; confirm the override syntax on a real machine before publishing it as a fix.</strong></p>
+      <h3>"Error: Fan not found" on a MacBookPro15,1</h3>
+      <p>The daemon crashes immediately on every start with <code>Error: Fan not found</code>. The kernel log shows <code>macsmc-acpi</code> initializing fine, but the fan-identification keys (<code>F0ID</code>/<code>F1ID</code>) fail with <code>mmio/get_key_info failed, ret: 0x84</code>.</p>
+      <p><strong>Fix:</strong> There is no fix in t2fanrd. This is a firmware limitation of the 2018 15" MacBook Pro (MacBookPro15,1) — the same missing keys were reported against the macOS-native SMCKit back in 2018. The reporter suggested a fallback (default to a fixed fan count and use the speed read/write keys directly), but it was never implemented. If you own this model, t2fanrd will not work for you; the hwmon + fancontrol path the README points to is the thing to try instead — <strong>unverified, needs testing on that exact model.</strong></p>
+      <h3>GPU gets hot but the fans don't spin up</h3>
+      <p>On a dual-GPU machine (reported on a Mac Pro 7,1 with a Radeon Pro 580X), the AMD GPU hits 100 °C under load while the fans sit near idle (~500 RPM) — because the CPU is barely working and t2fanrd only reads CPU temperature. Sustained, the machine freezes and restarts.</p>
+      <p><strong>Fix:</strong> There is no config option to add a GPU sensor — t2fanrd reads the CPU and nothing else, and there is no per-fan minimum-speed setting either (that's open feature request <a href="https://github.com/GnomedDev/t2fanrd/issues/13" target="_blank" rel="noopener">#13</a>). The reporter's workaround is to lower <code>low_temp</code> (e.g. into the low 40s) so the fans engage sooner — but that makes the fans cycle on and off noisily during light use. A steadier mitigation is <code>always_full_speed=true</code> on the affected fans during GPU-heavy sessions, then back to <code>false</code> after. Neither is a real fix; if you game or render on a dual-GPU T2 Mac, this limitation should decide whether t2fanrd is enough for you.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/linux-t2.html">linux-t2</a> — the T2-patched kernel t2fanrd depends on; without it there is no fan driver for the daemon to talk to. <a href="https://omarchyapps.com/apps/apple-bcm-firmware-fetcher.html">apple-bcm-firmware-fetcher</a> — pulls the Wi-Fi/Bluetooth firmware out of macOS so the rest of the machine works alongside the fans. <a href="https://omarchyapps.com/apps/apple-t2-audio-config.html">apple-t2-audio-config</a> — the audio counterpart, same "make the T2 Mac whole" job. And <code>lm_sensors</code> — <code>sensors</code> is how you actually see temperatures and fan RPM, since t2fanrd has no display of its own.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>fancontrol</code> (ships with <code>lm_sensors</code>) — the standard Linux fan daemon, which the archived README itself now recommends: write <code>1</code> to <code>/sys/module/macsmc_hwmon/parameters/fan_control</code> and let fancontrol drive the fans through the kernel's hwmon interface. More moving parts (you write your own <code>fancontrol</code> config via <code>pwmconfig</code>), but it's maintained and it can watch GPU sensors too. Or <code>mbpfan</code> — the older MacBook fan daemon, if you're on a pre-T2 Mac; it was built for the <code>applesmc</code> driver era, not T2 hardware.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: t2fanrd vs fancontrol vs mbpfan vs Macs Fan Control</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>t2fanrd</th><th>fancontrol (lm_sensors)</th><th>mbpfan</th><th>Macs Fan Control</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (GPL-3.0)</td><td>Free (GPL)</td><td>Free (GPL)</td><td>Free (macOS/Windows only)</td></tr>
+            <tr><td>Best for</td><td>T2 Macs where you want fan control with one package and one config file</td><td>T2 Macs where you want GPU-aware curves and a maintained daemon</td><td>Pre-T2 MacBooks (2015 and older)</td><td>Monitoring/controlling fans from macOS or Windows Boot Camp</td></tr>
+            <tr><td>Works on T2 Macs?</td><td>Yes — built for them</td><td>Yes, via the hwmon interface (needs <code>fan_control=1</code>)</td><td>No — targets the old <code>applesmc</code> driver</td><td>No Linux version exists</td></tr>
+            <tr><td>Watches GPU temp?</td><td>No — CPU only</td><td>Yes — any hwmon sensor</td><td>No — CPU only</td><td>Yes, where the hardware exposes it</td></tr>
+            <tr><td>Config</td><td><code>/etc/t2fand.conf</code>, 4 keys per fan</td><td><code>/etc/fancontrol</code>, generated by <code>pwmconfig</code></td><td><code>/etc/mbpfan.conf</code></td><td>GUI sliders</td></tr>
+            <tr><td>Maintained?</td><td>No — upstream archived Nov 16, 2026; Omarchy package tracks the sharpenedblade fork</td><td>Yes</td><td>Sporadic</td><td>Yes</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add t2fanrd</code></td><td><code>omarchy pkg add lm_sensors</code></td><td>Not in the store</td><td>Not available on Linux</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you're on a T2 Mac and you just want the fans handled, t2fanrd is still the fastest path — one command, one config file, sensible defaults. Pick fancontrol if you have a dual-GPU machine (it can watch the GPU sensor t2fanrd ignores) or if you want a daemon with a future. Pick mbpfan only if your Mac predates the T2 chip. Macs Fan Control isn't an option on Linux at all — it's listed here because it's the first thing ex-macOS users search for.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>t2fanrd is the free fix for the two bad defaults on a T2 Mac running Linux</h2>
+      <p><strong>There is no paid Linux fan daemon for T2 Macs to undercut — the honest pitch is different. t2fanrd is the free fix for the two bad defaults on a T2 Mac running Linux: fans screaming at full speed, or fans asleep while the machine cooks.</strong> The alternative most people actually live with is rebooting into macOS whenever the machine gets loud or hot, which defeats the point of running Omarchy on it. t2fanrd costs $0, one command, and a four-line config — what you give up is a GUI, GPU-aware curves, and an upstream maintainer (archived Nov 2026). What you keep is a quiet machine that doesn't throttle itself to death. If the GPU-blindness matters to you, the free upgrade path is fancontrol (above), not a purchase.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from macOS fan control to t2fanrd (~15 minutes)</h2>
       <ol>
-        <li>Open a terminal.</li>
-        <li>Run the install command:<pre><code class="language-bash">omarchy pkg add t2fanrd</code></pre></li>
-        <li>Check it landed. Pacman should list version r16.48baf96-2:<pre><code class="language-bash">pacman -Qi t2fanrd</code></pre></li>
+        <li><strong>Install:</strong> On Omarchy: <code>omarchy pkg add t2fanrd</code>, then <code>sudo systemctl enable --now t2fanrd</code>.</li>
+        <li><strong>Check the baseline:</strong> Run <code>sensors</code> before and after starting the daemon. Note idle CPU temp and fan RPM with the daemon off (firmware curve) versus on.</li>
+        <li><strong>Tune the curve:</strong> Edit <code>/etc/t2fand.conf</code> — most people start by lowering <code>low_temp</code> from 55 to 45–50 if the fans engage too late, or raising it if they're too eager. Restart after each change: <code>sudo systemctl restart t2fanrd</code>.</li>
+        <li><strong>Test suspend:</strong> Suspend and resume once, then check <code>sensors</code> under load. If the fans are stuck at minimum, you have the issue #16 bug — set up the post-resume restart (see above) before you trust the machine unattended.</li>
+        <li><strong>What doesn't transfer:</strong> Your macOS fan presets and per-app rules (Macs Fan Control doesn't exist on Linux), and any temperature-based rules that watched the GPU — t2fanrd is CPU-only. Uninstall nothing on the macOS side; the two OSes don't share fan settings.</li>
       </ol>
     </section>
 
-    <section id="use">
-      <h2>Open and use t2fanrd</h2>
-      <p>To see what the package installed, including any commands and desktop entries:</p><pre><code class="language-bash">pacman -Ql t2fanrd</code></pre>
-    </section>
-
-    <section id="requirements">
-      <h2>t2fanrd requirements and compatibility</h2>
-      <p>No special requirements are documented for t2fanrd.</p>
-      <h3>Dependencies Omarchy installs for you</h3><ul><li><code>gcc-libs</code></li><li><code>glibc</code></li></ul>
-      <h3>Pricing and license</h3>
-      <p>Check the project site for current pricing. License: GPL-3.0-only.</p>
-    </section>
-
-    <section id="remove">
-      <h2>Uninstall t2fanrd</h2>
-      <pre><code class="language-bash">omarchy pkg drop t2fanrd</code></pre>
-    </section>
-
-    <section id="facts">
-      <h2>t2fanrd package facts</h2>
-      <div class="table-scroll"><table class="compare-table"><tbody><tr><th scope='row'>Package</th><td><code>t2fanrd</code></td></tr><tr><th scope='row'>Version</th><td>r16.48baf96-2</td></tr><tr><th scope='row'>Category</th><td>Utilities</td></tr><tr><th scope='row'>License</th><td>GPL-3.0-only</td></tr><tr><th scope='row'>Download</th><td>263 KB</td></tr><tr><th scope='row'>Installed size</th><td>530.4 KB</td></tr><tr><th scope='row'>Built</th><td>2026-11-16</td></tr><tr><th scope='row'>Pricing</th><td>Check the project site for current pricing</td></tr><tr><th scope='row'>Added to the official repo</th><td>2026-11-16</td></tr><tr><th scope='row'>Made by</th><td>GnomedDev</td></tr></tbody></table></div>
-      <p><a href="/apps/t2fanrd.html">t2fanrd package page on this site</a> · <a href="https://github.com/GnomedDev/t2fanrd" target="_blank" rel="noopener">Project site</a></p>
-    </section>
+    <div class="guide-cta">
+      <div><h2>Open the t2fanrd package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/t2fanrd.html">View t2fanrd →</a>
+    </div>
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>How do I install t2fanrd on Omarchy?</summary><p>Open a terminal and run omarchy pkg add t2fanrd. The download is 263 KB and it takes 530.4 KB once installed. Omarchy pulls in any dependencies automatically.</p></details><details><summary>Is t2fanrd free?</summary><p>Check the project site for current pricing. The package is licensed GPL-3.0-only.</p></details><details><summary>How do I uninstall t2fanrd?</summary><p>Run omarchy pkg drop t2fanrd. It removes the package from your system.</p></details><details><summary>What does t2fanrd depend on?</summary><p>The package declares 2 dependencies: gcc-libs, glibc. Omarchy installs them for you.</p></details><details><summary>Is t2fanrd in the official Omarchy repo?</summary><p>Yes. It is published as t2fanrd (version r16.48baf96-2) in the official Omarchy package repository. GnomedDev makes it. Project site: https://github.com/GnomedDev/t2fanrd. This site is unofficial: an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p></details>
+      <details><summary>Does t2fanrd work on Omarchy?</summary><p>Yes — it's in the official Omarchy repo as <code>t2fanrd</code> (version r16.48baf96-2, built Nov 16, 2026) and installs with one command: <code>omarchy pkg add t2fanrd</code>. It only works on Intel Macs with the Apple T2 chip, and only with a T2-patched kernel (the <code>linux-t2</code> package). It does nothing on a normal PC or an Apple Silicon Mac — there are no fans for it to find, and it will exit with "Fan not found."</p></details>
+      <details><summary>Is t2fanrd really free?</summary><p>Yes. GPL-3.0, no paid tier, no account. The Omarchy package is 263 KB to download and 530.4 KB installed, with only <code>gcc-libs</code> and <code>glibc</code> as dependencies.</p></details>
+      <details><summary>Is it safe — what happens if the daemon crashes?</summary><p>Unverified on a real machine, so treat this as "what the evidence suggests," not a tested fact. What is confirmed: the daemon takes manual control of the fans from the SMC, and when that manual flag is cleared (observed across suspend), the SMC firmware resumes running its own fan curve — the machine does not lose all cooling, it falls back to Apple's firmware behaviour. What is <em>not</em> confirmed is the exact fan state in the seconds after a crash — whether the fans stick at their last written speed or the SMC reclaims control immediately. Until someone tests a kill mid-run, don't run a heavy compile with the daemon stopped, and watch <code>sensors</code> the first time you use it.</p></details>
+      <details><summary>Why is the project archived?</summary><p>The maintainer archived it on Nov 16, 2026, because recent kernels expose T2 fans through the standard hwmon interface — the job no longer needs a T2-specific daemon. The README says standard userspace fan daemons "should work" after writing <code>1</code> to <code>/sys/module/macsmc_hwmon/parameters/fan_control</code>, and points users who want the t2fand config format at the sharpenedblade fork. The Omarchy package tracks that fork. Archival doesn't mean the package stops working — it means no new fixes, including for the suspend and boot-race bugs above.</p></details>
+      <details><summary>How do I see my fan speed?</summary><p>t2fanrd has no display. Install <code>lm_sensors</code> and run <code>sensors</code> — the <code>applesmc-acpi-0</code> block shows each fan's RPM, min, and max, and <code>coretemp-isa-0000</code> shows the CPU temperature the curve is reading.</p></details>
+      <details><summary>My fans are stuck at minimum after waking the laptop. Is the daemon broken?</summary><p>Probably not broken — this is the known suspend bug (issue #16). The SMC clears manual fan control across suspend and the daemon never re-asserts it, silently. <code>sudo systemctl restart t2fanrd</code> restores control. Set up a post-resume restart so you don't have to remember.</p></details>
+      <details><summary>Can I set a minimum fan speed so the fans never sit at idle?</summary><p>Not in t2fanrd — there is no minimum-speed option (open feature request #13). The workarounds are lowering <code>low_temp</code> so the curve engages earlier, or <code>always_full_speed=true</code>, which is far too blunt for daily use. If a minimum speed matters to you, fancontrol is the better tool.</p></details>
+      <details><summary>Does it work on a MacBookPro15,1 (2018 15")?</summary><p>Known not to: the daemon exits with "Fan not found" on that model because its firmware doesn't expose the fan-identification keys t2fanrd reads (issue #17). Try the hwmon + fancontrol path instead.</p></details>
     </section>
 
-    <section id="related">
-      <h2>More Utilities apps on Omarchy</h2>
-      <ul><li><a href="/tzupdate-on-omarchy.html">tzupdate</a></li><li><a href="/vi-on-omarchy.html">vi</a></li><li><a href="/voxtype-bin-on-omarchy.html">voxtype</a></li><li><a href="/yay-on-omarchy.html">yay</a></li><li><a href="/zen-browser-bin-on-omarchy.html">zen-browser</a></li><li><a href="/apple-bcm-firmware-fetcher-on-omarchy.html">apple-bcm-firmware-fetcher</a></li></ul>
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/t2fanrd.html" target="_blank" rel="noopener">Omarchy App Store — t2fanrd package page (version, size, deps, license, added date)</a></li>
+        <li><a href="https://omarchyapps.com/t2fanrd-on-omarchy.html" target="_blank" rel="noopener">Omarchy App Store — auto-generated t2fanrd guide stub</a></li>
+        <li><a href="https://github.com/GnomedDev/t2fanrd" target="_blank" rel="noopener">t2fanrd project README (archived notice, hwmon note, config keys, speed curves, fork pointer)</a></li>
+        <li><a href="https://github.com/sharpenedblade/T2FanRD" target="_blank" rel="noopener">sharpenedblade/T2FanRD fork (maintained fork the Omarchy package version points to)</a></li>
+        <li><a href="https://github.com/GnomedDev/t2fanrd/issues/1" target="_blank" rel="noopener">Issue #1 — "Error: Cannot write to fan controller" (kernel/driver cause, no t2fanrd-side fix)</a></li>
+        <li><a href="https://github.com/GnomedDev/t2fanrd/issues/3" target="_blank" rel="noopener">Issue #3 — AMD GPU temperature ignored, CPU-only curve (Mac Pro 7,1)</a></li>
+        <li><a href="https://github.com/GnomedDev/t2fanrd/issues/13" target="_blank" rel="noopener">Issue #13 — feature request: per-fan minimum speed</a></li>
+        <li><a href="https://github.com/GnomedDev/t2fanrd/issues/16" target="_blank" rel="noopener">Issue #16 — fans stop responding after suspend, silent failure, Omarchy 4.0.4-1 report</a></li>
+        <li><a href="https://github.com/GnomedDev/t2fanrd/issues/17" target="_blank" rel="noopener">Issue #17 — "Fan not found" on MacBookPro15,1, firmware key limitation</a></li>
+        <li><a href="https://github.com/GnomedDev/t2fanrd/issues/20" target="_blank" rel="noopener">Issue #20 — daemon exits at boot when coretemp isn't loaded yet</a></li>
+        <li><a href="https://github.com/omacom/omarchy/issues/12393" target="_blank" rel="noopener">Omarchy issue #12393 — same suspend bug on MacBookAir8,2 (referenced in issue #16)</a></li>
+        <li><a href="https://deepwiki.com/t2linux/wiki/5-hardware-support" target="_blank" rel="noopener">t2linux wiki — hardware support, fan control requires t2fanrd</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
     </section>
 
   </article>
@@ -126,15 +260,15 @@
   <aside class="related-guides" aria-labelledby="related-guides-h">
     <h2 id="related-guides-h">Keep exploring</h2>
     <div class="related-guide-grid">
-<a class="related-guide" href="/tzupdate-on-omarchy.html"><strong>tzupdate on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/vi-on-omarchy.html"><strong>vi on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/voxtype-bin-on-omarchy.html"><strong>voxtype on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/apps/t2fanrd.html"><strong>t2fanrd package page</strong><span>Version, size, license and install command</span></a>
+<a class="related-guide" href="/apple-bcm-firmware-fetcher-on-omarchy.html"><strong>How to Install &amp; Use apple-bcm-firmware-fetcher on Omarchy (2026) — Fix Wi-Fi &amp; Bluetooth on T2 Macs</strong><span>Fix Wi-Fi and Bluetooth on your T2 Mac running Omarchy: install apple-bcm-firmware-fetcher with one command, pull the firmware from your macOS volume, verify it loaded, and fix the common failures (macOS wiped, APFS driver, FileVault, iMac models).</span></a>
+<a class="related-guide" href="/apple-t2-audio-config-on-omarchy.html"><strong>How to Install &amp; Use apple-t2-audio-config on Omarchy (2026) — Fix Sound on a T2 Mac</strong><span>Install apple-t2-audio-config on Omarchy with one command and get working speakers and mic on your T2 Mac. Reboot onto the linux-t2 kernel, pick the T2 output, and fix no-sound, silent-mic, and wrong-device problems.</span></a>
+<a class="related-guide" href="/best-apps-for-omarchy.html"><strong>Best Omarchy Apps (2026): 12 to Install First, With Commands</strong><span>The best apps for a new Omarchy setup, picked by job: files, notes, transfers, themes, video, coding and gaming. Each pick has its exact omarchy pkg add command.</span></a>
+<a class="related-guide" href="/collie-on-omarchy.html"><strong>How to Install &amp; Use Collie on Omarchy (2026)</strong><span>Install Collie, the self-hosted phone UI for terminal AI agents, on Omarchy with one command. Watch and approve Claude Code from your phone over Tailscale — plus real fixes for pairing, refused sends, and the update race.</span></a>
     </div>
   </aside>
 </main>
 
-<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
+<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">

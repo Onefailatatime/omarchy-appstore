@@ -1,0 +1,176 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add apple-bcm-firmware-fetcher` installs version 1-2 from Omarchy's repo, and that the store listing slug is `apple-bcm-firmware-fetcher`.
+- THE BIG ONE — what does the package actually install, and what command runs the fetcher? The package is only 9.3 KB download / 14.5 KB installed, far too small to contain the full t2linux firmware.sh (~70 KB), so it is a wrapper of some kind. On a real T2 install run `pacman -Ql apple-bcm-firmware-fetcher` and record the exact installed file(s) and the exact command to run (e.g. whether it installs a `apple-bcm-firmware-fetcher` binary, a script, or something else), whether it needs sudo, and whether it prompts to pick method 4 or runs it directly. Do NOT publish the guide until this is nailed down — the "run the fetcher" step below is written around `pacman -Ql` discovery for exactly this reason.
+- Does the fetcher need internet at run time? The wrapped firmware.sh method 4 installs the APFS driver on demand from the AUR (`linux-apfs-rw-dkms-git`, needs git + base-devel + kernel headers). Confirm whether the driver is already present on a standard Omarchy T2 install (e.g. shipped with the linux-t2 kernel or the Omarchy T2 ISO), or whether first run downloads and builds it — and whether that works over Ethernet/USB tethering when Wi-Fi is still down.
+- First run on a real dual-boot T2 Mac: confirm the fetcher finds the macOS APFS partition, copies firmware to `/lib/firmware/brcm`, reloads `brcmfmac`/`hci_bcm4377`, and that Wi-Fi appears afterwards (check `sudo journalctl -k --grep=brcmfmac` for the "Firmware: BCM4377/4 ..." line and a renamed `wlp1s0f0`-style interface).
+- Bluetooth after the run: confirm Bluetooth comes up too (`bluetoothctl` sees the controller), or record that it doesn't and what fixed it.
+- FileVault: confirm whether method 4 works when the macOS volume has FileVault on. The linux-apfs-rw driver has no encryption support, so this may fail — record the actual behaviour rather than assuming.
+- iMac19,1 / iMac19,2 / iMacPro1,1: confirm the fetcher refuses or fails on these models (the wiki says methods 4 and 5 do not work for them) and that the guide's warning is accurate.
+- macOS-wiped machine: confirm the fetcher fails cleanly with "Could not find location of firmware" (or equivalent) when there is no macOS volume, and that method 5 is the correct fallback.
+- Each "Common issue" below reproduces as described, and each fix works on a current install.
+- Comparison install commands: confirm `omarchy pkg add linux-t2`, `omarchy pkg add apple-t2-audio-config`, and `omarchy pkg add t2fanrd` all resolve (all three are in the store).
+- License: package is MIT (confirmed on store listing). The firmware itself is Apple's proprietary blob — confirm the guide's licensing note is worded right.
+- Version at publish time: check `pacman -Qi apple-bcm-firmware-fetcher` and note it; guide drafted against 1-2 (added to the official repo Nov 16, 2026).
+
+SEO notes:
+- URL: /guides/apple-bcm-firmware-fetcher-on-omarchy
+- Title tag: "How to Install & Use apple-bcm-firmware-fetcher on Omarchy (2026) — Fix Wi-Fi & Bluetooth on T2 Macs"
+- Meta description: "Fix Wi-Fi and Bluetooth on your T2 Mac running Omarchy: install apple-bcm-firmware-fetcher with one command, pull the firmware from your macOS volume, verify it loaded, and fix the common failures (macOS wiped, APFS driver, FileVault, iMac models)."
+- Keywords: apple-bcm-firmware-fetcher omarchy, t2 mac wifi linux, omarchy macbook wifi not working, t2linux firmware.sh method 4, brcmfmac firmware t2 mac, macbook pro wifi omarchy, t2 mac bluetooth linux
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>apple-bcm-firmware-fetcher on Omarchy</h2>
+      <p>apple-bcm-firmware-fetcher is a tiny one-shot tool for T2 Macs running Omarchy: it pulls the Wi-Fi and Bluetooth firmware for your Broadcom chip straight off the macOS install still on your disk, so your wireless works without ever booting back into macOS to run scripts by hand.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add apple-bcm-firmware-fetcher
+pacman -Ql apple-bcm-firmware-fetcher   # find the installed script — see note below
+sudo &lt;the installed fetcher script&gt;     # pick "Retrieve the firmware directly from macOS"</code></pre>
+      <p>It takes ~1 minute (9.3 KB download, 14.5 KB installed). Then run the fetcher once — it mounts your macOS volume, copies the firmware to <code>/lib/firmware/brcm</code>, and reloads the drivers.</p>
+      <p><strong>Exact run command — unverified, read this first.</strong> The store page documents the install command but not what to run afterwards, and no public PKGBUILD for this package could be found to check against. The package is far too small (14.5 KB installed) to contain the full t2linux <code>firmware.sh</code>, so it ships a wrapper of some kind. Until someone runs <code>pacman -Ql apple-bcm-firmware-fetcher</code> on a real T2 install and records the exact command, use that listing to find the script and run it with <code>sudo</code>, choosing option 2 ("Retrieve the firmware directly from macOS") when it asks. That is the top item on the verify checklist above.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>0. Before you run it — check you qualify.</h3>
+      <p>This tool only works if <strong>macOS is still on your disk</strong> (a dual-boot setup). It reads the firmware from your macOS volume; if you wiped macOS entirely, this package cannot help you — method 5 in the comparison table below is the only option then. It also does <strong>not</strong> work on iMac19,1, iMac19,2, or iMacPro1,1 (the wiki says methods 4 and 5 don't work for those models — you need methods 1–3). And you probably need <strong>internet on Linux</strong> for the first run: the fetcher needs an APFS driver to read the macOS volume, and if it isn't already installed it downloads and builds one — use Ethernet, USB tethering from your phone, or an external USB Wi-Fi adapter to get online first, since your built-in Wi-Fi is exactly what's broken.</p>
+      <p>Quick pre-flight checks:</p>
+      <pre><code class="language-bash">uname -r            # you should be on a linux-t2 kernel (see linux-t2 below)
+lsblk -o NAME,FSTYPE | grep -i apfs   # you should see an APFS partition (usually nvme0n1p2)</code></pre>
+      <h3>1. Install.</h3>
+      <p>One command from any terminal:</p>
+      <pre><code class="language-bash">omarchy pkg add apple-bcm-firmware-fetcher</code></pre>
+      <p>Confirm it landed: <code>pacman -Qi apple-bcm-firmware-fetcher</code> should show version 1-2.</p>
+      <h3>2. Run the fetcher.</h3>
+      <p>Find what it installed (<code>pacman -Ql apple-bcm-firmware-fetcher</code>), then run that script with <code>sudo</code> and choose <strong>option 2, "Retrieve the firmware directly from macOS"</strong>. Under the hood it does the t2linux wiki's method 4 for you:</p>
+      <ul>
+        <li>Loads the APFS driver (<code>linux-apfs-rw</code>) so Linux can read the macOS volume — installing it from the AUR first if it's missing, which is the step that needs internet and kernel headers.</li>
+        <li>Mounts the macOS APFS partition (it tries the volumes on your NVMe drive until it finds one containing <code>/usr/share/firmware</code>).</li>
+        <li>Extracts and renames the firmware for your exact chip (BCM4355, BCM4364, or BCM4377 — the script knows which files your model needs) and copies them to <code>/lib/firmware/brcm</code>.</li>
+        <li>Reloads the drivers: <code>brcmfmac</code> (Wi-Fi) and <code>hci_bcm4377</code> (Bluetooth).</li>
+      </ul>
+      <h3>3. Verify it worked.</h3>
+      <p>Check the kernel log for the firmware actually loading:</p>
+      <pre><code class="language-bash">sudo journalctl -k --grep=brcmfmac</code></pre>
+      <p>You want to see a line like <code>Firmware: BCM4377/4 wl0: ... version 16.20.328.0.3.6.105</code> and your interface renamed to something like <code>wlp1s0f0</code>. Don't panic about lines saying <code>Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,...bin failed with error -2</code> — the driver tries several board-specific filenames before it finds the right one, and the wiki's own example log is full of those -2 lines before the successful load. They only matter if <strong>no</strong> firmware line follows them. Then check Wi-Fi shows up (<code>ip link</code> should list a wireless interface) and Bluetooth (<code>bluetoothctl list</code> should show a controller). If nothing appears, a reboot is the cheap next step before digging into the issues below.</p>
+      <h3>The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>It's a one-shot tool, not an app.</strong> There is no window, no service, no config file, and nothing in <code>~/.config</code>. You run it once (and again after macOS updates — see below), it does its job, and it's done. If you want it gone afterwards, <code>omarchy pkg drop apple-bcm-firmware-fetcher</code> removes it; the firmware files it placed in <code>/lib/firmware/brcm</code> stay put, which is what you want.</li>
+        <li><strong>The firmware comes from YOUR macOS install.</strong> Apple doesn't license this firmware for redistribution, which is why there's no <code>linux-firmware</code> package for it and why this tool extracts it from the copy of macOS already on your machine. Keep a macOS partition around — even a small one — or the fetcher has nothing to read from.</li>
+        <li><strong>Re-run it after macOS updates.</strong> A macOS update can ship newer firmware files, and the files in <code>/lib/firmware/brcm</code> are just a snapshot of whatever macOS had when you last ran the fetcher. After a macOS update, run it again to pick up the new files, then reload the drivers (the script does that part for you).</li>
+      </ul>
+      <h3>Config location.</h3>
+      <p>None — this is a run-once script, not a service. Everything it produces lives in <code>/lib/firmware/brcm</code> (the firmware files themselves, e.g. <code>brcmfmac4377b3-pcie.bin</code>, <code>.clm_blob</code>, <code>.txt</code>, and Bluetooth <code>brcmbt*.bin</code>/<code>.ptb</code> files).</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>All of these come from the t2linux wiki's Wi-Fi/Bluetooth guide and the <code>firmware.sh</code> source itself — they are the project's documented failure modes, not guesses. Each one is still marked for on-machine confirmation in the checklist above.</p>
+      <h3>"Could not find location of firmware. Aborting!"</h3>
+      <p>The fetcher mounts the APFS volumes, finds no <code>/usr/share/firmware</code> anywhere, and gives up. The usual cause is that macOS is gone — you wiped the macOS partition when installing Linux, or the macOS volume is on a different disk than the script expects (it looks at the <code>nvme0n1</code> drive).</p>
+      <p><strong>Fix:</strong> Check whether a macOS volume exists at all:</p>
+      <pre><code class="language-bash">lsblk -o NAME,FSTYPE,SIZE | grep -i apfs</code></pre>
+      <p>If nothing shows up, macOS is gone and this package cannot work for you — the wiki is explicit: if you removed macOS after installing Linux, <strong>method 5 is the only option</strong>. That means running the full <code>firmware.sh</code> yourself and choosing "Download a macOS Recovery Image from Apple" (see the comparison table). If an APFS partition <em>does</em> show up but the fetcher still can't find the firmware, your macOS install may be too old or damaged — same fallback applies.</p>
+      <h3>The APFS driver won't install or load</h3>
+      <p>The fetcher needs the <code>linux-apfs-rw</code> kernel module to read the macOS volume, and it isn't installed. On Arch-based systems the script builds it from the AUR (<code>linux-apfs-rw-dkms-git</code>), which needs <code>git</code>, <code>base-devel</code>, kernel headers, and internet. If any of those is missing, the install fails with "APFS driver could not be loaded" and the script exits.</p>
+      <p><strong>Fix:</strong> Get online first (Ethernet or USB tethering — your built-in Wi-Fi can't help yet), then make sure the build tools and headers are present:</p>
+      <pre><code class="language-bash">sudo pacman -Sy --noconfirm git base-devel linux-t2-headers</code></pre>
+      <p>Then run the fetcher again. If it still fails, reboot and try once more — the wiki's own advice for a stubborn APFS install is to restart the Mac and run the script again. If the driver loads but the mount still fails and your macOS volume has <strong>FileVault</strong> turned on, that may be the wall: <code>linux-apfs-rw</code> has no encryption support, and T2 hardware-encrypted volumes can't be unlocked from Linux even with the recovery key (per the APFS driver docs and Arch forum reports on this exact scenario). <strong>Unverified for this package's flow</strong> — the wiki doesn't call FileVault out for method 4 — but if you hit it, the fallback is method 5 (Recovery image), which doesn't need to mount your disk at all.</p>
+      <h3>Wi-Fi works, but Bluetooth doesn't (or vice versa)</h3>
+      <p>One radio comes up and the other doesn't. The most common cause is the macOS version your firmware came from: on MacBookPro15,4, MacBookPro16,3, and MacBookAir9,1, Bluetooth firmware only exists on <strong>macOS Monterey or later</strong> — if your macOS install is older than Monterey, the script copies Wi-Fi firmware only and warns you about it. The other common cause is the Bluetooth driver simply not reloading after the files land.</p>
+      <p><strong>Fix:</strong> First, reload the Bluetooth driver by hand:</p>
+      <pre><code class="language-bash">sudo modprobe -r hci_bcm4377
+sudo modprobe hci_bcm4377</code></pre>
+      <p>Then check <code>bluetoothctl list</code> shows a controller. If it's still missing and your macOS is older than Monterey, update macOS to Monterey or later and re-run the fetcher — or use method 5 with a Monterey-or-later Recovery image, which the wiki says gives complete firmware files. If Wi-Fi is the one that's missing instead, reload its driver the same way (<code>sudo modprobe -r brcmfmac &amp;&amp; sudo modprobe brcmfmac</code>) and check the journal (<code>sudo journalctl -k --grep=brcmfmac</code>) for the firmware line.</p>
+      <h3>Firmware loads, but Wi-Fi still won't connect</h3>
+      <p>The firmware is in place, the interface exists, networks appear — but connecting fails even with the right password. This is a known regression, not a firmware problem: since <strong>wpa_supplicant 2.11</strong>, Wi-Fi on Broadcom chips is broken. The t2linux wiki flags it at the top of the Wi-Fi guide.</p>
+      <p><strong>Fix:</strong> Switch your Wi-Fi backend to <code>iwd</code>, or disable offloading by adding <code>brcmfmac.feature_disable=0x82000</code> to your kernel parameters. The wiki notes this currently affects Arch Linux and EndeavourOS. Also check you're not using the <code>broadcom-wl</code> driver — the wiki is blunt about this: <code>broadcom-wl</code> is <strong>not</strong> the driver for these Macs, <code>brcmfmac</code> (in the kernel) is the only one that supports them, and a lot of "Wi-Fi not working" reports turn out to be people on <code>broadcom-wl</code>. If you installed it, remove it.</p>
+      <h3>The fetcher does nothing on an iMac19,1, iMac19,2, or iMacPro1,1</h3>
+      <p>You're on one of these three models and method 4 silently can't work for you. The wiki states it plainly: for iMac19,1, iMac19,2, and iMacPro1,1, methods 4 and 5 will not work — you must choose a method from 1–3. (These are the non-T2 iMacs the guide also covers, and their firmware needs extra NVRAM/TxCap files the direct-from-macOS path doesn't fetch.)</p>
+      <p><strong>Fix:</strong> Don't fight the fetcher — use the full <code>firmware.sh</code> instead. Boot into macOS, download the script from the wiki, run it there, and pick method 1 (copy firmware to the EFI partition), method 2 (tarball), or method 3 (build a Linux package). Method 1 needs no extra software on macOS, so it's the simplest if you don't want to install Homebrew tools. Full steps are in the wiki guide linked in Sources.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/linux-t2.html">linux-t2</a> — the T2 kernel and modules this firmware is <em>for</em>; without the T2 kernel's <code>brcmfmac</code> support the firmware has nothing to load into, so install the kernel first if you haven't. <a href="https://omarchyapps.com/apps/apple-t2-audio-config.html">apple-t2-audio-config</a> — the ALSA config for the T2 audio driver, the next "why doesn't my hardware work" fix after Wi-Fi. <a href="https://omarchyapps.com/apps/t2fanrd.html">t2fanrd</a> — fan control for T2 Macs, since a Linux install with no fan curve will cook itself quietly while you're celebrating the Wi-Fi working.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>The full <code>firmware.sh</code> from the t2linux wiki, run by hand — same script, all five methods, including the ones this package doesn't cover (EFI copy, tarball, package build, Recovery image download). It's the fallback for every case above where this package can't help: macOS wiped, iMac19,1/19,2/iMacPro1,1, or FileVault trouble. Or a $10–15 USB Wi-Fi adapter as a stopgap while you sort the firmware out — it gets you online for the APFS driver download, and it's the thing the wiki itself suggests keeping handy.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: the five firmware methods (t2linux guide)</h2>
+      <p>This package is method 4 only. The other four are what you fall back to when method 4 can't work.</p>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Method 4 — this package</th><th>Method 1 — EFI partition</th><th>Method 2 — tarball</th><th>Method 3 — Linux package</th><th>Method 5 — Recovery image</th></tr></thead>
+          <tbody>
+            <tr><td>Needs macOS still on disk</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td><strong>No</strong></td></tr>
+            <tr><td>Steps to do in macOS first</td><td>None</td><td>Yes (run script in macOS)</td><td>Yes (run script in macOS)</td><td>Yes (run script in macOS)</td><td>None</td></tr>
+            <tr><td>Internet needed on Linux</td><td>Maybe (APFS driver install)</td><td>No</td><td>No</td><td>No</td><td>Yes (downloads Recovery image)</td></tr>
+            <tr><td>Works if macOS was wiped</td><td>No</td><td>No</td><td>No</td><td>No</td><td><strong>Yes — the only one</strong></td></tr>
+            <tr><td>Works on iMac19,1 / 19,2 / iMacPro1,1</td><td>No</td><td><strong>Yes</strong></td><td><strong>Yes</strong></td><td><strong>Yes</strong></td><td>No</td></tr>
+            <tr><td>macOS version needed</td><td>Any (Bluetooth needs Monterey+ for some models)</td><td>Any</td><td>Any</td><td>Any</td><td>Monterey–Sonoma for complete firmware</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add apple-bcm-firmware-fetcher</code></td><td>Manual (<code>firmware.sh</code> from the wiki)</td><td>Manual</td><td>Manual</td><td>Manual</td></tr>
+            <tr><td>Best for</td><td>Dual-boot T2 Macs — the lazy path</td><td>No extra software on macOS; keeps a reusable copy on EFI</td><td>Simplest manual path if you're comfortable with tar</td><td>Cleanest if you reinstall often</td><td>macOS already gone</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If macOS is still on your disk and you're on a T2 Mac (not one of the three iMacs), this package is the obvious pick — it's the same script the wiki tells you to run, minus the manual download and the menu. If macOS is gone, skip it entirely and go straight to method 5. If you're on iMac19,1/19,2/iMacPro1,1, methods 1–3 are your only options.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>There is no paid product to replace here</h2>
+      <p><strong>There is no paid product to replace here, and the guide won't pretend otherwise.</strong> The firmware is Apple's proprietary blob — you already own it as part of the Mac you bought, and this package just extracts it from your own disk instead of making you run the wiki's script by hand. The honest framing is time, not money: the manual path (download <code>firmware.sh</code>, read the wiki, pick a method, build an APFS driver from the AUR) is free too, and it works fine — this package just compresses it into one install command and one run. What you give up for that convenience: the other four methods. If method 4 can't work for your machine, the manual script is the answer, not a different app.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the apple-bcm-firmware-fetcher package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/apple-bcm-firmware-fetcher.html">View apple-bcm-firmware-fetcher →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does apple-bcm-firmware-fetcher work on Omarchy?</summary><p>Yes — it's in the official Omarchy repo as <code>apple-bcm-firmware-fetcher</code> (version 1-2, added Nov 16, 2026) and installs with one command: <code>omarchy pkg add apple-bcm-firmware-fetcher</code>. It's a 9.3 KB download. Note the exact command to <em>run</em> after installing is still unverified (see the TL;DR note) — use <code>pacman -Ql apple-bcm-firmware-fetcher</code> to find the installed script.</p></details>
+      <details><summary>What if I erased macOS entirely?</summary><p>This package can't help you — it reads firmware from the macOS volume on your disk, and there's nothing to read. Use method 5 from the t2linux wiki: run the full <code>firmware.sh</code> and choose "Download a macOS Recovery Image from Apple", picking a macOS version between Monterey and Sonoma for complete firmware files. You'll need internet on Linux (Ethernet or USB tethering).</p></details>
+      <details><summary>Is the firmware free / open source?</summary><p>The <em>package</em> is MIT-licensed and free. The <em>firmware</em> is not open source — it's Apple's proprietary Broadcom firmware, and the reason this tooling exists is that Apple doesn't redistribute it. You extract it from the macOS install you already own, which is the arrangement the t2linux project documents. Don't go looking for a downloadable firmware package for these chips; that's the whole point of the fetcher.</p></details>
+      <details><summary>Do I need internet to run it?</summary><p>Possibly. The fetcher needs an APFS driver to read the macOS volume, and if it isn't already on your system the script installs it from the AUR — which needs internet, <code>git</code>, <code>base-devel</code>, and kernel headers. If your T2 install already has the driver (e.g. it shipped with your install media), no internet is needed. Either way, have Ethernet or phone USB tethering ready before you start, since built-in Wi-Fi is down until the firmware lands.</p></details>
+      <details><summary>Does it work on Apple Silicon Macs?</summary><p>No. This is for Intel Macs with the T2 security chip (2018–2020 MacBook Pro/Air, Mac mini, iMac Pro, and related models), plus the iMac19,1/19,2 exceptions — which, confusingly, this method does <em>not</em> cover. Apple Silicon Macs are a different project entirely (Asahi Linux) and this package is irrelevant there.</p></details>
+      <details><summary>Why is there no app icon or window?</summary><p>Because there's nothing to launch — it's a run-once script, not a program. Install it, run it, confirm Wi-Fi works, and optionally remove it (<code>omarchy pkg drop apple-bcm-firmware-fetcher</code>). The firmware files stay in <code>/lib/firmware/brcm</code> either way.</p></details>
+      <details><summary>Do I have to re-run it after updates?</summary><p>After a <strong>macOS</strong> update, yes — re-run it so <code>/lib/firmware/brcm</code> picks up any newer firmware macOS shipped. After a <strong>Linux kernel</strong> update, no — the firmware files persist, though a reboot is needed for the new kernel to load them. If Wi-Fi breaks after a kernel update, reload the modules (<code>sudo modprobe -r brcmfmac &amp;&amp; sudo modprobe brcmfmac</code>) before assuming the firmware is gone.</p></details>
+      <details><summary>How do I uninstall it?</summary><p><code>omarchy pkg drop apple-bcm-firmware-fetcher</code>. That removes the fetcher script; it does not remove the firmware files from <code>/lib/firmware/brcm</code>, so your Wi-Fi keeps working.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/apple-bcm-firmware-fetcher.html" target="_blank" rel="noopener">Omarchy App Store — apple-bcm-firmware-fetcher package page (version 1-2, size, deps, license, added date)</a></li>
+        <li><a href="https://omarchyapps.com/apple-bcm-firmware-fetcher-on-omarchy.html" target="_blank" rel="noopener">Omarchy App Store — auto-generated apple-bcm-firmware-fetcher guide stub</a></li>
+        <li><a href="https://omarchyapps.com/catalog/v1.json" target="_blank" rel="noopener">Omarchy App Store — catalog feed, 218 apps (checked 2026-11-17)</a></li>
+        <li><a href="https://wiki.t2linux.org/guides/wifi-bluetooth/" target="_blank" rel="noopener">t2linux wiki — Wi-Fi and Bluetooth guide (methods 1–5, wpa_supplicant 2.11 regression, broadcom-wl warning, iMac19,1/19,2/iMacPro1,1 limits, testing with journalctl)</a></li>
+        <li><a href="https://raw.githubusercontent.com/t2linux/wiki/0a60cf22516c49a445c5edd1b3910f158dbc92f5/docs/tools/firmware.sh" target="_blank" rel="noopener">t2linux firmware.sh source (method 4: APFS driver install via AUR, mount vols 0–5, rename + extract to /lib/firmware/brcm, driver reload; chips C-4355/C-4364/C-4377)</a></li>
+        <li><a href="https://linuxvox.com/blog/apfs-linux/" target="_blank" rel="noopener">APFS on Linux guide — linux-apfs-rw has no encryption support</a></li>
+        <li><a href="https://www.dotlinux.net/blog/how-to-mount-apfs-on-linux-or-windows/" target="_blank" rel="noopener">How to mount APFS on Linux or Windows — T2 hardware-encrypted volumes cannot be unlocked from Linux</a></li>
+        <li><a href="https://bbs.archlinux.org/viewtopic.php?pid=1978738" target="_blank" rel="noopener">Arch Linux Forums — T2 encrypted volumes not supported even with the recovery key</a></li>
+        <li><a href="https://git.zacharyzhang.com/ZacharyZhang-NY/omarchy-pkgs" target="_blank" rel="noopener">Omarchy package repo (recipes live under pkgbuilds/&lt;package&gt;/; no public PKGBUILD for this package was found — hence the unverified run command)</a></li>
+        <li><a href="https://omarchyapps.com/apps/linux-t2.html" target="_blank" rel="noopener">Sibling T2 apps in the store: linux-t2</a></li>
+        <li><a href="https://omarchyapps.com/apps/apple-t2-audio-config.html" target="_blank" rel="noopener">Sibling T2 apps in the store: apple-t2-audio-config</a></li>
+        <li><a href="https://omarchyapps.com/apps/t2fanrd.html" target="_blank" rel="noopener">Sibling T2 apps in the store: t2fanrd</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

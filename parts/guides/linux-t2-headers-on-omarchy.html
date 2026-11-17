@@ -1,0 +1,174 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add linux-t2-headers` installs version 1:7.2.15.arch1-1 from Omarchy's repo, and that the store listing slug is `linux-t2-headers`.
+- Version match: confirm `pacman -Qi linux-t2-headers` and `pacman -Qi linux-t2` report the same version (1:7.2.15.arch1-1), and that `uname -r` on a booted linux-t2 kernel matches that version string.
+- Build directory: confirm `/usr/lib/modules/$(uname -r)/build` exists after install and resolves to the installed headers (not a dangling symlink).
+- DKMS end-to-end: install a DKMS module that needs these headers (e.g. `macbook12-spi-driver-dkms`, which is in the store) on a linux-t2 boot and confirm `dkms status` shows it built for the running kernel.
+- Mismatch repro: after a `linux-t2` kernel update without a headers update, confirm the DKMS failure described below reproduces, and that updating `linux-t2-headers` + rebooting fixes it.
+- Wrong-kernel repro: boot the stock Omarchy kernel (`linux-omarchy`) with only `linux-t2-headers` installed and confirm a DKMS build fails against the wrong tree, as described below.
+- Missing-toolchain repro: confirm a DKMS build still fails without `base-devel` even with headers installed, and succeeds once it is installed.
+- Sizes: confirm the 92.2 MB download / 340.8 MB installed figures from the store listing against `pacman -Qi linux-t2-headers`.
+- Comparison install commands: confirm `omarchy pkg add linux-omarchy-headers` and `omarchy pkg add linux-omarchy-eevdf-headers` both resolve (both are in the store catalog).
+- License: GPL-2.0-only (confirmed on the store listing). Free, no paid tier exists.
+- Upstream link correction: the store catalog lists the homepage as https://github.com/archlinux/linux, and https://github.com/t2linux/linux returns a 404. Confirm which repo the store intends, and whether the Arch T2 kernel source is actually https://github.com/NoaHimesaka1873/linux-t2-arch.
+- Version at publish time: check `pacman -Qi linux-t2-headers` and note it; guide drafted against 1:7.2.15.arch1-1 (added to the official repo Nov 16, 2026).
+
+SEO notes:
+- URL: /guides/linux-t2-headers-on-omarchy
+- Title tag: "How to Install & Use linux-t2-headers on Omarchy (2026) — Build Kernel Modules for the T2 Kernel"
+- Meta description: "Install linux-t2-headers on Omarchy with one command. What kernel headers are, when a T2 Mac actually needs them, how to verify the build directory, and fixes for DKMS missing-headers and version-mismatch errors."
+- Keywords: linux-t2-headers omarchy, t2 mac kernel headers, dkms missing kernel headers, linux-t2 headers, build kernel module t2 mac, omarchy t2 mac, /usr/lib/modules build missing
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>linux-t2-headers on Omarchy</h2>
+      <p>linux-t2-headers is the build kit for the Linux-for-T2-Macs kernel — the headers and scripts you need to compile out-of-tree kernel modules (DKMS drivers and the like) against <code>linux-t2</code> on a T2 Mac running Omarchy. It is a niche developer package: most T2 Mac users will never touch it directly.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add linux-t2-headers</code></pre>
+      <p>It takes ~2 minutes (92.2 MB download, 340.8 MB installed). You only need it if you build kernel modules — if you just run Omarchy on your T2 Mac, skip it.</p>
+      <p><strong>Be honest about what this is:</strong> this package does nothing visible. There is no app to open, no window, no config file, no service. It drops header files and build scripts onto your disk so a compiler can build modules against your kernel. If that sentence meant nothing to you, you almost certainly don't need this package — and that's fine.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Confirm you're actually running the T2 kernel.</h3>
+      <p>These headers are only useful if your running kernel is <code>linux-t2</code>. Check first:</p>
+      <pre><code class="language-bash">uname -r</code></pre>
+      <p>You should see a version string matching the <code>linux-t2</code> package (1:7.2.15.arch1-1 at the time of writing — the version after the <code>1:</code> epoch, e.g. <code>7.2.15-arch1-1-t2</code> style naming; confirm the exact string on your machine). If <code>uname -r</code> shows the stock Omarchy kernel instead, these headers are the wrong ones for the kernel you're booted into — install <code>linux-omarchy-headers</code> for that kernel, or boot <code>linux-t2</code> (see "Common issues" below).</p>
+      <h3>2. Install the headers and the kernel together.</h3>
+      <p>The headers are useless without the kernel they belong to, and the kernel update and the headers update must move in lockstep:</p>
+      <pre><code class="language-bash">omarchy pkg add linux-t2 linux-t2-headers</code></pre>
+      <h3>3. Verify the build directory exists.</h3>
+      <p>DKMS and manual module builds look for the kernel build tree at <code>/usr/lib/modules/$(uname -r)/build</code>. Confirm it's there and resolves to a real directory:</p>
+      <pre><code class="language-bash">ls -ld /usr/lib/modules/$(uname -r)/build
+readlink -f /usr/lib/modules/$(uname -r)/build</code></pre>
+      <p>If that path is missing or the symlink dangles, module builds will fail before they start — see the first issue below.</p>
+      <h3>The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Headers must match the running kernel exactly.</strong> A module is compiled against one specific kernel build. Headers for any other version — even one point release off — won't work. After every <code>linux-t2</code> update, update <code>linux-t2-headers</code> too, then reboot into the new kernel before building anything.</li>
+        <li><strong>Headers alone change nothing about your hardware.</strong> Wi-Fi, audio, the Touch Bar, and fan control come from the kernel (<code>linux-t2</code>) plus the firmware and config packages — not from this package. Installing the headers will not fix a broken trackpad or silent speakers.</li>
+        <li><strong>You also need a compiler toolchain.</strong> The headers are just files; something has to compile against them. On Arch that means <code>base-devel</code> (gcc, make, and friends) plus <code>dkms</code> if you're using DKMS modules. The headers package itself only pulls in binutils, glibc, libelf, libgcc, openssl, pahole, xxhash, zlib, and zstd.</li>
+      </ul>
+      <h3>Config location.</h3>
+      <p>There is none — this is not an app. The files it installs live under <code>/usr/lib/modules/&lt;kernel-version&gt;/build</code>. Nothing to configure, nothing to launch.</p>
+      <p><strong>Practical notes:</strong> A concrete example of when you'd need this: you want to build a DKMS driver that isn't in the kernel — for example <code>macbook12-spi-driver-dkms</code> (keyboard/touchpad/Touch Bar driver for newer MacBooks, in the Omarchy store). That package ships source code, and DKMS compiles it on your machine against your running kernel. Without <code>linux-t2-headers</code>, that compile has no kernel headers to build against and fails immediately. With them, <code>dkms autoinstall</code> builds the module and it loads at boot. On Omarchy, <code>omarchy-update</code> upgrades the headers with the rest of the system — but remember to reboot into the new kernel before rebuilding modules. To remove the package: <code>omarchy pkg drop linux-t2-headers</code> (any DKMS modules already built keep working until the next kernel update, when they will fail to rebuild).</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <p>All of these come from DKMS and kernel-headers troubleshooting guides and the t2linux wiki's kernel build docs — they are documented failure modes for this exact class of package, not guesses. Each one is still marked for on-machine confirmation in the checklist above, because none of them was reproduced on a real T2 Mac for this draft.</p>
+      <h3>DKMS build fails — "missing kernel headers"</h3>
+      <p>You try to build a DKMS module and get an error like <code>ERROR: Missing kernel headers for module &lt;name&gt;/&lt;version&gt;</code>, or the build dies on the first <code>#include</code>. The headers for your running kernel aren't installed, so <code>/lib/modules/$(uname -r)/build</code> points at a directory that doesn't exist.</p>
+      <p><strong>Fix:</strong> Install the headers for the kernel you're actually running — for the T2 kernel, that's this package:</p>
+      <pre><code class="language-bash">omarchy pkg add linux-t2-headers</code></pre>
+      <p>Then verify the build directory resolves, and retry the build:</p>
+      <pre><code class="language-bash">ls -ld /usr/lib/modules/$(uname -r)/build
+sudo dkms autoinstall</code></pre>
+      <p>If you just updated the kernel, reboot first — the headers match the <em>new</em> kernel, but you're still booted into the old one, and DKMS builds against the running kernel's version.</p>
+      <h3>Headers and kernel versions don't match after an update</h3>
+      <p>A kernel update lands, you reboot, and a DKMS module that used to build now fails — or <code>dkms status</code> shows the module built for the old kernel but missing for the new one. The kernel and the headers updated out of step, so the headers on disk belong to a different kernel version than the one you booted.</p>
+      <p><strong>Fix:</strong> Update both packages together and reboot, then rebuild:</p>
+      <pre><code class="language-bash">omarchy pkg add linux-t2 linux-t2-headers
+# reboot into the new kernel
+sudo dkms autoinstall
+dkms status</code></pre>
+      <p><code>dkms status</code> lists every module with the kernels it was built for — the kernel with no line next to the module name is the one whose build failed. The general rule, from the DKMS guides: always install the headers matching your exact kernel version, using <code>$(uname -r)</code> for precision, and verify with <code>ls /lib/modules/$(uname -r)/build</code> afterwards.</p>
+      <h3>You installed the headers, but you're booted into the wrong kernel</h3>
+      <p>You have <code>linux-t2-headers</code> installed, but <code>uname -r</code> shows the stock Omarchy kernel (<code>linux-omarchy</code>), and DKMS still fails. Headers are per-kernel: <code>linux-t2-headers</code> only builds modules for <code>linux-t2</code>. A machine with several kernels installed needs the headers package for each kernel it actually boots — a DKMS module only builds for kernels whose headers are present.</p>
+      <p><strong>Fix:</strong> Either boot the T2 kernel (pick <code>linux-t2</code> in your bootloader), or install the headers for the kernel you're actually running:</p>
+      <pre><code class="language-bash">uname -r
+omarchy pkg add linux-omarchy-headers   # if you're on the stock Omarchy kernel</code></pre>
+      <p>Check which kernel packages you have installed with <code>pacman -Q | grep -E '^linux'</code>, and match the headers package to the kernel in <code>uname -r</code> before blaming the module.</p>
+      <h3>Headers installed, but the DKMS build still fails</h3>
+      <p>The build directory exists, the versions match, and the build still errors out — usually on a missing compiler or a missing tool (<code>gcc: command not found</code>, <code>make: command not found</code>, or a missing <code>bc</code>/<code>pahole</code>/<code>libelf</code>). The headers are only half the build environment; the t2linux wiki's own kernel-build guide lists <code>bc kmod libelf pahole cpio perl tar xz git</code> as required on Arch systems, and a DKMS build needs the compiler toolchain on top of that.</p>
+      <p><strong>Fix:</strong> Install the toolchain and DKMS itself, then retry:</p>
+      <pre><code class="language-bash">omarchy pkg add base-devel dkms
+sudo dkms autoinstall</code></pre>
+      <p>If the failure persists, read the first compiler error in the DKMS build log — not the summary at the bottom:</p>
+      <pre><code class="language-bash">sudo grep -n -m 5 'error:' /var/lib/dkms/&lt;module&gt;/&lt;version&gt;/build/make.log</code></pre>
+      <p>A stale entry can also be the culprit: old kernel references cause phantom errors, so if <code>dkms status</code> shows a module stuck on a kernel you no longer run, remove that entry (<code>sudo dkms remove &lt;module&gt;/&lt;version&gt; --all</code>) and rebuild.</p>
+      <h3>You installed the headers expecting your T2 hardware to start working</h3>
+      <p>Wi-Fi, Bluetooth, audio, or the Touch Bar still don't work after installing <code>linux-t2-headers</code>. That's expected — this package contains no drivers, no firmware, and no hardware support of any kind. It's the <em>build kit</em> for the kernel, not the kernel.</p>
+      <p><strong>Fix:</strong> Install the pieces that actually drive the hardware: the kernel itself (<code>omarchy pkg add linux-t2</code>), then the sibling T2 packages — <code>apple-bcm-firmware-fetcher</code> pulls Wi-Fi/Bluetooth firmware from your on-disk macOS volume, <code>apple-t2-audio-config</code> supplies the ALSA config for the t2bce audio driver, and <code>t2fanrd</code> runs the fans. The t2linux wiki is explicit that distro-specific guides are the right path and that hardware support comes from the patched kernel plus those firmware/config packages, pre-installed in the distro ISOs. Headers only matter once you want to compile something extra on top.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/linux-t2.html">linux-t2</a> — the kernel these headers belong to; install them as a pair and update them as a pair. <a href="https://omarchyapps.com/apps/apple-bcm-firmware-fetcher.html">apple-bcm-firmware-fetcher</a> — Wi-Fi/Bluetooth firmware for T2 Macs, pulled from your macOS volume. <a href="https://omarchyapps.com/apps/apple-t2-audio-config.html">apple-t2-audio-config</a> — ALSA config for the t2bce audio driver. <a href="https://omarchyapps.com/apps/t2fanrd.html">t2fanrd</a> — the fan-control daemon for T2 Macs. And <code>dkms</code> plus <code>base-devel</code> — the tools that actually do the building once the headers are in place.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Nothing — there is no alternative to matching headers. If you run a different kernel, you need <em>that</em> kernel's headers instead (<code>linux-omarchy-headers</code> for the stock Omarchy kernel, <code>linux-omarchy-eevdf-headers</code> for the EEVDF variant). The only real alternative to installing the package is building the kernel yourself from source, which the t2linux wiki prices at 2–3 hours and ~20 GB of disk — see "Free-alternative angle" below.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: linux-t2-headers vs linux-omarchy-headers vs linux-omarchy-eevdf-headers</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>linux-t2-headers</th><th>linux-omarchy-headers</th><th>linux-omarchy-eevdf-headers</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (GPL-2.0-only)</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Building modules against the T2-patched kernel on a 2018–2020 Mac</td><td>Building modules against the stock Omarchy kernel (BORE/ADIOS schedulers)</td><td>Building modules against the Omarchy EEVDF-scheduler kernel</td></tr>
+            <tr><td>For kernel</td><td><code>linux-t2</code> (1:7.2.15.arch1-1)</td><td><code>linux-omarchy</code></td><td><code>linux-omarchy-eevdf</code></td></tr>
+            <tr><td>Download / installed</td><td>92.2 MB / 340.8 MB</td><td>(check <code>pacman -Si</code> at publish time)</td><td>(check <code>pacman -Si</code> at publish time)</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add linux-t2-headers</code></td><td><code>omarchy pkg add linux-omarchy-headers</code></td><td><code>omarchy pkg add linux-omarchy-eevdf-headers</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> There is no "best" headers package — there is only the one that matches the kernel you boot. Run <code>uname -r</code>, then install the headers for that kernel. On a T2 Mac booted into <code>linux-t2</code>, that is this package; on any other Omarchy machine, it is one of the other two. Installing the wrong one is the single most common mistake with headers packages.</p>
+      <p><strong>Note on the plain <code>linux-headers</code> package:</strong> Arch's stock <code>linux-headers</code> (for the vanilla Arch <code>linux</code> kernel) is <em>not</em> a store listing — a search of the store catalog (218 apps, Nov 17, 2026) finds no <code>linux-headers</code> app. If you're on the vanilla Arch kernel you'd install it from the Arch repos with pacman, but on Omarchy you should be on one of the kernels above, with its matching headers package.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Installing this package is the free, instant alternative to compiling the T2 kernel yourself</h2>
+      <p><strong>There is no paid product here to replace — the headers are free, and so is every alternative. The honest comparison is against the do-it-yourself route: installing this package is the free, instant alternative to compiling the T2 kernel yourself.</strong> The t2linux wiki's kernel guide has you cloning <code>t2linux/linux-t2-patches</code>, downloading the kernel source from kernel.org, applying the patches, configuring with <code>make olddefconfig</code>, and building with <code>make -j$(nproc)</code> — a 2–3 hour build needing ~20 GB of disk, plus the <code>bc kmod libelf pahole cpio perl tar xz git</code> prerequisites. The prebuilt <code>linux-t2</code> + <code>linux-t2-headers</code> pair gives you the same patched kernel and the same build tree in one ~2 minute install. What you give up: the ability to tweak the kernel config before building (custom options, extra drivers built in). What you keep: a working T2 kernel and a build tree DKMS can compile against. If you later decide you do need a custom config, the headers package is still the starting point — you build against it, you don't replace it.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the linux-t2-headers package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/linux-t2-headers.html">View linux-t2-headers →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Do I need linux-t2-headers if I just run Omarchy on a T2 Mac?</summary><p>No. You only need it if you build kernel modules — DKMS drivers, out-of-tree modules, or your own module code. Normal use, including Wi-Fi, audio, and the Touch Bar, works (or doesn't) based on the <code>linux-t2</code> kernel and the firmware/config packages, not the headers. If nobody has ever asked you to "install the kernel headers," don't install them: 340.8 MB of disk for a package you'll never use.</p></details>
+      <details><summary>What does this package actually install?</summary><p>The C header files and build scripts for the <code>linux-t2</code> kernel, landing in the kernel build tree at <code>/usr/lib/modules/&lt;kernel-version&gt;/build</code> (confirm the exact path on a real install — see the checklist). It also pulls in 9 dependencies: binutils, glibc, libelf, libgcc, openssl, pahole, xxhash, zlib, and zstd. There is no binary to run, no desktop entry, and no config file.</p></details>
+      <details><summary>Do I need to reboot after installing it?</summary><p>Not for the headers alone. But if you also updated the <code>linux-t2</code> kernel, reboot into the new kernel before building anything — DKMS builds against the <em>running</em> kernel, and headers for a kernel you haven't booted yet won't help.</p></details>
+      <details><summary>Can I install headers for more than one kernel?</summary><p>Yes — and you should, if you boot more than one kernel. Each kernel needs its own headers package (<code>linux-t2-headers</code> for <code>linux-t2</code>, <code>linux-omarchy-headers</code> for <code>linux-omarchy</code>). DKMS builds a module separately for every kernel whose headers are present.</p></details>
+      <details><summary>How do I uninstall it?</summary><p><code>omarchy pkg drop linux-t2-headers</code>. Modules you already built keep working until the next kernel update, when DKMS will fail to rebuild them without the headers.</p></details>
+      <details><summary>Is linux-t2-headers free?</summary><p>Yes. GPL-2.0-only, no paid tier, no account. The Omarchy package is a 92.2 MB download and 340.8 MB installed.</p></details>
+      <details><summary>Where does the T2 kernel itself come from?</summary><p>The T2 patches come from the community t2linux project (<code>t2linux/linux-t2-patches</code> on GitHub, plus the wiki at wiki.t2linux.org); the Arch T2 kernel packaging is maintained at <code>NoaHimesaka1873/linux-t2-arch</code>. One correction worth flagging: the store catalog lists the homepage as <code>github.com/archlinux/linux</code>, and <code>github.com/t2linux/linux</code> (sometimes cited as the upstream) returns a 404 — the checklist asks Jessyka to confirm which repo the store intends.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/linux-t2-headers.html" target="_blank" rel="noopener">Omarchy App Store — linux-t2-headers package page (version, size, deps, license, added date)</a></li>
+        <li><a href="https://omarchyapps.com/linux-t2-headers-on-omarchy.html" target="_blank" rel="noopener">Omarchy App Store — auto-generated linux-t2-headers guide stub</a></li>
+        <li><a href="https://omarchyapps.com/catalog/v1.json" target="_blank" rel="noopener">Omarchy App Store — catalog feed, generated 2026-11-17T14:00:50+00:00, 218 apps (linux-t2-headers entry, linux-omarchy-headers / linux-omarchy-eevdf-headers entries, no linux-headers app)</a></li>
+        <li><a href="https://omarchyapps.com/apps/linux-t2.html" target="_blank" rel="noopener">Omarchy App Store — linux-t2 package page (kernel version, size, deps)</a></li>
+        <li><a href="https://omarchyapps.com/apps/apple-bcm-firmware-fetcher.html" target="_blank" rel="noopener">Omarchy App Store — apple-bcm-firmware-fetcher package page</a></li>
+        <li><a href="https://omarchyapps.com/apps/apple-t2-audio-config.html" target="_blank" rel="noopener">Omarchy App Store — apple-t2-audio-config package page</a></li>
+        <li><a href="https://omarchyapps.com/apps/t2fanrd.html" target="_blank" rel="noopener">Omarchy App Store — t2fanrd package page</a></li>
+        <li><a href="https://wiki.t2linux.org/" target="_blank" rel="noopener">t2linux wiki — home (T2 hardware, distro guides, kernel-module repos)</a></li>
+        <li><a href="https://wiki.t2linux.org/guides/kernel/" target="_blank" rel="noopener">t2linux wiki — Kernel guide (build requirements, patching, 2–3 hour build, ~20 GB disk, t2bce config)</a></li>
+        <li><a href="https://deepwiki.com/t2linux/wiki/3.2-post-installation-configuration" target="_blank" rel="noopener">t2linux wiki — post-installation configuration (Arch kernel source: NoaHimesaka1873/linux-t2-arch; patches: t2linux/linux-t2-patches)</a></li>
+        <li><a href="https://copyprogramming.com/howto/building-kernel-module-using-dkms-missing-headers" target="_blank" rel="noopener">DKMS missing-headers guide (missing-headers error, /lib/modules build symlink, version matching, per-kernel headers)</a></li>
+        <li><a href="https://www.ssdnodes.com/learn/nvidia-dkms-build-fails-on-new-kernel" target="_blank" rel="noopener">DKMS build-failure guide (build log location, first-error diagnosis, headers/kernel matching)</a></li>
+        <li><a href="https://copyprogramming.com/howto/your-kernel-headers-are-incomplete-not-installed" target="_blank" rel="noopener">Kernel headers incomplete guide (per-kernel headers requirement, version mismatch examples)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>
