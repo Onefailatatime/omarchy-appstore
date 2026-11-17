@@ -25,8 +25,8 @@
   "v": 4
  },
  "apps/1password.html": {
-  "date": "2026-11-10",
-  "hash": "eed2c246bc600d829de23760248d0ef520e203903f7416ad2eeb32d5a5ad9da7",
+  "date": "2026-11-17",
+  "hash": "02992cc694702b63635efdb531d6ca6f7f9884fb782ffbb8bbd38592354f6a7e",
   "v": 4
  },
  "apps/aether.html": {
@@ -35,8 +35,8 @@
   "v": 4
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-16",
-  "hash": "056d1af1cd6b8b8611673b8b77949437d781eeafd9fd2935a82236f8d035fc3a",
+  "date": "2026-11-17",
+  "hash": "77d2535e94bcc02e5d51d93f3516d72a973cd96edb520e8e400f82f080cd8e34",
   "v": 4
  },
  "apps/apple-bcm-firmware-fetcher.html": {
@@ -570,8 +570,8 @@
   "v": 4
  },
  "apps/rawmakase-bin.html": {
-  "date": "2026-11-16",
-  "hash": "9bc27fd18c443f0e5e7c2f5fa3058b39c3b56b3fa49174c04072f3066561b0a0",
+  "date": "2026-11-17",
+  "hash": "793ef885e333e1fcd79598dd44e4698463851ca3951080ccbd1dc327b4cb71de",
   "v": 4
  },
  "apps/retroarch-joypad-autoconfig-git.html": {
@@ -645,13 +645,13 @@
   "v": 4
  },
  "apps/t3code-bin.html": {
-  "date": "2026-11-11",
-  "hash": "979459a7e360fcaa3f6f0ef6843d05143b91dd6687abf1c5e2b7c1703d2a9c7f",
+  "date": "2026-11-17",
+  "hash": "ac0f10a94d9a366877ed9a2c4c0f61cc83fcd8e8cc4cec87e53051415721ae80",
   "v": 4
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-16",
-  "hash": "302ac1606cc6213291d79778deffd295e470352e2f510bada0312d8809e62c90",
+  "date": "2026-11-17",
+  "hash": "d45af378f6eaa737ca5db9ee5024eceb030083fe530c2a49eb82593cb35ed03a",
   "v": 4
  },
  "apps/tensaku.html": {
@@ -940,13 +940,13 @@
   "v": 4
  },
  "ghost-on-omarchy.html": {
-  "date": "2026-11-16",
-  "hash": "97435ce20f95b7eef59cc5ba4554925229530cbef8f557b5fd494490edfd6e82",
+  "date": "2026-11-17",
+  "hash": "b266211605f4cca8e839bdc4c5537a6e32c4ebef9c51471062d9c9246834b332",
   "v": 4
  },
  "ghost-runtime-on-omarchy.html": {
-  "date": "2026-11-16",
-  "hash": "1e994dcd222d1664b746c7ab463efb6d1601edbddc26867145d7d1dbf6e2dc0c",
+  "date": "2026-11-17",
+  "hash": "9c7fcc5a29feb1d861d155a7bfd378d9f180adadf2dd559b51e8a7b14479ed92",
   "v": 4
  },
  "ghostty-nautilus-on-omarchy.html": {
@@ -1125,8 +1125,8 @@
   "v": 4
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-11-14",
-  "hash": "c749ff4a36fbd64d9a648c225de4a9613c2eea64d1bbb027488fba40ab7092f3",
+  "date": "2026-11-17",
+  "hash": "92f49a3e688e42480ae4764cbc11114d1439646e079dbd57ac999ac1784938d3",
   "v": 4
  },
  "monologue-on-omarchy.html": {
