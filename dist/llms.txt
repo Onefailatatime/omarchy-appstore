@@ -91,6 +91,8 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [https://omarchyapps.com/install/gaming-on-omarchy.html](https://omarchyapps.com/install/gaming-on-omarchy.html)
 
 ## App tutorials
+- [Install & Use apple-bcm-firmware-fetcher on Omarchy (2026)](https://omarchyapps.com/apple-bcm-firmware-fetcher-on-omarchy.html)
+- [How to Install & Use apple-t2-audio-config on Omarchy (2026)](https://omarchyapps.com/apple-t2-audio-config-on-omarchy.html)
 - [How to Install & Use bambustudio on Omarchy (2026)](https://omarchyapps.com/bambustudio-bin-on-omarchy.html)
 - [How to Install & Use basecamp-cli on Omarchy (2026)](https://omarchyapps.com/basecamp-cli-on-omarchy.html)
 - [How to Install & Use claude-code on Omarchy (2026)](https://omarchyapps.com/claude-code-on-omarchy.html)
@@ -106,6 +108,8 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [How to Install & Use libretro-vice-x128 on Omarchy (2026)](https://omarchyapps.com/libretro-vice-x128-git-on-omarchy.html)
 - [linux-firmware-cirrus-dx13260 on Omarchy: Install & Use](https://omarchyapps.com/linux-firmware-cirrus-dx13260-on-omarchy.html)
 - [How to Install & Use linux-omarchy on Omarchy (2026)](https://omarchyapps.com/linux-omarchy-on-omarchy.html)
+- [How to Install & Use linux-t2 on Omarchy (2026)](https://omarchyapps.com/linux-t2-on-omarchy.html)
+- [How to Install & Use linux-t2-headers on Omarchy (2026)](https://omarchyapps.com/linux-t2-headers-on-omarchy.html)
 - [How to Install & Use lmstudio on Omarchy (2026)](https://omarchyapps.com/lmstudio-on-omarchy.html)
 - [How to Install & Use lmstudio-bin on Omarchy (2026)](https://omarchyapps.com/lmstudio-bin-on-omarchy.html)
 - [How to Install & Use makima on Omarchy (2026)](https://omarchyapps.com/makima-bin-on-omarchy.html)
@@ -120,6 +124,7 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [How to Install & Use quickshell-git on Omarchy (2026)](https://omarchyapps.com/quickshell-git-on-omarchy.html)
 - [How to Install & Use superwhisper on Omarchy (2026)](https://omarchyapps.com/superwhisper-bin-on-omarchy.html)
 - [How to Install & Use symfony-cli on Omarchy (2026)](https://omarchyapps.com/symfony-cli-on-omarchy.html)
+- [How to Install & Use t2fanrd on Omarchy (2026)](https://omarchyapps.com/t2fanrd-on-omarchy.html)
 - [How to Install & Use ttfx on Omarchy (2026)](https://omarchyapps.com/ttfx-on-omarchy.html)
 - [How to Install & Use ufw-docker on Omarchy (2026)](https://omarchyapps.com/ufw-docker-on-omarchy.html)
 - [How to Install & Use vi on Omarchy (2026)](https://omarchyapps.com/vi-on-omarchy.html)

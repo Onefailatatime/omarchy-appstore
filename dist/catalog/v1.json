@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-11-16T17:38:28+00:00",
+ "generated_at": "2026-11-17T02:00:48+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 213,
+ "app_count": 218,
  "apps": [
   {
    "id": "1password",
@@ -63,6 +63,28 @@
    "homepage": "https://ampcode.com",
    "tutorial_url": "https://omarchyapps.com/apps/amp-desktop-bin.html",
    "url": "https://omarchyapps.com/apps/amp-desktop-bin.html"
+  },
+  {
+   "id": "apple-bcm-firmware-fetcher",
+   "name": "apple-bcm-firmware-fetcher",
+   "package": "apple-bcm-firmware-fetcher",
+   "install_command": "omarchy pkg add apple-bcm-firmware-fetcher",
+   "category": "Utilities",
+   "description": "Fetches Wi-Fi and Bluetooth firmware for T2 Macs from the on-disk macOS volume (t2linux firmware.sh, method 4 only)",
+   "homepage": "https://wiki.t2linux.org/guides/wifi-bluetooth/",
+   "tutorial_url": "https://omarchyapps.com/apple-bcm-firmware-fetcher-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/apple-bcm-firmware-fetcher.html"
+  },
+  {
+   "id": "apple-t2-audio-config",
+   "name": "apple-t2-audio-config",
+   "package": "apple-t2-audio-config",
+   "install_command": "omarchy pkg add apple-t2-audio-config",
+   "category": "Utilities",
+   "description": "ALSA UCM configuration for the t2bce audio driver on Apple T2 Macs",
+   "homepage": "https://github.com/kaiT2en/KaiT2en-Fedora",
+   "tutorial_url": "https://omarchyapps.com/apple-t2-audio-config-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/apple-t2-audio-config.html"
   },
   {
    "id": "asdcontrol",
@@ -968,6 +990,28 @@
    "homepage": "https://omarchy.org",
    "tutorial_url": "https://omarchyapps.com/apps/linux-omarchy-muqss-headers.html",
    "url": "https://omarchyapps.com/apps/linux-omarchy-muqss-headers.html"
+  },
+  {
+   "id": "linux-t2",
+   "name": "linux-t2",
+   "package": "linux-t2",
+   "install_command": "omarchy pkg add linux-t2",
+   "category": "Utilities",
+   "description": "The Linux for T2 Macs kernel and modules",
+   "homepage": "https://github.com/archlinux/linux",
+   "tutorial_url": "https://omarchyapps.com/linux-t2-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/linux-t2.html"
+  },
+  {
+   "id": "linux-t2-headers",
+   "name": "linux-t2-headers",
+   "package": "linux-t2-headers",
+   "install_command": "omarchy pkg add linux-t2-headers",
+   "category": "Utilities",
+   "description": "Headers and scripts for building modules for the Linux for T2 Macs kernel",
+   "homepage": "https://github.com/archlinux/linux",
+   "tutorial_url": "https://omarchyapps.com/linux-t2-headers-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/linux-t2-headers.html"
   },
   {
    "id": "linuxqq",
@@ -1952,6 +1996,17 @@
    "repository": "https://github.com/symfony-cli/symfony-cli",
    "tutorial_url": "https://omarchyapps.com/symfony-cli-on-omarchy.html",
    "url": "https://omarchyapps.com/symfony-cli-on-omarchy.html"
+  },
+  {
+   "id": "t2fanrd",
+   "name": "t2fanrd",
+   "package": "t2fanrd",
+   "install_command": "omarchy pkg add t2fanrd",
+   "category": "Utilities",
+   "description": "Fan control daemon for Macs with the Apple T2 chip",
+   "homepage": "https://github.com/GnomedDev/t2fanrd",
+   "tutorial_url": "https://omarchyapps.com/t2fanrd-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/t2fanrd.html"
   },
   {
    "id": "t3code-bin",
