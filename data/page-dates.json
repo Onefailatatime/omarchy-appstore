@@ -90,8 +90,8 @@
   "v": 4
  },
  "apps/cursor-cli.html": {
-  "date": "2026-11-13",
-  "hash": "c5fb8ecc6df31de99a3d6df1c9555a37076a6a182ca1e85b280c7a235abf2bf1",
+  "date": "2026-11-17",
+  "hash": "1b725180c46763edff0e5a27506bb2fa2864f6aba35c2be075d9b694bd0c891b",
   "v": 4
  },
  "apps/dbxcli-bin.html": {
@@ -135,8 +135,8 @@
   "v": 4
  },
  "apps/github-copilot-cli.html": {
-  "date": "2026-11-13",
-  "hash": "55715ce125e05f2bc6d121f76971801963dc0023dda65a3948d13e4151ff9335",
+  "date": "2026-11-17",
+  "hash": "2da969e674f53059ee628510bc2c8671d98ae1bdf6d41f53f001f9522eac348f",
   "v": 4
  },
  "apps/gliff.html": {
@@ -145,8 +145,8 @@
   "v": 4
  },
  "apps/google-chrome.html": {
-  "date": "2026-11-16",
-  "hash": "261145782c3d2bdb993a0457ac4d9cce81fda0bd5e219462d9f2d80fe494fc38",
+  "date": "2026-11-17",
+  "hash": "156f239e5a603fb7c26396c886feeab6b1da1701dc4f749fe1d50deaefd154c6",
   "v": 4
  },
  "apps/gridcraft-bin.html": {
@@ -550,8 +550,8 @@
   "v": 4
  },
  "apps/perplexity.html": {
-  "date": "2026-11-10",
-  "hash": "681621a6f370c0b98646e37e7c37c242c7a78942033122282db2702635169baa",
+  "date": "2026-11-17",
+  "hash": "0a130800949145c66184a71747667bbf11249d8c8cbf44328ec3a85d02c74b84",
   "v": 4
  },
  "apps/python-sounddevice.html": {
@@ -651,7 +651,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-17",
-  "hash": "d45af378f6eaa737ca5db9ee5024eceb030083fe530c2a49eb82593cb35ed03a",
+  "hash": "e9ffbbe152f9bd4529bbe24f0ad5edd2f9a8dfc943a1f712488f6f3ee6cd81c2",
   "v": 4
  },
  "apps/tensaku.html": {
@@ -840,8 +840,8 @@
   "v": 4
  },
  "claude-code-on-omarchy.html": {
-  "date": "2026-11-16",
-  "hash": "02306d404f95ae149bd22e3a3c75618b072770f90e3a9ac1f5e11ddbef7f8861",
+  "date": "2026-11-17",
+  "hash": "a7ecb062783ab3b7492ee2542025db3507ad85aa3bbc8b7dfdb68fda75a7db95",
   "v": 4
  },
  "cliamp-on-omarchy.html": {
@@ -1220,8 +1220,8 @@
   "v": 4
  },
  "openai-codex-desktop-on-omarchy.html": {
-  "date": "2026-11-13",
-  "hash": "41ee1436871160dbfc13f0788179212587d8c44fad9e6e7d31924b763ebb9abc",
+  "date": "2026-11-17",
+  "hash": "c9577c40ca4607046a26c451fd0d21b1b00065daf76a9db9ab861a3729eedd9e",
   "v": 4
  },
  "power-profiles-daemon-on-omarchy.html": {
