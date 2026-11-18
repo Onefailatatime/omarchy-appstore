@@ -30,8 +30,8 @@
   "v": 4
  },
  "apps/aether.html": {
-  "date": "2026-11-09",
-  "hash": "c8de9bdcb5a32923d02d1f1240614372390b64301c5e0aaf1a69d6af86a5a1b7",
+  "date": "2026-11-18",
+  "hash": "12aa58d14020504b1de91e05b2cb03a3c1153f9f7d1ca14361f682fa73f786c0",
   "v": 4
  },
  "apps/amp-desktop-bin.html": {
@@ -95,8 +95,8 @@
   "v": 4
  },
  "apps/dbxcli-bin.html": {
-  "date": "2026-11-16",
-  "hash": "ba5343813239c1bfc9465d56991c8857f331bc68260b8fd672bc2d7de2168eff",
+  "date": "2026-11-18",
+  "hash": "765903c48e3bb875206092e2fa14a0b73d48e0af59772ecdd50477a4d15876bc",
   "v": 4
  },
  "apps/dell-xps13-sidecar-amps.html": {
@@ -135,8 +135,8 @@
   "v": 4
  },
  "apps/github-copilot-cli.html": {
-  "date": "2026-11-17",
-  "hash": "2da969e674f53059ee628510bc2c8671d98ae1bdf6d41f53f001f9522eac348f",
+  "date": "2026-11-18",
+  "hash": "728c1fd008ee4bdb1d89e7b1b6614b647a6a1845fcad0ea9542ccd794edc5267",
   "v": 4
  },
  "apps/gliff.html": {
@@ -650,8 +650,8 @@
   "v": 4
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-17",
-  "hash": "e9ffbbe152f9bd4529bbe24f0ad5edd2f9a8dfc943a1f712488f6f3ee6cd81c2",
+  "date": "2026-11-18",
+  "hash": "5eaba90328c8bcf0e222a9a767ff6526b4660b59cb77d6e6499a2dc744da1291",
   "v": 4
  },
  "apps/tensaku.html": {
@@ -960,8 +960,8 @@
   "v": 4
  },
  "grok-bot-on-omarchy.html": {
-  "date": "2026-11-16",
-  "hash": "75d9c58dc4b1ee840ebeab3d921164241ce10c26f9e34deb10157110a62804c2",
+  "date": "2026-11-18",
+  "hash": "1c8cf460ca2a405a013a7b87546a5f32fd53492ee56780645f3c88c9f85ff95f",
   "v": 4
  },
  "guides.html": {
@@ -1145,8 +1145,8 @@
   "v": 4
  },
  "nordvpn-bin-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "efe34900609efdf04363f0b15d95011912be4a055ef50ed5b02ca3ba39e5fb08",
+  "date": "2026-11-18",
+  "hash": "de1e61cff8739f09dcb75af0b30e0f0936cfc42dec5923ff212a54e76ac36747",
   "v": 4
  },
  "omadesign-omarchy.html": {
@@ -1340,8 +1340,8 @@
   "v": 4
  },
  "visual-studio-code-bin-on-omarchy.html": {
-  "date": "2026-11-11",
-  "hash": "e3854c98ecae90fba58dc6f6ac8b10dfe19ad1aa548c9244d9471f2d7fe19ecb",
+  "date": "2026-11-18",
+  "hash": "7fc1304c4f37ffd80c63347484c5e506e76be7989f27d921f841b86a5e3c4d48",
   "v": 4
  },
  "voxtype-bin-on-omarchy.html": {
