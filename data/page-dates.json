@@ -15,8 +15,8 @@
   "v": 4
  },
  "apps/1password-beta.html": {
-  "date": "2026-11-10",
-  "hash": "e85f2f3c883b121bd29c333cd5e12c723cf8b2c30bbaaaebd951cdc344713da0",
+  "date": "2026-11-18",
+  "hash": "44b85e56b69bffb8a4de77cfecadda952db81d7d3eb9759f5197acefbb20ee63",
   "v": 4
  },
  "apps/1password-cli.html": {
@@ -55,13 +55,13 @@
   "v": 4
  },
  "apps/brave-bin.html": {
-  "date": "2026-11-16",
-  "hash": "7a874e53a525aadc78eddf4afdb7979efe8d1bba1fc1591f4ce93946a4c8c52d",
+  "date": "2026-11-18",
+  "hash": "1a03bdfc489a34ba3d62f78c8648dc9dca9a213e5b5f8402e5de7c7c901d6926",
   "v": 4
  },
  "apps/brave-origin-bin.html": {
-  "date": "2026-11-16",
-  "hash": "dcf019ca13db17a1a8b4a693b9873174e6fd65ef8e55edadb537515a8c454113",
+  "date": "2026-11-18",
+  "hash": "0c7c7aa78abb508446afed39730e1e1fbeeb99144dd070ac1681a952372effdc",
   "v": 4
  },
  "apps/bun-bin.html": {
@@ -570,8 +570,8 @@
   "v": 4
  },
  "apps/rawmakase-bin.html": {
-  "date": "2026-11-17",
-  "hash": "793ef885e333e1fcd79598dd44e4698463851ca3951080ccbd1dc327b4cb71de",
+  "date": "2026-11-18",
+  "hash": "59830ed00593a54fb89cf844fdbd320e10536417ba8e26d72766a9196188da68",
   "v": 4
  },
  "apps/retroarch-joypad-autoconfig-git.html": {
@@ -651,7 +651,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-18",
-  "hash": "5eaba90328c8bcf0e222a9a767ff6526b4660b59cb77d6e6499a2dc744da1291",
+  "hash": "990442af2d1abe86d820812bda1ebfeb88880874baa4735f54e92f25b12d9acf",
   "v": 4
  },
  "apps/tensaku.html": {
@@ -840,8 +840,8 @@
   "v": 4
  },
  "claude-code-on-omarchy.html": {
-  "date": "2026-11-17",
-  "hash": "a7ecb062783ab3b7492ee2542025db3507ad85aa3bbc8b7dfdb68fda75a7db95",
+  "date": "2026-11-18",
+  "hash": "21c338d888f3e2af754bde2fa518aa89b7c0e611eaa8950018d90c1c4b662eed",
   "v": 4
  },
  "cliamp-on-omarchy.html": {
@@ -1220,8 +1220,8 @@
   "v": 4
  },
  "openai-codex-desktop-on-omarchy.html": {
-  "date": "2026-11-17",
-  "hash": "c9577c40ca4607046a26c451fd0d21b1b00065daf76a9db9ab861a3729eedd9e",
+  "date": "2026-11-18",
+  "hash": "257d4a30ac4862d779450a78d945189751af3cce6be20fad3231828217da8248",
   "v": 4
  },
  "power-profiles-daemon-on-omarchy.html": {
@@ -1420,8 +1420,8 @@
   "v": 4
  },
  "zen-browser-bin-on-omarchy.html": {
-  "date": "2026-11-17",
-  "hash": "a42c4894895ce5e91c0f26806c83bb3efd558ab7e6da842315a3dce6cac1b450",
+  "date": "2026-11-18",
+  "hash": "30eba5b3db74aa29c60457afcba441781a562d0b7fb94946531e813c31d59605",
   "v": 4
  }
 }
