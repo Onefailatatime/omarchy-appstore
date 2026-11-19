@@ -35,8 +35,8 @@
   "v": 4
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-17",
-  "hash": "77d2535e94bcc02e5d51d93f3516d72a973cd96edb520e8e400f82f080cd8e34",
+  "date": "2026-11-19",
+  "hash": "9e28349897098cefd70df538965dd67b0a472a42aa52d27060adaf618a1257b5",
   "v": 4
  },
  "apps/apple-bcm-firmware-fetcher.html": {
@@ -90,8 +90,8 @@
   "v": 4
  },
  "apps/cursor-cli.html": {
-  "date": "2026-11-17",
-  "hash": "1b725180c46763edff0e5a27506bb2fa2864f6aba35c2be075d9b694bd0c891b",
+  "date": "2026-11-19",
+  "hash": "80841ca3e72eab7e3723795cfbc0d2a8ae5c92e1f7bdceb286b5f8eb0c8e200c",
   "v": 4
  },
  "apps/dbxcli-bin.html": {
@@ -650,8 +650,8 @@
   "v": 4
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-18",
-  "hash": "990442af2d1abe86d820812bda1ebfeb88880874baa4735f54e92f25b12d9acf",
+  "date": "2026-11-19",
+  "hash": "26d6b5e82b50bcf0d56217810ffa068495cb66da5de989fa82692b4194bea64f",
   "v": 4
  },
  "apps/tensaku.html": {
