@@ -80,13 +80,13 @@
   "v": 4
  },
  "apps/crush-bin.html": {
-  "date": "2026-11-12",
-  "hash": "2ddce6ad0124d50c13c19a0c9f3514f9f4d0c66208cd2f818a88a3632ac38c9c",
+  "date": "2026-11-19",
+  "hash": "37bcad9fe4d8021cc788275e4544f718d0e56d2c124334a185847e1585b97290",
   "v": 4
  },
  "apps/cursor-bin.html": {
-  "date": "2026-11-13",
-  "hash": "f8ce3fe83925010a29986c57c66a664001339945ef78b8fef82278cdfb4488e4",
+  "date": "2026-11-19",
+  "hash": "ab1f9efa6b110b1858a426950cf911b629b5ee3ec422b2e22fb2a6f76f0acadc",
   "v": 4
  },
  "apps/cursor-cli.html": {
@@ -355,8 +355,8 @@
   "v": 4
  },
  "apps/microsoft-edge-stable-bin.html": {
-  "date": "2026-11-16",
-  "hash": "28d63cb30b09be0bed9b7a132cc0396d42e0614443f51f93d4fe4e48986bd690",
+  "date": "2026-11-19",
+  "hash": "edf1fdf3491f34c215e077bc1241dde4e794efd278b5dfb2bbcdaf1826494741",
   "v": 4
  },
  "apps/minecraft-launcher.html": {
@@ -365,8 +365,8 @@
   "v": 4
  },
  "apps/notion-desktop.html": {
-  "date": "2026-11-16",
-  "hash": "a72e41391b24305b093539cd5e7ef9360b7833c4037e56ffcd0a9b55c44966c1",
+  "date": "2026-11-19",
+  "hash": "c88101d53d04e712731af6d0d2fca183fa9648ad431b11c0724ee0021fbde72e",
   "v": 4
  },
  "apps/nvidia-580xx-dkms.html": {
@@ -651,7 +651,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-19",
-  "hash": "26d6b5e82b50bcf0d56217810ffa068495cb66da5de989fa82692b4194bea64f",
+  "hash": "30305ba7ca77c0aeece4c552f8ff150158f2c2a2b6fa044ca19eb7f2928f2d54",
   "v": 4
  },
  "apps/tensaku.html": {
@@ -840,8 +840,8 @@
   "v": 4
  },
  "claude-code-on-omarchy.html": {
-  "date": "2026-11-18",
-  "hash": "21c338d888f3e2af754bde2fa518aa89b7c0e611eaa8950018d90c1c4b662eed",
+  "date": "2026-11-19",
+  "hash": "28f98fea112ccfa620e39febf2762ed2981229b6ede2d37182e52f21628b1d9c",
   "v": 4
  },
  "cliamp-on-omarchy.html": {
@@ -880,8 +880,8 @@
   "v": 4
  },
  "dropbox-on-omarchy.html": {
-  "date": "2026-11-10",
-  "hash": "019cc957a1ea13ed78fbb2db4d70b8adcd42498626836ed93c5ac680ac8142be",
+  "date": "2026-11-19",
+  "hash": "137f933442a61dbcc229cb613623cb526e3b54a1e4697bd1573e44f7bb9f6e46",
   "v": 4
  },
  "dual-boot-windows-and-omarchy.html": {
@@ -1125,8 +1125,8 @@
   "v": 4
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-11-17",
-  "hash": "92f49a3e688e42480ae4764cbc11114d1439646e079dbd57ac999ac1784938d3",
+  "date": "2026-11-19",
+  "hash": "9e210ad848e03480bd39dffefd7760c109151bc78cb1f442999b0f490047c2f3",
   "v": 4
  },
  "monologue-on-omarchy.html": {
@@ -1345,8 +1345,8 @@
   "v": 4
  },
  "voxtype-bin-on-omarchy.html": {
-  "date": "2026-11-17",
-  "hash": "8de8440340f8eb9fc0aada6d1dec69b4133037a12455a49bf89464c1ec318666",
+  "date": "2026-11-19",
+  "hash": "8f650ddb3c37002418414837452b34f348e9e274a5086f2adf8d4f9471df2fa1",
   "v": 4
  },
  "vs/omarchy-apps-vs-omarchy-store.html": {
