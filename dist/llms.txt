@@ -51,6 +51,7 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [How to Install & Use linux-t2-headers on Omarchy (2026) — Build Kernel Modules for the T2 Kernel](https://omarchyapps.com/linux-t2-headers-on-omarchy.html)
 - [How to Install & Use linux-t2 on Omarchy (2026) — Linux on a T2 Mac](https://omarchyapps.com/linux-t2-on-omarchy.html)
 - [How to Install & Use t2fanrd on Omarchy (2026) — Fan Control for T2 Macs](https://omarchyapps.com/t2fanrd-on-omarchy.html)
+- [How to Install & Use Antigravity on Omarchy (2026) — Free Cursor Alternative](https://omarchyapps.com/antigravity-on-omarchy.html)
 - [Best Free and Open Source Photoshop Alternatives on Omarchy](https://omarchyapps.com/free-photoshop-alternatives-omarchy.html)
 - [Free Sublime Text Alternatives on Omarchy: Neovim, Zed, Helix](https://omarchyapps.com/free-sublime-text-alternatives-omarchy.html)
 - [Free TeamViewer Alternatives on Omarchy: RustDesk, gliff, Sunshine](https://omarchyapps.com/free-teamviewer-alternatives-omarchy.html)
@@ -96,7 +97,6 @@ This site is unofficial. It is an independent community project, not affiliated 
 - [https://omarchyapps.com/install/gaming-on-omarchy.html](https://omarchyapps.com/install/gaming-on-omarchy.html)
 
 ## App tutorials
-- [How to Install & Use antigravity on Omarchy (2026)](https://omarchyapps.com/antigravity-on-omarchy.html)
 - [How to Install & Use bambustudio on Omarchy (2026)](https://omarchyapps.com/bambustudio-bin-on-omarchy.html)
 - [How to Install & Use basecamp-cli on Omarchy (2026)](https://omarchyapps.com/basecamp-cli-on-omarchy.html)
 - [How to Install & Use claude-code on Omarchy (2026)](https://omarchyapps.com/claude-code-on-omarchy.html)
