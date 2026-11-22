@@ -40,8 +40,8 @@
   "v": 4
  },
  "apps/amp-desktop-bin.html": {
-  "date": "2026-11-20",
-  "hash": "620b6c2a97cf37be9ed66514eeef0a74d74a1c0b268969a5fec683175cb1f863",
+  "date": "2026-11-21",
+  "hash": "2b47d4e653cebd77d65475771dbb5ce7bc6ffdcb3f6b8d86bd0ca076ca9621f0",
   "v": 4
  },
  "apps/antigravity.html": {
@@ -85,8 +85,8 @@
   "v": 4
  },
  "apps/claude-desktop.html": {
-  "date": "2026-11-20",
-  "hash": "ee66e62c1b7b47060ffe590ae77c6fcd3e024c166be04734d1b3bbc88e20874e",
+  "date": "2026-11-21",
+  "hash": "18f480ace5abd3fc1a6e208e78ab5b71fa8f71766f28bf5bd9b8cf1cbd556bb1",
   "v": 4
  },
  "apps/crush-bin.html": {
@@ -100,8 +100,8 @@
   "v": 4
  },
  "apps/cursor-cli.html": {
-  "date": "2026-11-19",
-  "hash": "80841ca3e72eab7e3723795cfbc0d2a8ae5c92e1f7bdceb286b5f8eb0c8e200c",
+  "date": "2026-11-21",
+  "hash": "1691d31c70692650c9b08f7bf110d4d3018602cacf4058064b8c0d98178df519",
   "v": 4
  },
  "apps/dbxcli-bin.html": {
@@ -580,8 +580,8 @@
   "v": 4
  },
  "apps/rawmakase-bin.html": {
-  "date": "2026-11-20",
-  "hash": "39b9a37e3fb3dccf09bc5fcbef779614a85f416085dd6c20a93e6bc8610f6542",
+  "date": "2026-11-21",
+  "hash": "87edcd0f3b9a90d50561b0f37e8806bbe541cc1421d59f8fc0e6d111cc034303",
   "v": 4
  },
  "apps/retroarch-joypad-autoconfig-git.html": {
@@ -610,8 +610,8 @@
   "v": 4
  },
  "apps/slack-desktop.html": {
-  "date": "2026-11-20",
-  "hash": "a525f0f3a9decf7800b01aa266e18babec766f0ca863bb4548d685367f4b953b",
+  "date": "2026-11-21",
+  "hash": "4d7552b6e746945f3a7d1d66026825b61872f4c1f3ba29cedc02d84432467479",
   "v": 4
  },
  "apps/slap-notes-bin.html": {
@@ -661,7 +661,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-21",
-  "hash": "3b12e176b892212c1f36707a5c878bbf9c10005a3771b14e278bb1b20b04e4dc",
+  "hash": "7564317bed1b6fe0dcb9726098d14364072525064eba7aae75793314eccd9c70",
   "v": 4
  },
  "apps/tensaku.html": {
@@ -1135,8 +1135,8 @@
   "v": 4
  },
  "mise-bin-on-omarchy.html": {
-  "date": "2026-11-19",
-  "hash": "9e210ad848e03480bd39dffefd7760c109151bc78cb1f442999b0f490047c2f3",
+  "date": "2026-11-21",
+  "hash": "24737b127cbfb878d29e8146807a28c6459a85b5919aec80462853573a9d0a12",
   "v": 4
  },
  "monologue-on-omarchy.html": {
