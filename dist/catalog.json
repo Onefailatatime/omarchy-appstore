@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-11-22T02:00:48+00:00",
+ "generated_at": "2026-11-22T14:00:45+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 219,
+ "app_count": 220,
  "apps": [
   {
    "id": "1password",
@@ -1741,6 +1741,18 @@
    "homepage": "https://www.perplexity.ai",
    "tutorial_url": "https://omarchyapps.com/apps/perplexity.html",
    "url": "https://omarchyapps.com/apps/perplexity.html"
+  },
+  {
+   "id": "pi-coding-agent",
+   "name": "pi-coding-agent",
+   "package": "pi-coding-agent",
+   "install_command": "omarchy pkg add pi-coding-agent",
+   "category": "Utilities",
+   "description": "Pi, a terminal coding agent that works with any model provider",
+   "homepage": "https://pi.dev",
+   "repository": "https://github.com/earendil-works/pi",
+   "tutorial_url": "https://omarchyapps.com/pi-coding-agent-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/pi-coding-agent.html"
   },
   {
    "id": "python-mediapipe",
