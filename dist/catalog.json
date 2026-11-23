@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-11-23T14:00:49+00:00",
+ "generated_at": "2026-11-23T16:38:09+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 224,
+ "app_count": 234,
  "apps": [
   {
    "id": "1password",
@@ -54,6 +54,17 @@
    "url": "https://omarchyapps.com/apps/aether.html"
   },
   {
+   "id": "amp-cli",
+   "name": "amp-cli",
+   "package": "amp-cli",
+   "install_command": "omarchy pkg add amp-cli",
+   "category": "Utilities",
+   "description": "Amp, the frontier coding agent, in your terminal",
+   "homepage": "https://ampcode.com",
+   "tutorial_url": "https://omarchyapps.com/amp-cli-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/amp-cli.html"
+  },
+  {
    "id": "amp-desktop-bin",
    "name": "amp-desktop-bin",
    "package": "amp-desktop-bin",
@@ -74,6 +85,17 @@
    "homepage": "https://antigravity.google/product/antigravity-2",
    "tutorial_url": "https://omarchyapps.com/antigravity-on-omarchy.html",
    "url": "https://omarchyapps.com/apps/antigravity.html"
+  },
+  {
+   "id": "antigravity-cli",
+   "name": "antigravity-cli",
+   "package": "antigravity-cli",
+   "install_command": "omarchy pkg add antigravity-cli",
+   "category": "Utilities",
+   "description": "Google Antigravity CLI (agy), a terminal coding agent",
+   "homepage": "https://github.com/google-antigravity/antigravity-cli",
+   "tutorial_url": "https://omarchyapps.com/antigravity-cli-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/antigravity-cli.html"
   },
   {
    "id": "apple-bcm-firmware-fetcher",
@@ -192,8 +214,8 @@
    "package": "claude-code",
    "install_command": "omarchy pkg add claude-code",
    "category": "AI & Agents",
-   "description": "An agentic coding tool that lives in your terminal",
-   "homepage": "https://github.com/anthropics/claude-code",
+   "description": "Claude Code, Anthropic's agentic coding tool for the terminal",
+   "homepage": "https://code.claude.com",
    "tutorial_url": "https://omarchyapps.com/claude-code-on-omarchy.html",
    "url": "https://omarchyapps.com/claude-code-on-omarchy.html"
   },
@@ -236,8 +258,8 @@
    "package": "crush-bin",
    "install_command": "omarchy pkg add crush-bin",
    "category": "AI & Agents",
-   "description": "A powerful terminal-based AI assistant for developers, providing intelligent coding assistance directly in your terminal.",
-   "homepage": "https://charm.sh/crush",
+   "description": "Crush, Charm's terminal coding agent",
+   "homepage": "https://charm.land/crush",
    "repository": "https://github.com/charmbracelet/crush",
    "tutorial_url": "https://omarchyapps.com/apps/crush-bin.html",
    "url": "https://omarchyapps.com/apps/crush-bin.html"
@@ -281,7 +303,7 @@
    "package": "cursor-cli",
    "install_command": "omarchy pkg add cursor-cli",
    "category": "AI & Agents",
-   "description": "CLI tool for Cursor, the AI-first coding agent",
+   "description": "Cursor Agent, the terminal coding agent from Cursor",
    "homepage": "https://cursor.com/cli",
    "tutorial_url": "https://omarchyapps.com/apps/cursor-cli.html",
    "url": "https://omarchyapps.com/apps/cursor-cli.html"
@@ -296,6 +318,17 @@
    "homepage": "https://github.com/dropbox/dbxcli",
    "tutorial_url": "https://omarchyapps.com/apps/dbxcli-bin.html",
    "url": "https://omarchyapps.com/apps/dbxcli-bin.html"
+  },
+  {
+   "id": "deepseek-dsh",
+   "name": "deepseek-dsh",
+   "package": "deepseek-dsh",
+   "install_command": "omarchy pkg add deepseek-dsh",
+   "category": "Utilities",
+   "description": "DeepSeek Harness (dsh), DeepSeek's terminal coding agent",
+   "homepage": "https://github.com/deepseek-ai/deepseek-harness",
+   "tutorial_url": "https://omarchyapps.com/deepseek-dsh-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/deepseek-dsh.html"
   },
   {
    "id": "dell-xps-touchpad-haptics",
@@ -395,6 +428,17 @@
    "url": "https://omarchyapps.com/apps/flea.html"
   },
   {
+   "id": "freebuff",
+   "name": "freebuff",
+   "package": "freebuff",
+   "install_command": "omarchy pkg add freebuff",
+   "category": "Utilities",
+   "description": "Freebuff, a free AI coding agent for the terminal",
+   "homepage": "https://freebuff.com",
+   "tutorial_url": "https://omarchyapps.com/freebuff-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/freebuff.html"
+  },
+  {
    "id": "ghost",
    "name": "ghost",
    "package": "ghost",
@@ -461,12 +505,23 @@
    "url": "https://omarchyapps.com/apps/ghostty-terminfo.html"
   },
   {
+   "id": "ghui",
+   "name": "ghui",
+   "package": "ghui",
+   "install_command": "omarchy pkg add ghui",
+   "category": "Utilities",
+   "description": "Terminal UI for keeping up with your open GitHub pull requests",
+   "homepage": "https://github.com/kitlangton/ghui",
+   "tutorial_url": "https://omarchyapps.com/ghui-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/ghui.html"
+  },
+  {
    "id": "github-copilot-cli",
    "name": "github-copilot-cli",
    "package": "github-copilot-cli",
    "install_command": "omarchy pkg add github-copilot-cli",
    "category": "AI & Agents",
-   "description": "GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal.",
+   "description": "GitHub Copilot CLI, the Copilot coding agent in your terminal",
    "homepage": "https://github.com/github/copilot-cli",
    "tutorial_url": "https://omarchyapps.com/apps/github-copilot-cli.html",
    "url": "https://omarchyapps.com/apps/github-copilot-cli.html"
@@ -514,6 +569,17 @@
    "homepage": "https://x.ai/bot",
    "tutorial_url": "https://omarchyapps.com/grok-bot-on-omarchy.html",
    "url": "https://omarchyapps.com/grok-bot-on-omarchy.html"
+  },
+  {
+   "id": "grok-cli",
+   "name": "grok-cli",
+   "package": "grok-cli",
+   "install_command": "omarchy pkg add grok-cli",
+   "category": "Utilities",
+   "description": "Grok Build, xAI's terminal coding agent",
+   "homepage": "https://x.ai/build",
+   "tutorial_url": "https://omarchyapps.com/grok-cli-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/grok-cli.html"
   },
   {
    "id": "helium-browser-bin",
@@ -670,6 +736,29 @@
    "homepage": "https://github.com/TsaiGaggery/hurrican_omarchy_enabling",
    "tutorial_url": "https://omarchyapps.com/apps/intel-ipu7-camera.html",
    "url": "https://omarchyapps.com/apps/intel-ipu7-camera.html"
+  },
+  {
+   "id": "kilocode-cli",
+   "name": "kilocode-cli",
+   "package": "kilocode-cli",
+   "install_command": "omarchy pkg add kilocode-cli",
+   "category": "Utilities",
+   "description": "Kilo Code CLI, an open source terminal coding agent",
+   "homepage": "https://kilo.ai/cli",
+   "repository": "https://github.com/Kilo-Org/kilocode",
+   "tutorial_url": "https://omarchyapps.com/kilocode-cli-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/kilocode-cli.html"
+  },
+  {
+   "id": "kimi-code",
+   "name": "kimi-code",
+   "package": "kimi-code",
+   "install_command": "omarchy pkg add kimi-code",
+   "category": "Utilities",
+   "description": "Kimi Code CLI, Moonshot AI's terminal coding agent",
+   "homepage": "https://github.com/MoonshotAI/kimi-code",
+   "tutorial_url": "https://omarchyapps.com/kimi-code-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/kimi-code.html"
   },
   {
    "id": "kujo",
@@ -1280,6 +1369,18 @@
    "url": "https://omarchyapps.com/apps/nvidia-580xx-utils.html"
   },
   {
+   "id": "oh-my-pi",
+   "name": "oh-my-pi",
+   "package": "oh-my-pi",
+   "install_command": "omarchy pkg add oh-my-pi",
+   "category": "Utilities",
+   "description": "Oh My Pi, a terminal coding agent with the IDE wired in",
+   "homepage": "https://omp.sh",
+   "repository": "https://github.com/can1357/oh-my-pi",
+   "tutorial_url": "https://omarchyapps.com/oh-my-pi-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/oh-my-pi.html"
+  },
+  {
    "id": "omacalc",
    "name": "omacalc",
    "package": "omacalc",
@@ -1742,6 +1843,17 @@
    "homepage": "https://github.com/openclaw/openclaw",
    "tutorial_url": "https://omarchyapps.com/apps/openclaw.html",
    "url": "https://omarchyapps.com/apps/openclaw.html"
+  },
+  {
+   "id": "openrouter-ori",
+   "name": "openrouter-ori",
+   "package": "openrouter-ori",
+   "install_command": "omarchy pkg add openrouter-ori",
+   "category": "Utilities",
+   "description": "Ori, OpenRouter's local agent CLI",
+   "homepage": "https://openrouter.ai/labs/ori",
+   "tutorial_url": "https://omarchyapps.com/openrouter-ori-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/openrouter-ori.html"
   },
   {
    "id": "openvino-genai",

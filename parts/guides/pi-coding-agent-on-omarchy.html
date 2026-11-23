@@ -1,0 +1,152 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: run `omarchy pkg add pi-coding-agent` on a clean Omarchy system. Confirm version 1.6.0-1, ~57.8 MB download / ~130.9 MB installed as listed on the store page.
+- First launch: run `pi` in a project directory. Confirm the TUI opens in Ghostty (Omarchy's default terminal) and the missing-auth warning points to `/login`.
+- Auth flow: sign in with at least one provider via `/login` (OAuth) and one via API key in `~/.pi/agent/auth.json`. Confirm the footer shows a model name after login.
+- A real task: give Pi a small coding task in a test repo (e.g. "add a function and a test") and confirm read/edit/bash tools work and files land where expected.
+- Model switching: confirm `/model` switches mid-session and `Ctrl+L` works in Ghostty.
+- Issues claimed below are NOT personally reproduced — they're documented upstream (Pi docs, README troubleshooting, provider docs). Verify at least the first-launch auth flow on a real machine.
+- Screenshots needed: TUI on first launch, `/login` provider picker, a working session with tool calls, `/model` picker.
+
+SEO notes:
+- URL: /guides/pi-coding-agent-on-omarchy
+- Title tag: "How to Install & Use Pi on Omarchy (2026) — Free Terminal Coding Agent, Any Model"
+- Meta description: "Install Pi on Omarchy with one command. Free, open-source terminal coding agent: any model provider, mid-session switching, local Ollama support, and the no-permission-prompts caveat explained."
+- Keywords: pi coding agent omarchy, pi.dev omarchy, pi terminal agent linux, pi vs claude code, free claude code alternative, pi ollama local models, pi-coding-agent install
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Pi on Omarchy</h2>
+      <p>Pi is a minimal, open-source (MIT) terminal coding agent — four tools, any model provider, and a tiny core you extend yourself instead of a sealed product with features you didn’t ask for.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add pi-coding-agent
+cd ~/your-project
+pi</code></pre>
+      <p>Then run <code>/login</code>, pick your provider (Claude Pro, ChatGPT Plus, GitHub Copilot, or any API key), and type a task. Pi reads files, edits code, and runs shell commands in the folder you started it in.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and launch.</h3>
+      <p>Run the command above, then <code>cd</code> into any project and run <code>pi</code>. The terminal UI opens with three parts: your conversation, a prompt editor, and a footer showing the current folder, model, and session status.</p>
+      <h3>2. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Authenticate first, or nothing works.</strong> Pi ships with no model configured. Inside Pi, run <code>/login</code> and pick a provider — OAuth for subscriptions you already pay for (Claude Pro/Max, ChatGPT Plus, GitHub Copilot, Google Gemini) or paste an API key for Anthropic, OpenAI, Google, Mistral, Groq, OpenRouter, and 15+ others. Keys are stored in <code>~/.pi/agent/auth.json</code>; you can also export them as environment variables (e.g. <code>ANTHROPIC_API_KEY</code>) in the shell that starts Pi.</li>
+        <li><strong>Pi only has four tools: <code>read</code>, <code>write</code>, <code>edit</code>, and <code>bash</code>.</strong> That’s the whole built-in toolset, by design. There are no sub-agents, no plan mode, and no permission popups in the core. Everything else — sub-agents, plan mode, permission gates, sandboxing, MCP servers, to-do lists — you add as a TypeScript extension or install as a package from pi.dev/packages (5,000+ community packages). If you want it, ask Pi to build it for you, or <code>pi install</code> a package that does it your way.</li>
+        <li><strong>Switch models mid-session.</strong> Run <code>/model</code> (or press <code>Ctrl+L</code>) to swap providers/models without leaving the conversation; <code>Ctrl+P</code> cycles your favorites. This is the killer feature for Omarchy users: one agent, whatever model is cheapest or best for the task, including local models via Ollama or llama.cpp.</li>
+      </ul>
+      <h3>3. Config location.</h3>
+      <p>Global config lives at <code>~/.pi/agent/</code> — <code>auth.json</code> (credentials), <code>settings.json</code> (default provider/model), <code>models.json</code> (custom providers/models). Project instructions go in <code>AGENTS.md</code> (loaded from <code>~/.pi/agent/</code>, parent directories, and the current directory) and <code>SYSTEM.md</code> replaces or appends to the default system prompt per project. Sessions are stored as trees — <code>/tree</code> jumps to any earlier point and continues from there, <code>/export</code> saves a session to HTML, <code>/share</code> uploads it to a GitHub gist.</p>
+      <p><strong>Practical notes:</strong> Pi also runs headless — <code>pi -p "query"</code> for one-shot scripting, <code>--mode json</code> for event streams, plus an RPC mode and an SDK for embedding it in your own apps. The system prompt is deliberately tiny (under 1,000 tokens), so most of your context budget goes to your actual code.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>First launch shows no model / missing-auth warning</h3>
+      <p>You run <code>pi</code>, the TUI opens, but there’s no model selected and Pi warns about missing auth. This is the normal first-run state, not a broken install — Pi ships with no provider configured. Upstream even improved these warnings in 2026 specifically to point people at <code>/login</code> (<a href="https://github.com/earendil-works/pi/blob/main/packages/coding-agent/CHANGELOG.md" target="_blank" rel="noopener">changelog</a>).</p>
+      <p><strong>Fix:</strong> Inside Pi, run <code>/login</code>, pick your provider, and follow the prompt (paste an API key, or complete the browser OAuth flow). When it works, the footer shows a model name instead of an empty slot, and a test prompt like <code>say hello</code> gets a reply. Credentials land in <code>~/.pi/agent/auth.json</code>. If you prefer environment variables, export e.g. <code>ANTHROPIC_API_KEY</code> in the same shell before launching <code>pi</code> — auth-file keys take priority over env vars.</p>
+      <h3>OAuth login fails — port 1455 in use, or token expired</h3>
+      <p>During <code>/login</code>, the browser flow stalls, or a previously working login suddenly reports an expired/failed token. Documented in the <a href="https://github.com/earendil-works/pi#readme" target="_blank" rel="noopener">Pi README troubleshooting section</a>: the OAuth callback listens on port 1455, and tokens can expire or fail to refresh.</p>
+      <p><strong>Fix:</strong> If port 1455 is in use, close the conflicting process, or paste the auth code/URL when Pi prompts for it instead of relying on the automatic callback. If you get “token expired” or “refresh failed”, just run <code>/login</code> again for that provider — it re-authenticates and replaces the stored credentials. Use <code>/logout</code> to clear OAuth tokens entirely.</p>
+      <h3>Custom model doesn’t appear in the <code>/model</code> picker</h3>
+      <p>You added a custom provider/model in <code>models.json</code>, but it never shows up in <code>/model</code>. This is the most common custom-provider gotcha: models load from <code>models.json</code> but stay unavailable in the picker until Pi can resolve credentials for them (<a href="https://docs.nebul.io/docs/integrations/pi" target="_blank" rel="noopener">Nebul Pi docs</a>).</p>
+      <p><strong>Fix:</strong> Make sure the API key is set in the shell that started Pi — <code>export NEBUL_API_KEY=...</code> (or your provider’s variable) <em>before</em> running <code>pi</code>, not in a different terminal. <code>apiKey</code> in <code>models.json</code> accepts <code>${NAME}</code> env-var interpolation, a literal value, or a leading <code>!command</code> for secrets from a password manager. Also check the model <code>id</code> matches the provider’s catalog ID exactly, including vendor prefix and casing — a wrong <code>id</code> surfaces as “model not found”, and a wrong base URL as a <code>404</code> (e.g. OpenAI-compatible endpoints usually need the <code>/v1</code> suffix).</p>
+      <h3>npm install fails — Node.js too old</h3>
+      <p>Installing via npm errors out or Pi won’t start. The npm route needs <strong>Node.js 22.19 or newer</strong> (<a href="https://pi.dev" target="_blank" rel="noopener">Pi docs</a>, <a href="https://www.getorchestra.io/knowledge-hub/data-tools/pi-agent-harness" target="_blank" rel="noopener">GetOrchestra walkthrough</a>) — older Node versions are the blocker that stops most people.</p>
+      <p><strong>Fix:</strong> On Omarchy, skip npm entirely: <code>omarchy pkg add pi-coding-agent</code> installs the packaged build and its dependencies for you. If you do want the npm route, check <code>node --version</code> first and upgrade Node (or use the official installer <code>curl -fsSL https://pi.dev/install.sh | sh</code>, which pins dependencies and lets you update later with <code>pi update</code>). The docs note the npm route doesn’t pin transitive dependencies, which is why they recommend the installer.</p>
+      <h3>Pi contacts the network on startup / you want it fully offline</h3>
+      <p>Pi checks pi.dev at startup for a newer version and to refresh its model list, and sends an anonymous ping after installs and updates (<a href="https://flaviocopes.com/pi/" target="_blank" rel="noopener">Flavio Copes deep dive</a>). On a machine you want quiet, that’s unwanted traffic.</p>
+      <p><strong>Fix:</strong> Set <code>export PI_OFFLINE=1</code> before launching Pi — this disables all startup network operations, including the update check and install/update telemetry (<a href="https://docs.nebul.io/docs/integrations/pi" target="_blank" rel="noopener">Nebul Pi docs</a>). Note this also means no automatic update notifications; run <code>pi update</code> manually when you want the latest version.</p>
+      <h3>Pi runs shell commands without asking first</h3>
+      <p>You asked Pi to do something and it ran <code>bash</code> commands — including file writes — with no confirmation prompt. This is not a bug: Pi’s own security page is direct that Pi “does not ask for approval before every tool call” and has no built-in permission system for files, processes, network, or credentials (<a href="https://pi.dev" target="_blank" rel="noopener">Pi docs</a>, via <a href="https://zenolab.app/blog/pi-coding-agent-guide/" target="_blank" rel="noopener">Zenolab guide</a>).</p>
+      <p><strong>Fix:</strong> Treat Pi like a trusted pair-programmer with your shell, not a sandbox. Run it in a project directory you can afford to have modified, keep real work in git so anything can be reverted, and use a scratch repo for first experiments. If you want gates, install a community package that adds permission prompts, path protection, or sandboxing — pi.dev/packages lists several — or ask Pi to build one for you. Never run Pi as root or in a directory containing credentials you wouldn’t hand to a stranger.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><a href="/apps/claude-code.html">Claude Code</a> (same Claude subscription, different philosophy — use Pi when you want provider freedom, Claude Code when you want Anthropic’s batteries-included agent), <a href="/apps/ghostty.html">Ghostty</a> (Omarchy’s default terminal — Pi’s TUI lives here), and <code>git</code> (Pi edits files freely, so commit early and often; sessions are trees, and so is your history).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><a href="/apps/crush-bin.html">Crush</a> — another terminal coding agent in the store, with more built in out of the box; or <a href="/apps/openai-codex-bin.html">OpenAI Codex</a> if you’re all-in on ChatGPT Plus and want OpenAI’s own agent. Pi is the pick when you want the smallest possible core and the freedom to swap models mid-task.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Pi vs Claude Code vs OpenAI Codex vs Crush</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Pi</th><th>Claude Code</th><th>OpenAI Codex</th><th>Crush</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free forever (MIT). You pay only your model provider (API key or existing subscription)</td><td>Free CLI; needs Claude Pro ($20/mo) via OAuth or an Anthropic API key</td><td>Free CLI; needs ChatGPT Plus/Pro via OAuth or an OpenAI API key</td><td>Free to use; source-available under FSL-1.1-MIT</td></tr>
+            <tr><td>Best for</td><td>People who want one agent for every model, including local ones, and a core they can reshape</td><td>Claude users who want Anthropic’s full-featured agent with sub-agents, plan mode, and hooks built in</td><td>ChatGPT subscribers who want OpenAI’s agent in the terminal</td><td>A batteries-included terminal agent with more defaults than Pi</td></tr>
+            <tr><td>Model freedom</td><td>15+ providers, hundreds of models, Ollama/llama.cpp local, mid-session switching</td><td>Claude models only</td><td>OpenAI/Codex models only</td><td>Multiple providers</td></tr>
+            <tr><td>Built-in tools</td><td>4 (<code>read</code>, <code>write</code>, <code>edit</code>, <code>bash</code>) — everything else is an extension</td><td>Full set: sub-agents, plan mode, permissions, hooks, MCP</td><td>Full agent toolset</td><td>Full agent toolset</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add pi-coding-agent</code></td><td><code>omarchy pkg add claude-code</code></td><td><code>omarchy pkg add openai-codex-bin</code></td><td><code>omarchy pkg add crush-bin</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Pi if you want the smallest agent that runs on any model — especially if you already pay for more than one provider, or you run local models and don’t want to be locked to a single vendor’s CLI. Pick Claude Code or Codex if you live inside one ecosystem and want the guardrails and built-in features Pi deliberately leaves out.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Pi is a free alternative to Claude Code ($20/mo)</h2>
+      <p><strong>Pi is a free alternative to Claude Code ($20/mo Pro subscription) — with a catch worth stating plainly.</strong> Pi itself costs $0, MIT-licensed, and it can sign in to your existing Claude Pro subscription via OAuth, so you don’t pay anything extra for the agent. What you give up: Claude Code’s built-in sub-agents, plan mode, permission prompts, and hooks — Pi ships a four-tool core and expects you to add those as packages (or build them). What you keep: the full agent loop, every Claude model, plus the freedom to switch to OpenAI, Gemini, Groq, or a local Ollama model mid-session — something no single-vendor CLI offers.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes)</h2>
+      <ol>
+        <li><strong>Keep your subscription:</strong> Pi signs in to the same Claude Pro/Max account via OAuth — no new billing. Run <code>pi</code>, then <code>/login</code> and pick Anthropic.</li>
+        <li><strong>Install Pi on Omarchy:</strong> <code>omarchy pkg add pi-coding-agent</code>.</li>
+        <li><strong>Bring your project instructions:</strong> copy your <code>CLAUDE.md</code> content into <code>AGENTS.md</code> in the project root (Pi reads <code>AGENTS.md</code> at startup, same idea). Add a global <code>~/.pi/agent/AGENTS.md</code> for rules you want everywhere.</li>
+        <li><strong>Re-create your workflow:</strong> anything Claude Code did natively that you miss — sub-agents, plan mode, permission gates — install as a Pi package (<code>pi install npm:...</code> or from pi.dev/packages) or ask Pi to build it for you.</li>
+        <li><strong>What doesn’t transfer:</strong> Claude Code’s hooks, its specific slash-command set, and its permission system. Your code, your git history, and your Claude subscription all come with you — the switch is the agent harness, not the model.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Pi package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/pi-coding-agent.html">View Pi →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Pi work on Omarchy?</summary><p>Yes. It’s packaged in the official Omarchy repository as <code>pi-coding-agent</code> (version 1.6.0-1, added 2026-11-22) and installs with one command. It’s a terminal app, so it runs in Ghostty or any terminal on Hyprland — no Wayland or display-server quirks apply.</p></details>
+      <details><summary>Is Pi really free?</summary><p>Yes — MIT licensed, no paid tier, no account required for the agent itself. The cost is whatever your model provider charges: an API key (pay-per-token), an existing subscription (Claude Pro, ChatGPT Plus, GitHub Copilot via OAuth), or $0 with local models through Ollama or llama.cpp. Earendil (the company behind Pi) sells hosted services around it (Lefos), but the coding agent core stays MIT.</p></details>
+      <details><summary>Does Pi ask before running commands?</summary><p>No — and this is the most important thing to know before your first session. Pi has no built-in permission system. It runs <code>bash</code> and edits files as soon as the model decides to. Work in git, commit before big tasks, and install a permission-gate package if you want prompts.</p></details>
+      <details><summary>Which models can Pi use?</summary><p>15+ providers and hundreds of models: Anthropic, OpenAI, Google (Gemini, Vertex AI), Azure, Bedrock, Mistral, Groq, Cerebras, xAI, Hugging Face, Kimi, MiniMax, NVIDIA, OpenRouter, and local models via Ollama or llama.cpp. Authenticate by API key or OAuth, and switch mid-session with <code>/model</code> or <code>Ctrl+L</code>.</p></details>
+      <details><summary>Pi vs Claude Code — which should I pick?</summary><p>Pick Pi if you use (or want to use) more than one model provider, run local models, or want a minimal core you can reshape with TypeScript extensions. Pick Claude Code if you want the most polished single-vendor agent with sub-agents, plan mode, and permission prompts already built in — and you’re happy living inside Anthropic’s ecosystem.</p></details>
+      <details><summary>Can I use Pi without the internet?</summary><p>Mostly. Set <code>PI_OFFLINE=1</code> to stop the startup update check and telemetry. But the model itself still needs to be reachable — unless you’re running a local model via Ollama or llama.cpp, in which case Pi works fully offline.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://pi.dev" target="_blank" rel="noopener">Pi official site (features, providers, modes, extensions)</a></li>
+        <li><a href="https://github.com/earendil-works/pi" target="_blank" rel="noopener">Pi GitHub repo (README, troubleshooting, changelog)</a></li>
+        <li><a href="https://flaviocopes.com/pi/" target="_blank" rel="noopener">Flavio Copes — “A deep dive into Pi” (install, update check, telemetry, 1.0 release)</a></li>
+        <li><a href="https://zenolab.app/blog/pi-coding-agent-guide/" target="_blank" rel="noopener">Zenolab — “Pi Coding Agent: What It Is and How to Set It Up” (installer vs npm, Node 22.19+, no permission system)</a></li>
+        <li><a href="https://www.kdnuggets.com/working-with-pi-coding-agents" target="_blank" rel="noopener">KDnuggets — “Working with Pi Coding Agents” (four tools, no MCP/sub-agents/plan mode by design, AGENTS.md)</a></li>
+        <li><a href="https://dev.to/arshtechpro/pi-the-open-source-ai-coding-agent-you-probably-havent-tried-yet-2h0h" target="_blank" rel="noopener">DEV — “Pi: The Open-Source AI Coding Agent You Probably Haven’t Tried Yet” (46k+ stars, setup, auth paths)</a></li>
+        <li><a href="https://docs.nebul.io/docs/integrations/pi" target="_blank" rel="noopener">Nebul docs — Pi integration (models.json, credential resolution, PI_OFFLINE=1, port 1455)</a></li>
+        <li><a href="https://www.getorchestra.io/knowledge-hub/data-tools/pi-agent-harness" target="_blank" rel="noopener">GetOrchestra — “Getting Started with the PI Agent Harness” (Node 22.19+, ~/.pi/agent, /login flow)</a></li>
+        <li><a href="https://docs.llmgateway.io/guides/pi" target="_blank" rel="noopener">LLM Gateway docs — Pi integration (verified with Pi 0.85.1, deprecated npm scope)</a></li>
+        <li><a href="https://agenticindex.io/vendors/pi-coding-agent" target="_blank" rel="noopener">Agentic Index — Pi vendor profile (~118k stars, 38 providers, 5,000+ packages)</a></li>
+        <li><a href="https://omarchyapps.com/apps/pi-coding-agent.html" target="_blank" rel="noopener">omarchyapps.com app page — pi-coding-agent 1.6.0-1, 57.8 MB download, 130.9 MB installed, MIT, added 2026-11-22</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

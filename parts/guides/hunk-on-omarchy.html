@@ -1,0 +1,165 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add hunk` installs version 0.25.0-1 from Omarchy's repo, and that the store listing slug is `hunk`.
+- First-launch behavior: what `hunk` with no args actually prints (help text per the README) and what `hunk diff` shows in a real repo on Omarchy (split vs unified layout at the default terminal width).
+- `hunk diff` in a git repo: confirm untracked files appear (README says Hunk's own working-tree loader auto-includes them) and the sidebar navigation works.
+- `hunk diff --web`: confirm the browser review serves on localhost and the page loads in the default browser.
+- `hunk gh pr`: confirm it works anonymously on a public repo and asks for GH_TOKEN/GITHUB_TOKEN on a private one.
+- Config location: README says `$XDG_CONFIG_HOME/hunk/config.toml` (default `~/.config/hunk/config.toml`) — confirm the file is created/read there on Omarchy, and state in `~/.local/state/hunk/state.json`.
+- Git pager setup: confirm `git config --global core.pager "hunk pager"` makes `git diff` open in Hunk, and that the alias route (`alias.hdiff`) works as documented.
+- Each "Common issue" below reproduces as described, and each fix works on a current install (0.25.0).
+- `hunk update` behavior on the Omarchy-packaged install: the README's self-update applies to npm/Homebrew/install-script installs — confirm whether it works or refuses on the pacman package (package-managed installs usually should NOT self-update).
+- Screenshots needed: split view with sidebar, unified view, `hunk log` history browser, browser review (`--web`), image preview with `i` on a changed PNG.
+- License: MIT (confirmed in repo). Free, no paid tier exists.
+- Version at publish time: check `hunk --version` and note it; guide drafted against v0.25.0 (store package 0.25.0-1, added 2026-11-23).
+
+SEO notes:
+- URL: /guides/hunk-on-omarchy
+- Title tag: "How to Install & Use Hunk on Omarchy (2026)"
+- Meta description: "Install Hunk on Omarchy with one command. Review-first terminal diff viewer for agentic coders: multi-file review stream, inline agent annotations, GitHub PR review, and Git pager setup."
+- Keywords: hunk omarchy, hunk diff viewer install, hunk review agent code, hunk gh pr, best diff viewer omarchy, hunk vs delta
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Hunk on Omarchy</h2>
+      <p>Hunk is a review-first terminal diff viewer for agentic coders — a multi-file review stream with a sidebar, inline AI/agent annotations, and GitHub PR review built in. It’s for Omarchy users who review code their agents wrote (or anyone who reads diffs all day) and want a keyboard-driven reviewer instead of scrolling <code>git diff</code> output.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add hunk
+hunk --version   # should print 0.25.0</code></pre>
+      <p>Takes ~2 minutes (69.7 MB download, 193.1 MB installed). Note: Hunk also ships as a default tool in Omarchy itself, installed through mise (per the README) — the store package is the standalone binary instead. Use one or the other, not both, so you don’t end up with two Hunks on your PATH.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. First launch.</h3>
+      <p>Run <code>hunk</code> with no arguments in any terminal and it prints help. The real entry point is a repo: <code>cd</code> into any git checkout and run:</p>
+      <pre><code class="language-bash">hunk diff            # review current working-tree changes, including untracked files</code></pre>
+      <p>You get a multi-file review stream with a sidebar listing every changed file, split or unified layout depending on terminal width, and syntax highlighting. Arrow keys move, Enter opens a file, Tab switches focus between the sidebar and the diff.</p>
+      <h3>2. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong><code>hunk diff</code> is the daily driver.</strong> <code>hunk show</code> reviews the latest commit, <code>hunk show HEAD~1</code> an earlier one, <code>hunk log</code> opens an interactive history browser (press <code>v</code> to select a commit range, <code>q</code> back out to history). Add <code>--watch</code> to <code>hunk diff</code> and the review auto-reloads as your agent keeps editing files. Add <code>--web</code> and the same review opens in your browser instead of the terminal.</li>
+        <li><strong>Press <code>a</code> to see what your agent thought.</strong> Agent annotations start hidden — <code>a</code> toggles them on, inline beside the code. To get them in the first place, install the review skill once (<code>npx skills add modem-dev/hunk -g --skill hunk-review</code>), open Hunk in another terminal, and ask your agent to use the hunk-review skill against the live session. No skill system? Ask the agent to run <code>hunk skill show</code> and follow the output.</li>
+        <li><strong>Review PRs without the GitHub CLI.</strong> Hunk bundles <code>hunk gh</code>, so <code>hunk gh pr</code> opens the PR for your current branch, <code>hunk gh pr 123</code> a numbered one, <code>hunk gh commit a1b2c3d</code> a commit, and <code>hunk gh compare main...feature</code> a comparison. Public repos work anonymously; set <code>GH_TOKEN</code> (or <code>GITHUB_TOKEN</code>) for private repos and higher API limits. As of 0.25.0 it also works with GitHub Enterprise Cloud (<code>&lt;tenant&gt;.ghe.com</code>).</li>
+      </ul>
+      <h3>3. Make it your Git pager.</h3>
+      <p>One command and every <code>git diff</code> / <code>git show</code> opens in Hunk:</p>
+      <pre><code class="language-bash">git config --global core.pager "hunk pager"</code></pre>
+      <p>Prefer opt-in instead? Keep the default pager and add aliases:</p>
+      <pre><code class="language-bash">git config --global alias.hdiff "-c core.pager=\"hunk pager\" diff"
+git config --global alias.hshow "-c core.pager=\"hunk pager\" show"</code></pre>
+      <p>Caveat from the README: untracked files appear only in Hunk’s own <code>hunk diff</code> loader — if you open <code>git diff</code> through the pager, Git decides the patch contents and untracked files won’t show. Jujutsu users set <code>pager = ["hunk", "pager"]</code> and <code>diff-formatter = ":git"</code> in <code>jj config edit --user</code>; Sapling users set <code>pager = hunk pager</code> in <code>sl config -u</code>.</p>
+      <h3>4. Config location.</h3>
+      <p>Preferences live in <code>~/.config/hunk/config.toml</code> (or a repo-local <code>.hunk/config.toml</code>), for example:</p>
+      <pre><code class="language-toml">theme = "github-dark-default"
+mode = "auto"               # auto, split, unified
+auto_split_min_width = 160  # minimum diff columns for split in auto mode
+line_numbers = true
+wrap_lines = false</code></pre>
+      <p>Persistent state sits in <code>~/.local/state/hunk/state.json</code>. Keybindings are remappable with a <code>[keybindings]</code> table in the same config file — see the keybinding guide on hunk.dev for the command list.</p>
+      <p><strong>Practical notes:</strong> Press <code>i</code> on a changed PNG, JPEG, GIF, or WebP and Hunk draws the before/after images inline where “Binary file skipped” used to appear (new in 0.25.0). And <code>hunk open</code> browses the current directory (or <code>hunk open README.md</code> views one file, syntax-highlighted) with no repo required — <code>i</code> shows hidden/ignored entries there, <code>e</code> edits the displayed file in <code>$EDITOR</code>.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Your shell alias or pager config broke after updating: Hunk rejects <code>--fast</code> as an unknown option</h3>
+      <p>0.25.0 removed the <code>--fast</code> flag — it had been a no-op since 0.24.0 made worker highlighting the default.</p>
+      <p><strong>Fix:</strong> Drop <code>--fast</code> from shell aliases, scripts, and pager configs (Git’s <code>core.pager</code>, LazyGit). (<a href="https://github.com/modem-dev/hunk/blob/main/CHANGELOG.md" target="_blank" rel="noopener">0.25.0 changelog</a>)</p>
+      <h3><code>hunk diff --web</code> on a phone-width viewport scrolls sideways</h3>
+      <p>The review page lays out at ~536px on a 390px screen. The terminal UI is unaffected.</p>
+      <p><strong>Fix:</strong> Still open as of Nov 2026 (<a href="https://github.com/modem-dev/hunk/issues/1348" target="_blank" rel="noopener">issue #1348</a>). Use the terminal review on narrow screens, or a desktop-width browser window, until the fix lands.</p>
+      <h3>Deeply nested filenames show only “…” in the Files sidebar</h3>
+      <p>You can see the change counts but not which file it is.</p>
+      <p><strong>Fix:</strong> Still open (<a href="https://github.com/modem-dev/hunk/issues/1344" target="_blank" rel="noopener">issue #1344</a>). Workaround: widen the terminal so the sidebar gets more room, or use <code>hunk diff --web</code>, where the file list has more space.</p>
+      <h3>You can’t read a full commit message inside <code>hunk log</code></h3>
+      <p>Long messages are truncated with no way to expand them.</p>
+      <p><strong>Fix:</strong> Still open as a feature request (<a href="https://github.com/modem-dev/hunk/issues/1343" target="_blank" rel="noopener">issue #1343</a>). Workaround: quit the review and read the message with <code>git log</code> / <code>git show</code> in the terminal.</p>
+      <h3>Review comment threads can’t be resolved or reopened</h3>
+      <p>There’s no resolve action, so discussion state is lost if you delete a thread.</p>
+      <p><strong>Fix:</strong> Still open as a feature request (<a href="https://github.com/modem-dev/hunk/issues/1342" target="_blank" rel="noopener">issue #1342</a>). For now, threads are delete-only; keep the discussion in the PR itself if you need a resolved/unresolved record.</p>
+      <h3><code>hunk diff --web --no-open | head -1</code> keeps the review running after <code>head</code> exits</h3>
+      <p>The docs claimed stdout was exactly the URL, but piping it into another command stranded the process.</p>
+      <p><strong>Fix:</strong> Fixed upstream (<a href="https://github.com/modem-dev/hunk/issues/1353" target="_blank" rel="noopener">issue #1353</a>, closed): Hunk now matches the terminal’s shutdown signals in headless reviews, so piping the URL into another command no longer strands the process. Update to a current build if you hit it.</p>
+      <h3><code>hunk update</code> doesn’t do what you expect on the Omarchy package install</h3>
+      <p><code>hunk update</code> is for npm, Homebrew, and install-script installs. The Omarchy package is managed by pacman.</p>
+      <p><strong>Fix:</strong> Update it with <code>omarchy update</code> (or <code>omarchy pkg add hunk</code> again), not the self-updater. Unverified on-machine whether <code>hunk update</code> refuses or misbehaves on the packaged install; see the checklist.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><a href="/apps/claude-code.html">Claude Code</a> / <code>opencode</code> / any agentic coder — Hunk is the review half of the agent loop (the agent writes, Hunk is where you check). <code>lazygit</code> for staging and committing once the review is done — Hunk reviews, LazyGit stages. <code>jj</code> (Jujutsu) if you want native revsets in the same review UI.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>delta</code> — a pager, not a reviewer: beautiful <code>git diff</code> output in the terminal, no interactive stream. <code>difftastic</code> if you care most about structural diffs (it understands syntax, so a reformat doesn’t look like a rewrite). <code>lumen</code> is the closest sibling — also a review-first interactive TUI with mouse support and a sidebar, but no inline agent annotations.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Hunk vs similar apps</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Hunk</th><th>lumen</th><th>difftastic</th><th>delta</th><th>diff-so-fancy</th></tr></thead>
+          <tbody>
+            <tr><td>Review-first interactive UI</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>Multi-file review stream + sidebar</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>Inline agent / AI annotations</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>Responsive auto split/unified layout</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>Mouse support inside the viewer</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>Syntax highlighting</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
+            <tr><td>Structural diffing</td><td>❌</td><td>❌</td><td>✅</td><td>❌</td><td>❌</td></tr>
+            <tr><td>Pager-compatible mode</td><td>✅</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add hunk</code></td><td>Not in the Omarchy repo</td><td>Not in the Omarchy repo</td><td>Not in the Omarchy repo</td><td>Not in the Omarchy repo</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you review agent-written code, Hunk is the pick — it’s the only one in the table with inline agent annotations and a review stream built for that loop. If you just want prettier <code>git diff</code> output, delta is lighter; if you want syntax-aware diffs, difftastic wins that one column.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Hunk is a free alternative to hosted AI code review</h2>
+      <p><strong>Hunk is a free alternative to hosted AI code review.</strong> Hunk is free and MIT-licensed — there is no paid tier, no trial, no feature gate. The honest framing: the paid thing it replaces is a seat in a hosted AI code-review tool (GitHub Copilot code review, JetBrains AI review, or a dedicated review bot subscription). Hunk plus the coding agent you already pay for covers the same loop — agent writes, you review with its annotations inline — for $0 extra. What you give up: the hosted tools’ automatic PR comments and team dashboards. What you keep: the actual review, in your terminal, with your agent’s notes attached to the lines they concern. GitHub’s own built-in PR review is also free for public repos, so Hunk’s pitch is the terminal workflow and the agent loop, not the price.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Hunk package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/hunk.html">View Hunk →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Hunk work on Omarchy?</summary><p>Yes — it’s in the official Omarchy repo as <code>hunk</code> (0.25.0-1, added 2026-11-23), and the README notes it also ships as a default Omarchy tool via mise. <code>omarchy pkg add hunk</code> installs the standalone binary; it needs only glibc.</p></details>
+      <details><summary>Is Hunk free?</summary><p>Yes. MIT-licensed open source, ~9,900 GitHub stars. No paid tier.</p></details>
+      <details><summary>How do I review my agent’s changes?</summary><p><code>cd</code> into the repo and run <code>hunk diff</code> (add <code>--watch</code> while the agent is still working). Press <code>a</code> to show the agent’s inline annotations. Install the hunk-review skill once so the agent can annotate the live session: <code>npx skills add modem-dev/hunk -g --skill hunk-review</code>.</p></details>
+      <details><summary>Can I review GitHub PRs with it?</summary><p>Yes, without the GitHub CLI: <code>hunk gh pr</code> for the current branch’s PR, <code>hunk gh pr 123</code> for a numbered one. Public repos work anonymously; private repos need <code>GH_TOKEN</code> or <code>GITHUB_TOKEN</code>. GitHub Enterprise is not supported (Enterprise Cloud <code>&lt;tenant&gt;.ghe.com</code> is, since 0.25.0).</p></details>
+      <details><summary>Does it work with Jujutsu or Sapling?</summary><p>Yes — it auto-detects jj and Sapling checkouts, and <code>hunk diff</code> / <code>hunk show</code> accept native revsets there. Set <code>vcs = "git"</code> / <code>"jj"</code> / <code>"sl"</code> in config to override detection.</p></details>
+      <details><summary>How do I update Hunk?</summary><p>If you installed from the store, update through the package manager (<code>omarchy update</code>), not <code>hunk update</code> — the self-updater is for npm/Homebrew/install-script installs.</p></details>
+      <details><summary>How do I uninstall Hunk?</summary><p><code>omarchy pkg drop hunk</code>. If you set it as your Git pager, restore the default first: <code>git config --global --unset core.pager</code> (or point it at <code>less</code>).</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://github.com/modem-dev/hunk" target="_blank" rel="noopener">modem-dev/hunk — README (install, quick start, feature comparison, config, pager integration)</a></li>
+        <li><a href="https://github.com/modem-dev/hunk/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Hunk CHANGELOG — 0.25.0 (image preview, --fast removal, GH Enterprise Cloud, hunk feedback)</a></li>
+        <li><a href="https://omarchyapps.com/apps/hunk.html" target="_blank" rel="noopener">omarchyapps.com app page — hunk 0.25.0-1, MIT, 69.7 MB download / 193.1 MB installed, added 2026-11-23</a></li>
+        <li><a href="https://github.com/modem-dev/hunk/issues/1348" target="_blank" rel="noopener">Issue #1348 — browser review overflows at phone width (open)</a></li>
+        <li><a href="https://github.com/modem-dev/hunk/issues/1344" target="_blank" rel="noopener">Issue #1344 — deeply nested filenames show only … in the Files sidebar (open)</a></li>
+        <li><a href="https://github.com/modem-dev/hunk/issues/1343" target="_blank" rel="noopener">Issue #1343 — expanding commit messages inside hunk log (open)</a></li>
+        <li><a href="https://github.com/modem-dev/hunk/issues/1342" target="_blank" rel="noopener">Issue #1342 — resolve/reopen review comment threads (open)</a></li>
+        <li><a href="https://github.com/modem-dev/hunk/issues/1353" target="_blank" rel="noopener">Issue #1353 — headless web review shutdown signals (closed)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

@@ -1,0 +1,151 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Exact install command: confirm `omarchy pkg add antigravity` installs version 2.33.0-1 from Omarchy's repo, and that the store listing slug is `antigravity`.
+- First-launch behavior: what actually appears on first launch (sign-in screen? project picker? any onboarding?). Google sign-in is required — confirm the OAuth callback returns to the app instead of looping in the browser (see the known Linux deep-link bug below).
+- Binary and launcher name: confirm the app launcher entry is "Antigravity" and whether an `antigravity` command exists in the terminal.
+- Config location: check what lands in `~/.config/` after first launch (expected an Antigravity directory, by analogy with the VS Code-derived IDE — unconfirmed) and note it.
+- Agent run: confirm an agent can start a task, run a terminal command, and produce an artifact on a real project.
+- Wayland behavior: confirm whether the window renders correctly under Hyprland out of the box, or whether `--ozone-platform-hint=auto` is needed.
+- Each "Common issue" below reproduces as described, and each fix works on the current install (2.33.0, Nov 2026).
+- Screenshots needed: first-launch sign-in, Agent Manager / mission-control view, an agent mid-task with artifacts, the model picker showing the free-tier models.
+- Comparison install commands: confirm `omarchy pkg add cursor-bin`, `omarchy pkg add claude-code`, and `omarchy pkg add visual-studio-code-bin` resolve in the Omarchy package browser.
+- License: LicenseRef-Google-Antigravity (proprietary, per the store listing). Free for individuals within usage limits — confirm what the free tier actually allows at sign-in time.
+- Version at publish time: check `pacman -Qi antigravity` and note it; guide drafted against v2.33.0-1 (added to the store 2026-11-20).
+
+SEO notes:
+- URL: /guides/antigravity-on-omarchy
+- Title tag: "How to Install & Use Antigravity on Omarchy (2026)"
+- Meta description: "Install Google Antigravity on Omarchy with one command. Agent-first AI development, free for individuals: setup, sign-in, and real Linux fixes from Google's own forum."
+- Keywords: antigravity omarchy, install antigravity linux, antigravity vs cursor, antigravity free alternative cursor, antigravity-ide oauth loop linux, google antigravity arch linux
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Cursor</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Antigravity on Omarchy</h2>
+      <p>Google Antigravity 2.0 is an agent-first development platform in a desktop app: instead of an AI assistant bolted onto an editor, you supervise several AI agents working in parallel across your projects while they plan, write, run, and verify code — and show you receipts for it. It’s for developers who want to direct outcomes (“rebuild this feature, prove it works”) rather than type every keystroke.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add antigravity</code></pre>
+      <p>Takes ~2 minutes plus a 208.4 MB download (542 MB installed). You will need a Google account to sign in — the agents run on Google’s Gemini models, and the free individual tier is usage-limited. Paid Google AI Pro and Ultra plans raise the limits and unlock extra models.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. First launch and sign-in.</h3>
+      <p>After installing, launch Antigravity from the app launcher. Expect a Google sign-in on first run: it opens your browser, you approve the account, and the browser hands you back to the app. If the hand-off loops or lands in the wrong app instead of Antigravity, that’s the known Linux OAuth bug — see “Common issues” below before reinstalling anything.</p>
+      <h3>2. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Agent Manager is the home screen, not an editor.</strong> Antigravity 2.0 is a command center: you see every agent you’ve dispatched, what each one is doing, and which ones are waiting on your approval. The hands-on editor view is there when you want it, but the default posture is supervision, not typing.</li>
+        <li><strong>Agents produce artifacts, not just chat.</strong> Every task yields reviewable evidence — an implementation plan before code is written, a task list ticked off as it goes, screenshots of the UI it changed, even a video recording of the agent clicking through your app in a browser. Read the artifact before you trust the code.</li>
+        <li><strong>You can run several agents at once.</strong> Each agent works in its own workspace, so you can have one fixing a bug while another writes tests and a third researches a library. Check in on them from the Agent Manager instead of babysitting one conversation.</li>
+      </ul>
+      <h3>3. Your first task.</h3>
+      <p>Pick a small, verifiable job: “add a test for X” or “fix this failing test and show me the passing run.” Give the agent the outcome, not the steps, then watch the plan artifact first — Antigravity drafts the plan before writing code, and you can edit the plan before it starts. Approve terminal commands when prompted; don’t blanket-approve them until you’ve seen what the agent actually runs.</p>
+      <h3>4. Models and limits.</h3>
+      <p>The free individual tier runs on Gemini models (Gemini 3.8 Flash is the workhorse on every plan) within weekly usage limits. Gemini 4 Argon and some third-party models (including Claude) are paid-plan only. If an agent suddenly stops mid-task with a quota message, you’ve hit the free-tier limit — wait for the reset or upgrade the Google AI plan; it’s not a bug in the app.</p>
+      <h3>5. Config location.</h3>
+      <p>Unverified on Omarchy — see the checklist above. After first launch, check <code>~/.config/</code> for the Antigravity directory and note it here before treating this section as settled.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Sign-in loops forever</h3>
+      <p>After approving Google in the browser, the <code>antigravity-ide://</code> callback opens VS Code, then falls back to GNOME Software, and the app never receives the login. The session can also randomly unauthenticate later. This is a known, still-open Linux packaging gap (reported 2026-10-24): the official Linux build ships no registered handler for the <code>antigravity-ide://</code> scheme, so <code>xdg-open</code> has nowhere to send the callback (<a href="https://discuss.ai.google.dev/t/linux-arch-still-shipping-broken-oauth-deep-links-antigravity-ide-random-session-unauthentication/192012" target="_blank" rel="noopener">forum thread</a>).</p>
+      <p><strong>Fix:</strong> On Omarchy, first try the repo package and a reboot. The reporter worked around it by switching to the community AUR build (<code>antigravity-ide</code> on the AUR), which ships a proper <code>.desktop</code> handler. If the loop reproduces, the fix is a desktop entry registering <code>MimeType=x-scheme-handler/antigravity-ide;</code> — verify the exact entry on a real machine before publishing this as a fix, and report it upstream either way.</p>
+      <h3>App crashes on shutdown after the first run</h3>
+      <p><code>SIGTRAP</code> / coredump in the journal right after quitting. Reported once on Omarchy 4.0.6 with Antigravity 2.28.1 (2026-10-31): the main process aborted during language-server shutdown, then never reproduced on the next launch (<a href="https://discuss.ai.google.dev/t/antigravity-2-28-1-linux-main-process-sigtrap-int3-ud2-during-shutdown-after-first-run/197381" target="_blank" rel="noopener">forum thread</a>).</p>
+      <p><strong>Fix:</strong> Google’s response was to update — v2.29.0 shipped cold-start and window-restore fixes. If you see it on 2.33.0, it’s a one-off teardown crash, not a broken install: relaunch and move on, but note it if it repeats.</p>
+      <h3>Gemini models hang on “Working…” forever</h3>
+      <p>Gemini models hang on “Working…” and fail with “Agent execution terminated due to error”, while Claude models still work. This is the signature of a stale build: the bundled language-server certificate in v2.5.5 expired on 2026-11-03, and older Gemini models were retired at the same time (<a href="https://discuss.ai.google.dev/t/bug-gemini-models-hang-on-ubuntu-linux-in-antigravity-ide-v2-5-5-while-claude-works-expired-language-server-certificate/197939" target="_blank" rel="noopener">forum thread</a>).</p>
+      <p><strong>Fix:</strong> Update to a current build (<code>omarchy update</code>), then start a <strong>new</strong> conversation and pick a current model — model selection sticks per conversation, so an old chat keeps trying the retired model.</p>
+      <h3>Blank or invisible window on first launch under Hyprland/Wayland</h3>
+      <p>Standard Electron-on-Wayland behavior: Chromium defaults to the X11 backend through XWayland. (<a href="https://agentpedia.codes/blog/install-antigravity-arch-linux" target="_blank" rel="noopener">Arch install guide</a>).</p>
+      <p><strong>Fix:</strong> Launch with the native Wayland hint — <code>antigravity --ozone-platform-hint=auto</code> — and make it permanent by appending the flag to the <code>Exec=</code> line of the app’s <code>.desktop</code> entry if it reproduces. Confirm the flag and the binary name on Omarchy before publishing this as a fix.</p>
+      <h3>The agent wants to run terminal commands and you’re not sure what’s safe</h3>
+      <p>Not a bug — a setting. Antigravity added a Secure Mode (Dec 2025) in which agent actions require human review, and sandboxing for agent terminal commands on Linux (early 2026).</p>
+      <p><strong>Fix:</strong> Keep approvals on for anything that touches the network, installs packages, or writes outside the project until you trust a given workflow. Review <code>git diff</code> before committing anything an agent wrote.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><a href="/apps/claude-code.html">Claude Code</a> (terminal-first agent for quick jobs where opening the desktop app is overkill), <a href="/apps/ghostty.html">Ghostty</a> (the terminal the agents’ commands run in), and a Git workflow you actually commit in — agents write a lot of code fast, and <code>git diff</code> is your review surface.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><a href="/apps/cursor-bin.html">Cursor</a> — the same AI-pair-programming idea, but editor-first and $20/month, with a single-agent conversation instead of a mission-control view. Or <a href="/apps/claude-code.html">Claude Code</a> if you’d rather live in the terminal entirely. Or plain <a href="/apps/visual-studio-code-bin.html">VS Code</a> with Copilot if you want AI suggestions and nothing autonomous.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Antigravity vs Cursor vs Claude Code vs VS Code</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Antigravity</th><th>Cursor</th><th>Claude Code</th><th>VS Code + Copilot</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free for individuals (usage limits); Google AI Pro/Ultra raise limits</td><td>$20/mo</td><td>Usage-based (Anthropic API / subscription)</td><td>Free editor; Copilot $10–19/mo</td></tr>
+            <tr><td>Best for</td><td>Supervising several agents at once; agents that plan, run, and verify with artifacts</td><td>Editor-first AI pair programming; one focused conversation at a time</td><td>Terminal-first autonomous agents; scriptable, no GUI needed</td><td>Familiar editor, AI completions and chat, nothing autonomous</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add antigravity</code></td><td><code>omarchy pkg add cursor-bin</code></td><td><code>omarchy pkg add claude-code</code></td><td><code>omarchy pkg add visual-studio-code-bin</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you want to hand whole tasks to agents and check their work from a dashboard, Antigravity is the pick — and the free tier makes it the cheapest way to try that workflow. If you want one AI pair-programmer inside the editor you’re already in, Cursor is the safer bet.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Antigravity is a free alternative to Cursor ($20/mo)</h2>
+      <p><strong>Antigravity is a free alternative to Cursor ($20/mo).</strong> What you give up: the mature single-editor flow Cursor has refined for years, and some model choice on the free tier (Gemini 4 Argon and third-party models need a paid Google AI plan). What you keep: an agent that plans, writes, runs, and verifies code with reviewable artifacts, multi-agent parallel work, and a browser that tests your app for you — free for individuals within weekly usage limits.</p>
+      <p>Honesty note: “free” here means free within Google’s usage limits, not unlimited. Free-tier users were moved to a weekly limit in Dec 2025, and heavy agent use will hit it. Cursor’s $20 buys predictable quota; Antigravity’s $0 buys the best free agent tier available, with a quota ceiling you’ll eventually feel.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Cursor (~15 minutes)</h2>
+      <ol>
+        <li><strong>Export from Cursor:</strong> your code is just files on disk — there’s nothing to export. Your Cursor rules (<code>.cursor/rules/</code>) and chat history don’t transfer; copy any rules you care about into a text file.</li>
+        <li><strong>Import into Antigravity:</strong> open the same project folder in Antigravity. Paste your rules into the project’s instructions/knowledge base so agents pick them up. Re-create any custom commands as agent tasks.</li>
+        <li><strong>What doesn’t transfer:</strong> chat history, Cursor-specific rules formatting, and your Copilot-style inline completion habits — Antigravity wants you to delegate tasks, not accept ghost text.</li>
+        <li><strong>Time estimate:</strong> ~15 minutes to move a project over and run your first agent task.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Antigravity package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/antigravity.html">View Antigravity →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Antigravity work on Omarchy?</summary><p>Yes — it’s in the official Omarchy repo as <code>antigravity</code> (v2.33.0-1, added 2026-11-20): <code>omarchy pkg add antigravity</code>. It’s a 208.4 MB download, 542 MB installed. Note this is the Antigravity 2.0 desktop app (the agent command center), not the separate Antigravity IDE editor — don’t confuse the two version lines.</p></details>
+      <details><summary>Is Antigravity free?</summary><p>For individuals, yes, within usage limits — no separate Antigravity subscription exists; it draws on your Google AI plan. Paid Google AI Pro and Ultra plans raise the limits and unlock extra models. A Google account is required.</p></details>
+      <details><summary>How is Antigravity different from Cursor or Copilot?</summary><p>Cursor and Copilot are editor-first: an AI helps you while you type. Antigravity is agent-first: you describe the outcome, one or more agents plan and execute it across the editor, terminal, and a browser, and each step produces a reviewable artifact (plan, task list, screenshot, browser recording) before you accept it.</p></details>
+      <details><summary>Do I need a Google account?</summary><p>Yes. Sign-in is via Google, and the agents run on Gemini models. The sign-in callback on Linux has a known bug (see Common issues) — if the browser hand-off loops, that’s the bug, not your account.</p></details>
+      <details><summary>Can agents run commands on my machine?</summary><p>Yes — that’s the point, and the risk. Agents get terminal access. Use Secure Mode / approval prompts, and the Linux sandbox option for agent commands, until you trust a workflow. Review <code>git diff</code> before committing anything an agent wrote.</p></details>
+      <details><summary>How do I uninstall Antigravity?</summary><p><code>omarchy pkg drop antigravity</code>. Sign out first if you want the local session revoked; the uninstall removes the package, not your Google account or your projects.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/antigravity.html" target="_blank" rel="noopener">omarchyapps.com — antigravity app page (version 2.33.0-1, 208.4 MB / 542 MB, LicenseRef-Google-Antigravity, added 2026-11-20)</a></li>
+        <li><a href="https://omarchyapps.com/catalog/v1.json" target="_blank" rel="noopener">omarchyapps.com — catalog feed v1 (app_count 219, generated 2026-11-20T14:00:48Z)</a></li>
+        <li><a href="https://antigravity.google/product/antigravity-2" target="_blank" rel="noopener">Google Antigravity — product page, Antigravity 2.0</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Google_Antigravity" target="_blank" rel="noopener">Wikipedia — Google Antigravity (launch Nov 18 2025; Antigravity 2.0 at I/O May 19 2026; stable 2.31.0 Nov 9 2026; Secure Mode; Linux sandboxing)</a></li>
+        <li><a href="https://discuss.ai.google.dev/t/linux-arch-still-shipping-broken-oauth-deep-links-antigravity-ide-random-session-unauthentication/192012" target="_blank" rel="noopener">Google AI Developers forum — Linux/Arch broken OAuth deep-links &amp; random unauthentication (2026-10-24)</a></li>
+        <li><a href="https://discuss.ai.google.dev/t/antigravity-2-28-1-linux-main-process-sigtrap-int3-ud2-during-shutdown-after-first-run/197381" target="_blank" rel="noopener">Google AI Developers forum — SIGTRAP on shutdown, Omarchy 4.0.6, v2.28.1 (2026-10-31)</a></li>
+        <li><a href="https://discuss.ai.google.dev/t/bug-gemini-models-hang-on-ubuntu-linux-in-antigravity-ide-v2-5-5-while-claude-works-expired-language-server-certificate/197939" target="_blank" rel="noopener">Google AI Developers forum — Gemini hang on v2.5.5, expired language-server cert (2026-11-03)</a></li>
+        <li><a href="https://agentpedia.codes/blog/install-antigravity-arch-linux" target="_blank" rel="noopener">Agentpedia — How to Install Antigravity on Arch Linux (AUR options, Wayland <code>--ozone-platform-hint=auto</code>)</a></li>
+        <li><a href="https://pandromeda.com/ai/what-is-google-antigravity-how-it-works-and-what-it-costs" target="_blank" rel="noopener">Pandromeda — Google Antigravity: What It Is, Pricing &amp; Setup 2026 (free individuals tier, Gemini 3.8 Flash / Gemini 4 Argon)</a></li>
+        <li><a href="https://www.thelinuxitguy.com/blog/antigravity-arch-install/" target="_blank" rel="noopener">The Linux IT Guy — Antigravity IDE on Arch/Omarchy from a tarball (launcher + .desktop notes)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Install &amp; Use linux-omarchy-nvidia-open on Omarchy (2026)</title>
-<meta name="description" content="Install linux-omarchy-nvidia-open on Omarchy with one command: omarchy pkg add linux-omarchy-nvidia-open. NVIDIA open kernel modules for the Omarchy Linux…">
+<title>Install NVIDIA Open Kernel Modules on Omarchy (2026)</title>
+<meta name="description" content="linux-omarchy-nvidia-open is NVIDIA&#x27;s open kernel modules (driver 615.78.08) prebuilt for Omarchy&#x27;s default kernel. Install it, reboot, and verify with…">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/linux-omarchy-nvidia-open-on-omarchy.html">
@@ -13,8 +13,8 @@
 <link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
 <link rel="manifest" href="/images/site.webmanifest?v=2">
-<meta property="og:title" content="Install &amp; Use linux-omarchy-nvidia-open on Omarchy (2026)">
-<meta property="og:description" content="Install linux-omarchy-nvidia-open on Omarchy with one command: omarchy pkg add linux-omarchy-nvidia-open. NVIDIA open kernel modules for the Omarchy Linux…">
+<meta property="og:title" content="Install NVIDIA Open Kernel Modules on Omarchy (2026)">
+<meta property="og:description" content="linux-omarchy-nvidia-open is NVIDIA&#x27;s open kernel modules (driver 615.78.08) prebuilt for Omarchy&#x27;s default kernel. Install it, reboot, and verify with…">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://omarchyapps.com/linux-omarchy-nvidia-open-on-omarchy.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
@@ -24,10 +24,10 @@
 <meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@jessyka_boat">
-<meta name="twitter:title" content="Install &amp; Use linux-omarchy-nvidia-open on Omarchy (2026)">
-<meta name="twitter:description" content="Install linux-omarchy-nvidia-open on Omarchy with one command: omarchy pkg add linux-omarchy-nvidia-open. NVIDIA open kernel modules for the Omarchy Linux…">
+<meta name="twitter:title" content="Install NVIDIA Open Kernel Modules on Omarchy (2026)">
+<meta name="twitter:description" content="linux-omarchy-nvidia-open is NVIDIA&#x27;s open kernel modules (driver 615.78.08) prebuilt for Omarchy&#x27;s default kernel. Install it, reboot, and verify with…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/linux-omarchy-nvidia-open-on-omarchy.html#article","headline":"Install & Use linux-omarchy-nvidia-open on Omarchy (2026)","description":"Install linux-omarchy-nvidia-open on Omarchy with one command: omarchy pkg add linux-omarchy-nvidia-open. NVIDIA open kernel modules for the Omarchy Linux…","url":"https://omarchyapps.com/linux-omarchy-nvidia-open-on-omarchy.html","dateModified":"2026-11-23","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/guides.html"},{"@type":"ListItem","position":3,"name":"Install & Use linux-omarchy-nvidia-open on Omarchy (2026)","item":"https://omarchyapps.com/linux-omarchy-nvidia-open-on-omarchy.html"}]},{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/linux-omarchy-nvidia-open-on-omarchy.html#app","name":"linux-omarchy-nvidia-open","description":"NVIDIA open kernel modules for the Omarchy Linux (BORE CPU scheduler, ADIOS I/O scheduler) kernel","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"7.2.15-4","license":"MIT AND GPL-2.0-only","url":"https://omarchyapps.com/apps/linux-omarchy-nvidia-open.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/linux-omarchy-nvidia-open-on-omarchy.html#article","headline":"Install NVIDIA Open Kernel Modules on Omarchy (2026)","description":"linux-omarchy-nvidia-open is NVIDIA's open kernel modules (driver 615.78.08) prebuilt for Omarchy's default kernel. Install it, reboot, and verify with…","url":"https://omarchyapps.com/linux-omarchy-nvidia-open-on-omarchy.html","dateModified":"2026-11-23","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Install NVIDIA Open Kernel Modules on Omarchy (2026)","item":"https://omarchyapps.com/linux-omarchy-nvidia-open-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need this package?","acceptedAnswer":{"@type":"Answer","text":"Only if you have an NVIDIA GPU (Turing or newer) and run Omarchy's default kernel. AMD and Intel GPUs don't need it, and if Omarchy already installed NVIDIA support for you during setup, check nvidia-smi before adding anything — you may already have it."}},{"@type":"Question","name":"Which of the three -nvidia-open packages do I install?","acceptedAnswer":{"@type":"Answer","text":"Match your kernel: uname -r. Ends in -omarchy, install this package. Ends in -omarchy-eevdf, install linux-omarchy-eevdf-nvidia-open. Ends in -omarchy-muqss, install linux-omarchy-muqss-nvidia-open. One per kernel flavor, never two at once."}},{"@type":"Question","name":"Why is there a separate package per kernel?","acceptedAnswer":{"@type":"Answer","text":"Kernel modules load only into the exact kernel they were built against. Omarchy builds the same NVIDIA driver source three times — once per kernel flavor — and ships each as its own package, so a kernel update always lands with matching modules and nobody compiles anything through DKMS."}},{"@type":"Question","name":"Can I install this alongside nvidia-open-dkms?","acceptedAnswer":{"@type":"Answer","text":"No — they conflict. The DKMS package is the same modules built from source, for kernels other than Omarchy's three. On an Omarchy kernel, use the prebuilt package."}},{"@type":"Question","name":"What GPUs does it support?","acceptedAnswer":{"@type":"Answer","text":"Turing and later: GTX 16-series, RTX 20/30/40/50-series, and equivalent Quadro and datacenter cards. Pre-Turing cards (GTX 10-series and older) are not supported by the open modules at all — use the proprietary 580-series DKMS package."}},{"@type":"Question","name":"What happens on a kernel update?","acceptedAnswer":{"@type":"Answer","text":"The matching -nvidia-open package updates with the kernel (same version, same release). No DKMS rebuild, no manual step — that's the design. A partial update that moves one without the other will break the driver, so always update the full system."}},{"@type":"Question","name":"Does it work with Secure Boot?","acceptedAnswer":{"@type":"Answer","text":"The modules are signed with the key the kernel build generated and signed the kernel's own modules with. Whether that satisfies a Secure Boot-enforcing machine is unconfirmed."}},{"@type":"Question","name":"How do I uninstall it?","acceptedAnswer":{"@type":"Answer","text":"Run omarchy pkg drop linux-omarchy-nvidia-open, then reboot. If you were relying on it for your display, have a fallback ready: the open-source Nouveau driver loads in its absence, or reinstall before rebooting."}}]}]}</script>
 <link rel="stylesheet" href="/style.75958c2d72.css">
   <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
   <script src="/oa-ads.js" defer></script>
@@ -50,75 +50,175 @@
 
 <header class="hero guide-hero seo-hero">
   <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/guides.html">Guides</a><span>›</span><span aria-current="page">Utilities tutorial</span></nav>
-    <p class="eyebrow">Utilities tutorial</p>
-    <h1>linux-omarchy-nvidia-open on <span>Omarchy</span></h1>
-    <p class="tag">NVIDIA open kernel modules for the Omarchy Linux (BORE CPU scheduler, ADIOS I/O scheduler) kernel</p>
-    <p class="facts">Generated from the official Omarchy package repo</p>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">NVIDIA driver guide</span></nav>
+    <p class="eyebrow">NVIDIA driver guide</p>
+    <h1>NVIDIA open modules on <span>Omarchy</span></h1>
+    <p class="tag">NVIDIA&#x27;s open kernel modules, prebuilt for Omarchy&#x27;s default kernel — install, reboot, and your Turing-or-newer GPU works.</p>
+    <p class="facts">Reviewed 2026-11-23 · independent editorial guide</p>
   </div>
 </header>
-<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
+<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
 
 <main class="wrap seo-guide-main">
   <article class="seo-article">
     <div class="guide-answer">
       <p class="answer-label">Short answer</p>
-      <p>To install linux-omarchy-nvidia-open on Omarchy, open a terminal and run omarchy pkg add linux-omarchy-nvidia-open. It is a 10.3 MB download (10.3 MB installed), version 7.2.15-4, licensed MIT AND GPL-2.0-only. NVIDIA open kernel modules for the Omarchy Linux (BORE CPU scheduler, ADIOS I/O scheduler) kernel. Check the project site for current pricing.</p>
+      <p>Install linux-omarchy-nvidia-open with omarchy pkg add linux-omarchy-nvidia-open, reboot, and check nvidia-smi. The prebuilt modules match driver 615.78.08 and Omarchy&#x27;s default kernel (7.2.15-4), so kernel updates never need a DKMS rebuild. Turing GPUs and newer only.</p>
     </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install command: confirm `omarchy pkg add linux-omarchy-nvidia-open` installs version 7.2.15-4 and pulls in `linux-omarchy` 7.2.15-4 + `nvidia-utils` 615.78.08 as dependencies.
+- After install + reboot: confirm `nvidia-smi` works, `lsmod | grep nvidia` shows the modules loaded, and `modinfo nvidia` reports version 615.78.08.
+- Confirm the modules load only when booted into the matching kernel (`uname -r` ends in `-omarchy`): boot the eevdf or muqss kernel with this package installed and confirm the NVIDIA modules do NOT load (expected — each flavor needs its own package).
+- Confirm the conflict: with `nvidia-open-dkms` installed, pacman refuses this package (and vice versa) per the PKGBUILD `conflicts=(nvidia-open-dkms)`.
+- Confirm a kernel update keeps working: after the next `linux-omarchy` update, the matching `-nvidia-open` package updates in lockstep and no DKMS rebuild is needed (the whole point of the prebuilt package).
+- Confirm Wayland session starts normally on an NVIDIA GPU with these modules (Hyprland), and check whether any `nvidia_drm.modeset` kernel parameter is needed on this driver version.
+- Confirm suspend/resume behavior on an NVIDIA laptop with these modules (general NVIDIA pain point — see Common issues).
+- Confirm Secure Boot behavior: the PKGBUILD signs the modules with the kernel build's key — confirm what happens on a Secure Boot-enforcing machine.
+- Confirm `nvidia-smi` output and `glxinfo` / a game or CUDA workload actually use the GPU after install (not just that the module loads).
+- Sizes: download 10.3 MB / installed 10.3 MB (app-store package details, 7.2.15-4) — confirm on-machine.
+- Screenshots needed: `nvidia-smi` output, `lsmod` showing nvidia modules, the Hyprland session running on the NVIDIA GPU.
+- License: MIT AND GPL-2.0-only (app-store page). Free, no paid tier exists.
+- Version at publish time: check `pacman -Qi linux-omarchy-nvidia-open` and note it; guide drafted against 7.2.15-4 / driver 615.78.08 (added to the store 2026-11-23).
+
+SEO notes:
+- URL: /guides/linux-omarchy-nvidia-open-on-omarchy
+- Title tag: "Install NVIDIA Open Kernel Modules on Omarchy (2026)"
+- Meta description: "linux-omarchy-nvidia-open is NVIDIA's open kernel modules (driver 615.78.08) prebuilt for Omarchy's default kernel. Install it, reboot, and verify with nvidia-smi. Turing GPUs and newer only."
+- Keywords: linux-omarchy-nvidia-open, omarchy nvidia driver install, omarchy nvidia open modules, nvidia-smi omarchy, omarchy black screen nvidia
+-->
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
       <a href="#install">Install</a>
-      <a href="#use">Open and use</a>
-      <a href="#requirements">Requirements</a>
-      <a href="#remove">Uninstall</a>
-      <a href="#facts">Package facts</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
       <a href="#faq">Questions</a>
     </nav>
 
     <section id="install">
-      <h2>Install linux-omarchy-nvidia-open on Omarchy</h2>
-      <p>NVIDIA open kernel modules for the Omarchy Linux (BORE CPU scheduler, ADIOS I/O scheduler) kernel</p>
-      <p>The official repository lists this package in Utilities. It was added on 2026-09-14.</p>
-      
-      <ol>
-        <li>Open a terminal.</li>
-        <li>Run the install command:<pre><code class="language-bash">omarchy pkg add linux-omarchy-nvidia-open</code></pre></li>
-        <li>Check it landed. Pacman should list version 7.2.15-4:<pre><code class="language-bash">pacman -Qi linux-omarchy-nvidia-open</code></pre></li>
-      </ol>
+      <h2>NVIDIA open kernel modules on Omarchy</h2>
+      <p>linux-omarchy-nvidia-open is NVIDIA’s open kernel modules (driver 615.78.08), prebuilt for Omarchy’s default kernel (BORE CPU scheduler, ADIOS I/O scheduler) — the driver half of the NVIDIA stack on Omarchy, so your NVIDIA GPU actually works. It’s for Omarchy users with a Turing-or-newer NVIDIA GPU (GTX 16-series, RTX 20-series and up) running the default <code>linux-omarchy</code> kernel.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add linux-omarchy-nvidia-open
+sudo reboot
+nvidia-smi   # after reboot: should list your GPU and driver 615.78.08</code></pre>
+      <p>Takes ~2 minutes (10.3 MB download). <strong>Who this is for:</strong> people with an NVIDIA GPU on the default Omarchy kernel. If you run the EEVDF kernel flavor instead, you need <code>linux-omarchy-eevdf-nvidia-open</code>; if you run MuQSS, <code>linux-omarchy-muqss-nvidia-open</code>. The modules only load into the exact kernel they were built against. If you have an AMD or Intel GPU, you don’t need this package at all. If your NVIDIA card is older than Turing (GTX 10-series, 9-series, or older), these modules will not work for you — see Common issues.</p>
     </section>
 
-    <section id="use">
-      <h2>Open and use linux-omarchy-nvidia-open</h2>
-      <p>To see what the package installed, including any commands and desktop entries:</p><pre><code class="language-bash">pacman -Ql linux-omarchy-nvidia-open</code></pre>
+    <section id="getting-started">
+      <h2>Getting started (10 minutes — includes a reboot)</h2>
+      <h3>1. Check your GPU is supported.</h3>
+      <p>The open kernel modules work on Turing GPUs and later — GTX 16-series, RTX 20-series and everything newer (per NVIDIA’s own compatibility list). Find your card with:</p>
+      <pre><code class="language-bash">lspci | grep -i nvidia</code></pre>
+      <p>If it says GTX 1060, 1070, 1080, or anything older, stop: the open modules don’t support it, and you want the proprietary-module path (<code>nvidia-580xx-dkms</code> in the store) instead. If it says RTX 2060 or newer, or GTX 1650/1660, you’re good.</p>
+      <h3>2. Check which kernel you’re running.</h3>
+      <p>This package is built for the default kernel flavor only:</p>
+      <pre><code class="language-bash">uname -r</code></pre>
+      <p>You should see a release string ending in <code>-omarchy</code> (e.g. <code>7.2.15-4-omarchy</code>). If it ends in <code>-omarchy-eevdf</code> or <code>-omarchy-muqss</code>, install the matching <code>-nvidia-open</code> package for that flavor instead — same guide, different package name.</p>
+      <h3>3. Install.</h3>
+      <p><code>omarchy pkg add linux-omarchy-nvidia-open</code>. It pulls in the matching kernel (<code>linux-omarchy</code> 7.2.15-4) and the matching user-space driver (<code>nvidia-utils</code> 615.78.08) as dependencies — the kernel modules and the user-space driver must be the same version, and Omarchy pins them together. The point of this package: the modules ship prebuilt inside the kernel recipe, so a kernel update never leaves you compiling modules through DKMS. The PKGBUILD comment says it plainly: the modules are built in the kernel recipe “so every kernel lands with modules for it and nobody compiles them through DKMS on a kernel update.”</p>
+      <h3>4. Reboot and verify.</h3>
+      <p>After rebooting, check three things:</p>
+      <pre><code class="language-bash">nvidia-smi                    # lists your GPU, driver version 615.78.08, VRAM, temperature
+lsmod | grep nvidia           # nvidia, nvidia_modeset, nvidia_uvm, nvidia_drm loaded
+modinfo nvidia | grep version # version: 615.78.08</code></pre>
+      <p><code>nvidia-smi</code> succeeding is the real test — it proves the kernel modules loaded and the user-space driver is talking to the card. The modules live in <code>/usr/lib/modules/&lt;kernel-release&gt;/extramodules</code>, signed with the same key the kernel build signed its own modules with.</p>
+      <h3>5. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>This is one half of the driver.</strong> The kernel modules in this package are the half that lives in the kernel. The other half — <code>nvidia-utils</code> (the <code>nvidia-smi</code> binary, the GL/Vulkan libraries, the X/Wayland driver pieces) — is a dependency that installs automatically. If you ever update one without the other, the driver breaks; always update the whole system together (<code>omarchy update</code>), never the kernel modules alone.</li>
+        <li><strong>It conflicts with the DKMS build.</strong> This package declares <code>conflicts=(nvidia-open-dkms)</code>. That’s the same open modules built from source via DKMS — the package for people on kernels other than Omarchy’s three flavors. If you have <code>nvidia-open-dkms</code> installed, pacman will make you remove it first. On an Omarchy kernel, prefer the prebuilt package: no compile wait on every kernel update.</li>
+        <li><strong>It only works with its kernel.</strong> The modules are built against kernel 7.2.15-4 exactly. Boot a different kernel flavor and they won’t load — that’s by design, and it’s why there are three sibling packages (default, EEVDF, MuQSS), one per kernel flavor.</li>
+      </ul>
     </section>
 
-    <section id="requirements">
-      <h2>linux-omarchy-nvidia-open requirements and compatibility</h2>
-      <p>No special requirements are documented for linux-omarchy-nvidia-open.</p>
-      <h3>Dependencies Omarchy installs for you</h3><ul><li><code>linux-omarchy</code></li><li><code>nvidia-utils</code></li></ul>
-      <h3>Pricing and license</h3>
-      <p>Check the project site for current pricing. License: MIT AND GPL-2.0-only.</p>
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Your GPU is a GTX 10-series (Pascal) or older, and the modules won’t load — or <code>nvidia-smi</code> says no devices found</h3>
+      <p>Expected, not a bug: NVIDIA’s open kernel modules support Turing GPUs and later only (GTX 16-series, RTX 20-series and up).</p>
+      <p><strong>Fix:</strong> Older cards need the proprietary kernel modules instead — in the store that’s <code>nvidia-580xx-dkms</code> (driver 580 series, proprietary modules). (<a href="https://github.com/NVIDIA/open-gpu-kernel-modules" target="_blank" rel="noopener">NVIDIA open-gpu-kernel-modules README — “Compatible GPUs”</a>)</p>
+      <h3>You installed the wrong flavor — <code>nvidia-smi</code> fails, or the modules don’t load, after booting a different kernel</h3>
+      <p>Each <code>-nvidia-open</code> package is pinned to its kernel (<code>depends</code> on the exact kernel package and version).</p>
+      <p><strong>Fix:</strong> Install the one matching the kernel you actually boot: <code>linux-omarchy-nvidia-open</code> for <code>-omarchy</code>, <code>linux-omarchy-eevdf-nvidia-open</code> for <code>-omarchy-eevdf</code>, <code>linux-omarchy-muqss-nvidia-open</code> for <code>-omarchy-muqss</code>. Check <code>uname -r</code> first, then install the matching package. (PKGBUILD <code>depends</code>, read 2026-11-23; on-machine confirmation pending.)</p>
+      <h3>Pacman refuses to install, complaining about a conflict with <code>nvidia-open-dkms</code></h3>
+      <p>The two packages are mutually exclusive by design (<code>conflicts=(nvidia-open-dkms)</code> in the PKGBUILD).</p>
+      <p><strong>Fix:</strong> Remove the DKMS package first — <code>omarchy pkg drop nvidia-open-dkms</code> — then install the prebuilt one. The DKMS package exists for kernels other than Omarchy’s three flavors; on an Omarchy kernel you don’t need it. (<a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/nvidia-open-dkms" target="_blank" rel="noopener">nvidia-open-dkms README</a>)</p>
+      <h3>After a partial update, the driver is broken — <code>nvidia-smi</code> fails with a version mismatch, or the desktop won’t start</h3>
+      <p>The kernel modules and <code>nvidia-utils</code> must be the same driver version (615.78.08), and Omarchy keeps them in lockstep deliberately (“Keep this version in step with nvidia-utils” — PKGBUILD header comment). A partial upgrade that updates one and not the other breaks the pair.</p>
+      <p><strong>Fix:</strong> Update the whole system: <code>omarchy update</code>, then reboot. Don’t pin or hold one of the two packages.</p>
+      <h3>Black screen or a Wayland session that won’t start after installing the driver</h3>
+      <p>General NVIDIA-on-Arch practice, not verified for driver 615 on Omarchy — see the checklist. The usual suspects: the <code>nvidia_drm</code> module needs modesetting enabled for Wayland compositors (Hyprland included).</p>
+      <p><strong>Fix:</strong> Omarchy’s 580-series utils package enables atomic kernel modesetting by default via a patch, and the same expectation applies to the 615 series — confirm on-machine whether any <code>nvidia_drm.modeset=1</code> / <code>fbdev=1</code> kernel parameter is still needed. If you hit a black screen, boot into a TTY (Ctrl+Alt+F2), check <code>journalctl -b -p err</code> and <code>dmesg | grep -i nvidia</code> for the actual error before changing parameters.</p>
+      <h3>Suspend/resume misbehaves on an NVIDIA laptop — the machine won’t wake, or the GPU stays powered</h3>
+      <p>General NVIDIA practice, unverified for this driver version on Omarchy. The NVIDIA suspend/resume path needs the <code>nvidia-suspend</code>/<code>nvidia-resume</code> services plus <code>NVreg_PreserveVideoMemoryAllocations=1</code>; Omarchy’s 580-series utils ship an <code>nvidia-sleep.conf</code> for this.</p>
+      <p><strong>Fix:</strong> If suspend breaks after installing, check whether the equivalent config exists for the 615 series and report what you find — the checklist covers confirming this on-machine.</p>
     </section>
 
-    <section id="remove">
-      <h2>Uninstall linux-omarchy-nvidia-open</h2>
-      <pre><code class="language-bash">omarchy pkg drop linux-omarchy-nvidia-open</code></pre>
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>nvidia-580xx-utils</code> is NOT a pairing — don’t mix driver generations; <code>nvidia-utils</code> 615.78.08 comes in as this package’s dependency. The real companions: the matching kernel package itself (<a href="/linux-omarchy-on-omarchy.html">linux-omarchy</a>), and a GPU workload to actually use the card — <a href="/lmstudio-on-omarchy.html">LM Studio</a> (in the store) for local AI, or any game via Steam/Heroic. For monitoring, <code>nvidia-smi</code> is built in; <code>nvtop</code> gives you a live <code>htop</code>-style GPU view.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><a href="/apps/nvidia-580xx-dkms.html">nvidia-580xx-dkms</a> — the proprietary kernel modules for the older 580 driver series, built via DKMS. Same GPU, closed-source kernel modules, different trade-offs (broader legacy support, no open code). Or Nouveau, the community open-source driver: fully open, no NVIDIA code at all, but no CUDA and much weaker 3D performance — a principled choice, not a practical one for gaming or AI work.</li>
+      </ul>
     </section>
 
-    <section id="facts">
-      <h2>linux-omarchy-nvidia-open package facts</h2>
-      <div class="table-scroll"><table class="compare-table"><tbody><tr><th scope='row'>Package</th><td><code>linux-omarchy-nvidia-open</code></td></tr><tr><th scope='row'>Version</th><td>7.2.15-4</td></tr><tr><th scope='row'>Category</th><td>Utilities</td></tr><tr><th scope='row'>License</th><td>MIT AND GPL-2.0-only</td></tr><tr><th scope='row'>Download</th><td>10.3 MB</td></tr><tr><th scope='row'>Installed size</th><td>10.3 MB</td></tr><tr><th scope='row'>Built</th><td>2026-11-22</td></tr><tr><th scope='row'>Pricing</th><td>Check the project site for current pricing</td></tr><tr><th scope='row'>Added to the official repo</th><td>2026-09-14</td></tr></tbody></table></div>
-      <p><a href="/apps/linux-omarchy-nvidia-open.html">linux-omarchy-nvidia-open package page on this site</a> · <a href="https://omarchy.org" target="_blank" rel="noopener">Project site</a></p>
+    <section id="comparison">
+      <h2>Comparison: NVIDIA driver options on Omarchy</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>linux-omarchy-nvidia-open (this)</th><th>linux-omarchy-eevdf-nvidia-open</th><th>linux-omarchy-muqss-nvidia-open</th><th>nvidia-open-dkms</th><th>nvidia-580xx-dkms</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Modules</td><td>Open, prebuilt</td><td>Open, prebuilt</td><td>Open, prebuilt</td><td>Open, DKMS-built</td><td>Proprietary, DKMS-built</td></tr>
+            <tr><td>Driver version</td><td>615.78.08</td><td>615.78.08</td><td>615.78.08</td><td>615.78.08</td><td>580 series</td></tr>
+            <tr><td>Kernel</td><td><code>linux-omarchy</code> (BORE/ADIOS)</td><td><code>linux-omarchy-eevdf</code> (plain EEVDF)</td><td><code>linux-omarchy-muqss</code> (MuQSS)</td><td>any other kernel</td><td>any kernel</td></tr>
+            <tr><td>Rebuild on kernel update</td><td>No (prebuilt)</td><td>No (prebuilt)</td><td>No (prebuilt)</td><td>Yes (DKMS compile)</td><td>Yes (DKMS compile)</td></tr>
+            <tr><td>GPUs</td><td>Turing+ only</td><td>Turing+ only</td><td>Turing+ only</td><td>Turing+ only</td><td>Older cards too</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add linux-omarchy-nvidia-open</code></td><td><code>omarchy pkg add linux-omarchy-eevdf-nvidia-open</code></td><td><code>omarchy pkg add linux-omarchy-muqss-nvidia-open</code></td><td>Not in the Omarchy repo</td><td><code>omarchy pkg add nvidia-580xx-dkms</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> On the default Omarchy kernel with a Turing-or-newer card, this is the right package — prebuilt, lockstep with the driver, no DKMS compile on updates. Pick the sibling package if you boot a different kernel flavor, and the 580-series DKMS package only if your card predates Turing.</p>
     </section>
+
+    <aside class="guide-callout">
+      <h2>NVIDIA’s open modules cost $0 — the win is openness, not price</h2>
+      <p><strong>There is no paid driver to replace here — every NVIDIA driver on Linux is free of charge.</strong> The honest angle is openness, not price: these are NVIDIA’s <em>open</em> kernel modules (MIT/GPL-2.0) instead of the proprietary ones, which means the kernel-side code is auditable and ships prebuilt in lockstep with the kernel. What you give up vs the proprietary modules: support for pre-Turing cards, and a few edge features NVIDIA documents as open-module limitations. What you keep: the same GPU, the same performance for gaming and CUDA, and a driver that never needs a DKMS rebuild after a kernel update. The fully-open alternative is Nouveau — also free, but without CUDA and with much weaker 3D performance, so it’s a statement, not a substitute.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the linux-omarchy-nvidia-open package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/linux-omarchy-nvidia-open.html">View linux-omarchy-nvidia-open →</a>
+    </div>
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>How do I install linux-omarchy-nvidia-open on Omarchy?</summary><p>Open a terminal and run omarchy pkg add linux-omarchy-nvidia-open. The download is 10.3 MB and it takes 10.3 MB once installed. Omarchy pulls in any dependencies automatically.</p></details><details><summary>Is linux-omarchy-nvidia-open free?</summary><p>Check the project site for current pricing. The package is licensed MIT AND GPL-2.0-only.</p></details><details><summary>How do I uninstall linux-omarchy-nvidia-open?</summary><p>Run omarchy pkg drop linux-omarchy-nvidia-open. It removes the package from your system.</p></details><details><summary>What does linux-omarchy-nvidia-open depend on?</summary><p>The package declares 2 dependencies: linux-omarchy, nvidia-utils. Omarchy installs them for you.</p></details><details><summary>Is linux-omarchy-nvidia-open in the official Omarchy repo?</summary><p>Yes. It is published as linux-omarchy-nvidia-open (version 7.2.15-4) in the official Omarchy package repository. Project site: https://omarchy.org. This site is unofficial: an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p></details>
+      <details><summary>Do I need this package?</summary><p>Only if you have an NVIDIA GPU (Turing or newer) and run Omarchy’s default kernel. AMD/Intel GPUs don’t need it, and if Omarchy already installed NVIDIA support for you during setup, check <code>nvidia-smi</code> before adding anything — you may already have it.</p></details>
+      <details><summary>Which of the three -nvidia-open packages do I install?</summary><p>Match your kernel: <code>uname -r</code>. Ends in <code>-omarchy</code> → this package. Ends in <code>-omarchy-eevdf</code> → <a href="/linux-omarchy-eevdf-nvidia-open-on-omarchy.html">linux-omarchy-eevdf-nvidia-open</a>. Ends in <code>-omarchy-muqss</code> → <a href="/linux-omarchy-muqss-nvidia-open-on-omarchy.html">linux-omarchy-muqss-nvidia-open</a>. One per kernel flavor, never two at once.</p></details>
+      <details><summary>Why is there a separate package per kernel?</summary><p>Kernel modules load only into the exact kernel they were built against. Omarchy builds the same NVIDIA driver source three times — once per kernel flavor — and ships each as its own package, so a kernel update always lands with matching modules and nobody compiles anything through DKMS.</p></details>
+      <details><summary>Can I install this alongside nvidia-open-dkms?</summary><p>No — they conflict. The DKMS package is the same modules built from source, for kernels other than Omarchy’s three. On an Omarchy kernel, use the prebuilt package.</p></details>
+      <details><summary>What GPUs does it support?</summary><p>Turing and later: GTX 16-series, RTX 20/30/40/50-series, and equivalent Quadro/datacenter cards. Pre-Turing cards (GTX 10-series and older) are not supported by the open modules at all — use the proprietary 580-series DKMS package.</p></details>
+      <details><summary>What happens on a kernel update?</summary><p>The matching <code>-nvidia-open</code> package updates with the kernel (same version, same release). No DKMS rebuild, no manual step — that’s the design. A partial update that moves one without the other will break the driver, so always update the full system.</p></details>
+      <details><summary>Does it work with Secure Boot?</summary><p>The modules are signed with the key the kernel build generated and signed the kernel’s own modules with. Whether that satisfies a Secure Boot-enforcing machine is on the on-machine checklist — unconfirmed.</p></details>
+      <details><summary>How do I uninstall it?</summary><p><code>omarchy pkg drop linux-omarchy-nvidia-open</code>. Then reboot. If you were relying on it for your display, have a fallback ready (the open-source Nouveau driver loads in its absence, or reinstall before rebooting).</p></details>
     </section>
 
-    <section id="related">
-      <h2>More Utilities apps on Omarchy</h2>
-      <ul><li><a href="/nautilus-dropbox-on-omarchy.html">nautilus-dropbox</a></li><li><a href="/omawake-bin-on-omarchy.html">omawake</a></li><li><a href="/superwhisper-bin-on-omarchy.html">superwhisper</a></li><li><a href="/tzupdate-on-omarchy.html">tzupdate</a></li><li><a href="/vi-on-omarchy.html">vi</a></li><li><a href="/voxtype-bin-on-omarchy.html">voxtype</a></li></ul>
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/linux-omarchy-nvidia-open.html" target="_blank" rel="noopener">omarchyapps.com app page — linux-omarchy-nvidia-open 7.2.15-4, MIT AND GPL-2.0-only, 10.3 MB, depends on linux-omarchy + nvidia-utils, added 2026-11-23</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/linux-omarchy" target="_blank" rel="noopener">omarchy-pkgs linux-omarchy PKGBUILD — kernel 7.2.15-4, _nvidiaver=615.78.08, _package-nvidia-open(): depends, provides, conflicts, prebuilt + signed modules (read 2026-11-23)</a></li>
+        <li><a href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/nvidia-open-dkms" target="_blank" rel="noopener">omarchy-pkgs nvidia-open-dkms README.package.md — prebuilt vs DKMS split, lockstep requirement, N1x patches</a></li>
+        <li><a href="https://github.com/NVIDIA/open-gpu-kernel-modules" target="_blank" rel="noopener">NVIDIA open-gpu-kernel-modules README — compatible GPUs: Turing or later; GSP firmware + matching user-space driver required</a></li>
+        <li><a href="https://omarchyapps.com/linux-omarchy-eevdf-on-omarchy.html" target="_blank" rel="noopener">linux-omarchy-eevdf guide draft — kernel flavor context (BORE/ADIOS vs plain EEVDF)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
     </section>
 
   </article>
@@ -126,15 +226,15 @@
   <aside class="related-guides" aria-labelledby="related-guides-h">
     <h2 id="related-guides-h">Keep exploring</h2>
     <div class="related-guide-grid">
-<a class="related-guide" href="/nautilus-dropbox-on-omarchy.html"><strong>nautilus-dropbox on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/omawake-bin-on-omarchy.html"><strong>omawake on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/superwhisper-bin-on-omarchy.html"><strong>superwhisper on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/apps/linux-omarchy-nvidia-open.html"><strong>linux-omarchy-nvidia-open package page</strong><span>Version, size, license and install command</span></a>
+<a class="related-guide" href="/antigravity-on-omarchy.html"><strong>How to Install &amp; Use Antigravity on Omarchy (2026) — Free Cursor Alternative</strong><span>Install Google Antigravity on Omarchy with one command. Agent-first AI development, free for individuals: setup, sign-in, and real Linux fixes from Google&#x27;s own forum.</span></a>
+<a class="related-guide" href="/apple-bcm-firmware-fetcher-on-omarchy.html"><strong>How to Install &amp; Use apple-bcm-firmware-fetcher on Omarchy (2026) — Fix Wi-Fi &amp; Bluetooth on T2 Macs</strong><span>Fix Wi-Fi and Bluetooth on your T2 Mac running Omarchy: install apple-bcm-firmware-fetcher with one command, pull the firmware from your macOS volume, verify it loaded, and fix the common failures (macOS wiped, APFS driver, FileVault, iMac models).</span></a>
+<a class="related-guide" href="/apple-t2-audio-config-on-omarchy.html"><strong>How to Install &amp; Use apple-t2-audio-config on Omarchy (2026) — Fix Sound on a T2 Mac</strong><span>Install apple-t2-audio-config on Omarchy with one command and get working speakers and mic on your T2 Mac. Reboot onto the linux-t2 kernel, pick the T2 output, and fix no-sound, silent-mic, and wrong-device problems.</span></a>
+<a class="related-guide" href="/best-apps-for-omarchy.html"><strong>Best Omarchy Apps (2026): 12 to Install First, With Commands</strong><span>The best apps for a new Omarchy setup, picked by job: files, notes, transfers, themes, video, coding and gaming. Each pick has its exact omarchy pkg add command.</span></a>
     </div>
   </aside>
 </main>
 
-<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
+<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">
