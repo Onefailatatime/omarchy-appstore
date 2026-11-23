@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-11-23T02:00:49+00:00",
+ "generated_at": "2026-11-23T14:00:49+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 220,
+ "app_count": 224,
  "apps": [
   {
    "id": "1password",
@@ -605,6 +605,18 @@
    "url": "https://omarchyapps.com/apps/hey-cli.html"
   },
   {
+   "id": "hunk",
+   "name": "hunk",
+   "package": "hunk",
+   "install_command": "omarchy pkg add hunk",
+   "category": "Utilities",
+   "description": "Review-first terminal diff viewer for agentic coders",
+   "homepage": "https://hunk.dev",
+   "repository": "https://github.com/modem-dev/hunk",
+   "tutorial_url": "https://omarchyapps.com/hunk-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/hunk.html"
+  },
+  {
    "id": "hype",
    "name": "hype",
    "package": "hype",
@@ -970,6 +982,17 @@
    "url": "https://omarchyapps.com/apps/linux-omarchy-eevdf-headers.html"
   },
   {
+   "id": "linux-omarchy-eevdf-nvidia-open",
+   "name": "linux-omarchy-eevdf-nvidia-open",
+   "package": "linux-omarchy-eevdf-nvidia-open",
+   "install_command": "omarchy pkg add linux-omarchy-eevdf-nvidia-open",
+   "category": "Utilities",
+   "description": "NVIDIA open kernel modules for the Omarchy Linux kernel",
+   "homepage": "https://omarchy.org",
+   "tutorial_url": "https://omarchyapps.com/linux-omarchy-eevdf-nvidia-open-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/linux-omarchy-eevdf-nvidia-open.html"
+  },
+  {
    "id": "linux-omarchy-headers",
    "name": "linux-omarchy-headers",
    "package": "linux-omarchy-headers",
@@ -1001,6 +1024,28 @@
    "homepage": "https://omarchy.org",
    "tutorial_url": "https://omarchyapps.com/apps/linux-omarchy-muqss-headers.html",
    "url": "https://omarchyapps.com/apps/linux-omarchy-muqss-headers.html"
+  },
+  {
+   "id": "linux-omarchy-muqss-nvidia-open",
+   "name": "linux-omarchy-muqss-nvidia-open",
+   "package": "linux-omarchy-muqss-nvidia-open",
+   "install_command": "omarchy pkg add linux-omarchy-muqss-nvidia-open",
+   "category": "Utilities",
+   "description": "NVIDIA open kernel modules for the Omarchy Linux (MuQSS CPU scheduler) kernel",
+   "homepage": "https://omarchy.org",
+   "tutorial_url": "https://omarchyapps.com/linux-omarchy-muqss-nvidia-open-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/linux-omarchy-muqss-nvidia-open.html"
+  },
+  {
+   "id": "linux-omarchy-nvidia-open",
+   "name": "linux-omarchy-nvidia-open",
+   "package": "linux-omarchy-nvidia-open",
+   "install_command": "omarchy pkg add linux-omarchy-nvidia-open",
+   "category": "Utilities",
+   "description": "NVIDIA open kernel modules for the Omarchy Linux (BORE CPU scheduler, ADIOS I/O scheduler) kernel",
+   "homepage": "https://omarchy.org",
+   "tutorial_url": "https://omarchyapps.com/linux-omarchy-nvidia-open-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/linux-omarchy-nvidia-open.html"
   },
   {
    "id": "linux-t2",
