@@ -1,5 +1,5 @@
 {
-  "note": "These URLs return 410 from src/worker.js. They were generated tutorials (and their /apps/ aliases) for packages that are no longer in the official Omarchy repository. The HTML is not written to dist/. Checked 2026-11-09: opencode has no successor in the current catalog (t3code-bin is a separate control plane that can steer OpenCode, not a replacement package), so it is included here rather than 301'd. linux-firmware-cirrus is not listed; it 301s to linux-firmware-cirrus-dx13260.",
+  "note": "These URLs return 410 from src/worker.js. They were generated tutorials (and their /apps/ aliases) for packages that are no longer in the official Omarchy repository. The HTML is not written to dist/. 2026-11-24: opencode removed — it is back in the official repository, so its app page and tutorial are live again. linux-firmware-cirrus is not listed; it 301s to linux-firmware-cirrus-dx13260.",
   "decided": "2026-11-09",
   "pages": [
     "/apps/asusctl.html",
@@ -11,7 +11,6 @@
     "/apps/linux-ptl-audio.html",
     "/apps/linux-ptl-headers.html",
     "/apps/linux-ptl.html",
-    "/apps/opencode.html",
     "/apps/pinta.html",
     "/apps/rog-control-center.html",
     "/apps/umu-launcher.html",
@@ -26,7 +25,6 @@
     "/linux-ptl-headers-on-omarchy.html",
     "/linux-ptl-headers.html",
     "/linux-ptl-on-omarchy.html",
-    "/opencode-on-omarchy.html",
     "/pinta-on-omarchy.html",
     "/rog-control-center-on-omarchy.html",
     "/umu-launcher-on-omarchy.html",

@@ -1,0 +1,132 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: run `omarchy pkg add antigravity-cli` on a clean Omarchy system. Confirm version 1.5.15-1, ~98.5 MB download / ~273.9 MB installed as listed.
+- Binary name: confirm the installed command is `agy` (not `antigravity`) and that it is on PATH after install.
+- First run: run `agy` and confirm the Google Sign-In flow works from Hyprland, including the headless/SSH fallback (auth URL plus one-time code).
+- Auto mode: confirm the CLI starts in Auto mode on Omarchy and what it approves without asking.
+- Config location: find where `agy` stores settings and auth (upstream docs do not state a single canonical path; do not guess in the guide).
+- Self-update: confirm whether the Omarchy package or `agy update` owns updates, and whether they conflict.
+- Issues claimed below are NOT personally reproduced — they are documented upstream (Google docs, independent reviews). Verify at least the sign-in and rate-limit behavior on a real machine.
+- Screenshots needed: install, sign-in, first session, model/status bar, MCP setup.
+
+SEO notes:
+- URL: /guides/antigravity-cli-on-omarchy
+- Title tag: "How to Install & Use Antigravity CLI on Omarchy (2026) — Google's Gemini Terminal Agent"
+- Meta description: "Install Google Antigravity CLI on Omarchy. Free tier, Google sign-in, Auto mode, MCP setup, quota limits, and the Gemini CLI replacement explained."
+- Keywords: antigravity cli omarchy, agy omarchy, antigravity cli install, agy google sign in, antigravity cli vs claude code, gemini cli replacement, agy quota limit
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Antigravity CLI on Omarchy</h2>
+      <p>Antigravity CLI (<code>agy</code>) on Omarchy is Google’s terminal coding agent: Gemini-powered, multi-file editing, subagents, and MCP tools, all from your shell, and the official replacement for the retired Gemini CLI.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add antigravity-cli
+agy</code></pre>
+      <p>That installs Antigravity CLI (v1.5.15-1, ~98.5 MB download, ~273.9 MB installed). The command is <code>agy</code>, not <code>antigravity</code>. First run starts a Google Sign-In; a free Google account works on the free Individual plan. It takes about 2 minutes plus sign-in.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Sign in with Google.</h3>
+      <p>Run <code>agy</code> from any project directory. The first run starts a one-time Google Sign-In flow. If you are on SSH or a headless session, it prints an authorization URL plus a one-time code instead of opening a browser.</p>
+      <h3>2. Start an interactive session.</h3>
+      <p>Running bare <code>agy</code> opens the full terminal UI: a scrollable conversation pane, a <code>&gt;</code> prompt, and a status bar showing the active model, token usage, and any running subagents. Just describe the task in plain words.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Know your mode.</strong> The CLI starts in Auto mode, which approves file edits and safe commands on its own and asks before anything riskier. Learn what Auto approves before you point it at a repo you care about; recent releases loosened these defaults, and remote agents now run commands without asking.</li>
+        <li><strong>Check your quota before a big job.</strong> Antigravity meters work as “compute effort,” not transparent token counts, and the free tier has a weekly starter quota. A small question might cost 1 unit; a multi-file refactor might cost 50. The status bar shows a capacity percentage, but launch-era reports found it unreliable, so do not trust it blindly.</li>
+        <li><strong>Add MCP servers for your tools.</strong> Antigravity CLI supports MCP, which extends it with real integrations. Add one with <code>agy mcp add &lt;name&gt; &lt;command&gt;</code>, list them with <code>agy mcp list</code>, remove one with <code>agy mcp remove &lt;name&gt;</code>. For example, CircleCI’s guide adds their server with <code>agy mcp add circleci-cli circleci mcp start</code>.</li>
+      </ul>
+      <p><strong>Config location:</strong> upstream docs do not state a single canonical path for where <code>agy</code> stores settings and auth, so this guide does not guess one — that is an open item on the on-machine verification checklist.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>You hit a rate limit after 20 to 30 minutes of use, and the CLI locks you out for days</h3>
+      <p>This was widely reported at launch: free-tier users were locked out for up to 7 days after short sessions, and the capacity meter read 100% right before the lockout triggered. Google has since moved to 5-hour quota refreshes under a weekly cap, with paid AI-credit top-ups for Pro and Ultra subscribers. (<a href="https://www.danilchenko.dev/posts/antigravity-cli-vs-claude-code/" target="_blank" rel="noopener">Comparison, Nov 2026</a>.)</p>
+      <p><strong>Fix:</strong> If you hit the wall on the free tier, wait for the weekly refresh, or upgrade to Google AI Pro ($19.99/month) for the 5-hour refresh cycle.</p>
+      <h3><code>agy</code> is not found, or the command seems to be named something else</h3>
+      <p>The binary is <code>agy</code>, not <code>antigravity</code>. Google’s own installer drops it in <code>~/.local/bin/</code>; the Omarchy package should put it on PATH, but open a new terminal after install and run <code>agy --version</code> to confirm. (Binary name confirmed by <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/workbench/instances/antigravity-cli" target="_blank" rel="noopener">Google’s docs</a> and multiple install guides.)</p>
+      <p><strong>Fix:</strong> If it is still missing, check <code>pacman -Ql antigravity-cli | grep bin</code>.</p>
+      <h3>Sign-in fails or hangs on a remote machine with no browser</h3>
+      <p>Antigravity CLI detects remote sessions and prints an authorization URL plus a one-time code. (<a href="https://dev.to/arindam_1729/antigravity-cli-a-hands-on-guide-to-googles-terminal-coding-agent-5bc7" target="_blank" rel="noopener">DEV hands-on guide</a>.)</p>
+      <p><strong>Fix:</strong> Copy the URL into a browser on your own machine, sign in, and paste the code back into the terminal. Do not try to force a browser open over SSH.</p>
+      <h3>The agent edits files or runs commands you did not expect it to</h3>
+      <p>That is Auto mode doing what it is set to do: it approves file edits and safe commands without asking. (Auto mode behavior per <a href="https://circleci.com/blog/getting-started-with-antigravity-cli-and-circleci/" target="_blank" rel="noopener">CircleCI guide</a>; the loosened defaults per <a href="https://tailkits.com/tools/google-antigravity/" target="_blank" rel="noopener">Tailkits review, Nov 2026</a>.)</p>
+      <p><strong>Fix:</strong> If that is too loose for your repo, switch to a mode that asks first, and review the diff before you commit anything. Treat the agent like a junior dev with commit access: capable, but always reviewed.</p>
+      <h3>You came from Gemini CLI and your old setup stopped working</h3>
+      <p>That is expected, not a bug in this package. Google retired Gemini CLI for individual Google AI Pro and Ultra users on June 18, 2026. Antigravity CLI is its closed-source, Go-based replacement, sharing the same agent engine as the Antigravity 2.0 desktop app. Your old Gemini CLI config and extensions do not carry over automatically. (<a href="https://dev.to/arindam_1729/antigravity-cli-a-hands-on-guide-to-googles-terminal-coding-agent-5bc7" target="_blank" rel="noopener">DEV hands-on guide</a>.)</p>
+      <p><strong>Fix:</strong> Install Antigravity CLI and sign in with Google; do not try to repair the retired Gemini CLI setup.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>A Google AI Pro subscription if you use it daily (the free weekly quota is thin for real work), <code>git</code> for reviewing every diff the agent makes, and MCP servers for the services you live in (CI, issue trackers, databases).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Claude Code for a terminal agent with clearer per-plan limits, or deepseek-dsh if you want an open-source harness you can point at any model, including local ones, with no Google account at all. Both are covered in their own guides on this site.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Antigravity CLI vs Claude Code vs Amp CLI vs DeepSeek Harness vs Gemini CLI</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Antigravity CLI</th><th>Claude Code (CLI)</th><th>Amp CLI</th><th>DeepSeek Harness</th><th>Gemini CLI</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free tier; Google AI Pro $19.99/mo; Ultra $99.99/$199.99/mo</td><td>Requires Claude Pro $20/mo or higher</td><td>Free Hobby tier; Megawatt $20/mo; Gigawatt $200/mo</td><td>Free, MIT open source; you pay only for model API usage</td><td>Retired for individuals June 18, 2026</td></tr>
+            <tr><td>Best for</td><td>Gemini-powered agent work if you already live in Google’s ecosystem</td><td>Terminal coding where code quality matters most; clearest limits</td><td>Frontier-model choice plus cloud orbs that keep working after you close the laptop</td><td>Open harness, any model, including local ones; no vendor account needed</td><td>Nothing anymore for personal use; enterprise only via paid Gemini API or Code Assist</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add antigravity-cli</code></td><td>Omarchy AI menu / npm</td><td><code>omarchy pkg add amp-cli</code></td><td><code>omarchy pkg add deepseek-dsh</code></td><td>Do not install; use <code>agy</code> instead</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Antigravity CLI if you already pay for Google AI Pro or Ultra, or you want Gemini models in the terminal for free with a thin weekly quota. If you need predictable, published limits or heavy daily use on the free tier, the quota system is the weakest part of this tool, and a paid plan or a different agent is the honest answer.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Antigravity CLI is free to start — the Individual plan costs $0</h2>
+      <p><strong>Antigravity’s Individual plan costs $0 and includes a baseline weekly agent quota, unlimited Tab completions, and unlimited Command requests.</strong> That makes it a genuine free way into a frontier terminal agent, with no credit card. The honest catch: Google publishes no numeric quota for any plan, the quota meters “compute effort” rather than tokens, and the free tier refreshes weekly, not every 5 hours like paid plans. So the pitch is: <strong>free to start, and free is enough to learn the tool, but free is not enough for heavy daily work.</strong> Paid capacity rides on Google AI plans, not a separate Antigravity subscription: Pro $19.99/month, Ultra $99.99 or $199.99/month. Prices as of November 2026; check antigravity.google/pricing before you pay.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Antigravity CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/antigravity-cli.html">View Antigravity CLI →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Antigravity CLI free?</summary><p>Yes, the Individual plan is $0 with a weekly agent quota. Paid quota comes from Google AI Pro ($19.99/month) or Ultra ($99.99 or $199.99/month). There is no Antigravity-only subscription.</p></details>
+      <details><summary>What happened to Gemini CLI?</summary><p>Google retired it for individual users on June 18, 2026. It no longer works with a free Google sign-in and needs paid Gemini API or Gemini Code Assist access. Antigravity CLI (<code>agy</code>) is its replacement, built in Go instead of Node, with a smaller memory footprint and faster startup.</p></details>
+      <details><summary>Is Antigravity CLI open source?</summary><p>No. Unlike Gemini CLI, which was Apache 2.0, Antigravity CLI is closed source. Its GitHub repository holds a changelog, a readme, and a demo, but no source code.</p></details>
+      <details><summary>Which models can I use?</summary><p>Free and Plus tiers get Gemini 3.8 Flash, plus Claude Sonnet 4.6, Claude Opus 4.6, and GPT-OSS-120B until November 30, 2026, when Google plans to remove them. Google AI Pro adds Gemini 4 models (Neon, Argon, Hydrogen) and Claude Sonnet and Opus 5.5 on paid subscriptions. Model availability changes often; check the models page before you commit to a workflow.</p></details>
+      <details><summary>Does <code>agy</code> update itself?</summary><p>Upstream, yes: the Go binary updates itself in place, and you can trigger it manually with <code>agy update</code>. On Omarchy, the package manager may own the version instead, so check whether <code>agy update</code> and <code>omarchy update</code> disagree before relying on either. (Unverified on Omarchy; self-update per <a href="https://realpython.com/antigravity-cli/" target="_blank" rel="noopener">Real Python guide</a>.)</p></details>
+      <details><summary>Can I use it over SSH?</summary><p>Yes. It detects remote sessions and falls back to an authorization URL plus a one-time code for sign-in.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/antigravity-cli.html" target="_blank" rel="noopener">omarchyapps.com app page — antigravity-cli v1.5.15-1, 98.5 MB download, 273.9 MB installed, LicenseRef-Google-Antigravity, updated 2026-11-23</a></li>
+        <li><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/workbench/instances/antigravity-cli" target="_blank" rel="noopener">Google Antigravity CLI docs (Agent Platform Workbench)</a></li>
+        <li><a href="https://dev.to/arindam_1729/antigravity-cli-a-hands-on-guide-to-googles-terminal-coding-agent-5bc7" target="_blank" rel="noopener">Antigravity CLI hands-on guide (install, auth, modes)</a></li>
+        <li><a href="https://circleci.com/blog/getting-started-with-antigravity-cli-and-circleci/" target="_blank" rel="noopener">Antigravity CLI with CircleCI (MCP setup, Auto mode)</a></li>
+        <li><a href="https://realpython.com/antigravity-cli/" target="_blank" rel="noopener">Real Python hands-on guide (install, auth, <code>agy update</code>)</a></li>
+        <li><a href="https://www.danilchenko.dev/posts/antigravity-cli-vs-claude-code/" target="_blank" rel="noopener">Antigravity CLI vs Claude Code vs Codex CLI, rate-limit history (Nov 2026)</a></li>
+        <li><a href="https://www.cloudzero.com/blog/google-antigravity-pricing/" target="_blank" rel="noopener">Google Antigravity pricing tiers and quota mechanics</a></li>
+        <li><a href="https://tailkits.com/tools/google-antigravity/" target="_blank" rel="noopener">Antigravity pricing and model availability (Nov 2026)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

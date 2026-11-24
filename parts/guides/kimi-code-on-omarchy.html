@@ -1,0 +1,145 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add kimi-code` (package slug `kimi-code`) — verify it resolves in the store index. Confirm version 2.7.3-1, 61.8 MB download / 194 MB installed, depends on glibc and gcc-libs, as listed.
+- Binary name: confirm the package installs the `kimi` command (upstream install script places a single `kimi` binary on PATH).
+- First launch: run `kimi` in a project and confirm the `/login` flow: Kimi Code OAuth (device-code flow) vs Kimi Platform API key, and which one the Omarchy binary defaults to.
+- Config paths: confirm local data under `~/.kimi-code/`, config at `~/.kimi-code/config.toml`, and project overrides at `<project-root>/.kimi-code/local.toml`.
+- Legacy collision: if a machine ever had the old Python `kimi-cli` installed, confirm the installer renames its shim rather than colliding. Probably not applicable on a fresh Omarchy install; check only if relevant.
+- Issues claimed below are NOT personally reproduced, they are documented upstream (Moonshot docs, GitHub, independent guides). Verify at least the `/login` flow and the `/mcp-config` path on a real machine.
+- Screenshots needed: install, first launch, `/login` picker, a finished task, `/model` switcher, `kimi web` browser UI.
+
+SEO notes:
+- URL: /guides/kimi-code-on-omarchy
+- Title tag: "How to Install & Use Kimi Code CLI on Omarchy (2026) — Free Claude Code Alternative"
+- Meta description: "Install Moonshot AI's Kimi Code CLI on Omarchy. Setup with /login, OAuth vs API key, MCP config, and the kimi-code vs kimi-cli confusion explained."
+- Keywords: kimi code cli omarchy, kimi code linux, kimi code vs claude code, moonshot kimi code install, kimi code mcp, kimi code vs kimi-cli
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Kimi Code CLI on Omarchy</h2>
+      <p>Kimi Code CLI is Moonshot AI’s MIT-licensed terminal coding agent: a single binary with a fast purpose-built TUI, subagents, MCP support, and editor integration through ACP, running Kimi K2.7 Code by default.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add kimi-code
+cd ~/my-project
+kimi</code></pre>
+      <p>That installs Kimi Code CLI v2.7.3-1 (61.8 MB download, 194 MB installed, depends on glibc and gcc-libs). On first launch, type <code>/login</code> and pick Kimi Code OAuth or a Kimi Platform API key. Then describe what you want done.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Launch and log in.</h3>
+      <p>Change into a project directory and run <code>kimi</code>. On first launch, type <code>/login</code> to begin the login flow. You get two choices: <strong>Kimi Code OAuth</strong>, a device-code flow where you open a link on any device, sign in, and enter the code to authorize (this bills against your Kimi membership), or a <strong>Kimi Platform API key</strong> from <code>platform.kimi.com</code> or <code>platform.kimi.ai</code> (this bills per token). To sign out, type <code>/logout</code>. Do not skip login: without it, your first prompt fails before the agent starts.</p>
+      <h3>2. Start with a read-only task.</h3>
+      <p>Try: “Take a look at this project and explain its main directories.” Kimi reads and searches the project before answering, so you see how it works before it edits anything. Then run <code>/init</code> to have it read the codebase and write an <code>AGENTS.md</code> with your project conventions. Note that <code>/init</code> only works in an interactive session.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Switch models with <code>/model</code>.</strong> The default is Kimi K2.7 Code, Moonshot’s agentic coding model. You can also point the CLI at another provider entirely (Anthropic, OpenAI, Google GenAI, or Vertex AI) by editing <code>~/.kimi-code/config.toml</code>.</li>
+        <li><strong>Add MCP servers conversationally.</strong> Type <code>/mcp-config</code> and describe the server you want; Kimi adds, edits, and authenticates MCP servers without hand-editing JSON. MCP servers live in <code>mcp.json</code> under <code>~/.kimi-code/</code>.</li>
+        <li><strong>Use subagents for parallel work.</strong> Dispatch the built-in <code>coder</code>, <code>explore</code>, and <code>plan</code> subagents in isolated contexts while keeping the main conversation clean. Sessions are resumable with <code>/sessions</code>, and <code>kimi web</code> serves a browser UI from a local server bound to 127.0.0.1.</li>
+      </ul>
+      <h3>4. Config location.</h3>
+      <p>Local data lives under <code>~/.kimi-code/</code> by default (config files, session records, logs, update cache). Main config is <code>~/.kimi-code/config.toml</code>, project overrides go in <code>&lt;project-root&gt;/.kimi-code/local.toml</code> (gitignore that file), and UI preferences live in <code>tui.toml</code>. Move the whole data directory with the <code>KIMI_CODE_HOME</code> environment variable.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3><code>kimi mcp add</code> returns “unknown command ‘mcp’”</h3>
+      <p>Nothing is broken: Moonshot publishes two builds that both install a command named <code>kimi</code>, and the <code>mcp</code> subcommand belongs to the other one, the legacy Python <code>kimi-cli</code>. In Kimi Code CLI (this package), there is no <code>kimi mcp</code> subcommand. If you followed an old tutorial, check which repo it points to: anything written before kimi-code existed describes kimi-cli. (<a href="https://decodo.com/blog/kimi-code-cli" target="_blank" rel="noopener">Decodo guide</a>)</p>
+      <p><strong>Fix:</strong> Add MCP servers with <code>/mcp-config</code> inside the TUI, or edit <code>mcp.json</code> by hand.</p>
+      <h3>Login works, but every request fails with a 401</h3>
+      <p>The three login routes are not interchangeable, and the keys are not either. A Kimi Code Console key targets <code>api.kimi.com/coding/v1</code>. A key from <code>platform.kimi.ai</code> targets <code>api.moonshot.ai/v1</code> and returns 401 on the coding base, and a key from <code>platform.kimi.com</code> targets <code>api.moonshot.cn/v1</code>. Logging into one build does not log you into the other, so a legacy kimi-cli login does not carry over. (<a href="https://decodo.com/blog/kimi-code-cli" target="_blank" rel="noopener">Decodo guide</a>)</p>
+      <p><strong>Fix:</strong> Use the key from the console you actually created it in, and re-run <code>/login</code> if you mixed them up.</p>
+      <h3>The agent’s built-in fetch tool returns nothing, or a 403</h3>
+      <p>This is a known limit of the FetchURL tool, not a rendering bug. It has no proxy rotation, no CAPTCHA handling, and no session management, and it identifies itself with a hardcoded Chrome user agent from 2021, so bot-protected pages (Cloudflare challenges, g2.com, zillow.com) return 403 or an empty shell. On an undefended page it works fine. (<a href="https://decodo.com/blog/kimi-code-cli" target="_blank" rel="noopener">Decodo guide</a>)</p>
+      <p><strong>Fix:</strong> For defended targets, give the agent a scraping endpoint or an MCP data server instead of asking FetchURL to fight bot detection.</p>
+      <h3>Slash commands like <code>/init</code> do nothing in non-interactive mode</h3>
+      <p>Most slash commands do not work with <code>-p</code> (non-interactive print mode), so <code>/init</code> writes nothing even though the answer suggests it worked. Also note that <code>-yolo</code> cannot be combined with <code>-p</code>: the command fails outright rather than degrading gracefully. (<a href="https://decodo.com/blog/kimi-code-cli" target="_blank" rel="noopener">Decodo guide</a>)</p>
+      <p><strong>Fix:</strong> Run <code>/init</code> in an interactive session instead. Pre-approve what CI needs with permission rules in <code>config.toml</code> instead of combining <code>-yolo</code> with <code>-p</code>.</p>
+      <h3>The docs disagree about which Node.js version you need</h3>
+      <p>The README says Node.js 24.15.0 or later, but the published package’s <code>engines</code> field declares Node.js 22.19.0 or later, and an open issue tracks the contradiction. The getting-started page agrees with the package (22.19.0). This mostly bites npm installs: the Omarchy package installs the standalone single binary, which needs no Node.js at all. (<a href="https://backgrind.com/blog/install-kimi-code/" target="_blank" rel="noopener">Backgrind install guide</a>)</p>
+      <p><strong>Fix:</strong> If you do install with npm, use Node.js 22.19.0 or later and treat the README’s higher number as unverified.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Zed or JetBrains through ACP (<code>kimi acp</code> lets the editor drive a session directly, with no extra login), <code>git</code> (review diffs before committing), and a Kimi membership if you use it daily.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>kilocode-cli</code> — lets you pick from 500+ models including local Ollama models, if you want model choice over a single-vendor default; or <code>freebuff</code>, which needs no login or key at all. If you want the same terminal-agent shape from Anthropic’s own models, Claude Code is the paid reference point.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Kimi Code CLI vs Claude Code vs Kilo Code CLI vs Freebuff</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Kimi Code CLI</th><th>Claude Code (CLI)</th><th>Kilo Code CLI</th><th>Freebuff</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free CLI; Kimi membership from $15/mo or per-token API billing</td><td>Requires Claude Pro $20/mo+</td><td>Free agent; you pay provider rates</td><td>Free; ads pay the bill</td></tr>
+            <tr><td>Best for</td><td>A fast single-binary TUI with subagents, MCP, and editor integration</td><td>The strongest single-vendor models, no key juggling</td><td>Picking your own model per task, local models, scripted runs</td><td>Zero setup, zero spend, no API key</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add kimi-code</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td><code>omarchy pkg add kilocode-cli</code></td><td><code>omarchy pkg add freebuff</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Kimi Code CLI if you want a polished, fast-starting terminal agent and you are happy with Moonshot’s Kimi models as the default, with other providers available in config. Pick Kilo Code CLI if model choice matters more than polish, and Freebuff if you want to pay nothing at all.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Kimi Code CLI is a free alternative to Claude Code (Pro $20/mo)</h2>
+      <p><strong>Kimi Code CLI is a free alternative to Claude Code (Pro $20/mo).</strong> What you give up: Claude’s models and the maturity of a tool with a much longer track record; Kimi Code CLI is young (the repo was created in May 2026) and ships several releases a week, so behavior changes fast. What you keep: a full agentic loop, subagents, MCP, lifecycle hooks, a plugin marketplace, and editor integration, with the CLI itself free and MIT licensed. The honest pricing picture has two meters that are not interchangeable: OAuth login draws on a Kimi membership (free tier $0, Plus $15/mo, Pro $31/mo, Max $79/mo, Ultra $159/mo, with Kimi Code available on every tier), while a Platform API key bills per token against a separate balance. The free membership tier includes 1 concurrent agent task; heavy daily use needs a paid tier or API billing. Check current pricing at kimi.com before deciding.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes per project)</h2>
+      <ol>
+        <li><strong>Export from Claude Code:</strong> your project instructions already live in <code>CLAUDE.md</code>. Kimi Code CLI reads <code>AGENTS.md</code> (and <code>.kimi-code/AGENTS.md</code>); copy the contents across or run <code>/init</code> and let it generate one from the codebase.</li>
+        <li><strong>Import into Kimi:</strong> move MCP servers into Kimi’s <code>mcp.json</code> (or add them with <code>/mcp-config</code>), and skills into <code>.kimi-code/skills/</code> as <code>SKILL.md</code> files with frontmatter. Hooks go in <code>config.toml</code> as <code>[[hooks]]</code> entries.</li>
+        <li><strong>What doesn’t transfer:</strong> chat history, Claude-specific slash commands and permissions modes (Kimi has its own permission modes: default, acceptEdits, plan, auto, dontAsk, bypassPermissions), and Claude Code’s GitHub Actions integration.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Kimi Code CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/kimi-code.html">View Kimi Code CLI →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Kimi Code CLI free?</summary><p>The CLI itself is free and MIT licensed. Model access is not free: OAuth login draws on a Kimi membership (there is a $0 free tier, with Kimi Code available on it), and a Platform API key bills per token. Check kimi.com pricing for current rates.</p></details>
+      <details><summary>What is the difference between kimi-code and kimi-cli?</summary><p>They are two builds from Moonshot that both install a <code>kimi</code> command. <code>kimi-cli</code> is the older Python build (last release 1.49.0); its own README says it is evolving into Kimi Code CLI and will be wound down, and Homebrew has marked its formula deprecated with a disable date of January 17, 2027. <code>kimi-code</code> is the current TypeScript build, the one linked from kimi.com/code, and the one this guide covers. Install kimi-code, not kimi-cli.</p></details>
+      <details><summary>Do I need Node.js?</summary><p>No, not with the Omarchy package: it installs the standalone single binary. Node.js is only needed for the npm install path (<code>npm install -g @moonshot-ai/kimi-code</code>, Node.js 22.19.0 or later).</p></details>
+      <details><summary>Where does Kimi Code CLI store its config?</summary><p>Local data lives under <code>~/.kimi-code/</code> by default (config files, session records, logs, update cache). Main config is <code>~/.kimi-code/config.toml</code>, project overrides go in <code>&lt;project-root&gt;/.kimi-code/local.toml</code> (gitignore that file), and UI preferences live in <code>tui.toml</code>. Move the whole data directory with the <code>KIMI_CODE_HOME</code> environment variable.</p></details>
+      <details><summary>Does it work offline or run a model locally?</summary><p>No. Every prompt goes to a model provider over the network, whether that is Moonshot or a provider you configured in <code>config.toml</code>. There is no bundled local model.</p></details>
+      <details><summary>Can I use Claude or GPT models with it?</summary><p>Yes. <code>config.toml</code> supports Anthropic, OpenAI, the OpenAI Responses API, Google GenAI, and Vertex AI protocols, and the <code>kimi provider catalog add</code> command can import providers from the public models.dev catalog. Kimi models are just the default.</p></details>
+      <details><summary>I used the old kimi-cli. Does anything carry over?</summary><p>Yes, with one command: <code>kimi migrate</code> copies <code>config.toml</code>, MCP server entries, skills, and input history from the legacy <code>~/.kimi/</code> directory into <code>~/.kimi-code/</code>. OAuth credentials, MCP authorizations, and legacy plugins are outside its scope, so log in again and re-authorize each server after migrating.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/kimi-code.html" target="_blank" rel="noopener">omarchyapps.com app page — kimi-code 2.7.3-1, 61.8 MB download, 194 MB installed, MIT, updated 2026-11-23</a></li>
+        <li><a href="https://github.com/MoonshotAI/kimi-code" target="_blank" rel="noopener">Kimi Code README (install, quick start, /login, features, ACP)</a></li>
+        <li><a href="https://moonshotai.github.io/kimi-code/en/guides/getting-started" target="_blank" rel="noopener">Kimi Code getting-started docs (install script, npm, first launch, /login, config paths)</a></li>
+        <li><a href="https://www.kimi.com/en/help/kimi-code/cli-getting-started" target="_blank" rel="noopener">Kimi Code getting-started on kimi.com (OAuth vs API key, config.toml, other providers)</a></li>
+        <li><a href="https://www.kimi.com/membership/pricing?from=footer_nav" target="_blank" rel="noopener">Kimi membership pricing (Free $0, Plus $15/mo, Pro $31/mo, Max $79/mo, Ultra $159/mo; Kimi Code on all tiers)</a></li>
+        <li><a href="https://decodo.com/blog/kimi-code-cli" target="_blank" rel="noopener">Decodo — kimi-code vs kimi-cli, kimi mcp confusion, FetchURL limits, key mixups, -p limits</a></li>
+        <li><a href="https://backgrind.com/blog/install-kimi-code/" target="_blank" rel="noopener">Backgrind — install methods, Node version contradiction, pricing meters, config locations</a></li>
+        <li><a href="https://dev.to/arshtechpro/kimi-code-cli-a-beginner-friendly-guide-to-moonshot-ais-terminal-coding-agent-39db" target="_blank" rel="noopener">DEV — beginner guide (single binary, /login, config, ACP, plugin marketplace)</a></li>
+        <li><a href="https://andrew.ooo/posts/kimi-code-cli-review-moonshot-terminal-agent/" target="_blank" rel="noopener">Review (K2.7 Code default model, successor to kimi-cli, features)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

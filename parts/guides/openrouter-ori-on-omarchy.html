@@ -1,0 +1,134 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add openrouter-ori` (package slug `openrouter-ori`) — verify it resolves in the store index. Confirm version 0.17.4-1, ~55.9 MB download / ~118.7 MB installed as listed.
+- Binary name: confirm the installed command is `ori` and that it is on PATH in a fresh shell.
+- Login flow: run `ori login` and confirm the browser OAuth flow works from an Omarchy terminal (and that `ori login --no-browser` works when it does not).
+- First agent launch: run `ori claude` or `ori opencode` and confirm the agent starts with OpenRouter wired in.
+- Config location: confirm where ori stores its credential and settings on Linux (not confirmed in the docs read for this guide).
+- Issues claimed below are NOT personally reproduced — they are documented upstream (OpenRouter docs, the install skill). Verify at least the login flow on a real machine.
+- Screenshots needed: install, `ori login`, `ori --help`, an agent session running through ori.
+
+SEO notes:
+- URL: /guides/openrouter-ori-on-omarchy
+- Title tag: "How to Install & Use OpenRouter Ori on Omarchy (2026) — One Login, 600+ Models"
+- Meta description: "Install OpenRouter Ori on Omarchy. Run Claude Code, Codex, OpenCode, and omp on 600+ models with one login. Setup, model switching, and fixes."
+- Keywords: openrouter ori omarchy, ori cli linux, openrouter coding agent, ori claude code, openrouter auto model, ori harness setup
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>OpenRouter Ori on Omarchy</h2>
+      <p>Ori is OpenRouter’s free CLI that signs you in once and then runs the coding agent you already use (Claude Code, Codex, OpenCode, omp, and more) on any of OpenRouter’s 600+ models, with one bill.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add openrouter-ori
+ori login
+ori claude</code></pre>
+      <p>That installs ori v0.17.4-1 (~55.9 MB download, ~118.7 MB installed, Apache-2.0 licence). The CLI is free; you pay OpenRouter per token at the model’s provider list price, plus a 5.5% fee when you buy credits on the Standard plan. Free models exist if you just want to try it.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and sign in.</h3>
+      <p>After <code>omarchy pkg add openrouter-ori</code>, run <code>ori login</code>. It opens your browser for OAuth sign-in with your existing OpenRouter account. There is no API key to create or paste for interactive use: your models, credits, and org settings come with the login.</p>
+      <h3>2. Launch the agent you already use.</h3>
+      <p>Ori does not replace your agent; it runs it with OpenRouter wired in. The commands, keybindings, and flags stay the same:</p>
+      <pre><code class="language-bash">ori claude      # Claude Code on OpenRouter
+ori codex       # Codex CLI on OpenRouter
+ori opencode    # OpenCode on OpenRouter
+ori omp         # Oh My Pi on OpenRouter
+ori hermes      # Hermes on OpenRouter</code></pre>
+      <p>If the agent is not installed, ori prints the recommended install command and offers to install it for you. Run <code>ori --help</code> to see the full list for your version.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Pick a model with <code>--model</code>.</strong> Without a model setting, Ori Code uses <code>openrouter/auto</code>, which routes to a model for you. Pass any OpenRouter model ID to choose: <code>ori claude --model claude-opus-latest</code> or <code>ori codex --model gpt-5.2</code>. Everything after the flags is forwarded to the agent untouched.</li>
+        <li><strong>Try Ori Code, OpenRouter’s own agent.</strong> Run <code>ori code</code> (the native terminal coding agent, built for working with many models) if you do not have a favorite agent yet.</li>
+        <li><strong>Make it the default with <code>ori harness setup</code>.</strong> A one-off <code>ori &lt;agent&gt;</code> command puts one session on OpenRouter. <code>ori harness setup &lt;agent&gt;</code> writes the OpenRouter settings into the agent’s own config, so the agent’s plain command runs on OpenRouter too. <code>ori harness reset</code> puts back what you had. Setup only works for the supported harness list, so check <code>ori --help</code> first.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3><code>ori: command not found</code> after installing</h3>
+      <p>The installer puts the <code>ori</code> executable in your local binary directory, and that directory must be on PATH. This is documented in OpenRouter’s own install skill. (<a href="https://github.com/OpenRouterTeam/skills/blob/main/skills/install-ori-harness/SKILL.md" target="_blank" rel="noopener">Install skill</a>) Unverified on Omarchy: the Omarchy package may already handle PATH, so check before editing shell config.</p>
+      <p><strong>Fix:</strong> Open a new shell first (the install may have updated your shell config), then check <code>which ori</code>. If it is still missing, find where the installer put it and add that directory to PATH in <code>~/.bashrc</code> or <code>~/.zshrc</code>.</p>
+      <h3><code>ori login</code> cannot open a browser</h3>
+      <p>Headless session, SSH, or no default browser: the OAuth flow stalls because ori cannot launch one. (<a href="https://github.com/OpenRouterTeam/skills/blob/main/skills/install-ori-harness/SKILL.md" target="_blank" rel="noopener">Install skill</a>)</p>
+      <p><strong>Fix:</strong> Run <code>ori login --no-browser</code> and open the printed URL yourself in any browser. The OAuth flow is the same; only the browser launch is skipped.</p>
+      <h3>The agent bills the wrong model, or uses <code>openrouter/auto</code> when you wanted a specific model</h3>
+      <p>Without a model setting, Ori Code defaults to <code>openrouter/auto</code>, which routes to a model for you. Note that some agents take their own model flag instead of ori’s: Grok Build uses <code>ori grok -m</code>, Crush uses <code>ori crush run -m</code>, Factory Droid uses <code>ori droid exec -m</code> or its model picker. (<a href="https://www.openrouter.ai/docs/guides/ori/harness" target="_blank" rel="noopener">Ori Harness docs</a>)</p>
+      <p><strong>Fix:</strong> Pass the model explicitly every time: <code>ori claude --model &lt;model-id&gt;</code>. Check <code>ori --help</code> for your agent’s flag.</p>
+      <h3><code>ori harness setup</code> does nothing, or says the agent is not supported</h3>
+      <p><code>ori harness setup</code> only works for the harnesses in ori’s supported list (Claude, Codex, Cursor, Factory Droid, and others named in the docs). It does not configure any other app or IDE. (<a href="https://www.openrouter.ai/docs/guides/ori/harness" target="_blank" rel="noopener">Ori Harness docs</a>)</p>
+      <p><strong>Fix:</strong> For an unsupported agent, keep launching it per session with <code>ori &lt;agent&gt;</code> instead.</p>
+      <h3>Requests fail or stop working even though you have credits</h3>
+      <p>First, run <code>ori update</code> and <code>ori --version</code> to make sure you are on the latest release. Then check your OpenRouter balance and the model you picked: free models are capped at 20 requests a minute and 50 a day (1,000 a day once your account has bought at least $10 of credits), and a model that is out of capacity or retired will fail until you pick another. (<a href="https://openrouter.ai/pricing" target="_blank" rel="noopener">OpenRouter pricing</a>) Unverified on Omarchy: not tested against a live account for this guide.</p>
+      <p><strong>Fix:</strong> Update ori, check your balance, and pick a different model if the one you chose is out of capacity or retired.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Any agent in ori’s list (Claude Code, Codex, OpenCode, omp, Hermes), plus an OpenRouter account with a small credit top-up so free-model caps do not bite.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Configure your agent directly against OpenRouter with an API key and a base URL (for example, <code>ANTHROPIC_BASE_URL=https://openrouter.ai/api</code> for Claude Code). Same models, same bill, no ori in the middle — but you lose the one-command model switching and org guardrails.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Ori vs Direct API Key vs OpenRouter Web vs Claude Code Subscription</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Ori</th><th>Direct provider API key</th><th>OpenRouter web / API key</th><th>Claude Code with a Claude subscription</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free CLI (Apache-2.0); models at provider list price + 5.5% on credit purchases</td><td>Model list price, no platform fee</td><td>Same per-token pricing</td><td>Claude Pro $20/mo+</td></tr>
+            <tr><td>Best for</td><td>Running your existing agent on any of 600+ models with one login and one bill</td><td>One model, one vendor, zero middleman</td><td>Scripts and apps that call the API directly</td><td>If you only ever use Claude models</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add openrouter-ori</code></td><td>Edit the agent’s config by hand</td><td>No install; create a key at openrouter.ai</td><td>Omarchy AI menu</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you use more than one model or more than one agent, ori is the easiest way to keep them all on one bill with one login. If you only use Claude and already pay for Pro, ori adds nothing.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Ori is free — try any agent on any model for $0</h2>
+      <p><strong>Ori is free, and OpenRouter has a free tier: 25+ free models, capped at 50 requests a day (1,000 a day after you have bought $10 of credits).</strong> That is genuinely free coding-agent usage if you stick to free models — no subscription and no minimum on the Standard plan. The honest limit: free models are slower and weaker than paid ones, and the daily cap will stop a heavy session. The pitch that holds up: <strong>try any agent on any model for $0, then pay per token only when you want the good models.</strong> Paid usage is billed at the model’s provider list price, plus a 5.5% fee when you buy credits on Standard (8% on Business).</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the OpenRouter Ori package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/openrouter-ori.html">View OpenRouter Ori →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Ori free?</summary><p>The CLI is free (Apache-2.0). Model usage is pay-as-you-go: tokens are billed at the provider’s list price, and OpenRouter charges a 5.5% fee when you buy credits on Standard (8% on Business). Free models cost nothing within their daily caps.</p></details>
+      <details><summary>Do I need an API key?</summary><p>No, not for interactive use. <code>ori login</code> uses OAuth against your OpenRouter account, so there is no key to create or paste. API keys are still available on openrouter.ai if you want them for scripts.</p></details>
+      <details><summary>Which agents does ori work with?</summary><p>Claude Code, Codex, Grok Build, Hermes, OpenCode, Pi, omp, Prime Agent, Cline, Kilo Code, Muse Code, ZCode, Unreal Agent, Crush, Factory Droid, and DeepSeek Harness, with more on the way. Run <code>ori --help</code> for the list your version supports.</p></details>
+      <details><summary>What is <code>openrouter/auto</code>?</summary><p>The default model when you do not pick one. It routes your request to a model automatically, and you pay the rate of whichever model serves the request. Routing adds no fee.</p></details>
+      <details><summary>Does ori replace my agent?</summary><p>No. Ori launches the real agent CLI on your machine, with OpenRouter credentials and settings applied to that session. Your commands, keybindings, and flags stay the same.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/openrouter-ori.html" target="_blank" rel="noopener">omarchyapps.com app page — openrouter-ori v0.17.4-1, ~55.9 MB download / ~118.7 MB installed, Apache-2.0, updated 2026-11-23</a></li>
+        <li><a href="https://openrouter.ai/docs/guides/ori/overview" target="_blank" rel="noopener">Ori overview (Ori Harness, Ori Code, install, openrouter/auto default)</a></li>
+        <li><a href="https://www.openrouter.ai/docs/guides/ori/harness" target="_blank" rel="noopener">Ori Harness guide (install, login, supported agents, ori harness setup, model flags, DeepSeek setup)</a></li>
+        <li><a href="https://github.com/OpenRouterTeam/skills/blob/main/skills/install-ori-harness/SKILL.md" target="_blank" rel="noopener">Install skill (PATH check, ori login --no-browser, ori update, missing-agent prompt)</a></li>
+        <li><a href="https://openrouter.ai/pricing" target="_blank" rel="noopener">OpenRouter pricing (5.5% Standard / 8% Business credit fee, free-model caps, BYOK allowance)</a></li>
+        <li><a href="https://www.coderouter.io/blog/openrouter-pricing-2026-credit-fees-byok-free-models" target="_blank" rel="noopener">Pricing summary, checked Nov 2026 (credit fees, BYOK, free models)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

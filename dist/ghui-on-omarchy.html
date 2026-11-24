@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How to Install &amp; Use ghui on Omarchy (2026)</title>
-<meta name="description" content="Install ghui on Omarchy with one command: omarchy pkg add ghui. Terminal UI for keeping up with your open GitHub pull requests. Setup, requirements and FAQ.">
+<title>How to Install &amp; Use ghui on Omarchy (2026) — Terminal PR…</title>
+<meta name="description" content="Install ghui on Omarchy with one command. A free terminal UI for GitHub pull requests: review diffs, leave comments, check CI, and merge without a browser.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/ghui-on-omarchy.html">
@@ -13,8 +13,8 @@
 <link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
 <link rel="manifest" href="/images/site.webmanifest?v=2">
-<meta property="og:title" content="How to Install &amp; Use ghui on Omarchy (2026)">
-<meta property="og:description" content="Install ghui on Omarchy with one command: omarchy pkg add ghui. Terminal UI for keeping up with your open GitHub pull requests. Setup, requirements and FAQ.">
+<meta property="og:title" content="How to Install &amp; Use ghui on Omarchy (2026) — Terminal PR…">
+<meta property="og:description" content="Install ghui on Omarchy with one command. A free terminal UI for GitHub pull requests: review diffs, leave comments, check CI, and merge without a browser.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://omarchyapps.com/ghui-on-omarchy.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
@@ -24,10 +24,10 @@
 <meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@jessyka_boat">
-<meta name="twitter:title" content="How to Install &amp; Use ghui on Omarchy (2026)">
-<meta name="twitter:description" content="Install ghui on Omarchy with one command: omarchy pkg add ghui. Terminal UI for keeping up with your open GitHub pull requests. Setup, requirements and FAQ.">
+<meta name="twitter:title" content="How to Install &amp; Use ghui on Omarchy (2026) — Terminal PR…">
+<meta name="twitter:description" content="Install ghui on Omarchy with one command. A free terminal UI for GitHub pull requests: review diffs, leave comments, check CI, and merge without a browser.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/ghui-on-omarchy.html#article","headline":"How to Install & Use ghui on Omarchy (2026)","description":"Install ghui on Omarchy with one command: omarchy pkg add ghui. Terminal UI for keeping up with your open GitHub pull requests. Setup, requirements and FAQ.","url":"https://omarchyapps.com/ghui-on-omarchy.html","dateModified":"2026-11-23","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/guides.html"},{"@type":"ListItem","position":3,"name":"How to Install & Use ghui on Omarchy (2026)","item":"https://omarchyapps.com/ghui-on-omarchy.html"}]},{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/ghui-on-omarchy.html#app","name":"ghui","description":"Terminal UI for keeping up with your open GitHub pull requests","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"0.9.1-1","license":"MIT","url":"https://omarchyapps.com/apps/ghui.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/ghui-on-omarchy.html#article","headline":"How to Install & Use ghui on Omarchy (2026) — Terminal PR…","description":"Install ghui on Omarchy with one command. A free terminal UI for GitHub pull requests: review diffs, leave comments, check CI, and merge without a browser.","url":"https://omarchyapps.com/ghui-on-omarchy.html","dateModified":"2026-11-24","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"How to Install & Use ghui on Omarchy (2026) — Terminal PR Review for GitHub","item":"https://omarchyapps.com/ghui-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is ghui free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is MIT-licensed and free to install and use. The only requirement is a GitHub account and the GitHub CLI."}},{"@type":"Question","name":"Do I need a separate GitHub login for ghui?","acceptedAnswer":{"@type":"Answer","text":"No. ghui reuses the GitHub CLI’s authentication. Run gh auth login once and ghui uses that token, including for GitHub Enterprise."}},{"@type":"Question","name":"Does ghui work with GitHub Enterprise?","acceptedAnswer":{"@type":"Answer","text":"Yes. Because it authenticates through gh, it works wherever gh is authenticated, including GitHub Enterprise hosts. Unverified on Omarchy: Enterprise was not tested for this guide."}},{"@type":"Question","name":"Where does ghui store its settings?","acceptedAnswer":{"@type":"Answer","text":"UI preferences live in config.json under GHUI_CONFIG_DIR if set, otherwise under the platform config directory, which is normally ~/.config/ghui/config.json on Linux. Fetch limits are environment variables: GHUI_PR_FETCH_LIMIT (default 200) and GHUI_RUN_FETCH_LIMIT (default 20)."}},{"@type":"Question","name":"Can I review PRs from many repos at once?","acceptedAnswer":{"@type":"Answer","text":"Yes, that is the point. ghui aggregates open PRs across repositories into one list, with queues you switch between using Tab / Shift-Tab."}}]}]}</script>
 <link rel="stylesheet" href="/style.75958c2d72.css">
   <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
   <script src="/oa-ads.js" defer></script>
@@ -50,75 +50,154 @@
 
 <header class="hero guide-hero seo-hero">
   <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/guides.html">Guides</a><span>›</span><span aria-current="page">Utilities tutorial</span></nav>
-    <p class="eyebrow">Utilities tutorial</p>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">Terminal PR review guide</span></nav>
+    <p class="eyebrow">Terminal PR review guide</p>
     <h1>ghui on <span>Omarchy</span></h1>
-    <p class="tag">Terminal UI for keeping up with your open GitHub pull requests</p>
-    <p class="facts">Generated from the official Omarchy package repo</p>
+    <p class="tag">A free, keyboard-driven terminal UI that puts all your open GitHub pull requests across every repo in one place.</p>
+    <p class="facts">Reviewed 2026-11-24 · independent editorial guide</p>
   </div>
 </header>
-<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
+<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
 
 <main class="wrap seo-guide-main">
   <article class="seo-article">
     <div class="guide-answer">
       <p class="answer-label">Short answer</p>
-      <p>To install ghui on Omarchy, open a terminal and run omarchy pkg add ghui. It is a 49.1 MB download (140.4 MB installed), version 0.9.1-1, licensed MIT. Terminal UI for keeping up with your open GitHub pull requests. Check the project site for current pricing.</p>
+      <p>Install ghui with omarchy pkg add ghui, then run gh auth login once and ghui in any terminal. It needs the GitHub CLI installed and logged in, because ghui reuses gh&#x27;s authentication. It is MIT licensed and free.</p>
     </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: run `omarchy pkg add ghui` on a clean Omarchy system. Confirm version 0.9.1-1, ~49.1 MB download / ~140.4 MB installed as listed, and that the `github-cli` dependency comes with it.
+- First launch: run `ghui` after `gh auth login` and confirm the PR list loads across repos.
+- Config path: confirm UI preferences land in `~/.config/ghui/config.json` on Omarchy.
+- Editor handoff: test pressing `e` on a PR with a `repoPaths` entry and confirm it opens the local checkout.
+- Issues claimed below are NOT personally reproduced — they are documented upstream (the ghui README, GitHub CLI docs, GitHub rate-limit docs). Verify at least the auth one on a real machine.
+- Screenshots needed: install, PR list, PR detail view, diff view, Actions runs view.
+
+SEO notes:
+- URL: /guides/ghui-on-omarchy
+- Title tag: "How to Install & Use ghui on Omarchy (2026) — Terminal PR Review for GitHub"
+- Meta description: "Install ghui on Omarchy. A free terminal UI for GitHub pull requests: review diffs, leave comments, check CI, and merge without a browser."
+-->
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
       <a href="#install">Install</a>
-      <a href="#use">Open and use</a>
-      <a href="#requirements">Requirements</a>
-      <a href="#remove">Uninstall</a>
-      <a href="#facts">Package facts</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
       <a href="#faq">Questions</a>
     </nav>
 
     <section id="install">
-      <h2>Install ghui on Omarchy</h2>
-      <p>Terminal UI for keeping up with your open GitHub pull requests</p>
-      <p>The official repository lists this package in Utilities. It was added on 2026-11-23.</p>
-      
-      <ol>
-        <li>Open a terminal.</li>
-        <li>Run the install command:<pre><code class="language-bash">omarchy pkg add ghui</code></pre></li>
-        <li>Check it landed. Pacman should list version 0.9.1-1:<pre><code class="language-bash">pacman -Qi ghui</code></pre></li>
-      </ol>
+      <h2>ghui on Omarchy</h2>
+      <p>ghui is a free, keyboard-driven terminal UI that puts all your open GitHub pull requests across every repo in one place, so you can review diffs, leave comments, and merge without opening a browser.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add ghui
+gh auth login
+ghui</code></pre>
+      <p>That installs ghui v0.9.1-1 (~49.1 MB download, ~140.4 MB installed, MIT licence). It needs the GitHub CLI (<code>gh</code>) installed and logged in, because ghui reuses <code>gh</code>’s authentication and does its own login step.</p>
     </section>
 
-    <section id="use">
-      <h2>Open and use ghui</h2>
-      <p>To see what the package installed, including any commands and desktop entries:</p><pre><code class="language-bash">pacman -Ql ghui</code></pre>
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Log in to GitHub first.</h3>
+      <p>ghui has no login screen of its own. Before launching it, authenticate the GitHub CLI:</p>
+      <pre><code class="language-bash">gh auth login
+gh auth status</code></pre>
+      <p>If <code>gh auth status</code> shows you logged in, ghui will work. If it does not, ghui has nothing to authenticate with.</p>
+      <h3>2. Launch it from anywhere.</h3>
+      <p>Run <code>ghui</code> in any terminal. It opens a dashboard of your open pull requests across repositories, with queues you switch between using <code>Tab</code> / <code>Shift-Tab</code>. Use <code>j</code> / <code>k</code> or arrow keys to move, <code>Enter</code> to expand a PR’s details, and <code>r</code> to refresh.</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Review a diff without leaving the terminal.</strong> Press <code>d</code> on a PR to see the stacked diff for all changed files, then use <code>[</code> / <code>]</code> to switch files and <code>Enter</code> on a line to start a comment. Press <code>v</code> to select a multi-line range for a comment.</li>
+        <li><strong>Approve or request changes from the keyboard.</strong> Press <code>Shift-R</code> to open the review modal, choose Comment, Approve, or Request changes, and submit. Press <code>m</code> to merge, <code>s</code> to toggle draft or ready-for-review, and <code>l</code> to manage labels.</li>
+        <li><strong>Check CI without opening GitHub.</strong> Press <code>a</code> on a PR to see its GitHub Actions runs for the head commit, drill into a run with <code>Enter</code>, and jump between failures with <code>n</code> / <code>p</code>.</li>
+      </ul>
+      <p><strong>Practical notes:</strong> Other keys worth learning: <code>/</code> to filter, <code>o</code> to open the PR in your browser, <code>e</code> to open it in your editor, <code>y</code> to copy PR metadata, <code>Ctrl-P</code> for the command palette, and <code>q</code> to quit.</p>
     </section>
 
-    <section id="requirements">
-      <h2>ghui requirements and compatibility</h2>
-      <p>No special requirements are documented for ghui.</p>
-      <h3>Dependencies Omarchy installs for you</h3><ul><li><code>glibc</code></li><li><code>github-cli</code></li></ul>
-      <h3>Pricing and license</h3>
-      <p>Check the project site for current pricing. License: MIT.</p>
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>ghui opens but shows no PRs, or errors about authentication</h3>
+      <p>ghui does not log you in itself; it needs <code>gh</code> authenticated.</p>
+      <p><strong>Fix:</strong> Run <code>gh auth status</code>. If it says you are not logged in, run <code>gh auth login</code> and complete the browser flow, then relaunch ghui. If <code>gh</code> works but ghui still fails, check that the token <code>gh</code> is using has not expired or been revoked (re-run <code>gh auth login</code> to refresh it). Unverified on Omarchy: not tested with a live account for this guide. (<a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">ghui README</a>)</p>
+      <h3>The PR list stops updating, or requests fail with a rate-limit error</h3>
+      <p>ghui talks to GitHub’s API through <code>gh</code>, and GitHub caps authenticated requests at 5,000 per hour per account, shared across every token and app acting for you. Heavy polling plus other tools can eat that budget.</p>
+      <p><strong>Fix:</strong> Wait for the hourly reset (GitHub reports the reset time in the error), close other GitHub tools, and lower how much ghui fetches with <code>GHUI_PR_FETCH_LIMIT</code> (default 200) and <code>GHUI_RUN_FETCH_LIMIT</code> (default 20 per PR). (<a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api" target="_blank" rel="noopener">GitHub rate limits</a>; <a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">ghui README</a>)</p>
+      <h3>Pressing <code>e</code> does nothing, or opens the wrong directory</h3>
+      <p>The editor handoff needs a <code>repoPaths</code> entry mapping the repo to your local clone. Add it to <code>~/.config/ghui/config.json</code>:</p>
+      <pre><code class="language-json">{
+  "repoPaths": {
+    "owner/repo": "~/code/repo"
+  }
+}</code></pre>
+      <p><strong>Fix:</strong> Without a matching entry, ghui cannot resolve a local path. You can also set a custom <code>editorCommand</code> template (for example, a tmux command that checks out the PR branch and opens your editor). See the README’s editor section for the full template variables. (<a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">ghui README</a>)</p>
+      <h3>The list is slow or shows PRs you do not care about</h3>
+      <p>ghui fetches up to 200 PRs by default. If you follow many repos, that is a lot to pull on every load.</p>
+      <p><strong>Fix:</strong> Lower the fetch limit for a faster load: <code>GHUI_PR_FETCH_LIMIT=100 ghui</code>. You can also put the values in a <code>.env</code> file (copy <code>.env.example</code> from the repo) instead of typing them each time. Unverified on Omarchy: fetch-limit behavior was read from the README, not timed on a real machine. (<a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">ghui README</a>)</p>
+      <h3>A PR you just opened, merged, or closed does not show the new state</h3>
+      <p>ghui polls GitHub rather than receiving live updates, so state changes made in the browser or by someone else only appear after a refresh or a refetch.</p>
+      <p><strong>Fix:</strong> Press <code>r</code> to refresh. If a refresh still shows stale data, quit and relaunch. Unverified on Omarchy: refresh behavior was read from the README keybindings, not tested live.</p>
     </section>
 
-    <section id="remove">
-      <h2>Uninstall ghui</h2>
-      <pre><code class="language-bash">omarchy pkg drop ghui</code></pre>
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>gh</code> (the GitHub CLI, which ghui depends on), <code>lazygit</code> for the repo side of the same workflow, and your editor of choice via the <code>e</code> handoff (Neovim with diffview.nvim or octo.nvim is the documented recipe).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Stick with <code>gh pr list</code> and <code>gh pr status</code> in the terminal, which give you the same data as plain text and are scriptable. Or use GitHub’s web PR inbox if you prefer a mouse.</li>
+      </ul>
     </section>
 
-    <section id="facts">
-      <h2>ghui package facts</h2>
-      <div class="table-scroll"><table class="compare-table"><tbody><tr><th scope='row'>Package</th><td><code>ghui</code></td></tr><tr><th scope='row'>Version</th><td>0.9.1-1</td></tr><tr><th scope='row'>Category</th><td>Utilities</td></tr><tr><th scope='row'>License</th><td>MIT</td></tr><tr><th scope='row'>Download</th><td>49.1 MB</td></tr><tr><th scope='row'>Installed size</th><td>140.4 MB</td></tr><tr><th scope='row'>Built</th><td>2026-11-23</td></tr><tr><th scope='row'>Pricing</th><td>Check the project site for current pricing</td></tr><tr><th scope='row'>Added to the official repo</th><td>2026-11-23</td></tr><tr><th scope='row'>Made by</th><td>kitlangton</td></tr></tbody></table></div>
-      <p><a href="/apps/ghui.html">ghui package page on this site</a> · <a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">Project site</a></p>
+    <section id="comparison">
+      <h2>Comparison: ghui vs gh pr vs gh-dash vs GitHub web UI</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>ghui</th><th>gh pr (GitHub CLI)</th><th>gh-dash</th><th>GitHub web UI</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free</td><td>Free (MIT)</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Keyboard-driven PR review across repos: diffs, comments, CI, merge</td><td>Scriptable PR commands and quick one-off checks</td><td>A lighter PR and issue dashboard, also built on <code>gh</code></td><td>Full-featured review with the richest commenting and CI views</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add ghui</code></td><td><code>omarchy pkg add github-cli</code> (ghui dependency)</td><td><code>gh extension install dlvhdr/gh-dash</code></td><td>Just open github.com</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you live in the terminal and review PRs across many repos, ghui is the most complete keyboard workflow of the free options. If you only check PRs occasionally, <code>gh pr list</code> is enough and costs you nothing to learn.</p>
     </section>
+
+    <aside class="guide-callout">
+      <h2>ghui is a free alternative to paid PR-dashboard tools</h2>
+      <p><strong>ghui is a free alternative to paid PR-dashboard tools.</strong> Instead of a subscription tool that aggregates your pull requests, you get the same single-pane review queue for $0. What you give up: hosted notifications, a web dashboard you can open on your phone, and team analytics. What you keep: the full review workflow — diffs, inline comments, approvals, merges, CI status — in one keyboard-driven screen, with no account beyond the GitHub login you already have.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the ghui package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/ghui.html">View ghui →</a>
+    </div>
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>How do I install ghui on Omarchy?</summary><p>Open a terminal and run omarchy pkg add ghui. The download is 49.1 MB and it takes 140.4 MB once installed. Omarchy pulls in any dependencies automatically.</p></details><details><summary>Is ghui free?</summary><p>Check the project site for current pricing. The package is licensed MIT.</p></details><details><summary>How do I uninstall ghui?</summary><p>Run omarchy pkg drop ghui. It removes the package from your system.</p></details><details><summary>What does ghui depend on?</summary><p>The package declares 2 dependencies: glibc, github-cli. Omarchy installs them for you.</p></details><details><summary>Is ghui in the official Omarchy repo?</summary><p>Yes. It is published as ghui (version 0.9.1-1) in the official Omarchy package repository. kitlangton makes it. Project site: https://github.com/kitlangton/ghui. This site is unofficial: an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p></details>
+      <details><summary>Is ghui free?</summary><p>Yes. It is MIT-licensed and free to install and use. The only requirement is a GitHub account and the GitHub CLI.</p></details>
+      <details><summary>Do I need a separate GitHub login for ghui?</summary><p>No. ghui reuses the GitHub CLI’s authentication. Run <code>gh auth login</code> once and ghui uses that token, including for GitHub Enterprise.</p></details>
+      <details><summary>Does ghui work with GitHub Enterprise?</summary><p>Yes. Because it authenticates through <code>gh</code>, it works wherever <code>gh</code> is authenticated, including GitHub Enterprise hosts. Unverified on Omarchy: Enterprise was not tested for this guide.</p></details>
+      <details><summary>Where does ghui store its settings?</summary><p>UI preferences live in <code>config.json</code> under <code>GHUI_CONFIG_DIR</code> if set, otherwise under the platform config directory, which is normally <code>~/.config/ghui/config.json</code> on Linux. Fetch limits are environment variables: <code>GHUI_PR_FETCH_LIMIT</code> (default 200) and <code>GHUI_RUN_FETCH_LIMIT</code> (default 20).</p></details>
+      <details><summary>Can I review PRs from many repos at once?</summary><p>Yes, that is the point. ghui aggregates open PRs across repositories into one list, with queues you switch between using <code>Tab</code> / <code>Shift-Tab</code>.</p></details>
     </section>
 
-    <section id="related">
-      <h2>More Utilities apps on Omarchy</h2>
-      <ul><li><a href="/grok-cli-on-omarchy.html">grok-cli</a></li><li><a href="/kilocode-cli-on-omarchy.html">kilocode-cli</a></li><li><a href="/kimi-code-on-omarchy.html">kimi-code</a></li><li><a href="/linux-firmware-cirrus-dx13260-on-omarchy.html">linux-firmware-cirrus-dx13260</a></li><li><a href="/linux-omarchy-on-omarchy.html">linux-omarchy</a></li><li><a href="/linux-omarchy-bore-headers-on-omarchy.html">linux-omarchy-bore-headers</a></li></ul>
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/ghui.html" target="_blank" rel="noopener">omarchyapps.com app page — ghui v0.9.1-1, ~49.1 MB download, ~140.4 MB installed, MIT, depends on glibc, github-cli</a></li>
+        <li><a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">ghui README (install, gh auth login requirement, config, editor handoff, workflow runs, keybindings)</a></li>
+        <li><a href="https://cli.github.com/manual/gh_pr" target="_blank" rel="noopener">GitHub CLI manual (gh pr commands)</a></li>
+        <li><a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api" target="_blank" rel="noopener">GitHub REST API rate limits (5,000 requests/hour authenticated)</a></li>
+        <li><a href="https://www.opensourceprojects.dev/post/gh-dash" target="_blank" rel="noopener">gh-dash (alternative TUI, gh extension install)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
     </section>
 
   </article>
@@ -126,15 +205,15 @@
   <aside class="related-guides" aria-labelledby="related-guides-h">
     <h2 id="related-guides-h">Keep exploring</h2>
     <div class="related-guide-grid">
-<a class="related-guide" href="/grok-cli-on-omarchy.html"><strong>grok-cli on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/kilocode-cli-on-omarchy.html"><strong>kilocode-cli on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/kimi-code-on-omarchy.html"><strong>kimi-code on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/apps/ghui.html"><strong>ghui package page</strong><span>Version, size, license and install command</span></a>
+<a class="related-guide" href="/amp-cli-on-omarchy.html"><strong>How to Install &amp; Use Amp CLI on Omarchy (2026) — Free Hobby Tier, the Dial, and Cloud Orbs</strong><span>Install Sourcegraph Amp CLI on Omarchy with one command. Free Hobby tier, login, the Dial modes, AGENTS.md setup, orb pricing, and common fixes.</span></a>
+<a class="related-guide" href="/antigravity-cli-on-omarchy.html"><strong>How to Install &amp; Use Antigravity CLI on Omarchy (2026) — Google&#x27;s Gemini Terminal Agent</strong><span>Install Google Antigravity CLI on Omarchy with one command. Free tier, Google sign-in, Auto mode, MCP setup, quota limits, and the Gemini CLI replacement explained.</span></a>
+<a class="related-guide" href="/antigravity-on-omarchy.html"><strong>How to Install &amp; Use Antigravity on Omarchy (2026) — Free Cursor Alternative</strong><span>Install Google Antigravity on Omarchy with one command. Agent-first AI development, free for individuals: setup, sign-in, and real Linux fixes from Google&#x27;s own forum.</span></a>
+<a class="related-guide" href="/apple-bcm-firmware-fetcher-on-omarchy.html"><strong>How to Install &amp; Use apple-bcm-firmware-fetcher on Omarchy (2026) — Fix Wi-Fi &amp; Bluetooth on T2 Macs</strong><span>Fix Wi-Fi and Bluetooth on your T2 Mac running Omarchy: install apple-bcm-firmware-fetcher with one command, pull the firmware from your macOS volume, verify it loaded, and fix the common failures (macOS wiped, APFS driver, FileVault, iMac models).</span></a>
     </div>
   </aside>
 </main>
 
-<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
+<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">

@@ -28,8 +28,8 @@ assert.equal(mergedTarget("/apps/linux-firmware-cirrus.html"), "/linux-firmware-
 assert.equal(mergedTarget("/vs/omarchy-vs-ubuntu.html"), "/vs/omarchy-compared.html");
 assert.equal(mergedTarget("/install/lutris-on-omarchy.html"), "/install/gaming-on-omarchy.html");
 assert.equal(mergedTarget("/install/heroic-epic-games-on-omarchy.html"), "/install/gaming-on-omarchy.html");
-assert.equal(goneTarget("/apps/opencode.html"), true);
-assert.equal(goneTarget("/opencode-on-omarchy"), true);
+assert.equal(goneTarget("/apps/asusctl.html"), true);
+assert.equal(goneTarget("/asusctl-on-omarchy"), true);
 assert.equal(goneTarget("/linux-ptl-headers.html"), true);
 assert.equal(goneTarget("/apps/linux-ptl-headers.html"), true);
 assert.equal(goneTarget("/helium-on-omarchy.html"), false);

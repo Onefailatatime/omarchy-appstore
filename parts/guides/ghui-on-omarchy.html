@@ -1,0 +1,134 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: run `omarchy pkg add ghui` on a clean Omarchy system. Confirm version 0.9.1-1, ~49.1 MB download / ~140.4 MB installed as listed, and that the `github-cli` dependency comes with it.
+- First launch: run `ghui` after `gh auth login` and confirm the PR list loads across repos.
+- Config path: confirm UI preferences land in `~/.config/ghui/config.json` on Omarchy.
+- Editor handoff: test pressing `e` on a PR with a `repoPaths` entry and confirm it opens the local checkout.
+- Issues claimed below are NOT personally reproduced — they are documented upstream (the ghui README, GitHub CLI docs, GitHub rate-limit docs). Verify at least the auth one on a real machine.
+- Screenshots needed: install, PR list, PR detail view, diff view, Actions runs view.
+
+SEO notes:
+- URL: /guides/ghui-on-omarchy
+- Title tag: "How to Install & Use ghui on Omarchy (2026) — Terminal PR Review for GitHub"
+- Meta description: "Install ghui on Omarchy. A free terminal UI for GitHub pull requests: review diffs, leave comments, check CI, and merge without a browser."
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>ghui on Omarchy</h2>
+      <p>ghui is a free, keyboard-driven terminal UI that puts all your open GitHub pull requests across every repo in one place, so you can review diffs, leave comments, and merge without opening a browser.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add ghui
+gh auth login
+ghui</code></pre>
+      <p>That installs ghui v0.9.1-1 (~49.1 MB download, ~140.4 MB installed, MIT licence). It needs the GitHub CLI (<code>gh</code>) installed and logged in, because ghui reuses <code>gh</code>’s authentication and does its own login step.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Log in to GitHub first.</h3>
+      <p>ghui has no login screen of its own. Before launching it, authenticate the GitHub CLI:</p>
+      <pre><code class="language-bash">gh auth login
+gh auth status</code></pre>
+      <p>If <code>gh auth status</code> shows you logged in, ghui will work. If it does not, ghui has nothing to authenticate with.</p>
+      <h3>2. Launch it from anywhere.</h3>
+      <p>Run <code>ghui</code> in any terminal. It opens a dashboard of your open pull requests across repositories, with queues you switch between using <code>Tab</code> / <code>Shift-Tab</code>. Use <code>j</code> / <code>k</code> or arrow keys to move, <code>Enter</code> to expand a PR’s details, and <code>r</code> to refresh.</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Review a diff without leaving the terminal.</strong> Press <code>d</code> on a PR to see the stacked diff for all changed files, then use <code>[</code> / <code>]</code> to switch files and <code>Enter</code> on a line to start a comment. Press <code>v</code> to select a multi-line range for a comment.</li>
+        <li><strong>Approve or request changes from the keyboard.</strong> Press <code>Shift-R</code> to open the review modal, choose Comment, Approve, or Request changes, and submit. Press <code>m</code> to merge, <code>s</code> to toggle draft or ready-for-review, and <code>l</code> to manage labels.</li>
+        <li><strong>Check CI without opening GitHub.</strong> Press <code>a</code> on a PR to see its GitHub Actions runs for the head commit, drill into a run with <code>Enter</code>, and jump between failures with <code>n</code> / <code>p</code>.</li>
+      </ul>
+      <p><strong>Practical notes:</strong> Other keys worth learning: <code>/</code> to filter, <code>o</code> to open the PR in your browser, <code>e</code> to open it in your editor, <code>y</code> to copy PR metadata, <code>Ctrl-P</code> for the command palette, and <code>q</code> to quit.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>ghui opens but shows no PRs, or errors about authentication</h3>
+      <p>ghui does not log you in itself; it needs <code>gh</code> authenticated.</p>
+      <p><strong>Fix:</strong> Run <code>gh auth status</code>. If it says you are not logged in, run <code>gh auth login</code> and complete the browser flow, then relaunch ghui. If <code>gh</code> works but ghui still fails, check that the token <code>gh</code> is using has not expired or been revoked (re-run <code>gh auth login</code> to refresh it). Unverified on Omarchy: not tested with a live account for this guide. (<a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">ghui README</a>)</p>
+      <h3>The PR list stops updating, or requests fail with a rate-limit error</h3>
+      <p>ghui talks to GitHub’s API through <code>gh</code>, and GitHub caps authenticated requests at 5,000 per hour per account, shared across every token and app acting for you. Heavy polling plus other tools can eat that budget.</p>
+      <p><strong>Fix:</strong> Wait for the hourly reset (GitHub reports the reset time in the error), close other GitHub tools, and lower how much ghui fetches with <code>GHUI_PR_FETCH_LIMIT</code> (default 200) and <code>GHUI_RUN_FETCH_LIMIT</code> (default 20 per PR). (<a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api" target="_blank" rel="noopener">GitHub rate limits</a>; <a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">ghui README</a>)</p>
+      <h3>Pressing <code>e</code> does nothing, or opens the wrong directory</h3>
+      <p>The editor handoff needs a <code>repoPaths</code> entry mapping the repo to your local clone. Add it to <code>~/.config/ghui/config.json</code>:</p>
+      <pre><code class="language-json">{
+  "repoPaths": {
+    "owner/repo": "~/code/repo"
+  }
+}</code></pre>
+      <p><strong>Fix:</strong> Without a matching entry, ghui cannot resolve a local path. You can also set a custom <code>editorCommand</code> template (for example, a tmux command that checks out the PR branch and opens your editor). See the README’s editor section for the full template variables. (<a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">ghui README</a>)</p>
+      <h3>The list is slow or shows PRs you do not care about</h3>
+      <p>ghui fetches up to 200 PRs by default. If you follow many repos, that is a lot to pull on every load.</p>
+      <p><strong>Fix:</strong> Lower the fetch limit for a faster load: <code>GHUI_PR_FETCH_LIMIT=100 ghui</code>. You can also put the values in a <code>.env</code> file (copy <code>.env.example</code> from the repo) instead of typing them each time. Unverified on Omarchy: fetch-limit behavior was read from the README, not timed on a real machine. (<a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">ghui README</a>)</p>
+      <h3>A PR you just opened, merged, or closed does not show the new state</h3>
+      <p>ghui polls GitHub rather than receiving live updates, so state changes made in the browser or by someone else only appear after a refresh or a refetch.</p>
+      <p><strong>Fix:</strong> Press <code>r</code> to refresh. If a refresh still shows stale data, quit and relaunch. Unverified on Omarchy: refresh behavior was read from the README keybindings, not tested live.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>gh</code> (the GitHub CLI, which ghui depends on), <code>lazygit</code> for the repo side of the same workflow, and your editor of choice via the <code>e</code> handoff (Neovim with diffview.nvim or octo.nvim is the documented recipe).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Stick with <code>gh pr list</code> and <code>gh pr status</code> in the terminal, which give you the same data as plain text and are scriptable. Or use GitHub’s web PR inbox if you prefer a mouse.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: ghui vs gh pr vs gh-dash vs GitHub web UI</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>ghui</th><th>gh pr (GitHub CLI)</th><th>gh-dash</th><th>GitHub web UI</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free</td><td>Free (MIT)</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Keyboard-driven PR review across repos: diffs, comments, CI, merge</td><td>Scriptable PR commands and quick one-off checks</td><td>A lighter PR and issue dashboard, also built on <code>gh</code></td><td>Full-featured review with the richest commenting and CI views</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add ghui</code></td><td><code>omarchy pkg add github-cli</code> (ghui dependency)</td><td><code>gh extension install dlvhdr/gh-dash</code></td><td>Just open github.com</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> If you live in the terminal and review PRs across many repos, ghui is the most complete keyboard workflow of the free options. If you only check PRs occasionally, <code>gh pr list</code> is enough and costs you nothing to learn.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>ghui is a free alternative to paid PR-dashboard tools</h2>
+      <p><strong>ghui is a free alternative to paid PR-dashboard tools.</strong> Instead of a subscription tool that aggregates your pull requests, you get the same single-pane review queue for $0. What you give up: hosted notifications, a web dashboard you can open on your phone, and team analytics. What you keep: the full review workflow — diffs, inline comments, approvals, merges, CI status — in one keyboard-driven screen, with no account beyond the GitHub login you already have.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the ghui package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/ghui.html">View ghui →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is ghui free?</summary><p>Yes. It is MIT-licensed and free to install and use. The only requirement is a GitHub account and the GitHub CLI.</p></details>
+      <details><summary>Do I need a separate GitHub login for ghui?</summary><p>No. ghui reuses the GitHub CLI’s authentication. Run <code>gh auth login</code> once and ghui uses that token, including for GitHub Enterprise.</p></details>
+      <details><summary>Does ghui work with GitHub Enterprise?</summary><p>Yes. Because it authenticates through <code>gh</code>, it works wherever <code>gh</code> is authenticated, including GitHub Enterprise hosts. Unverified on Omarchy: Enterprise was not tested for this guide.</p></details>
+      <details><summary>Where does ghui store its settings?</summary><p>UI preferences live in <code>config.json</code> under <code>GHUI_CONFIG_DIR</code> if set, otherwise under the platform config directory, which is normally <code>~/.config/ghui/config.json</code> on Linux. Fetch limits are environment variables: <code>GHUI_PR_FETCH_LIMIT</code> (default 200) and <code>GHUI_RUN_FETCH_LIMIT</code> (default 20).</p></details>
+      <details><summary>Can I review PRs from many repos at once?</summary><p>Yes, that is the point. ghui aggregates open PRs across repositories into one list, with queues you switch between using <code>Tab</code> / <code>Shift-Tab</code>.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/ghui.html" target="_blank" rel="noopener">omarchyapps.com app page — ghui v0.9.1-1, ~49.1 MB download, ~140.4 MB installed, MIT, depends on glibc, github-cli</a></li>
+        <li><a href="https://github.com/kitlangton/ghui" target="_blank" rel="noopener">ghui README (install, gh auth login requirement, config, editor handoff, workflow runs, keybindings)</a></li>
+        <li><a href="https://cli.github.com/manual/gh_pr" target="_blank" rel="noopener">GitHub CLI manual (gh pr commands)</a></li>
+        <li><a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api" target="_blank" rel="noopener">GitHub REST API rate limits (5,000 requests/hour authenticated)</a></li>
+        <li><a href="https://www.opensourceprojects.dev/post/gh-dash" target="_blank" rel="noopener">gh-dash (alternative TUI, gh extension install)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

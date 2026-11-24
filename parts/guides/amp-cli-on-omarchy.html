@@ -1,0 +1,131 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: run `omarchy pkg add amp-cli` on a clean Omarchy system. Confirm version 0.0.1795478457-1, ~67.8 MB download / ~156.5 MB installed as listed.
+- First run: run `amp login` and confirm the browser sign-in flow works from Hyprland (Amp opens a browser for auth). Confirm `amp` starts the interactive thread in a project directory.
+- The Dial: press Ctrl+S before the first message and confirm the mode picker works in the Omarchy terminal (Ghostty/Alacritty).
+- Config location: confirm user settings live at `~/.config/amp/settings.json` and that `amp config edit` opens it.
+- Orbs: confirm whether starting a cloud orb thread works from the CLI on Omarchy, or whether orb work needs the web app.
+- Issues claimed below are NOT personally reproduced — they are documented upstream (Amp docs, independent guides). Verify at least the login and PATH ones on a real machine.
+- Screenshots needed: install, login, first thread, the Dial, settings file.
+
+SEO notes:
+- URL: /guides/amp-cli-on-omarchy
+- Title tag: "How to Install & Use Amp CLI on Omarchy (2026) — Free Hobby Tier, the Dial, and Cloud Orbs"
+- Meta description: "Install Sourcegraph Amp CLI on Omarchy. Free Hobby tier, login, the Dial modes, AGENTS.md setup, orb pricing, and common fixes."
+- Keywords: amp cli omarchy, amp code omarchy, amp coding agent linux, amp dial modes, amp agents.md, amp orb pricing, amp hobby tier free
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Amp CLI on Omarchy</h2>
+      <p>Amp CLI on Omarchy is Sourcegraph’s frontier coding agent in your terminal: describe a task, and it reads, edits, and tests code across your whole project, with each conversation running as its own thread.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add amp-cli
+amp login
+cd ~/your-project
+amp</code></pre>
+      <p>That installs Amp CLI (v0.0.1795478457-1, ~67.8 MB download, ~156.5 MB installed). It is free to install; the Hobby tier costs $0 and lets you bring your own model subscription or API keys with no Amp token fees. Amp-hosted cloud orbs and Amp model credits cost extra. It takes about 2 minutes.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Log in.</h3>
+      <p>Run <code>amp login</code>. It opens your browser to sign in to your Amp account at ampcode.com. The CLI can keep several accounts: <code>amp account list</code> shows them, <code>amp account switch &lt;email&gt;</code> picks the active one, and <code>amp logout</code> removes it.</p>
+      <h3>2. Start your first thread.</h3>
+      <p>Change into a project directory and run <code>amp</code>. Every conversation is a thread with its own URL, and Amp can keep working on a thread from the web app or your phone after you close the terminal.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Turn the Dial.</strong> Before your first message, press Ctrl+S to pick a mode. Amp routes by difficulty, not by model name: low modes are fast and cheap, high modes use frontier models. Picking the right mode matters more than picking a model.</li>
+        <li><strong>Write an AGENTS.md.</strong> Amp reads <code>AGENTS.md</code> at the repo root (plus <code>~/.config/amp/AGENTS.md</code> for your personal rules) and treats it as standing instructions: architecture, build and test commands, review steps. A short one makes every thread better.</li>
+        <li><strong>Bring your own model.</strong> On the free Hobby tier you can link a ChatGPT, Claude, or Grok subscription, or add your own API keys, with no Amp token fees. Run <code>amp config model-providers add-chatgpt-subscription</code> to link a ChatGPT plan, or set keys in settings. If you buy Amp credits instead, they are billed at provider list price with no markup.</li>
+      </ul>
+      <h3>4. Config location.</h3>
+      <p>User settings live at <code>~/.config/amp/settings.json</code> (edit with <code>amp config edit</code>), workspace settings at <code>.amp/settings.json</code> in the project (edit with <code>amp config edit --workspace</code>). Workspace values override user values, except for keymap entries. (Unverified on Omarchy; from Amp docs.)</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3><code>amp: command not found</code> right after installing</h3>
+      <p>The binary is probably not on your PATH in the current shell. (Reported in community cheatsheets for the upstream installer; verify the Omarchy package path on a real machine.)</p>
+      <p><strong>Fix:</strong> Open a new terminal window, or check where the package put the binary with <code>which amp</code> and <code>pacman -Ql amp-cli | grep bin</code>.</p>
+      <h3><code>amp login</code> works, but scripts and CI fail with an expired session</h3>
+      <p>The session token from <code>amp login</code> expires within about an hour, and the CLI rejects it for non-interactive use (<a href="https://luongnv.com/awesome-cheatsheets/cheatsheets/amp-code/" target="_blank" rel="noopener">Amp cheatsheet</a>).</p>
+      <p><strong>Fix:</strong> For scripts and CI, create a long-lived access token in Settings on ampcode.com (it starts with <code>sgamp_</code>) and export it as <code>AMP_API_KEY</code>.</p>
+      <h3>Amp asks for approval on every MCP server, or a workspace MCP server never runs</h3>
+      <p>MCP servers are configured under <code>amp.mcpServers</code> in <code>~/.config/amp/settings.json</code> or the workspace <code>.amp/settings.json</code>. Workspace servers need explicit trust before they run (<a href="https://kipt.me/guides/amp-code" target="_blank" rel="noopener">Amp Code guide</a>).</p>
+      <p><strong>Fix:</strong> Approve workspace servers with <code>amp mcp approve &lt;name&gt;</code>. Add a server with <code>amp mcp add context7 -- npx -y @upstash/context7-mcp</code>.</p>
+      <h3>Amp burns through credits fast, or a simple task uses a frontier model</h3>
+      <p>You probably left the Dial on a high mode. (Amp docs via <a href="https://agentvera.dev/en/blog/how-to-use-amp/" target="_blank" rel="noopener">AgentVera guide</a>.)</p>
+      <p><strong>Fix:</strong> Press Ctrl+S and drop to a lower mode for routine edits; save high modes for hard refactors. On the Hobby tier, linking your own ChatGPT or Claude subscription avoids Amp credit charges entirely.</p>
+      <h3>Amp’s edits ignore your project conventions</h3>
+      <p>Amp only knows what it can read. (<a href="https://kipt.me/guides/amp-code" target="_blank" rel="noopener">Amp Code guide</a>.)</p>
+      <p><strong>Fix:</strong> Add an <code>AGENTS.md</code> at the repo root with your build, test, and style rules. Amp also loads <code>~/.config/amp/AGENTS.md</code> and <code>~/.config/AGENTS.md</code> in every project, and falls back to <code>AGENT.md</code> or <code>CLAUDE.md</code> when no <code>AGENTS.md</code> exists.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>A good terminal (Ghostty or Alacritty, which Amp’s own docs recommend for clipboard support), <code>git</code> (Amp threads work best with clean commits so you can review diffs), and an <code>AGENTS.md</code> per project.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Claude Code for a terminal agent tied to a Claude subscription, or Google’s Antigravity CLI (<code>agy</code>, also on the Omarchy store) if your work lives in Google’s ecosystem. Both are covered in their own guides on this site.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Amp CLI vs Claude Code vs Antigravity CLI vs DeepSeek Harness vs Claude Desktop</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Amp CLI</th><th>Claude Code (CLI)</th><th>Antigravity CLI (<code>agy</code>)</th><th>DeepSeek Harness</th><th>Claude Desktop</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free Hobby tier; Megawatt $20/mo; Gigawatt $200/mo</td><td>Requires Claude Pro $20/mo or higher</td><td>Free tier; Google AI Pro $19.99/mo; Ultra $99.99/$199.99/mo</td><td>Free, MIT open source; you pay only for model API usage</td><td>Free app; Claude Free / Pro $20/mo</td></tr>
+            <tr><td>Best for</td><td>Frontier models plus cloud orbs that keep working after you close your laptop</td><td>Terminal coding with Claude models and deep Claude ecosystem tooling</td><td>Gemini-powered agent work if you already pay for Google AI</td><td>Open, plugin-based harness you can point at any model, including local ones</td><td>Desktop chat plus MCP and Cowork agents</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add amp-cli</code></td><td>Omarchy AI menu / npm</td><td><code>omarchy pkg add antigravity-cli</code></td><td><code>omarchy pkg add deepseek-dsh</code></td><td><code>omarchy pkg add claude-desktop</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Amp if you want frontier-model choice (Claude, GPT, Grok) in one CLI and threads that keep running in the cloud after you close your laptop. Pick a single-vendor CLI if you already pay for one model family and want the simplest bill.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Amp CLI is free — the agent costs $0; the cloud machines cost money</h2>
+      <p><strong>Amp’s Hobby tier is free, and it is free in a useful way:</strong> all features, no Amp token fees when you bring your own ChatGPT, Claude, or Grok subscription or your own API keys, and free self-hosted orbs and runners. What you pay for is Amp-hosted cloud compute (orbs billed by the minute) and Amp model credits if you buy them. If you run Amp locally with your own subscription, your only cost is the subscription you already pay for. The old $10/day free credit grant was replaced by this Hobby tier on September 13, 2026, so older guides that quote it are out of date.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Amp CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/amp-cli.html">View Amp CLI →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Amp CLI free?</summary><p>Yes, to install and to use on the Hobby tier ($0). You bring your own model subscription or API keys and pay Amp nothing for tokens. Paid plans buy hosted orb time and credits: Megawatt $20/month, Gigawatt $200/month. Prices are US list prices as of October 2026; check ampcode.com/pricing before you pay.</p></details>
+      <details><summary>Who makes Amp now?</summary><p>Amp Frontier Corporation, an independent company spun out of Sourcegraph in December 2025. It calls itself an agent research lab. The CLI npm package moved from <code>@sourcegraph/amp</code> to <code>@ampcode/cli</code>.</p></details>
+      <details><summary>What is an orb?</summary><p>A cloud machine Amp spins up per thread, with your repo cloned into it. The agent keeps working there after you close your laptop, and you can check on it from the web app or your phone. Orbs are billed by the minute by size; self-hosted orbs on your own Docker or Kubernetes setup are free on the Hobby tier.</p></details>
+      <details><summary>Does Amp work offline or run a model locally?</summary><p>No. Amp is a cloud agent: every task goes to a frontier model through Amp or your own provider keys. For a local-model workflow, look at deepseek-dsh instead.</p></details>
+      <details><summary>Where does Amp keep its settings?</summary><p>User settings live at <code>~/.config/amp/settings.json</code> (edit with <code>amp config edit</code>), workspace settings at <code>.amp/settings.json</code> in the project (edit with <code>amp config edit --workspace</code>). Workspace values override user values, except for keymap entries. (Unverified on Omarchy; from Amp docs.)</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/amp-cli.html" target="_blank" rel="noopener">omarchyapps.com app page — amp-cli v0.0.1795478457-1, 67.8 MB download, 156.5 MB installed, LicenseRef-Amp, updated 2026-11-23</a></li>
+        <li><a href="https://www.software-lifecycle.com/software/amp" target="_blank" rel="noopener">Amp review with pricing and orb details (Oct 2026)</a></li>
+        <li><a href="https://tailkits.com/tools/amp/" target="_blank" rel="noopener">Amp pricing summary (Nov 2026)</a></li>
+        <li><a href="https://luongnv.com/awesome-cheatsheets/cheatsheets/amp-code/" target="_blank" rel="noopener">Amp CLI cheatsheet (install, login, settings, CI token expiry)</a></li>
+        <li><a href="https://agentvera.dev/en/blog/how-to-use-amp/" target="_blank" rel="noopener">Amp step-by-step guide (modes, AGENTS.md, MCP, pricing)</a></li>
+        <li><a href="https://kipt.me/guides/amp-code" target="_blank" rel="noopener">Amp Code guide (Dial, skills, MCP approval)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

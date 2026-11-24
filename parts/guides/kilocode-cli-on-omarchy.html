@@ -1,0 +1,142 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: run `omarchy pkg add kilocode-cli` on a clean Omarchy system. Confirm version 7.8.32-1, 82.9 MB download / 332.6 MB installed as listed.
+- Binary name: confirm the package installs the `kilo` command (upstream npm installs both `kilo` and `kilocode`).
+- First run: run `kilo` in a project and confirm the `/connect` flow works on Omarchy: Kilo Gateway account vs your own provider API key vs local Ollama.
+- Config paths: confirm global config at `~/.config/kilo/kilo.jsonc` and project config at `./kilo.jsonc` or `./.kilo/`.
+- Telemetry default: confirm product telemetry is on by default and that `KILO_TELEMETRY_LEVEL=off` turns it off.
+- Issues claimed below are NOT personally reproduced — they are documented upstream (Kilo docs, GitHub issues, independent reviews). Verify at least the `/connect` flow and the telemetry opt-out on a real machine.
+- Screenshots needed: install, first launch, `/connect` screen, agent switcher, a `kilo run` one-shot, `kilo stats` output.
+
+SEO notes:
+- URL: /guides/kilocode-cli-on-omarchy
+- Title tag: "How to Install & Use Kilo Code CLI on Omarchy (2026) — Open Source Terminal Coding Agent"
+- Meta description: "Install Kilo Code CLI, the open source terminal coding agent, on Omarchy. Setup with /connect, agents, kilo run automation, and the older-CPU and telemetry fixes."
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Kilo Code CLI on Omarchy</h2>
+      <p>Kilo Code CLI is the open source (MIT) terminal coding agent from Kilo Code: a fork of OpenCode with 500+ models, switchable agents for coding, planning, asking, and debugging, and the same engine as its VS Code and JetBrains plugins.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add kilocode-cli
+cd ~/my-project
+kilo</code></pre>
+      <p>That installs Kilo Code CLI v7.8.32-1 (82.9 MB download, 332.6 MB installed, depends on glibc). On first run, use <code>/connect</code> inside the TUI to add your provider credentials. Then describe the change you want in plain language.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Launch and connect a provider.</h3>
+      <p>Run <code>kilo</code> in a project directory. The first time, type <code>/connect</code> inside the TUI: this is the guided entry point for adding provider credentials. You can use a Kilo account (the Kilo Gateway gives you 500+ models billed at provider rates), your own provider API key, or a local model through Ollama or LM Studio. No API key is required just to start if you use the Kilo Gateway path.</p>
+      <h3>2. Pick an agent for the job.</h3>
+      <p>Kilo ships with four built-in agents you switch between: <code>code</code> (the default, implements and edits code), <code>plan</code> (designs architecture and writes implementation plans before any code gets written), <code>ask</code> (answers questions about your codebase without touching any files), and <code>debug</code> (troubleshoots and traces issues). Start a session with a specific agent from the shell with <code>kilo --agent plan</code>, or switch inside the TUI.</p>
+      <h3>3. The 3 things you need to know:</h3>
+      <ul>
+        <li><strong>Learn <code>kilo run</code> for one-shot work.</strong> <code>kilo run "run tests and fix any failures"</code> runs a task without opening the TUI, which makes it scriptable and CI-friendly. Add <code>--auto</code> for fully autonomous operation with no prompts, but only in trusted environments, since it auto-approves permission prompts unless a rule explicitly denies the action.</li>
+        <li><strong>Know where config lives.</strong> Global config is <code>~/.config/kilo/kilo.jsonc</code> and applies to all projects; project config is <code>./kilo.jsonc</code> or under <code>./.kilo/</code>. That is where the default model, provider credentials, permission rules, and MCP servers live. Run <code>kilo config check</code> to validate it.</li>
+        <li><strong>Check your usage.</strong> <code>kilo stats</code> shows token usage and cost, and <code>kilo session list</code> shows past sessions you can resume or export (<code>kilo export &lt;sessionID&gt;</code>).</li>
+      </ul>
+      <p><strong>Practical notes:</strong> Kilo Code was acquired by Anaconda on July 15, 2026. The project is still open source under MIT, with about 28,000 GitHub stars, and the README notes that new feature pull requests now target a <code>v2</code> branch while bug fixes still go to <code>main</code>.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Kilo crashes immediately with <code>Illegal instruction</code> on an older CPU</h3>
+      <p>This hits CPUs without AVX support (Intel Xeon Nehalem, AMD Bulldozer, or older). The Omarchy package ships the standard build, so on an affected machine this is a real blocker, not a config problem.</p>
+      <p><strong>Fix:</strong> Download the baseline variant from GitHub Releases instead of the default build: for Linux x64 that is <code>kilo-linux-x64-baseline.tar.gz</code>. Extract it and run the <code>kilo</code> binary directly. (<a href="https://kilo.ai/docs/code-with-ai/platforms/cli" target="_blank" rel="noopener">Kilo CLI docs</a>)</p>
+      <h3>Kilo sends usage telemetry by default and you did not agree to that</h3>
+      <p>Product telemetry (to PostHog) is enabled by default.</p>
+      <p><strong>Fix:</strong> Turn it off with <code>KILO_TELEMETRY_LEVEL=off</code> in your shell environment, or set <code>experimental.openTelemetry</code> to <code>false</code> in your global Kilo config and restart the CLI. The environment variable takes precedence over config, and project config alone does not control telemetry initialization. (<a href="https://kilo.ai/docs/code-with-ai/platforms/cli" target="_blank" rel="noopener">Kilo CLI docs</a>)</p>
+      <h3>The agent stalls mid-task, showing tool calls as if they were thinking tokens, and never runs them</h3>
+      <p>This is a real reported bug with Kimi K2.5 models through OpenRouter (Kilo issue #5748): the model emits tool calls while thinking, and Kilo fails to interpret them, so the task stops instead of executing.</p>
+      <p><strong>Fix:</strong> Switch to a different model or provider for that task (for example a Kilo Gateway model or an Anthropic model) and report the trace on the issue if it reproduces for you. (<a href="https://github.com/Kilo-Org/kilocode/issues/5748" target="_blank" rel="noopener">Kilo-Org/kilocode issue #5748</a>)</p>
+      <h3>The <code>/connect</code> login link will not open, or it opens on the wrong machine</h3>
+      <p>Links open on the machine running Kilo. If Kilo runs over SSH and the browser is on your local machine, the link opens somewhere you cannot see it.</p>
+      <p><strong>Fix:</strong> Select and copy the visible URL from the terminal and paste it into your local browser. <code>KILO_DISABLE_MOUSE=1</code> can help diagnose terminal link behavior, but it also disables TUI mouse controls and is not required for normal use. (<a href="https://kilo.ai/docs/code-with-ai/platforms/cli" target="_blank" rel="noopener">Kilo CLI docs</a>)</p>
+      <h3>The agent runs shell commands with your full permissions, and a recent update changed permission or MCP behavior without warning</h3>
+      <p>Two things to know. First, the sandbox is off by default: on Linux it uses Bubblewrap to limit writes outside the workspace and outbound network, but you have to enable it in config. Second, October 2026 releases changed permission and MCP behavior without a breaking-change label.</p>
+      <p><strong>Fix:</strong> Enable the sandbox in config (<code>sandbox</code> settings, including <code>sandbox.network</code> deny with <code>sandbox.allowed_hosts</code>). Pin a version for unattended <code>kilo run --auto</code> use instead of tracking latest blindly. And never use <code>--auto</code> outside a trusted environment. (<a href="https://kilo.ai/docs/code-with-ai/platforms/cli" target="_blank" rel="noopener">Kilo CLI docs</a>; <a href="https://www.anchorterminal.com/tools/kilo-code-cli" target="_blank" rel="noopener">Anchor Terminal review</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>The Kilo Code VS Code extension (same engine, same account, no separate install needed for the CLI binary), <code>git</code> (review diffs before committing), and Ollama or LM Studio for local models with no per-token bill.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>If you hate managing provider keys: Freebuff needs no key at all (ads pay instead), and Kimi Code CLI gives you a single-vendor login with a membership. If you want the same terminal agent without Kilo’s gateway and cloud features, upstream OpenCode is the project Kilo’s CLI is forked from.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Kilo Code CLI vs OpenCode vs Freebuff vs Claude Code</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Kilo Code CLI</th><th>OpenCode (upstream)</th><th>Freebuff</th><th>Claude Code</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free agent; models at provider rates, zero markup. Kilo Pass from $19/mo</td><td>Free agent; bring your own key</td><td>Free; ads pay the bill</td><td>Requires Claude Pro $20/mo+</td></tr>
+            <tr><td>Best for</td><td>One agent across terminal, VS Code, and JetBrains with any model</td><td>The terminal agent without Kilo’s gateway, IDE plugins, or cloud features</td><td>Zero setup, zero spend, no API key</td><td>The strongest single-vendor models, no key juggling</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add kilocode-cli</code></td><td><code>npm install -g opencode-ai</code></td><td><code>omarchy pkg add freebuff</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Kilo Code CLI if you want to choose your model per task (including local ones) and use the same agent in the terminal and your editor. Pick OpenCode if you want the same terminal experience with no vendor account at all. Pick Freebuff if you want to pay nothing and never touch an API key.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Kilo Code CLI is a free alternative to Claude Code ($20/mo)</h2>
+      <p><strong>Kilo Code CLI is a free alternative to Claude Code (Pro $20/mo).</strong> What you give up: a single vendor’s bundled models and the polish of a first-party tool; you manage keys, billing, and model choice yourself. What you keep: a full agentic coding loop, 500+ models, MCP servers, custom agents, and scripted <code>kilo run</code> workflows, with the agent itself free and MIT licensed. The honest math: the agent costs $0, but the intelligence is not free. Kilo charges provider rates with zero markup, plus a 5% fee on credit purchases, and Kilo Pass starts at $19/mo. With a cheap provider model or a local Ollama model, a light month can still cost less than a Claude Pro subscription, but a heavy month on frontier models can cost more. Check current pricing at kilo.ai before deciding.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15–30 minutes)</h2>
+      <ol>
+        <li><strong>Export from Claude Code:</strong> your project instructions live in <code>CLAUDE.md</code>. Kilo does not document reading <code>CLAUDE.md</code> directly, so copy its contents into your Kilo project config or an agent instruction file rather than assuming it carries over.</li>
+        <li><strong>Import into Kilo:</strong> run <code>kilo</code>, then <code>/connect</code> to add your provider, and set the default model in <code>./kilo.jsonc</code>. Add MCP servers with <code>kilo mcp add</code>. Recreate any custom slash commands as custom agents (Markdown files under <code>.kilo/agents/</code>).</li>
+        <li><strong>Install Kilo Code CLI on Omarchy:</strong> <code>omarchy pkg add kilocode-cli</code>.</li>
+        <li><strong>What doesn’t transfer:</strong> chat history, Claude-specific features, and Claude Code’s headless GitHub Actions integration (Kilo has its own <code>kilo run --auto</code> for CI instead).</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Kilo Code CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/kilocode-cli.html">View Kilo Code CLI →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Kilo Code CLI free?</summary><p>The agent is free and MIT licensed. You pay for model usage: either through the Kilo Gateway at provider rates, with your own provider API keys, or with a local model through Ollama or LM Studio, which costs nothing per token. Kilo Pass starts at $19/mo for extra platform features.</p></details>
+      <details><summary>Do I need an API key to start?</summary><p>No key is required to start if you use a Kilo account and the Kilo Gateway. If you want your own provider or a specific vendor’s models, add the key with <code>/connect</code> or <code>kilo auth login</code>.</p></details>
+      <details><summary>Does it work with local models?</summary><p>Yes. Kilo works with local Ollama and LM Studio servers as providers, alongside 500+ hosted models. That is the cheapest way to run it and the only way to keep prompts fully on your machine.</p></details>
+      <details><summary>Is Kilo Code CLI the same as OpenCode?</summary><p>No, but it is closely related. The Kilo CLI is a fork of OpenCode, enhanced to work within the Kilo platform: it adds the Kilo Gateway, the shared engine with the VS Code and JetBrains plugins, and commands like <code>kilo cloud</code>. Upstream OpenCode is the same terminal experience without those additions.</p></details>
+      <details><summary>Who owns Kilo Code?</summary><p>Anaconda acquired Kilo Code on July 15, 2026. The project is still open source under MIT, with about 28,000 GitHub stars, and the README notes that new feature pull requests now target a <code>v2</code> branch while bug fixes still go to <code>main</code>.</p></details>
+      <details><summary>Where does Kilo Code CLI store its config?</summary><p>Global config at <code>~/.config/kilo/kilo.jsonc</code>, project config at <code>./kilo.jsonc</code> or under <code>./.kilo/</code>. Sessions, usage stats, and the local database are managed through <code>kilo session</code>, <code>kilo stats</code>, and <code>kilo db</code> commands.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/kilocode-cli.html" target="_blank" rel="noopener">omarchyapps.com app page — kilocode-cli v7.8.32-1, 82.9 MB download, 332.6 MB installed, MIT, updated 2026-11-23</a></li>
+        <li><a href="https://github.com/Kilo-Org/kilocode" target="_blank" rel="noopener">Kilo Code README (install methods, agents, 500+ models, zero markup, fork of OpenCode, baseline builds)</a></li>
+        <li><a href="https://kilo.ai/docs/code-with-ai/platforms/cli" target="_blank" rel="noopener">Kilo CLI docs (Illegal instruction baseline fix, /connect, SSH link fallback, telemetry opt-out, sandbox)</a></li>
+        <li><a href="https://gist.github.com/jetnet/d8be5febbd9dc87db25c494fb1d7de20" target="_blank" rel="noopener">Kilo CLI cheatsheet (commands, kilo.jsonc paths, agents, auth commands)</a></li>
+        <li><a href="https://github.com/Kilo-Org/kilocode/issues/5748" target="_blank" rel="noopener">Kimi K2.5 tool-call bug, Kilo issue #5748</a></li>
+        <li><a href="https://shortlisted.tools/products/kilo" target="_blank" rel="noopener">Pricing (free agent, provider rates plus 5% fee, Kilo Pass from $19/mo, Teams $15/user, Anaconda acquisition July 15, 2026)</a></li>
+        <li><a href="https://www.anchorterminal.com/tools/kilo-code-cli" target="_blank" rel="noopener">Telemetry, sandbox, and permission-change review</a></li>
+        <li><a href="https://www.skillsdirectory.com/skills/terminalskills-kilo-code" target="_blank" rel="noopener">Kilo Code skill reference (config paths, agents, local models)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

@@ -1,0 +1,143 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: run `omarchy pkg add deepseek-dsh` on a clean Omarchy system. Confirm version 0.2.2rc.5-1, ~135.2 MB download / ~559.2 MB installed as listed.
+- First run: run `dsh web` and confirm the web UI opens at `http://127.0.0.1:3080`, and confirm `dsh --profile headless` works for a one-shot task.
+- Node version: confirm the bundled Node.js meets the requirement (Node 22.19+ in the 22.x line, or Node 24+).
+- API key flow: add a DeepSeek API key in Settings, confirm it lands in `$DSH_HOME/.credentials.yaml`, and run one real task end to end.
+- Profiles: confirm `dsh web` is shorthand for `dsh --profile web` and that profiles live under `$DSH_HOME/profiles/<name>`.
+- Issues claimed below are NOT personally reproduced — they are documented upstream (DeepSeek docs, independent guides, GitHub issues). Verify at least the key setup and the Ollama launcher issue on a real machine.
+- Screenshots needed: install, web UI first screen, Settings Models page, a running task, approval prompt.
+
+SEO notes:
+- URL: /guides/deepseek-dsh-on-omarchy
+- Title tag: "How to Install & Use DeepSeek Harness on Omarchy (2026) — Open-Source Agent Runtime, Any Model"
+- Meta description: "Install DeepSeek Harness on Omarchy. Open-source agent runtime, DeepSeek API key setup, local Ollama models, profiles, and common fixes."
+- Keywords: deepseek harness omarchy, dsh omarchy, deepseek dsh install, dsh web ui, dsh ollama local model, deepseek harness vs claude code, dsh cordis
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>DeepSeek Harness on Omarchy</h2>
+      <p>DeepSeek Harness (<code>dsh</code>) on Omarchy is DeepSeek’s open-source agent runtime: the chassis that turns any language model, including a local one, into a coding agent that reads and edits files, runs shell commands, and delegates to subagents.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add deepseek-dsh
+dsh web</code></pre>
+      <p>That installs DeepSeek Harness (v0.2.2rc.5-1, ~135.2 MB download, ~559.2 MB installed). Then open the web UI at <code>http://127.0.0.1:3080</code>, add your DeepSeek API key in Settings, and start a task. Note: despite the store calling it a “terminal coding agent,” <code>dsh</code> has no terminal UI. It runs a local web UI in your browser, plus a headless mode for one-shot tasks. It takes about 2 minutes plus API key setup.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Launch the web UI.</h3>
+      <p>Run <code>dsh web</code> from your project directory. It serves the UI at <code>http://127.0.0.1:3080</code> and opens your browser to it (pass <code>--no-open</code> if you would rather it did not). This is the main way you use dsh; there is no full-screen terminal interface like Claude Code or <code>agy</code>.</p>
+      <h3>2. Add your API key.</h3>
+      <p>Open Settings, then Models, and enter your DeepSeek API key on the DeepSeek provider card and save. The key is stored in <code>$DSH_HOME/.credentials.yaml</code> (default <code>~/.dsh</code>), kept separate from the main settings file, which only holds a reference to it. Never paste the key itself into <code>settings.yaml</code>; reference it by environment variable name with <code>apiKeyEnv</code> if you configure it by hand.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Pick the right preset.</strong> dsh ships four agent presets, each loading a different set of plugins. Standard is the default full coding agent: file editing, shell, search, planning, goals, subagents, and workflows. Minimal loads only a persistent bash plus a file editor, which is what DeepSeek used for its Terminal-Bench runs.</li>
+        <li><strong>Know the approval flow.</strong> The web UI asks before operations that require approval under the active permission policy. File writes and shell commands surface as prompts rather than executing silently, so watch for them on your first task.</li>
+        <li><strong>Remember it is a preview.</strong> The README warns, verbatim: “THERE WILL BE COMPATIBILITY-BREAKING CHANGES.” Config field names and behavior can change between releases, so pin the version you tested with and read the changelog before updating.</li>
+      </ul>
+      <h3>4. Config location.</h3>
+      <p>Everything lives under <code>$DSH_HOME</code>, which defaults to <code>~/.dsh</code>. Settings live in <code>$DSH_HOME/settings.yaml</code>, credentials in <code>$DSH_HOME/.credentials.yaml</code>, and profiles under <code>$DSH_HOME/profiles/&lt;name&gt;</code>. Set <code>DSH_HOME</code> to move it, which is worth doing so tests do not mix with your normal use.</p>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>The first screen asks for a DeepSeek key and lists “No models available”</h3>
+      <p>No provider is configured yet. (<a href="https://dsh-plugin.org" target="_blank" rel="noopener">dsh model-error guide</a>; <a href="https://deepinfra.com/blog/deepseek-harness-review" target="_blank" rel="noopener">DeepInfra review</a>.)</p>
+      <p><strong>Fix:</strong> Open Settings, then Models, enter your DeepSeek API key on the provider card, and save. If you use a custom endpoint instead, add it as a custom provider with a lowercase provider ID, a base URL, an API protocol, and at least one model, then use Fetch available models to list what it offers.</p>
+      <h3>Requests fail with <code>MISSING_CREDENTIAL</code> or a 401</h3>
+      <p>Read the error keyword first. <code>MISSING_CREDENTIAL</code> means the key was not saved on the model page, or the environment variable was not injected before starting dsh. A 401 on Fetch available models means the key is wrong, or the service has no <code>GET /models</code> endpoint, in which case enter model IDs manually and make sure they match the provider’s actual model field exactly. (<a href="https://dsh-plugin.org" target="_blank" rel="noopener">dsh model-error guide</a>.)</p>
+      <p><strong>Fix:</strong> Keys live in <code>$DSH_HOME/.credentials.yaml</code>, never in <code>settings.yaml</code>. Re-save the key on the model page, or fix the environment variable and restart dsh.</p>
+      <h3>Requests fail with <code>UNKNOWN_MODEL</code>, or the model selector shows “Select model” and blocks input</h3>
+      <p>The requested model is not among your configured providers. (<a href="https://dsh-plugin.org" target="_blank" rel="noopener">dsh model-error guide</a>.)</p>
+      <p><strong>Fix:</strong> Check <code>settings.yaml</code> under <code>$DSH_HOME</code> and confirm the provider and model ID are spelled exactly as the provider lists them. Model config changes take effect on the next request without a restart, so fix the file and retry.</p>
+      <h3><code>ollama launch dsh</code> opens a web UI that asks for a DeepSeek key and shows no Ollama models</h3>
+      <p>Known bug, not your setup. The Ollama launcher writes its model list into <code>~/.ollama/launch/dsh/settings.yaml</code>, but dsh dropped the file-backed settings provider that honored that path back in the 0.1 line, so no Ollama route ever loads. The break was reported to Ollama as issue 18699, closed as not planned in September 2026, and it still reproduces with current releases. (<a href="https://computingforgeeks.com/deepseek-harness-local-model/" target="_blank" rel="noopener">ComputingForGeeks, Nov 2026</a>.)</p>
+      <p><strong>Fix:</strong> Declare the Ollama route yourself in <code>~/.dsh/cordis.patch.yml</code>, point its <code>apiKeyEnv</code> at <code>OLLAMA_LAUNCH_DSH_API_KEY</code>, and pin Ollama’s context length to the window you declare.</p>
+      <h3>A small local model writes junk files or loops for minutes</h3>
+      <p>The harness is only as good as the model under it. Small models with short context windows are the usual cause. (<a href="https://jacar.es/en/deepseek-harness-dsh-local-model/" target="_blank" rel="noopener">jacar.es local-model guide</a>.)</p>
+      <p><strong>Fix:</strong> Declare a <code>contextWindow</code> in your provider config that matches what your server actually offers, and prefer a larger model for real coding work. One tester found a 4B model completed a real task in 4 of 5 attempts, but runs took 3 to 25 minutes.</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Ollama or llama.cpp for local models (no API bill, full privacy), a DeepSeek API key for the default V4 experience, and <code>git</code> so every agent edit is reviewable and revertible.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Claude Code or Antigravity CLI (<code>agy</code>) for a true terminal interface. Both are covered in their own guides on this site. If you hate the preview-stage rough edges, wait for a stable release; dsh is explicitly a developer preview.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: DeepSeek Harness vs Claude Code vs Antigravity CLI vs Amp CLI vs opencode</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>DeepSeek Harness</th><th>Claude Code (CLI)</th><th>Antigravity CLI (<code>agy</code>)</th><th>Amp CLI</th><th>opencode</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT open source; you pay only for model API usage</td><td>Requires Claude Pro $20/mo or higher</td><td>Free tier; Google AI Pro $19.99/mo; Ultra $99.99/$199.99/mo</td><td>Free Hobby tier; Megawatt $20/mo; Gigawatt $200/mo</td><td>Free, open source; bring your own keys</td></tr>
+            <tr><td>Best for</td><td>Open harness, any model, including local ones; plugin-based and hackable</td><td>Terminal coding with Claude models; the most polished agent loop</td><td>Gemini-powered agent work in a real terminal UI</td><td>Frontier-model choice plus cloud orbs that keep working after you close the laptop</td><td>Open-source terminal agent with a real TUI, if you want the terminal, not a browser tab</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add deepseek-dsh</code></td><td>Omarchy AI menu / npm</td><td><code>omarchy pkg add antigravity-cli</code></td><td><code>omarchy pkg add amp-cli</code></td><td>npm / AUR</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick dsh if you want an open, model-agnostic harness you can point at DeepSeek, a rival API, or a local model, and you are comfortable with a web UI and preview-stage breaking changes. Pick a terminal-native agent if you live in the shell and want a TUI.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>DeepSeek Harness is a free alternative to Claude Code ($20/mo Pro)</h2>
+      <p><strong>dsh is MIT licensed and free, and it is the only agent in this set that is both open source and model-agnostic:</strong> it accepts DeepSeek, Anthropic, OpenAI, Bedrock, Azure, and any OpenAI-compatible endpoint, including a local llama.cpp or Ollama server. That makes it a genuine free alternative to Claude Code and Codex for the harness itself: <strong>the agent runtime costs $0; you pay only for the model you choose, and a local model costs nothing but electricity.</strong> What you give up: the polish of a finished product. It is a developer preview with breaking changes, no terminal UI, and setup that expects you to understand providers and config files. What you keep: the full agent loop, subagents, MCP support, and the freedom to swap models without swapping tools.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes)</h2>
+      <ol>
+        <li><strong>Export from Claude Code:</strong> dsh reads the <code>hooks.json</code> you already wrote for Claude Code through its hook bridges, and its subagent providers can delegate real work to an installed Claude Code CLI, so your existing setup is not wasted.</li>
+        <li><strong>Install dsh:</strong> <code>omarchy pkg add deepseek-dsh</code>, then <code>dsh web</code>, then add your DeepSeek key (or a custom provider pointing at any OpenAI-compatible endpoint) in Settings, then Models.</li>
+        <li><strong>What does not transfer:</strong> your Claude Code session history and per-project memory files do not carry over; dsh keeps its own append-only session log (Trajectory, stored as zstd-compressed JSONL) under <code>$DSH_HOME</code>.</li>
+        <li><strong>Time estimate:</strong> about 15 minutes for the key setup and one test task.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the DeepSeek Harness package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/deepseek-dsh.html">View DeepSeek Harness →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is DeepSeek Harness free?</summary><p>Yes. It is MIT licensed and open source, released by DeepSeek AI on August 13, 2026. You pay only for model usage: DeepSeek API calls are billed per token, and local models cost nothing beyond your hardware.</p></details>
+      <details><summary>Is it really a terminal coding agent?</summary><p>Not in the way the store description suggests. It has no terminal UI. You drive it from a local web UI at <code>http://127.0.0.1:3080</code>, or headless with <code>dsh --profile headless</code> for one-shot tasks. If you want a TUI, use Claude Code, <code>agy</code>, or opencode instead.</p></details>
+      <details><summary>What is Cordis?</summary><p>The plugin framework dsh is built on. Everything is a plugin: the model adapter, the tool registry, the session log, the sandbox, and even the agent loop itself. That is why you can swap models, session storage (JSONL or SQLite), shells, and subagent providers in config instead of patching code.</p></details>
+      <details><summary>What are the system requirements?</summary><p>Node.js 22.19 or newer in the 22.x line, or Node.js 24 and later. The Omarchy package declares nodejs as a dependency, so the install should satisfy this. Building from source also needs pnpm, git, Python 3.8+, and tmux for some plugins.</p></details>
+      <details><summary>Where does dsh keep its config?</summary><p>Under <code>$DSH_HOME</code>, which defaults to <code>~/.dsh</code>. Settings live in <code>$DSH_HOME/settings.yaml</code>, credentials in <code>$DSH_HOME/.credentials.yaml</code>, and profiles under <code>$DSH_HOME/profiles/&lt;name&gt;</code>. Set <code>DSH_HOME</code> to move it, which is worth doing so tests do not mix with your normal use.</p></details>
+      <details><summary>Is it stable enough to rely on?</summary><p>Not yet. It is a developer preview, and the README warns of compatibility-breaking changes. Treat it as a tool for experimenting and for projects where you can pin a version, not as production infrastructure.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/deepseek-dsh.html" target="_blank" rel="noopener">omarchyapps.com app page — deepseek-dsh v0.2.2rc.5-1, 135.2 MB download, 559.2 MB installed, MIT, updated 2026-11-23</a></li>
+        <li><a href="https://primo.ai/wiki/DeepSeek_Harness" target="_blank" rel="noopener">DeepSeek Harness overview (launch, Cordis, presets, web UI)</a></li>
+        <li><a href="https://deepinfra.com/blog/deepseek-harness-review" target="_blank" rel="noopener">DeepSeek Harness review (architecture, npx vs source, subagents)</a></li>
+        <li><a href="https://apidog.com/blog/what-is-deepseek-harness/" target="_blank" rel="noopener">What is DeepSeek Harness, quick start and first-run flow</a></li>
+        <li><a href="https://jacar.es/en/deepseek-harness-dsh-local-model/" target="_blank" rel="noopener">dsh with a local llama.cpp model (settings.yaml, context window, 4B test results)</a></li>
+        <li><a href="https://dsh-plugin.org" target="_blank" rel="noopener">dsh model errors, MISSING_CREDENTIAL, 401, UNKNOWN_MODEL</a></li>
+        <li><a href="https://computingforgeeks.com/deepseek-harness-local-model/" target="_blank" rel="noopener">dsh Ollama setup and fixes, issue 18699, version 0.2.2-rc.5 (Nov 2026)</a></li>
+        <li><a href="https://www.ssdnodes.com/learn/run-dsh-superagent-on-a-vps" target="_blank" rel="noopener">dsh-superagent deployment requirements (Node, pnpm, git, tmux, gh)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

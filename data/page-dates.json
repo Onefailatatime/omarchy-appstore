@@ -1,32 +1,32 @@
 {
  "about.html": {
-  "date": "2026-11-23",
-  "hash": "1b8ed911042fa8885625cbbb171cf3e255f4de742471c32807b1e188e9ef500b",
+  "date": "2026-11-24",
+  "hash": "a73db58dc092ac730b9216566ca392af26b410df2936290e939c1bfd65a4c197",
   "v": 4
  },
  "amp-cli-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "83eb49c65b85a0edb655789d67a2f6543cc549e3659304f23a545e83a58fc24a",
+  "date": "2026-11-24",
+  "hash": "31e7350843228887bc33b7266ebe5e9b6486e4885a946a3474eca207b61accb3",
   "v": 4
  },
  "antigravity-cli-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "0cccb0a0238f8e338ed9e0ad27e8b9acb3fdb2025a08bab0682f7d7037b4f1f6",
+  "date": "2026-11-24",
+  "hash": "27e3f3f9f50f18381f54b1279986f33232e704228b8c4cef6762187d386c8c98",
   "v": 4
  },
  "antigravity-on-omarchy.html": {
   "date": "2026-11-20",
-  "hash": "df9c52651df5533354c0a5e695240e6383a120b4a0ec735ab9b77b0215128194",
+  "hash": "3a2a2c7b69be5fe4ee7082977c2b75d47d039413e04583ca34ec88772a20416d",
   "v": 4
  },
  "apple-bcm-firmware-fetcher-on-omarchy.html": {
   "date": "2026-11-17",
-  "hash": "93e168db8a10490f6bfd3173ca1688f46589520a9e0a9cb945426fd19978a989",
+  "hash": "4d99a0963c7d8841e17112381adf2cbca245c1a73e22d1165893fe98aaa41a9e",
   "v": 4
  },
  "apple-t2-audio-config-on-omarchy.html": {
   "date": "2026-11-17",
-  "hash": "3bf6949006b391ff744428d927006e38f0676dd96c989427dfe13e4c29d82913",
+  "hash": "e283139bf461f2fa9a942528fed9623ae403736e05778698d44a174fbf0180e5",
   "v": 4
  },
  "apps/1password-beta.html": {
@@ -50,8 +50,8 @@
   "v": 4
  },
  "apps/amp-cli.html": {
-  "date": "2026-11-23",
-  "hash": "50ef8ccc23352549e457c76c56757d01b1f27991269ce45b1efa4d6e7ae46859",
+  "date": "2026-11-24",
+  "hash": "0dd9e7acc2d7b667aa6776e47712a29817ac92b160bdc732b2c3ced0a3f8575a",
   "v": 4
  },
  "apps/amp-desktop-bin.html": {
@@ -60,8 +60,8 @@
   "v": 4
  },
  "apps/antigravity-cli.html": {
-  "date": "2026-11-23",
-  "hash": "1065c99692eceaedf4a8d0b2c8672dc534adfd799f56fe94119c8b321a50fe20",
+  "date": "2026-11-24",
+  "hash": "d9378496b767bde554de3f193e639a207e72bed76ee2478f51e0631ad4897e58",
   "v": 4
  },
  "apps/antigravity.html": {
@@ -109,6 +109,11 @@
   "hash": "50caced61b06e07500b60fa94851fc61437cf3986e4a96f17d646ace8a6adda5",
   "v": 4
  },
+ "apps/cloudflare-cli.html": {
+  "date": "2026-11-24",
+  "hash": "5312536fe3a3c427d2281f4831f86bbb1d0488f0defd4a08209723243e55afaa",
+  "v": 4
+ },
  "apps/crush-bin.html": {
   "date": "2026-11-23",
   "hash": "c31946117b3ec5e2edb71f2c080aeb3acc9481a58a33bfebf800f28fae8f34d5",
@@ -139,6 +144,11 @@
   "hash": "321109ad116beb084165e7320f6ec3d3abfb3056556a43e5af25946a0e10ee33",
   "v": 4
  },
+ "apps/devin-cli.html": {
+  "date": "2026-11-24",
+  "hash": "a9740eb1b151cdcd71bd47538cdabe0e9d147bf4bc147f28f88f9194eab25fa5",
+  "v": 4
+ },
  "apps/dingtalk-bin.html": {
   "date": "2026-11-23",
   "hash": "9e0e8852d6f4ffe390746b4987b32b0c0bbdd09c3849883fa5e32fba576ac6b8",
@@ -152,6 +162,526 @@
  "apps/elsewhen.html": {
   "date": "2026-11-23",
   "hash": "2c7c3b7ea6778ff5308e1edf5600ad666de056723859a8494c2e9fbeb6d207f5",
+  "v": 4
+ },
+ "apps/firefox-i18n-ach.html": {
+  "date": "2026-11-24",
+  "hash": "4c52426ee086f5fccf0ee48d8659d2b36787d63ef4312d4241e805deb561a78c",
+  "v": 4
+ },
+ "apps/firefox-i18n-af.html": {
+  "date": "2026-11-24",
+  "hash": "d6d58e6ed760dd2172f1bb2059dec9d0984e76155c4904ea555c60a5675af264",
+  "v": 4
+ },
+ "apps/firefox-i18n-an.html": {
+  "date": "2026-11-24",
+  "hash": "31394d5aaf2c1b0f6e01375ac176865c6e772aae8e8221f2048621d3bae0a467",
+  "v": 4
+ },
+ "apps/firefox-i18n-ar.html": {
+  "date": "2026-11-24",
+  "hash": "f9f4e8bbc0354d8967fb05600ef873f0e41faa6f063e985ca6d266a116b1cd9a",
+  "v": 4
+ },
+ "apps/firefox-i18n-ast.html": {
+  "date": "2026-11-24",
+  "hash": "72c84ecda3a311ee752563580d02bc29066d289aab3e8d552d723ac3211132cd",
+  "v": 4
+ },
+ "apps/firefox-i18n-az.html": {
+  "date": "2026-11-24",
+  "hash": "ee0633f8ff549108d85102f2694439dba443dd061074fba814da561b7fe95545",
+  "v": 4
+ },
+ "apps/firefox-i18n-be.html": {
+  "date": "2026-11-24",
+  "hash": "f9e3ac266b44dc9a25454d7becbe46100faa3518bf2a4392b9953b3fe0273e6c",
+  "v": 4
+ },
+ "apps/firefox-i18n-bg.html": {
+  "date": "2026-11-24",
+  "hash": "b3eecfea170ec19a45d2fbb6aca0d60dc19c728bdea2d61424c98fa7f2d9e617",
+  "v": 4
+ },
+ "apps/firefox-i18n-bn.html": {
+  "date": "2026-11-24",
+  "hash": "b0f3a43dadfed6cbdd1585a2e0ae442e67748dc4798678c4e8313c0d53deb6e3",
+  "v": 4
+ },
+ "apps/firefox-i18n-br.html": {
+  "date": "2026-11-24",
+  "hash": "c9e68415e385cfecb2c95700962a24ba4c401e3affe7ff5bd04603f4eb5a7698",
+  "v": 4
+ },
+ "apps/firefox-i18n-bs.html": {
+  "date": "2026-11-24",
+  "hash": "d36966ec94cd2acabe04380d8618fdaeea91b6671eb225b877d8066238c39133",
+  "v": 4
+ },
+ "apps/firefox-i18n-ca-valencia.html": {
+  "date": "2026-11-24",
+  "hash": "0dba4925198731b5ca124c7ef5e580497cc682366e8c3c92de6d0d471b1031cd",
+  "v": 4
+ },
+ "apps/firefox-i18n-ca.html": {
+  "date": "2026-11-24",
+  "hash": "c136541426533c8b747698d86b18845d82ec2bfa0d692aebdb2913fae698d8ab",
+  "v": 4
+ },
+ "apps/firefox-i18n-cak.html": {
+  "date": "2026-11-24",
+  "hash": "30d3cd3c432a9ec0853b3242548b382c0ec1e6a651441350e8fb84bb81440f5d",
+  "v": 4
+ },
+ "apps/firefox-i18n-cs.html": {
+  "date": "2026-11-24",
+  "hash": "5a38ed661ba15e1a38d3f35dafa081f502628eac747a030aaabc7eb5ad6a3330",
+  "v": 4
+ },
+ "apps/firefox-i18n-cy.html": {
+  "date": "2026-11-24",
+  "hash": "351ac42d25c83cc2d05e415e92b73137a4caa239435dbfebf840a9f9069cd553",
+  "v": 4
+ },
+ "apps/firefox-i18n-da.html": {
+  "date": "2026-11-24",
+  "hash": "a156983d3e4aae08046c3ed5f9af6e8d6a1f508da6db13d544a3e098bae489bc",
+  "v": 4
+ },
+ "apps/firefox-i18n-de.html": {
+  "date": "2026-11-24",
+  "hash": "10ea2aacabeed54b879dbbf66b56666908ebe3e07ebd0a81487035cce48da699",
+  "v": 4
+ },
+ "apps/firefox-i18n-dsb.html": {
+  "date": "2026-11-24",
+  "hash": "d56669f4f29e0d994b5915901c521180df2fbab065e6a735d714a5d803c86fe0",
+  "v": 4
+ },
+ "apps/firefox-i18n-el.html": {
+  "date": "2026-11-24",
+  "hash": "c1d6e611edc758ba8507060111e196110fe6b0e58035ed228563a3284b0dedfa",
+  "v": 4
+ },
+ "apps/firefox-i18n-en-ca.html": {
+  "date": "2026-11-24",
+  "hash": "6a165ca3bfcb8e30f2c69440cb0bbeea86a09bd0a561fe8dd444a5d415c8db7f",
+  "v": 4
+ },
+ "apps/firefox-i18n-en-gb.html": {
+  "date": "2026-11-24",
+  "hash": "dade522c38d248a0492e6ecc97327b52aaf484b2249a460f7f04e4bb16f6d997",
+  "v": 4
+ },
+ "apps/firefox-i18n-en-us.html": {
+  "date": "2026-11-24",
+  "hash": "5e1906cb0bc6758a244ecbb65391ee20d213370a1b0894cb8cdf7a564cc8de15",
+  "v": 4
+ },
+ "apps/firefox-i18n-eo.html": {
+  "date": "2026-11-24",
+  "hash": "d10c354a5b488367b70ae6240acf1c737fc8936bfd2569c391da5b788067aa72",
+  "v": 4
+ },
+ "apps/firefox-i18n-es-ar.html": {
+  "date": "2026-11-24",
+  "hash": "8fe1c2173d23513ef2e9d0ade6813a1fb0956876af93e08dc5a61a6709260b73",
+  "v": 4
+ },
+ "apps/firefox-i18n-es-cl.html": {
+  "date": "2026-11-24",
+  "hash": "a6346f093b9c368ee2f5bd638797e744242efe986879654cb1cc68ca3e2ed2aa",
+  "v": 4
+ },
+ "apps/firefox-i18n-es-es.html": {
+  "date": "2026-11-24",
+  "hash": "45500b6817d232152054da711e7a37722f28f0003ee7e5cc4c5e88e7d5c3e5de",
+  "v": 4
+ },
+ "apps/firefox-i18n-es-mx.html": {
+  "date": "2026-11-24",
+  "hash": "20bb17b57bdacfa54cca1a7f96b104a42b11d0ec03bc18ad17e765d95073a338",
+  "v": 4
+ },
+ "apps/firefox-i18n-et.html": {
+  "date": "2026-11-24",
+  "hash": "f40a49e52bd60c24aaa089fc0cc2f06d60e3688f3ff080f6bba9782edc12cb94",
+  "v": 4
+ },
+ "apps/firefox-i18n-eu.html": {
+  "date": "2026-11-24",
+  "hash": "e1705d76e34de0fdb3a09525cf8e879cb567aed245d2b864f808af6eac77fba9",
+  "v": 4
+ },
+ "apps/firefox-i18n-fa.html": {
+  "date": "2026-11-24",
+  "hash": "3ca85d33c235329a0458d639eb0630114acdf8c8a261110190232f3052b4ab8c",
+  "v": 4
+ },
+ "apps/firefox-i18n-ff.html": {
+  "date": "2026-11-24",
+  "hash": "481bb071a760aa5b02b7175166122570aa0de1d187585f9b68d0d6c5ff4c42f7",
+  "v": 4
+ },
+ "apps/firefox-i18n-fi.html": {
+  "date": "2026-11-24",
+  "hash": "347cc1c089312017c3f07d1f0b2762282c1bf68d2e2bce19fbecacc43c844352",
+  "v": 4
+ },
+ "apps/firefox-i18n-fr.html": {
+  "date": "2026-11-24",
+  "hash": "7315d2f40130b6fbd81a07d12d82bd47d99885748c61e09f40a566293d64846e",
+  "v": 4
+ },
+ "apps/firefox-i18n-fur.html": {
+  "date": "2026-11-24",
+  "hash": "1a4fbde2b8e43d5982277e56a27a8f5b71adce30fac5e9efde50b048b50d636c",
+  "v": 4
+ },
+ "apps/firefox-i18n-fy-nl.html": {
+  "date": "2026-11-24",
+  "hash": "a37ce6fd4b58da249a01feb887434c5b0b7ed255b5c9541e6631029b7c3b60ff",
+  "v": 4
+ },
+ "apps/firefox-i18n-ga-ie.html": {
+  "date": "2026-11-24",
+  "hash": "2179d9685776302ba6c1e88ae1f7cae74122f7f99f9c177c6a11013dadb4d808",
+  "v": 4
+ },
+ "apps/firefox-i18n-gd.html": {
+  "date": "2026-11-24",
+  "hash": "7081c7470464dcbb415714fd17e50fcbee3299fc8c4206ecf7992b797d6d012f",
+  "v": 4
+ },
+ "apps/firefox-i18n-gl.html": {
+  "date": "2026-11-24",
+  "hash": "8f32796205057f1d59bff5aaac70d29cba8904cec37a563ebb53a6ddf543574a",
+  "v": 4
+ },
+ "apps/firefox-i18n-gn.html": {
+  "date": "2026-11-24",
+  "hash": "7a6d53b7a8688897b7f4ffd2b8770dcb549bfdd2f117c6427d72f267b23c964b",
+  "v": 4
+ },
+ "apps/firefox-i18n-gu-in.html": {
+  "date": "2026-11-24",
+  "hash": "e17373982f1277ad03f5893832e6e9d6fabc903ab056b0fdb3b058c7d8ddc259",
+  "v": 4
+ },
+ "apps/firefox-i18n-he.html": {
+  "date": "2026-11-24",
+  "hash": "06872fd6ddc8658afe2430726ca70876f967a76fbc2d0f2ff5217b7dea6c5613",
+  "v": 4
+ },
+ "apps/firefox-i18n-hi-in.html": {
+  "date": "2026-11-24",
+  "hash": "b3a83375bcea64647dca80ee374dbe95d3ace8f839426d147f85122eef62f0c6",
+  "v": 4
+ },
+ "apps/firefox-i18n-hr.html": {
+  "date": "2026-11-24",
+  "hash": "fa2051a8dbd08953e4748b8fcbf7f3d963da5c45d20713e72fe3a52d694e942f",
+  "v": 4
+ },
+ "apps/firefox-i18n-hsb.html": {
+  "date": "2026-11-24",
+  "hash": "2d7e2c429929531d42d7a9b04921db44995d7a6bf51ca71f1322ab4aa32814e5",
+  "v": 4
+ },
+ "apps/firefox-i18n-hu.html": {
+  "date": "2026-11-24",
+  "hash": "b5ec69ca6dc398031d4c4ac08e4191cacc235df431a37236332d94a5a6406666",
+  "v": 4
+ },
+ "apps/firefox-i18n-hy-am.html": {
+  "date": "2026-11-24",
+  "hash": "a204cfb8de2f37785004000d9aa90950ca36c825d1a93021664754793363bfcc",
+  "v": 4
+ },
+ "apps/firefox-i18n-ia.html": {
+  "date": "2026-11-24",
+  "hash": "2f8df12e0c6a50e16b520b2a1ab7f45fff90277369ba198bd169e284f4d31167",
+  "v": 4
+ },
+ "apps/firefox-i18n-id.html": {
+  "date": "2026-11-24",
+  "hash": "614019b79d2e2073dac2b880635639c218541c94b2f8d18facfbd1a7d8432256",
+  "v": 4
+ },
+ "apps/firefox-i18n-is.html": {
+  "date": "2026-11-24",
+  "hash": "a0ac625891ae064a3ef899acff3b4224b3a1981b0d57d1f31e81e874784de7c8",
+  "v": 4
+ },
+ "apps/firefox-i18n-it.html": {
+  "date": "2026-11-24",
+  "hash": "a9bb30abaac8131f8324f9889d06394a8484681db75fd33473e9511e3a241d3f",
+  "v": 4
+ },
+ "apps/firefox-i18n-ja.html": {
+  "date": "2026-11-24",
+  "hash": "05c04d143af60ff20342e666abdf39665bae827c3efaaac82ef8868f64f91acb",
+  "v": 4
+ },
+ "apps/firefox-i18n-ka.html": {
+  "date": "2026-11-24",
+  "hash": "2e9051184295aba6eb8b2cb08c00b170cd440d2f46d2c22903cdfbe93b0ce1f0",
+  "v": 4
+ },
+ "apps/firefox-i18n-kab.html": {
+  "date": "2026-11-24",
+  "hash": "fd559d6d099a6c59334afa4acc02f981ba58c3864f40167bc670e3d030fe0fdd",
+  "v": 4
+ },
+ "apps/firefox-i18n-kk.html": {
+  "date": "2026-11-24",
+  "hash": "1ac9f54d1e043c8ecedf3d0f62390c3c3a64fef4fd5dee8ba1d47b6951cb5160",
+  "v": 4
+ },
+ "apps/firefox-i18n-km.html": {
+  "date": "2026-11-24",
+  "hash": "70a9a54ec0cdf1049bcabea9ac9132c8813eb1c93bc8a76bae9385be49d7a081",
+  "v": 4
+ },
+ "apps/firefox-i18n-kn.html": {
+  "date": "2026-11-24",
+  "hash": "0d82c9224f820712fc3b00242a19f9e520c4d0b1113d1c067740834e72d9fb3b",
+  "v": 4
+ },
+ "apps/firefox-i18n-ko.html": {
+  "date": "2026-11-24",
+  "hash": "d759b55793068aefffaa8565a2b454f19f74536dc09601555cea0797e2930f20",
+  "v": 4
+ },
+ "apps/firefox-i18n-lij.html": {
+  "date": "2026-11-24",
+  "hash": "3ba842cf655e13d4009a07172e64a537b3cdcf14a6cdecbf312197b2facfb771",
+  "v": 4
+ },
+ "apps/firefox-i18n-lt.html": {
+  "date": "2026-11-24",
+  "hash": "1171b669b4c8b4d5047e3e6a601f2b6b9cf0f53cd866ddc47f84502d9da66ed9",
+  "v": 4
+ },
+ "apps/firefox-i18n-lv.html": {
+  "date": "2026-11-24",
+  "hash": "7468bf6aa0cbba9a1f2624f6fb4d70ff20c3f237f696e7e9b5ec94a9754e1e39",
+  "v": 4
+ },
+ "apps/firefox-i18n-mk.html": {
+  "date": "2026-11-24",
+  "hash": "20120d9f814911fc2e807a1cecedf3cfdea82bb62878197299e5248cea5cde70",
+  "v": 4
+ },
+ "apps/firefox-i18n-mr.html": {
+  "date": "2026-11-24",
+  "hash": "e621c177e0fb865c0f9509e0f75eeaa5327fdad6bd0b8772461341a1abdadcc7",
+  "v": 4
+ },
+ "apps/firefox-i18n-ms.html": {
+  "date": "2026-11-24",
+  "hash": "64afe52393b6c0327ce6e0e6d573fb8d1a1c00e72480b1f16358514518c5bb61",
+  "v": 4
+ },
+ "apps/firefox-i18n-my.html": {
+  "date": "2026-11-24",
+  "hash": "9c2a48369f8835f53649c1561c19b61c3a074e0566ba2dd224d7857271d5aa58",
+  "v": 4
+ },
+ "apps/firefox-i18n-nb-no.html": {
+  "date": "2026-11-24",
+  "hash": "55c93c137647ede012244723f56e7ccc94b56eb56d73351d745309dac270f6aa",
+  "v": 4
+ },
+ "apps/firefox-i18n-ne-np.html": {
+  "date": "2026-11-24",
+  "hash": "3b8785e14b95595fab1761c4340ca4650126e28c791c8f690ce8ab70d7d61c96",
+  "v": 4
+ },
+ "apps/firefox-i18n-nl.html": {
+  "date": "2026-11-24",
+  "hash": "6b9b7ed0faa49d5d64b4137b6490b36edcea84861b4d092bd8e8738aeb20bae4",
+  "v": 4
+ },
+ "apps/firefox-i18n-nn-no.html": {
+  "date": "2026-11-24",
+  "hash": "de78f772435629c52e1c725cdd6f60c17c94bdb44d698137ba9fbc34db414c33",
+  "v": 4
+ },
+ "apps/firefox-i18n-oc.html": {
+  "date": "2026-11-24",
+  "hash": "bb6d913a24d7b2043588abf5f3831fd4909b6481e064b9e44e6a792e44c751cf",
+  "v": 4
+ },
+ "apps/firefox-i18n-pa-in.html": {
+  "date": "2026-11-24",
+  "hash": "35fb638b17f9e0e6232ed7df3eff25947f232b9369ac349e30aba60999682c26",
+  "v": 4
+ },
+ "apps/firefox-i18n-pl.html": {
+  "date": "2026-11-24",
+  "hash": "885be31047a6bbf31d0f790def115ae1fb23f476a350d7b877b9d2cac4a86dd7",
+  "v": 4
+ },
+ "apps/firefox-i18n-pt-br.html": {
+  "date": "2026-11-24",
+  "hash": "8437bf45790c86fa97d5f7e0f43160c93b4d8b8d9235d38bae5163a14c581396",
+  "v": 4
+ },
+ "apps/firefox-i18n-pt-pt.html": {
+  "date": "2026-11-24",
+  "hash": "40590b60f0692ed037f6451e0b4ea1c4b9a24809ccfbcce743d49d2f5c761153",
+  "v": 4
+ },
+ "apps/firefox-i18n-rm.html": {
+  "date": "2026-11-24",
+  "hash": "37d0298ce0e331ad47890d205f70eb715da40fb2bb7ac3601fc4a5b8a230b5e6",
+  "v": 4
+ },
+ "apps/firefox-i18n-ro.html": {
+  "date": "2026-11-24",
+  "hash": "5c20d6d09d362927ae864c661ffb792881e893e18d01dc625e10c4f6441a6cae",
+  "v": 4
+ },
+ "apps/firefox-i18n-ru.html": {
+  "date": "2026-11-24",
+  "hash": "6d0757e893a72eddbd86cc21fca495919911db6047e5c67e10be19f19223e701",
+  "v": 4
+ },
+ "apps/firefox-i18n-sat.html": {
+  "date": "2026-11-24",
+  "hash": "46a72657736dd47c3383b0cbad510337e93e817175d2d8df765fee21840c3bc0",
+  "v": 4
+ },
+ "apps/firefox-i18n-sc.html": {
+  "date": "2026-11-24",
+  "hash": "d13c31166cb02aab4db61cf2d100cafd8760499eb7e01fad6f1cbe522e337c5d",
+  "v": 4
+ },
+ "apps/firefox-i18n-sco.html": {
+  "date": "2026-11-24",
+  "hash": "842bdf0759955e5a325ed5f09db63175cc28f75305f5df4b40204d63564f3e5b",
+  "v": 4
+ },
+ "apps/firefox-i18n-si.html": {
+  "date": "2026-11-24",
+  "hash": "7a85683a58a07d19cf6ce5ba581d341d2a68b0eae0988a8d18353923a7450014",
+  "v": 4
+ },
+ "apps/firefox-i18n-sk.html": {
+  "date": "2026-11-24",
+  "hash": "b1d7e4f5eff09b8f51b85b7ca2855d12f726150fd2ecdf042ef21fbf562330ae",
+  "v": 4
+ },
+ "apps/firefox-i18n-skr.html": {
+  "date": "2026-11-24",
+  "hash": "cee3629a8c7d8d78a96a7e841aa60431d936cf40dfaed650f3b4a9b9205100f2",
+  "v": 4
+ },
+ "apps/firefox-i18n-sl.html": {
+  "date": "2026-11-24",
+  "hash": "db97de415442d77b402bc21e2ed31724f0c08901151619cb22c180cae5c83582",
+  "v": 4
+ },
+ "apps/firefox-i18n-son.html": {
+  "date": "2026-11-24",
+  "hash": "744830244845f5cbde0a4f7bc9cbea9ea5e38d771b21eee1b8207bf2194b2d66",
+  "v": 4
+ },
+ "apps/firefox-i18n-sq.html": {
+  "date": "2026-11-24",
+  "hash": "98ebc3865830c02c0f4c07b9a94a83ca22cf20bc68526e352b75226e0f71115d",
+  "v": 4
+ },
+ "apps/firefox-i18n-sr.html": {
+  "date": "2026-11-24",
+  "hash": "c054fa7ce3509c1d028c5b0065d9ad247a93e06f0edc9219fc7edae6cc7f66d3",
+  "v": 4
+ },
+ "apps/firefox-i18n-sv-se.html": {
+  "date": "2026-11-24",
+  "hash": "616607df60aeb44f301060e4019b796ab3122356db65dcfcaf95eaa433e0d623",
+  "v": 4
+ },
+ "apps/firefox-i18n-szl.html": {
+  "date": "2026-11-24",
+  "hash": "1e587af88c46c0fde9a534f4b363168cbe9e14f069c8a192c2cb8de942f85793",
+  "v": 4
+ },
+ "apps/firefox-i18n-ta.html": {
+  "date": "2026-11-24",
+  "hash": "4f24a27014df932d220f5593f9c925468b2b1f3f23c6cea84f304408583b0001",
+  "v": 4
+ },
+ "apps/firefox-i18n-te.html": {
+  "date": "2026-11-24",
+  "hash": "1d9efd7eab09c3128431141d36100b4b934183616a46f4a7de9337558f4007dc",
+  "v": 4
+ },
+ "apps/firefox-i18n-tg.html": {
+  "date": "2026-11-24",
+  "hash": "b54972dcc53636e7ddb654c5ee60f538ba3e993d15a5fbcb14149949cf13aff5",
+  "v": 4
+ },
+ "apps/firefox-i18n-th.html": {
+  "date": "2026-11-24",
+  "hash": "d7bb1652ca4452f429cc24130236fdd17af1439fe2ef9851685ced5a8221af95",
+  "v": 4
+ },
+ "apps/firefox-i18n-tl.html": {
+  "date": "2026-11-24",
+  "hash": "699db45036caa23492b9e22aeea94d84619d81d974df10eff2c7121c8b07ad18",
+  "v": 4
+ },
+ "apps/firefox-i18n-tr.html": {
+  "date": "2026-11-24",
+  "hash": "238023bb18b0ca10955410818c840b6313dfa8efb0e2cdf07f15c0acda34f0aa",
+  "v": 4
+ },
+ "apps/firefox-i18n-trs.html": {
+  "date": "2026-11-24",
+  "hash": "9da0166aac5663e0bf1a124bf73aa388729a1a8a40052a849e24411ff1b1b4f7",
+  "v": 4
+ },
+ "apps/firefox-i18n-uk.html": {
+  "date": "2026-11-24",
+  "hash": "d9ffe4822386567a647ab21b67cfe1a7950503f2928b705b7103c19b80b203e7",
+  "v": 4
+ },
+ "apps/firefox-i18n-ur.html": {
+  "date": "2026-11-24",
+  "hash": "afdceff4c7fd80fc2784c8b984c77bece86c740910011bcf86699701152d2e5c",
+  "v": 4
+ },
+ "apps/firefox-i18n-uz.html": {
+  "date": "2026-11-24",
+  "hash": "da2b58ef688d0725a0f0183bbdce6841d8e42f1a84b2931b669603a79623fbd8",
+  "v": 4
+ },
+ "apps/firefox-i18n-vi.html": {
+  "date": "2026-11-24",
+  "hash": "a281c19e8b57ed779cf36482e55f68b70132043fd1821da2bf1e3d8553de7094",
+  "v": 4
+ },
+ "apps/firefox-i18n-xh.html": {
+  "date": "2026-11-24",
+  "hash": "e9eba950554495bf87904129c16fe5191d379848e42999aee1df2f0d0e8fe9d9",
+  "v": 4
+ },
+ "apps/firefox-i18n-zh-cn.html": {
+  "date": "2026-11-24",
+  "hash": "c0215829ebb17fbb2172867c22bed973c2f7d421ff1436c021a3969aa45dc5fa",
+  "v": 4
+ },
+ "apps/firefox-i18n-zh-tw.html": {
+  "date": "2026-11-24",
+  "hash": "c76ceb3d6cd5aea3c0241ce08c1e4ff4b8b1861d9981fd8e018aa55d5c5379e6",
+  "v": 4
+ },
+ "apps/firefox.html": {
+  "date": "2026-11-24",
+  "hash": "8cefa0261061712eda711ae89ba851d7da9330145948ffb439085ebdecd61b7e",
   "v": 4
  },
  "apps/flea.html": {
@@ -180,8 +710,8 @@
   "v": 4
  },
  "apps/github-copilot-cli.html": {
-  "date": "2026-11-23",
-  "hash": "3bc8099848a1fd70c8dc6da1c1ffaa8bd4ddc4c312578777c3823b4c8c0762ed",
+  "date": "2026-11-24",
+  "hash": "85fd57c5774d7568a3d35000a657b49f5d562819988cbb2c295ed51fa3beb5ba",
   "v": 4
  },
  "apps/gliff.html": {
@@ -235,8 +765,8 @@
   "v": 4
  },
  "apps/hey-cli.html": {
-  "date": "2026-11-23",
-  "hash": "4139d8e6eca6e78c402e678c9bc66189a1c13edbc7e3db4e9dee5411a1352551",
+  "date": "2026-11-24",
+  "hash": "13bfa8e7d08da97c3d4981fbc36544f026569f7eb906aabd0acc1bb1ce6e0518",
   "v": 4
  },
  "apps/hunk.html": {
@@ -272,6 +802,11 @@
  "apps/kujo.html": {
   "date": "2026-11-23",
   "hash": "e8b166e5344ebcccc49754160867c27d56d0764d93fb36538d8c82d3303052ad",
+  "v": 4
+ },
+ "apps/ladybird-bin.html": {
+  "date": "2026-11-24",
+  "hash": "cd4c8a67d3d848b5f127b720d913680e97af0171d1be91563b9b01637bca2425",
   "v": 4
  },
  "apps/learn-omarchy.html": {
@@ -444,9 +979,14 @@
   "hash": "ba3f517005b95b5a89b6721e945d2004aba447c74372da00a2d1124b6f25ee4b",
   "v": 4
  },
+ "apps/muse-code.html": {
+  "date": "2026-11-24",
+  "hash": "73cb3940c0a7e18460592327421eb45c9b080b0d1c2b2a588f504a95d0745c86",
+  "v": 4
+ },
  "apps/notion-desktop.html": {
-  "date": "2026-11-23",
-  "hash": "8d808271706f5558a77ac415c6d0aa1f4a4b32fcf40065fd8ddc831bd27ee9b9",
+  "date": "2026-11-24",
+  "hash": "79500b7bb7af51b2016a76eac04b9672339cde9d5a5f58ef0412ee83f5ea8af0",
   "v": 4
  },
  "apps/nvidia-580xx-dkms.html": {
@@ -609,6 +1149,11 @@
   "hash": "123afce6c4cd21b82aac8457d0bf16fea729619de51063a3b87f25ee9dbff6fe",
   "v": 4
  },
+ "apps/openai-codex.html": {
+  "date": "2026-11-24",
+  "hash": "56f111b1384f9b4163ebf69793c8a3c511aa258d486cfa5cbdb3466beadc3124",
+  "v": 4
+ },
  "apps/opencl-nvidia-580xx.html": {
   "date": "2026-11-09",
   "hash": "1d5c6f0c073045b0a4ebcd1060dc43cb29ad527e55c5def582022b1c8652a2e4",
@@ -617,6 +1162,16 @@
  "apps/openclaw.html": {
   "date": "2026-11-23",
   "hash": "3f3bcaf1eb4ab1a94a75f602ba27a0645c2a76e7b3ed9cc63bb7771c5b401e1e",
+  "v": 4
+ },
+ "apps/opencode-desktop.html": {
+  "date": "2026-11-24",
+  "hash": "6778f1e6085c081c561bcafe0c440349377ebca35b8642ae7bec9034e37bfb08",
+  "v": 4
+ },
+ "apps/opencode.html": {
+  "date": "2026-11-24",
+  "hash": "31d20d7bd436ce4ac84ced006985564acce1de2dca364dc5b9118a4318bf553e",
   "v": 4
  },
  "apps/openrouter-ori.html": {
@@ -649,6 +1204,11 @@
   "hash": "c57263017d80dd58abd15c9c62078f6904d1d5f44a10c3d4a940100bd71724ec",
   "v": 4
  },
+ "apps/playwright-cli.html": {
+  "date": "2026-11-24",
+  "hash": "e9ce2d241f1ff86aec655d6159c28f71c5af826972720806c5d8545789c99c0a",
+  "v": 4
+ },
  "apps/python-sounddevice.html": {
   "date": "2026-11-09",
   "hash": "499ec2d98ac83002e6cf781b6738d63e972aab65d682e75fe8a9b3d23e6a2450",
@@ -662,6 +1222,11 @@
  "apps/qmk-hid.html": {
   "date": "2026-11-10",
   "hash": "39d7b0952c6dff6f6ee1b76adaec0391a04e7ba70f462e6d96736a84a4076398",
+  "v": 4
+ },
+ "apps/qwen-code.html": {
+  "date": "2026-11-24",
+  "hash": "c4ed8fb7b86d442d9d20b8e4b38761c243c7900f068e97b4caaaf5e11a7cb091",
   "v": 4
  },
  "apps/rawmakase-bin.html": {
@@ -745,8 +1310,8 @@
   "v": 4
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-23",
-  "hash": "796616c9dd0644447a916fbbd5c6851a60c00801b444de3feb104a8b0c258427",
+  "date": "2026-11-24",
+  "hash": "201ceec1f842a9f62e0b20fa7ca123ca3a37bca5dc24bc7e88788faa06f00579",
   "v": 4
  },
  "apps/tensaku.html": {
@@ -850,8 +1415,8 @@
   "v": 4
  },
  "bambustudio-bin-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "6b32b58b71f311fb7cfa5ceb936d52a66060f57946005bf150db9ed319c08990",
+  "date": "2026-11-24",
+  "hash": "2787c212b867c834e44d9c0972eb862fcc63f0f39331bfc2e8414fdc7e8ad423",
   "v": 4
  },
  "basecamp-cli-on-omarchy.html": {
@@ -861,82 +1426,82 @@
  },
  "best-apps-for-omarchy.html": {
   "date": "2026-11-02",
-  "hash": "704361aa002c5912f6d30d7bbe9761044d9c5c11a9fa19671e9c2d77573899bb",
+  "hash": "de0c9d2c6db16d5323145985bc8abf3420ae610a682712fadead73784ccbe4a5",
   "v": 4
  },
  "buzz-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "81b91659887f7a2784387f7fc8cb504c5314099586d2a50563c7199ed3ebd631",
+  "date": "2026-11-24",
+  "hash": "3589935e57386cfd1c9eeaf9c144910ee612b5b8312c3d926280897082795cd4",
   "v": 4
  },
  "catalog.html": {
-  "date": "2026-11-23",
-  "hash": "d87a9185626dc4c13f25c1cb250e32871668ccc665ffb8b830e745afc3147729",
+  "date": "2026-11-24",
+  "hash": "f4cec25fef71f5879b6f97c123ec2ee93ea3de7a95fc9105cf65ce8960836e20",
   "v": 4
  },
  "category/ai-agents.html": {
-  "date": "2026-11-09",
-  "hash": "8b51b3404f30daa962ff8b6ff11d6d9c2a20c5835842adb8e766ca3f76a86a8b",
+  "date": "2026-11-24",
+  "hash": "4e63dd8764ca7caa755e1ffb56a6438347a6c8d6b8241406c56b0bb2b4bdb8b3",
   "v": 4
  },
  "category/browsers-web.html": {
-  "date": "2026-11-09",
-  "hash": "82b379d2f85dea8bc06d006e3ab2b74e1208a1261e667cf6c3c1074498223285",
+  "date": "2026-11-24",
+  "hash": "8460bff99e51df3b691562169045bd08f52efc5e378d5a7e5d16cef77598e033",
   "v": 4
  },
  "category/communication.html": {
-  "date": "2026-11-09",
-  "hash": "3515833f61c93ba1006465f068bd8d625bbb5d3f8b0788096e74e47b53796e45",
+  "date": "2026-11-24",
+  "hash": "89fc0def6f75df7728c2d4157f182c7c7a44c2c52111c21ca3acb6c5eedcb6d5",
   "v": 4
  },
  "category/developer-tools.html": {
-  "date": "2026-11-09",
-  "hash": "b831c21040abcf164f365698c43d7647b11ff2bb40f8c1562daf2fbfc12255be",
+  "date": "2026-11-24",
+  "hash": "c5c1eff5621e7d9158644f3c626d2f982abcd3957703ae97ceabb207e6f208f3",
   "v": 4
  },
  "category/gaming-emulation.html": {
-  "date": "2026-11-09",
-  "hash": "08c8b0d94588922cac3d62a2ef069ee398bf51cfb98aaa298a3182dbb18c6ba4",
+  "date": "2026-11-24",
+  "hash": "c2696fe68d9bc75095efd37e24940bcf88eecb05c63bb262e19ddaefecb5265e",
   "v": 4
  },
  "category/media-creative.html": {
-  "date": "2026-11-09",
-  "hash": "3c35fd62ee704dd76f28ac6ec506b094ab8ab54dd071cfb41a6a664f780d15e5",
+  "date": "2026-11-24",
+  "hash": "b8bf22a51b5b402a16cebe8883af9d0e85275a5a6dd34bf68e59bf56e47a067e",
   "v": 4
  },
  "category/productivity-notes.html": {
-  "date": "2026-11-09",
-  "hash": "755bd127a163773d37d25dedc3dcb28751351cee1bf522e46550b90c8fa56106",
+  "date": "2026-11-24",
+  "hash": "a388747e050e76a7a7afd40a402ca7b122fd457da0b13670c4c6376ee95c1587",
   "v": 4
  },
  "category/security-privacy.html": {
-  "date": "2026-11-09",
-  "hash": "680d54bef72615b908a87d0c13bc9bfa5fb5564fadfb9ddb803354bdf5a2c2d3",
+  "date": "2026-11-24",
+  "hash": "2f445916d8216d07570f40243f50479882316dee9a3d70dced30a2ef86b76182",
   "v": 4
  },
  "category/system-drivers.html": {
-  "date": "2026-11-09",
-  "hash": "4b4104610f88dfec05b8bced43c3f9fcb8096a75f165d722b1c2842089f5fe16",
+  "date": "2026-11-24",
+  "hash": "6eaa3fb8ec82c937367745f4712de3f3d0528e58fb50e2b1abbd374d78640c56",
   "v": 4
  },
  "category/terminal-shell.html": {
-  "date": "2026-11-09",
-  "hash": "be26d355b384ab70515d0feb742a6c217c4453f0157f426317bb11ffa510e3c9",
+  "date": "2026-11-24",
+  "hash": "a720db6ee8bfde2930156e548077b9af0fdb3b618220198775f5275f64f8262c",
   "v": 4
  },
  "category/themes-desktop.html": {
-  "date": "2026-11-09",
-  "hash": "0eb89b863b489ba026113d15ed0ab33e8b84207dc073ad8f19147e394e335704",
+  "date": "2026-11-24",
+  "hash": "7dbaaad31a42db227c4e50019d46c718bad832ca409db2b44f256d02c2ed1a4b",
   "v": 4
  },
  "category/utilities.html": {
-  "date": "2026-11-23",
-  "hash": "78b328c230377990104d34862930e4c4029c4ef0aa8eb05381e1521ad9a665f6",
+  "date": "2026-11-24",
+  "hash": "84f1dac3e4d59b1798847ada4d3d7fe2caf1b3eee8f4daee6a224194c2ec603a",
   "v": 4
  },
  "claude-code-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "44e82362bfa9c5e450da1d0aa9232c3a303b748faa3757e4093420c489fa1118",
+  "date": "2026-11-24",
+  "hash": "4a63586d3dff0bad24aa472acb2bfa16cbeaffcca6f7d945ac1e83c4c54191f8",
   "v": 4
  },
  "cliamp-on-omarchy.html": {
@@ -944,24 +1509,29 @@
   "hash": "080afc9f2f7fb01a5e0dfdee18ea5c189d3a16a4c7bbdb0c0689ce4e0c9244ff",
   "v": 4
  },
+ "cloudflare-cli-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "32f41b1e9969346b83aac63605b0b97b63f04f6d6c86e315886f9fc8830041ce",
+  "v": 4
+ },
  "collie-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "f4d3a6c83ea88eb9f6acca61da10c8e3587188c432dd822e2c3ae19ed30bc056",
+  "hash": "08faad8163f8c1833af72484e6f2c028e82c311cdea80a9ecb9579d972cb6af9",
   "v": 4
  },
  "cua-driver-bin-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "a7fd54c3e68ba0e2f4b29390170d6254a9697b15001099ff4801655f019aea39",
+  "date": "2026-11-24",
+  "hash": "a5109d88bcafe7230d73033b93cc5aa4897e5c8477729a4daea72fbe0c0e963d",
   "v": 4
  },
  "cua-hyprland-plugin-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "11b54eff9d5e00acb57a720783842bdc89cbebc04e9f092ec6456b080001a1aa",
+  "hash": "1a499ec46443025c1c7745fc23f3d18f908e7d7210e43ba3a07aaeab45f9a670",
   "v": 4
  },
  "deepseek-dsh-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "ab9e3a13e1c76a5d58a0ee5933bd1026e87509b45cfebd2cecb549d8dca7d6de",
+  "date": "2026-11-24",
+  "hash": "4bf35f437e22fef79309896a4d927a324beb81f3a77e5a247666e8d560b6de65",
   "v": 4
  },
  "dell-xps-touchpad-haptics-on-omarchy.html": {
@@ -974,19 +1544,24 @@
   "hash": "3c791f0f26b5f1538c6226410bbc497030f18ac9339325d20ea0ed43b6ba2600",
   "v": 4
  },
+ "devin-cli-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "3ee92a0228e27e15aa8d15cfc38aaa2f74d03addc59f6a4c5dc7c8080be5b9af",
+  "v": 4
+ },
  "disktree-bin-on-omarchy.html": {
   "date": "2026-10-16",
-  "hash": "faa6792dc0d76af1d833e26d4c5ed82eac61bf289a0b169978b0a3696b90f6ea",
+  "hash": "9e56c27ec8cc1aa0c3164893028f616d0286ca292b0ca97795ec9aaaef3ca067",
   "v": 4
  },
  "dropbox-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "4dc5c1a5f6c7de98db3531cc7914e62ebeca40e699fe116614550da031f7e91e",
+  "date": "2026-11-24",
+  "hash": "ee3fa4c8481de96ea8aa87bde155ea76b7a740c2d602a61e0569a4e7cc146f04",
   "v": 4
  },
  "dual-boot-windows-and-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "90d293488ac2ba5ca5fc147ef702bd8c1d14631cc0c1358fa95ca9ec99b63647",
+  "hash": "3ff8fddf8c33eb1a9de19afd7f177ad300e2a95be9514c4420ee22cc3e8aa8a6",
   "v": 4
  },
  "faq.html": {
@@ -996,112 +1571,632 @@
  },
  "feishu-bin-on-omarchy.html": {
   "date": "2026-10-21",
-  "hash": "af3d0940f537f62ba900a3ca65df8bf87fcd7cddfcc09a2e33ddca8829aa4b93",
+  "hash": "19a0e648ca772007156e59316c51de63e67c7ea467daffe2b186bffaebcccb87",
+  "v": 4
+ },
+ "firefox-i18n-ach-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "1333f7d867aad17cc9959d3078c8ebc02c20b507b125b79472a30596270eb9f0",
+  "v": 4
+ },
+ "firefox-i18n-af-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "e787915678b3f2ae4380441577ed7a13bd4324b917f53dd25a41975fee0ee1d1",
+  "v": 4
+ },
+ "firefox-i18n-an-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "34d636efe2d406c6a37de6a958230a593120469da3ea3f7e47c615cd3ba5e975",
+  "v": 4
+ },
+ "firefox-i18n-ar-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "a2883dec3f51f7d014844983a114130b3c9cb8a3c70629c2d672a3e70120312e",
+  "v": 4
+ },
+ "firefox-i18n-ast-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "76f89f7de450075b51de67614c0e33030b44a3297f289cc143f55f4c76ec4b56",
+  "v": 4
+ },
+ "firefox-i18n-az-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "77e90ab4b40a5ccbef88aec2e2a8a709e67f1b2ed308424023eb6a553bf8dceb",
+  "v": 4
+ },
+ "firefox-i18n-be-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "189ad3ae9d21c101cd4247ce2cb316b43f0574b3eece0401cfad5c4124edc93a",
+  "v": 4
+ },
+ "firefox-i18n-bg-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "c3562ad4462c29f6f46fb2a13b06cd5b2286222f8397108b43c8241cf47f0ff4",
+  "v": 4
+ },
+ "firefox-i18n-bn-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "62a2158a7e4f437c1e1332974a9aa7ec787b756c3a67ff275bf1066d890a9838",
+  "v": 4
+ },
+ "firefox-i18n-br-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "d717311ae62daa871f32641c2746f40396ae92652467b1a03ef3881d1ff273bf",
+  "v": 4
+ },
+ "firefox-i18n-bs-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "6e75348e3ebc5fe705beaa21f2aed443d30b4c88ada0ec875669c08172e1999f",
+  "v": 4
+ },
+ "firefox-i18n-ca-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "a897ee479ad4a7096230f3432e14ab6a5aa11e87205f1e74bbdaf7cf6221bc12",
+  "v": 4
+ },
+ "firefox-i18n-ca-valencia-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "8c1b2b02db2074e5fc6d1e6e101e5c79270d6ba2aed2dce568deef9c181c4e95",
+  "v": 4
+ },
+ "firefox-i18n-cak-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "a57c067aeea596c9ab809d49d4b8f411208dd459de0420dd28cf834b8482ba2c",
+  "v": 4
+ },
+ "firefox-i18n-cs-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "4c2befc131602b97fbe04274fc978680fe6f6adf5cd0d139c92a4b4f5369990a",
+  "v": 4
+ },
+ "firefox-i18n-cy-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "3406828b458da1bad1c464bed9d036c412aee9857f74cdbc3151505791acbccd",
+  "v": 4
+ },
+ "firefox-i18n-da-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "5c4b35caa109d581a242b8a2b4ed5c9180d1100ab00f2da1bc8439a62c9c6804",
+  "v": 4
+ },
+ "firefox-i18n-de-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "88e018400673d8b83dd0507601bbbd5d8d00fc5c1013e516fbfc820ed0eecca1",
+  "v": 4
+ },
+ "firefox-i18n-dsb-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "02fe194fab83998f41497ebd596ca02dd45e6dce4103e65c946d79a740bce8f8",
+  "v": 4
+ },
+ "firefox-i18n-el-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "c77b6f9dcfba268ebd4aeda264ad5afd477aeb6b4973c7334b0bc00e30a62afa",
+  "v": 4
+ },
+ "firefox-i18n-en-ca-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "da77aad7fc6498fb7c2d040b46f418930334748031bb647f395bca3b66b3c353",
+  "v": 4
+ },
+ "firefox-i18n-en-gb-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "e798ae2ff3920bd3740cadea9294633c9ff557f4ba1fcff0625a0266f74e45b8",
+  "v": 4
+ },
+ "firefox-i18n-en-us-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "dbc79a359b5c556b62c4e53e7f3240db42e3612f3a20b4faf435bd2820f0ec00",
+  "v": 4
+ },
+ "firefox-i18n-eo-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "ae02ce03321f13a0d413702714f25b6ff9e130f2e6b0d8481a0851d6040173c2",
+  "v": 4
+ },
+ "firefox-i18n-es-ar-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "59775f1ae8cd3302f4f0377a8bfd1fb1b35b244d656c25a6677a551277abc917",
+  "v": 4
+ },
+ "firefox-i18n-es-cl-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "aff1d8ae1a0dc3ac9c3083918930a7d65d6f7ed3e2375b8203bd0c7c104c6745",
+  "v": 4
+ },
+ "firefox-i18n-es-es-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "9e28361c564989b36c163286181f1af33f1e9f4c55f7245949b8fbd139547d62",
+  "v": 4
+ },
+ "firefox-i18n-es-mx-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "031b88f3c8eac4b0232398db8b9a1a3e782f3955121f1ae5efc798d50cabc2ed",
+  "v": 4
+ },
+ "firefox-i18n-et-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "b9cbf90491e268ff1c5e65fc5043e6f68869d7821b4877c9cb5f2ae89e63f91f",
+  "v": 4
+ },
+ "firefox-i18n-eu-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "3a693f370e83873a7e769d5e77a2ef4226410c1f436e13ca7392204488d827be",
+  "v": 4
+ },
+ "firefox-i18n-fa-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "34afc0c62104cb74ed8db9113aa199f7fa13ab9ece82875b087c3d431ef83c28",
+  "v": 4
+ },
+ "firefox-i18n-ff-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "66910202b70a7663250e906368547078748019129ffb5bb05a909136bc2c1b49",
+  "v": 4
+ },
+ "firefox-i18n-fi-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "b4d56a173855d7a7b9068e23d57986bfff21243c3370978a6fad3923d9a39754",
+  "v": 4
+ },
+ "firefox-i18n-fr-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "0bcad72a9028c99c073ee750026efc403005136d4efa03e4c57e6502728602d0",
+  "v": 4
+ },
+ "firefox-i18n-fur-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "7dcb0fe3b3920bb518673e9e8c419e75504076b73d2e4c90581a3657e2a0084a",
+  "v": 4
+ },
+ "firefox-i18n-fy-nl-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "40ec32c21a11bc53e81f4efdb8f06f23efa4a48555186bf80aa24787fa95b9e0",
+  "v": 4
+ },
+ "firefox-i18n-ga-ie-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "be0563cbbb6419abc8ab627dcb3d120e2d9892f62ccfde7b2132f5b3ca0146fe",
+  "v": 4
+ },
+ "firefox-i18n-gd-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "0c1b9561148c94cf9b1011aef6bf06e46106364231fb64c6544ed4edfecc71aa",
+  "v": 4
+ },
+ "firefox-i18n-gl-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "721cd4b4470d548b164ce0510b7fad2cf92d52d74315069f38da6b6e064e64de",
+  "v": 4
+ },
+ "firefox-i18n-gn-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "a4d05a6deebfacefc1605376e6c1781e01a432a6bbdcc4edf81f7f9b436fa972",
+  "v": 4
+ },
+ "firefox-i18n-gu-in-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "4bbf6d4a382adc7770be23f68de597bd88daca23140b98acda46bf53fc356aec",
+  "v": 4
+ },
+ "firefox-i18n-he-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "ea40eaca3c71fc23ac1c017ab55cb2b1cfeaa7e009b541920008399d2b626bae",
+  "v": 4
+ },
+ "firefox-i18n-hi-in-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "6e5f3dd2b350dde4d2aa388ada0567f9b0cc3eada6029ef58f12680a7109eb99",
+  "v": 4
+ },
+ "firefox-i18n-hr-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "f4cfebc987bac11b6aa99b31616e85f281fa1615eda7a68936cfad986a111046",
+  "v": 4
+ },
+ "firefox-i18n-hsb-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "2a7fd82a1946db0d9e7d85e415f7ec0a8b872882a3cbf3629ead74b4dc9e9398",
+  "v": 4
+ },
+ "firefox-i18n-hu-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "3a571f18d51575d8fdb79cb6e667dd3b1f20c395cd43d47dcdacf5a749b0e672",
+  "v": 4
+ },
+ "firefox-i18n-hy-am-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "4ec985141adb9eefdd538886272d224196b8cff8ff21384b8ecb4af09ee0c1bb",
+  "v": 4
+ },
+ "firefox-i18n-ia-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "2ab92826e33f003a162741f03792be7bdd28b682bab98532b101e487f867ec05",
+  "v": 4
+ },
+ "firefox-i18n-id-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "1a68a185e9bd7cb2e68140aa5149a724f742ef33cb5de78de179705d825b138f",
+  "v": 4
+ },
+ "firefox-i18n-is-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "bf2efbc92e8331e0d3af03bd5e65317ee54fc10569a2bc2663cf1eac213401bf",
+  "v": 4
+ },
+ "firefox-i18n-it-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "e7a98e65f42734458d2332fb2c882e29563e2c2ad1b4d71af8e26505b511bfc7",
+  "v": 4
+ },
+ "firefox-i18n-ja-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "e4282053f18b7dcd8aa5918e8a2c22a325a0c79c6a8061d10b404f486a8a10b0",
+  "v": 4
+ },
+ "firefox-i18n-ka-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "42c3a84fdddaad4664cf954bfa21495b07e0792e48bc505b6caf228616e9dd3b",
+  "v": 4
+ },
+ "firefox-i18n-kab-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "478c52f06cdea3d0dc8750ec2fe5a4b9bcf3df2663da30a79b0eaf0c87d35f7f",
+  "v": 4
+ },
+ "firefox-i18n-kk-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "2718df5c61a6114af2174a869489b90b6bed1204f7982b134a8782d74f5fda9b",
+  "v": 4
+ },
+ "firefox-i18n-km-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "5a71c6448f036b99545898a0c164b523353d758a24122aff3d7557741fc4ba53",
+  "v": 4
+ },
+ "firefox-i18n-kn-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "c51adaa4ebe5d1e3f3f81ce963203b7e2d3617d01aad9c295afcc324a3f160f5",
+  "v": 4
+ },
+ "firefox-i18n-ko-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "61dde5ac36c8e424415b7ec68680b92abc1c116275c672d19dbd73b466523434",
+  "v": 4
+ },
+ "firefox-i18n-lij-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "c9e16da9fa31a2ae87ac1fceb4d8d2508754c0ad56e127b00b0b46ff4e67c4d4",
+  "v": 4
+ },
+ "firefox-i18n-lt-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "d190cafd266487800adf24ae870fc628da501539428f8b9825646c139a930321",
+  "v": 4
+ },
+ "firefox-i18n-lv-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "d00b1d4dc4d5c0a3163221beedbd62ea9372b9644b4fde9f273b3a9df97b9f3b",
+  "v": 4
+ },
+ "firefox-i18n-mk-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "5af9bb3a52fc7d232527216ba2fdb9d0082aa6eaaaebfe9716569e0a7ae49a1f",
+  "v": 4
+ },
+ "firefox-i18n-mr-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "31a80c89d0cb06b7d01b4c906211e5bb896a8fa9ec26929f3345207e188777bd",
+  "v": 4
+ },
+ "firefox-i18n-ms-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "f1fc1de4680c2d1da8702342e8fa60284dd6f1a507d04f50878074f830eb0fa9",
+  "v": 4
+ },
+ "firefox-i18n-my-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "6dfdf1c7434d3e522ddaf727a0756ffdf0db56a2536f4a8ecca2a186453a0ad1",
+  "v": 4
+ },
+ "firefox-i18n-nb-no-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "1670d80a159119a892d2d6c4a470ab7e5c1fc0eee341c13845332e8f433de6a2",
+  "v": 4
+ },
+ "firefox-i18n-ne-np-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "73c5117c828371cdca98130b291ee3bbf8d0254a2126db0b6050bc500fa5fb24",
+  "v": 4
+ },
+ "firefox-i18n-nl-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "f7f419c32add0b1edd05edcd86296fe0b777ab2f8bb8e2f88df56eecf9b0290f",
+  "v": 4
+ },
+ "firefox-i18n-nn-no-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "4de113e7b37cd92bb956959bac8fe82ee9a28a7e14ed0fe00a4738599a62956f",
+  "v": 4
+ },
+ "firefox-i18n-oc-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "b8ba89496bc0e8b0a617de8d62c830d0f1aef01380758b5275b877165238853c",
+  "v": 4
+ },
+ "firefox-i18n-pa-in-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "e8fe5c156952b6411504a16ada98b267993ae1378e11667496a57d949d0097d1",
+  "v": 4
+ },
+ "firefox-i18n-pl-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "647ba458c183690af60ff2fecaab03dcaa1805959dffb06a69d9f7981e9ff4ec",
+  "v": 4
+ },
+ "firefox-i18n-pt-br-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "25dee6a68d24f66c02f741c052cc849fac819f9dfd7282f41cc3735b666f8e87",
+  "v": 4
+ },
+ "firefox-i18n-pt-pt-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "37920e8a1e0cea50d7213f3c3a9a36c63fd66eb1084e184e093dbbaa13c7c461",
+  "v": 4
+ },
+ "firefox-i18n-rm-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "75f18d70d4c6ba77527e2b28f8cc9c223c0b55a65ae129ca0c5f648635ba0e25",
+  "v": 4
+ },
+ "firefox-i18n-ro-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "87b429970e391942c47f32a4ac313f38131fe31c8343b8e05b2f75a7ded36b1b",
+  "v": 4
+ },
+ "firefox-i18n-ru-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "032d53d0b79fba90c73d74e049e5c1407b15cafb7b548155d39732e3bd34a7f8",
+  "v": 4
+ },
+ "firefox-i18n-sat-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "2b4688d2e83376ddd4a96d6dc2f76c20b9129e8e8f396205e1b2eabef7e01f39",
+  "v": 4
+ },
+ "firefox-i18n-sc-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "be29296c96fc9d039ab0a109c67118ad97f705fa4ed0256bb301946fd581478d",
+  "v": 4
+ },
+ "firefox-i18n-sco-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "9187ae60050d08f80130c0c20fc44468a9890e05b2a2e3544e89ba7f75845a1d",
+  "v": 4
+ },
+ "firefox-i18n-si-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "958521563caf5a00c9ce76f359086566ae57543a5750742ca803daa028dec4b8",
+  "v": 4
+ },
+ "firefox-i18n-sk-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "50fc7a38cd272673d2d3535254c7a0fff8c79cf149f92059d70304ae6f0bd2f4",
+  "v": 4
+ },
+ "firefox-i18n-skr-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "d436a25ae6316d69f02762ee36e4066f75232eac51b9117779c476e48e79238a",
+  "v": 4
+ },
+ "firefox-i18n-sl-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "4498853c361655c9df91158909d0a7a9c2add9adac7d656d7684da60dfe63d0e",
+  "v": 4
+ },
+ "firefox-i18n-son-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "86ea14a2ebaa8e1244740923c94a4719f727831d04c9a981619f648b93b63ff0",
+  "v": 4
+ },
+ "firefox-i18n-sq-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "ad47bff64c085227aa65b6138d027af8a6c5d6e3dc53843d21c133bec57e48ab",
+  "v": 4
+ },
+ "firefox-i18n-sr-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "21924bf1b767863552896408206de9ed45a07ad395b1526829f2ff152128360e",
+  "v": 4
+ },
+ "firefox-i18n-sv-se-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "b361c788364c60dd4b4a847a41a7d03700717363f4437edfb180d83fa78821f8",
+  "v": 4
+ },
+ "firefox-i18n-szl-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "afdcc32f65797a8ce92296bc95c7e1796032c11ff2a62c8a494d041841825cb3",
+  "v": 4
+ },
+ "firefox-i18n-ta-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "b14dd5ced3d2c798e62286ee894d01e297c925d299a088c43ee37b7436c6cb9b",
+  "v": 4
+ },
+ "firefox-i18n-te-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "052cf0dae0780b33e07436afd8deca896546f292e64631a13f85bddd7e028eb1",
+  "v": 4
+ },
+ "firefox-i18n-tg-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "8a9da1bf79acf0d180e8d4b5ac5b85653c3e17d36d82f26885862cffb0d85a99",
+  "v": 4
+ },
+ "firefox-i18n-th-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "48d8d3858b9278d34532b4702b8625e2d6037bcfe809bae9cb17715b7f283dd1",
+  "v": 4
+ },
+ "firefox-i18n-tl-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "615efab1e8cd7f47462683da6e566597c65abe08aed4da5e7fa752bacc935f8d",
+  "v": 4
+ },
+ "firefox-i18n-tr-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "027993728be38eb8a356127f752bfd70df377cde6cebe6ac670689045d442e5f",
+  "v": 4
+ },
+ "firefox-i18n-trs-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "73f8a9ecc3ca9f3dc5b6fd4dd34f03c36f22f980380915f83001b719eda18274",
+  "v": 4
+ },
+ "firefox-i18n-uk-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "91a1c386a774e46d1e16da4c6f2d56f472525b519ef05d0344d10149dacb6d52",
+  "v": 4
+ },
+ "firefox-i18n-ur-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "4d27c4e14823e73e65ff0d2d59186cfb9074e265203927303031429537237971",
+  "v": 4
+ },
+ "firefox-i18n-uz-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "276cd8ae2401f8ea6637fa91fde447ce006dccd1b3d9a5292d33d5f00e3008f8",
+  "v": 4
+ },
+ "firefox-i18n-vi-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "610341f872942b22592c9d25aa8d701119daaa098450ae75bef23809f1dd4573",
+  "v": 4
+ },
+ "firefox-i18n-xh-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "498c5033949a916ec762692d4ef1eb9cd7fcedc9b30329f269657d8c2a49042d",
+  "v": 4
+ },
+ "firefox-i18n-zh-cn-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "d3fd7dd395a134bed245ffa0acddc845d169d736bc145d14d70873f1367e8b6c",
+  "v": 4
+ },
+ "firefox-i18n-zh-tw-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "9d4278c15daecab1f3585f63603b57ff8ef36b96de3536838555c88dba511bb9",
+  "v": 4
+ },
+ "firefox-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "76640299f6c9a6d6cd9c4fe355105abb1f0137faf7425ae2dfab841f5a20eb7b",
   "v": 4
  },
  "free-loom-alternatives-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "d59004405023c5ed53029bda7a666d3457551efa43344cedc26cd0f7472a18c4",
+  "hash": "091902e0a43c4290d553b12c36eae97eb031a68b0dcd01f691a732e077f66c93",
   "v": 4
  },
  "free-notion-alternative-linux-slap-notes.html": {
   "date": "2026-09-05",
-  "hash": "bd54dab26e463a2bf7cd9c706db413e7cbad1d73b7ec22276eb050b41dc9afea",
+  "hash": "fcdc85729e9818328d969c9c463313eed432722a95f06bea97abdd3a66da95ea",
   "v": 4
  },
  "free-photoshop-alternatives-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "3aadee71629b0fe9364a3bdb6acab863666983f2b03cda9147d72045dac17ed5",
+  "hash": "3ba186770165c10989078c45d378123f049c8cabf2f6fb5582b3ce61696ba706",
   "v": 4
  },
  "free-powerpoint-alternatives-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "022eb8cbfe779f0febf7849f6ef9693599debae2a1f849da64f836227379b224",
+  "hash": "1cac1f670824cd39cb9b83de45f7566aded6127e4cc5dd647dc5d9ea04b97da6",
   "v": 4
  },
  "free-sublime-text-alternatives-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "496d89667a148e337a4da07224f6d328d6bb2b892a3dde793e666f8cbe1fa934",
+  "hash": "fb70387be2dc16ab9438d7a43856d2d7d77a25c683614e7efb618be5312cce3b",
   "v": 4
  },
  "free-teamviewer-alternatives-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "73fe9a13f746cc25440b31d7c7c3d0c2a07834efc500ad91ae2a1c6113ca22b5",
+  "hash": "a94016bc4680bed8c8fbcd97ee4f08460f86a8b9849203a8d0b78ae8d1650f73",
   "v": 4
  },
  "free-video-editor-linux-omarchy.html": {
   "date": "2026-09-05",
-  "hash": "2ab8db85b261031add38266732ff00688f630d66bf23ed4fdddbabf4dcab0013",
+  "hash": "39fd35c61283e8de6b0501034e38ac744a7d24268a1f142414c0c0e3eb916e65",
   "v": 4
  },
  "freebuff-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "f809d14b768a4ebe7fd94e1b060de152608e4176691cba3af20b26ce371f05bc",
+  "date": "2026-11-24",
+  "hash": "55869cd60f303c6489607aea7382ba68f061a2e5015894077c596b9ada592f64",
   "v": 4
  },
  "gaming-on-omarchy-after-windows.html": {
   "date": "2026-10-19",
-  "hash": "abbcb7385e91b8966b2fae2c3686e206f5b8d42fe605c06e68e99029b7210ef0",
+  "hash": "769ae7721544e9f1b1e5a16ab82910943d1f27badb2d1760c61f81354e1c4236",
   "v": 4
  },
  "ghost-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "efb58b57d6860b293457695293f48d1908b6eb373020db85354d3393ec8f0ab1",
+  "date": "2026-11-24",
+  "hash": "52f7222e23583f51b2023937e76cf470e636b1d0c0b80510933a6112bda053d7",
   "v": 4
  },
  "ghost-runtime-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "37cb212f453b7e081657016d9801804e160165cc05f16403d3fba83545aeceee",
+  "date": "2026-11-24",
+  "hash": "1a58a60ee067bc27b62bba11e91834cd3f992a6ab53fa9a89d551637c2411792",
   "v": 4
  },
  "ghostty-nautilus-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "3299401ac29561c389d897a3c31e2580eb4bf87c9f436179f95fc3516a615b21",
+  "date": "2026-11-24",
+  "hash": "577bb49daf772ed43e82896b6f136034e54cca4e52c4c7310e87c2d210b6c177",
   "v": 4
  },
  "ghostty-shell-integration-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "6f721728139fb4e8a51d07f9416e1314b4985536429e94422876259f83fb353d",
+  "date": "2026-11-24",
+  "hash": "a2d343580bdc1c8c35f29a2f1eb654230ef811f3f89ef5ed90b0ee2311806b7a",
   "v": 4
  },
  "ghui-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "2c7960fb14fa93ece5b617e3a7cb9d6f02fc671c4c47c32d4055bf72ed0823a2",
+  "date": "2026-11-24",
+  "hash": "68d96eb2b1c28ab708cdb65113b49612d1f86fbc8e38bb3348eafb4b046c8bfe",
   "v": 4
  },
  "grok-bot-on-omarchy.html": {
-  "date": "2026-11-18",
-  "hash": "1c8cf460ca2a405a013a7b87546a5f32fd53492ee56780645f3c88c9f85ff95f",
+  "date": "2026-11-24",
+  "hash": "ba2938be7f1e2314acea59eb5b32f39e57e5245e7f60c6f7032cf1d89a5c6b44",
   "v": 4
  },
  "grok-cli-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "291d484ecb2f5c2c1c5ae0d4b6628889b62788cf5c6b1d49e3800113a9673a15",
+  "date": "2026-11-24",
+  "hash": "6c3abcfb2428f23bb79da9b9005d0dd0177d27ff40b14eebe9c4a09f0a98348e",
   "v": 4
  },
  "guides.html": {
-  "date": "2026-11-23",
-  "hash": "c885e73a0eba5c65cf82db3989b01ead3dfd2e7301b2b0c8b62ca46480415a58",
+  "date": "2026-11-24",
+  "hash": "c0abbf0202f346d1aaf93a442fcf7a574f6bdc4f008137c5ee83f04a3ea04a55",
   "v": 4
  },
  "helium-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "9d6059c65cfc536bf0f5fc0ff6d05025326ca5930ff148a1e5c2b4685a90d6a5",
+  "hash": "2f4d71a64b1d5fa8077f827ad6790ecf019506c4be414f924bd4a72312138dc0",
   "v": 4
  },
  "how-to-install-apps-on-omarchy.html": {
   "date": "2026-11-16",
-  "hash": "6349f45ce39f8b785f0fa1a75c3f8f191de59705c22b66114cf65fc756c1433e",
+  "hash": "a7107a5812bececf79c58b9b807a3663b6296b228fff514b9d3e711f0710e783",
   "v": 4
  },
  "hunk-on-omarchy.html": {
   "date": "2026-11-23",
-  "hash": "0de5dc9fc91b46d5add41d7e7e93fa846a6556d354985d66146093a033b05e57",
+  "hash": "f6cee784d8d389e22ba8d5ea6189e6dbbddb6789c2e56fa2e80139ada55b626d",
   "v": 4
  },
  "hype-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "8538ba95457b565ed55af330f9f887c5d968629af342d5735fc987c2c65b4d5e",
+  "hash": "640e95b86f37b68cc4d1a6529bb08e0d20a23ae5e0669c378ac1fdc7e3f258e1",
   "v": 4
  },
  "hyprland-preview-share-picker-git-on-omarchy.html": {
@@ -1110,13 +2205,13 @@
   "v": 4
  },
  "index.html": {
-  "date": "2026-11-23",
-  "hash": "7fc344883eaa25f21fa7d978f16858bbef6d253f1f27b4d5757e505da2e520e5",
+  "date": "2026-11-24",
+  "hash": "9672bb1836ec3e6598850896ca8a22cbb9ad4ce9c7f1b6ab7a6712b3f8095500",
   "v": 4
  },
  "install-omarchy-on-intel-mac.html": {
   "date": "2026-10-19",
-  "hash": "296cd0c4e1a04344612de319f5d36f7ce71ad0096e1e16996f0148bec2b7f2ba",
+  "hash": "824c4950ff4f58f4c993302ea1ff6bd2266dfd16f39ba3d911326c74a9422cb9",
   "v": 4
  },
  "install/battle-net-on-omarchy.html": {
@@ -1137,11 +2232,6 @@
  "install/docker-on-omarchy.html": {
   "date": "2026-11-09",
   "hash": "5b46a990f36ae8f63bf1099f7ec605c0876972a630eb85d93d5b1c1abcd058ec",
-  "v": 4
- },
- "install/firefox-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "916ae209f42695afa778a72657be88278c392397781dce20631fe1efe1847e87",
   "v": 4
  },
  "install/gaming-on-omarchy.html": {
@@ -1170,18 +2260,23 @@
   "v": 4
  },
  "kilocode-cli-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "ff8134c2b1366abd851774848d069857a9687bcb71a3aad8ac6a7a075b683ca0",
+  "date": "2026-11-24",
+  "hash": "c4e449b37dcab767c11428eca258f76072567c15bded78b2f23bbf0956974d75",
   "v": 4
  },
  "kimi-code-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "a8a366cb4e16e3fdfbe2aba1a4a40369852c0f435e656bd8c61e6c05270652da",
+  "date": "2026-11-24",
+  "hash": "36a337eb7dafdda1c80eca21d91a78fd11899abd7fb86e09fa7eafb64992f0c0",
+  "v": 4
+ },
+ "ladybird-bin-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "ef801c84e0d02d896614158ba8c0f73c0e410f4a0881bb57a53de2c62e566eb0",
   "v": 4
  },
  "leaderboard.html": {
-  "date": "2026-11-23",
-  "hash": "6138059c8303e1c9da79a43da9ef73130f9a23639b85970580f5c9b906251a65",
+  "date": "2026-11-24",
+  "hash": "2ecf87a967b6033fa894d4599ff4991d927ac4eca1da23964fbca551c37ee271",
   "v": 4
  },
  "libretro-database-git-on-omarchy.html": {
@@ -1200,63 +2295,63 @@
   "v": 4
  },
  "linux-firmware-cirrus-dx13260-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "eed65fa50293b4af68c1620b43cb794d2a1d193bde841c79374d10fea4d2ccd4",
+  "date": "2026-11-24",
+  "hash": "cd01ce100d82512cb7c445d8872cbf101f4e869b04f681ee2afc6edd2e6dca32",
   "v": 4
  },
  "linux-omarchy-bore-headers-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "503b7340a007ecc9ecf7f649f63cd1a851c3249a35f835c2b13a13e4b473dab2",
+  "date": "2026-11-24",
+  "hash": "465f082e5c62ac6fbbac8415854bbc535aefd71d8377de29404d351d6659a5e2",
   "v": 4
  },
  "linux-omarchy-eevdf-nvidia-open-on-omarchy.html": {
   "date": "2026-11-23",
-  "hash": "20a1570ae7ba13d6a9404e4b982854dafd2e60a1821f11dc7bb8610735850375",
+  "hash": "97bf6f7c1f7d3e9d931d2919dcceed374484e87d9cca171a4eedbcae0ce28bd4",
   "v": 4
  },
  "linux-omarchy-eevdf-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "94125813b606c1ae7a9fa7eed4ef6fb061757a7d303831298bf294a7d033dd1d",
+  "hash": "e353d6e71fb074cf5be919ed0f5b2a1080db088541a64fec92c4db5b776c33fd",
   "v": 4
  },
  "linux-omarchy-muqss-nvidia-open-on-omarchy.html": {
   "date": "2026-11-23",
-  "hash": "3621564f5cc2bb305336d8130dac8b40f06ff3b3d422727cf4a04567fb0ca97d",
+  "hash": "76f5a617181cd56a584488b3cb1733851dc0257cee488207f27dd0097042c0f7",
   "v": 4
  },
  "linux-omarchy-nvidia-open-on-omarchy.html": {
   "date": "2026-11-23",
-  "hash": "a5ec9ebe4137517db91f2ee213376d74770794187190ebc877e0ef8dbbe803e6",
+  "hash": "d0d7950bc8445cce2a0b99bb8271745af4b360babd84586d1785ae41c081007b",
   "v": 4
  },
  "linux-omarchy-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "8487b0e2847e9b05a1f0dc403506cac61a97aef8cc175cdb090d73d443fa79b7",
+  "date": "2026-11-24",
+  "hash": "8d10ae50000c30379b408da09b4d2645537147a98461dbc8e5783c280e87ddb1",
   "v": 4
  },
  "linux-t2-headers-on-omarchy.html": {
   "date": "2026-11-17",
-  "hash": "f7d1e0d020d578ab9c9465d87a4f80613a124a013f52a96f424e44d8afe3c308",
+  "hash": "643cf89d85bf2b7e00a2b522926090e1535fa6070bc28bb2c981a71b5e2c8d40",
   "v": 4
  },
  "linux-t2-on-omarchy.html": {
   "date": "2026-11-17",
-  "hash": "ae15e2ba943a22f364edd12b015ffa0209f9ebb46026e50b0f14eef9a922f96f",
+  "hash": "a2034796274155a67bad8de9498f4f01aa29d0348203cc8a4b77d3ac67775d49",
   "v": 4
  },
  "linuxqq-on-omarchy.html": {
   "date": "2026-10-16",
-  "hash": "bfbf57bc98389dfc3fb55b82a356c87a37e02b17db896f4e029ef2566dc43a6d",
+  "hash": "a30a1a7a9b586629490405e17beb5a8b58a3f826d1fcd13f2316e5c0975b5fbc",
   "v": 4
  },
  "lmstudio-bin-on-omarchy.html": {
-  "date": "2026-11-10",
-  "hash": "baaa3e12dba715cd100a7c8dfe5bff145821bdf915135d38c8df752a8df0d178",
+  "date": "2026-11-24",
+  "hash": "a0c4fc92304fbab406f82b6aee6d5ff84a75528d1677d75807ac8315101d7508",
   "v": 4
  },
  "lmstudio-on-omarchy.html": {
-  "date": "2026-11-10",
-  "hash": "9a7031590c284d72eec14831a6c8f995367ae4b18bfd0b296905026c8a207df5",
+  "date": "2026-11-24",
+  "hash": "f237c7e4cac90d1eeae8a397ce6e0fb6ea3b3eb56241407e5b9138b9dc3ac7a0",
   "v": 4
  },
  "makima-bin-on-omarchy.html": {
@@ -1266,7 +2361,7 @@
  },
  "maplemono-nf-cn-on-omarchy.html": {
   "date": "2026-10-21",
-  "hash": "26f24f6af10bedbc9cd35ddad7ccbd82c2da2f799f4142eb5b237033eb444256",
+  "hash": "3488984aa5b9291812d5b8e209184096ab54441f4f0e5da48be000663d0d2f65",
   "v": 4
  },
  "mise-bin-on-omarchy.html": {
@@ -1276,12 +2371,17 @@
  },
  "monologue-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "423efab2ecc4c8ba92390f54af49b39c627caff1e451aae81fc3bb34f5f2f308",
+  "hash": "fb795c6bbdb09629850b4f229eee039aa5a7731b93157e5e3b2dbeef44aab4f2",
+  "v": 4
+ },
+ "muse-code-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "fd1e77ed092188f6fa0c02d6e7bf083c824a626238ba6d229156063306e9d742",
   "v": 4
  },
  "nautilus-dropbox-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "88e1fd81832b3841d48f959978f86ab6980b4c6e7c4a53396525cda1b6447fb7",
+  "date": "2026-11-24",
+  "hash": "286df0519e4230027d75fad82fdc36cdcf8b038ae89e3558ffc9f6d1637efe02",
   "v": 4
  },
  "nautilus-open-any-terminal-on-omarchy.html": {
@@ -1295,18 +2395,18 @@
   "v": 4
  },
  "oh-my-pi-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "1bc2db9c69101a7315825d5382063ed41cc4e6b9d1335932e6934cf210166d14",
+  "date": "2026-11-24",
+  "hash": "e692a81e109818c364437db14d7346b5069820fef6a8885b93d3a8e65e909a6a",
   "v": 4
  },
  "omadesign-omarchy.html": {
   "date": "2026-10-11",
-  "hash": "7d2aa55e8c71f29456ba54a0c3094335c9d9d047b81f1223cc985934e64aed86",
+  "hash": "e7bc47145f7c948e0de0debe49d86f697be51df24f9003e8f6a6bfdcf6cc2c31",
   "v": 4
  },
  "omakeyboard-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "3890ffbea28dfee93e649d91aafd3e32a80fbab722d37573c08c4ae4c0db88bb",
+  "hash": "c204d8a973980eedbe8ba8f4e73d7f3051e6367befc524baa3273ed2bb063957",
   "v": 4
  },
  "omarchy-audio-tuner-on-omarchy.html": {
@@ -1321,17 +2421,17 @@
  },
  "omarchy-for-windows-developers.html": {
   "date": "2026-10-19",
-  "hash": "a96e4a4368daca6d1c641b128c1d1b19974aad4ed19531c335a0faf438868c3e",
+  "hash": "d39bda4311a505cafd49e8bc3a2838fa9e7f4f256b99c7ad652dabe77b3144d6",
   "v": 4
  },
  "omarchy-hyprland-titlebars-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "c426badfd6ef420eb4dfcc97de5184c201516d46a172466b4b5cf0bba600b096",
+  "hash": "f81dcc80249950bb7306060dde2fa41d71cab4ac39638fa310d3898d0a6c915c",
   "v": 4
  },
  "omarchy-on-t2-macbook.html": {
   "date": "2026-10-19",
-  "hash": "3e83856831778c9bd2bb0a391a4f7cb9121ae899f34311afd4a5d39af660a80c",
+  "hash": "c3e3dd8ed1f60760569ec072fc897ac56466202de1fd3cbf2345523b3c73bf42",
   "v": 4
  },
  "omarchy-settings-dev-on-omarchy.html": {
@@ -1341,27 +2441,27 @@
  },
  "omarchy-speedtest-on-omarchy.html": {
   "date": "2026-11-01",
-  "hash": "d371dcd0b520c0d34e4f0e8cc4c6c9284063127895caf2345e2e1501570a6398",
+  "hash": "36a415a6b0060bc6889507b9cb63d05b8f41eda800239b358ba61a30a747b30b",
   "v": 4
  },
  "omarchy-store.html": {
   "date": "2026-11-16",
-  "hash": "98b7f9958320d845836208452fcf7678b91e1c86fe3f637f21b4890168f6d52c",
+  "hash": "d39cf17d411ac514182fa18fadd6d4197bd68fb04ee66e09dc940deba4b0a1be",
   "v": 4
  },
  "omarchy-theme-intros.html": {
   "date": "2026-10-18",
-  "hash": "78354176c561c0c00527953ffb335ce8795274479154418f44842be799c93ec2",
+  "hash": "c8996eb3829ee6fa2c16156be71fb823e00f9e425be6b0e72453be92fefe8da9",
   "v": 4
  },
  "omarchy-vs-macos-windows-ubuntu.html": {
   "date": "2026-09-05",
-  "hash": "e70bac4b7e9441361f55f183957c984714e21e922554e45929623f0e802b0bc0",
+  "hash": "da186ea10e5759dc1c63b118929154a2c4723e3d2a67e106d871b1457c680589",
   "v": 4
  },
  "omawake-bin-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "cb4505c1a3385a42ef4d119e9f3720547f4c4dc77d38d0527ddd5d971503e4d5",
+  "date": "2026-11-24",
+  "hash": "cebba70a6bb67ada172887e24fbd3a4853c00636efe88d54bdb5738411ba9945",
   "v": 4
  },
  "once-bin-on-omarchy.html": {
@@ -1370,23 +2470,43 @@
   "v": 4
  },
  "openai-codex-desktop-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "946629386d3f5092882d5ef1e3bc99fd929135255f6b35c1b339b03e79e8c738",
+  "date": "2026-11-24",
+  "hash": "9c6253e2dff885a10adba28bbe819c5bf66a443f6a0244dd2da1368082ec6911",
+  "v": 4
+ },
+ "openai-codex-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "7fd88444a2228ee4d6e1166d91e7a366b90b4d4f3e7a8491fd0d6b9a73b32176",
+  "v": 4
+ },
+ "opencode-desktop-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "e16505711359015b16236027ef9cfbfc412cee53d8789bea15e6481165ce6caa",
+  "v": 4
+ },
+ "opencode-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "0b7a5104888a16d0f9708d80449a6cd0ba28d4d9dcd5e10ada65119783877604",
   "v": 4
  },
  "openrouter-ori-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "ed343bd6274c2b0a6d4e4d010dd556ba9c4b353aa67e071dfe642e425db524c5",
+  "date": "2026-11-24",
+  "hash": "eeb77ff9c3fd6ad5e06fa6e1dc62b6593ef4d1cccb39c18aa4ad57b0365a6993",
   "v": 4
  },
  "pi-coding-agent-on-omarchy.html": {
   "date": "2026-11-22",
-  "hash": "00c4e86b8c86ba18bd2bf26c12e05e77c50fb192cb059e103a2d84982785bebe",
+  "hash": "ad771d443ffe5d912e9e300463c4dfca04efc18be3546ec5517664521789c57f",
+  "v": 4
+ },
+ "playwright-cli-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "32c463dc0333f8d43fdee9df3e4bb0336b3d60e2190be2fcedc207ed65420888",
   "v": 4
  },
  "power-profiles-daemon-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "e41470e7c91bef8e8c1031ea38fef520395c3a2c9944fc73ede56d80ffc11471",
+  "hash": "4995198bad35bdd89816f24f8ae07f7bcfdd50fd7a1cf4bd5de384a284fffbf9",
   "v": 4
  },
  "press.html": {
@@ -1401,7 +2521,7 @@
  },
  "qcom-firmware-extract-snapdragon-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "7e110ef078390f7ee84a3be82bf43c5031f08b21580203d5a7302f251dbb1dd0",
+  "hash": "669608d1f84c532858309fc48446a8f2e844feb671ed9c9e1026c68a57eafb1f",
   "v": 4
  },
  "quickshell-git-on-omarchy.html": {
@@ -1411,27 +2531,32 @@
  },
  "quickshell-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "f23480c3788b9bad56bd4ff6553ae1ae063899169e440fa6a24030735d13b3d1",
+  "hash": "d5fb4bbb78743d5d26642799397c8a3600fd7496056e9b30f295c4e19919340b",
+  "v": 4
+ },
+ "qwen-code-on-omarchy.html": {
+  "date": "2026-11-24",
+  "hash": "e8c0485aa565296d97b1b768c5bc9db1e9b3d7c0df32fdb128a2d75a55057abc",
   "v": 4
  },
  "revive-old-laptop-with-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "a4a24f3378a2fa9279cefd1337c6e837500819f4f0ceb8cf04d4353d546d2011",
+  "hash": "89ae7c1a0d02e5f55e34a17fc800cb633c6df368b295d59a16e9cae753823856",
   "v": 4
  },
  "run-windows-apps-on-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "0dc7b007a373ae5581d224bce9325e519c9d4c2e1f32deb1c358991f69aa1c00",
+  "hash": "84ece7bd33f4ec27e854b93751463a688c0d4c2597cf3874740b33888d1580da",
   "v": 4
  },
  "speed-up-old-mac-with-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "d529334d04c9db21139e1d872b40acd4914a4707b17da17719820274fce2b910",
+  "hash": "6ef1229f7c67a189107e04de4c4151614b6b7106752c2b01a7e46fc3fc3663c7",
   "v": 4
  },
  "sponsor.html": {
-  "date": "2026-11-23",
-  "hash": "a794b443968cd76bef186debb8224a0a17f1b24d4bd518523f6d0135ea660e01",
+  "date": "2026-11-24",
+  "hash": "7bd193a75fafa74d7e38b6f5b3fadd3b8bbd03931c34ce89f16191d92356eda6",
   "v": 4
  },
  "sublime-text-4-on-omarchy.html": {
@@ -1440,28 +2565,28 @@
   "v": 4
  },
  "superwhisper-bin-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "baca0d88e08e913b41bba78f0bdb768a0bbb820f94b2e0c22c18043219b87cf8",
+  "date": "2026-11-24",
+  "hash": "b1191be8d3f42c3b4f91e29dafbd22b5ded3f647fc2a224b8ba7447ddc495539",
   "v": 4
  },
  "switch-from-mac-to-omarchy-safely.html": {
   "date": "2026-10-19",
-  "hash": "efbd282709f849b4a549ac95848ff4ad809a20c6c98a31b7cedf19f47567d711",
+  "hash": "c161a12929c83f8da80f5a56c1bbddf0c97e5a5b79621b85c0bc6f2956474763",
   "v": 4
  },
  "switch-from-windows-to-omarchy-safely.html": {
   "date": "2026-10-19",
-  "hash": "154057ebccba4cf599ef05ace7ab00b9d79c7df095ec540b21b9bcaa75ba97d4",
+  "hash": "95c5a486cb932d3ff138b61856922259858d892bcacccc52ed412b1eaaeaa92e",
   "v": 4
  },
  "symfony-cli-on-omarchy.html": {
-  "date": "2026-11-09",
-  "hash": "f4c4e80f02d1dfb64fe80c2d6462cc650441407f9a31dc91781b86697c809d32",
+  "date": "2026-11-24",
+  "hash": "a05f821974593c3584c62382540d306288f5428d5223e8446e7a8cb8dd7c7ddc",
   "v": 4
  },
  "t2fanrd-on-omarchy.html": {
   "date": "2026-11-17",
-  "hash": "f5af78251c95cee170abcaf314e7b4170cfd00a685a57999a2ef6576dfffcf89",
+  "hash": "162e2924109a573a66ce5718f250d0426d3e4f299edd1f25c8de9e97f4f98b90",
   "v": 4
  },
  "terms.html": {
@@ -1471,7 +2596,7 @@
  },
  "thinkpad-t14-amd-touchpad-on-omarchy.html": {
   "date": "2026-10-18",
-  "hash": "73d89b72a18775546448df4853b5fc6e07cae6027e62056fcbcd6a94413ca1ba",
+  "hash": "5855a32777f2a3a7a814d3c2a42e157f531ef1c5c6582e698fabddf44b05acbd",
   "v": 4
  },
  "ttfx-on-omarchy.html": {
@@ -1480,13 +2605,13 @@
   "v": 4
  },
  "tutorials.html": {
-  "date": "2026-11-23",
-  "hash": "853b4b2494bc83e93eb484f39f6ff7b7fbf5e67de1c1f78fa019d80f2731baf5",
+  "date": "2026-11-24",
+  "hash": "90bcf1271269711bd6d015634c18a024c6398d51b516c5d7df9e6a878b2bfaec",
   "v": 4
  },
  "tzupdate-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "fb7f08739ef74eb5fc343d7c72037057a597e5d20d53bbbf61d0add4897c9ae0",
+  "date": "2026-11-24",
+  "hash": "31c3a570d0750a854499b9eb57021151996999fdb25f37a7af87b6f74c4f05cc",
   "v": 4
  },
  "ufw-docker-on-omarchy.html": {
@@ -1495,8 +2620,8 @@
   "v": 4
  },
  "vi-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "7d3cdc3ff1744cab5facadbdf1363ffa776088fc29947aab518b233a5713017f",
+  "date": "2026-11-24",
+  "hash": "4d0ea9b552c7f2a34f5c6d776ee2769b29c297eade89d40070142047b8491229",
   "v": 4
  },
  "visual-studio-code-bin-on-omarchy.html": {
@@ -1505,13 +2630,13 @@
   "v": 4
  },
  "voxtype-bin-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "cbdf968190a1755c0ac9f0417fae60c687ef228cb538a6b8d4faf1a11159ed18",
+  "date": "2026-11-24",
+  "hash": "34c02024ace4fd12c7264433ef24c79b4276e0b3e55dca3de98e685b302fe6e3",
   "v": 4
  },
  "vs/omarchy-apps-vs-omarchy-store.html": {
   "date": "2026-11-16",
-  "hash": "6ef54efd145ca105a8153902b85f4d3d17543221f603202257c1a88b283be9cf",
+  "hash": "3e3f109da32866aefdb15ac2ba14ecaa345676da99a63acefded6ef385b39c81",
   "v": 4
  },
  "vs/omarchy-compared.html": {
@@ -1531,27 +2656,27 @@
  },
  "wayshare-on-omarchy.html": {
   "date": "2026-11-14",
-  "hash": "a18857b923b3de290868ba83826f01aa471dc6995985ae8051629d1d1fbb68c1",
+  "hash": "6fe3f633501492fd65efab26df055587f407aef5d39fb0e464d4488867c0af58",
   "v": 4
  },
  "wechat-bin-on-omarchy.html": {
   "date": "2026-10-16",
-  "hash": "13ea1f17e45a08f3d1833b041a91b3c828cc7659eca8470c37c5059e22366bf8",
+  "hash": "56bf691162a91e622e6b46a38c12983e9c7e51731ca2c7a6c55177cd388f1cd8",
   "v": 4
  },
  "which-macs-can-run-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "25d7e79288e520001371275dba9e828bbe767c857a129b937acbfbeab45cd750",
+  "hash": "21428d41feb01315cd89ff18b8521cff23a68201082cc40c325f294f2bdddb74",
   "v": 4
  },
  "windows-shortcuts-on-omarchy.html": {
   "date": "2026-10-19",
-  "hash": "e72c290ca5f728eae97d14010e80aceaaa8939476cea00cd73d35ecc362377af",
+  "hash": "86b60641653cff5e3f7f7fa9d21db6935b6fee9a68b16ad2f5f14da7b0b1ee39",
   "v": 4
  },
  "wps-office-cn-on-omarchy.html": {
   "date": "2026-10-16",
-  "hash": "2613febca53847d00b7a95ade45bc4d1d5a09584935a5687d277a7fcc5468c75",
+  "hash": "5694cb1fb3c3a9dd45a5fcecf40967f90a6673a898a6a7263a6f0d2c3bbbff98",
   "v": 4
  },
  "yaru-gnome-shell-theme-on-omarchy.html": {
@@ -1570,18 +2695,18 @@
   "v": 4
  },
  "yay-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "9ccc5af5cbbd6cb82ade3f2bddfab1a44ed8f22ffb69a29ed8d2e907558a7880",
+  "date": "2026-11-24",
+  "hash": "49407124a9c3acadeefb3b4fcae339acf8d41f9611c7a9146721ceca45284bba",
   "v": 4
  },
  "yt-dlp-on-omarchy.html": {
   "date": "2026-11-13",
-  "hash": "956186c674ed9861b88e9202743a42e63705fc0a60a5411aea17847e11a8bd30",
+  "hash": "c85cac20470944edd2e4b411c02e3425c8dbcd7e1de8ccce9264d299345c234a",
   "v": 4
  },
  "zen-browser-bin-on-omarchy.html": {
-  "date": "2026-11-23",
-  "hash": "91ced82f376bbf711990c1242277563face825fc9247fad73488505343df0dab",
+  "date": "2026-11-24",
+  "hash": "3e3e2c265f0742455f0373f64eec1a921ee5a8a7627d53489ffba8faf6ea6b4d",
   "v": 4
  }
 }
