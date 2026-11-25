@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How to Install &amp; Use firefox on Omarchy (2026)</title>
-<meta name="description" content="Install firefox on Omarchy with one command: omarchy pkg add firefox. Fast, Private &amp; Safe Web Browser. Setup, requirements and FAQ.">
+<title>Firefox on Omarchy: Install &amp; Setup Guide (2026) | Omarchy Apps</title>
+<meta name="description" content="Install Firefox on Omarchy. Enable VA-API hardware video, run natively on Wayland, fix the profile lock error, and switch from Chrome in 5 minutes.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/firefox-on-omarchy.html">
@@ -13,8 +13,8 @@
 <link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
 <link rel="manifest" href="/images/site.webmanifest?v=2">
-<meta property="og:title" content="How to Install &amp; Use firefox on Omarchy (2026)">
-<meta property="og:description" content="Install firefox on Omarchy with one command: omarchy pkg add firefox. Fast, Private &amp; Safe Web Browser. Setup, requirements and FAQ.">
+<meta property="og:title" content="Firefox on Omarchy: Install &amp; Setup Guide (2026) | Omarchy Apps">
+<meta property="og:description" content="Install Firefox on Omarchy. Enable VA-API hardware video, run natively on Wayland, fix the profile lock error, and switch from Chrome in 5 minutes.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://omarchyapps.com/firefox-on-omarchy.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
@@ -24,10 +24,10 @@
 <meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@jessyka_boat">
-<meta name="twitter:title" content="How to Install &amp; Use firefox on Omarchy (2026)">
-<meta name="twitter:description" content="Install firefox on Omarchy with one command: omarchy pkg add firefox. Fast, Private &amp; Safe Web Browser. Setup, requirements and FAQ.">
+<meta name="twitter:title" content="Firefox on Omarchy: Install &amp; Setup Guide (2026) | Omarchy Apps">
+<meta name="twitter:description" content="Install Firefox on Omarchy. Enable VA-API hardware video, run natively on Wayland, fix the profile lock error, and switch from Chrome in 5 minutes.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/firefox-on-omarchy.html#article","headline":"How to Install & Use firefox on Omarchy (2026)","description":"Install firefox on Omarchy with one command: omarchy pkg add firefox. Fast, Private & Safe Web Browser. Setup, requirements and FAQ.","url":"https://omarchyapps.com/firefox-on-omarchy.html","dateModified":"2026-11-24","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/guides.html"},{"@type":"ListItem","position":3,"name":"How to Install & Use firefox on Omarchy (2026)","item":"https://omarchyapps.com/firefox-on-omarchy.html"}]},{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/firefox-on-omarchy.html#app","name":"firefox","description":"Fast, Private & Safe Web Browser","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"161.0-1","license":"MPL-2.0","url":"https://omarchyapps.com/apps/firefox.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/firefox-on-omarchy.html#article","headline":"Firefox on Omarchy: Install & Setup Guide (2026) | Omarchy Apps","description":"Install Firefox on Omarchy. Enable VA-API hardware video, run natively on Wayland, fix the profile lock error, and switch from Chrome in 5 minutes.","url":"https://omarchyapps.com/firefox-on-omarchy.html","dateModified":"2026-11-25","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Firefox on Omarchy: Install & Setup Guide (2026) | Omarchy Apps","item":"https://omarchyapps.com/firefox-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Firefox free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is open source under the MPL-2.0 license, and the Omarchy package costs nothing."}},{"@type":"Question","name":"Does Netflix work in Firefox on Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes. Firefox ships Widevine DRM support, so Netflix, Spotify, and Prime play with no extra packages. Chromium, by contrast, needs Widevine installed from the AUR."}},{"@type":"Question","name":"Does Firefox run natively on Wayland?","acceptedAnswer":{"@type":"Answer","text":"Yes, Firefox 115 and later auto-detects a Wayland session. Check about:support: Window Protocol should say wayland. If it says xwayland, launch with MOZ_ENABLE_WAYLAND=1 firefox."}},{"@type":"Question","name":"Where does Firefox store my profile?","acceptedAnswer":{"@type":"Answer","text":"Under ~/.mozilla/firefox, in a folder ending in .default-release. profiles.ini in the same directory lists your profiles."}},{"@type":"Question","name":"How do I enable hardware video decoding?","acceptedAnswer":{"@type":"Answer","text":"Install the VA-API driver for your GPU, then set media.ffmpeg.vaapi.enabled to true in about:config and restart. Verify in about:support."}}]}]}</script>
 <link rel="stylesheet" href="/style.75958c2d72.css">
   <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
   <script src="/oa-ads.js" defer></script>
@@ -50,75 +50,154 @@
 
 <header class="hero guide-hero seo-hero">
   <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/guides.html">Guides</a><span>›</span><span aria-current="page">Utilities tutorial</span></nav>
-    <p class="eyebrow">Utilities tutorial</p>
-    <h1>firefox on <span>Omarchy</span></h1>
-    <p class="tag">Fast, Private &amp; Safe Web Browser</p>
-    <p class="facts">Generated from the official Omarchy package repo</p>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">Web browser guide</span></nav>
+    <p class="eyebrow">Web browser guide</p>
+    <h1>Firefox on <span>Omarchy</span></h1>
+    <p class="tag">Mozilla&#x27;s fast, private, and safe web browser — the independent Gecko engine, real privacy controls, and DRM video that works with no extra packages.</p>
+    <p class="facts">Reviewed 2026-11-25 · independent editorial guide</p>
   </div>
 </header>
-<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
+<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
 
 <main class="wrap seo-guide-main">
   <article class="seo-article">
     <div class="guide-answer">
       <p class="answer-label">Short answer</p>
-      <p>To install firefox on Omarchy, open a terminal and run omarchy pkg add firefox. It is a 125.9 MB download (345.6 MB installed), version 161.0-1, licensed MPL-2.0. Fast, Private &amp; Safe Web Browser. Check the project site for current pricing.</p>
+      <p>Install Firefox with omarchy pkg add firefox, then launch it with firefox. Streaming works with no extra packages, and it runs natively on Wayland.</p>
     </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add firefox` — verify it resolves in the store index; confirm 125.9 MB download / 345.6 MB installed, MPL-2.0, as listed. The store page lists no version number; confirm the installed version with `firefox --version`
+- First launch: launch from the Omarchy menu and confirm the first-run screens (import prompt, default browser prompt)
+- Wayland: confirm Firefox runs natively on Wayland out of the box on Hyprland (Firefox 115 and later auto-detects Wayland). Check `about:support` for the window protocol
+- Config paths: confirm profile data lives under `~/.mozilla/firefox` and `profiles.ini` lists the default profile
+- Claimed issues reproduced: (1) "Firefox is already running, but is not responding" profile lock, (2) no hardware video decoding until VA-API is enabled, (3) blurry XWayland rendering on HiDPI, (4) mesa_shader_cache permission errors after forcing hardware decoding
+- Screenshots needed: install, first launch, `about:support` graphics section, `about:config` VA-API setting, the profile folder
+
+SEO notes:
+- URL: /guides/firefox-on-omarchy
+- Title tag: "Firefox on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install Firefox on Omarchy. Enable VA-API hardware video, run natively on Wayland, fix the profile lock error, and switch from Chrome in 5 minutes."
+- Keywords: firefox omarchy, firefox linux, firefox wayland, firefox va-api, firefox vs chrome, firefox profile lock
+-->
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
       <a href="#install">Install</a>
-      <a href="#use">Open and use</a>
-      <a href="#requirements">Requirements</a>
-      <a href="#remove">Uninstall</a>
-      <a href="#facts">Package facts</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Google Chrome</a>
       <a href="#faq">Questions</a>
     </nav>
 
     <section id="install">
-      <h2>Install firefox on Omarchy</h2>
-      <p>Fast, Private &amp; Safe Web Browser</p>
-      <p>The official repository lists this package in Utilities. It was added on 2026-11-24.</p>
-      
+      <h2>Firefox on Omarchy</h2>
+      <p>Firefox on Omarchy is Mozilla’s fast, private, and safe web browser: the independent Gecko engine, real privacy controls, and DRM video that works with no extra packages.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add firefox</code></pre>
+      <p>That installs Firefox (125.9 MB download, 345.6 MB installed, MPL-2.0). Launch it with <code>firefox</code>. It is the browser that needs the least setup on Omarchy: streaming works, extensions work, and it runs natively on Wayland. The store page lists no version number — confirm the installed version with <code>firefox --version</code>.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Launch it and import your old browser.</h3>
+      <p>Open the Omarchy menu (<code>Super + Space</code>), type <code>firefox</code>, and press Enter. On first launch Firefox offers to import bookmarks, passwords, and history from Chrome or Chromium. Take it: the import wizard does the whole move in one pass. Then accept the default-browser prompt if you want links from other apps to open here.</p>
+      <h3>2. Set up sync if you want it, skip it if you don’t.</h3>
+      <p>Firefox Sync (a free Mozilla account) carries bookmarks, passwords, and open tabs between machines. Unlike Chrome, sync is optional and the browser works fully without it. Turn it on from the menu under Settings, Sync, or ignore it and keep everything local.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Check Wayland and hardware video</strong> — open <code>about:support</code> and look under Graphics. Window Protocol should say <code>wayland</code>, and Hardware Video Decoding should say available. If video decoding is not available, see the VA-API fix below.</li>
+        <li><strong>Install uBlock Origin</strong> — open <code>about:addons</code>, search for uBlock Origin, and install it. It is the single highest-value extension for any browser.</li>
+        <li><strong>Know where your profile lives</strong> — bookmarks, extensions, and settings sit under <code>~/.mozilla/firefox</code>, in a folder ending in <code>.default-release</code>. Back that folder up if you want to carry your browser to another machine.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Firefox shows “Firefox is already running, but is not responding” and will not start</h3>
+      <p>A leftover lock file is the usual cause: Firefox crashed or was killed and never cleaned up.</p>
+      <p><strong>Fix:</strong> First check no Firefox process is actually running with <code>ps aux | grep firefox</code> and kill any strays. Then open your profile folder under <code>~/.mozilla/firefox/</code> and delete the <code>lock</code> and <code>.parentlock</code> files inside the profile folder. Do not delete the whole profile folder: that wipes bookmarks and settings. (<a href="https://support.mozilla.org/en-US/kb/firefox-already-running-not-responding?redirectslug=firefox-already-running-not-responding-redirect-1&amp;redirectlocale=en-US" target="_blank" rel="noopener">Mozilla Support</a>)</p>
+      <h3>Video playback uses the CPU heavily and the laptop fan spins up on YouTube</h3>
+      <p>Hardware video decoding is off until you turn it on.</p>
+      <p><strong>Fix:</strong> First install the right VA-API driver for your GPU: <code>intel-media-driver</code> for Intel (Broadwell and newer), <code>mesa</code> for AMD, <code>libva-nvidia-driver</code> for Nvidia. Then open <code>about:config</code>, accept the warning, and set <code>media.ffmpeg.vaapi.enabled</code> to <code>true</code>. Restart Firefox and check <code>about:support</code>: Hardware Video Decoding should now say available. (<a href="https://dev.to/weatherclockdash/firefox-on-wayland-native-support-va-api-screen-sharing-via-pipewire-20ja" target="_blank" rel="noopener">Firefox Wayland guide</a>)</p>
+      <h3>Firefox looks blurry or scales wrong on a HiDPI screen, or behaves like an X11 app</h3>
+      <p>It is running through XWayland instead of native Wayland. Firefox 115 and later auto-detects a Wayland session, so this mostly affects older setups or odd launches, but check <code>about:support</code> for the window protocol.</p>
+      <p><strong>Fix:</strong> If it says <code>xwayland</code>, launch with <code>MOZ_ENABLE_WAYLAND=1 firefox</code>. To make it permanent, add <code>MOZ_ENABLE_WAYLAND=1</code> to your environment or edit the desktop file’s Exec line to <code>Exec=env MOZ_ENABLE_WAYLAND=1 /usr/lib/firefox/firefox %u</code>. (<a href="https://dev.to/weatherclockdash/firefox-on-wayland-native-support-va-api-screen-sharing-via-pipewire-20ja" target="_blank" rel="noopener">Firefox Wayland guide</a>)</p>
+      <h3>After forcing hardware decoding on, the logs fill with “Failed to create ~/.cache/mesa_shader_cache for shader cache (Permission denied)” errors</h3>
+      <p>This is a known issue reported on the Arch forums when <code>media.ffmpeg.vaapi.enabled</code> and <code>media.hardware-video-decoding.force-enabled</code> are both forced on, and it appears tied to the sandbox rather than the driver: <code>vainfo</code> reports everything fine while the errors repeat.</p>
+      <p><strong>Fix:</strong> Leave <code>media.hardware-video-decoding.force-enabled</code> at its default (off) and only enable <code>media.ffmpeg.vaapi.enabled</code>, which gives hardware decoding without the error spam on most setups. If the errors persist, check the permissions on <code>~/.cache/mesa_shader_cache</code> before forcing anything else. (<a href="https://bbs.archlinux.org/viewtopic.php?pid=2206504" target="_blank" rel="noopener">Arch Linux Forums</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Bitwarden for passwords, uBlock Origin for ads and trackers, and Firefox Sync if you use Firefox on more than one machine.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Chromium gives you the Chrome Web Store with no Google account, and Brave adds built-in ad blocking. If you want something brand new, Ladybird is the independent engine to watch, but it is alpha and not a daily driver yet.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Firefox vs Chromium vs Google Chrome vs Ladybird</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Firefox</th><th>Chromium</th><th>Google Chrome</th><th>Ladybird</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MPL-2.0</td><td>Free, BSD-3-Clause</td><td>Free, proprietary</td><td>Free, BSD-2-Clause</td></tr>
+            <tr><td>Best for</td><td>Privacy defaults, DRM and codecs that just work</td><td>Chrome engine and Chrome Web Store, no Google account</td><td>Google sync and the widest site compatibility</td><td>Testing a brand-new independent engine</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add firefox</code></td><td><code>omarchy pkg add chromium</code></td><td>AUR (<code>google-chrome</code>)</td><td><code>omarchy pkg add ladybird-bin</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Firefox if you want the browser that works with the least setup on Omarchy: streaming plays, Wayland is native, and your data is not tied to a Google account. Pick Chromium if you need a specific Chrome-only extension or site.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Firefox is a free alternative to Google Chrome ($0, but your data is the product)</h2>
+      <p><strong>Firefox is a free alternative to Google Chrome ($0, but your data is the product).</strong> What you give up: Google account sync across Chrome, and a few Chrome-only extensions. What you keep: a fast modern browser, DRM video that plays with no extra packages, and a non-profit steward (Mozilla) instead of an ad company. Firefox costs nothing and Chrome costs nothing too, so the trade is not money, it is who holds your data.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Google Chrome (~5 minutes)</h2>
       <ol>
-        <li>Open a terminal.</li>
-        <li>Run the install command:<pre><code class="language-bash">omarchy pkg add firefox</code></pre></li>
-        <li>Check it landed. Pacman should list version 161.0-1:<pre><code class="language-bash">pacman -Qi firefox</code></pre></li>
+        <li><strong>Export from Chrome:</strong> you do not need to export anything by hand. Firefox’s import wizard reads Chrome directly.</li>
+        <li><strong>Import into Firefox:</strong> on first launch, or later from the menu under Bookmarks, Manage bookmarks, Import and Backup, Import Data from Another Browser, choose Chrome. It pulls bookmarks, passwords, history, and open tabs in one pass.</li>
+        <li><strong>What doesn’t transfer:</strong> Chrome extensions (find Firefox equivalents on addons.mozilla.org; uBlock Origin and Bitwarden are both there), Google account sync, and saved payment methods tied to your Google account.</li>
+        <li><strong>Time estimate:</strong> takes about 5 minutes, plus a few more to reinstall your extensions.</li>
       </ol>
     </section>
 
-    <section id="use">
-      <h2>Open and use firefox</h2>
-      <p>To see what the package installed, including any commands and desktop entries:</p><pre><code class="language-bash">pacman -Ql firefox</code></pre>
-    </section>
-
-    <section id="requirements">
-      <h2>firefox requirements and compatibility</h2>
-      <p>No special requirements are documented for firefox.</p>
-      <h3>Dependencies Omarchy installs for you</h3><ul><li><code>alsa-lib</code></li><li><code>at-spi2-core</code></li><li><code>cairo</code></li><li><code>dbus</code></li><li><code>ffmpeg</code></li><li><code>fontconfig</code></li><li><code>freetype2</code></li><li><code>gdk-pixbuf2</code></li><li><code>glib2</code></li><li><code>glibc</code></li><li><code>gtk3</code></li><li><code>hicolor-icon-theme</code></li></ul>
-      <h3>Pricing and license</h3>
-      <p>Check the project site for current pricing. License: MPL-2.0.</p>
-    </section>
-
-    <section id="remove">
-      <h2>Uninstall firefox</h2>
-      <pre><code class="language-bash">omarchy pkg drop firefox</code></pre>
-    </section>
-
-    <section id="facts">
-      <h2>firefox package facts</h2>
-      <div class="table-scroll"><table class="compare-table"><tbody><tr><th scope='row'>Package</th><td><code>firefox</code></td></tr><tr><th scope='row'>Version</th><td>161.0-1</td></tr><tr><th scope='row'>Category</th><td>Utilities</td></tr><tr><th scope='row'>License</th><td>MPL-2.0</td></tr><tr><th scope='row'>Download</th><td>125.9 MB</td></tr><tr><th scope='row'>Installed size</th><td>345.6 MB</td></tr><tr><th scope='row'>Built</th><td>2026-11-24</td></tr><tr><th scope='row'>Pricing</th><td>Check the project site for current pricing</td></tr><tr><th scope='row'>Added to the official repo</th><td>2026-11-24</td></tr></tbody></table></div>
-      <p><a href="/apps/firefox.html">firefox package page on this site</a> · <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Project site</a></p>
-    </section>
+    <div class="guide-cta">
+      <div><h2>Open the Firefox package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/firefox.html">View Firefox →</a>
+    </div>
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>How do I install firefox on Omarchy?</summary><p>Open a terminal and run omarchy pkg add firefox. The download is 125.9 MB and it takes 345.6 MB once installed. Omarchy pulls in any dependencies automatically.</p></details><details><summary>Is firefox free?</summary><p>Check the project site for current pricing. The package is licensed MPL-2.0.</p></details><details><summary>How do I uninstall firefox?</summary><p>Run omarchy pkg drop firefox. It removes the package from your system.</p></details><details><summary>What does firefox depend on?</summary><p>The package declares 29 dependencies: alsa-lib, at-spi2-core, cairo, dbus, ffmpeg, fontconfig, freetype2, gdk-pixbuf2, glib2, glibc, gtk3, hicolor-icon-theme and more. Omarchy installs them for you.</p></details><details><summary>Is firefox in the official Omarchy repo?</summary><p>Yes. It is published as firefox (version 161.0-1) in the official Omarchy package repository. Project site: https://www.mozilla.org/firefox/. This site is unofficial: an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p></details>
+      <details><summary>Is Firefox free?</summary><p>Yes. It is open source under the MPL-2.0 license, and the Omarchy package costs nothing.</p></details>
+      <details><summary>Does Netflix work in Firefox on Linux?</summary><p>Yes. Firefox ships Widevine DRM support, so Netflix, Spotify, and Prime play with no extra packages. Chromium, by contrast, needs Widevine installed from the AUR.</p></details>
+      <details><summary>Does Firefox run natively on Wayland?</summary><p>Yes, Firefox 115 and later auto-detects a Wayland session. Check <code>about:support</code>: Window Protocol should say <code>wayland</code>. If it says <code>xwayland</code>, launch with <code>MOZ_ENABLE_WAYLAND=1 firefox</code>.</p></details>
+      <details><summary>Where does Firefox store my profile?</summary><p>Under <code>~/.mozilla/firefox</code>, in a folder ending in <code>.default-release</code>. <code>profiles.ini</code> in the same directory lists your profiles.</p></details>
+      <details><summary>How do I enable hardware video decoding?</summary><p>Install the VA-API driver for your GPU, then set <code>media.ffmpeg.vaapi.enabled</code> to <code>true</code> in <code>about:config</code> and restart. Verify in <code>about:support</code>.</p></details>
+      <details><summary>Can I use Chrome extensions in Firefox?</summary><p>No, not directly. Firefox uses its own add-ons site, addons.mozilla.org, but most popular extensions (uBlock Origin, Bitwarden, Dark Reader) have Firefox versions.</p></details>
     </section>
 
-    <section id="related">
-      <h2>More Utilities apps on Omarchy</h2>
-      <ul><li><a href="/firefox-i18n-ach-on-omarchy.html">firefox-i18n-ach</a></li><li><a href="/firefox-i18n-af-on-omarchy.html">firefox-i18n-af</a></li><li><a href="/firefox-i18n-an-on-omarchy.html">firefox-i18n-an</a></li><li><a href="/firefox-i18n-ar-on-omarchy.html">firefox-i18n-ar</a></li><li><a href="/firefox-i18n-ast-on-omarchy.html">firefox-i18n-ast</a></li><li><a href="/firefox-i18n-az-on-omarchy.html">firefox-i18n-az</a></li></ul>
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/firefox.html" target="_blank" rel="noopener">Omarchy package listing for Firefox</a></li>
+        <li><a href="https://support.mozilla.org/en-US/kb/firefox-already-running-not-responding?redirectslug=firefox-already-running-not-responding-redirect-1&amp;redirectlocale=en-US" target="_blank" rel="noopener">Profile lock error and fix (Mozilla Support)</a></li>
+        <li><a href="https://dev.to/weatherclockdash/firefox-on-wayland-native-support-va-api-screen-sharing-via-pipewire-20ja" target="_blank" rel="noopener">VA-API setup, Wayland auto-detection, about:support checks</a></li>
+        <li><a href="https://deepwiki.com/gytis-ivaskevicius/linux-gpu-debug-helper/1.1.3.1-firefox-configuration" target="_blank" rel="noopener">VA-API config reference and driver table</a></li>
+        <li><a href="https://www.siberoloji.com/how-to-enable-hardware-acceleration-for-video-playback-on-arch-linux/" target="_blank" rel="noopener">Hardware acceleration guide (about:config prefs, driver install)</a></li>
+        <li><a href="https://bbs.archlinux.org/viewtopic.php?pid=2206504" target="_blank" rel="noopener">mesa_shader_cache permission errors after forcing VA-API (Arch Linux Forums)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
     </section>
 
   </article>
@@ -126,15 +205,15 @@
   <aside class="related-guides" aria-labelledby="related-guides-h">
     <h2 id="related-guides-h">Keep exploring</h2>
     <div class="related-guide-grid">
-<a class="related-guide" href="/firefox-i18n-ach-on-omarchy.html"><strong>firefox-i18n-ach on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/firefox-i18n-af-on-omarchy.html"><strong>firefox-i18n-af on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/firefox-i18n-an-on-omarchy.html"><strong>firefox-i18n-an on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/apps/firefox.html"><strong>firefox package page</strong><span>Version, size, license and install command</span></a>
+<a class="related-guide" href="/amp-cli-on-omarchy.html"><strong>How to Install &amp; Use Amp CLI on Omarchy (2026) — Free Hobby Tier, the Dial, and Cloud Orbs</strong><span>Install Sourcegraph Amp CLI on Omarchy with one command. Free Hobby tier, login, the Dial modes, AGENTS.md setup, orb pricing, and common fixes.</span></a>
+<a class="related-guide" href="/antigravity-cli-on-omarchy.html"><strong>How to Install &amp; Use Antigravity CLI on Omarchy (2026) — Google&#x27;s Gemini Terminal Agent</strong><span>Install Google Antigravity CLI on Omarchy with one command. Free tier, Google sign-in, Auto mode, MCP setup, quota limits, and the Gemini CLI replacement explained.</span></a>
+<a class="related-guide" href="/antigravity-on-omarchy.html"><strong>How to Install &amp; Use Antigravity on Omarchy (2026) — Free Cursor Alternative</strong><span>Install Google Antigravity on Omarchy with one command. Agent-first AI development, free for individuals: setup, sign-in, and real Linux fixes from Google&#x27;s own forum.</span></a>
+<a class="related-guide" href="/apple-bcm-firmware-fetcher-on-omarchy.html"><strong>How to Install &amp; Use apple-bcm-firmware-fetcher on Omarchy (2026) — Fix Wi-Fi &amp; Bluetooth on T2 Macs</strong><span>Fix Wi-Fi and Bluetooth on your T2 Mac running Omarchy: install apple-bcm-firmware-fetcher with one command, pull the firmware from your macOS volume, verify it loaded, and fix the common failures (macOS wiped, APFS driver, FileVault, iMac models).</span></a>
     </div>
   </aside>
 </main>
 
-<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
+<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">

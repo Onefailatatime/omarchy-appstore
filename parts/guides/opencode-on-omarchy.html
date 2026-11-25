@@ -1,0 +1,142 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add opencode` (package slug `opencode`) — verify it resolves in the store index. The app page did not show a version number in the listing, so confirm the installed version with `opencode --version` (upstream is on the 2.x line; v2.4.1 was the desktop changelog entry on Nov 23, 2026). Confirm 127 MB download / 275.3 MB installed, depends on glibc and ripgrep, as listed
+- Binary name: confirm the package installs the `opencode` command on PATH
+- First launch: run `opencode` in a project and confirm the first-run flow: `/connect` provider picker vs `opencode auth login`, and which provider it defaults to
+- Config paths: confirm global config at `~/.config/opencode/opencode.json`, TUI settings at `~/.config/opencode/tui.json`, and stored credentials at `~/.local/share/opencode/auth.json`
+- 1.x vs 2.x: confirm the Omarchy package is OpenCode 2 (the TypeScript rewrite, npm `@opencode/cli`), not the older 1.x line, and note which one `opencode upgrade` tracks
+- Issues claimed below are NOT personally reproduced, they are documented upstream (OpenCode docs, GitHub issues #56324, #58891, #59387, independent guides). Verify at least the `/connect` flow and the free-tier behavior on a real machine
+- Screenshots needed: install, first launch, `/connect` picker, build vs plan mode switch, a finished task, `opencode web` browser UI
+
+SEO notes:
+- URL: /guides/opencode-on-omarchy
+- Title tag: "OpenCode on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install OpenCode on Omarchy. Connect any of 75+ providers with /connect, build vs plan mode, and the free-tier and Invalid credential errors explained."
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>OpenCode on Omarchy</h2>
+      <p>OpenCode on Omarchy is a MIT-licensed, open-source terminal coding agent with a rich TUI: you chat with it, it reads and edits files and runs commands, and you bring your own API key from Anthropic, OpenAI, Google, or any of 75+ supported providers.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add opencode</code></pre>
+      <p>Then <code>cd ~/my-project</code> and run <code>opencode</code>. That installs OpenCode (127 MB download, 275.3 MB installed, depends on glibc and ripgrep). On first launch, type <code>/connect</code>, pick a provider, and paste your API key. Then describe what you want done. The tool itself is free and open source; you pay your chosen provider for API usage. The Omarchy package version was not shown on the app page and is unconfirmed; upstream is on the 2.x line.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Connect a model provider.</h3>
+      <p>Inside the TUI, type <code>/connect</code>, pick a provider, and paste the key. From the shell, <code>opencode auth login</code> (alias <code>opencode providers login</code>) opens the same picker. Keys are stored in <code>~/.local/share/opencode/auth.json</code>. Keys already in your environment, or in a project <code>.env</code> file, are also picked up automatically. Check what is stored with <code>opencode providers list</code>. If you have no paid key, OpenCode Zen offers free models through OpenCode’s own gateway, and OpenCode Go is a $10/month subscription for its best models. Do not skip this step: without a provider, your first prompt fails before the agent starts.</p>
+      <h3>2. Start with a read-only task.</h3>
+      <p>OpenCode ships two agents: <strong>build</strong> (full access, the default) and <strong>plan</strong> (read-only analysis). Start in plan mode and try: “Take a look at this project and explain its main directories.” Then run <code>/init</code> once: it scans the repo and writes an <code>AGENTS.md</code> with build, test, and convention notes. Switch between build and plan with Tab in the TUI.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Lock permissions before the first real run.</strong> The defaults allow almost everything except reading <code>.env</code> files. On untrusted code, set <code>bash</code> and <code>edit</code> to <code>ask</code> in <code>~/.config/opencode/opencode.json</code>. Note that denying the <code>read</code> tool can also break OpenCode’s free-tier models, so use <code>ask</code>, not <code>deny</code>, for <code>read</code>.</li>
+        <li><strong>Set two models.</strong> Put your main model in <code>model</code> and a small cheap model in <code>small_model</code> for titles, summaries, and compaction. This is the single biggest cost saver in OpenCode.</li>
+        <li><strong>Try the web UI.</strong> <code>opencode web</code> serves the same agent in your browser, and <code>opencode serve</code> plus <code>opencode run --attach</code> gives you headless calls without re-booting MCP servers. Update with <code>opencode upgrade</code>.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Every request fails with “Upstream request failed: Invalid credential”</h3>
+      <p>This is OpenCode’s own gateway refusing a stored OpenCode Console (Zen) or Go key, not a key for Anthropic or OpenAI. A maintainer’s explanation on the tracker: “This happens when your stored OpenCode API key has expired. Several older keys stopped working after the console migration.” Reinstalling or switching models does not help. A search of the tracker in mid-November 2026 returned 47 issues with this message, several from people who had just paid for Go and found nothing worked.</p>
+      <p><strong>Fix:</strong> Run <code>opencode auth login</code> (or <code>/connect</code> in the TUI) and sign in to OpenCode again, or create a new key in the OpenCode Console (Account, then Personal API keys, in the workspace that holds your credit or Go subscription) and connect that one. (<a href="https://everpod.ai/guides/opencode-upstream-request-failed-invalid-credential" target="_blank" rel="noopener">Everpod guide</a>)</p>
+      <h3>Free models fail with “OpenCode’s free tier can only be used from within OpenCode”, even though you are inside OpenCode</h3>
+      <p>The free tier is served through OpenCode’s Zen gateway, and the gateway checks that each request looks like one OpenCode would send. A denied <code>read</code> permission is enough to trip it. The same error is by design if you use the free models from another app, a proxy, or a direct API call: the pinned thread #59387 says free models only work inside OpenCode.</p>
+      <p><strong>Fix:</strong> Run <code>opencode debug config</code>, find any <code>read</code> deny (including <code>"*": "deny"</code> and <code>"tools": { "read": false }</code>), change it to <code>"ask"</code> or remove it, and try again. If the message instead says free models “aren’t available from your current network because we’ve detected abusive traffic from this IP address”, it is your network, not your config. (<a href="https://www.engineerfoodie.in/blog/opencode-free-tier-only-within-opencode/" target="_blank" rel="noopener">Engineer Foodie guide</a>, <a href="https://dev.to/its-tahir/opencodes-free-tier-can-only-be-used-from-within-opencode-error-even-in-opencode-what-triggers-2kol" target="_blank" rel="noopener">DEV investigation</a>)</p>
+      <h3>Selecting any OpenCode Console model fails with the bare message “Error: Workspace access denied”</h3>
+      <p>This is a server-side workspace or account restriction, not a local permissions bug, so reinstalling, re-logging in, and rotating keys will not fix it. Every other provider keeps working from the same machine at the same time, which makes it look model-specific. The client shows the raw upstream body with no explanation (GitHub issue #58891, OpenCode v2.1.4).</p>
+      <p><strong>Fix:</strong> Check that the workspace your key belongs to is the one holding your credit or Go subscription, and that the workspace was not deleted or its service account removed. If a new key from the right workspace still fails, the maintainers ask for an email to help@anoma.ly with your account email and workspace name. (<a href="https://github.com/anomalyco/opencode/issues/58891" target="_blank" rel="noopener">GitHub issue #58891</a>)</p>
+      <h3>You followed a tutorial and the install command gives you the wrong version, or opencode is not found after installing</h3>
+      <p>OpenCode 1 and OpenCode 2 are different lines with different installers. The 2.x install script is <code>curl -fsSL https://opencode.ai/v2/install | bash</code>, the 2.x npm package is <code>@opencode/cli</code>, and the 2.x Homebrew tap is <code>anomalyco/tap/opencode-v2</code>. The old 1.x script at <code>opencode.ai/install</code> and the old npm package <code>opencode-ai</code> install 1.x, and 2.x requested through the 1.x script errors out.</p>
+      <p><strong>Fix:</strong> On Omarchy, <code>omarchy pkg add opencode</code> is the one to use; if you installed by another route first, remove the old binary before installing, since versions older than 0.1.x conflict. (<a href="https://www.turboai.dev/blog/opencode-2-versions" target="_blank" rel="noopener">TurboAI OpenCode 2 install guide</a>)</p>
+      <h3>The agent does something destructive on a repo you did not fully trust</h3>
+      <p>The defaults allow everything except reading <code>.env</code>, so the fix is config, not a bug report. Config files merge in layers (global <code>~/.config/opencode/opencode.json</code>, then project <code>opencode.json</code>), so a project file can tighten rules for one repo without touching your global setup.</p>
+      <p><strong>Fix:</strong> Before the first run on untrusted code, set <code>bash</code> and <code>edit</code> to <code>ask</code> in <code>opencode.json</code>, and use plan mode for exploration. (<a href="https://www.thedeepfeed.ai/posts/2026-06-09-stop-using-opencode-like-a-claude-code-clone/" target="_blank" rel="noopener">The Deep Feed config guide</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>git (review diffs before committing), Ollama for a local model with zero API spend, and the OpenCode Desktop app when you want the same agent in a window with several agents running side by side.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>If you hate bringing your own key: Kimi Code CLI has a $0 membership tier with OAuth login and no key juggling, and Freebuff needs no login or key at all. If you want the same terminal-agent shape from one vendor’s models, Claude Code is the paid reference point.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: OpenCode vs Claude Code vs Kimi Code CLI vs Kilo Code CLI</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>OpenCode</th><th>Claude Code (CLI)</th><th>Kimi Code CLI</th><th>Kilo Code CLI</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free CLI; you pay your provider, or free Zen models</td><td>Requires Claude Pro $20/mo+</td><td>Free CLI; Kimi membership from $15/mo or per-token API billing</td><td>Free agent; you pay provider rates</td></tr>
+            <tr><td>Best for</td><td>Picking your own model per task, 75+ providers, local models</td><td>The strongest single-vendor models, no key juggling</td><td>A fast single-binary TUI with subagents and MCP</td><td>Picking your own model per task, local models, scripted runs</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add opencode</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td><code>omarchy pkg add kimi-code</code></td><td><code>omarchy pkg add kilocode-cli</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick OpenCode if model choice matters more than polish: no other agent on this list talks to 75+ providers, and the free Zen models mean you can start with $0. Pick Claude Code if you want one vendor’s models and zero config, and Kimi Code CLI if you want a polished single-vendor agent with a free tier.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>OpenCode is a free alternative to Claude Code (Pro $20/mo)</h2>
+      <p><strong>OpenCode is a free alternative to Claude Code (Pro $20/mo).</strong> What you give up: Claude’s models and the maturity of a tool with a much longer track record; OpenCode 2 is a young rewrite (2.0.0 shipped September 11, 2026) and its free-tier gateway has had real outages and confusing errors. What you keep: a full agentic loop, build and plan modes, MCP, a web UI, headless runs, and your choice of model, with the CLI itself free and MIT licensed. The honest pricing picture: the CLI costs $0, and the model is a separate bill. Free options are OpenCode Zen’s free models (usable only inside OpenCode), free-tier keys from providers like Google AI Studio, or a local model through Ollama. Paid options are any provider key you connect, or OpenCode Go at $10/month for its best models. Check current pricing at opencode.ai before deciding.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes per project)</h2>
+      <ol>
+        <li><strong>Export from Claude Code:</strong> your project instructions already live in <code>CLAUDE.md</code>. OpenCode reads <code>AGENTS.md</code>; copy the contents across or run <code>/init</code> and let it generate one from the codebase.</li>
+        <li><strong>Import into OpenCode:</strong> move MCP servers into <code>opencode.json</code> (or add them through the TUI), and set your model and small model in the same file. Your existing provider keys work as-is: paste them with <code>/connect</code> or set the standard env vars like <code>ANTHROPIC_API_KEY</code>.</li>
+        <li><strong>What doesn’t transfer:</strong> chat history, Claude-specific slash commands and permission modes, and Claude Code’s GitHub Actions integration. OpenCode has its own plan mode, <code>opencode run</code> for scripting, and <code>opencode serve</code> for headless use instead.</li>
+        <li><strong>Time estimate:</strong> takes about 15 minutes per project.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the OpenCode package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/opencode.html">View OpenCode →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is OpenCode free?</summary><p>The tool itself is free and open source (MIT). You pay your chosen LLM provider for API usage, or use OpenCode Zen’s free models, a free-tier provider key, or a local model. OpenCode Go is a $10/month subscription for its best models.</p></details>
+      <details><summary>What is the difference between opencode and opencode-desktop?</summary><p>Same agent, different window. <code>opencode</code> is the terminal UI this guide covers. <code>opencode-desktop</code> is the beta Electron app: the same agent in a desktop window, running several agents in parallel with a browser view beside them. The desktop package depends on the CLI package, and both share the same config at <code>~/.config/opencode/</code>.</p></details>
+      <details><summary>What is the difference between OpenCode 1 and OpenCode 2?</summary><p>OpenCode 2 is a ground-up TypeScript rewrite, published on npm as <code>@opencode/cli</code> since 2.0.0 on September 11, 2026, with a new session table, plugin API, and server API. The 1.x line (old npm package <code>opencode-ai</code>, repo <code>sst/opencode</code>) keeps shipping separately. Make sure the installer you use matches the version you want.</p></details>
+      <details><summary>Where does OpenCode store its config?</summary><p>Global config is <code>~/.config/opencode/opencode.json</code>, TUI theme and keybinds are <code>~/.config/opencode/tui.json</code>, and stored credentials are <code>~/.local/share/opencode/auth.json</code>. Project config goes in <code>opencode.json</code> at the project root, and the files merge in layers instead of replacing each other.</p></details>
+      <details><summary>Can I use a local model?</summary><p>Yes. OpenCode works with any of 75+ providers, including a local model through Ollama or any OpenAI-compatible endpoint. Point it at your local server in <code>opencode.json</code> or with the provider env vars.</p></details>
+      <details><summary>Does it work offline?</summary><p>Only with a local model. Every hosted provider needs network access.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/opencode.html" target="_blank" rel="noopener">Omarchy package listing: opencode (127 MB download / 275.3 MB installed, MIT)</a></li>
+        <li><a href="https://www.skillsdirectory.com/skills/terminalskills-opencode" target="_blank" rel="noopener">OpenCode install, auth, config, providers</a></li>
+        <li><a href="https://blog.damavis.com/en/opencode-step-by-step-installation-and-configuration/" target="_blank" rel="noopener">OpenCode install and configuration, Zen, Gemini free key</a></li>
+        <li><a href="https://www.thedeepfeed.ai/posts/2026-06-09-stop-using-opencode-like-a-claude-code-clone/" target="_blank" rel="noopener">OpenCode config guide, permissions, two-model setup, 1.x vs 2.x</a></li>
+        <li><a href="https://www.turboai.dev/blog/opencode-2-versions" target="_blank" rel="noopener">OpenCode 2 install, desktop app, version tracker</a></li>
+        <li><a href="https://everpod.ai/guides/opencode-upstream-request-failed-invalid-credential" target="_blank" rel="noopener">“Upstream request failed: Invalid credential” fix, console migration, 47 tracker issues</a></li>
+        <li><a href="https://www.engineerfoodie.in/blog/opencode-free-tier-only-within-opencode/" target="_blank" rel="noopener">“Free tier can only be used from within OpenCode” error, read-permission trigger, GitHub #56324 and #59387</a></li>
+        <li><a href="https://dev.to/its-tahir/opencodes-free-tier-can-only-be-used-from-within-opencode-error-even-in-opencode-what-triggers-2kol" target="_blank" rel="noopener">Free-tier error investigation, permission matrix, Oct 17 2026 wave</a></li>
+        <li><a href="https://github.com/anomalyco/opencode/issues/58891" target="_blank" rel="noopener">“Workspace access denied” 403, GitHub issue #58891</a></li>
+        <li><a href="https://github.com/anomalyco/opencode" target="_blank" rel="noopener">OpenCode source and README</a></li>
+        <li><a href="https://opencode.ai/docs/index" target="_blank" rel="noopener">OpenCode docs</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

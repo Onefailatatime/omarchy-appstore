@@ -1,0 +1,141 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add muse-code` — confirm version 1.4.25.r9361.1-1, 160.2 MB download / 468.8 MB installed, LicenseRef-Meta-Model-API, as listed
+- Binary name: confirm the package installs the `muse` command, and that `muse --version` reports the same version
+- First launch: run `muse` in a project directory and confirm the login flow (browser OAuth at dev.meta.ai), the workspace trust prompt, and the default approval mode
+- Config paths: confirm user settings at `~/.config/muse/settings.json` and login state at `~/.config/muse/auth.json`, and project instructions from `AGENTS.md` with `CLAUDE.md` as fallback
+- Sandbox: confirm whether the OS sandbox runs on Omarchy out of the box, or fails with a bubblewrap or user-namespace error (see the issue below)
+- Issues claimed below are NOT personally reproduced, they are documented upstream (Meta's blog, independent guides, third-party docs). Verify at least the login flow and the sandbox behavior on a real machine
+- Screenshots needed: install, login prompt, first session, an approval card, the event log, `muse exec` output
+
+SEO notes:
+- URL: /guides/muse-code-on-omarchy
+- Title tag: "Muse Code on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install Meta's Muse Code on Omarchy. Login, sandbox setup, MCP support, pricing tiers, and how it compares to Claude Code and Kimi Code CLI."
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Muse Code on Omarchy</h2>
+      <p>Muse Code on Omarchy is Meta's terminal coding agent, powered by the Muse Spark models: multi-agent by default, with subagents, an audit log, and a sandbox on from the first run.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add muse-code</code></pre>
+      <p>Then <code>cd ~/my-project</code> and run <code>muse</code>. That installs Muse Code (version 1.4.25.r9361.1-1, 160.2 MB download, 468.8 MB installed). On first launch, log in through your browser at dev.meta.ai. Then describe what you want done. Note: login requires a Meta account with a payment method on file.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Log in.</h3>
+      <p>Run <code>muse login</code> or just <code>muse</code> and follow the browser prompt to authenticate at dev.meta.ai. You can also log in with a Meta Model API key by setting the <code>META_API_KEY</code> environment variable. If login fails with a payment-method error, see the first issue below. Sign out any time with <code>muse logout</code>.</p>
+      <h3>2. Start with a read-only task.</h3>
+      <p>Change into a project directory and run <code>muse</code>. On first launch in an unfamiliar directory it asks whether to trust the workspace: say yes for your own code, no for code you do not trust. Then try: "Take a look at this project and explain its main directories." Muse reads and searches the project before answering, so you see how it works before it edits anything.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Learn the approval modes.</strong> Muse asks before it writes files or runs commands. The default is Auto-review, where an automated judge approves routine actions, and you can switch to Ask me (approve everything yourself), Plan first, or Unrestricted. Start strict and loosen up only when you trust the setup.</li>
+        <li><strong>Use the built-in skills.</strong> Muse Code ships with skills like <code>/plan</code> (structured planning), <code>/grill</code> (plan validation), and <code>/goal</code> (objective tracking). Type <code>/plan</code> before a big change and let it lay out the steps first.</li>
+        <li><strong>Know where the config lives.</strong> User settings are in <code>~/.config/muse/settings.json</code>, login state in <code>~/.config/muse/auth.json</code>, and project instructions in <code>AGENTS.md</code> at the project root (<code>CLAUDE.md</code> works as a fallback). Project memory lives in <code>.agents/memory/</code>: personal memory stays private on your machine, committed memory is shared with anyone who clones the repo.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Login ends with "Muse Code requires a payment method"</h3>
+      <p>Login ends with "Muse Code requires a payment method, subscribe at accountscenter.meta.com/muse_code, then log in again."</p>
+      <p><strong>Fix:</strong> A Meta account alone is not enough: Muse Code needs a payment method on file before it will log you in. Add one at the accounts center link in the error message, then run <code>muse login</code> again. If you would rather not hand Meta a card, use a Meta Model API key instead by setting <code>META_API_KEY</code>, which counts as a login. (<a href="https://fezu.dev/docs/agents-and-sessions/muse" target="_blank" rel="noopener">Fezu docs</a>)</p>
+      <h3>Muse says its sandbox cannot run on this computer, so it runs at Full only</h3>
+      <p>On Linux the sandbox needs bubblewrap installed and user namespaces turned on.</p>
+      <p><strong>Fix:</strong> The error message names the reason: either "bubblewrap is not installed" or "user namespaces are turned off". Install bubblewrap with your package manager and make sure user namespaces are enabled, then restart Muse. Until the sandbox works, Muse runs at Full, which means it executes without the containment the sandbox provides, so be extra careful about what you approve. (<a href="https://fezu.dev/docs/agents-and-sessions/muse" target="_blank" rel="noopener">Fezu docs</a>)</p>
+      <h3>MCP servers are configured but the agent cannot call their tools</h3>
+      <p>This is a known upstream gap in some setups: Muse can drop the returned MCP tool namespace before matching a call, so the tools never become callable.</p>
+      <p><strong>Fix:</strong> The issue has been reported against the Muse CLI itself, and it affects frontends that drive Muse over its session protocol. Check that your servers are listed with <code>/mcp</code> first: if they show up but calls fail, the problem is upstream, not your config. Keep the servers in <code>~/.config/muse/settings.json</code> and retry after updating Muse to the latest version. (<a href="https://paseo.sh/docs/supported-providers/muse-code" target="_blank" rel="noopener">Paseo docs</a>)</p>
+      <h3>You are on the free contributor tier and worried Meta trains on your code</h3>
+      <p>Subscriptions default to the contributor tier, where Meta may use prompts and outputs to train future models, and the tier choice applies to Muse Code usage. You get a notice before your first request.</p>
+      <p><strong>Fix:</strong> That worry is correct. To opt out, switch to the standard Model API tier, where prompts and outputs are not used for training, at standard pay-as-you-go rates. Check the current tier and pricing in your Meta account settings before sending proprietary code through it. (<a href="https://www.anchorterminal.com/compare/muse-code-vs-warp" target="_blank" rel="noopener">Muse Code vs Warp comparison</a>)</p>
+      <h3>You need to report a bug or read the source, and there is no GitHub repo for the CLI</h3>
+      <p>The CLI is closed source: Meta ships it as a binary through its install scripts and has not published the source, and there is no public issue tracker for it.</p>
+      <p><strong>Fix:</strong> The Muse Code SDK is public (github.com/meta-models/muse-code-sdk), but that is the SDK, not the CLI. For CLI problems, use Meta's official support channels and the release notes, and check the docs at dev.meta.ai first. (<a href="https://musecodes.io/" target="_blank" rel="noopener">Muse Code FAQ</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>git (review diffs before committing), <code>muse exec</code> for headless or CI runs, and a second agent such as Kimi Code CLI for cross-checking a tricky change.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>kimi-code</code> (Kimi Code CLI) — MIT licensed with a free CLI and a free membership tier, or Claude Code as the paid reference point. If you want local models with no account at all, Kilo Code CLI can run Ollama models — if you hate the closed source and the Meta account.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Muse Code vs Claude Code vs Kimi Code CLI vs Codex CLI</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>muse-code</th><th>Claude Code (CLI)</th><th>Kimi Code CLI</th><th>Codex CLI</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free contributor tier; paid plans $5, $15, $50, $200/mo; or Model API pay-as-you-go</td><td>Requires Claude Pro $20/mo+</td><td>Free CLI; Kimi membership from $15/mo or per-token API billing</td><td>OpenAI API credits</td></tr>
+            <tr><td>Best for</td><td>Meta's Muse Spark models, multi-agent runs, audit log</td><td>The strongest single-vendor models, no key juggling</td><td>A fast single-binary TUI with subagents, MCP, and editor integration</td><td>OpenAI models in the terminal</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add muse-code</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td><code>omarchy pkg add kimi-code</code></td><td><code>npm install -g @openai/codex</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Muse Code if you want Meta's Muse Spark models with multi-agent orchestration and a full audit trail, and you are fine with a Meta account and a payment method. Pick Kimi Code CLI if you want an open-source agent, and Claude Code if you want Anthropic's models.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Muse Code is a free alternative to Claude Code (Pro $20/mo)</h2>
+      <p><strong>Muse Code is a free alternative to Claude Code (Pro $20/mo).</strong> What you give up: Claude's models, an open-source CLI, and a public issue tracker. What you keep: a full agentic loop, subagents, MCP, hooks, skills, a sandbox, and a free tier to start on.</p>
+      <p>The honest pricing picture has two paths. The contributor tier is free to start, with rate limiting by tokens in a rolling 5-hour window, but Meta may train on your prompts and outputs. The standard Model API tier does not train on your data and bills pay-as-you-go: $0.15 per million cached input tokens, $1.25 per million input tokens, $4.25 per million output tokens. Paid plans run $5, $15, $50, and $200 per month. Check current pricing at dev.meta.ai before deciding, and pick the standard tier before sending proprietary code through it.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes per project)</h2>
+      <ol>
+        <li><strong>Export from Claude Code:</strong> your project instructions already live in <code>CLAUDE.md</code>. Muse Code reads <code>AGENTS.md</code> first and <code>CLAUDE.md</code> as a fallback, so your instructions work as-is, or copy them into <code>AGENTS.md</code> for the canonical path.</li>
+        <li><strong>Import into Muse Code:</strong> move MCP servers into <code>~/.config/muse/settings.json</code>, and skills into the skills directory Muse reads. Your git history, tests, and project layout need no changes at all.</li>
+        <li><strong>What doesn't transfer:</strong> chat history, Claude-specific slash commands and permission modes (Muse has its own approval modes and built-in skills like <code>/plan</code>, <code>/grill</code>, and <code>/goal</code>), and Claude Code's GitHub Actions integration.</li>
+        <li><strong>Time estimate:</strong> takes about 15 minutes per project.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Muse Code package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/muse-code.html">View Muse Code →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Muse Code free?</summary><p>It starts free on the contributor tier, with token rate limits in a rolling 5-hour window. Paid plans run $5, $15, $50, and $200 per month, and the standard Model API tier bills pay-as-you-go. Login requires a Meta account with a payment method on file.</p></details>
+      <details><summary>What model does Muse Code run?</summary><p>Muse Spark, Meta's coding model. It launched on Muse Spark 1.2 in August 2026, moved to 1.3 on September 2, 2026, and Muse Wonder and Muse Wonder Full were added October 12, 2026. The Omarchy package version is 1.4.25.r9361.1-1.</p></details>
+      <details><summary>Is Muse Code open source?</summary><p>No. Meta ships the CLI as a closed-source binary and has not published the source. The Muse Code SDK is public, but that is a separate package for building on the platform.</p></details>
+      <details><summary>What command do I run to start it?</summary><p><code>muse</code>, in any project directory. <code>muse login</code> handles authentication, <code>muse logout</code> signs out, and <code>muse exec</code> runs a single prompt headless for scripts and CI.</p></details>
+      <details><summary>Where does Muse Code store its config?</summary><p>User settings in <code>~/.config/muse/settings.json</code>, login state in <code>~/.config/muse/auth.json</code>, project instructions in <code>AGENTS.md</code> (or <code>CLAUDE.md</code> as a fallback), and project memory in <code>.agents/memory/</code>.</p></details>
+      <details><summary>Does Muse Code work offline or run a model locally?</summary><p>No. Every prompt goes to Meta's hosted models over the network. There is no bundled local model.</p></details>
+      <details><summary>Does it support MCP servers?</summary><p>Yes, MCP servers are configured in settings and listed with <code>/mcp</code>, but there is a known upstream issue where the agent can fail to call MCP tools in some setups. See the issue above.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/muse-code.html" target="_blank" rel="noopener">Omarchy package listing (version 1.4.25.r9361.1-1, LicenseRef-Meta-Model-API, 160.2 MB download / 468.8 MB installed, updated 2026-11-24)</a></li>
+        <li><a href="https://dev.meta.ai/resources/blog/build-with-muse-code" target="_blank" rel="noopener">Meta launch post (Muse Spark 1.2, beta launch, contributor tier, Model API pricing)</a></li>
+        <li><a href="https://musecodes.io/" target="_blank" rel="noopener">Muse Code FAQ (model versions, install, closed source, SDK, plans)</a></li>
+        <li><a href="https://daily.dev/posts/meta-muse-code-getting-started-with-the-terminal-coding-agent-fxweagqs4" target="_blank" rel="noopener">Getting started guide (npm install, OAuth, sandbox and permission hardening, MCP gap at launch)</a></li>
+        <li><a href="https://fezu.dev/docs/agents-and-sessions/muse" target="_blank" rel="noopener">Payment-method login error, sandbox errors, auth paths</a></li>
+        <li><a href="https://paseo.sh/docs/supported-providers/muse-code" target="_blank" rel="noopener">MCP tool namespace issue, login via META_API_KEY</a></li>
+        <li><a href="https://www.anchorterminal.com/compare/muse-code-vs-warp" target="_blank" rel="noopener">Contributor tier training notice, sandbox and approval details</a></li>
+        <li><a href="https://innfactory.ai/en/ai-harness/muse/" target="_blank" rel="noopener">Config paths, subagents, skills, memory locations</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

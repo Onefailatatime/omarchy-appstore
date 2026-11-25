@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How to Install &amp; Use devin-cli on Omarchy (2026)</title>
-<meta name="description" content="Install devin-cli on Omarchy with one command: omarchy pkg add devin-cli. Devin for Terminal, Cognition&#x27;s coding agent CLI. Setup, requirements and FAQ.">
+<title>Devin CLI on Omarchy: Install &amp; Setup Guide (2026) | Omarchy Apps</title>
+<meta name="description" content="Install Cognition&#x27;s Devin CLI on Omarchy. Sign in with devin auth login, pick a model, set permission modes, and hand tasks to Devin Cloud with /handoff.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/devin-cli-on-omarchy.html">
@@ -13,8 +13,8 @@
 <link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
 <link rel="manifest" href="/images/site.webmanifest?v=2">
-<meta property="og:title" content="How to Install &amp; Use devin-cli on Omarchy (2026)">
-<meta property="og:description" content="Install devin-cli on Omarchy with one command: omarchy pkg add devin-cli. Devin for Terminal, Cognition&#x27;s coding agent CLI. Setup, requirements and FAQ.">
+<meta property="og:title" content="Devin CLI on Omarchy: Install &amp; Setup Guide (2026) | Omarchy Apps">
+<meta property="og:description" content="Install Cognition&#x27;s Devin CLI on Omarchy. Sign in with devin auth login, pick a model, set permission modes, and hand tasks to Devin Cloud with /handoff.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://omarchyapps.com/devin-cli-on-omarchy.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
@@ -24,10 +24,10 @@
 <meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@jessyka_boat">
-<meta name="twitter:title" content="How to Install &amp; Use devin-cli on Omarchy (2026)">
-<meta name="twitter:description" content="Install devin-cli on Omarchy with one command: omarchy pkg add devin-cli. Devin for Terminal, Cognition&#x27;s coding agent CLI. Setup, requirements and FAQ.">
+<meta name="twitter:title" content="Devin CLI on Omarchy: Install &amp; Setup Guide (2026) | Omarchy Apps">
+<meta name="twitter:description" content="Install Cognition&#x27;s Devin CLI on Omarchy. Sign in with devin auth login, pick a model, set permission modes, and hand tasks to Devin Cloud with /handoff.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/devin-cli-on-omarchy.html#article","headline":"How to Install & Use devin-cli on Omarchy (2026)","description":"Install devin-cli on Omarchy with one command: omarchy pkg add devin-cli. Devin for Terminal, Cognition's coding agent CLI. Setup, requirements and FAQ.","url":"https://omarchyapps.com/devin-cli-on-omarchy.html","dateModified":"2026-11-24","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/guides.html"},{"@type":"ListItem","position":3,"name":"How to Install & Use devin-cli on Omarchy (2026)","item":"https://omarchyapps.com/devin-cli-on-omarchy.html"}]},{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/devin-cli-on-omarchy.html#app","name":"devin-cli","description":"Devin for Terminal, Cognition's coding agent CLI","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"3000.14.30821-1","license":"LicenseRef-Cognition","url":"https://omarchyapps.com/apps/devin-cli.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/devin-cli-on-omarchy.html#article","headline":"Devin CLI on Omarchy: Install & Setup Guide (2026) | Omarchy Apps","description":"Install Cognition's Devin CLI on Omarchy. Sign in with devin auth login, pick a model, set permission modes, and hand tasks to Devin Cloud with /handoff.","url":"https://omarchyapps.com/devin-cli-on-omarchy.html","dateModified":"2026-11-25","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Devin CLI on Omarchy: Install & Setup Guide (2026) | Omarchy Apps","item":"https://omarchyapps.com/devin-cli-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Devin CLI cost extra on top of a Devin plan?","acceptedAnswer":{"@type":"Answer","text":"No. The CLI is included in every plan, including the free tier, and draws on the same daily and weekly usage allowances as Devin Web and Devin Desktop."}},{"@type":"Question","name":"What model does it run?","acceptedAnswer":{"@type":"Answer","text":"SWE-2, Cognition's own model, is the default. You can also pick Anthropic, OpenAI, Google, and open models like DeepSeek, Kimi, and GLM with /model or --model."}},{"@type":"Question","name":"Does it work offline?","acceptedAnswer":{"@type":"Answer","text":"No. Every prompt goes to Devin's cloud, whether the session runs locally in your terminal or as a Devin Cloud session."}},{"@type":"Question","name":"Can it use my Claude Code or Cursor setup?","acceptedAnswer":{"@type":"Answer","text":"Yes. It reads rules, skills, and MCP servers from Cursor, Windsurf, Claude Code, and Copilot in place, with no migration needed."}},{"@type":"Question","name":"How do I hand a task to the cloud?","acceptedAnswer":{"@type":"Answer","text":"Type /handoff inside a session. Devin Cloud picks it up in its own VM and returns a pull request."}}]}]}</script>
 <link rel="stylesheet" href="/style.75958c2d72.css">
   <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
   <script src="/oa-ads.js" defer></script>
@@ -50,75 +50,159 @@
 
 <header class="hero guide-hero seo-hero">
   <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/guides.html">Guides</a><span>›</span><span aria-current="page">Utilities tutorial</span></nav>
-    <p class="eyebrow">Utilities tutorial</p>
-    <h1>devin-cli on <span>Omarchy</span></h1>
-    <p class="tag">Devin for Terminal, Cognition&#x27;s coding agent CLI</p>
-    <p class="facts">Generated from the official Omarchy package repo</p>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">AI coding agent guide</span></nav>
+    <p class="eyebrow">AI coding agent guide</p>
+    <h1>Devin CLI on <span>Omarchy</span></h1>
+    <p class="tag">Cognition&#x27;s terminal coding agent — run Devin in your terminal, and hand tasks to Devin Cloud with /handoff when they outgrow your machine.</p>
+    <p class="facts">Reviewed 2026-11-25 · independent editorial guide</p>
   </div>
 </header>
-<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
+<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
 
 <main class="wrap seo-guide-main">
   <article class="seo-article">
     <div class="guide-answer">
       <p class="answer-label">Short answer</p>
-      <p>To install devin-cli on Omarchy, open a terminal and run omarchy pkg add devin-cli. It is a 82.5 MB download (257.7 MB installed), version 3000.14.30821-1, licensed LicenseRef-Cognition. Devin for Terminal, Cognition&#x27;s coding agent CLI. Check the project site for current pricing.</p>
+      <p>Install Devin CLI with omarchy pkg add devin-cli, sign in with devin auth login, then run devin in a project folder. The CLI is included in every Devin plan, including the free tier.</p>
     </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add devin-cli` — verify it resolves in the store index; confirm version 3000.14.30821-1, 82.5 MB download / 257.7 MB installed, as listed
+- Binary name: confirm the package installs the `devin` command (upstream installers place a single `devin` binary on PATH)
+- First launch: run `devin auth login` and confirm the browser sign-in flow through app.devin.ai, and `devin auth status` afterwards. Confirm `--force-manual-token-flow` works over SSH
+- Config paths: confirm config under `~/.config/devin`, credentials at `~/.local/share/devin/credentials.toml`, and session data under `~/.local/share/devin/cli`
+- Claimed issues reproduced: (1) empty model list before login, (2) browser login unreachable over SSH, (3) 401 after sign-in (dead stored token), (4) Enterprise login flow failure, (5) mid-week quota stop
+- Screenshots needed: install, `devin auth login` browser step, first session, `/model` picker, a finished task, `/handoff` to Devin Cloud
+
+SEO notes:
+- URL: /guides/devin-cli-on-omarchy
+- Title tag: "Devin CLI on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install Cognition's Devin CLI on Omarchy. Sign in with devin auth login, pick a model, set permission modes, and hand tasks to Devin Cloud with /handoff."
+- Keywords: devin cli omarchy, devin terminal, devin auth login, devin handoff, devin vs claude code
+-->
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
       <a href="#install">Install</a>
-      <a href="#use">Open and use</a>
-      <a href="#requirements">Requirements</a>
-      <a href="#remove">Uninstall</a>
-      <a href="#facts">Package facts</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
       <a href="#faq">Questions</a>
     </nav>
 
     <section id="install">
-      <h2>Install devin-cli on Omarchy</h2>
-      <p>Devin for Terminal, Cognition&#x27;s coding agent CLI</p>
-      <p>The official repository lists this package in Utilities. It was added on 2026-11-24.</p>
-      
+      <h2>Devin CLI on Omarchy</h2>
+      <p>Devin CLI on Omarchy is Cognition’s terminal coding agent: run Devin (SWE-2 by default) in your terminal for local work, with a <code>/handoff</code> command that sends a task to Devin Cloud when it outgrows your machine.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add devin-cli</code></pre>
+      <p>That installs Devin CLI v3000.14.30821-1 (82.5 MB download, 257.7 MB installed; LicenseRef-Cognition, proprietary). Sign in with your Devin account in the browser (<code>devin auth login</code>), then start a session in a project folder with <code>devin</code>. The CLI is included in every Devin plan, including the free tier; it costs nothing extra on top of the plan.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Sign in.</h3>
+      <p>Run <code>devin auth login</code>. It opens a browser sign-in through app.devin.ai (a PKCE flow) and stores a persistent token that does not expire on a schedule. Check the result with <code>devin auth status</code>, and sign out with <code>devin auth logout</code>. On a remote machine over SSH, where no browser opens, use <code>devin auth login --force-manual-token-flow</code> and paste the token by hand. Do not skip login: the model list is empty until you do, so nothing runs before you sign in.</p>
+      <h3>2. Start a session.</h3>
+      <p>Change into a project and run <code>devin</code>. Start with a read-only question, for example “Explain the structure of this repo,” so you see how it works before it edits anything. Pick a model with <code>/model</code> inside the session, or pass <code>--model</code> at launch (short names like <code>opus</code>, <code>sonnet</code>, <code>swe</code>, <code>codex</code>, and <code>gemini</code>). SWE-2, Cognition’s own model, is the default, and Cognition recommends Fusion, which pairs a frontier lead model with a cheaper sidekick.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Set a permission mode</strong> — the default is <code>normal</code> (also called <code>auto</code>). Use <code>--permission-mode accept-edits</code> to let it edit without asking each time, <code>smart</code> for a middle ground, and <code>dangerous</code> (aliases <code>yolo</code>, <code>bypass</code>) only when you know what you are doing. <code>autonomous</code> requires <code>--sandbox</code>.</li>
+        <li><strong>Hand work to the cloud</strong> — when a task is long or needs a clean machine, type <code>/handoff</code> in the session to send it to Devin Cloud, where it runs in its own VM and ends in a pull request. The same account covers the CLI, Devin Desktop, and Devin Cloud, and they share one daily and weekly usage allowance.</li>
+        <li><strong>Let it read your existing setup</strong> — Devin CLI reads rules, skills, and MCP servers from Cursor, Windsurf, Claude Code, and Copilot in place, with no migration needed. If you do want to migrate another tool’s config into Devin’s own formats, <code>devin migrate</code> handles it. Your own config lives in <code>~/.config/devin</code>, and your login token in <code>~/.local/share/devin/credentials.toml</code>. Treat that file as sensitive: anyone with it can sign in as you, so never share it or commit it.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>You launch <code>devin</code> and the model list is empty, or no model will run</h3>
+      <p>You are not signed in yet. The model list stays empty until you authenticate, so a fresh install with no login has no models at all, which looks like a broken install but is just missing auth.</p>
+      <p><strong>Fix:</strong> Run <code>devin auth login</code> first, then check with <code>devin auth status</code> and <code>devin models list</code>. (<a href="https://1devtool.com/compare/devin-cli-vs-cursor-cli" target="_blank" rel="noopener">1devtool comparison</a>)</p>
+      <h3>Over SSH, <code>devin auth login</code> opens a browser you cannot reach</h3>
+      <p>On a remote machine there is no browser to open, so the default login flow cannot complete.</p>
+      <p><strong>Fix:</strong> Use the manual token flow instead: <code>devin auth login --force-manual-token-flow</code>. It prints a sign-in URL you open on another device and a token you paste back into the terminal. The same flag is the documented escape hatch for any remote or headless session. (<a href="https://docs.devin.ai/cli/reference/commands" target="_blank" rel="noopener">Devin docs, Commands &amp; Flags</a>)</p>
+      <h3>You sign in, but every request fails with a 401 telling you to sign in again</h3>
+      <p>The stored token was refused, which means it is dead rather than expired (Devin tokens do not expire on a schedule).</p>
+      <p><strong>Fix:</strong> Run <code>devin auth logout</code> to clear the stored credentials, then <code>devin auth login</code> again. If you copied <code>credentials.toml</code> between machines, copy it again from a machine where login still works, or just log in fresh. (<a href="https://docs.devin.ai/cli/enterprise/devin-auth" target="_blank" rel="noopener">Devin docs, Devin Auth</a>, <a href="https://npm.io/package/@magpie-community/opencode-devin-auth" target="_blank" rel="noopener">magpie opencode-devin-auth notes</a>)</p>
+      <h3>On a company or Enterprise deployment, login succeeds but the CLI exits or cannot authenticate</h3>
+      <p>Enterprise deployments can break the stock login flow: the OAuth token endpoint returns only a short-lived intermediate token, so the durable-key handoff never fires.</p>
+      <p><strong>Fix:</strong> Use the manual token flow (<code>devin auth login --force-manual-token-flow</code>) with the durable key kept in <code>~/.local/share/devin/credentials.toml</code>. Also check with your admin that your role has the <strong>Use Devin CLI</strong> permission; without it, access is blocked at the account level. (<a href="https://hub.docker.com/r/sbx/devin-enterprise-kit" target="_blank" rel="noopener">sbx devin-enterprise-kit</a>, <a href="https://docs.devin.ai/cli/enterprise/devin-auth" target="_blank" rel="noopener">Devin docs, Devin Auth</a>)</p>
+      <h3>Your session stops mid-week with a quota message</h3>
+      <p>Devin bills on daily and weekly usage allowances, not unlimited use. The free tier has a light quota with limited model choice, Pro ($20/mo) has larger daily and weekly quotas, and Max ($200/mo) has significantly higher quotas with no daily cap. Extra usage beyond a plan is covered by prepaid credits at API pricing.</p>
+      <p><strong>Fix:</strong> Check your plan and remaining quota at app.devin.ai/settings/plans before starting a long task. (<a href="https://troiana.net/guides/devin/" target="_blank" rel="noopener">Troiana Devin guide</a>, <a href="https://fast.io/resources/devin-ai-pro/" target="_blank" rel="noopener">Fast.io Devin Pro guide</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>git (review every diff before it lands), Devin Desktop (same account, same quota, for when you want an editor instead of a terminal), and Devin Cloud via <code>/handoff</code> (long tasks that end in a pull request).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Claude Code (Pro $20/mo) bills by subscription with its own models, Kimi Code CLI gives you a free CLI with per-token or membership billing, and Kilo Code CLI lets you bring any provider or a local model.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Devin CLI vs Claude Code vs Kimi Code CLI vs Kilo Code CLI</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Devin CLI</th><th>Claude Code (CLI)</th><th>Kimi Code CLI</th><th>Kilo Code CLI</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free tier $0; Pro $20/mo; Max $200/mo; Teams from $80/mo</td><td>Requires Claude Pro $20/mo+</td><td>Free CLI; Kimi membership from $15/mo or per-token API billing</td><td>Free agent; you pay provider rates</td></tr>
+            <tr><td>Best for</td><td>An autonomous agent that can hand a task to the cloud and return a PR</td><td>The strongest single-vendor models, no key juggling</td><td>A fast single-binary TUI with subagents and MCP</td><td>Picking your own model per task, including local Ollama models</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add devin-cli</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td><code>omarchy pkg add kimi-code</code></td><td><code>omarchy pkg add kilocode-cli</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Devin CLI if you want an agent that can take a task away from your machine entirely and come back with a pull request. Pick Claude Code if you want the strongest single-vendor models, and Kilo Code CLI if model choice matters more than the cloud handoff.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Devin CLI is a free way to try an autonomous coding agent (Devin Free, $0)</h2>
+      <p><strong>Devin CLI is a free way to try an autonomous coding agent (Devin Free, $0).</strong> What you give up: the free tier has a light quota with limited model choice, so it is a trial, not a daily driver. What you keep: the full CLI, the same SWE-2 model family, Devin Desktop, and the cloud handoff, all on the same account. The honest comparison is Pro at $20/mo, the same price as Claude Pro, with the cloud agent included.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes per project)</h2>
       <ol>
-        <li>Open a terminal.</li>
-        <li>Run the install command:<pre><code class="language-bash">omarchy pkg add devin-cli</code></pre></li>
-        <li>Check it landed. Pacman should list version 3000.14.30821-1:<pre><code class="language-bash">pacman -Qi devin-cli</code></pre></li>
+        <li><strong>Export from Claude Code:</strong> you do not need to export anything. Devin CLI reads Claude Code rules, skills, and MCP servers in place, so your setup carries over without a migration step.</li>
+        <li><strong>Import into Devin:</strong> if you prefer Devin’s own formats, run <code>devin migrate</code> to convert the config. Your project instructions live in whatever rules file you already use; Devin reads them from the same place.</li>
+        <li><strong>What doesn’t transfer:</strong> chat history, Claude-specific slash commands and permission modes (Devin has its own: normal, accept-edits, smart, dangerous, autonomous), and Claude Code’s GitHub Actions integration.</li>
+        <li><strong>Time estimate:</strong> about 15 minutes per project, mostly signing in and picking a model.</li>
       </ol>
     </section>
 
-    <section id="use">
-      <h2>Open and use devin-cli</h2>
-      <p>To see what the package installed, including any commands and desktop entries:</p><pre><code class="language-bash">pacman -Ql devin-cli</code></pre>
-    </section>
-
-    <section id="requirements">
-      <h2>devin-cli requirements and compatibility</h2>
-      <p>No special requirements are documented for devin-cli.</p>
-      
-      <h3>Pricing and license</h3>
-      <p>Check the project site for current pricing. License: LicenseRef-Cognition.</p>
-    </section>
-
-    <section id="remove">
-      <h2>Uninstall devin-cli</h2>
-      <pre><code class="language-bash">omarchy pkg drop devin-cli</code></pre>
-    </section>
-
-    <section id="facts">
-      <h2>devin-cli package facts</h2>
-      <div class="table-scroll"><table class="compare-table"><tbody><tr><th scope='row'>Package</th><td><code>devin-cli</code></td></tr><tr><th scope='row'>Version</th><td>3000.14.30821-1</td></tr><tr><th scope='row'>Category</th><td>Utilities</td></tr><tr><th scope='row'>License</th><td>LicenseRef-Cognition</td></tr><tr><th scope='row'>Download</th><td>82.5 MB</td></tr><tr><th scope='row'>Installed size</th><td>257.7 MB</td></tr><tr><th scope='row'>Built</th><td>2026-11-23</td></tr><tr><th scope='row'>Pricing</th><td>Check the project site for current pricing</td></tr><tr><th scope='row'>Added to the official repo</th><td>2026-11-24</td></tr></tbody></table></div>
-      <p><a href="/apps/devin-cli.html">devin-cli package page on this site</a> · <a href="https://docs.devin.ai/cli" target="_blank" rel="noopener">Project site</a></p>
-    </section>
+    <div class="guide-cta">
+      <div><h2>Open the Devin CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/devin-cli.html">View Devin CLI →</a>
+    </div>
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>How do I install devin-cli on Omarchy?</summary><p>Open a terminal and run omarchy pkg add devin-cli. The download is 82.5 MB and it takes 257.7 MB once installed. Omarchy pulls in any dependencies automatically.</p></details><details><summary>Is devin-cli free?</summary><p>Check the project site for current pricing. The package is licensed LicenseRef-Cognition.</p></details><details><summary>How do I uninstall devin-cli?</summary><p>Run omarchy pkg drop devin-cli. It removes the package from your system.</p></details><details><summary>What does devin-cli depend on?</summary><p>devin-cli declares no dependencies in the Omarchy package database.</p></details><details><summary>Is devin-cli in the official Omarchy repo?</summary><p>Yes. It is published as devin-cli (version 3000.14.30821-1) in the official Omarchy package repository. Project site: https://docs.devin.ai/cli. This site is unofficial: an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p></details>
+      <details><summary>Does Devin CLI cost extra on top of a Devin plan?</summary><p>No. The CLI is included in every plan, including the free tier, and draws on the same daily and weekly usage allowances as Devin Web and Devin Desktop.</p></details>
+      <details><summary>What model does it run?</summary><p>SWE-2, Cognition’s own model, is the default. You can also pick Anthropic, OpenAI, Google, and open models like DeepSeek, Kimi, and GLM with <code>/model</code> or <code>--model</code>, using short names like <code>opus</code>, <code>sonnet</code>, <code>swe</code>, <code>codex</code>, and <code>gemini</code>.</p></details>
+      <details><summary>Does it work offline?</summary><p>No. Every prompt goes to Devin’s cloud, whether the session runs locally in your terminal or as a Devin Cloud session.</p></details>
+      <details><summary>Can it use my Claude Code or Cursor setup?</summary><p>Yes. It reads rules, skills, and MCP servers from Cursor, Windsurf, Claude Code, and Copilot in place, with no migration needed.</p></details>
+      <details><summary>Where does Devin CLI store its config?</summary><p>Config lives in <code>~/.config/devin</code>, following XDG paths even on macOS. Credentials live in <code>~/.local/share/devin/credentials.toml</code> (or <code>$XDG_DATA_HOME/devin/credentials.toml</code> if that is set). Session data, including one SQLite database covering every project on the machine, lives under <code>~/.local/share/devin/cli</code>.</p></details>
+      <details><summary>How do I hand a task to the cloud?</summary><p>Type <code>/handoff</code> inside a session. Devin Cloud picks it up in its own VM and returns a pull request.</p></details>
     </section>
 
-    <section id="related">
-      <h2>More Utilities apps on Omarchy</h2>
-      <ul><li><a href="/dropbox-on-omarchy.html">dropbox</a></li><li><a href="/firefox-on-omarchy.html">firefox</a></li><li><a href="/firefox-i18n-ach-on-omarchy.html">firefox-i18n-ach</a></li><li><a href="/firefox-i18n-af-on-omarchy.html">firefox-i18n-af</a></li><li><a href="/firefox-i18n-an-on-omarchy.html">firefox-i18n-an</a></li><li><a href="/firefox-i18n-ar-on-omarchy.html">firefox-i18n-ar</a></li></ul>
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/devin-cli.html" target="_blank" rel="noopener">Omarchy package listing for Devin CLI</a></li>
+        <li><a href="https://docs.devin.ai/cli/reference/commands" target="_blank" rel="noopener">Devin CLI commands and flags (auth login, --force-manual-token-flow, models, permission modes, migrate)</a></li>
+        <li><a href="https://docs.devin.ai/cli/enterprise/devin-auth" target="_blank" rel="noopener">Devin Auth docs (credentials.toml location, enterprise roles, ACU billing)</a></li>
+        <li><a href="https://www.developersdigest.tech/tools/devin" target="_blank" rel="noopener">Devin review and setup (pricing Free $0, Pro $20, Max $200, Teams from $80; install commands)</a></li>
+        <li><a href="https://troiana.net/guides/devin/" target="_blank" rel="noopener">Devin guide (quickstart, /handoff, quota, plans)</a></li>
+        <li><a href="https://fast.io/resources/devin-ai-pro/" target="_blank" rel="noopener">Devin Pro pricing and quotas</a></li>
+        <li><a href="https://1devtool.com/compare/devin-cli-vs-cursor-cli" target="_blank" rel="noopener">Devin CLI vs Cursor CLI (empty model list before login, XDG config paths, SQLite sessions)</a></li>
+        <li><a href="https://hub.docker.com/r/sbx/devin-enterprise-kit" target="_blank" rel="noopener">Enterprise login flow failure and manual token workaround</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
     </section>
 
   </article>
@@ -126,15 +210,15 @@
   <aside class="related-guides" aria-labelledby="related-guides-h">
     <h2 id="related-guides-h">Keep exploring</h2>
     <div class="related-guide-grid">
-<a class="related-guide" href="/dropbox-on-omarchy.html"><strong>dropbox on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/firefox-on-omarchy.html"><strong>firefox on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/firefox-i18n-ach-on-omarchy.html"><strong>firefox-i18n-ach on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/apps/devin-cli.html"><strong>devin-cli package page</strong><span>Version, size, license and install command</span></a>
+<a class="related-guide" href="/amp-cli-on-omarchy.html"><strong>How to Install &amp; Use Amp CLI on Omarchy (2026) — Free Hobby Tier, the Dial, and Cloud Orbs</strong><span>Install Sourcegraph Amp CLI on Omarchy with one command. Free Hobby tier, login, the Dial modes, AGENTS.md setup, orb pricing, and common fixes.</span></a>
+<a class="related-guide" href="/antigravity-cli-on-omarchy.html"><strong>How to Install &amp; Use Antigravity CLI on Omarchy (2026) — Google&#x27;s Gemini Terminal Agent</strong><span>Install Google Antigravity CLI on Omarchy with one command. Free tier, Google sign-in, Auto mode, MCP setup, quota limits, and the Gemini CLI replacement explained.</span></a>
+<a class="related-guide" href="/antigravity-on-omarchy.html"><strong>How to Install &amp; Use Antigravity on Omarchy (2026) — Free Cursor Alternative</strong><span>Install Google Antigravity on Omarchy with one command. Agent-first AI development, free for individuals: setup, sign-in, and real Linux fixes from Google&#x27;s own forum.</span></a>
+<a class="related-guide" href="/apple-bcm-firmware-fetcher-on-omarchy.html"><strong>How to Install &amp; Use apple-bcm-firmware-fetcher on Omarchy (2026) — Fix Wi-Fi &amp; Bluetooth on T2 Macs</strong><span>Fix Wi-Fi and Bluetooth on your T2 Mac running Omarchy: install apple-bcm-firmware-fetcher with one command, pull the firmware from your macOS volume, verify it loaded, and fix the common failures (macOS wiped, APFS driver, FileVault, iMac models).</span></a>
     </div>
   </aside>
 </main>
 
-<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
+<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">

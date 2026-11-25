@@ -1,0 +1,139 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add devin-cli` — verify it resolves in the store index; confirm version 3000.14.30821-1, 82.5 MB download / 257.7 MB installed, as listed
+- Binary name: confirm the package installs the `devin` command (upstream installers place a single `devin` binary on PATH)
+- First launch: run `devin auth login` and confirm the browser sign-in flow through app.devin.ai, and `devin auth status` afterwards. Confirm `--force-manual-token-flow` works over SSH
+- Config paths: confirm config under `~/.config/devin`, credentials at `~/.local/share/devin/credentials.toml`, and session data under `~/.local/share/devin/cli`
+- Claimed issues reproduced: (1) empty model list before login, (2) browser login unreachable over SSH, (3) 401 after sign-in (dead stored token), (4) Enterprise login flow failure, (5) mid-week quota stop
+- Screenshots needed: install, `devin auth login` browser step, first session, `/model` picker, a finished task, `/handoff` to Devin Cloud
+
+SEO notes:
+- URL: /guides/devin-cli-on-omarchy
+- Title tag: "Devin CLI on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install Cognition's Devin CLI on Omarchy. Sign in with devin auth login, pick a model, set permission modes, and hand tasks to Devin Cloud with /handoff."
+- Keywords: devin cli omarchy, devin terminal, devin auth login, devin handoff, devin vs claude code
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Devin CLI on Omarchy</h2>
+      <p>Devin CLI on Omarchy is Cognition’s terminal coding agent: run Devin (SWE-2 by default) in your terminal for local work, with a <code>/handoff</code> command that sends a task to Devin Cloud when it outgrows your machine.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add devin-cli</code></pre>
+      <p>That installs Devin CLI v3000.14.30821-1 (82.5 MB download, 257.7 MB installed; LicenseRef-Cognition, proprietary). Sign in with your Devin account in the browser (<code>devin auth login</code>), then start a session in a project folder with <code>devin</code>. The CLI is included in every Devin plan, including the free tier; it costs nothing extra on top of the plan.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Sign in.</h3>
+      <p>Run <code>devin auth login</code>. It opens a browser sign-in through app.devin.ai (a PKCE flow) and stores a persistent token that does not expire on a schedule. Check the result with <code>devin auth status</code>, and sign out with <code>devin auth logout</code>. On a remote machine over SSH, where no browser opens, use <code>devin auth login --force-manual-token-flow</code> and paste the token by hand. Do not skip login: the model list is empty until you do, so nothing runs before you sign in.</p>
+      <h3>2. Start a session.</h3>
+      <p>Change into a project and run <code>devin</code>. Start with a read-only question, for example “Explain the structure of this repo,” so you see how it works before it edits anything. Pick a model with <code>/model</code> inside the session, or pass <code>--model</code> at launch (short names like <code>opus</code>, <code>sonnet</code>, <code>swe</code>, <code>codex</code>, and <code>gemini</code>). SWE-2, Cognition’s own model, is the default, and Cognition recommends Fusion, which pairs a frontier lead model with a cheaper sidekick.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Set a permission mode</strong> — the default is <code>normal</code> (also called <code>auto</code>). Use <code>--permission-mode accept-edits</code> to let it edit without asking each time, <code>smart</code> for a middle ground, and <code>dangerous</code> (aliases <code>yolo</code>, <code>bypass</code>) only when you know what you are doing. <code>autonomous</code> requires <code>--sandbox</code>.</li>
+        <li><strong>Hand work to the cloud</strong> — when a task is long or needs a clean machine, type <code>/handoff</code> in the session to send it to Devin Cloud, where it runs in its own VM and ends in a pull request. The same account covers the CLI, Devin Desktop, and Devin Cloud, and they share one daily and weekly usage allowance.</li>
+        <li><strong>Let it read your existing setup</strong> — Devin CLI reads rules, skills, and MCP servers from Cursor, Windsurf, Claude Code, and Copilot in place, with no migration needed. If you do want to migrate another tool’s config into Devin’s own formats, <code>devin migrate</code> handles it. Your own config lives in <code>~/.config/devin</code>, and your login token in <code>~/.local/share/devin/credentials.toml</code>. Treat that file as sensitive: anyone with it can sign in as you, so never share it or commit it.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>You launch <code>devin</code> and the model list is empty, or no model will run</h3>
+      <p>You are not signed in yet. The model list stays empty until you authenticate, so a fresh install with no login has no models at all, which looks like a broken install but is just missing auth.</p>
+      <p><strong>Fix:</strong> Run <code>devin auth login</code> first, then check with <code>devin auth status</code> and <code>devin models list</code>. (<a href="https://1devtool.com/compare/devin-cli-vs-cursor-cli" target="_blank" rel="noopener">1devtool comparison</a>)</p>
+      <h3>Over SSH, <code>devin auth login</code> opens a browser you cannot reach</h3>
+      <p>On a remote machine there is no browser to open, so the default login flow cannot complete.</p>
+      <p><strong>Fix:</strong> Use the manual token flow instead: <code>devin auth login --force-manual-token-flow</code>. It prints a sign-in URL you open on another device and a token you paste back into the terminal. The same flag is the documented escape hatch for any remote or headless session. (<a href="https://docs.devin.ai/cli/reference/commands" target="_blank" rel="noopener">Devin docs, Commands &amp; Flags</a>)</p>
+      <h3>You sign in, but every request fails with a 401 telling you to sign in again</h3>
+      <p>The stored token was refused, which means it is dead rather than expired (Devin tokens do not expire on a schedule).</p>
+      <p><strong>Fix:</strong> Run <code>devin auth logout</code> to clear the stored credentials, then <code>devin auth login</code> again. If you copied <code>credentials.toml</code> between machines, copy it again from a machine where login still works, or just log in fresh. (<a href="https://docs.devin.ai/cli/enterprise/devin-auth" target="_blank" rel="noopener">Devin docs, Devin Auth</a>, <a href="https://npm.io/package/@magpie-community/opencode-devin-auth" target="_blank" rel="noopener">magpie opencode-devin-auth notes</a>)</p>
+      <h3>On a company or Enterprise deployment, login succeeds but the CLI exits or cannot authenticate</h3>
+      <p>Enterprise deployments can break the stock login flow: the OAuth token endpoint returns only a short-lived intermediate token, so the durable-key handoff never fires.</p>
+      <p><strong>Fix:</strong> Use the manual token flow (<code>devin auth login --force-manual-token-flow</code>) with the durable key kept in <code>~/.local/share/devin/credentials.toml</code>. Also check with your admin that your role has the <strong>Use Devin CLI</strong> permission; without it, access is blocked at the account level. (<a href="https://hub.docker.com/r/sbx/devin-enterprise-kit" target="_blank" rel="noopener">sbx devin-enterprise-kit</a>, <a href="https://docs.devin.ai/cli/enterprise/devin-auth" target="_blank" rel="noopener">Devin docs, Devin Auth</a>)</p>
+      <h3>Your session stops mid-week with a quota message</h3>
+      <p>Devin bills on daily and weekly usage allowances, not unlimited use. The free tier has a light quota with limited model choice, Pro ($20/mo) has larger daily and weekly quotas, and Max ($200/mo) has significantly higher quotas with no daily cap. Extra usage beyond a plan is covered by prepaid credits at API pricing.</p>
+      <p><strong>Fix:</strong> Check your plan and remaining quota at app.devin.ai/settings/plans before starting a long task. (<a href="https://troiana.net/guides/devin/" target="_blank" rel="noopener">Troiana Devin guide</a>, <a href="https://fast.io/resources/devin-ai-pro/" target="_blank" rel="noopener">Fast.io Devin Pro guide</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>git (review every diff before it lands), Devin Desktop (same account, same quota, for when you want an editor instead of a terminal), and Devin Cloud via <code>/handoff</code> (long tasks that end in a pull request).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Claude Code (Pro $20/mo) bills by subscription with its own models, Kimi Code CLI gives you a free CLI with per-token or membership billing, and Kilo Code CLI lets you bring any provider or a local model.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Devin CLI vs Claude Code vs Kimi Code CLI vs Kilo Code CLI</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Devin CLI</th><th>Claude Code (CLI)</th><th>Kimi Code CLI</th><th>Kilo Code CLI</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free tier $0; Pro $20/mo; Max $200/mo; Teams from $80/mo</td><td>Requires Claude Pro $20/mo+</td><td>Free CLI; Kimi membership from $15/mo or per-token API billing</td><td>Free agent; you pay provider rates</td></tr>
+            <tr><td>Best for</td><td>An autonomous agent that can hand a task to the cloud and return a PR</td><td>The strongest single-vendor models, no key juggling</td><td>A fast single-binary TUI with subagents and MCP</td><td>Picking your own model per task, including local Ollama models</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add devin-cli</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td><code>omarchy pkg add kimi-code</code></td><td><code>omarchy pkg add kilocode-cli</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Devin CLI if you want an agent that can take a task away from your machine entirely and come back with a pull request. Pick Claude Code if you want the strongest single-vendor models, and Kilo Code CLI if model choice matters more than the cloud handoff.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Devin CLI is a free way to try an autonomous coding agent (Devin Free, $0)</h2>
+      <p><strong>Devin CLI is a free way to try an autonomous coding agent (Devin Free, $0).</strong> What you give up: the free tier has a light quota with limited model choice, so it is a trial, not a daily driver. What you keep: the full CLI, the same SWE-2 model family, Devin Desktop, and the cloud handoff, all on the same account. The honest comparison is Pro at $20/mo, the same price as Claude Pro, with the cloud agent included.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes per project)</h2>
+      <ol>
+        <li><strong>Export from Claude Code:</strong> you do not need to export anything. Devin CLI reads Claude Code rules, skills, and MCP servers in place, so your setup carries over without a migration step.</li>
+        <li><strong>Import into Devin:</strong> if you prefer Devin’s own formats, run <code>devin migrate</code> to convert the config. Your project instructions live in whatever rules file you already use; Devin reads them from the same place.</li>
+        <li><strong>What doesn’t transfer:</strong> chat history, Claude-specific slash commands and permission modes (Devin has its own: normal, accept-edits, smart, dangerous, autonomous), and Claude Code’s GitHub Actions integration.</li>
+        <li><strong>Time estimate:</strong> about 15 minutes per project, mostly signing in and picking a model.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Devin CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/devin-cli.html">View Devin CLI →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Devin CLI cost extra on top of a Devin plan?</summary><p>No. The CLI is included in every plan, including the free tier, and draws on the same daily and weekly usage allowances as Devin Web and Devin Desktop.</p></details>
+      <details><summary>What model does it run?</summary><p>SWE-2, Cognition’s own model, is the default. You can also pick Anthropic, OpenAI, Google, and open models like DeepSeek, Kimi, and GLM with <code>/model</code> or <code>--model</code>, using short names like <code>opus</code>, <code>sonnet</code>, <code>swe</code>, <code>codex</code>, and <code>gemini</code>.</p></details>
+      <details><summary>Does it work offline?</summary><p>No. Every prompt goes to Devin’s cloud, whether the session runs locally in your terminal or as a Devin Cloud session.</p></details>
+      <details><summary>Can it use my Claude Code or Cursor setup?</summary><p>Yes. It reads rules, skills, and MCP servers from Cursor, Windsurf, Claude Code, and Copilot in place, with no migration needed.</p></details>
+      <details><summary>Where does Devin CLI store its config?</summary><p>Config lives in <code>~/.config/devin</code>, following XDG paths even on macOS. Credentials live in <code>~/.local/share/devin/credentials.toml</code> (or <code>$XDG_DATA_HOME/devin/credentials.toml</code> if that is set). Session data, including one SQLite database covering every project on the machine, lives under <code>~/.local/share/devin/cli</code>.</p></details>
+      <details><summary>How do I hand a task to the cloud?</summary><p>Type <code>/handoff</code> inside a session. Devin Cloud picks it up in its own VM and returns a pull request.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/devin-cli.html" target="_blank" rel="noopener">Omarchy package listing for Devin CLI</a></li>
+        <li><a href="https://docs.devin.ai/cli/reference/commands" target="_blank" rel="noopener">Devin CLI commands and flags (auth login, --force-manual-token-flow, models, permission modes, migrate)</a></li>
+        <li><a href="https://docs.devin.ai/cli/enterprise/devin-auth" target="_blank" rel="noopener">Devin Auth docs (credentials.toml location, enterprise roles, ACU billing)</a></li>
+        <li><a href="https://www.developersdigest.tech/tools/devin" target="_blank" rel="noopener">Devin review and setup (pricing Free $0, Pro $20, Max $200, Teams from $80; install commands)</a></li>
+        <li><a href="https://troiana.net/guides/devin/" target="_blank" rel="noopener">Devin guide (quickstart, /handoff, quota, plans)</a></li>
+        <li><a href="https://fast.io/resources/devin-ai-pro/" target="_blank" rel="noopener">Devin Pro pricing and quotas</a></li>
+        <li><a href="https://1devtool.com/compare/devin-cli-vs-cursor-cli" target="_blank" rel="noopener">Devin CLI vs Cursor CLI (empty model list before login, XDG config paths, SQLite sessions)</a></li>
+        <li><a href="https://hub.docker.com/r/sbx/devin-enterprise-kit" target="_blank" rel="noopener">Enterprise login flow failure and manual token workaround</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

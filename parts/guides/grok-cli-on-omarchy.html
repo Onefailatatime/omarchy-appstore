@@ -1,0 +1,141 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add grok-cli` — confirm version 1.0.92-1, 78.9 MB download / 208.5 MB installed, Apache-2.0, as listed
+- Binary name: confirm the package installs the `grok` command, and confirm it does not clash with anything `grok-bot` installs (grok-bot is a desktop app; its command name is unverified)
+- First launch: run `grok` in a project and confirm the browser sign-in flow, and confirm `grok login --device-auth` works for SSH sessions
+- Config paths: confirm local data under `~/.grok/`, config at `~/.grok/config.toml`, and auth at `~/.grok/auth.json`
+- Free tier limits: confirm what the free tier actually allows in Grok Build, since xAI does not publish token counts. Do not quote a number from a third-party roundup.
+- Issues claimed below are NOT personally reproduced, they are documented upstream (xAI docs, independent guides). Verify at least the login flow and `grok -p` headless mode on a real machine
+- Screenshots needed: install, browser sign-in, first prompt, `/usage` output, a finished task, `grok update`
+
+SEO notes:
+- URL: /guides/grok-cli-on-omarchy
+- Title tag: "Grok CLI (Grok Build) on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install xAI's Grok Build CLI on Omarchy. Sign in with grok login, use Grok 4.7 in your terminal, and learn how grok-cli differs from grok-bot."
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Grok CLI on Omarchy</h2>
+      <p>Grok Build (grok-cli) on Omarchy is xAI's terminal coding agent: a TUI that reads, edits, and tests code in your project, powered by Grok 4.7, with headless and ACP modes for scripts and editors.</p>
+      <p><strong>Not grok-bot.</strong> The <code>grok-bot</code> package is a different xAI product: a desktop always-on agent with a persistent cloud VM, a browser, and a filesystem of its own. This guide covers <code>grok-cli</code>, the terminal coding agent, command <code>grok</code>. If you want the always-on desktop agent, see the grok-bot guide instead.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add grok-cli</code></pre>
+      <p>Then <code>cd ~/my-project</code> and run <code>grok</code>. That installs Grok Build v1.0.92-1 (78.9 MB download, 208.5 MB installed, Apache-2.0). On first launch it opens your browser to sign in with your xAI account and keeps you signed in after that. Then describe what you want done.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Launch and sign in.</h3>
+      <p>Change into a project folder and run <code>grok</code>. The first launch opens browser authentication automatically; you can also start it yourself with <code>grok login</code>. It prints a URL and a confirmation code to verify in your browser, then reports once you are signed in. On a remote machine with no browser, use <code>grok login --device-auth</code> instead. For scripts or CI, set an <code>XAI_API_KEY</code> from console.x.ai in the environment before launching. To sign out and wipe cached credentials, run <code>grok logout</code>.</p>
+      <h3>2. Start with a read-only question.</h3>
+      <p>Try: "Explain this repo." Grok reads the files it needs, shows each step as it runs, and answers with a summary of the codebase. Once you see that, the install, the sign-in, and the project are all working. Then point it at a file with <code>@</code>, for example <code>@src/main.rs Walk me through this file.</code> You do not need a git repo; unlike some agents, Grok runs fine outside a git directory.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Check which billing bucket you are on.</strong> Signing in with an API key spends from a different bucket than signing in through your browser, so run <code>/usage</code> inside Grok and check the billing account tied to whichever sign-in method you chose. The free tier has limited Grok Build access; paid plans share one weekly usage pool across Grok and Cursor.</li>
+        <li><strong>Keep it updated.</strong> One command updates Grok for both interactive and headless use: <code>grok update</code>. Check for a newer release first with <code>grok update --check</code>. In automation, always pass <code>--no-auto-update</code>, or Grok phones home for update checks and may hang where x.ai is unreachable.</li>
+        <li><strong>Know where its files live.</strong> Settings live in <code>~/.grok/config.toml</code>, the login in <code>~/.grok/auth.json</code>, and sessions under <code>~/.grok</code>. Grok reads <code>AGENTS.md</code>, skills, plugins, hooks, and MCP servers from the project, and it works through the Agent Client Protocol (ACP) in editors that support it, including a community VS Code extension.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>After installing, your shell says <code>grok: command not found</code></h3>
+      <p>The installer puts the binary in <code>~/.grok/bin/grok</code>, and your shell only picks it up in a new terminal.</p>
+      <p><strong>Fix:</strong> Open a fresh terminal window and try again, and confirm <code>~/.grok/bin</code> is on your PATH. Do not grab an unrelated package just because its binary has the same name. (<a href="https://docs.x.ai/build/overview" target="_blank" rel="noopener">xAI Grok Build docs</a>, <a href="https://www.scriptbyai.com/grok-build-cheat-sheet/" target="_blank" rel="noopener">Grok Build cheat sheet</a>)</p>
+      <h3>Browser sign-in fails, or the login loop never completes</h3>
+      <p>The login loop never completes, or the browser sign-in fails partway through.</p>
+      <p><strong>Fix:</strong> Run <code>grok logout</code> to clear the cached credentials, then <code>grok login</code> again. On a remote machine where opening a local browser is awkward, use device-code authentication: <code>grok login --device-auth</code>, which prints a URL and a code to approve on another device. (<a href="https://www.scriptbyai.com/grok-build-cheat-sheet/" target="_blank" rel="noopener">Grok Build cheat sheet</a>)</p>
+      <h3>Usage is billed to the wrong account, or you hit a limit you did not expect</h3>
+      <p>The two sign-in paths bill separately, and a stored login takes precedence over an API key.</p>
+      <p><strong>Fix:</strong> Browser login spends from your X Subscription usage pool; an <code>XAI_API_KEY</code> spends from your xAI API account at per-token rates (Grok 4.7 is listed at $2.00 per million input tokens and $6.00 per million output tokens). A stored login also takes precedence over the API key, so if you want the key to be used, sign out first. Run <code>/usage</code> inside Grok to see which bucket you are drawing from. (<a href="https://flaviocopes.com/grok-build/" target="_blank" rel="noopener">Flavio Copes Grok Build guide</a>)</p>
+      <h3>Grok ignores your <code>AGENTS.md</code></h3>
+      <p>Your project instructions are not being picked up.</p>
+      <p><strong>Fix:</strong> Run <code>grok inspect</code>. It checks the filename, the current directory, the git root, and <code>.gitignore</code>, which is usually where the problem is: a misspelled filename, a file in the wrong folder, or a <code>.gitignore</code> rule hiding it. (<a href="https://www.scriptbyai.com/grok-build-cheat-sheet/" target="_blank" rel="noopener">Grok Build cheat sheet</a>)</p>
+      <h3>An MCP server will not start, or its tools never appear</h3>
+      <p>The server is configured, but Grok never shows its tools.</p>
+      <p><strong>Fix:</strong> Run <code>grok mcp doctor &lt;name&gt;</code> to diagnose that server, test the server command directly in your shell, and inspect the log at <code>~/.grok/logs/mcp/&lt;server&gt;.stderr.log</code>. Most failures are a wrong command path or missing environment variable in the server entry, not a Grok bug. (<a href="https://www.scriptbyai.com/grok-build-cheat-sheet/" target="_blank" rel="noopener">Grok Build cheat sheet</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>git (review diffs before committing), the Grok Build Community Edition VS Code extension (chat, tools, diffs, and sessions in the editor while the agent runs as <code>grok agent stdio</code>), and an <code>XAI_API_KEY</code> for CI runs where browser login cannot work.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Claude Code (Pro $20/mo) if you want simpler subscription billing, <code>kimi-code</code> (Kimi Code CLI) for per-token API billing with no subscription, or Kilo Code CLI to bring any provider or a local model — if you hate the X Subscription billing.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Grok CLI vs Claude Code vs Kimi Code CLI vs Devin CLI</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>grok-cli</th><th>Claude Code (CLI)</th><th>Kimi Code CLI</th><th>Devin CLI</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free tier $0 (limited); X Subscription Plus $8/mo, Premium $30/mo, Super $100/mo, Ultra $200/mo; or pay-per-token API</td><td>Requires Claude Pro $20/mo+</td><td>Free CLI; Kimi membership from $15/mo or per-token API billing</td><td>Free tier $0; Pro $20/mo; Max $200/mo</td></tr>
+            <tr><td>Best for</td><td>xAI's Grok 4.7 as a terminal agent, with headless and ACP modes</td><td>The strongest single-vendor models, no key juggling</td><td>A fast single-binary TUI with subagents and MCP</td><td>An agent that can hand a task to the cloud and return a PR</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add grok-cli</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td><code>omarchy pkg add kimi-code</code></td><td><code>omarchy pkg add devin-cli</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Grok CLI if you already pay for an X Subscription and want Grok 4.7 in your terminal, or if you want a free tier to try a terminal agent. Pick Claude Code if you want the strongest single-vendor models, and Kimi Code CLI if you want per-token billing with no subscription.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Grok CLI is a free alternative to Claude Code (Pro $20/mo)</h2>
+      <p><strong>Grok CLI is a free alternative to Claude Code (Pro $20/mo).</strong> What you give up: Claude's models and the maturity of a tool with a much longer track record, and the free tier's Grok Build access is limited, so heavy daily use needs a paid X Subscription plan or API billing. What you keep: a full agentic loop, subagents, MCP, skills, and editor integration through ACP, with the CLI itself free and Apache-2.0 licensed.</p>
+      <p>The honest pricing picture has two meters. Browser login draws on your X Subscription weekly usage pool, shared across Grok and Cursor (Free $0 limited, Plus $8/mo, Premium $30/mo at 4x Plus usage, Super $100/mo at 15x, Ultra $200/mo at 50x). An API key bills per token instead (Grok 4.7 at $2.00 per million input tokens and $6.00 per million output tokens). xAI replaced the old SuperGrok plans with the X Subscription on October 12, 2026, so any price list written before mid-October is out of date. Check x.ai/pricing before deciding.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes per project)</h2>
+      <ol>
+        <li><strong>Export from Claude Code:</strong> your project instructions already live in <code>CLAUDE.md</code>. Grok reads <code>AGENTS.md</code>; copy the contents across or let Grok generate one from the codebase.</li>
+        <li><strong>Import into Grok:</strong> add MCP servers through Grok's config, and skills into the project the same way you would for any agent that reads <code>AGENTS.md</code>.</li>
+        <li><strong>What doesn't transfer:</strong> chat history, Claude-specific slash commands, and Claude Code's GitHub Actions integration.</li>
+        <li><strong>Time estimate:</strong> about 15 minutes per project.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Grok CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/grok-cli.html">View Grok CLI →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>What is the difference between grok-cli and grok-bot?</summary><p>They are two different xAI products. <code>grok-cli</code> is Grok Build, a terminal coding agent you run with the <code>grok</code> command in a project folder. <code>grok-bot</code> is a desktop always-on agent: each Bot gets a persistent cloud virtual machine with its own browser, filesystem, and terminal. This guide covers grok-cli only.</p></details>
+      <details><summary>Is Grok Build free?</summary><p>There is a free tier with limited Grok Build access. For more usage, the X Subscription plans start at Plus $8/mo, then Premium $30/mo, Super $100/mo, and Ultra $200/mo. You can also pay per token with an <code>XAI_API_KEY</code> instead of a subscription.</p></details>
+      <details><summary>What model does it run?</summary><p>Grok 4.7, according to the Grok Build overview. The same model family is also available through xAI's API.</p></details>
+      <details><summary>Do I need Node.js?</summary><p>No. The native installer does not depend on Node.js, and the Omarchy package installs a binary. Node.js only matters if your own project needs it.</p></details>
+      <details><summary>Where does Grok Build store its config?</summary><p>Settings live in <code>~/.grok/config.toml</code>, the login in <code>~/.grok/auth.json</code>, and sessions under <code>~/.grok</code>. The installer places the binary in <code>~/.grok/bin/grok</code>.</p></details>
+      <details><summary>Can I run it without the TUI?</summary><p>Yes. <code>grok -p "your prompt"</code> runs headless for scripts and bots, and ACP mode lets editors drive it directly.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/grok-cli.html" target="_blank" rel="noopener">Omarchy package listing (v1.0.92-1, Apache-2.0, 78.9 MB download / 208.5 MB installed, updated 2026-11-23)</a></li>
+        <li><a href="https://docs.x.ai/build/overview" target="_blank" rel="noopener">Grok Build docs (install, sign in, device auth, API key, config, update)</a></li>
+        <li><a href="https://flaviocopes.com/grok-build/" target="_blank" rel="noopener">Grok Build tutorial (sign-in methods, /usage billing buckets, update, first task)</a></li>
+        <li><a href="https://www.scriptbyai.com/grok-build-cheat-sheet/" target="_blank" rel="noopener">Grok Build cheat sheet (command not found, login loop, AGENTS.md, MCP doctor, logs)</a></li>
+        <li><a href="https://agentport.johnstech.in/guides/run-grok-build-in-docker/" target="_blank" rel="noopener">Grok Build in Docker (binary and config paths, --device-auth, XAI_API_KEY precedence)</a></li>
+        <li><a href="https://www.ai-toolbox.co/grok-models/grok-pricing-plans-api-2026" target="_blank" rel="noopener">Grok pricing, X Subscription plans and API rates, checked October 25, 2026</a></li>
+        <li><a href="https://marketplace.visualstudio.com/items?itemName=tienpham.grok-build-community-edition" target="_blank" rel="noopener">Grok Build Community Edition extension (auth, binary path, config)</a></li>
+        <li><a href="https://omarchyapps.com/apps/grok-bot.html" target="_blank" rel="noopener">grok-bot package listing, for the grok-cli vs grok-bot distinction (v1.3.0-1, desktop always-on agent, persistent cloud VM)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

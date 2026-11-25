@@ -1,0 +1,137 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add ladybird-bin` — confirm 145.9 MB download / 382.9 MB installed, BSD-2-Clause and LGPL licenses, as listed. The store page lists no version number; confirm the installed version (upstream alpha was 2026.47.7, released 2026-11-23)
+- Binary name: confirm the package installs a `ladybird` command, and how it appears in the Omarchy menu
+- First launch: run it and confirm the first-run setup screens (theme, accent color, tab layout, ad blocker choice, search engine choice)
+- Config paths: confirm where Ladybird stores its profile and settings on Linux. Unverified at draft time, so no config path is claimed below
+- Issues claimed below are NOT personally reproduced, they are documented upstream (ladybird.org announcement, hands-on alpha reviews). Verify at least the first-run setup and one real site load on a real machine
+- Screenshots needed: install, first-run setup, a normal site, a broken site, the settings page
+
+SEO notes:
+- URL: /guides/ladybird-bin-on-omarchy
+- Title tag: "Ladybird on Omarchy: Install the Alpha & What to Expect (2026) | Omarchy Apps"
+- Meta description: "Install the Ladybird alpha on Omarchy. First-run setup, built-in ad blocker, what works, what breaks, and why it is not a daily driver yet."
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Chrome</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Ladybird on Omarchy</h2>
+      <p>Ladybird on Omarchy is the first public alpha of a truly independent web browser: its own engine built from scratch, no Chromium, no Google, and no monetization, but it is alpha software and not a daily driver yet.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add ladybird-bin</code></pre>
+      <p>Then run <code>ladybird</code>. That installs Ladybird (145.9 MB download, 382.9 MB installed, BSD-2-Clause and LGPL). It is an alpha released 2026-11-23 (upstream alpha version 2026.47.7; the store page lists no version number, so the packaged version is unconfirmed). Try it to see the web on a brand-new engine, and keep Firefox or Chromium as your real browser.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Run the first-run setup.</h3>
+      <p>On first launch Ladybird walks you through setup: pick a light or dark theme, pick an accent color, and choose a tab layout (top tabs or vertical tabs). Then it asks about the built-in ad and tracker blocker: leave it on. Finally, pick a search engine. There is no default: choose from Google, Bing, Brave Search, DuckDuckGo, Ecosia, Kagi, Mojeek, Startpage, Yahoo, or Yandex, or add a custom one.</p>
+      <h3>2. Load a site you know well.</h3>
+      <p>Try a plain site first, like a news homepage or a docs page. For an alpha, rendering is surprisingly good: hands-on tests found pages render nearly as well as Blink and WebKit, with only small differences like wavy text underlines drawing as zigzags. If a site looks wrong, that is useful data, not a failure on your part.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Try the built-in tools.</strong> Ladybird ships a screenshot tool (selected area, visible page, or full page), a PDF viewer with annotation, forced dark mode for sites without one, and Global Privacy Control. All of it is built in, no extensions needed, because extensions do not exist yet.</li>
+        <li><strong>Use per-site settings.</strong> The toolbar has a button to switch ad blocking off for the current site, and per-site settings live in the same place. If a site breaks, try it with the blocker off before concluding the engine cannot render it.</li>
+        <li><strong>Report what breaks.</strong> The project explicitly asks for this: if you build websites, try yours in Ladybird and tell the team what breaks. It supports WebDriver for automated testing and the Firefox DevTools protocol. File issues at github.com/LadybirdBrowser/ladybird.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>A website looks broken, loads wrong, or a feature does not work</h3>
+      <p>Ladybird's engine, LibWeb with the LibJS JavaScript engine, is built from scratch, so sites that were only ever tested against Blink, WebKit, or Gecko can break in ways no other browser shows.</p>
+      <p><strong>Fix:</strong> This is expected in an alpha. Try the site with the content blocker off first, since a blocked script can look like an engine bug. If it still breaks, report it to the project with the URL and what you expected: that report is the point of the alpha. (<a href="https://www.tech2geek.net/ladybird-browser-alpha-a-new-open-source-browser-built-from-scratch/" target="_blank" rel="noopener">Ladybird alpha hands-on</a>)</p>
+      <h3>The browser crashes, sometimes on ordinary pages</h3>
+      <p>Ordinary pages can crash the browser.</p>
+      <p><strong>Fix:</strong> Also expected. The alpha announcement says plainly that some websites will not work and the browser will sometimes crash. Restart and try again, and if a specific page crashes it reliably, report it upstream with the URL. Do not use Ladybird for anything you cannot afford to lose to a crash. (<a href="https://coywolf.com/news/browsers/ladybird-releases-its-first-alpha-browser-for-macos-and-linux/" target="_blank" rel="noopener">Ladybird alpha coverage</a>)</p>
+      <h3>Your favorite extension is not available, and there is no extensions menu</h3>
+      <p>Extensions do not exist yet in Ladybird, and neither do PWAs, so a site you use as an installed app cannot be installed here.</p>
+      <p><strong>Fix:</strong> The built-in ad blocker, screenshot tool, PDF viewer, and forced dark mode cover the most common extension jobs. If your workflow depends on a password manager or a specific extension, keep Firefox or Chromium as your daily driver and use Ladybird for testing. (<a href="https://coywolf.com/news/browsers/ladybird-releases-its-first-alpha-browser-for-macos-and-linux/" target="_blank" rel="noopener">Ladybird alpha coverage</a>)</p>
+      <h3>No search engine is set, and searches from the address bar go nowhere</h3>
+      <p>Ladybird ships with no default search engine on purpose: the project takes no search deals and no other monetization.</p>
+      <p><strong>Fix:</strong> Pick one during first-run setup, or change it later in Settings. Google, DuckDuckGo, Brave Search, Kagi, and Startpage are all in the list, and you can add a custom engine. (<a href="https://www.tech2geek.net/ladybird-browser-alpha-a-new-open-source-browser-built-from-scratch/" target="_blank" rel="noopener">Ladybird alpha hands-on</a>)</p>
+      <h3>You are unsure whether it is safe to log into your email or bank in Ladybird</h3>
+      <p>Do not.</p>
+      <p><strong>Fix:</strong> The alpha announcement is direct: a new browser gets hacked over and over, and the project makes no promises about security today. Its process isolation is still being hardened, and the browser process does not yet treat every request from the WebContent process as untrusted. Use test accounts and staging sites only, keep it away from secrets, and do your real logins in Firefox or Chromium. (<a href="http://dev.to/jamilxt/ladybird-alpha-how-to-test-your-website-in-a-brand-new-browser-engine-1hjm" target="_blank" rel="noopener">Ladybird alpha testing guide</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Firefox or Chromium as your daily driver (Ladybird is a second browser for now), and WebDriver or the Firefox DevTools protocol if you test websites.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>firefox</code> (Firefox) — the independent-engine browser that is ready today, or <code>chromium</code> (Chromium) — the stable Blink option. Check back on Ladybird when the beta lands in 2027 — if you hate the crashes and missing sites.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Ladybird vs Firefox vs Chromium vs Brave</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>ladybird-bin</th><th>Firefox</th><th>Chromium</th><th>Brave</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, BSD-2-Clause / LGPL</td><td>Free, MPL-2.0</td><td>Free, BSD-3-Clause</td><td>Free, open source</td></tr>
+            <tr><td>Best for</td><td>Testing a brand-new independent engine, reporting bugs</td><td>A mature independent engine as a daily driver</td><td>Chrome engine and Chrome Web Store, no Google account</td><td>Chromium with built-in ad blocking and privacy defaults</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add ladybird-bin</code></td><td><code>omarchy pkg add firefox</code></td><td><code>omarchy pkg add chromium</code></td><td>AUR (<code>brave-bin</code>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Ladybird if you want to see and shape the future of an independent web, and you accept alpha crashes and broken sites as part of the deal. Pick Firefox if you want an independent engine that works today.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Ladybird is a free alternative to Google Chrome ($0, but your data is the product)</h2>
+      <p><strong>Ladybird is a free alternative to Google Chrome ($0, but your data is the product).</strong> What you give up: stability, extensions, PWAs, and any security promise at all, because this is an alpha. What you keep: a full browser with a built-in ad blocker, a real choice of search engine, and an engine owned by a non-profit, not an ad company.</p>
+      <p>Be honest about the trade: Ladybird is not a Chrome replacement yet, and the project says so itself. The free-alternative pitch here is about the future, not today. If you switch to Ladybird as a daily driver now, you will hit broken sites and crashes. The honest recommendation is to run it beside Firefox or Chromium, report what breaks, and help it become a real alternative. A beta is planned for 2027 and a stable release for 2028.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Google Chrome (~2 minutes to install; a real switch is not recommended yet)</h2>
+      <ol>
+        <li><strong>Export from Chrome:</strong> export bookmarks from the Bookmark Manager (<code>Ctrl + Shift + O</code>, then the three-dot menu, Export bookmarks) as an HTML file. Passwords export from <code>chrome://settings/passwords</code> under the three-dot menu, as a CSV file. Treat that CSV as sensitive and delete it after importing.</li>
+        <li><strong>Import into Ladybird:</strong> Ladybird's import story is still thin in the alpha, and no verified import path from Chrome is documented yet, so do not promise one. For now, keep Chrome or Firefox installed for your passwords and use Ladybird for casual browsing and testing.</li>
+        <li><strong>What doesn't transfer:</strong> extensions, PWAs, Google account sync, saved payment methods, and any Chrome-only feature. The built-in ad blocker and PDF viewer cover part of that gap.</li>
+        <li><strong>Time estimate:</strong> the install takes about 2 minutes. A real switch is not recommended yet, so treat this as a trial, not a migration.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Ladybird package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/ladybird-bin.html">View Ladybird →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Ladybird free?</summary><p>Yes. It is open source, and the project is backed by a 501(c)(3) non-profit funded entirely by donations and sponsorships. It takes no search deals, no crypto tokens, and no other monetization.</p></details>
+      <details><summary>Is Ladybird ready to replace Chrome or Firefox?</summary><p>No. It is a first alpha, released 2026-11-23. Some websites will not work, the browser will sometimes crash, and the project makes no security promises today. A beta is planned for 2027 and a stable release for 2028.</p></details>
+      <details><summary>What engine does Ladybird use?</summary><p>Its own. LibWeb is the rendering engine and LibJS is the JavaScript engine, both built from scratch. It is not a fork of Chromium, WebKit, or Gecko.</p></details>
+      <details><summary>Does Ladybird support extensions?</summary><p>Not yet. There is no extension support and no PWA support in the alpha. Built-in tools cover ad blocking, screenshots, PDFs, and forced dark mode.</p></details>
+      <details><summary>Is Ladybird safe to log into accounts with?</summary><p>No, not yet. The project says a new browser gets hacked over and over and makes no security promises today. Use test accounts only and keep your real logins in another browser.</p></details>
+      <details><summary>Does Ladybird run on Windows?</summary><p>Not in this alpha. macOS (Apple Silicon) and Linux (x86-64 and Arm64) are supported. Windows support is planned later.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/ladybird-bin.html" target="_blank" rel="noopener">Omarchy package listing (BSD-2-Clause, LGPL-3.0-only, LGPL-2.1-or-later, Unicode-3.0, "Truly independent web browser (alpha)", 145.9 MB download / 382.9 MB installed, updated 2026-11-24; no version listed)</a></li>
+        <li><a href="https://vibefix.work/en/explore/ladybird-browser-alpha-independent-engine-november-2026" target="_blank" rel="noopener">Alpha announcement (2026-11-23, version 2026.47.7, features, beta 2027, stable 2028)</a></li>
+        <li><a href="https://www.tech2geek.net/ladybird-browser-alpha-a-new-open-source-browser-built-from-scratch/" target="_blank" rel="noopener">Alpha hands-on (setup choices, ad blocker lists, search engines, features)</a></li>
+        <li><a href="https://coywolf.com/news/browsers/ladybird-releases-its-first-alpha-browser-for-macos-and-linux/" target="_blank" rel="noopener">Alpha coverage (crashes, no extensions, no PWAs, not a replacement yet)</a></li>
+        <li><a href="http://dev.to/jamilxt/ladybird-alpha-how-to-test-your-website-in-a-brand-new-browser-engine-1hjm" target="_blank" rel="noopener">Testing guide (security limits, WebDriver, DevTools protocol, do-not-log-in advice)</a></li>
+        <li><a href="https://ladybird.org" target="_blank" rel="noopener">Ladybird project site and FAQ</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

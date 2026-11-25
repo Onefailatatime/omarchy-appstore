@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How to Install &amp; Use openai-codex on Omarchy (2026)</title>
-<meta name="description" content="Install openai-codex on Omarchy with one command: omarchy pkg add openai-codex. OpenAI&#x27;s coding agent that runs in your terminal. Setup, requirements and FAQ.">
+<title>OpenAI Codex CLI on Omarchy: Install &amp; Setup Guide (2026) |…</title>
+<meta name="description" content="Install OpenAI Codex CLI on Omarchy. Sign in with ChatGPT or an API key, set the sandbox and approval policy, and Codex vs Codex-bin vs Codex Desktop explained.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/openai-codex-on-omarchy.html">
@@ -13,8 +13,8 @@
 <link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
 <link rel="manifest" href="/images/site.webmanifest?v=2">
-<meta property="og:title" content="How to Install &amp; Use openai-codex on Omarchy (2026)">
-<meta property="og:description" content="Install openai-codex on Omarchy with one command: omarchy pkg add openai-codex. OpenAI&#x27;s coding agent that runs in your terminal. Setup, requirements and FAQ.">
+<meta property="og:title" content="OpenAI Codex CLI on Omarchy: Install &amp; Setup Guide (2026) |…">
+<meta property="og:description" content="Install OpenAI Codex CLI on Omarchy. Sign in with ChatGPT or an API key, set the sandbox and approval policy, and Codex vs Codex-bin vs Codex Desktop explained.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://omarchyapps.com/openai-codex-on-omarchy.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
@@ -24,10 +24,10 @@
 <meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@jessyka_boat">
-<meta name="twitter:title" content="How to Install &amp; Use openai-codex on Omarchy (2026)">
-<meta name="twitter:description" content="Install openai-codex on Omarchy with one command: omarchy pkg add openai-codex. OpenAI&#x27;s coding agent that runs in your terminal. Setup, requirements and FAQ.">
+<meta name="twitter:title" content="OpenAI Codex CLI on Omarchy: Install &amp; Setup Guide (2026) |…">
+<meta name="twitter:description" content="Install OpenAI Codex CLI on Omarchy. Sign in with ChatGPT or an API key, set the sandbox and approval policy, and Codex vs Codex-bin vs Codex Desktop explained.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/openai-codex-on-omarchy.html#article","headline":"How to Install & Use openai-codex on Omarchy (2026)","description":"Install openai-codex on Omarchy with one command: omarchy pkg add openai-codex. OpenAI's coding agent that runs in your terminal. Setup, requirements and FAQ.","url":"https://omarchyapps.com/openai-codex-on-omarchy.html","dateModified":"2026-11-24","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/guides.html"},{"@type":"ListItem","position":3,"name":"How to Install & Use openai-codex on Omarchy (2026)","item":"https://omarchyapps.com/openai-codex-on-omarchy.html"}]},{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/openai-codex-on-omarchy.html#app","name":"openai-codex","description":"OpenAI's coding agent that runs in your terminal","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"0.172.0-1","license":"Apache-2.0","url":"https://omarchyapps.com/apps/openai-codex.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/openai-codex-on-omarchy.html#article","headline":"OpenAI Codex CLI on Omarchy: Install & Setup Guide (2026) |…","description":"Install OpenAI Codex CLI on Omarchy. Sign in with ChatGPT or an API key, set the sandbox and approval policy, and Codex vs Codex-bin vs Codex Desktop explained.","url":"https://omarchyapps.com/openai-codex-on-omarchy.html","dateModified":"2026-11-25","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"OpenAI Codex CLI on Omarchy: Install & Setup Guide (2026) | Omarchy Apps","item":"https://omarchyapps.com/openai-codex-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Codex CLI free?","acceptedAnswer":{"@type":"Answer","text":"The CLI itself is free and Apache-2.0 licensed. Model access is not: you need a paid ChatGPT plan (Plus $20/mo and up) or an OpenAI API key billed per token. Free and Go plans include Codex only in the desktop app, not the CLI."}},{"@type":"Question","name":"What is the difference between openai-codex, openai-codex-bin, and openai-codex-desktop?","acceptedAnswer":{"@type":"Answer","text":"openai-codex is the official Omarchy repo build of the terminal CLI, v0.172.0-1. openai-codex-bin is the older prebuilt binary package, and openai-codex-desktop is the ChatGPT desktop app with Codex built in. Install the plain openai-codex for the terminal agent."}},{"@type":"Question","name":"Do I need Node.js?","acceptedAnswer":{"@type":"Answer","text":"No, not with the Omarchy package: it installs the standalone binary. Node.js is only needed for the npm install path (npm install -g @openai/codex)."}},{"@type":"Question","name":"Where does Codex CLI store its config?","acceptedAnswer":{"@type":"Answer","text":"Config lives in ~/.codex/config.toml, credentials under ~/.codex/ (a file or the OS keyring). Project rules go in AGENTS.md at the project root, and a global ~/.codex/AGENTS.md applies everywhere."}},{"@type":"Question","name":"Does it work offline or run a model locally?","acceptedAnswer":{"@type":"Answer","text":"No. Every prompt goes to OpenAI over the network. There is no bundled local model."}}]}]}</script>
 <link rel="stylesheet" href="/style.75958c2d72.css">
   <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
   <script src="/oa-ads.js" defer></script>
@@ -50,75 +50,161 @@
 
 <header class="hero guide-hero seo-hero">
   <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/guides.html">Guides</a><span>›</span><span aria-current="page">Utilities tutorial</span></nav>
-    <p class="eyebrow">Utilities tutorial</p>
-    <h1>openai-codex on <span>Omarchy</span></h1>
-    <p class="tag">OpenAI&#x27;s coding agent that runs in your terminal</p>
-    <p class="facts">Generated from the official Omarchy package repo</p>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">AI coding agent guide</span></nav>
+    <p class="eyebrow">AI coding agent guide</p>
+    <h1>OpenAI Codex CLI on <span>Omarchy</span></h1>
+    <p class="tag">OpenAI&#x27;s terminal coding agent — describe a task, and it reads code, edits files, and runs commands.</p>
+    <p class="facts">Reviewed 2026-11-25 · independent editorial guide</p>
   </div>
 </header>
-<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
+<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
 
 <main class="wrap seo-guide-main">
   <article class="seo-article">
     <div class="guide-answer">
       <p class="answer-label">Short answer</p>
-      <p>To install openai-codex on Omarchy, open a terminal and run omarchy pkg add openai-codex. It is a 189.9 MB download (528.4 MB installed), version 0.172.0-1, licensed Apache-2.0. OpenAI&#x27;s coding agent that runs in your terminal. Check the project site for current pricing.</p>
+      <p>Install OpenAI Codex CLI with omarchy pkg add openai-codex, then run codex in your project folder. Sign in with ChatGPT or an API key; the safe default is workspace-write sandbox with on-request approvals.</p>
     </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add openai-codex` (package slug `openai-codex`) — verify it resolves in the store index. Confirm version 0.172.0-1, 189.9 MB download / 528.4 MB installed, depends on glibc, as listed
+- Binary name: confirm the package installs the `codex` command on PATH
+- First launch: run `codex` in a project and confirm the sign-in picker: Sign in with ChatGPT vs Sign in with Device Code vs Provide your own API key
+- Config paths: confirm config at `~/.codex/config.toml` and credentials under `~/.codex/` (auth.json or the OS keyring)
+- Plain vs -bin: confirm the plain `openai-codex` package is the official-repo build and `openai-codex-bin` is the older prebuilt binary (129.5 MB download / 369.6 MB installed, last updated 2026-10-09). The plain package is the one to recommend
+- Issues claimed below are NOT personally reproduced, they are documented upstream (OpenAI docs, GitHub issue #59060, independent guides). Verify at least the login flow and the sandbox default on a real machine
+- Screenshots needed: install, first launch, sign-in picker, a finished task, `/permissions` screen, `codex doctor` output
+
+SEO notes:
+- URL: /guides/openai-codex-on-omarchy
+- Title tag: "OpenAI Codex CLI on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install OpenAI Codex CLI on Omarchy. Sign in with ChatGPT or an API key, set the sandbox and approval policy, and Codex vs Codex-bin vs Codex Desktop explained."
+-->
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
       <a href="#install">Install</a>
-      <a href="#use">Open and use</a>
-      <a href="#requirements">Requirements</a>
-      <a href="#remove">Uninstall</a>
-      <a href="#facts">Package facts</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
       <a href="#faq">Questions</a>
     </nav>
 
     <section id="install">
-      <h2>Install openai-codex on Omarchy</h2>
-      <p>OpenAI&#x27;s coding agent that runs in your terminal</p>
-      <p>The official repository lists this package in Utilities. It was added on 2025-10-26.</p>
-      
+      <h2>OpenAI Codex CLI on Omarchy</h2>
+      <p>OpenAI Codex CLI on Omarchy is OpenAI’s Apache-2.0 terminal coding agent: run <code>codex</code> in a project, describe the task, and it reads code, edits files, and runs commands, billed through your ChatGPT plan or an OpenAI API key.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add openai-codex</code></pre>
+      <p>Then <code>cd ~/my-project</code> and run <code>codex</code>. That installs Codex CLI v0.172.0-1 (189.9 MB download, 528.4 MB installed, depends on glibc). On first launch, sign in with ChatGPT or provide your own API key, then describe what you want done.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Sign in.</h3>
+      <p>Run <code>codex</code> for the first time and it asks how you want to sign in. <strong>Sign in with ChatGPT</strong> uses the Codex usage included in your ChatGPT plan (Plus, Pro, Business, or Enterprise; the Free and Go plans include Codex only in the desktop app, not the CLI). <strong>Sign in with Device Code</strong> is for machines without a browser, like a server reached over SSH: you get a code to type on another device. <strong>Provide your own API key</strong> bills you per use on the OpenAI API instead of your plan. You can also sign in without starting a session with <code>codex login</code>, use <code>codex login --device-auth</code> on a headless machine, and check which method is active with <code>codex login status</code>. Sign out with <code>codex logout</code>.</p>
+      <h3>2. Start with a read-only task.</h3>
+      <p>Try: “Take a look at this project and explain its main directories.” Codex reads and searches the project before answering, so you see how it works before it edits anything. Then ask it to write an <code>AGENTS.md</code> with your project conventions, so future sessions follow your rules.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Check the sandbox before you trust it.</strong> Codex splits safety into <code>sandbox_mode</code> (read-only, workspace-write, or danger-full-access) and <code>approval_policy</code> (on-request asks before each command or write). The safe default for daily work is <code>workspace-write</code> with <code>on-request</code>. Check and switch them inside a session with <code>/permissions</code>. Never use <code>danger-full-access</code> on a machine you care about: it turns the sandbox off entirely.</li>
+        <li><strong>Run <code>codex doctor</code> when anything looks wrong.</strong> It checks the install, config, auth, and runtime in one pass and tells you what failed.</li>
+        <li><strong>Use <code>codex exec</code> for scripted runs.</strong> It runs one prompt non-interactively, which is what you want in CI or a shell script. Note that approval prompts do not work the same way outside the TUI, so keep <code>codex exec</code> on a branch you can throw away.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Sign-in hangs or loops on a server, or the browser callback never returns to the CLI</h3>
+      <p>Use the device-code flow instead of the browser flow. The device-code flow is beta and you may need to enable it in your ChatGPT security settings first, or have your workspace admin enable it. If you are behind a proxy, the CLI may also fail to reach OpenAI even when your browser works.</p>
+      <p><strong>Fix:</strong> Run <code>codex login --device-auth</code> — you get a one-time code to enter on another device. Behind a proxy, enable TUN mode in your proxy tool, or set <code>HTTP_PROXY</code> in the terminal before running <code>codex</code>. (<a href="https://openagents.org/blog/posts/2026-10-12-how-to-install-codex-cli" target="_blank" rel="noopener">OpenAgents install guide</a>, <a href="https://linuxize.com/post/how-to-install-codex-cli-on-linux/" target="_blank" rel="noopener">Linuxize install guide</a>)</p>
+      <h3>The agent edits files outside the project, or runs commands you never asked for</h3>
+      <p>This is the sandbox and approval settings, not a bug in one session. A documented incident (GitHub issue #59060, November 2026) saw Codex edit <code>/etc/fstab</code> on a server after a reboot task. Under <code>read-only</code> and <code>workspace-write</code>, writes outside the workspace fail with <code>Read-only file system</code>; only <code>danger-full-access</code> lets them through.</p>
+      <p><strong>Fix:</strong> Set <code>sandbox_mode = "workspace-write"</code> and <code>approval_policy = "on-request"</code> in <code>~/.codex/config.toml</code>, keep <code>writable_roots</code> to folders you really need, and never add <code>/etc</code>, <code>/</code>, or your whole home directory. If a folder is not trusted, Codex falls back to <code>read-only</code>. (<a href="https://aicodewith.ai/en/blog/codex-sandbox-permissions-untrusted-retired" target="_blank" rel="noopener">AI Code With sandbox retest</a>)</p>
+      <h3>Your AGENTS.md rules get ignored, especially the ones near the bottom</h3>
+      <p>Codex concatenates every <code>AGENTS.md</code> from your global <code>~/.codex/AGENTS.md</code> through each directory down to your working directory, capped at 32 KiB by default. A long file is silently truncated past that budget, with no warning, so the rules you added last vanish first.</p>
+      <p><strong>Fix:</strong> Keep each <code>AGENTS.md</code> under 4 KB and move detailed reference material into separate files the agent can read on demand. (<a href="https://codex.danielvaughan.com/2026/06/12/codex-cli-configuration-anti-patterns-twelve-settings-mistakes-tokens-sandbox-agent-performance/" target="_blank" rel="noopener">Codex configuration anti-patterns</a>)</p>
+      <h3>You pinned a model in config.toml and the agent behaves differently than it used to, with no error</h3>
+      <p>OpenAI retires models, and a pinned model that no longer exists silently falls back to the replacement, without the reasoning or context settings you calibrated for. GPT-5.2 and GPT-5.3-Codex were sunset in June 2026, and GPT-5.5 retired from Codex in October 2026.</p>
+      <p><strong>Fix:</strong> Check your pinned model with <code>/model</code> inside a session and update <code>config.toml</code> to a current model (GPT-6.1 Sol was the default in early November 2026). Audit pinned models every few months. (<a href="https://codex.danielvaughan.com/2026/06/12/codex-cli-configuration-anti-patterns-twelve-settings-mistakes-tokens-sandbox-agent-performance/" target="_blank" rel="noopener">Codex configuration anti-patterns</a>, <a href="https://openagents.org/blog/posts/2026-10-12-how-to-install-codex-cli" target="_blank" rel="noopener">OpenAgents install guide</a>)</p>
+      <h3>You run codex and it says you have no Codex access, even though you have a ChatGPT account</h3>
+      <p>The Free and Go plans include Codex only in the ChatGPT desktop app, not in the CLI. The CLI needs a paid plan (Plus, Pro, Business, or Enterprise) or an OpenAI API key with billing enabled.</p>
+      <p><strong>Fix:</strong> If you are on Free or Go, either upgrade or sign in with an API key instead. Check your current method with <code>codex login status</code>. (<a href="https://openagents.org/blog/posts/2026-10-12-how-to-install-codex-cli" target="_blank" rel="noopener">OpenAgents install guide</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>git (review diffs on a throwaway branch before merging), VS Code, Cursor, or Windsurf through the Codex IDE extension (it shares the CLI login), and Codex Cloud for long jobs you do not want to babysit.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>If you hate paying OpenAI’s prices: OpenCode lets you bring your own key from 75+ providers, including free-tier keys, and Kimi Code CLI has a $0 membership tier. If you want the same terminal-agent shape with a different vendor’s models, Claude Code is the paid reference point.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: OpenAI Codex CLI vs Claude Code vs Kimi Code CLI vs OpenCode</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>OpenAI Codex CLI</th><th>Claude Code (CLI)</th><th>Kimi Code CLI</th><th>OpenCode</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free CLI; needs ChatGPT Plus $20/mo+ or pay-as-you-go API key</td><td>Requires Claude Pro $20/mo+</td><td>Free CLI; Kimi membership from $15/mo or per-token API billing</td><td>Free CLI; you pay your provider</td></tr>
+            <tr><td>Best for</td><td>OpenAI’s own models, sandbox controls, Codex Cloud</td><td>The strongest single-vendor models, no key juggling</td><td>A fast single-binary TUI with subagents and MCP</td><td>Picking your own model per task, including free-tier keys</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add openai-codex</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td><code>omarchy pkg add kimi-code</code></td><td><code>omarchy pkg add opencode</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Codex CLI if you already pay for a ChatGPT plan and want OpenAI’s models with real sandbox controls. Pick OpenCode if you want to choose your own model and provider, and Kimi Code CLI if you want a polished single-vendor agent with a free tier.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Codex CLI is not a free alternative to Claude Code (Pro $20/mo)</h2>
+      <p><strong>Codex CLI is not a free alternative to Claude Code (Pro $20/mo).</strong> Codex CLI costs the same kind of money: a paid ChatGPT plan (Plus $20/mo) or pay-as-you-go API billing. What you get for it: OpenAI’s frontier models, a real OS-level sandbox, and Codex Cloud for long jobs. What you do not get: a free tier for the CLI at all. If you want the same terminal-agent shape for $0, OpenCode with a free provider key or Kimi Code CLI on its $0 membership tier are the honest free picks. Check current pricing at openai.com before deciding: plan names and Codex limits change often.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes per project)</h2>
       <ol>
-        <li>Open a terminal.</li>
-        <li>Run the install command:<pre><code class="language-bash">omarchy pkg add openai-codex</code></pre></li>
-        <li>Check it landed. Pacman should list version 0.172.0-1:<pre><code class="language-bash">pacman -Qi openai-codex</code></pre></li>
+        <li><strong>Export from Claude Code:</strong> your project instructions already live in <code>CLAUDE.md</code>. Codex reads <code>AGENTS.md</code>; copy the contents across, keeping it under 4 KB so nothing is silently truncated.</li>
+        <li><strong>Import into Codex:</strong> move MCP servers into <code>~/.codex/config.toml</code>, and skills into the skills directory Codex reads. Set <code>sandbox_mode = "workspace-write"</code> and <code>approval_policy = "on-request"</code> before your first real task.</li>
+        <li><strong>What doesn’t transfer:</strong> chat history, Claude-specific slash commands and permission modes, and Claude Code’s GitHub Actions integration. Codex has its own cloud agent and IDE extension instead.</li>
+        <li><strong>Time estimate:</strong> takes about 15 minutes per project.</li>
       </ol>
     </section>
 
-    <section id="use">
-      <h2>Open and use openai-codex</h2>
-      <p>To see what the package installed, including any commands and desktop entries:</p><pre><code class="language-bash">pacman -Ql openai-codex</code></pre>
-    </section>
-
-    <section id="requirements">
-      <h2>openai-codex requirements and compatibility</h2>
-      <p>No special requirements are documented for openai-codex.</p>
-      <h3>Dependencies Omarchy installs for you</h3><ul><li><code>glibc</code></li></ul>
-      <h3>Pricing and license</h3>
-      <p>Check the project site for current pricing. License: Apache-2.0.</p>
-    </section>
-
-    <section id="remove">
-      <h2>Uninstall openai-codex</h2>
-      <pre><code class="language-bash">omarchy pkg drop openai-codex</code></pre>
-    </section>
-
-    <section id="facts">
-      <h2>openai-codex package facts</h2>
-      <div class="table-scroll"><table class="compare-table"><tbody><tr><th scope='row'>Package</th><td><code>openai-codex</code></td></tr><tr><th scope='row'>Version</th><td>0.172.0-1</td></tr><tr><th scope='row'>Category</th><td>Utilities</td></tr><tr><th scope='row'>License</th><td>Apache-2.0</td></tr><tr><th scope='row'>Download</th><td>189.9 MB</td></tr><tr><th scope='row'>Installed size</th><td>528.4 MB</td></tr><tr><th scope='row'>Built</th><td>2026-11-24</td></tr><tr><th scope='row'>Pricing</th><td>Check the project site for current pricing</td></tr><tr><th scope='row'>Added to the official repo</th><td>2025-10-26</td></tr><tr><th scope='row'>Made by</th><td>OpenAI</td></tr></tbody></table></div>
-      <p><a href="/apps/openai-codex.html">openai-codex package page on this site</a> · <a href="https://github.com/openai/codex" target="_blank" rel="noopener">Project site</a></p>
-    </section>
+    <div class="guide-cta">
+      <div><h2>Open the OpenAI Codex CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/openai-codex.html">View OpenAI Codex CLI →</a>
+    </div>
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>How do I install openai-codex on Omarchy?</summary><p>Open a terminal and run omarchy pkg add openai-codex. The download is 189.9 MB and it takes 528.4 MB once installed. Omarchy pulls in any dependencies automatically.</p></details><details><summary>Is openai-codex free?</summary><p>Check the project site for current pricing. The package is licensed Apache-2.0.</p></details><details><summary>How do I uninstall openai-codex?</summary><p>Run omarchy pkg drop openai-codex. It removes the package from your system.</p></details><details><summary>What does openai-codex depend on?</summary><p>The package declares 1 dependency: glibc. Omarchy installs them for you.</p></details><details><summary>Is openai-codex in the official Omarchy repo?</summary><p>Yes. It is published as openai-codex (version 0.172.0-1) in the official Omarchy package repository. OpenAI makes it. Project site: https://github.com/openai/codex. This site is unofficial: an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p></details>
+      <details><summary>Is Codex CLI free?</summary><p>The CLI itself is free and Apache-2.0 licensed. Model access is not free: you need a paid ChatGPT plan (Plus $20/mo and up) or an OpenAI API key billed per token. The Free and Go plans include Codex only in the desktop app, not the CLI.</p></details>
+      <details><summary>What is the difference between openai-codex, openai-codex-bin, and openai-codex-desktop?</summary><p>All three are OpenAI’s Codex, in different packaging. <code>openai-codex</code> (this guide) is the official Omarchy repo build of the terminal CLI, v0.172.0-1. <code>openai-codex-bin</code> is the older prebuilt binary package (129.5 MB download, last updated 2026-10-09). <code>openai-codex-desktop</code> is the ChatGPT desktop app with Codex built in, a 484 MB download and 1.6 GB installed. Install the plain <code>openai-codex</code> for the terminal agent.</p></details>
+      <details><summary>Do I need Node.js?</summary><p>No, not with the Omarchy package: it installs the standalone binary. Node.js is only needed for the npm install path (<code>npm install -g @openai/codex</code>).</p></details>
+      <details><summary>Where does Codex CLI store its config?</summary><p>Config lives in <code>~/.codex/config.toml</code>, credentials under <code>~/.codex/</code> (a file or the OS keyring, depending on the <code>cli_auth_credentials_store</code> setting). Project rules go in <code>AGENTS.md</code> at the project root, and a global <code>~/.codex/AGENTS.md</code> applies everywhere.</p></details>
+      <details><summary>Does it work offline or run a model locally?</summary><p>No. Every prompt goes to OpenAI over the network. There is no bundled local model.</p></details>
+      <details><summary>What is the default model?</summary><p>GPT-6.1 Sol was the default in early November 2026. Check yours with <code>/model</code> inside a session, and do not trust a pinned model name from an old tutorial: retired models silently fall back to a replacement.</p></details>
     </section>
 
-    <section id="related">
-      <h2>More Utilities apps on Omarchy</h2>
-      <ul><li><a href="/opencode-desktop-on-omarchy.html">opencode-desktop</a></li><li><a href="/playwright-cli-on-omarchy.html">playwright-cli</a></li><li><a href="/qwen-code-on-omarchy.html">qwen-code</a></li><li><a href="/superwhisper-bin-on-omarchy.html">superwhisper</a></li><li><a href="/tzupdate-on-omarchy.html">tzupdate</a></li><li><a href="/vi-on-omarchy.html">vi</a></li></ul>
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/openai-codex.html" target="_blank" rel="noopener">Omarchy package listing: openai-codex (v0.172.0-1, 189.9 MB download / 528.4 MB installed)</a></li>
+        <li><a href="https://omarchyapps.com/apps/openai-codex-bin.html" target="_blank" rel="noopener">Omarchy package listing: openai-codex-bin (129.5 MB download, updated 2026-10-09)</a></li>
+        <li><a href="https://omarchyapps.com/openai-codex-desktop-on-omarchy.html" target="_blank" rel="noopener">Omarchy package listing: openai-codex-desktop (484 MB download / 1.6 GB installed)</a></li>
+        <li><a href="https://flaviocopes.com/codex-cli/" target="_blank" rel="noopener">Codex CLI install, sign-in, login flags, default model GPT-6.1 Sol</a></li>
+        <li><a href="https://roughworks.ca/blog/codex-cli-guide/" target="_blank" rel="noopener">Codex CLI guide, version 0.166.0 checked, auth and config</a></li>
+        <li><a href="https://linuxize.com/post/how-to-install-codex-cli-on-linux/" target="_blank" rel="noopener">Codex CLI Linux install, sign-in, headless login</a></li>
+        <li><a href="https://openagents.org/blog/posts/2026-10-12-how-to-install-codex-cli" target="_blank" rel="noopener">Codex CLI install, plans, Free/Go desktop-only note, model retirement</a></li>
+        <li><a href="https://aicodewith.ai/en/blog/codex-sandbox-permissions-untrusted-retired" target="_blank" rel="noopener">Sandbox incident, GitHub issue #59060, read-only vs workspace-write vs danger-full-access</a></li>
+        <li><a href="https://codex.danielvaughan.com/2026/06/12/codex-cli-configuration-anti-patterns-twelve-settings-mistakes-tokens-sandbox-agent-performance/" target="_blank" rel="noopener">AGENTS.md 32 KiB truncation, deprecated model fallback, danger-full-access risks</a></li>
+        <li><a href="https://github.com/openai/codex" target="_blank" rel="noopener">Codex CLI source and README</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
     </section>
 
   </article>
@@ -126,15 +212,15 @@
   <aside class="related-guides" aria-labelledby="related-guides-h">
     <h2 id="related-guides-h">Keep exploring</h2>
     <div class="related-guide-grid">
-<a class="related-guide" href="/opencode-desktop-on-omarchy.html"><strong>opencode-desktop on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/playwright-cli-on-omarchy.html"><strong>playwright-cli on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/qwen-code-on-omarchy.html"><strong>qwen-code on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/apps/openai-codex.html"><strong>openai-codex package page</strong><span>Version, size, license and install command</span></a>
+<a class="related-guide" href="/amp-cli-on-omarchy.html"><strong>How to Install &amp; Use Amp CLI on Omarchy (2026) — Free Hobby Tier, the Dial, and Cloud Orbs</strong><span>Install Sourcegraph Amp CLI on Omarchy with one command. Free Hobby tier, login, the Dial modes, AGENTS.md setup, orb pricing, and common fixes.</span></a>
+<a class="related-guide" href="/antigravity-cli-on-omarchy.html"><strong>How to Install &amp; Use Antigravity CLI on Omarchy (2026) — Google&#x27;s Gemini Terminal Agent</strong><span>Install Google Antigravity CLI on Omarchy with one command. Free tier, Google sign-in, Auto mode, MCP setup, quota limits, and the Gemini CLI replacement explained.</span></a>
+<a class="related-guide" href="/antigravity-on-omarchy.html"><strong>How to Install &amp; Use Antigravity on Omarchy (2026) — Free Cursor Alternative</strong><span>Install Google Antigravity on Omarchy with one command. Agent-first AI development, free for individuals: setup, sign-in, and real Linux fixes from Google&#x27;s own forum.</span></a>
+<a class="related-guide" href="/apple-bcm-firmware-fetcher-on-omarchy.html"><strong>How to Install &amp; Use apple-bcm-firmware-fetcher on Omarchy (2026) — Fix Wi-Fi &amp; Bluetooth on T2 Macs</strong><span>Fix Wi-Fi and Bluetooth on your T2 Mac running Omarchy: install apple-bcm-firmware-fetcher with one command, pull the firmware from your macOS volume, verify it loaded, and fix the common failures (macOS wiped, APFS driver, FileVault, iMac models).</span></a>
     </div>
   </aside>
 </main>
 
-<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
+<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">

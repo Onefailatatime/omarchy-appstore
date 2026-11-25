@@ -1,0 +1,122 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add omarchy-themes-backgrounds` — confirm version 2026.11.25-1, 72.1 MB download / 72.8 MB installed, MIT, as listed
+- File location: confirm where the package puts its images. Expected to be the stock theme directories under `/usr/share/omarchy/themes/<name>/backgrounds/`, but this was not confirmed from the package itself. List the files after install with `pacman -Ql omarchy-themes-backgrounds`
+- Effect: confirm the new backgrounds actually appear in the background picker (`Super + Ctrl + Space`) after install, and whether re-applying the theme is needed first
+- Theme list: confirm which themes gain new backgrounds from this package, and how many images each gets
+- Issues claimed below are NOT personally reproduced, they are documented from Omarchy theme docs and community guides. Verify at least the install and picker behavior on a real machine
+- Screenshots needed: install, the background picker before and after, a theme with a new background applied, the user backgrounds folder
+
+SEO notes:
+- URL: /guides/omarchy-themes-backgrounds-on-omarchy
+- Title tag: "Omarchy Themes Backgrounds on Omarchy: Install & Use Guide (2026) | Omarchy Apps"
+- Meta description: "Install Omarchy Themes Backgrounds on Omarchy. Find the stock wallpapers, cycle them, add your own images, and keep them safe from updates."
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Omarchy Themes Backgrounds on Omarchy</h2>
+      <p>Omarchy Themes Backgrounds on Omarchy is the stock wallpaper pack for Omarchy's built-in themes: the still images each theme cycles through, in one install.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omarchy-themes-backgrounds</code></pre>
+      <p>That installs the background stills for the Omarchy themes (version 2026.11.25-1, 72.1 MB download, 72.8 MB installed, MIT). There is no app to launch. After install, cycle backgrounds with <code>Super + Ctrl + Space</code> or <code>omarchy theme bg next</code>.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install it and check what arrived.</h3>
+      <p>Run the install command above. Then list the files it delivered with <code>pacman -Ql omarchy-themes-backgrounds</code> to see which theme folders gained images. The images land in the stock theme directories, expected under <code>/usr/share/omarchy/themes/&lt;name&gt;/backgrounds/</code>, one folder per theme.</p>
+      <h3>2. Pick a background.</h3>
+      <p>Press <code>Super + Ctrl + Space</code> to open the background picker for your current theme, and choose one. Or cycle with <code>omarchy theme bg next</code>. To jump to a specific image, use <code>omarchy theme bg set &lt;path-to-image&gt;</code>, and to see the current one, run <code>omarchy theme bg current</code>. Switching themes with <code>Super + Ctrl + Shift + Space</code> or <code>omarchy theme set &lt;name&gt;</code> also changes the background to that theme's set.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Add your own images.</strong> Copy any image into <code>~/.config/omarchy/backgrounds/&lt;theme-name&gt;/</code>, for example <code>~/.config/omarchy/backgrounds/nord</code>. Your images join the theme's bundled set in the picker without touching the stock files. The quickest route is Install, Style, Background in the Omarchy menu, which opens that folder for you.</li>
+        <li><strong>Know the two background folders.</strong> Stock backgrounds live under <code>/usr/share/omarchy/themes</code> and get replaced on update, so never edit them there. Your own images live under <code>~/.config/omarchy/backgrounds/&lt;theme-name&gt;/</code> and survive updates.</li>
+        <li><strong>Try a theme switch.</strong> Each theme ships its own backgrounds, and the current theme remembers the last background you chose for it. Switching themes restores that theme's last background, and re-applying the active theme can advance to the next image.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>You installed the package but no new backgrounds show up in the picker</h3>
+      <p>The files may be there, but the picker looks the same — or you may be looking at the wrong theme.</p>
+      <p><strong>Fix:</strong> First confirm the files actually arrived with <code>pacman -Ql omarchy-themes-backgrounds</code>. If the files are there but the picker looks the same, re-apply your theme with <code>omarchy theme set &lt;current-theme-name&gt;</code>: a theme change re-reads the background set, and re-applying an active theme can advance to the next image. If the picker still shows nothing new, check that you are looking at the right theme: each theme has its own folder, so a new nord background will not appear while tokyo-night is active. This step is unverified on a live machine, so treat it as the first thing to check, not a guaranteed fix. (<a href="https://www.greptile.com/grepository/omacom/omarchy/docs/theme-catalog-and-assets" target="_blank" rel="noopener">Omarchy theme docs</a>)</p>
+      <h3>Your own image does not appear in the background picker</h3>
+      <p>It is probably in the wrong folder.</p>
+      <p><strong>Fix:</strong> User images belong in <code>~/.config/omarchy/backgrounds/&lt;theme-name&gt;/</code>, not in the theme directory under <code>/usr/share/omarchy/themes</code> and not loose in <code>~/.config/omarchy/backgrounds/</code>. The folder name must match the active theme exactly. Open Install, Style, Background in the Omarchy menu to open the right folder for the current theme, copy the image there, then open the picker again. (<a href="https://themissingmanual.dev/guides/making-omarchy-comfortable/4" target="_blank" rel="noopener">Omarchy comfort guide</a>)</p>
+      <h3>A short intro video plays every time you switch themes or backgrounds</h3>
+      <p>Some themes pair a still background with a silent intro clip, matched by file name in <code>backgrounds/intros/</code>.</p>
+      <p><strong>Fix:</strong> Toggle intro playback with <code>omarchy theme bg intro toggle</code>. This only affects the intro clips; it does not change the still backgrounds this package installs. (<a href="https://bamr87.github.io/README/bashos/amrchy/docs/theming/" target="_blank" rel="noopener">Omarchy theming docs</a>)</p>
+      <h3>You edited a stock background or deleted one, and an update wiped your change</h3>
+      <p>That is by design: never edit anything under <code>/usr/share/omarchy/themes</code>, because an update replaces it.</p>
+      <p><strong>Fix:</strong> The safe routes are an overlay (copy the theme folder to <code>~/.config/omarchy/themes/&lt;name&gt;/</code> and change files there) or your own backgrounds under <code>~/.config/omarchy/backgrounds/&lt;name&gt;/</code>. Both survive updates. (<a href="https://themissingmanual.dev/guides/making-omarchy-comfortable/4" target="_blank" rel="noopener">Omarchy comfort guide</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>The Omarchy theme picker (<code>Super + Ctrl + Shift + Space</code>), community themes from omarchytheme.com, and your own photos in <code>~/.config/omarchy/backgrounds/&lt;theme-name&gt;/</code>.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Your own images: drop them into <code>~/.config/omarchy/backgrounds/&lt;theme-name&gt;/</code> — you do not need this package at all. Or grab a curated set like dharmx/walls on GitHub, which the Omarchy manual itself points to — if you hate the stock wallpapers.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Omarchy Themes Backgrounds vs your own images vs dharmx/walls vs community themes</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omarchy-themes-backgrounds</th><th>Your own images</th><th>dharmx/walls</th><th>Community themes</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, MIT</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>The stock stills for the built-in themes, kept in sync with updates</td><td>Photos and art you already own</td><td>A large curated wallpaper collection</td><td>Whole new themes with their own backgrounds</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omarchy-themes-backgrounds</code></td><td>Copy to <code>~/.config/omarchy/backgrounds/&lt;theme-name&gt;/</code></td><td>Clone from GitHub, copy into your backgrounds folder</td><td><code>omarchy theme install &lt;git-url&gt;</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Install this package if you use the built-in themes and want their full background sets. Skip it if you only use your own wallpapers or community themes, since those bring their own images.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Omarchy Themes Backgrounds is free — there is no paid version</h2>
+      <p><strong>Omarchy Themes Backgrounds is free, with no paid equivalent.</strong> This one does not replace a paid wallpaper pack: it is the official stills for the themes you already use, kept in sync by updates, and it costs nothing. It only adds still images; it does not change your colors or theme.</p>
+    </aside>
+
+    <div class="guide-cta">
+      <div><h2>Open the Omarchy Themes Backgrounds package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omarchy-themes-backgrounds.html">View Omarchy Themes Backgrounds →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>What does this package actually install?</summary><p>Background stills for the Omarchy themes: the wallpaper images each built-in theme cycles through. It is a data package, not an app, so there is nothing to launch.</p></details>
+      <details><summary>Where do the files go?</summary><p>Expected under the stock theme directories at <code>/usr/share/omarchy/themes/&lt;name&gt;/backgrounds/</code>. Confirm with <code>pacman -Ql omarchy-themes-backgrounds</code> after install, since the exact file list was not verified at draft time.</p></details>
+      <details><summary>How do I change my background after installing it?</summary><p>Press <code>Super + Ctrl + Space</code> for the picker, or run <code>omarchy theme bg next</code> to cycle, or <code>omarchy theme bg set &lt;path-to-image&gt;</code> for a specific file.</p></details>
+      <details><summary>How do I add my own wallpaper?</summary><p>Copy the image into <code>~/.config/omarchy/backgrounds/&lt;theme-name&gt;/</code> for the theme you use. It appears in the picker alongside the stock images. Use Install, Style, Background in the Omarchy menu to open the right folder.</p></details>
+      <details><summary>Does installing this change my colors or theme?</summary><p>No. It only adds still images. Colors come from the theme's <code>colors.toml</code>, which this package does not touch.</p></details>
+      <details><summary>How do I remove it?</summary><p>Run <code>omarchy pkg remove omarchy-themes-backgrounds</code>. Your own images under <code>~/.config/omarchy/backgrounds/</code> are untouched, since they live outside the package.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/omarchy-themes-backgrounds.html" target="_blank" rel="noopener">Omarchy package listing (version 2026.11.25-1, "Background stills for the Omarchy themes", MIT, 72.1 MB download / 72.8 MB installed, updated 2026-11-25)</a></li>
+        <li><a href="https://themissingmanual.dev/guides/making-omarchy-comfortable/4" target="_blank" rel="noopener">Theme and background picker, user background folders, overlay rules</a></li>
+        <li><a href="https://www.greptile.com/grepository/omacom/omarchy/docs/theme-catalog-and-assets" target="_blank" rel="noopener">Background catalog, theme directory layout, intro media</a></li>
+        <li><a href="https://bamr87.github.io/README/bashos/amrchy/docs/theming/" target="_blank" rel="noopener">Theme activation, intro toggle, background commands</a></li>
+        <li><a href="https://deepwiki.com/hypn/omarchy-for-wsl/5.3-background-management" target="_blank" rel="noopener">Background management, current/background symlink, swaybg</a></li>
+        <li><a href="https://www.starryhope.com/linux/omarchy-4-5-whats-new/" target="_blank" rel="noopener">Omarchy 4.5 theme picker and background install flow</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

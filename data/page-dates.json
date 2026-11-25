@@ -56,7 +56,7 @@
  },
  "apps/amp-desktop-bin.html": {
   "date": "2026-11-25",
-  "hash": "dd131047e34d9fda88158fdba1918f3b3dd7e8cd0ad2806d351e0cdfd01ce767",
+  "hash": "e9300a9a3fc42ac1a6bf7e4128f30d1fec204edd819dbe41ba4687b1c56c4f96",
   "v": 4
  },
  "apps/antigravity-cli.html": {
@@ -106,7 +106,7 @@
  },
  "apps/chromium.html": {
   "date": "2026-11-25",
-  "hash": "edb8a9cf9b527a75e1372ed64bbdf9b2b012f122da08c6ae95cf68229f57a5cd",
+  "hash": "f311e109d9115a7e73de35902ebf7a7fdd7fa2f29dd018f5f149f630903a9a29",
   "v": 4
  },
  "apps/claude-desktop.html": {
@@ -715,8 +715,8 @@
   "v": 4
  },
  "apps/github-copilot-cli.html": {
-  "date": "2026-11-24",
-  "hash": "85fd57c5774d7568a3d35000a657b49f5d562819988cbb2c295ed51fa3beb5ba",
+  "date": "2026-11-25",
+  "hash": "b6fc33bd30d16cd82d0813fc5c87748fd223e845fd688f2bdce3a331598e1d10",
   "v": 4
  },
  "apps/gliff.html": {
@@ -770,8 +770,8 @@
   "v": 4
  },
  "apps/hey-cli.html": {
-  "date": "2026-11-24",
-  "hash": "13bfa8e7d08da97c3d4981fbc36544f026569f7eb906aabd0acc1bb1ce6e0518",
+  "date": "2026-11-25",
+  "hash": "c42c6708c594c8f8929efe3a9a3712a524f4b5ed3e29f391b0d0a1365981013a",
   "v": 4
  },
  "apps/hunk.html": {
@@ -1426,7 +1426,7 @@
  },
  "bambustudio-bin-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "99980beee9f0a6a13da23a4c34adbee37f27ffcef7d93ef082f780ea0c3257b8",
+  "hash": "719cebda1d3ae89d7479266eed48c796b70aa0853cad50ab3977fd8e0f5c7e8a",
   "v": 4
  },
  "basecamp-cli-on-omarchy.html": {
@@ -1441,7 +1441,7 @@
  },
  "buzz-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "017a31c20441ad5c20ffd54646969dc879ee879b35580331d62d7db05b161404",
+  "hash": "a5a0c11542a4988b8831fbb8178af6d7b130eddc697a4f40058c1ddebba2e3a6",
   "v": 4
  },
  "catalog.html": {
@@ -1511,12 +1511,12 @@
  },
  "chromium-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "2c2c661f84844898a6e9a84c5d356fff3103b1d58d80e2f96c80d72a2f90aed9",
+  "hash": "5379028ddb5749ced157254970577b5cc8fcc3e97611fe4bd3fef6f91ccf28f2",
   "v": 4
  },
  "claude-code-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "811783a97f03de066203f01c67005cea18569a6cd3f0e597d60bda9b45a0dbd1",
+  "date": "2026-11-25",
+  "hash": "37352680d8932d3a45db3349c8cba9b78e48aef88ad3784db1c7799e6b859113",
   "v": 4
  },
  "cliamp-on-omarchy.html": {
@@ -1525,8 +1525,8 @@
   "v": 4
  },
  "cloudflare-cli-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "eaf88a9812c7ec7b259b02c57b6d5e01160005ef9d0f2c6f130465b317c40eba",
+  "date": "2026-11-25",
+  "hash": "4a9075a63967189ef42e5446f08a3a14ae40d9faf7d25614d94849a217f30f2b",
   "v": 4
  },
  "collie-on-omarchy.html": {
@@ -1535,8 +1535,8 @@
   "v": 4
  },
  "cua-driver-bin-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "a5109d88bcafe7230d73033b93cc5aa4897e5c8477729a4daea72fbe0c0e963d",
+  "date": "2026-11-25",
+  "hash": "34aaaead692616c5ddfc80da36ab02058a0774f4e3811b6aedb85ed70197bae8",
   "v": 4
  },
  "cua-hyprland-plugin-on-omarchy.html": {
@@ -1560,8 +1560,8 @@
   "v": 4
  },
  "devin-cli-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "3ee92a0228e27e15aa8d15cfc38aaa2f74d03addc59f6a4c5dc7c8080be5b9af",
+  "date": "2026-11-25",
+  "hash": "30bca2d9da08846c4eb0206e4af4379dc56594918dd510af3d05c14e0e79041a",
   "v": 4
  },
  "disktree-bin-on-omarchy.html": {
@@ -1570,8 +1570,8 @@
   "v": 4
  },
  "dropbox-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "ee3fa4c8481de96ea8aa87bde155ea76b7a740c2d602a61e0569a4e7cc146f04",
+  "date": "2026-11-25",
+  "hash": "eec77eba79761cd9590216be7d12f22f388c4850e6aa1fc5b965e9deba82e94d",
   "v": 4
  },
  "dual-boot-windows-and-omarchy.html": {
@@ -2095,18 +2095,18 @@
   "v": 4
  },
  "firefox-i18n-zh-cn-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "d3fd7dd395a134bed245ffa0acddc845d169d736bc145d14d70873f1367e8b6c",
+  "date": "2026-11-25",
+  "hash": "f334ccd079fea6a3e902b620c9fdeceee1b1140ca5fc16ea67b50cb384a9b4d5",
   "v": 4
  },
  "firefox-i18n-zh-tw-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "9d4278c15daecab1f3585f63603b57ff8ef36b96de3536838555c88dba511bb9",
+  "date": "2026-11-25",
+  "hash": "37ed58fd2fcb9e07d11b8b5390c30d2c3182c842b645e242c0db2e1c0acde3dd",
   "v": 4
  },
  "firefox-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "76640299f6c9a6d6cd9c4fe355105abb1f0137faf7425ae2dfab841f5a20eb7b",
+  "date": "2026-11-25",
+  "hash": "46743551721c47f6de014c394ef941ab885cc9d6e808f080fa30f7c51fbc863e",
   "v": 4
  },
  "free-loom-alternatives-omarchy.html": {
@@ -2155,23 +2155,23 @@
   "v": 4
  },
  "ghost-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "52f7222e23583f51b2023937e76cf470e636b1d0c0b80510933a6112bda053d7",
+  "date": "2026-11-25",
+  "hash": "b266211605f4cca8e839bdc4c5537a6e32c4ebef9c51471062d9c9246834b332",
   "v": 4
  },
  "ghost-runtime-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "1a58a60ee067bc27b62bba11e91834cd3f992a6ab53fa9a89d551637c2411792",
+  "date": "2026-11-25",
+  "hash": "9416f3d4588a538b4e7296204de1bbbd3cb60907d6f2081bce1cfa8c468d3ebd",
   "v": 4
  },
  "ghostty-nautilus-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "a58303b77b5e82bfd07705e91f0df798aa38fa4ef035e0a6800fe87fe9458432",
+  "date": "2026-11-25",
+  "hash": "2b536c4131790dc5b173ca77ca3550cfab4efed7903d4d5d6cbe0a35129e5633",
   "v": 4
  },
  "ghostty-shell-integration-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "ebdf0131382f9fe3a12d31c1a7af30fb671b1a4e9dc6b509aa5504d8fb01223a",
+  "date": "2026-11-25",
+  "hash": "ac235d9cf3f1508240be53b91dadbf97ba88c2c0f72f884937c5613ed7b7a096",
   "v": 4
  },
  "ghui-on-omarchy.html": {
@@ -2180,18 +2180,18 @@
   "v": 4
  },
  "grok-bot-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "759974425600bf3632cd07340807822e9271205cc637c68e076dbd6ed1103542",
+  "date": "2026-11-25",
+  "hash": "6cf14b8308625eea6a805c69f0c2b4874808d3b92cfba47a4bf5359b029e18bd",
   "v": 4
  },
  "grok-cli-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "6c3abcfb2428f23bb79da9b9005d0dd0177d27ff40b14eebe9c4a09f0a98348e",
+  "date": "2026-11-25",
+  "hash": "aca728ef516da9b75a0441dd200f8bb4352be022b78e991cbd9290fc1d1007b3",
   "v": 4
  },
  "guides.html": {
-  "date": "2026-11-24",
-  "hash": "c0abbf0202f346d1aaf93a442fcf7a574f6bdc4f008137c5ee83f04a3ea04a55",
+  "date": "2026-11-25",
+  "hash": "c793b0ec0ab9830999d2826a1762b7a8665ab1dce22024e5d3edce585c384304",
   "v": 4
  },
  "helium-on-omarchy.html": {
@@ -2221,7 +2221,7 @@
  },
  "index.html": {
   "date": "2026-11-25",
-  "hash": "58eb7ed484728d35d21f6cbacb6d1b6c556271f12ae777c8eeeeb37262487049",
+  "hash": "3e95c022a982509d661416ededa20c943b4edafa28b5ba19dd29135597564277",
   "v": 4
  },
  "install-omarchy-on-intel-mac.html": {
@@ -2286,7 +2286,7 @@
  },
  "ladybird-bin-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "1e4ceae80c4423b0467f20e8befdec42704da6ae08369c5a0eb952d831c1443f",
+  "hash": "5c1d5bce899d63ac9fac44f2f01c469bb9549ce38884586e1aef8bdca352a672",
   "v": 4
  },
  "leaderboard.html": {
@@ -2311,12 +2311,12 @@
  },
  "linux-firmware-cirrus-dx13260-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "8cb72967a45749539b46da5e36250bc9f3fdf6fce97d5437131cefc67fd8630d",
+  "hash": "622f05969176642d0cf028216f914a8414952a2f169ecfa5c5f8e2e7d9963e70",
   "v": 4
  },
  "linux-omarchy-bore-headers-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "8e98c6983242e006825e8692699393d513ba1a655f06f1834359b082035c4873",
+  "hash": "de8e9aaba9ff2fe2624db1eedddd9fbfde7ce2049ed4d01f93c050c1573d8052",
   "v": 4
  },
  "linux-omarchy-eevdf-nvidia-open-on-omarchy.html": {
@@ -2341,7 +2341,7 @@
  },
  "linux-omarchy-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "cfa0757bdf9e055c93f7d935b37e77188ecef899af281331d1ebd434fc6c352a",
+  "hash": "3a11951fc40e2b1d28ace0d2806e285cce866ceae4c7f2ccddb33dde3dad2fff",
   "v": 4
  },
  "linux-t2-headers-on-omarchy.html": {
@@ -2360,13 +2360,13 @@
   "v": 4
  },
  "lmstudio-bin-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "a0c4fc92304fbab406f82b6aee6d5ff84a75528d1677d75807ac8315101d7508",
+  "date": "2026-11-25",
+  "hash": "baaa3e12dba715cd100a7c8dfe5bff145821bdf915135d38c8df752a8df0d178",
   "v": 4
  },
  "lmstudio-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "f237c7e4cac90d1eeae8a397ce6e0fb6ea3b3eb56241407e5b9138b9dc3ac7a0",
+  "date": "2026-11-25",
+  "hash": "9a7031590c284d72eec14831a6c8f995367ae4b18bfd0b296905026c8a207df5",
   "v": 4
  },
  "makima-bin-on-omarchy.html": {
@@ -2391,12 +2391,12 @@
  },
  "muse-code-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "9bfe52c03ea49f31e5b3889961db3de83834c44c0fda2b5c56fc8b70be49b605",
+  "hash": "01f5da75d30c72df27768c3823d55299a20e5f11dced2629cb55b6a814c08c18",
   "v": 4
  },
  "nautilus-dropbox-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "784c22e5496166c43de599c7288647c78eaf598c0437b6f535dfc1f4fb4654eb",
+  "hash": "b68959586cd7a40a33792ff7451d39e536be00580a0fb7fd0ac358cae6a8e672",
   "v": 4
  },
  "nautilus-open-any-terminal-on-omarchy.html": {
@@ -2471,7 +2471,7 @@
  },
  "omarchy-themes-backgrounds-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "467adc0fd7fd8b0d66a03b73636743cdcae20926b11e5032b91163afb059c359",
+  "hash": "b8b52b3b7499e12640c1acf339db30b122d3c1f9b079e5d97e537b993f8b144b",
   "v": 4
  },
  "omarchy-vs-macos-windows-ubuntu.html": {
@@ -2480,8 +2480,8 @@
   "v": 4
  },
  "omawake-bin-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "cebba70a6bb67ada172887e24fbd3a4853c00636efe88d54bdb5738411ba9945",
+  "date": "2026-11-25",
+  "hash": "d919164880a8bbd2cae98b98d544d7845e503f9f7f2e0ac228e4d8a5f764cc37",
   "v": 4
  },
  "once-bin-on-omarchy.html": {
@@ -2490,23 +2490,23 @@
   "v": 4
  },
  "openai-codex-desktop-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "a4a750d2bbaa7831a98024316adc83b18c8b47793dcf0f9419ff6b0e45e96335",
+  "date": "2026-11-25",
+  "hash": "0c3b8ad8f6ff16998680630b7e9f165e6a23886e2cd62007c4993bc68ed90f0d",
   "v": 4
  },
  "openai-codex-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "20bba965f6e075904b69bff2d9bbfe6c7d694cb2fe12a6a8d6dbd8197131d0d3",
+  "date": "2026-11-25",
+  "hash": "8d6c6dbad96b90f40769d6cc5ca14ca592dee4603f425315751e3764a6860594",
   "v": 4
  },
  "opencode-desktop-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "e16505711359015b16236027ef9cfbfc412cee53d8789bea15e6481165ce6caa",
+  "date": "2026-11-25",
+  "hash": "1c3b68486a6939ee5598a79d7bc5c009eebabbd6e7d044635710a1de1e347520",
   "v": 4
  },
  "opencode-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "0b7a5104888a16d0f9708d80449a6cd0ba28d4d9dcd5e10ada65119783877604",
+  "date": "2026-11-25",
+  "hash": "c9d71b65ee68619bc96cd3fcb1d599c233b05677f00b882d6818d14392c9a476",
   "v": 4
  },
  "openrouter-ori-on-omarchy.html": {
@@ -2520,8 +2520,8 @@
   "v": 4
  },
  "playwright-cli-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "32c463dc0333f8d43fdee9df3e4bb0336b3d60e2190be2fcedc207ed65420888",
+  "date": "2026-11-25",
+  "hash": "1e495b18b1e20571bf731091b3410d2d4601a71a01d2c8bb935d5f6bf6621967",
   "v": 4
  },
  "power-profiles-daemon-on-omarchy.html": {
@@ -2555,8 +2555,8 @@
   "v": 4
  },
  "qwen-code-on-omarchy.html": {
-  "date": "2026-11-24",
-  "hash": "e8c0485aa565296d97b1b768c5bc9db1e9b3d7c0df32fdb128a2d75a55057abc",
+  "date": "2026-11-25",
+  "hash": "ecd475d6e177b510a4875850bfff5862e571f7a58a1e085acc1a11142da2f020",
   "v": 4
  },
  "revive-old-laptop-with-omarchy.html": {
@@ -2626,7 +2626,7 @@
  },
  "tutorials.html": {
   "date": "2026-11-25",
-  "hash": "699d02882e61470d8e3518bc737d3c04330100630239198dff47fd6807733630",
+  "hash": "5f57379c2cf3096f18fdc8e62d59ede0bdb83bc1fe24fe0eab67b8b8b4bd3960",
   "v": 4
  },
  "tzupdate-on-omarchy.html": {
@@ -2641,7 +2641,7 @@
  },
  "vi-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "bb687b050420c53086571570ca625b6ae672dbe06009abb53959d9efd5114fe4",
+  "hash": "e570d541610ae16fed5d6a67f84603f69ea555fb9c35d07d82f90beaf0c24b92",
   "v": 4
  },
  "visual-studio-code-bin-on-omarchy.html": {
@@ -2651,7 +2651,7 @@
  },
  "voxtype-bin-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "84479c300c441774fc6808b720892df596450edb296299bf28fb8049dd562adb",
+  "hash": "dc61d99b37edddf51178492585f0851a22e457cec642ca03e17ecf394dd1d200",
   "v": 4
  },
  "vs/omarchy-apps-vs-omarchy-store.html": {
@@ -2716,7 +2716,7 @@
  },
  "yay-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "ea556c42187eefff28219ee4529c66d7d708bb716647bb5cd03cfa2c4edb5f74",
+  "hash": "df8ff9f13d96623b570cd09fff3dad2e6c1789bc24024d0128a1d1f5f5148e1f",
   "v": 4
  },
  "yt-dlp-on-omarchy.html": {
@@ -2726,7 +2726,7 @@
  },
  "zen-browser-bin-on-omarchy.html": {
   "date": "2026-11-25",
-  "hash": "692bc811a683ec735214f0f4f1846529dac77db034750eafafbb09c6eb8c947b",
+  "hash": "fe35833d0caa0403647b97b7526651997ed7fe9383bf18800402c1552c585c7a",
   "v": 4
  }
 }

@@ -1,0 +1,134 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add chromium` — verify it resolves in the store index; confirm 181.7 MB download / 435.3 MB installed, BSD-3-Clause, as listed. The store page lists no version number; confirm the installed version with `chromium --version`
+- First launch: launch from the Omarchy menu and confirm the first-run screens (default browser prompt, no Google sign-in offered)
+- Wayland: confirm whether Chromium runs natively on Wayland out of the box on Hyprland, or needs the `--ozone-platform-hint=auto` flag. Check `chrome://gpu` for the window protocol
+- Config path: confirm profile data lives under `~/.config/chromium`
+- Claimed issues reproduced: (1) Widevine DRM gap (Netflix/Spotify refuse to play), (2) missing proprietary codecs (H.264/AAC/HEVC), (3) blurry XWayland rendering on HiDPI, (4) no hardware video decoding by default
+- Screenshots needed: install, first launch, `chrome://gpu` status page, a DRM site error, the flags page
+
+SEO notes:
+- URL: /guides/chromium-on-omarchy
+- Title tag: "Chromium on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install Chromium on Omarchy. Fix Netflix and DRM with Widevine, enable Wayland and hardware video decoding, and see how it compares to Chrome and Firefox."
+- Keywords: chromium omarchy, chromium linux, chromium widevine, chromium wayland, chromium vs chrome, chromium h264 linux
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Google Chrome</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Chromium on Omarchy</h2>
+      <p>Chromium on Omarchy is the open-source browser behind Google Chrome: fast, standards-compliant, and free of Google account tracking, but without Chrome’s proprietary codecs and DRM module.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add chromium</code></pre>
+      <p>That installs Chromium (181.7 MB download, 435.3 MB installed, BSD-3-Clause). It launches like any other browser (<code>chromium</code>). Know this before you switch: Netflix, Spotify, and some video sites will not play until you add Widevine DRM, and some H.264 video will not play at all. The store page lists no version number — confirm the installed version with <code>chromium --version</code>.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Launch it and set it as default.</h3>
+      <p>Open the Omarchy menu (<code>Super + Space</code>), type <code>chromium</code>, and press Enter. On first launch it asks whether to make Chromium the default browser. Say yes if you want links from other apps to open here. There is no Google sign-in: Chromium ships without Google’s proprietary code, so there is no account sync. Your bookmarks, passwords, and history stay local unless you use a third-party sync extension.</p>
+      <h3>2. Import your old browser data.</h3>
+      <p>Go to <code>chrome://settings/importData</code> and pick your previous browser (Chrome, Firefox, or another Chromium browser). Import bookmarks, passwords, and history in one pass. If you are coming from Google Chrome, this is the step that makes the switch painless.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Check how it is running on Wayland</strong> — open <code>chrome://gpu</code> and look at the window protocol. If it says XWayland and text looks blurry, quit and relaunch with <code>chromium --ozone-platform-hint=auto</code>, or set the “Preferred Ozone platform” flag to Auto at <code>chrome://flags</code>.</li>
+        <li><strong>Install an ad blocker</strong> — Chromium uses the Chrome Web Store, so uBlock Origin installs the same way it does in Chrome. Open the Web Store, search for it, and click Add.</li>
+        <li><strong>Know where your profile lives</strong> — bookmarks, extensions, and settings sit under <code>~/.config/chromium</code>. Back that folder up if you want to carry your browser to another machine.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>Netflix, Spotify, Amazon Prime, or another streaming site shows an error and refuses to play video</h3>
+      <p>Chromium ships without Widevine, Google’s proprietary DRM module, so DRM-protected video cannot play. This is expected, not a bug.</p>
+      <p><strong>Fix:</strong> Install Widevine from the AUR with <code>yay -S chromium-widevine</code>, then restart Chromium and try again. If you would rather not touch the AUR, use Google Chrome or Firefox for streaming instead. (<a href="https://www.developnsolve.com/linux/how-to-install-chromium-on-arch-linux" target="_blank" rel="noopener">Arch install guide</a>)</p>
+      <h3>Some videos play with no sound, or will not play at all, while others work fine</h3>
+      <p>Chromium on Arch ships without proprietary codecs (H.264, AAC, HEVC) because of patent licensing, so video encoded in those formats fails.</p>
+      <p><strong>Fix:</strong> The Flatpak build of Chromium bundles a codecs extension that covers H.264, MP3, and AAC. If you installed from the Omarchy package and need those formats, install the Flatpak instead, or use Firefox, which handles them natively. (<a href="https://www.fosslinux.com/111944/how-to-install-chromium-web-browser-on-linux.htm" target="_blank" rel="noopener">FossLinux install guide</a>)</p>
+      <h3>Chromium looks blurry on HiDPI, or window dragging and scaling feel wrong on Hyprland</h3>
+      <p>It is probably running through XWayland instead of native Wayland.</p>
+      <p><strong>Fix:</strong> Launch with <code>chromium --ozone-platform-hint=auto</code> and check <code>chrome://gpu</code> again. If that fixes it, make the flag permanent by setting “Preferred Ozone platform” to Auto at <code>chrome://flags</code>. (<a href="https://bbs.archlinux.org/viewtopic.php?pid=2170975" target="_blank" rel="noopener">Arch Linux Forums</a>)</p>
+      <h3>Video playback uses the CPU heavily and the laptop fan spins up on YouTube</h3>
+      <p>Hardware video decoding is not on by default.</p>
+      <p><strong>Fix:</strong> First install the right VA-API driver for your GPU (<code>intel-media-driver</code> for Intel, <code>mesa</code> for AMD, <code>libva-nvidia-driver</code> for Nvidia). Then launch Chromium with <code>--enable-features=VaapiVideoDecodeLinuxGL --ozone-platform=wayland</code> and check <code>chrome://gpu</code> for “Video Decode: Hardware accelerated”. One gotcha from the Arch forums: if the flags seem to do nothing, delete the old profile cache (<code>~/.config/chromium</code> and <code>~/.cache/chromium</code>) and try again, because stale config can block the new settings. (<a href="https://bbs.archlinux.org/viewtopic.php?pid=2173385" target="_blank" rel="noopener">Arch Linux Forums</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Firefox as a second browser for streaming and DRM sites, Bitwarden for password sync (since Chromium has no Google sync), and uBlock Origin from the Chrome Web Store.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Google Chrome has it all built in, and Firefox plays everything natively with no extra packages. If you want Chromium without Google but with more privacy defaults, Brave is the usual pick.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Chromium vs Google Chrome vs Firefox vs Brave</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Chromium</th><th>Google Chrome</th><th>Firefox</th><th>Brave</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, BSD-3-Clause</td><td>Free, proprietary</td><td>Free, MPL-2.0</td><td>Free, open source</td></tr>
+            <tr><td>Best for</td><td>A clean open-source Chrome base with no Google account</td><td>Streaming and sites that need Widevine and proprietary codecs</td><td>Privacy defaults, DRM and codecs that just work</td><td>Chromium with built-in ad blocking and privacy defaults</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add chromium</code></td><td>AUR (<code>google-chrome</code>)</td><td><code>omarchy pkg add firefox</code></td><td>AUR (<code>brave-bin</code>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Chromium if you want the Chrome engine and the Chrome Web Store with no Google account attached. Pick Firefox if you want video and streaming to work with zero extra setup.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Chromium is a free alternative to Google Chrome ($0, but your data is the product)</h2>
+      <p><strong>Chromium is a free alternative to Google Chrome ($0, but your data is the product).</strong> What you give up: Google account sync, built-in Widevine DRM, and proprietary codecs, so some video and streaming needs extra setup. What you keep: the same Blink engine, the same Chrome Web Store extensions, the same speed, and a browser you can inspect and build yourself. Chromium costs nothing and Google Chrome costs nothing too, so the trade is not money, it is control.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Google Chrome (~10 minutes)</h2>
+      <ol>
+        <li><strong>Export from Chrome:</strong> export bookmarks from the Bookmark Manager (<code>Ctrl + Shift + O</code>, then the three-dot menu, Export bookmarks) as an HTML file. Passwords export from <code>chrome://settings/passwords</code> under the three-dot menu, as a CSV file. Treat that CSV as sensitive and delete it after importing.</li>
+        <li><strong>Import into Chromium:</strong> in Chromium, open <code>chrome://settings/importData</code>, choose Google Chrome, and import bookmarks, passwords, and history directly. Or import the HTML bookmarks file from the Bookmark Manager.</li>
+        <li><strong>What doesn’t transfer:</strong> your Google account sync (there is none in Chromium), Chrome’s saved payment methods tied to your Google account, and Widevine DRM, which needs the AUR package. Extensions transfer: reinstall them from the Chrome Web Store.</li>
+        <li><strong>Time estimate:</strong> takes about 10 minutes, plus a few more if you add Widevine.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Chromium package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/chromium.html">View Chromium →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Chromium free?</summary><p>Yes. It is open source under the BSD-3-Clause license, and the Omarchy package costs nothing.</p></details>
+      <details><summary>What is the difference between Chromium and Google Chrome?</summary><p>Chromium is the open-source project Chrome is built on. Chrome adds Google’s proprietary code: account sync, the built-in PDF viewer, Widevine DRM, and proprietary media codecs. Chromium leaves those out.</p></details>
+      <details><summary>Can I use Chrome extensions in Chromium?</summary><p>Yes. Chromium uses the Chrome Web Store, and extensions install the same way.</p></details>
+      <details><summary>Why won’t Netflix play in Chromium?</summary><p>Chromium has no Widevine DRM module. Install <code>chromium-widevine</code> from the AUR, or watch in Firefox or Chrome.</p></details>
+      <details><summary>Where does Chromium store my profile?</summary><p>Under <code>~/.config/chromium</code>. Each profile is a subfolder there.</p></details>
+      <details><summary>Does Chromium run natively on Wayland?</summary><p>Usually yes with the Ozone hint set to auto, but confirm on your machine with <code>chrome://gpu</code>. If it shows XWayland, launch with <code>--ozone-platform-hint=auto</code>.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/chromium.html" target="_blank" rel="noopener">Omarchy package listing for Chromium</a></li>
+        <li><a href="https://www.fosslinux.com/111944/how-to-install-chromium-web-browser-on-linux.htm" target="_blank" rel="noopener">Chromium vs Chrome, codecs, Widevine, Flatpak codecs extension</a></li>
+        <li><a href="https://www.developnsolve.com/linux/how-to-install-chromium-on-arch-linux" target="_blank" rel="noopener">Chromium Widevine and codecs on Arch, AUR packages</a></li>
+        <li><a href="https://bbs.archlinux.org/viewtopic.php?pid=2173385" target="_blank" rel="noopener">VA-API hardware decode flags and stale-config fix (Arch Linux Forums)</a></li>
+        <li><a href="https://bbs.archlinux.org/viewtopic.php?pid=2170975" target="_blank" rel="noopener">Wayland ozone-platform-hint flag (Arch Linux Forums)</a></li>
+        <li><a href="http://teaMdEv.CoM/dotnetbrowser/docs/guides/gs/media/" target="_blank" rel="noopener">Chromium codec support table (H.264, HEVC, AAC missing in Chromium)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

@@ -63,7 +63,128 @@
     <section><h2>Install hey-cli on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add hey-cli</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>an active HEY.com email account/subscription</li><li>browser-based sign-in to authenticate the CLI</li><li>network access to sync with HEY</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>the CLI itself is free and open source (MIT); it requires a paid HEY.com email subscription to be useful</dd><dt>Licence</dt><dd>MIT</dd><dt>Download</dt><dd>13.5 MB</dd><dt>Installed</dt><dd>40.6 MB</dd></dl></div></section>
 
-    <div class="actions"><a class="button ghost" href="https://github.com/basecamp/hey-cli" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/hey-cli" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
+<section class="folded-guide" id="guide"><nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from HEY</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>HEY CLI on Omarchy</h2>
+      <p>HEY CLI on Omarchy is Basecamp's official terminal interface for HEY email: a full-screen TUI plus scriptable commands for mail, contacts, calendar, and journal, with a skill and MCP server so coding agents can read and act on your HEY mail too.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add hey-cli</code></pre>
+      <p>Then run <code>hey setup</code> and <code>hey tui</code>. That installs HEY CLI (13.5 MB download, 40.6 MB installed, MIT; the app page did not list a version, and upstream was at 1.10.1 in early November 2026). <code>hey setup</code> walks you through a one-time browser sign-in, and <code>hey tui</code> opens the full-screen app. The CLI itself is free and open source, but it needs a paid HEY account: HEY for You is $99 a year after a 30-day free trial, and there is no free plan. HEY's own site says that on Omarchy 4.1 or later, hey is already installed and you just run <code>hey</code> — that is unverified, so if <code>hey</code> is not found, install it with the command above.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Sign in.</h3>
+      <p>Run <code>hey setup</code>. It walks you through setup and opens your browser once so you can sign in to HEY and approve access, then everything after that happens in the terminal. Check the session any time with <code>hey auth status</code>, and sign out with <code>hey auth logout</code> (<code>hey login</code> and <code>hey logout</code> are shortcuts). Run <code>hey setup</code> again any time to rerun the wizard. If you only want the HEY command and do not want agent integrations, run <code>hey setup --skip-agents</code>.</p>
+      <h3>2. Open the TUI.</h3>
+      <p>Run <code>hey tui</code>. It is a full-screen terminal app for Mail, Contacts, Calendar, and Journal, using HEY's own keyboard shortcuts, and it keeps mail and calendar data updated through live connections. If the connection drops, it shows an offline status and reconnects. The TUI is for browsing; the plain commands are for when you know what you want, or for scripts.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Try the scriptable commands.</strong> <code>hey search "invoice"</code> searches threads, and most commands accept <code>--json</code> for full structured output or <code>--jq '&lt;expression&gt;'</code> to filter it, so you can pipe results into scripts. Bare <code>hey</code> prints the help, and <code>hey commands --json</code> lists every command with its notes for agents.</li>
+        <li><strong>Connect your coding agent.</strong> The CLI ships with an agent skill and a Claude Code plugin. Run <code>hey setup claude</code> for the skill and the HEY plugin for Claude Code, <code>hey setup codex</code> for the skill in Codex, or <code>hey skill install</code> for just the skill with any other agent. Want HEY as MCP tools instead? <code>hey mcp</code> serves them from your signed-in CLI; add it to Claude Code with <code>claude mcp add hey -- hey mcp</code>.</li>
+        <li><strong>Know the fix-it command.</strong> If the TUI will not open or mail stops updating, run <code>hey doctor</code>. It checks whether you are still signed in, whether your login is stored securely, and whether you are on the latest version, with a fix alongside anything that is wrong.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>The TUI will not open, or mail stops updating</h3>
+      <p>The TUI refuses to open, or mail stops updating in the terminal.</p>
+      <p><strong>Fix:</strong> Run <code>hey doctor</code>. It checks your sign-in, your credential storage, and your version, and suggests a fix for whatever it finds. Do not reinstall first; <code>hey doctor</code> is the documented first step for exactly this symptom. (<a href="https://help.hey.com/article/1190-tui-for-hey" target="_blank" rel="noopener">HEY help, HEY TUI</a>)</p>
+      <h3>You installed with the curl pipe and nothing happens, or setup never runs</h3>
+      <p>The installer finishes, but setup never runs and nothing happens.</p>
+      <p><strong>Fix:</strong> The install command pipes a script through bash, so bash has no interactive input terminal during installation, and the installer finishes safely instead of trying to open a setup prompt. Start setup yourself with <code>hey setup</code>, or run bare <code>hey</code>, which starts the setup flow on first run when you are logged out. (This applies to the upstream installer; the Omarchy package may already handle it, which is an open verify item.) (<a href="https://flaviocopes.com/hey-cli/" target="_blank" rel="noopener">Flavio Copes HEY CLI guide</a>)</p>
+      <h3><code>hey auth status</code> reports a storage problem instead of saying you are logged out</h3>
+      <p>Signing in again does not fix it.</p>
+      <p><strong>Fix:</strong> On macOS, hey-cli stores credentials in the system Keychain, and if the Keychain refuses a read, for example inside an agent's sandbox, it reports a storage problem rather than a logged-out state. Signing in again will not fix it, so look at what is blocking Keychain access. On Linux the credential path is unverified; check <code>~/.config/hey-cli/</code> for a credentials file as a first step. (<a href="https://flaviocopes.com/hey-cli/" target="_blank" rel="noopener">Flavio Copes HEY CLI guide</a>)</p>
+      <h3>You expected hey-cli to work with your Gmail address</h3>
+      <p>It will not.</p>
+      <p><strong>Fix:</strong> HEY is its own email service with its own <code>@hey.com</code> address; there is no IMAP, and you cannot use your existing address except by forwarding mail into HEY. HEY for You is $99 a year after a 30-day free trial with no card, and there is no free plan. If you want terminal email on your current address, use aerc or neomutt with an IMAP provider instead. (<a href="https://paulobrien.com/hey-vs-fastmail/" target="_blank" rel="noopener">HEY vs Fastmail comparison</a>, <a href="https://canarymail.io/blog/hey-email-alternatives" target="_blank" rel="noopener">HEY alternatives</a>)</p>
+      <h3>Setup connected coding agents you did not want it to touch</h3>
+      <p>Setup connected agents you did not ask it to connect.</p>
+      <p><strong>Fix:</strong> Setup connects the agents it finds on your machine by default. Skip that step with <code>hey setup --skip-agents</code>, or set <code>HEY_SETUP_AGENT=none</code> on the install command. To connect one agent later, run <code>hey setup claude</code> or <code>hey setup codex</code> on its own. (<a href="https://flaviocopes.com/hey-cli/" target="_blank" rel="noopener">Flavio Copes HEY CLI guide</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Claude Code (the HEY skill and MCP server let it read, search, draft, and organize your mail in plain language), your HEY Calendar (same account, same TUI), and shell scripts (structured <code>--json</code> output makes mail searchable from cron jobs and agents).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li><code>aerc</code> or <code>neomutt</code> for terminal email with any IMAP provider for free, and <code>thunderbird</code> (Thunderbird) as the free GUI option — if you hate the paid-account requirement. If you like HEY's Screener idea but not its price, Fastmail Individual is $60 a year and includes your own domain.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: HEY CLI vs aerc vs neomutt vs Thunderbird</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>hey-cli</th><th>aerc</th><th>neomutt</th><th>Thunderbird</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free CLI (MIT); HEY for You $99/yr, no free plan</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>HEY users who want mail, calendar, and journal in the terminal, plus agent access</td><td>Terminal email with any IMAP account, fast and minimal</td><td>A classic terminal mail client with deep keyboard control</td><td>A full GUI mail client with any provider, including Gmail</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add hey-cli</code></td><td><code>omarchy pkg add aerc</code> (unverified, check the store)</td><td><code>omarchy pkg add neomutt</code> (unverified, check the store)</td><td><code>omarchy pkg add thunderbird</code> (unverified, check the store)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick hey-cli if you already pay for HEY and want your inbox in the terminal, especially if you want an agent to work in it. Pick aerc or neomutt if you want terminal email on the address you already own, for free.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>There is no free HEY</h2>
+      <p><strong>There is no free HEY.</strong> The CLI is free and MIT licensed, but the service it talks to costs $99 a year after a 30-day trial, with no free plan and no monthly billing. If you want terminal email without paying, use aerc or neomutt with a free or cheap IMAP provider instead. What you give up: HEY's Screener, Imbox, Feed, and Paper Trail workflow, and the agent skill built for it. What you keep: fast keyboard-driven mail in the terminal, for $0.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from HEY to a free terminal mail setup</h2>
+      <ol>
+        <li><strong>Export from HEY:</strong> HEY exports mail as MBOX and contacts as vCard. Export before you stop paying, since your <code>@hey.com</code> mail is forwarded for life after one paid year but the account itself closes.</li>
+        <li><strong>Import into the new setup:</strong> import the MBOX file into Thunderbird or Fastmail, and point aerc or neomutt at the new IMAP account. The vCard file carries your contacts across.</li>
+        <li><strong>What doesn't transfer:</strong> the Screener decisions, the Imbox/Feed/Paper Trail organization, and the HEY agent skill and MCP server, which only work with a HEY account.</li>
+        <li><strong>Time estimate:</strong> about 30 minutes to export and import, plus time to learn the new client's keys.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the HEY CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/hey-cli.html">View HEY CLI →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does hey-cli work with Gmail?</summary><p>No. It only works with a HEY account. HEY has no IMAP, so there is no way to point it at Gmail or any other provider. You can forward mail from another address into HEY, but the account itself is a <code>@hey.com</code> address.</p></details>
+      <details><summary>Is HEY free?</summary><p>No. HEY for You is $99 a year, billed yearly only, after a 30-day free trial with no card. HEY for Families is $179 a year for up to five people, and HEY for Domains is $12 per user a month ($10 for the first user) on your own domain. There is no free plan.</p></details>
+      <details><summary>Is hey already installed on Omarchy?</summary><p>HEY's own site says that if you are running Omarchy 4.1 or later, it is already installed and you just run <code>hey</code> in the terminal. This is unverified on a live Omarchy machine; if <code>hey</code> is not found, install it with <code>omarchy pkg add hey-cli</code>.</p></details>
+      <details><summary>Where does hey-cli store my login?</summary><p>On macOS it uses the system Keychain, falling back to <code>~/.config/hey-cli/credentials.json</code> if the keyring is unavailable. The Linux storage path is unverified; that is an open item on the checklist.</p></details>
+      <details><summary>Can Claude Code read my HEY mail?</summary><p>Yes. Run <code>hey setup claude</code> to install the skill and the HEY plugin for Claude Code, or serve HEY as MCP tools with <code>hey mcp</code>. Then Claude can read, search, draft, and organize your mail in plain language.</p></details>
+      <details><summary>What does <code>hey doctor</code> do?</summary><p>It checks whether you are still signed in, whether your login is stored securely, and whether you are on the latest version, and suggests a fix for anything it finds. Run it first whenever the TUI will not open or mail stops updating.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/hey-cli.html" target="_blank" rel="noopener">Omarchy package listing (MIT, 13.5 MB download / 40.6 MB installed, updated 2026-11-24; version not listed on the page)</a></li>
+        <li><a href="https://www.hey.com/agents/" target="_blank" rel="noopener">HEY CLI and TUI, hey.com (install, setup, Omarchy 4.1 preinstalled, agent skill, MCP)</a></li>
+        <li><a href="https://help.hey.com/article/1190-tui-for-hey" target="_blank" rel="noopener">HEY TUI help article (install, hey tui, hey doctor)</a></li>
+        <li><a href="https://flaviocopes.com/hey-cli/" target="_blank" rel="noopener">HEY CLI guide (version 1.10.1, setup flow, Keychain storage, --skip-agents, doctor)</a></li>
+        <li><a href="https://dove.email/blog/hey-email-review" target="_blank" rel="noopener">HEY pricing (HEY for You $99/yr, Families $179/yr, Domains $12/user/mo, 30-day trial, no free plan)</a></li>
+        <li><a href="https://paulobrien.com/hey-vs-fastmail/" target="_blank" rel="noopener">HEY vs Fastmail (MBOX and vCard export, no IMAP, $99/yr vs $60/yr)</a></li>
+        <li><a href="https://help.hey.com/article/1196-connect-claude-code-to-hey" target="_blank" rel="noopener">Connect Claude Code to HEY (skill, MCP, five-minute setup)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section></section>
+    <div class="actions"><a class="button" href="#guide">Guide: how to use hey-cli on Omarchy</a><a class="button ghost" href="https://github.com/basecamp/hey-cli" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/hey-cli" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
 <div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="app" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>

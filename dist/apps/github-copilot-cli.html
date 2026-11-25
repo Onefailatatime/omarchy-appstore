@@ -63,8 +63,131 @@
     <section><h2>Install github-copilot-cli on Omarchy</h2><div class="term"><div class="bar-line"><span>official Omarchy package command</span></div><pre><span class="p">$</span> omarchy pkg add github-copilot-cli</pre></div></section>
     <section class="app-columns"><div><h2>Good to know</h2><ul><li>A GitHub account</li><li>An active GitHub Copilot subscription</li><li>Network access to GitHub</li></ul></div><div><h2>Package details</h2><dl><dt>Pricing</dt><dd>requires an active GitHub Copilot subscription</dd><dt>Licence</dt><dd>LicenseRef-GitHub-Copilot</dd><dt>Download</dt><dd>188.9 MB</dd><dt>Installed</dt><dd>260.9 MB</dd><dt>Depends on</dt><dd>gcc-libs, glibc</dd></dl></div></section>
 <p><a class="button ghost" href="https://www.youtube.com/watch?v=VkOibxsQ1oU" target="_blank" rel="noopener">Watch: The ultimate guide to the GitHub Copilot CLI | Full demo | GitHub Checkout ↗</a></p>
+<section class="folded-guide" id="guide"><nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>GitHub Copilot CLI on Omarchy</h2>
+      <p>GitHub Copilot CLI on Omarchy brings GitHub’s Copilot coding agent into the terminal: describe what you want in plain language and it reads, edits, and runs code in your project, with deep GitHub integration for issues, pull requests, and actions.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add github-copilot-cli</code></pre>
+      <p>That installs GitHub Copilot CLI (188.9 MB download, 260.9 MB installed, depends on gcc-libs and glibc). From your project folder (<code>cd ~/my-project</code>), start it with <code>copilot</code>. On first launch, type <code>/login</code> and sign in with your GitHub account. You need a GitHub account and Copilot access: Copilot Free ($0) works, Pro is $10/month. Then describe what you want done. The Omarchy package version was not shown on the app page — confirm the installed version with <code>copilot --version</code>.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Log in with GitHub.</h3>
+      <p>Run <code>copilot</code> in a project folder and confirm you trust that folder, for this session or for future sessions. If you are not signed in, type <code>/login</code> inside the session, or run <code>copilot login</code> from the shell. On a local desktop it opens a browser sign-in; over SSH, in Codespaces, dev containers, or headless Linux it uses the GitHub device flow, showing a one-time code to enter at github.com/login/device. If your organization supplies Copilot, its admin must enable the Copilot CLI policy first. Note that if <code>COPILOT_GITHUB_TOKEN</code>, <code>GH_TOKEN</code>, or <code>GITHUB_TOKEN</code> is set, it silently overrides the stored login, so check those variables if the CLI signs in as the wrong account.</p>
+      <h3>2. Start with a read-only task.</h3>
+      <p>Copilot CLI has three working styles: <strong>Interactive</strong> (it checks in with you), <strong>Plan</strong> (it lays out the work for you to approve first), and <strong>Autopilot</strong> (it keeps going through a task). Start in Plan mode and try: “Take a look at this project and explain its main directories.” It reads the codebase before answering, so you see how it works before it edits anything. Every action is previewed for you to approve before it runs.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Pick a model with <code>/model</code></strong> — Copilot offers models from several makers (Claude, GPT, Gemini, and Microsoft’s MAI Code 2), and <strong>Copilot Fusion</strong> routes each task to a suitable model for you. What you can pin depends on your plan: Pro+ and Max unlock the premium models.</li>
+        <li><strong>Set an AI credit session limit</strong> — every model interaction draws AI credits, and Copilot CLI lets you cap what one session can spend, so a long task stays predictable. Pro includes 1,500 monthly AI credits, Pro+ 7,000, and Max 20,000.</li>
+        <li><strong>Use the GitHub tabs</strong> — the CLI has built-in tabs to browse issues, pull requests, and gists without leaving the terminal, and <code>/pr</code> manages pull requests. This is the one thing no other agent on this list does as natively: the agent lives where your repos live.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>You hit a rate limit, or a model stops answering mid-task</h3>
+      <p>First check the message: <code>Error: You've hit a rate limit</code> means you exceeded the rate limit for that model. If it is a model-specific outage, switch models. GitHub’s own advice during the model incidents of October and November 2026 was the same: choose another model. Seven of the 11 Copilot incidents in that window hit only some models, and six were over within an hour, so check githubstatus.com before reinstalling anything.</p>
+      <p><strong>Fix:</strong> Wait for the reset time the error gives, retry then, or upgrade your plan. Or switch models with <code>/model</code>, or use Copilot Fusion, which picks a healthy model for you. (<a href="https://enjoy.dev/blog/github-copilot-down/" target="_blank" rel="noopener">Enjoy Copilot outage guide</a>)</p>
+      <h3>The CLI signs in as the wrong GitHub account, or login keeps failing</h3>
+      <p>An explicitly exported <code>COPILOT_GITHUB_TOKEN</code>, <code>GH_TOKEN</code>, or <code>GITHUB_TOKEN</code> silently overrides the stored login.</p>
+      <p><strong>Fix:</strong> Check for token environment variables first. Unset the wrong one and run <code>copilot login</code> again. If you are on a remote terminal or headless Linux, use the device-code flow (<code>copilot login --device-code</code>) instead of the browser flow. For GitHub Enterprise Cloud, pass the host: <code>copilot login --host https://example.ghe.com</code>. If SAML SSO applies, authorize the relevant organizations during the browser flow. (<a href="https://omidsaffari.com/blog/github-copilot-cli-terminal-setup-2026" target="_blank" rel="noopener">Omid Saffari Copilot CLI guide</a>, <a href="https://www.itechfaqs.com/github-copilot-cli-tutorial-for-beginners-install-authenticate-code-and-build-advanced-workflows/" target="_blank" rel="noopener">iTechFaqs Copilot CLI tutorial</a>)</p>
+      <h3>You installed it, but <code>copilot</code> is not found, or the CLI will not start</h3>
+      <p>The standalone installer may have updated your PATH, so restart the terminal first.</p>
+      <p><strong>Fix:</strong> Verify with <code>copilot --version</code>. If it still fails, check the binary is executable (<code>chmod +x</code> on the installed path) and that the required shared libraries are present (<code>ldd</code> on the binary shows what is missing). The Omarchy package depends on gcc-libs and glibc, which Omarchy installs for you, so a missing library usually means a second install from another route is shadowing the package: remove the duplicate and restart the terminal. (<a href="https://docs.github.com/en/copilot/how-tos/copilot-sdk/troubleshooting/debugging" target="_blank" rel="noopener">GitHub Copilot SDK debugging guide</a>)</p>
+      <h3>Your organization pays for Copilot, but the CLI says you have no access</h3>
+      <p>An organization admin must enable the Copilot CLI policy before members can use it: the CLI does not work on an org plan until that policy is on. This is separate from having Copilot in VS Code.</p>
+      <p><strong>Fix:</strong> Ask the org admin to enable it, or check whether your own account has a personal plan (Copilot Free works with the CLI where available). (<a href="https://omidsaffari.com/blog/github-copilot-cli-terminal-setup-2026" target="_blank" rel="noopener">Omid Saffari Copilot CLI guide</a>)</p>
+      <h3>An MCP server you added does not show up, or its tools never run</h3>
+      <p>Verify the server works before integrating it: the executable must exist and run on its own, the command path must be correct (use absolute paths), tools must be enabled, and the working directory must be set if the server needs one.</p>
+      <p><strong>Fix:</strong> Check the Copilot home <code>logs</code> directory for the redacted <code>process-&lt;timestamp&gt;-&lt;pid&gt;.log</code> files, which show whether the server process started and what it returned. A server that fails its <code>initialize</code> request never registers its tools, no matter what the config says. (<a href="https://docs.github.com/en/copilot/how-tos/copilot-sdk/troubleshooting/debugging" target="_blank" rel="noopener">GitHub Copilot SDK debugging guide</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>git and GitHub (issues, PRs, and Actions are native to the agent), VS Code’s Copilot agent mode when you want the same agent in an editor, and the GitHub Copilot desktop app (<code>copilot app</code> opens it) for running agent sessions across repos.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>OpenCode lets you bring your own key from 75+ providers, including free-tier keys, and Kimi Code CLI has a $0 membership tier. If you want the same terminal-agent shape with one vendor’s frontier models, Claude Code is the paid reference point.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: GitHub Copilot CLI vs Claude Code vs OpenAI Codex CLI vs Kimi Code CLI</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>GitHub Copilot CLI</th><th>Claude Code (CLI)</th><th>OpenAI Codex CLI</th><th>Kimi Code CLI</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free $0, Pro $10/mo, Pro+ $39/mo, Max $100/mo</td><td>Requires Claude Pro $20/mo+</td><td>Free CLI; needs ChatGPT Plus $20/mo+ or API key</td><td>Free CLI; Kimi membership from $15/mo or per-token API billing</td></tr>
+            <tr><td>Best for</td><td>GitHub-native work: issues, PRs, Actions, multi-model choice</td><td>The strongest single-vendor models, no key juggling</td><td>OpenAI’s models, sandbox controls, Codex Cloud</td><td>A fast single-binary TUI with subagents, MCP, and a free tier</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add github-copilot-cli</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td><code>omarchy pkg add openai-codex</code></td><td><code>omarchy pkg add kimi-code</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Copilot CLI if your code already lives on GitHub and you want the agent that natively reads your issues and PRs, with a real $0 plan to start on. Pick Claude Code if you want one vendor’s strongest models, and OpenCode if you want to choose your own model and provider.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>GitHub Copilot CLI is a free alternative to Claude Code (Pro $20/mo)</h2>
+      <p><strong>GitHub Copilot CLI is a free alternative to Claude Code (Pro $20/mo).</strong> What you give up: Claude’s models and the freedom to pick any provider; Copilot CLI only runs the models GitHub offers, and heavy use burns AI credits that the free allowance may not cover. What you keep: a full agentic loop, plan and autopilot modes, MCP, skills, hooks, and the deepest GitHub integration of any agent here, with a genuine $0 plan to start on. The honest pricing picture, checked against GitHub’s plans page in November 2026: Free is $0, Pro is $10/month (1,500 monthly AI credits), Pro+ is $39/month (7,000 credits), Max is $100/month (20,000 credits), Business is $19 per seat per month, and Enterprise is $39 per seat per month. All plans include the CLI, including Free. GitHub does not publish a fixed credit price per job, so set a session credit limit before a long task. Check current pricing at github.com before deciding.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes per project)</h2>
+      <ol>
+        <li><strong>Export from Claude Code:</strong> your project instructions already live in <code>CLAUDE.md</code>. Copilot CLI reads project instructions from its own config; copy the contents across into the agent instructions file for the project.</li>
+        <li><strong>Import into Copilot CLI:</strong> add MCP servers and skills through the CLI’s config (see <code>/settings</code> inside a session), and connect your GitHub repos: the agent can already see your issues and PRs once you are logged in, with no import step.</li>
+        <li><strong>What doesn’t transfer:</strong> chat history, Claude-specific slash commands and permission modes, and Claude Code’s GitHub Actions integration. Copilot CLI has its own <code>/pr</code> command, hooks, and a GitHub Actions automation path instead.</li>
+        <li><strong>Time estimate:</strong> takes about 15 minutes per project.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the GitHub Copilot CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/github-copilot-cli.html">View GitHub Copilot CLI →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is GitHub Copilot CLI free?</summary><p>Yes, to start: Copilot Free ($0) includes the CLI, with a limited agent allowance. Pro is $10/month, Pro+ $39/month, and Max $100/month, with larger AI credit allowances. Check GitHub’s plans page for current limits.</p></details>
+      <details><summary>What is the difference between Copilot CLI and the old <code>gh copilot</code> extension?</summary><p>The old <code>gh copilot suggest</code> and <code>gh copilot explain</code> extension is superseded. Copilot CLI is the standalone terminal agent (<code>copilot</code> command, no <code>gh</code> needed), it reads your codebase, edits files, runs commands, and works with issues and PRs. It reached general availability on February 25, 2026.</p></details>
+      <details><summary>Do I need the GitHub CLI (<code>gh</code>) installed?</summary><p>No. Copilot CLI is a standalone tool and does not require <code>gh</code>. Install it with <code>omarchy pkg add github-copilot-cli</code> and run <code>copilot</code>.</p></details>
+      <details><summary>Where does Copilot CLI store its config?</summary><p>Settings are changed with the <code>/settings</code> command inside a session. Logs live under the Copilot home <code>logs</code> directory. Exact paths on Omarchy are unverified and need a live check.</p></details>
+      <details><summary>Can I use my own API key or a local model?</summary><p>Yes, in a limited way: Copilot CLI can run on your own key or a local model without GitHub, which is the fallback when GitHub’s own service is down. The main path is your Copilot plan, though, and model choice is limited to what your plan offers.</p></details>
+      <details><summary>Which models can I use?</summary><p>It depends on your plan. Copilot offers models from several makers (Claude, GPT, Gemini, and Microsoft’s MAI Code 2), and Copilot Fusion routes each task to a suitable model. Use <code>/model</code> to see what your plan lets you pin.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/github-copilot-cli.html" target="_blank" rel="noopener">Omarchy package listing for GitHub Copilot CLI</a></li>
+        <li><a href="https://learn.intellimetrics.net/modules/06-cli-tools-setup/05-copilot-cli/" target="_blank" rel="noopener">Copilot CLI install, sign-in, device flow, models, Fusion</a></li>
+        <li><a href="https://www.itechfaqs.com/github-copilot-cli-tutorial-for-beginners-install-authenticate-code-and-build-advanced-workflows/" target="_blank" rel="noopener">Copilot CLI tutorial, GA date Feb 25 2026, plans, auth, MCP</a></li>
+        <li><a href="https://omidsaffari.com/blog/github-copilot-cli-terminal-setup-2026" target="_blank" rel="noopener">Copilot CLI install, login, token override, plans and credits</a></li>
+        <li><a href="https://www.aitoolbase.site/blog/how-to-use-github-copilot" target="_blank" rel="noopener">Copilot plans, Free $0, Pro $10, Pro+ $39, Max $100</a></li>
+        <li><a href="https://enjoy.dev/blog/github-copilot-down/" target="_blank" rel="noopener">Copilot outage guide, model incidents Oct-Nov 2026, rate limits, own-key fallback</a></li>
+        <li><a href="https://docs.github.com/en/copilot/how-tos/copilot-sdk/troubleshooting/debugging" target="_blank" rel="noopener">Copilot CLI debugging guide, logs, MCP debugging, PATH and library checks</a></li>
+        <li><a href="https://docs.github.com/api/article/body?pathname=/en/copilot/how-tos/copilot-cli" target="_blank" rel="noopener">GitHub Copilot CLI docs index</a></li>
+        <li><a href="https://github.com/pricing" target="_blank" rel="noopener">GitHub Copilot plans page (pricing source of truth)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section></section>
 <section class="related-guides" id="related"><h2>Related packages in AI &amp; Agents</h2><div class="related-guide-grid"><a class="related-guide" href="/claude-code-on-omarchy.html"><strong>claude-code</strong><span>Claude Code, Anthropic&#x27;s agentic coding tool for the terminal</span></a><a class="related-guide" href="/apps/crush-bin.html"><strong>crush-bin</strong><span>Crush, Charm&#x27;s terminal coding agent</span></a><a class="related-guide" href="/apps/cursor-cli.html"><strong>cursor-cli</strong><span>Cursor Agent, the terminal coding agent from Cursor</span></a><a class="related-guide" href="/grok-bot-on-omarchy.html"><strong>grok-bot</strong><span>Grok Bot desktop agent</span></a><a class="related-guide" href="/apps/herdr.html"><strong>herdr</strong><span>Herdr terminal workspace manager for AI coding agents</span></a><a class="related-guide" href="/apps/hermes-desktop.html"><strong>hermes-desktop</strong><span>Native desktop shell for Hermes Agent</span></a></div></section>
-    <div class="actions"><a class="button ghost" href="https://github.com/github/copilot-cli" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/github-copilot-cli" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
+    <div class="actions"><a class="button" href="#guide">Guide: how to use github-copilot-cli on Omarchy</a><a class="button ghost" href="https://github.com/github/copilot-cli" target="_blank" rel="noopener">Project site ↗</a><a class="button ghost" href="https://github.com/omacom/omarchy-pkgs/tree/master/pkgbuilds/github-copilot-cli" target="_blank" rel="noopener">PKGBUILD ↗</a></div>
   </article>
 </main>
 <div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="app" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>

@@ -1,0 +1,140 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add opencode-desktop` (package slug `opencode-desktop`) — verify it resolves in the store index. The app page did not show a version number in the listing, so confirm the installed version (upstream desktop changelog reached v2.4.1 on Nov 23, 2026). Confirm 176.5 MB download / 551.9 MB installed, depends on opencode plus the Electron libraries, as listed
+- Launch: confirm how the app appears in the Omarchy launcher and what binary or desktop entry the package installs
+- First launch: open the app, confirm the first-run flow, and confirm it picks up the same provider login as the CLI (`/connect` or `opencode auth login`) with no second login needed
+- Config paths: confirm the desktop app shares the CLI config at `~/.config/opencode/opencode.json` and credentials at `~/.local/share/opencode/auth.json`
+- 1.x vs 2.x: confirm the Omarchy package is the OpenCode 2 desktop app, not the older 1.x build, and that the bundled CLI version matches the standalone `opencode` package
+- Issues claimed below are NOT personally reproduced, they are documented upstream (OpenCode docs, GitHub issues, independent guides). Verify at least the first launch and the parallel-agents view on a real machine
+- Screenshots needed: install, first launch, the agent list, parallel agents with the browser view, a finished task, the provider picker
+
+SEO notes:
+- URL: /guides/opencode-desktop-on-omarchy
+- Title tag: "OpenCode Desktop on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install OpenCode Desktop on Omarchy. The beta Electron app for the OpenCode agent, parallel agents, shared config with the CLI, and the 1.x vs 2.x trap."
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>OpenCode Desktop on Omarchy</h2>
+      <p>OpenCode Desktop on Omarchy is the beta desktop app for the open-source OpenCode agent: the same terminal agent in a window, running as many agents as you want in parallel, with every change visible in a browser beside them.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add opencode-desktop</code></pre>
+      <p>That installs OpenCode Desktop (176.5 MB download, 551.9 MB installed, depends on the <code>opencode</code> CLI package plus Electron libraries). Open it from the app launcher, connect a provider once, and start an agent. The app itself is free and MIT licensed; you pay your chosen LLM provider for API usage. The Omarchy package version was not shown on the app page and is unconfirmed; upstream’s desktop changelog reached v2.4.1 on Nov 23, 2026.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Open it and connect a provider.</h3>
+      <p>Launch OpenCode Desktop from the app launcher. It is an Electron window that runs OpenCode’s server on a loopback port and talks to it: the same agent as the TUI, with no terminal. If you already use the OpenCode CLI, your provider login carries over, because both share <code>~/.config/opencode/</code> and the stored credentials. If this is your first time with OpenCode, connect a provider: pick one from the picker and paste your API key (Anthropic, OpenAI, Google, or any of 75+ providers). With no paid key, OpenCode Zen offers free models through OpenCode’s own gateway, and OpenCode Go is a $10/month subscription for its best models.</p>
+      <h3>2. Start your first agent.</h3>
+      <p>Open a project folder and describe what you want done. Start with a read-only task: “Take a look at this project and explain its main directories.” The desktop app shows the agent’s work with a browser view beside it, so you can watch files change without switching windows. Run several agents in parallel on different tasks or different repos.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Learn build vs plan mode.</strong> The same two agents as the CLI ship here: <strong>build</strong> (full access, the default) and <strong>plan</strong> (read-only analysis). Start in plan mode on a repo you have not worked in yet.</li>
+        <li><strong>Set two models.</strong> Put your main model in <code>model</code> and a small cheap model in <code>small_model</code> in <code>~/.config/opencode/opencode.json</code>. This is the single biggest cost saver in OpenCode, and the desktop app reads the same file as the CLI.</li>
+        <li><strong>Lock permissions before the first real run.</strong> The defaults allow almost everything except reading <code>.env</code> files. On untrusted code, set <code>bash</code> and <code>edit</code> to <code>ask</code> in <code>opencode.json</code>. Use <code>ask</code>, not <code>deny</code>, for <code>read</code>: denying the read tool can break OpenCode’s free-tier models.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>You installed the desktop app and the CLI, and they behave like different versions</h3>
+      <p>This is a known 1.x vs 2.x trap. The download buttons on opencode.ai/download and the Homebrew cask serve the OpenCode 2 app, while other routes (Scoop, some docs) still served the OpenCode 1 CLI, so people ended up with an OpenCode 2 app beside an OpenCode 1 CLI and two different feature lists.</p>
+      <p><strong>Fix:</strong> On Omarchy, install both from the official repo (<code>omarchy pkg add opencode-desktop</code> pulls in <code>opencode</code> as a dependency) and check both versions match: <code>opencode --version</code> in a terminal, and the version shown in the app. If they disagree, remove the one installed by another route. (<a href="https://caprock.dev/guides/opencode-desktop-app/" target="_blank" rel="noopener">Caprock OpenCode Desktop guide</a>)</p>
+      <h3>Free models fail with “OpenCode’s free tier can only be used from within OpenCode”, even though you are inside the desktop app</h3>
+      <p>The free tier is served through OpenCode’s Zen gateway, and the gateway checks that each request looks like one OpenCode would send. A denied <code>read</code> permission is enough to trip it. The same error is by design if you use the free models from another app, a proxy, or a direct API call: the pinned thread #59387 says free models only work inside OpenCode.</p>
+      <p><strong>Fix:</strong> Run <code>opencode debug config</code>, find any <code>read</code> deny (including <code>"*": "deny"</code> and <code>"tools": { "read": false }</code>), change it to <code>"ask"</code> or remove it, and try again. The desktop app is affected the same way as the CLI, since it talks to the same server. If you are outside OpenCode, use a paid model or Go instead. (<a href="https://www.engineerfoodie.in/blog/opencode-free-tier-only-within-opencode/" target="_blank" rel="noopener">Engineer Foodie guide</a>, <a href="https://dev.to/its-tahir/opencodes-free-tier-can-only-be-used-from-within-opencode-error-even-in-opencode-what-triggers-2kol" target="_blank" rel="noopener">DEV investigation</a>)</p>
+      <h3>Every request fails with “Upstream request failed: Invalid credential”</h3>
+      <p>This is OpenCode’s own gateway refusing a stored OpenCode Console (Zen) or Go key, not a key for Anthropic or OpenAI. A maintainer’s explanation on the tracker: “This happens when your stored OpenCode API key has expired. Several older keys stopped working after the console migration.” Reinstalling or switching models does not help.</p>
+      <p><strong>Fix:</strong> Sign in to OpenCode again from the CLI with <code>opencode auth login</code>, or create a new key in the OpenCode Console (Account, then Personal API keys, in the workspace that holds your credit or Go subscription) and connect that one. The desktop app shares the CLI’s stored credentials, so fixing it in one place fixes both. (<a href="https://everpod.ai/guides/opencode-upstream-request-failed-invalid-credential" target="_blank" rel="noopener">Everpod guide</a>)</p>
+      <h3>The app is in beta and something in the desktop UI breaks or behaves oddly</h3>
+      <p>OpenCode labels the desktop app beta, and its issue tracker carries open desktop bugs.</p>
+      <p><strong>Fix:</strong> When the window misbehaves, the CLI is the fallback for the exact same agent and config: run <code>opencode</code> in a terminal in the same project and your sessions, providers, and <code>opencode.json</code> are all there. Report desktop bugs on the OpenCode tracker with the app version, the OS, and the steps, and keep the CLI as your working setup in the meantime. (<a href="https://caprock.dev/guides/opencode-desktop-app/" target="_blank" rel="noopener">Caprock OpenCode Desktop guide</a>)</p>
+      <h3>The install is huge for a coding agent, over 550 MB installed</h3>
+      <p>That is the Electron shell plus the bundled CLI and its runtime libraries, and the size on the app page (551.9 MB installed) is expected, not a broken install.</p>
+      <p><strong>Fix:</strong> If disk space matters, install the CLI alone with <code>omarchy pkg add opencode</code> (275.3 MB installed) and skip the desktop app. You lose the parallel-agents window and the browser view, but the agent itself is identical. (<a href="https://omarchyapps.com/apps/opencode-desktop.html" target="_blank" rel="noopener">Omarchy package listing</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>The OpenCode CLI (same agent, same config, for terminal and headless work), git (review diffs before committing), and Ollama for a local model with zero API spend.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>If you hate the beta desktop app: use the OpenCode CLI in a terminal, or try the ChatGPT desktop app with Codex (<code>openai-codex-desktop</code>) for a stable vendor app. If you want a desktop agent that is not a beta, the GitHub Copilot app is the other mainstream pick.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: OpenCode Desktop vs OpenCode CLI vs Codex Desktop vs Claude Code</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>OpenCode Desktop</th><th>OpenCode (CLI)</th><th>OpenAI Codex Desktop</th><th>Claude Code (CLI)</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free app; you pay your provider, or free Zen models</td><td>Free CLI; you pay your provider</td><td>Free app; needs ChatGPT plan ($8/mo Go and up for real use)</td><td>Requires Claude Pro $20/mo+</td></tr>
+            <tr><td>Best for</td><td>Running several OpenCode agents in parallel in a window</td><td>Terminal work, headless runs, scripting</td><td>A stable vendor desktop app with Codex Cloud</td><td>The strongest single-vendor models, no key juggling</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add opencode-desktop</code></td><td><code>omarchy pkg add opencode</code></td><td><code>omarchy pkg add openai-codex-desktop</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick OpenCode Desktop if you already use OpenCode and want the same agent in a window with several agents running side by side. Pick the CLI if you live in a terminal or disk space matters, and Codex Desktop if you want a stable, non-beta vendor app and already pay for ChatGPT.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>OpenCode Desktop is a free alternative to Claude Code (Pro $20/mo)</h2>
+      <p><strong>OpenCode Desktop is a free alternative to Claude Code (Pro $20/mo).</strong> What you give up: Claude’s models and the maturity of a tool with a much longer track record; OpenCode Desktop is explicitly beta, and OpenCode 2 is a young rewrite (2.0.0 shipped September 11, 2026). What you keep: a full agentic loop, parallel agents, build and plan modes, MCP, and your choice of model, with the app itself free and MIT licensed. The honest pricing picture: the app costs $0, and the model is a separate bill. Free options are OpenCode Zen’s free models (usable only inside OpenCode), free-tier keys from providers like Google AI Studio, or a local model through Ollama. Paid options are any provider key you connect, or OpenCode Go at $10/month for its best models. Check current pricing at opencode.ai before deciding.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes per project)</h2>
+      <ol>
+        <li><strong>Export from Claude Code:</strong> your project instructions already live in <code>CLAUDE.md</code>. OpenCode reads <code>AGENTS.md</code>; copy the contents across or run <code>/init</code> in the CLI and let it generate one from the codebase.</li>
+        <li><strong>Import into OpenCode:</strong> move MCP servers into <code>~/.config/opencode/opencode.json</code>, and connect your existing provider keys with <code>/connect</code> or <code>opencode auth login</code>. The desktop app reads the same config, so set it up once and both the app and the CLI use it.</li>
+        <li><strong>What doesn’t transfer:</strong> chat history, Claude-specific slash commands and permission modes, and Claude Code’s GitHub Actions integration. OpenCode has its own plan mode, parallel agents in the desktop app, and <code>opencode run</code> for scripting instead.</li>
+        <li><strong>Time estimate:</strong> takes about 15 minutes per project.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the OpenCode Desktop package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/opencode-desktop.html">View OpenCode Desktop →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is OpenCode Desktop free?</summary><p>The app itself is free and open source (MIT). You pay your chosen LLM provider for API usage, or use OpenCode Zen’s free models, a free-tier provider key, or a local model. OpenCode Go is a $10/month subscription for its best models.</p></details>
+      <details><summary>Is OpenCode Desktop the same as the OpenCode CLI?</summary><p>Yes, same agent. The desktop app is an Electron window that runs OpenCode’s server on a loopback port and talks to it. It shares the CLI’s config and credentials, and the desktop package depends on the CLI package.</p></details>
+      <details><summary>Is it stable?</summary><p>It is labeled beta by OpenCode, and its issue tracker carries open desktop bugs. The CLI is the fallback for the same agent and config when the window misbehaves.</p></details>
+      <details><summary>Where does OpenCode Desktop store its config?</summary><p>It shares the CLI config: global config at <code>~/.config/opencode/opencode.json</code>, TUI settings at <code>~/.config/opencode/tui.json</code>, and stored credentials at <code>~/.local/share/opencode/auth.json</code>. Project config goes in <code>opencode.json</code> at the project root.</p></details>
+      <details><summary>Can I run several agents at once?</summary><p>Yes, that is the point of the desktop app: run as many OpenCode agents as you want in parallel, see every change in a browser beside them, and pick them up on any device.</p></details>
+      <details><summary>Does it work offline?</summary><p>Only with a local model. Every hosted provider needs network access.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/opencode-desktop.html" target="_blank" rel="noopener">Omarchy package listing: opencode-desktop (176.5 MB download / 551.9 MB installed, MIT)</a></li>
+        <li><a href="https://dev.opencode.ai/desktop" target="_blank" rel="noopener">OpenCode Desktop download page, changelog v2.4.1 Nov 23, 2026</a></li>
+        <li><a href="https://opencode.ai/docs/index" target="_blank" rel="noopener">OpenCode docs, desktop app and install routes</a></li>
+        <li><a href="https://caprock.dev/guides/opencode-desktop-app/" target="_blank" rel="noopener">OpenCode Desktop, beta status, 1.x vs 2.x mixup, Electron server on loopback</a></li>
+        <li><a href="https://www.turboai.dev/blog/opencode-2-versions" target="_blank" rel="noopener">OpenCode 2 install, desktop app, version tracker</a></li>
+        <li><a href="https://everpod.ai/guides/opencode-upstream-request-failed-invalid-credential" target="_blank" rel="noopener">“Upstream request failed: Invalid credential” fix, console migration</a></li>
+        <li><a href="https://www.engineerfoodie.in/blog/opencode-free-tier-only-within-opencode/" target="_blank" rel="noopener">“Free tier can only be used from within OpenCode” error, read-permission trigger, GitHub #56324 and #59387</a></li>
+        <li><a href="https://dev.to/its-tahir/opencodes-free-tier-can-only-be-used-from-within-opencode-error-even-in-opencode-what-triggers-2kol" target="_blank" rel="noopener">Free-tier error investigation</a></li>
+        <li><a href="https://omarchyapps.com/apps/opencode.html" target="_blank" rel="noopener">OpenCode CLI guide (this guide’s companion)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

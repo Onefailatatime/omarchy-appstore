@@ -1,0 +1,142 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add playwright-cli` (package slug `playwright-cli`) — verify it resolves in the store index. Confirm version 0.1.25-1, 3.8 MB download / 19.2 MB installed, depends on nodejs, Apache-2.0, as listed
+- Binary name: confirm the package installs the `playwright-cli` command (the npm package is `@playwright/cli`)
+- First launch: run `playwright-cli install` in a test project and confirm it creates `.playwright`, adds it to `.gitignore`, and downloads a browser. Confirm where the browser lands on Arch/Omarchy (`~/.cache/ms-playwright` per the docs)
+- Arch gotcha: confirm whether `playwright-cli install-browser --with-deps` tries to run `apt-get` on Omarchy and fails, since Omarchy is Arch-based and has no apt-get. See the issues section
+- Issues claimed below are NOT personally reproduced, they are documented upstream (Playwright docs, GitHub, independent guides). Verify at least `playwright-cli install` and `playwright-cli open` on a real machine
+- Screenshots needed: install, `playwright-cli install` output, `playwright-cli open` on a test page, `playwright-cli show` dashboard, an agent session using the skill
+
+SEO notes:
+- URL: /guides/playwright-cli-on-omarchy
+- Title tag: "Playwright CLI on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install Microsoft's Playwright CLI on Omarchy. Set up the workspace, install the agent skill, run browsers headless or headed, and avoid the Arch apt-get trap."
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Playwright MCP</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Playwright CLI on Omarchy</h2>
+      <p>Playwright CLI on Omarchy is Microsoft’s browser automation CLI built for coding agents: your agent opens pages, clicks, and checks your app in a real browser, using far fewer tokens than an MCP server would.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add playwright-cli</code></pre>
+      <p>Then run <code>playwright-cli install</code>, <code>playwright-cli install --skills</code>, and <code>playwright-cli open https://example.com</code>. That installs Playwright CLI v0.1.25-1 (3.8 MB download, 19.2 MB installed, depends on nodejs, Apache-2.0). No account, no API key, no sign-in. <code>playwright-cli install</code> sets up the workspace and downloads a browser, and the skill install teaches your coding agent the commands.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and set up a workspace.</h3>
+      <p>Run <code>omarchy pkg add playwright-cli</code>, then in your project folder run <code>playwright-cli install</code>. It creates a <code>.playwright</code> directory in the current working directory, adds it to <code>.gitignore</code>, and downloads the configured browser if it is missing. Browsers live in <code>~/.cache/ms-playwright</code>. You need Node.js 20 or newer; the Omarchy package depends on nodejs, so it comes along. If your project already depends on Playwright 1.59 or newer, you can skip the global install and use <code>npx playwright cli</code> instead.</p>
+      <h3>2. Install the agent skill.</h3>
+      <p>Coding agents like Claude Code and GitHub Copilot use locally installed skills for richer context about the available commands:</p>
+      <pre><code class="language-bash">playwright-cli install --skills        # project skill, .claude/skills/playwright-cli
+playwright-cli install --skills -g     # home directory, ~/.claude/skills, for every project</code></pre>
+      <p>Use <code>--skills=agents</code> instead if your agent reads <code>.agents/skills</code> (Codex does). The skill teaches the agent the commands without dumping a help page into its context.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Open a page and watch it work.</strong> <code>playwright-cli open https://example.com</code> opens the page headless by default. Add <code>--headed</code> to see the browser window, and <code>--browser=chrome</code> or <code>--browser=firefox</code> to pick a browser. <code>playwright-cli list</code> shows your sessions, and <code>playwright-cli show</code> opens a dashboard with a live view of every session, where you can take over the keyboard if the agent gets stuck on something like a CAPTCHA.</li>
+        <li><strong>Use named sessions for separate logins.</strong> Each named session gets its own browser, cookies, storage, and tabs, so an admin login and a student login never share state. Start one with <code>playwright-cli open -s=admin &lt;url&gt;</code>, or tie a whole agent session to one with <code>PLAYWRIGHT_CLI_SESSION=checkout claude .</code>.</li>
+        <li><strong>Keep auth state out of git.</strong> The docs recommend keeping saved logins under <code>playwright/.auth</code> and warn that the state file “may contain sensitive cookies and headers that could be used to impersonate you or your test account”. Add <code>playwright/.auth</code> to <code>.gitignore</code> before you save any login.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>On Omarchy (Arch), playwright-cli install-browser --with-deps fails with “apt-get: command not found” and exit code 127</h3>
+      <p>Playwright’s dependency installer assumes Debian/Ubuntu and calls <code>apt-get</code>, which does not exist on Arch. This is unverified on Omarchy specifically; it is documented for Arch in general, and it is the first thing to check on this machine.</p>
+      <p><strong>Fix:</strong> Install the system libraries with pacman instead, or skip the auto-install and point Playwright at the Chromium you already have: <code>sudo pacman -S chromium</code>, then set <code>executablePath: "/usr/bin/chromium"</code> in your Playwright config’s launch options. The bundled Chromium often fights Arch on library versions anyway, so the system browser is the reliable path. (<a href="https://gist.github.com/mewset/44d4b5f21d3d00587a50190aa85cb692" target="_blank" rel="noopener">Arch Playwright gist</a>)</p>
+      <h3>A test run stops with “Host system is missing dependencies to run browsers”</h3>
+      <p>The browsers downloaded fine, but the system libraries never were installed. This is usually an old Playwright: versions before 1.45 ask apt for Ubuntu 22.04 package names that newer Ubuntu renamed.</p>
+      <p><strong>Fix:</strong> Upgrade the package, then install browsers and libraries together with <code>playwright-cli install-browser --with-deps</code> (or <code>npx playwright install --with-deps</code> in a project). (<a href="https://www.maazzindani.com/fix/playwright-install-deps-fails-ubuntu-24-04/" target="_blank" rel="noopener">maazzindani.com fix guide</a>)</p>
+      <h3>Browser install fails with “Playwright does not support chromium on ubuntu26.04-x64”</h3>
+      <p>Your Playwright is too old for your OS. Support for Ubuntu 26.04 arrived in Playwright 1.61.0, and 1.62.0 dropped Debian 11 while 1.63.0 dropped Ubuntu 20.04, so the fix direction depends on which side is stale: upgrade Playwright if your OS is new, or pin an older Playwright if your OS is old. On Omarchy, which tracks Arch, this exact Ubuntu error should not appear, but the same version-mismatch shape can.</p>
+      <p><strong>Fix:</strong> Upgrade Playwright if your OS is new, or pin an older Playwright if your OS is old. (<a href="https://cybernative.ai/guides/playwright-ubuntu-26-04-chromium-not-supported/" target="_blank" rel="noopener">cybernative.ai guide</a>)</p>
+      <h3>After a global npm install, your shell says “playwright-cli: command not found”</h3>
+      <p>The global bin directory is not on your PATH. With the Omarchy package this should not happen, since pacman-managed binaries land on PATH.</p>
+      <p><strong>Fix:</strong> Try the local version with <code>npx playwright-cli --version</code> first; if that works, use <code>npx playwright-cli</code> for every command, or fix your PATH so the global npm bin directory is included. (<a href="https://npm.io/package/@mseep/cli" target="_blank" rel="noopener">npm.io, @mseep/cli</a>)</p>
+      <h3>The agent cannot see what the browser is doing, or it gets stuck on a login or CAPTCHA</h3>
+      <p>Run <code>playwright-cli show</code> to open the visual dashboard. It shows a live view of every running browser session, and you can take over the keyboard yourself when the agent is stuck. The browser profile is kept in memory by default, so a session that ends loses its login.</p>
+      <p><strong>Fix:</strong> Open the dashboard with <code>playwright-cli show</code> and take over the keyboard when the agent is stuck; save auth state to <code>playwright/.auth</code> if you need a login to survive. (<a href="https://medium.com/@sandeep.jain2014/coding-agents-can-now-read-a-ticket-open-a-browser-click-through-a-feature-and-write-a-349fec0e25e8" target="_blank" rel="noopener">Medium, coding agents with Playwright CLI</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Claude Code or Codex (the agents it was built for), Playwright Test (<code>npm init playwright@latest</code>) to run the specs your agent writes, and git (specs and snapshots belong in the repo).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>If you hate the CLI shape: Playwright MCP (<code>npx @playwright/mcp@latest</code>) gives the same browser control through the Model Context Protocol, Puppeteer is the script-first alternative for hand-written automation, and Selenium covers the broadest browser and language matrix.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Playwright CLI vs Playwright MCP vs Puppeteer vs Selenium</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Playwright CLI</th><th>Playwright MCP</th><th>Puppeteer</th><th>Selenium</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free, Apache-2.0; no account, no key</td><td>Free, MIT; no account, no key</td><td>Free, Apache-2.0; no account, no key</td><td>Free, Apache-2.0; no account, no key</td></tr>
+            <tr><td>Best for</td><td>Coding agents driving a browser with minimal token use</td><td>AI agents that work through MCP tool calls</td><td>Hand-written browser scripts in Node.js</td><td>Cross-browser, cross-language test grids</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add playwright-cli</code></td><td><code>npx @playwright/mcp@latest</code></td><td><code>npm install puppeteer</code></td><td>Per-language package install</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Playwright CLI if a coding agent is doing the driving; its commands avoid loading large tool schemas and accessibility trees into the model context, which is the whole point of the CLI over the MCP server. Pick Playwright MCP if your agent only speaks MCP, and Puppeteer if a human is writing the script.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Playwright CLI is a free way to give your coding agent a browser</h2>
+      <p><strong>Playwright CLI is a free way to give your coding agent a browser.</strong> Playwright CLI is free and Apache-2.0, with no account and no API key, and it replaces paid browser-testing cloud time for the agent-driven checks it covers: read a ticket, open the app, click through a feature, write the test. What you give up: it is a tool for agents, not a full test suite, so pair it with Playwright Test for repeatable runs and CI. What you keep: real Chromium, Firefox, and WebKit control, named sessions with separate cookies, and a live dashboard you can take over.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Playwright MCP (~10 minutes per project)</h2>
+      <ol>
+        <li><strong>Export from MCP:</strong> your MCP server entry is a line in your agent config (for Claude Code, <code>claude mcp add playwright npx @playwright/mcp@latest</code>). Note which browsers and settings it used; nothing else to export.</li>
+        <li><strong>Import into the CLI:</strong> install the package, run <code>playwright-cli install</code> in the project, then <code>playwright-cli install --skills</code> so the agent learns the commands. Point the agent at the CLI and let it discover commands on its own, or set <code>PLAYWRIGHT_CLI_SESSION</code> to pin it to one named session.</li>
+        <li><strong>What doesn’t transfer:</strong> MCP tool-call history and any MCP-specific server config. The browser itself, the tests, and the project config are the same.</li>
+        <li><strong>Time estimate:</strong> about 10 minutes per project.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Playwright CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/playwright-cli.html">View Playwright CLI →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Do I need a coding agent to use Playwright CLI?</summary><p>No, but it was built for one. You can run every command yourself in the terminal; the skill install and the session model just make it much more useful when an agent is driving.</p></details>
+      <details><summary>Which browsers does it use?</summary><p>Chromium, Firefox, and WebKit. The CLI downloads the browser automatically on first use, or you can install explicitly with <code>playwright-cli install-browser</code>, including one browser at a time (<code>playwright-cli install-browser firefox</code>).</p></details>
+      <details><summary>Where are the browsers stored?</summary><p>In <code>~/.cache/ms-playwright</code>. The workspace itself lives in a <code>.playwright</code> directory inside the project, which <code>playwright-cli install</code> also adds to <code>.gitignore</code>.</p></details>
+      <details><summary>Does it need an account or API key?</summary><p>No. There is no sign-in, no key, and no billing. It is a local tool that drives a local browser.</p></details>
+      <details><summary>How is it different from Playwright MCP?</summary><p>Both drive the same browsers. The CLI is more token-efficient for coding agents because commands avoid loading large tool schemas and verbose accessibility trees into the model context; the snapshot sits in a file the agent opens only when it needs it. MCP loads tool schemas into context on every call.</p></details>
+      <details><summary>Can I watch what the agent is doing in the browser?</summary><p>Yes. <code>playwright-cli show</code> opens a dashboard with a live view of every session, and you can take over the keyboard. Add <code>--headed</code> to <code>playwright-cli open</code> to see the browser window directly.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/playwright-cli.html" target="_blank" rel="noopener">Omarchy package listing: playwright-cli (v0.1.25-1, 3.8 MB download / 19.2 MB installed)</a></li>
+        <li><a href="https://playwright.dev/docs/getting-started-cli" target="_blank" rel="noopener">Playwright coding agents docs (install, skills, sessions, browsers)</a></li>
+        <li><a href="https://playwright.dev/agent-cli/installation" target="_blank" rel="noopener">Playwright CLI installation docs (Node 20+, install, install-browser, --with-deps)</a></li>
+        <li><a href="https://raw.githubusercontent.com/microsoft/playwright/main/README.md" target="_blank" rel="noopener">Playwright README (CLI vs MCP vs Test vs Library)</a></li>
+        <li><a href="https://gist.github.com/mewset/44d4b5f21d3d00587a50190aa85cb692" target="_blank" rel="noopener">Playwright on Arch, apt-get failure and system Chromium fix</a></li>
+        <li><a href="https://cybernative.ai/guides/playwright-ubuntu-26-04-chromium-not-supported/" target="_blank" rel="noopener">Ubuntu 26.04 support, Playwright 1.61 fix and dropped OS versions</a></li>
+        <li><a href="https://www.maazzindani.com/fix/playwright-install-deps-fails-ubuntu-24-04/" target="_blank" rel="noopener">install-deps failure on Ubuntu 24.04, Playwright older than 1.45</a></li>
+        <li><a href="https://medium.com/@sandeep.jain2014/coding-agents-can-now-read-a-ticket-open-a-browser-click-through-a-feature-and-write-a-349fec0e25e8" target="_blank" rel="noopener">Coding agents with Playwright CLI (sessions, show dashboard, auth state warning)</a></li>
+        <li><a href="https://npm.io/package/@mseep/cli" target="_blank" rel="noopener">CLI quick reference (command not found, headed mode, sessions)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

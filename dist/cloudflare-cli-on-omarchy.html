@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How to Install &amp; Use cloudflare-cli on Omarchy (2026)</title>
-<meta name="description" content="Install cloudflare-cli on Omarchy with one command: omarchy pkg add cloudflare-cli. The Cloudflare CLI (cf). Setup, requirements and FAQ.">
+<title>Cloudflare CLI (cf) on Omarchy: Install &amp; Setup Guide (2026) |…</title>
+<meta name="description" content="Install Cloudflare&#x27;s cf CLI on Omarchy. Sign in with cf auth login, list zones, search 3,000 commands, and deploy Workers, plus the Wrangler login gotcha.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/cloudflare-cli-on-omarchy.html">
@@ -13,8 +13,8 @@
 <link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
 <link rel="manifest" href="/images/site.webmanifest?v=2">
-<meta property="og:title" content="How to Install &amp; Use cloudflare-cli on Omarchy (2026)">
-<meta property="og:description" content="Install cloudflare-cli on Omarchy with one command: omarchy pkg add cloudflare-cli. The Cloudflare CLI (cf). Setup, requirements and FAQ.">
+<meta property="og:title" content="Cloudflare CLI (cf) on Omarchy: Install &amp; Setup Guide (2026) |…">
+<meta property="og:description" content="Install Cloudflare&#x27;s cf CLI on Omarchy. Sign in with cf auth login, list zones, search 3,000 commands, and deploy Workers, plus the Wrangler login gotcha.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://omarchyapps.com/cloudflare-cli-on-omarchy.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
@@ -24,10 +24,10 @@
 <meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@jessyka_boat">
-<meta name="twitter:title" content="How to Install &amp; Use cloudflare-cli on Omarchy (2026)">
-<meta name="twitter:description" content="Install cloudflare-cli on Omarchy with one command: omarchy pkg add cloudflare-cli. The Cloudflare CLI (cf). Setup, requirements and FAQ.">
+<meta name="twitter:title" content="Cloudflare CLI (cf) on Omarchy: Install &amp; Setup Guide (2026) |…">
+<meta name="twitter:description" content="Install Cloudflare&#x27;s cf CLI on Omarchy. Sign in with cf auth login, list zones, search 3,000 commands, and deploy Workers, plus the Wrangler login gotcha.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/cloudflare-cli-on-omarchy.html#article","headline":"How to Install & Use cloudflare-cli on Omarchy (2026)","description":"Install cloudflare-cli on Omarchy with one command: omarchy pkg add cloudflare-cli. The Cloudflare CLI (cf). Setup, requirements and FAQ.","url":"https://omarchyapps.com/cloudflare-cli-on-omarchy.html","dateModified":"2026-11-24","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/guides.html"},{"@type":"ListItem","position":3,"name":"How to Install & Use cloudflare-cli on Omarchy (2026)","item":"https://omarchyapps.com/cloudflare-cli-on-omarchy.html"}]},{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/cloudflare-cli-on-omarchy.html#app","name":"cloudflare-cli","description":"The Cloudflare CLI (cf)","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"1.0.0rc.5-1","license":"MIT OR Apache-2.0","url":"https://omarchyapps.com/apps/cloudflare-cli.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/cloudflare-cli-on-omarchy.html#article","headline":"Cloudflare CLI (cf) on Omarchy: Install & Setup Guide (2026) |…","description":"Install Cloudflare's cf CLI on Omarchy. Sign in with cf auth login, list zones, search 3,000 commands, and deploy Workers, plus the Wrangler login gotcha.","url":"https://omarchyapps.com/cloudflare-cli-on-omarchy.html","dateModified":"2026-11-25","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"Cloudflare CLI (cf) on Omarchy: Install & Setup Guide (2026) | Omarchy Apps","item":"https://omarchyapps.com/cloudflare-cli-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is cf replacing Wrangler?","acceptedAnswer":{"@type":"Answer","text":"Cloudflare calls cf its new CLI and says it will replace Wrangler, but Wrangler still works today. cf migrate exists to move projects across."}},{"@type":"Question","name":"Do I need Node.js?","acceptedAnswer":{"@type":"Answer","text":"The Omarchy package depends on nodejs, so it comes along automatically. The npm install path needs Node.js 22 or newer."}},{"@type":"Question","name":"Does cf reuse my Wrangler login?","acceptedAnswer":{"@type":"Answer","text":"No. cf keeps its own credentials. Sign in once with cf auth login even if Wrangler is already signed in."}},{"@type":"Question","name":"Is it stable yet?","acceptedAnswer":{"@type":"Answer","text":"No. Version 1.0.0rc.5 is a release candidate, and Cloudflare warns commands, configuration, and build output can still change before the stable release."}},{"@type":"Question","name":"Does it work offline?","acceptedAnswer":{"@type":"Answer","text":"No, except for cf cli search, which runs locally. Every other command talks to the Cloudflare API, so it needs network access and a login or API token."}}]}]}</script>
 <link rel="stylesheet" href="/style.75958c2d72.css">
   <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
   <script src="/oa-ads.js" defer></script>
@@ -50,75 +50,163 @@
 
 <header class="hero guide-hero seo-hero">
   <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/guides.html">Guides</a><span>›</span><span aria-current="page">Utilities tutorial</span></nav>
-    <p class="eyebrow">Utilities tutorial</p>
-    <h1>cloudflare-cli on <span>Omarchy</span></h1>
-    <p class="tag">The Cloudflare CLI (cf)</p>
-    <p class="facts">Generated from the official Omarchy package repo</p>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">Cloudflare CLI guide</span></nav>
+    <p class="eyebrow">Cloudflare CLI guide</p>
+    <h1>Cloudflare CLI on <span>Omarchy</span></h1>
+    <p class="tag">Cloudflare&#x27;s official command line for the whole Cloudflare API and for Workers projects — manage DNS, zones, and security, and deploy Workers from one command.</p>
+    <p class="facts">Reviewed 2026-11-25 · independent editorial guide</p>
   </div>
 </header>
-<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
+<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
 
 <main class="wrap seo-guide-main">
   <article class="seo-article">
     <div class="guide-answer">
       <p class="answer-label">Short answer</p>
-      <p>To install cloudflare-cli on Omarchy, open a terminal and run omarchy pkg add cloudflare-cli. It is a 64.4 MB download (224.8 MB installed), version 1.0.0rc.5-1, licensed MIT OR Apache-2.0. The Cloudflare CLI (cf). Check the project site for current pricing.</p>
+      <p>Install Cloudflare CLI with omarchy pkg add cloudflare-cli, sign in with cf auth login, and prove it works with cf zones list. It is a release candidate (1.0.0rc.5), and it keeps its own login — it does not reuse a Wrangler login.</p>
     </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add cloudflare-cli` — verify it resolves in the store index; confirm version 1.0.0rc.5-1, 64.4 MB download / 224.8 MB installed, depends on nodejs, glibc, and gcc-libs, as listed
+- Binary names: confirm the package installs both `cf` and `cloudflare` on PATH (the npm package installs both names; the Omarchy package may differ)
+- First launch: run `cf auth login` and confirm the browser OAuth flow, the one-time code, and `cf auth whoami` afterwards. Confirm `--no-browser` works over SSH
+- Config paths: confirm where `cf` stores its credentials on Linux (not stated in the docs read) and that `cloudflare.config.ts` is created in the project root by `cf init`
+- Claimed issues reproduced: (1) `cf auth login` unknown OAuth scope error (`email_routing:read` / `email_sending:read`), (2) `cf` does not reuse a Wrangler login, (3) `cf` name clash with the Cloud Foundry CLI, (4) CI account-selection failure in non-interactive mode, (5) commands changed between release-candidate builds
+- Screenshots needed: install, `cf auth login` approval page, `cf zones list` output, `cf cli search` result, a `cf deploy` run
+
+SEO notes:
+- URL: /guides/cloudflare-cli-on-omarchy
+- Title tag: "Cloudflare CLI (cf) on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install Cloudflare's cf CLI on Omarchy. Sign in with cf auth login, list zones, search 3,000 commands, and deploy Workers, plus the Wrangler login gotcha."
+- Keywords: cloudflare cli omarchy, cf cli, cloudflare workers cli, cf auth login, wrangler vs cf
+-->
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
       <a href="#install">Install</a>
-      <a href="#use">Open and use</a>
-      <a href="#requirements">Requirements</a>
-      <a href="#remove">Uninstall</a>
-      <a href="#facts">Package facts</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Wrangler</a>
       <a href="#faq">Questions</a>
     </nav>
 
     <section id="install">
-      <h2>Install cloudflare-cli on Omarchy</h2>
-      <p>The Cloudflare CLI (cf)</p>
-      <p>The official repository lists this package in Utilities. It was added on 2026-11-24.</p>
-      
+      <h2>Cloudflare CLI on Omarchy</h2>
+      <p>Cloudflare CLI (<code>cf</code>) on Omarchy is Cloudflare’s official command line for the whole Cloudflare API and for Workers projects: manage DNS, zones, and security settings and deploy Workers from one command, with JSON output built for scripts and coding agents.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add cloudflare-cli</code></pre>
+      <p>That installs Cloudflare CLI v1.0.0rc.5-1 (64.4 MB download, 224.8 MB installed, depends on nodejs, glibc, and gcc-libs; MIT OR Apache-2.0). Sign in once in your browser with <code>cf auth login</code>, then list your zones with <code>cf zones list</code> to prove the login works.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Install and check the version.</h3>
+      <p>Run <code>omarchy pkg add cloudflare-cli</code>, then <code>cf --version</code>. If another tool on your PATH already answers to <code>cf</code> (the Cloud Foundry CLI does), call it as <code>cloudflare</code> instead, which runs the same CLI.</p>
+      <h3>2. Sign in.</h3>
+      <p>Run <code>cf auth login</code>. It prints a link and a one-time code, opens the link in your browser, and you approve access to your Cloudflare account. Confirm with <code>cf auth whoami</code>. Do not skip this step if you already use Wrangler: <code>cf</code> keeps its own credentials and does not reuse a Wrangler login, so you sign in once even if Wrangler is already signed in. Over SSH or in a container, add <code>--no-browser</code> and open the link on another device. To sign in again, add <code>--force</code>.</p>
+      <h3>3. Run one read-only command.</h3>
+      <p>List the zones you can access:</p>
+      <pre><code class="language-bash">cf zones list</code></pre>
+      <p>Pipe it to a file or <code>jq</code> to inspect the shape: <code>cf zones list | jq .</code>. If that works, the install, the login, and the account selection are all fine. Start with read-only commands before you let any script change something.</p>
+      <h3>4. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Find commands by describing the task</strong> — with almost 3,000 commands, <code>--help</code> is a bad way to find things. Run <code>cf cli search "create a DNS record"</code> and it returns ranked matches. The search runs on your machine and needs no login.</li>
+        <li><strong>Use profiles for more than one account</strong> — run <code>cf auth create work</code> to create a named profile and sign in to it, then <code>cf auth activate work</code> to link it to the current folder and every folder below it. For scripts and CI, set <code>CLOUDFLARE_API_TOKEN</code> instead, which takes priority over any stored login. You can also set <code>CLOUDFLARE_ACCOUNT_ID</code> and <code>CLOUDFLARE_ZONE_ID</code> to pin the account and zone.</li>
+        <li><strong>Deploy Workers from the same tool</strong> — <code>cf init my-worker</code> creates a project with a typed <code>cloudflare.config.ts</code>, <code>cf dev</code> runs it locally, <code>cf build</code> builds it, and <code>cf deploy</code> ships it. If the project already has a <code>wrangler.toml</code> or <code>wrangler.json</code>, run <code>cf migrate --dry-run</code> first, then <code>cf migrate</code>.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3><code>cf auth login</code> fails with an unknown OAuth scope error, naming <code>email_routing:read</code> or <code>email_sending:read</code></h3>
+      <p>This was a real bug, not an outage. On September 7, 2026 Cloudflare patched <code>@cloudflare/workers-auth</code> (0.6.9) because <code>cf</code> asked for read scopes the OAuth server never registered for those products; only the write scopes exist.</p>
+      <p><strong>Fix:</strong> Update <code>cf</code> to a build with the fix and log in again. Do not paste your API token into a chat or switch providers to work around it. (<a href="https://zemna.net/blog/requested-scopes-before-outage/" target="_blank" rel="noopener">zemna.net</a>)</p>
+      <h3>You are signed into Wrangler, but <code>cf</code> says you are not logged in</h3>
+      <p>Nothing is broken: <code>cf</code> keeps its own credentials and never reads Wrangler’s login.</p>
+      <p><strong>Fix:</strong> Run <code>cf auth login</code> once, even on a machine where Wrangler works fine. (<a href="https://developers.cloudflare.com/cf/get-started/" target="_blank" rel="noopener">Cloudflare get-started docs</a>)</p>
+      <h3>You type <code>cf</code> and get a different tool, or a “command not found” for the Cloudflare one</h3>
+      <p>The name <code>cf</code> is shared with the Cloud Foundry CLI.</p>
+      <p><strong>Fix:</strong> The Cloudflare package installs the same CLI under two names, <code>cf</code> and <code>cloudflare</code>. Use <code>cloudflare</code> if something else already owns <code>cf</code> on your PATH. (<a href="https://developers.cloudflare.com/cf/get-started/" target="_blank" rel="noopener">Cloudflare get-started docs</a>)</p>
+      <h3>In CI, a command fails with “More than one account available but unable to select one in non-interactive mode”</h3>
+      <p>In a non-interactive run <code>cf</code> cannot prompt you to pick an account, so it fails instead.</p>
+      <p><strong>Fix:</strong> Set <code>CLOUDFLARE_ACCOUNT_ID</code> as a repository secret, or add <code>accountId</code> to the default export in <code>cloudflare.config.ts</code>. (<a href="https://developers.cloudflare.com/cf/ci/" target="_blank" rel="noopener">Cloudflare CI docs</a>)</p>
+      <h3>A tutorial’s command does not exist, or output looks different from the docs</h3>
+      <p><code>cf</code> is still a release candidate (1.0.0rc.5). Cloudflare warns that commands, configuration, and build output can change before the stable release, so treat any guide older than a few weeks with care.</p>
+      <p><strong>Fix:</strong> Check <code>cf &lt;command&gt; --help</code> on your installed version. Also note that <code>cf</code> sends anonymous usage telemetry by default; turn it off with <code>cf cli telemetry disable</code> or by setting <code>DO_NOT_TRACK</code>. (<a href="https://developers.cloudflare.com/changelog/post/2026-09-28-cloudflare-cli-beta/" target="_blank" rel="noopener">Cloudflare changelog</a>, <a href="https://flaviocopes.com/cloudflare-cf/" target="_blank" rel="noopener">Flavio Copes guide</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>Wrangler (still the safe choice for existing Workers projects until you migrate), git (commit <code>cloudflare.config.ts</code>, never commit tokens), <code>jq</code> (every command prints JSON by default), and a coding agent (the <code>cf cli search</code> command exists so an agent can find commands without prior knowledge).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>Wrangler stays focused on Workers with hand-written commands, plain <code>curl</code> with an API token covers one-off calls, and the Terraform Cloudflare provider fits infrastructure-as-code setups.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Cloudflare CLI vs Wrangler vs curl vs Terraform</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Cloudflare CLI</th><th>Wrangler</th><th>curl + API token</th><th>Terraform Cloudflare provider</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free CLI; Cloudflare usage billed per plan, free tier available</td><td>Free CLI; same Cloudflare billing</td><td>Free; same Cloudflare billing</td><td>Free provider; same Cloudflare billing</td></tr>
+            <tr><td>Best for</td><td>Managing all of Cloudflare plus Workers from one command, with agent-friendly JSON</td><td>Workers-only work with a mature, hand-built command set</td><td>One-off API calls and tiny scripts</td><td>Declaring DNS, zones, and Workers as code with state</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add cloudflare-cli</code></td><td><code>npm install -g wrangler</code></td><td>Already installed</td><td><code>terraform init</code> in a project</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick <code>cf</code> if you want one tool for everything Cloudflare exposes, especially if you drive it from scripts or an agent. Pick Wrangler if your work is Workers only and you want the tool with the longest track record.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Cloudflare CLI is a free alternative to managing Cloudflare by hand in the dashboard</h2>
+      <p><strong>Cloudflare CLI is a free alternative to managing Cloudflare by hand in the dashboard.</strong> What you give up: the dashboard’s visual editors and click-through wizards, which are faster for a one-off DNS edit you will never repeat. What you keep: every setting the API exposes, plus scriptable deploys, repeatable config in <code>cloudflare.config.ts</code>, and JSON output you can pipe anywhere. The CLI itself is free, and a small Worker can start on Cloudflare’s free plan; Workers Paid has a $5 monthly minimum.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Wrangler (~15 minutes per project)</h2>
       <ol>
-        <li>Open a terminal.</li>
-        <li>Run the install command:<pre><code class="language-bash">omarchy pkg add cloudflare-cli</code></pre></li>
-        <li>Check it landed. Pacman should list version 1.0.0rc.5-1:<pre><code class="language-bash">pacman -Qi cloudflare-cli</code></pre></li>
+        <li><strong>Export from Wrangler:</strong> your project already has its config in <code>wrangler.toml</code> or <code>wrangler.json</code> (or <code>wrangler.jsonc</code>). Nothing to export by hand; <code>cf migrate</code> reads it.</li>
+        <li><strong>Import into cf:</strong> in the project folder run <code>cf migrate --dry-run</code> to preview the change, then <code>cf migrate</code>. It creates the typed <code>cloudflare.config.ts</code>. Open that file and check the worker name, compatibility date, entrypoint, and bindings.</li>
+        <li><strong>What doesn’t transfer:</strong> your Wrangler login does not carry over, so run <code>cf auth login</code> separately. Build output paths and some Wrangler-specific config keys may differ, so run <code>cf build</code> and read the output before deploying.</li>
+        <li><strong>Time estimate:</strong> about 15 minutes per project, plus a test deploy.</li>
       </ol>
     </section>
 
-    <section id="use">
-      <h2>Open and use cloudflare-cli</h2>
-      <p>To see what the package installed, including any commands and desktop entries:</p><pre><code class="language-bash">pacman -Ql cloudflare-cli</code></pre>
-    </section>
-
-    <section id="requirements">
-      <h2>cloudflare-cli requirements and compatibility</h2>
-      <p>No special requirements are documented for cloudflare-cli.</p>
-      <h3>Dependencies Omarchy installs for you</h3><ul><li><code>nodejs</code></li><li><code>glibc</code></li><li><code>gcc-libs</code></li></ul>
-      <h3>Pricing and license</h3>
-      <p>Check the project site for current pricing. License: MIT OR Apache-2.0.</p>
-    </section>
-
-    <section id="remove">
-      <h2>Uninstall cloudflare-cli</h2>
-      <pre><code class="language-bash">omarchy pkg drop cloudflare-cli</code></pre>
-    </section>
-
-    <section id="facts">
-      <h2>cloudflare-cli package facts</h2>
-      <div class="table-scroll"><table class="compare-table"><tbody><tr><th scope='row'>Package</th><td><code>cloudflare-cli</code></td></tr><tr><th scope='row'>Version</th><td>1.0.0rc.5-1</td></tr><tr><th scope='row'>Category</th><td>Utilities</td></tr><tr><th scope='row'>License</th><td>MIT OR Apache-2.0</td></tr><tr><th scope='row'>Download</th><td>64.4 MB</td></tr><tr><th scope='row'>Installed size</th><td>224.8 MB</td></tr><tr><th scope='row'>Built</th><td>2026-11-24</td></tr><tr><th scope='row'>Pricing</th><td>Check the project site for current pricing</td></tr><tr><th scope='row'>Added to the official repo</th><td>2026-11-24</td></tr><tr><th scope='row'>Made by</th><td>cloudflare</td></tr></tbody></table></div>
-      <p><a href="/apps/cloudflare-cli.html">cloudflare-cli package page on this site</a> · <a href="https://github.com/cloudflare/cf" target="_blank" rel="noopener">Project site</a></p>
-    </section>
+    <div class="guide-cta">
+      <div><h2>Open the Cloudflare CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/cloudflare-cli.html">View Cloudflare CLI →</a>
+    </div>
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>How do I install cloudflare-cli on Omarchy?</summary><p>Open a terminal and run omarchy pkg add cloudflare-cli. The download is 64.4 MB and it takes 224.8 MB once installed. Omarchy pulls in any dependencies automatically.</p></details><details><summary>Is cloudflare-cli free?</summary><p>Check the project site for current pricing. The package is licensed MIT OR Apache-2.0.</p></details><details><summary>How do I uninstall cloudflare-cli?</summary><p>Run omarchy pkg drop cloudflare-cli. It removes the package from your system.</p></details><details><summary>What does cloudflare-cli depend on?</summary><p>The package declares 3 dependencies: nodejs, glibc, gcc-libs. Omarchy installs them for you.</p></details><details><summary>Is cloudflare-cli in the official Omarchy repo?</summary><p>Yes. It is published as cloudflare-cli (version 1.0.0rc.5-1) in the official Omarchy package repository. cloudflare makes it. Project site: https://github.com/cloudflare/cf. This site is unofficial: an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p></details>
+      <details><summary>Is <code>cf</code> replacing Wrangler?</summary><p>Cloudflare calls <code>cf</code> its new CLI and says it will replace Wrangler, but Wrangler still works today. <code>cf migrate</code> exists to move projects across, and the release candidate is the version Cloudflare now asks you to try on your own projects.</p></details>
+      <details><summary>Do I need Node.js?</summary><p>The Omarchy package depends on nodejs, so it comes along automatically. The npm install path needs Node.js 22 or newer.</p></details>
+      <details><summary>Does <code>cf</code> reuse my Wrangler login?</summary><p>No. <code>cf</code> keeps its own credentials. Sign in once with <code>cf auth login</code> even if Wrangler is already signed in.</p></details>
+      <details><summary>Is it stable yet?</summary><p>No. Version 1.0.0rc.5 is a release candidate, and Cloudflare warns commands, configuration, and build output can still change before the stable release.</p></details>
+      <details><summary>Does it work offline?</summary><p>No, except for <code>cf cli search</code>, which runs locally. Every other command talks to the Cloudflare API, so it needs network access and a login or API token.</p></details>
+      <details><summary>Where does my project config live?</summary><p>Projects created with <code>cf init</code> use <code>cloudflare.config.ts</code> in the project root, a typed TypeScript config. API commands also read <code>CLOUDFLARE_API_TOKEN</code>, <code>CLOUDFLARE_ACCOUNT_ID</code>, and <code>CLOUDFLARE_ZONE_ID</code> from the environment or a local <code>.env</code> file.</p></details>
     </section>
 
-    <section id="related">
-      <h2>More Utilities apps on Omarchy</h2>
-      <ul><li><a href="/cua-driver-bin-on-omarchy.html">cua-driver</a></li><li><a href="/devin-cli-on-omarchy.html">devin-cli</a></li><li><a href="/dropbox-on-omarchy.html">dropbox</a></li><li><a href="/firefox-on-omarchy.html">firefox</a></li><li><a href="/firefox-i18n-ach-on-omarchy.html">firefox-i18n-ach</a></li><li><a href="/firefox-i18n-af-on-omarchy.html">firefox-i18n-af</a></li></ul>
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/cloudflare-cli.html" target="_blank" rel="noopener">Omarchy package listing for Cloudflare CLI</a></li>
+        <li><a href="https://developers.cloudflare.com/cf/get-started/" target="_blank" rel="noopener">Cloudflare CLI get-started docs (install, sign in, credential order, profiles, telemetry)</a></li>
+        <li><a href="https://developers.cloudflare.com/changelog/post/2026-09-28-cloudflare-cli-beta/" target="_blank" rel="noopener">Cloudflare CLI beta changelog (1.0.0-rc.1, commands can change before stable)</a></li>
+        <li><a href="https://developers.cloudflare.com/cf/ci/" target="_blank" rel="noopener">Cloudflare CLI in CI (account selection failure, non-interactive behavior)</a></li>
+        <li><a href="https://blog.openreplay.com/cloudflare-cf-cli-guide/" target="_blank" rel="noopener">Practical guide (Node 22.18+, Wrangler login does not carry over, migrate, telemetry)</a></li>
+        <li><a href="https://flaviocopes.com/cloudflare-cf/" target="_blank" rel="noopener">How to use cf (1.0.0-rc.1, cloudflare alias, telemetry, deploy)</a></li>
+        <li><a href="https://zemna.net/blog/requested-scopes-before-outage/" target="_blank" rel="noopener">Unknown OAuth scope login failure, September 2026 patch</a></li>
+        <li><a href="https://omidsaffari.com/blog/how-to-use-cloudflare-cf-cli-open-beta" target="_blank" rel="noopener">How to use cf, Workers free plan and $5 Paid minimum</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
     </section>
 
   </article>
@@ -126,15 +214,15 @@
   <aside class="related-guides" aria-labelledby="related-guides-h">
     <h2 id="related-guides-h">Keep exploring</h2>
     <div class="related-guide-grid">
-<a class="related-guide" href="/cua-driver-bin-on-omarchy.html"><strong>cua-driver on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/devin-cli-on-omarchy.html"><strong>devin-cli on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/dropbox-on-omarchy.html"><strong>dropbox on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/apps/cloudflare-cli.html"><strong>cloudflare-cli package page</strong><span>Version, size, license and install command</span></a>
+<a class="related-guide" href="/amp-cli-on-omarchy.html"><strong>How to Install &amp; Use Amp CLI on Omarchy (2026) — Free Hobby Tier, the Dial, and Cloud Orbs</strong><span>Install Sourcegraph Amp CLI on Omarchy with one command. Free Hobby tier, login, the Dial modes, AGENTS.md setup, orb pricing, and common fixes.</span></a>
+<a class="related-guide" href="/antigravity-cli-on-omarchy.html"><strong>How to Install &amp; Use Antigravity CLI on Omarchy (2026) — Google&#x27;s Gemini Terminal Agent</strong><span>Install Google Antigravity CLI on Omarchy with one command. Free tier, Google sign-in, Auto mode, MCP setup, quota limits, and the Gemini CLI replacement explained.</span></a>
+<a class="related-guide" href="/antigravity-on-omarchy.html"><strong>How to Install &amp; Use Antigravity on Omarchy (2026) — Free Cursor Alternative</strong><span>Install Google Antigravity on Omarchy with one command. Agent-first AI development, free for individuals: setup, sign-in, and real Linux fixes from Google&#x27;s own forum.</span></a>
+<a class="related-guide" href="/apple-bcm-firmware-fetcher-on-omarchy.html"><strong>How to Install &amp; Use apple-bcm-firmware-fetcher on Omarchy (2026) — Fix Wi-Fi &amp; Bluetooth on T2 Macs</strong><span>Fix Wi-Fi and Bluetooth on your T2 Mac running Omarchy: install apple-bcm-firmware-fetcher with one command, pull the firmware from your macOS volume, verify it loaded, and fix the common failures (macOS wiped, APFS driver, FileVault, iMac models).</span></a>
     </div>
   </aside>
 </main>
 
-<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
+<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">

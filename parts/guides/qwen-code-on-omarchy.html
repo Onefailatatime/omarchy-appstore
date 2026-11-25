@@ -1,0 +1,140 @@
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add qwen-code` (package slug `qwen-code`) — verify it resolves in the store index. Confirm version 0.28.4-1, 28 MB download / 114.6 MB installed, depends on nodejs, glibc, and gcc-libs, as listed
+- Binary name: confirm the package installs the `qwen` command on PATH
+- First launch: run `qwen` in a project and confirm the first-run `/auth` menu: Qwen Account with Subscription, QwenCloud, Alibaba ModelStudio, Third-party Providers, and Custom Provider
+- Config paths: confirm user settings at `~/.qwen/settings.json`, project settings at `.qwen/settings.json`, and logs at `~/.qwen/logs/`
+- Free tier: confirm the old Qwen OAuth free tier is gone from `/auth` on this version (it was discontinued April 15, 2026) and that old cached tokens are rejected
+- Issues claimed below are NOT personally reproduced, they are documented upstream (Qwen Code docs, independent reviews and guides). Verify at least the `/auth` flow and the default approval mode on a real machine
+- Screenshots needed: install, first launch, `/auth` menu, approval-mode switch, a finished task, `/model` picker, `/doctor` output
+
+SEO notes:
+- URL: /guides/qwen-code-on-omarchy
+- Title tag: "Qwen Code CLI on Omarchy: Install & Setup Guide (2026) | Omarchy Apps"
+- Meta description: "Install Qwen Code CLI on Omarchy. The /auth menu, what replaced the discontinued free tier, approval modes, and Qwen Code vs Kimi and Claude Code."
+-->
+    <nav class="guide-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#install">Install</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Claude Code</a>
+      <a href="#faq">Questions</a>
+    </nav>
+
+    <section id="install">
+      <h2>Qwen Code CLI on Omarchy</h2>
+      <p>Qwen Code CLI on Omarchy is Alibaba Qwen team’s Apache-2.0 terminal coding agent, optimized for Qwen models: run <code>qwen</code> in a project, pick a provider with <code>/auth</code>, and describe the task, with approval modes from read-only plan to full YOLO.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add qwen-code</code></pre>
+      <p>Then <code>cd ~/my-project</code> and run <code>qwen</code>. That installs Qwen Code CLI v0.28.4-1 (28 MB download, 114.6 MB installed, depends on nodejs, glibc, and gcc-libs). On first launch, pick an auth method with <code>/auth</code> and connect a model. Then describe what you want done. The CLI is free and open source; model access is a separate bill.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Pick an auth method with /auth.</h3>
+      <p>On first run, and any time later with <code>/auth</code>, Qwen Code shows a menu. <strong>Qwen Account with Subscription</strong> signs in with your Qwen account through Qwen OAuth and uses your Plus or Pro subscription from chat.qwen.ai. <strong>QwenCloud</strong> is the official recommended setup: a Token Plan subscription with a monthly credit quota, or a standard pay-as-you-go API key, on the China or International platform. <strong>Alibaba ModelStudio</strong> offers a Coding Plan for individual developers (fixed monthly fee with a weekly quota), a Token Plan for teams, or a standard API key. <strong>Third-party Providers</strong> has ready-made entries for DeepSeek, Grok, MiniMax, Z.AI, Kimi, ModelScope, OpenRouter, and Requesty. <strong>Custom Provider</strong> takes any OpenAI, Anthropic, or Gemini-compatible endpoint, including a local server. The old free Qwen OAuth tier was discontinued on April 15, 2026, so do not expect a free login: you need an API key, a plan, or a local model.</p>
+      <h3>2. Start with a read-only task.</h3>
+      <p>Try: “Take a look at this project and explain its main directories.” Qwen Code reads and searches the project before answering, so you see how it works before it edits anything. Then run <code>/init</code> to have it study the code and write a <code>QWEN.md</code> with build commands and conventions it found. <code>QWEN.md</code> is read at the start of every session, so keep it short: every line costs tokens on every request.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Check the approval mode before your first edit.</strong> Qwen Code has five modes: plan (read-only), default (ask), auto-edit, auto (an LLM classifier decides, and this is the default), and yolo. Switch with Shift+Tab or <code>/approval-mode</code>. The default Auto mode plus a sandbox that is off by default is a risky combination on a machine you care about: switch to default (ask) and turn the sandbox on in <code>~/.qwen/settings.json</code> for daily work.</li>
+        <li><strong>Set permissions in settings.</strong> The <code>permissions</code> block in <code>~/.qwen/settings.json</code> takes allow, ask, and deny rules: allow <code>git status</code> and <code>pnpm test</code> without asking, always ask for <code>git push</code>, and deny <code>rm -rf</code> and reading <code>.env</code> outright. Check what is active with <code>/permissions</code>.</li>
+        <li><strong>Run <code>/doctor</code> when anything looks wrong.</strong> It shows which authentication is active, which model is selected, and whether the sandbox is on. Check the active auth and model there before assuming a login worked: a successful login does not prove the account can use the model you picked.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>You used to sign in free with Qwen OAuth, and now every request fails</h3>
+      <p>The Qwen OAuth free tier was discontinued on April 15, 2026. It no longer appears in <code>/auth</code>, and new requests through it are rejected even if an old token is still cached.</p>
+      <p><strong>Fix:</strong> Run <code>qwen</code> and then <code>/auth</code> to reconfigure: pick QwenCloud, Alibaba ModelStudio, a third-party provider, or a custom provider with an API key or local model. There is no free tier to restore. (<a href="https://qwenlm.github.io/qwen-code-docs/en/users/overview" target="_blank" rel="noopener">Qwen Code README and docs</a>, <a href="https://agentvera.dev/blog/how-to-use-qwen-code" target="_blank" rel="noopener">AgentVera Qwen Code guide</a>)</p>
+      <h3>Login succeeds but every request fails</h3>
+      <p>Check account entitlement separately from a successful login: a sign-in that works does not mean the account can use the model you picked. The official troubleshooting table sorts the common causes: auth failure means the credential or model access is wrong, unknown model or endpoint means the model ID or base URL is wrong, and rate or quota limit means the provider quota is hit.</p>
+      <p><strong>Fix:</strong> Open <code>/auth</code> and <code>/model</code> to verify the selected connection and model. For a custom API, verify the endpoint, protocol, model ID, and credential in the shell that launches Qwen Code. Do not repeatedly retry a request that is clearly rejected for credentials or configuration. (<a href="https://qwenlm.github.io/qwen-code-docs/1.x/en/users/troubleshooting/" target="_blank" rel="noopener">Qwen Code troubleshooting docs</a>)</p>
+      <h3>The agent approves its own tool calls, or runs commands you would have blocked</h3>
+      <p>Recent versions default to Auto approval mode, where a separate classifier model evaluates every command, network access, or MCP tool call, and the sandbox and folder trust are both off by default. That means the agent can act without asking you, and each classifier check is an extra API request (if no fast model is set, the main model is used, and each check costs as much as a full request).</p>
+      <p><strong>Fix:</strong> Switch to default (ask) mode with <code>/approval-mode</code> or Shift+Tab, turn the sandbox on in <code>~/.qwen/settings.json</code>, and set explicit deny rules for destructive commands. YOLO mode should only run in an isolated environment. (<a href="https://news.hamidun.com/en/news/16266/configuring-qwen-code-qwen-md-subagents-and-a-sandbox-cut-wa" target="_blank" rel="noopener">Qwen Code config guide</a>, <a href="https://www.anchorterminal.com/tools/qwen-code" target="_blank" rel="noopener">Anchor Terminal Qwen Code review</a>)</p>
+      <h3>A tool is denied or unavailable, and adding an allow rule does not bring it back</h3>
+      <p>Use <code>/permissions</code> to inspect the rules and recent denials, the active mode, explicit deny rules, available tool selection, workspace directories, and MCP configuration. Note that <code>dont_ask</code> rejects requests that require new approval, and <code>accept_edits</code> does not automatically approve arbitrary shell commands.</p>
+      <p><strong>Fix:</strong> Inspect the rules with <code>/permissions</code> first; a tool absent from the available tool set cannot be restored solely by adding an allow rule. Avoid disabling all permission checks as a diagnostic shortcut. (<a href="https://qwenlm.github.io/qwen-code-docs/1.x/en/users/troubleshooting/" target="_blank" rel="noopener">Qwen Code troubleshooting docs</a>)</p>
+      <h3>You try the old qwen auth shell command from a tutorial and it does nothing, or the wrong version of qwen starts</h3>
+      <p>The old <code>qwen auth</code> shell command has been removed, so <code>/auth</code> inside a session is the place to change providers. If the wrong version starts, a stale npm or standalone install earlier on PATH shadows the Omarchy package.</p>
+      <p><strong>Fix:</strong> Run <code>qwen --version</code> and inspect your shell’s executable lookup. Remove the duplicate install and restart the terminal. (<a href="https://agentvera.dev/blog/how-to-use-qwen-code" target="_blank" rel="noopener">AgentVera Qwen Code guide</a>, <a href="https://qwenlm.github.io/qwen-code-docs/1.x/en/users/troubleshooting/" target="_blank" rel="noopener">Qwen Code troubleshooting docs</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>git (review diffs before committing), a local Ollama model as a Custom Provider for $0 runs, and the Qwen desktop app or editor extensions (VS Code, Zed, JetBrains) when you want the same agent outside the terminal.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>If you hate the dead free tier: Kimi Code CLI has a $0 membership tier with OAuth login, and OpenCode takes free-tier keys from 75+ providers. If you want the same terminal-agent shape from one vendor’s models, Claude Code is the paid reference point.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: Qwen Code CLI vs Claude Code vs Kimi Code CLI vs Kilo Code CLI</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Qwen Code CLI</th><th>Claude Code (CLI)</th><th>Kimi Code CLI</th><th>Kilo Code CLI</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free CLI; QwenCloud or ModelStudio plan, or your own provider key</td><td>Requires Claude Pro $20/mo+</td><td>Free CLI; Kimi membership from $15/mo or per-token API billing</td><td>Free agent; you pay provider rates</td></tr>
+            <tr><td>Best for</td><td>Qwen models, any OpenAI/Anthropic/Gemini endpoint, headless runs</td><td>The strongest single-vendor models, no key juggling</td><td>A fast single-binary TUI with subagents, MCP, and a free tier</td><td>Picking your own model per task, local models, scripted runs</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add qwen-code</code></td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td><code>omarchy pkg add kimi-code</code></td><td><code>omarchy pkg add kilocode-cli</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick Qwen Code if you already use Qwen models or want a provider-agnostic agent that also runs headless with <code>qwen -p</code>. Pick Kimi Code CLI if you want a free tier with no key, and Claude Code if you want one vendor’s models and zero config.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>Qwen Code CLI is a free CLI, but not a free ride vs Claude Code (Pro $20/mo)</h2>
+      <p><strong>Qwen Code CLI is a free CLI, but not a free ride.</strong> The Qwen Code CLI itself is free and Apache-2.0 licensed, but the free Qwen OAuth tier is gone since April 15, 2026. What you keep for $0: the full agent, five approval modes, MCP, subagents, and headless runs, with any OpenAI-compatible endpoint, including a local Ollama model. What you give up vs Claude Code (Pro $20/mo): Claude’s models, and the maturity of a tool with a much longer track record. The honest pricing picture: the CLI costs $0, and the model is a separate bill. Your options are a QwenCloud Token Plan, an Alibaba ModelStudio Coding Plan, a third-party provider key, or a local model at $0. Usage statistics are on by default for every sign-in method and go to an Alibaba Cloud endpoint, so check the settings if that matters to you. Check current pricing at qwen.ai and Alibaba Cloud ModelStudio before deciding.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Claude Code (~15 minutes per project)</h2>
+      <ol>
+        <li><strong>Export from Claude Code:</strong> your project instructions already live in <code>CLAUDE.md</code>. Qwen Code reads <code>QWEN.md</code>; copy the contents across or run <code>/init</code> and let it generate one from the codebase.</li>
+        <li><strong>Import into Qwen Code:</strong> move MCP servers with <code>qwen mcp add</code>, and put your model and provider settings in <code>~/.qwen/settings.json</code> (or set the provider env vars). Your existing OpenAI-compatible keys work as a Custom Provider.</li>
+        <li><strong>What doesn’t transfer:</strong> chat history, Claude-specific slash commands and permission modes, and Claude Code’s GitHub Actions integration. Qwen Code has its own approval modes, subagents, and a GitHub Action (<code>qwen-code-action</code>) instead.</li>
+        <li><strong>Time estimate:</strong> takes about 15 minutes per project.</li>
+      </ol>
+    </section>
+
+    <div class="guide-cta">
+      <div><h2>Open the Qwen Code CLI package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/qwen-code.html">View Qwen Code CLI →</a>
+    </div>
+
+    <section class="guide-faq" id="faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is Qwen Code free?</summary><p>The CLI is free and open source (Apache-2.0). Model access is not free anymore: the Qwen OAuth free tier was discontinued April 15, 2026. You need a QwenCloud or ModelStudio plan, a third-party provider key, or a local model.</p></details>
+      <details><summary>What happened to the free Qwen OAuth tier?</summary><p>It was discontinued on April 15, 2026. It no longer appears in <code>/auth</code>, and requests through it are rejected even if an old token is still cached. Use <code>/auth</code> to pick a plan or key instead.</p></details>
+      <details><summary>What is the difference between Qwen Code and the Qwen chatbot?</summary><p>Qwen Code is the terminal coding agent (this guide). The Qwen chatbot at chat.qwen.ai is the web chat, and its Plus or Pro subscription is one of the ways to pay for Qwen Code through the Qwen Account with Subscription option.</p></details>
+      <details><summary>Where does Qwen Code store its config?</summary><p>User settings live in <code>~/.qwen/settings.json</code>, project settings in <code>.qwen/settings.json</code> at the repo root, and logs in <code>~/.qwen/logs/</code>. Project rules go in <code>QWEN.md</code> at the project root (plus <code>~/.qwen/QWEN.md</code> for your own global rules and <code>.qwen/QWEN.local.md</code> for rules only you see in that project). Do not put API keys in settings files: use environment variables or user-level settings.</p></details>
+      <details><summary>Does it work offline or run a model locally?</summary><p>Only with a local model. Point a Custom Provider at Ollama or any OpenAI-compatible local server, and Qwen Code talks to it. Every hosted provider needs network access.</p></details>
+      <details><summary>Can I use Claude or GPT models with it?</summary><p>Yes. Qwen Code supports OpenAI-compatible, Anthropic, and Google GenAI protocols, plus built-in third-party providers (DeepSeek, Grok, MiniMax, Z.AI, Kimi, ModelScope, OpenRouter, Requesty) and any custom endpoint.</p></details>
+    </section>
+
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/qwen-code.html" target="_blank" rel="noopener">Omarchy package listing: qwen-code (v0.28.4-1, 28 MB download / 114.6 MB installed)</a></li>
+        <li><a href="https://qwenlm.github.io/qwen-code-docs/en/users/overview" target="_blank" rel="noopener">Qwen Code docs, overview, install, auth methods, free-tier discontinuation</a></li>
+        <li><a href="https://qwenlm.github.io/qwen-code-docs/en/users/configuration/auth/" target="_blank" rel="noopener">Qwen Code authentication docs, five /auth options</a></li>
+        <li><a href="https://qwenlm.github.io/qwen-code-docs/1.x/en/users/troubleshooting/" target="_blank" rel="noopener">Qwen Code troubleshooting docs, login failures, permissions, logs</a></li>
+        <li><a href="https://agentvera.dev/blog/how-to-use-qwen-code" target="_blank" rel="noopener">Qwen Code step-by-step guide, /auth, free-tier end, /doctor</a></li>
+        <li><a href="https://modelrovia.com/reviews/qwen-code-cli-review/" target="_blank" rel="noopener">Qwen Code CLI review, version 0.26.4 checks, approval modes, sandbox</a></li>
+        <li><a href="https://www.anchorterminal.com/tools/qwen-code" target="_blank" rel="noopener">Qwen Code review, pricing, approval modes, usage stats, weaknesses</a></li>
+        <li><a href="https://news.hamidun.com/en/news/16266/configuring-qwen-code-qwen-md-subagents-and-a-sandbox-cut-wa" target="_blank" rel="noopener">Qwen Code config guide, QWEN.md, approval modes, MCP, sandbox</a></li>
+        <li><a href="https://github.com/QwenLM/qwen-code" target="_blank" rel="noopener">Qwen Code source and README</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
+    </section>

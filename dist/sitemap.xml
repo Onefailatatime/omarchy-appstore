@@ -7,7 +7,7 @@
   <url><loc>https://omarchyapps.com/press.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/faq.html</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://omarchyapps.com/sponsor.html</loc><lastmod>2026-11-25</lastmod></url>
-  <url><loc>https://omarchyapps.com/guides.html</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://omarchyapps.com/guides.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/terms.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://omarchyapps.com/omarchy-vs-macos-windows-ubuntu.html</loc><lastmod>2026-09-05</lastmod></url>
   <url><loc>https://omarchyapps.com/free-notion-alternative-linux-slap-notes.html</loc><lastmod>2026-09-05</lastmod></url>
@@ -57,6 +57,19 @@
   <url><loc>https://omarchyapps.com/kimi-code-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/oh-my-pi-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/openrouter-ori-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://omarchyapps.com/chromium-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/cloudflare-cli-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/devin-cli-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/firefox-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/grok-cli-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/ladybird-bin-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/muse-code-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/omarchy-themes-backgrounds-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/openai-codex-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/opencode-desktop-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/opencode-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/playwright-cli-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/qwen-code-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/free-photoshop-alternatives-omarchy.html</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://omarchyapps.com/free-sublime-text-alternatives-omarchy.html</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://omarchyapps.com/free-teamviewer-alternatives-omarchy.html</loc><lastmod>2026-10-19</lastmod></url>
@@ -210,7 +223,7 @@
   <url><loc>https://omarchyapps.com/apps/flea.html</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/freebuff.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/ghui.html</loc><lastmod>2026-11-23</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/github-copilot-cli.html</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/github-copilot-cli.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/gliff.html</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/google-chrome.html</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/gridcraft-bin.html</loc><lastmod>2026-11-23</lastmod></url>
@@ -221,7 +234,7 @@
   <url><loc>https://omarchyapps.com/apps/hermes-desktop.html</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/heroic-games-launcher-bin.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/hex-bin.html</loc><lastmod>2026-11-23</lastmod></url>
-  <url><loc>https://omarchyapps.com/apps/hey-cli.html</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://omarchyapps.com/apps/hey-cli.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/hunk.html</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/hyprland-preview-share-picker.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/apps/hyprshade.html</loc><lastmod>2026-11-09</lastmod></url>
@@ -370,14 +383,10 @@
   <url><loc>https://omarchyapps.com/install/gaming-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/bambustudio-bin-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/basecamp-cli-on-omarchy.html</loc><lastmod>2026-11-23</lastmod></url>
-  <url><loc>https://omarchyapps.com/chromium-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
-  <url><loc>https://omarchyapps.com/claude-code-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://omarchyapps.com/claude-code-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/cliamp-on-omarchy.html</loc><lastmod>2026-11-12</lastmod></url>
-  <url><loc>https://omarchyapps.com/cloudflare-cli-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/dell-xps-touchpad-haptics-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/devin-cli-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/dropbox-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/firefox-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://omarchyapps.com/dropbox-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/firefox-i18n-ach-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/firefox-i18n-af-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/firefox-i18n-an-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
@@ -479,38 +488,29 @@
   <url><loc>https://omarchyapps.com/firefox-i18n-uz-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/firefox-i18n-vi-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/firefox-i18n-xh-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/firefox-i18n-zh-cn-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/firefox-i18n-zh-tw-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/ghost-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/ghostty-nautilus-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/ghostty-shell-integration-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/grok-bot-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/grok-cli-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/ladybird-bin-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/firefox-i18n-zh-cn-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/firefox-i18n-zh-tw-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/ghost-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/ghostty-nautilus-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/ghostty-shell-integration-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/grok-bot-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/libretro-database-git-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/libretro-fbneo-git-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/libretro-vice-x128-git-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/linux-firmware-cirrus-dx13260-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/linux-omarchy-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
-  <url><loc>https://omarchyapps.com/lmstudio-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/lmstudio-bin-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://omarchyapps.com/lmstudio-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://omarchyapps.com/lmstudio-bin-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/makima-bin-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/mise-bin-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
-  <url><loc>https://omarchyapps.com/muse-code-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/nautilus-dropbox-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/nautilus-open-any-terminal-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://omarchyapps.com/nordvpn-bin-on-omarchy.html</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://omarchyapps.com/omarchy-audio-tuner-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/omarchy-themes-backgrounds-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/once-bin-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
-  <url><loc>https://omarchyapps.com/openai-codex-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/openai-codex-desktop-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/opencode-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/opencode-desktop-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://omarchyapps.com/playwright-cli-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://omarchyapps.com/openai-codex-desktop-on-omarchy.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://omarchyapps.com/python-mediapipe-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://omarchyapps.com/quickshell-git-on-omarchy.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://omarchyapps.com/qwen-code-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/superwhisper-bin-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/symfony-cli-on-omarchy.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://omarchyapps.com/ttfx-on-omarchy.html</loc><lastmod>2026-11-10</lastmod></url>
