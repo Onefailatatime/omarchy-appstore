@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-11-25T02:00:52+00:00",
+ "generated_at": "2026-11-25T14:00:54+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 347,
+ "app_count": 349,
  "apps": [
   {
    "id": "1password",
@@ -207,6 +207,17 @@
    "homepage": "https://github.com/Stunkymonkey/nautilus-open-any-terminal",
    "tutorial_url": "https://omarchyapps.com/apps/caja-open-any-terminal.html",
    "url": "https://omarchyapps.com/apps/caja-open-any-terminal.html"
+  },
+  {
+   "id": "chromium",
+   "name": "chromium",
+   "package": "chromium",
+   "install_command": "omarchy pkg add chromium",
+   "category": "Utilities",
+   "description": "A web browser built for speed, simplicity, and security",
+   "homepage": "https://www.chromium.org/Home",
+   "tutorial_url": "https://omarchyapps.com/chromium-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/chromium.html"
   },
   {
    "id": "claude-code",
@@ -2720,7 +2731,6 @@
    "category": "Browsers & Web",
    "description": "A web browser built for speed, simplicity, and security, with patches for Omarchy (binary package)",
    "homepage": "https://www.chromium.org/Home",
-   "repository": "https://github.com/omacom-io/omarchy-chromium",
    "tutorial_url": "https://omarchyapps.com/omarchy-chromium-bin-on-omarchy.html",
    "url": "https://omarchyapps.com/omarchy-chromium-bin-on-omarchy.html"
   },
@@ -2866,6 +2876,17 @@
    "homepage": "https://github.com/tcballard/omarchy-task-manager",
    "tutorial_url": "https://omarchyapps.com/apps/omarchy-task-manager.html",
    "url": "https://omarchyapps.com/apps/omarchy-task-manager.html"
+  },
+  {
+   "id": "omarchy-themes-backgrounds",
+   "name": "omarchy-themes-backgrounds",
+   "package": "omarchy-themes-backgrounds",
+   "install_command": "omarchy pkg add omarchy-themes-backgrounds",
+   "category": "Utilities",
+   "description": "Background stills for the Omarchy themes",
+   "homepage": "https://github.com/omacom/omarchy-themes-backgrounds",
+   "tutorial_url": "https://omarchyapps.com/omarchy-themes-backgrounds-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/omarchy-themes-backgrounds.html"
   },
   {
    "id": "omarchy-themes-intros",
