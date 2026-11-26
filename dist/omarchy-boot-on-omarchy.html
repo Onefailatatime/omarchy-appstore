@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How to Install &amp; Use omarchy-boot on Omarchy (2026)</title>
-<meta name="description" content="Install omarchy-boot on Omarchy with one command: omarchy pkg add omarchy-boot. Omarchy boot stack: the Limine boot loader with snapshot entries. Setup…">
+<title>omarchy-boot on Omarchy: Limine Snapshots &amp; Rollback (2026) |…</title>
+<meta name="description" content="Install omarchy-boot on Omarchy for the Limine boot loader with snapshot entries. Create snapshots, boot into them from the menu, and roll back a broken…">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/omarchy-boot-on-omarchy.html">
@@ -13,8 +13,8 @@
 <link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
 <link rel="manifest" href="/images/site.webmanifest?v=2">
-<meta property="og:title" content="How to Install &amp; Use omarchy-boot on Omarchy (2026)">
-<meta property="og:description" content="Install omarchy-boot on Omarchy with one command: omarchy pkg add omarchy-boot. Omarchy boot stack: the Limine boot loader with snapshot entries. Setup…">
+<meta property="og:title" content="omarchy-boot on Omarchy: Limine Snapshots &amp; Rollback (2026) |…">
+<meta property="og:description" content="Install omarchy-boot on Omarchy for the Limine boot loader with snapshot entries. Create snapshots, boot into them from the menu, and roll back a broken…">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://omarchyapps.com/omarchy-boot-on-omarchy.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
@@ -24,10 +24,10 @@
 <meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@jessyka_boat">
-<meta name="twitter:title" content="How to Install &amp; Use omarchy-boot on Omarchy (2026)">
-<meta name="twitter:description" content="Install omarchy-boot on Omarchy with one command: omarchy pkg add omarchy-boot. Omarchy boot stack: the Limine boot loader with snapshot entries. Setup…">
+<meta name="twitter:title" content="omarchy-boot on Omarchy: Limine Snapshots &amp; Rollback (2026) |…">
+<meta name="twitter:description" content="Install omarchy-boot on Omarchy for the Limine boot loader with snapshot entries. Create snapshots, boot into them from the menu, and roll back a broken…">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/omarchy-boot-on-omarchy.html#article","headline":"How to Install & Use omarchy-boot on Omarchy (2026)","description":"Install omarchy-boot on Omarchy with one command: omarchy pkg add omarchy-boot. Omarchy boot stack: the Limine boot loader with snapshot entries. Setup…","url":"https://omarchyapps.com/omarchy-boot-on-omarchy.html","dateModified":"2026-11-25","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/guides.html"},{"@type":"ListItem","position":3,"name":"How to Install & Use omarchy-boot on Omarchy (2026)","item":"https://omarchyapps.com/omarchy-boot-on-omarchy.html"}]},{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/omarchy-boot-on-omarchy.html#app","name":"omarchy-boot","description":"Omarchy boot stack: the Limine boot loader with snapshot entries","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"1-1","license":"MIT","url":"https://omarchyapps.com/apps/omarchy-boot.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/omarchy-boot-on-omarchy.html#article","headline":"omarchy-boot on Omarchy: Limine Snapshots & Rollback (2026) |…","description":"Install omarchy-boot on Omarchy for the Limine boot loader with snapshot entries. Create snapshots, boot into them from the menu, and roll back a broken…","url":"https://omarchyapps.com/omarchy-boot-on-omarchy.html","dateModified":"2026-11-26","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"omarchy-boot on Omarchy: Limine Snapshots & Rollback (2026) | Omarchy Apps","item":"https://omarchyapps.com/omarchy-boot-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need to install omarchy-boot if Limine is already my boot loader?","acceptedAnswer":{"@type":"Answer","text":"Probably not — Limine has been the default since Omarchy 2.0, and on a standard install the whole stack is already there. The package is the one-command way to (re)install it if pieces were removed."}},{"@type":"Question","name":"Does omarchy-boot work on GRUB or systemd-boot installs?","acceptedAnswer":{"@type":"Answer","text":"No. Snapshots from the boot menu only work with Limine, which has been the default since Omarchy 2.0. If you are on GRUB or systemd-boot, you need to switch boot loaders first."}},{"@type":"Question","name":"Does a restore bring back files I deleted from my home folder?","acceptedAnswer":{"@type":"Answer","text":"No. A restore covers the root filesystem only — programs, /etc, and the package database. Your home folder, including ~/.config, is untouched. Back up personal files separately."}},{"@type":"Question","name":"How many snapshots does Omarchy keep?","acceptedAnswer":{"@type":"Answer","text":"Five. Omarchy's snapper policy keeps the 5 most recent snapshots made by an update or by you, and deletes older ones right after each new one."}}]}]}</script>
 <link rel="stylesheet" href="/style.75958c2d72.css">
   <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
   <script src="/oa-ads.js" defer></script>
@@ -50,91 +50,173 @@
 
 <header class="hero guide-hero seo-hero">
   <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/guides.html">Guides</a><span>›</span><span aria-current="page">Utilities tutorial</span></nav>
-    <p class="eyebrow">Utilities tutorial</p>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">Omarchy boot guide</span></nav>
+    <p class="eyebrow">Omarchy boot guide</p>
     <h1>omarchy-boot on <span>Omarchy</span></h1>
-    <p class="tag">Omarchy boot stack: the Limine boot loader with snapshot entries</p>
-    <p class="facts">Generated from the official Omarchy package repo</p>
+    <p class="tag">The whole boot stack in one package — Limine plus snapper, so every update gets a snapshot you can boot into.</p>
+    <p class="facts">Reviewed 2026-11-26 · independent editorial guide</p>
   </div>
 </header>
-<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
+<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
 
 <main class="wrap seo-guide-main">
   <article class="seo-article">
     <div class="guide-answer">
       <p class="answer-label">Short answer</p>
-      <p>To install omarchy-boot on Omarchy, open a terminal and run omarchy pkg add omarchy-boot. It is a 3.1 KB download (0 B installed), version 1-1, licensed MIT. Omarchy boot stack: the Limine boot loader with snapshot entries. Check the project site for current pricing.</p>
+      <p>Install omarchy-boot with omarchy pkg add omarchy-boot, then run omarchy snapshot create before risky changes. If an update breaks something, pick the snapshot in the Limine boot menu and restore it with omarchy snapshot restore. Limine has been the default since Omarchy 2.0, so on a standard install the stack is already there.</p>
     </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add omarchy-boot` (package slug `omarchy-boot`) — verify it resolves in the store index. Confirm 3.1 KB download / 0 B installed, MIT, version 1-1, and that it pulls in limine, limine-mkinitcpio-hook, limine-snapper-sync, and snapper, as listed on the app page
+- Already installed? On a standard Omarchy 2.0+ install, Limine and snapper are already the default boot stack. Confirm whether `omarchy-boot` is already present (and installing it is a no-op) or whether it only exists for systems that removed pieces of the stack
+- Snapshot round trip: run `omarchy snapshot create`, reboot into the snapshot from the Limine menu, confirm the `df -h /` overlay check, then run `omarchy snapshot restore` and confirm the system comes back
+- Boot menu: confirm the Limine menu shows the `linux-omarchy` entry, a `Snapshots` folder, and the ~5-second countdown on a real machine
+- Issues claimed below are NOT personally reproduced, they are documented in the Omarchy manual and in the Starry Hope walkthrough (done on Omarchy 4.0.4). Verify at least the snapshot create / boot / restore loop on a real machine
+- Screenshots needed: install output, `omarchy snapshot create` output, the Limine boot menu with the Snapshots folder, a booted snapshot's `df -h /` output, the restore prompt
+
+SEO notes:
+- URL: /guides/omarchy-boot-on-omarchy
+- Title tag: "omarchy-boot on Omarchy: Limine Snapshots & Rollback (2026) | Omarchy Apps"
+- Meta description: "Install omarchy-boot on Omarchy for the Limine boot loader with snapshot entries. Create snapshots, boot into them from the menu, and roll back a broken update in minutes."
+-->
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
       <a href="#install">Install</a>
-      <a href="#use">Open and use</a>
-      <a href="#requirements">Requirements</a>
-      <a href="#remove">Uninstall</a>
-      <a href="#facts">Package facts</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from GRUB</a>
       <a href="#faq">Questions</a>
     </nav>
 
     <section id="install">
-      <h2>Install omarchy-boot on Omarchy</h2>
-      <p>Omarchy boot stack: the Limine boot loader with snapshot entries</p>
-      <p>The official repository lists this package in Utilities. It was added on 2026-11-25.</p>
-      
+      <h2>omarchy-boot on Omarchy</h2>
+      <p>omarchy-boot on Omarchy is the whole boot stack in one package: the Limine boot loader plus snapper, so every system update gets a snapshot you can boot into and roll back from.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add omarchy-boot
+omarchy snapshot create</code></pre>
+      <p>That installs omarchy-boot (3.1 KB download, 0 B installed — it is a meta-package, version 1-1, MIT), which pulls in four pieces: <code>limine</code>, <code>limine-mkinitcpio-hook</code>, <code>limine-snapper-sync</code>, and <code>snapper</code>. <code>omarchy snapshot create</code> takes a snapshot of your system in about a second; if an update breaks something, you pick that snapshot in the Limine boot menu and restore it with <code>omarchy snapshot restore</code>. Limine has been the default boot loader since Omarchy 2.0, so on a standard install this stack is already there — the package exists to (re)install the whole thing in one command.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Understand the four pieces.</h3>
+      <p>omarchy-boot itself installs nothing — it is a meta-package that guarantees the stack is present. <code>limine</code> is the boot loader that shows the "Omarchy Bootloader" menu. <code>limine-mkinitcpio-hook</code> rebuilds your boot entries whenever the kernel or initramfs changes. <code>limine-snapper-sync</code> keeps the snapshot entries in that menu in step with snapper. <code>snapper</code> is the tool that actually takes Btrfs snapshots of your root filesystem. Omarchy stores its system on Btrfs, so a snapshot takes about a second and starts out using almost no extra disk space.</p>
+      <h3>2. Make a snapshot before you change anything.</h3>
+      <p>Open a terminal (<code>Super</code> + <code>Enter</code>) and run:</p>
+      <pre><code class="language-bash">omarchy snapshot create</code></pre>
+      <p>It prints two lines — a green "Create system snapshot" and "Snapshots can be selected during boot" — and finishes in about a second. The snapshot's description is your Omarchy version. You do not have to do this before every update: <code>omarchy update</code> takes a snapshot automatically before it changes any package. Do it yourself before installing, removing, or changing system packages by hand, since a plain <code>pacman</code> command takes no snapshot. Omarchy keeps the 5 most recent snapshots and discards older ones.</p>
+      <h3>3. Three things worth knowing before you ever need a rollback:</h3>
+      <ul>
+        <li><strong>Boot into a snapshot from the menu.</strong> Reboot, and at the "Omarchy Bootloader" menu press any key to stop the ~5-second countdown. Open the <strong>Snapshots</strong> folder, pick the snapshot by its date (newest first; the Omarchy version at the time shows at the bottom of the screen), open it, and boot its <code>linux-omarchy</code> entry. Type your disk password as usual. The desktop looks the same as a normal boot — the snapshot is read-only, with a temporary layer in memory on top, so system changes you make inside it are lost at the next reboot while files in your home folder stay.</li>
+        <li><strong>Restore it for good.</strong> Once you have confirmed the snapshot works, run <code>omarchy snapshot restore</code> in a terminal. It shows the snapshot's number, date, and description, asks "Restore snapshot N (method: replace)?" — type <code>r</code> — then asks for a description for a backup of your current system (press <code>Enter</code> to keep the default "backup before restore"). It finishes in a second or two and asks "Restore complete. Reboot now?" Press <code>Enter</code> to reboot into the restored system. Changed your mind later? That backup snapshot sits at the top of the Snapshots list — boot it and restore it the same way.</li>
+        <li><strong>A restore rolls back the system, not your home.</strong> It restores programs, system settings in <code>/etc</code>, and the package database. Your files and <code>~/.config</code> stay as they are, so if you roll back to an older app version that already rewrote its settings in a newer format, you sort that out by hand. And Omarchy's record of which migrations already ran lives in your home folder, so it survives the restore — migrations that ran after the snapshot stay marked as done, and the next <code>omarchy update</code> will not run them again.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>The computer booted the normal system before you could pick a snapshot</h3>
+      <p>The Limine countdown is about five seconds, and the menu boots the default entry when it runs out.</p>
+      <p><strong>Fix:</strong> Reboot and press any key as soon as the menu shows — any key stops the countdown. (Documented in the Starry Hope walkthrough, Omarchy 4.0.4; not reproduced on a live machine.) (<a href="https://www.starryhope.com/linux/omarchy-snapshots-limine-rollback/" target="_blank" rel="noopener">Starry Hope: Roll Back Omarchy with Snapshots and Limine</a>)</p>
+      <h3>Snapper commands fail inside a booted snapshot with an "IO Error"</h3>
+      <p>In a booted snapshot, root is the temporary overlay, not a Btrfs subvolume, so <code>sudo snapper -c root list</code> and friends cannot work there.</p>
+      <p><strong>Fix:</strong> Make new snapshots and manage old ones from the normal system: restore first, or reboot to <code>linux-omarchy</code>. (Documented in the Starry Hope walkthrough; not reproduced on a live machine.) (<a href="https://www.starryhope.com/linux/omarchy-snapshots-limine-rollback/" target="_blank" rel="noopener">Starry Hope</a>)</p>
+      <h3>A deleted snapshot is still listed in the boot menu</h3>
+      <p>The boot menu entries are generated from snapper's list, so a deleted snapshot lingers in the menu until the entries are rebuilt.</p>
+      <p><strong>Fix:</strong> List snapshots with <code>sudo snapper -c root list</code>, delete one by number with <code>sudo snapper -c root delete 17</code>, then rebuild the menu with <code>sudo limine-snapper-sync</code>. (Documented in the Starry Hope walkthrough; not reproduced on a live machine.) (<a href="https://www.starryhope.com/linux/omarchy-snapshots-limine-rollback/" target="_blank" rel="noopener">Starry Hope</a>)</p>
+      <h3>You turned on Direct Boot and can no longer reach your snapshots</h3>
+      <p><em>Setup &gt; Direct Boot</em> adds an EFI entry that boots straight to the disk password screen, skipping the Limine menu.</p>
+      <p><strong>Fix:</strong> To reach a snapshot, pick Limine from your firmware's boot menu (BIOS/UEFI boot picker), or run <em>Setup &gt; Direct Boot</em> again to turn it off and boot through Limine as before. Note the setup refuses to run on American Megatrends and Apple firmware, so on those machines the Limine menu stays. (Documented in the Omarchy manual; not reproduced on a live machine.) (<a href="https://omarchy.org/manual/system-snapshots/" target="_blank" rel="noopener">Omarchy Manual: System snapshots</a>)</p>
+      <h3>You restored a snapshot and something an earlier update had set up is still missing</h3>
+      <p>That is the migrations record, not a failed restore. Omarchy's record of which migrations already ran lives in your home directory, so it survives the restore, and the next <code>omarchy update</code> will not re-run migrations that ran after the snapshot was taken.</p>
+      <p><strong>Fix:</strong> Re-run the missing setup step by hand, or check the Omarchy release notes for what that migration did. (Documented in the Omarchy manual; not reproduced on a live machine.) (<a href="https://omarchy.org/manual/system-snapshots/" target="_blank" rel="noopener">Omarchy Manual: System snapshots</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li><code>omarchy update</code> (it snapshots automatically before every update, so the two are one safety net), <code>limine-snapper-sync</code> and <code>limine-mkinitcpio-hook</code> (the other two pieces of the stack, also in the store), and a real backup of your home folder — snapshots cover the system, not your files.</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>If you hate Limine: GRUB and systemd-boot are the other Linux boot loaders, but snapshots from the boot menu do not work on either — that feature is Limine-only on Omarchy. If you want snapshot-style rollback without Limine, Timeshift is a separate GUI tool for Btrfs/rsync snapshots, but it does not integrate with the Omarchy boot menu.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: omarchy-boot vs GRUB vs systemd-boot vs Timeshift</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>omarchy-boot</th><th>GRUB</th><th>systemd-boot</th><th>Timeshift</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free (MIT)</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Omarchy's own stack: Limine boot menu with bootable snapshots, automatic snapshot before every update</td><td>The traditional Linux boot loader; huge community, theming, multi-boot</td><td>Minimal, fast EFI boot loader</td><td>GUI snapshots and restore for Btrfs or rsync, popular on other distros</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add omarchy-boot</code></td><td>Not in the Omarchy store as a supported path; snapshots from the boot menu do not work</td><td>Not in the Omarchy store as a supported path; snapshots from the boot menu do not work</td><td><code>omarchy pkg add timeshift</code> (unverified, check the store); no Limine boot-menu integration</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick omarchy-boot if you run Omarchy — it is the supported path, it is already the default since 2.0, and it is the only option where a broken update is one boot-menu pick away from fixed. The alternatives are for people who have already decided to leave the Omarchy boot setup behind.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>omarchy-boot is free, and it is the safety net built into Omarchy</h2>
+      <p><strong>There is nothing to pay for here.</strong> omarchy-boot is free and MIT licensed, and it replaces no paid software — it is the safety net built into Omarchy itself. The thing it saves you from paying for is your own time: without bootable snapshots, a broken update means an afternoon of reinstalling or debugging from a live USB. With them, it means one reboot and one command.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from GRUB or systemd-boot to Limine + snapshots (~15 minutes plus a reboot)</h2>
       <ol>
-        <li>Open a terminal.</li>
-        <li>Run the install command:<pre><code class="language-bash">omarchy pkg add omarchy-boot</code></pre></li>
-        <li>Check it landed. Pacman should list version 1-1:<pre><code class="language-bash">pacman -Qi omarchy-boot</code></pre></li>
+        <li><strong>Check what you boot with now:</strong> if your Omarchy install predates 2.0 or you switched boot loaders yourself, you are on GRUB or systemd-boot and snapshots from the boot menu will not work.</li>
+        <li><strong>Install the stack:</strong> run <code>omarchy pkg add omarchy-boot</code> to pull in limine, limine-mkinitcpio-hook, limine-snapper-sync, and snapper, then follow the Omarchy installer's Limine setup to point your firmware at Limine. This step is the least documented part of the switch — verify it on a real machine before treating it as a recipe.</li>
+        <li><strong>Take your first snapshot:</strong> run <code>omarchy snapshot create</code> and confirm the new entry appears under Snapshots in the Limine menu on the next boot.</li>
+        <li><strong>What doesn't transfer:</strong> your old GRUB/systemd-boot menu entries and any custom boot configuration have to be recreated in Limine's config (<code>/boot/limine.conf</code>, managed via <code>/etc/default/limine</code>).</li>
+        <li><strong>Time estimate:</strong> about 15 minutes plus a reboot, not counting any firmware fiddling.</li>
       </ol>
     </section>
 
-    <section id="use">
-      <h2>Open and use omarchy-boot</h2>
-      <p>To see what the package installed, including any commands and desktop entries:</p><pre><code class="language-bash">pacman -Ql omarchy-boot</code></pre>
-    </section>
-
-    <section id="requirements">
-      <h2>omarchy-boot requirements and compatibility</h2>
-      <p>No special requirements are documented for omarchy-boot.</p>
-      <h3>Dependencies Omarchy installs for you</h3><ul><li><code>limine</code></li><li><code>limine-mkinitcpio-hook</code></li><li><code>limine-snapper-sync</code></li><li><code>snapper</code></li></ul>
-      <h3>Pricing and license</h3>
-      <p>Check the project site for current pricing. License: MIT.</p>
-    </section>
-
-    <section id="remove">
-      <h2>Uninstall omarchy-boot</h2>
-      <pre><code class="language-bash">omarchy pkg drop omarchy-boot</code></pre>
-    </section>
-
-    <section id="facts">
-      <h2>omarchy-boot package facts</h2>
-      <div class="table-scroll"><table class="compare-table"><tbody><tr><th scope='row'>Package</th><td><code>omarchy-boot</code></td></tr><tr><th scope='row'>Version</th><td>1-1</td></tr><tr><th scope='row'>Category</th><td>Utilities</td></tr><tr><th scope='row'>License</th><td>MIT</td></tr><tr><th scope='row'>Download</th><td>3.1 KB</td></tr><tr><th scope='row'>Installed size</th><td>0 B</td></tr><tr><th scope='row'>Built</th><td>2026-11-25</td></tr><tr><th scope='row'>Pricing</th><td>Check the project site for current pricing</td></tr><tr><th scope='row'>Added to the official repo</th><td>2026-11-25</td></tr></tbody></table></div>
-      <p><a href="/apps/omarchy-boot.html">omarchy-boot package page on this site</a> · <a href="https://omarchy.org" target="_blank" rel="noopener">Project site</a></p>
-    </section>
+    <div class="guide-cta">
+      <div><h2>Open the omarchy-boot package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/omarchy-boot.html">View omarchy-boot →</a>
+    </div>
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>How do I install omarchy-boot on Omarchy?</summary><p>Open a terminal and run omarchy pkg add omarchy-boot. The download is 3.1 KB and it takes 0 B once installed. Omarchy pulls in any dependencies automatically.</p></details><details><summary>Is omarchy-boot free?</summary><p>Check the project site for current pricing. The package is licensed MIT.</p></details><details><summary>How do I uninstall omarchy-boot?</summary><p>Run omarchy pkg drop omarchy-boot. It removes the package from your system.</p></details><details><summary>What does omarchy-boot depend on?</summary><p>The package declares 4 dependencies: limine, limine-mkinitcpio-hook, limine-snapper-sync, snapper. Omarchy installs them for you.</p></details><details><summary>Is omarchy-boot in the official Omarchy repo?</summary><p>Yes. It is published as omarchy-boot (version 1-1) in the official Omarchy package repository. Project site: https://omarchy.org. This site is unofficial: an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p></details>
+      <details><summary>Do I need to install omarchy-boot if Limine is already my boot loader?</summary><p>Probably not — Limine has been the default since Omarchy 2.0, and on a standard install the whole stack is already there. The package is the one-command way to (re)install it if pieces were removed. This is unverified on a live machine; it is an open item on the checklist.</p></details>
+      <details><summary>Does omarchy-boot work on GRUB or systemd-boot installs?</summary><p>No. Snapshots from the boot menu only work with Limine, which has been the default since Omarchy 2.0. If you are on GRUB or systemd-boot, you need to switch boot loaders first.</p></details>
+      <details><summary>Does a restore bring back files I deleted from my home folder?</summary><p>No. A restore covers the root filesystem only — programs, <code>/etc</code>, and the package database. Your home folder, including <code>~/.config</code>, is untouched. Back up personal files separately.</p></details>
+      <details><summary>How many snapshots does Omarchy keep?</summary><p>Five. Omarchy's snapper policy keeps the 5 most recent snapshots made by an update or by you, and deletes older ones right after each new one. Snapshots made with a plain <code>sudo snapper -c root create</code> do not count toward the five, and neither does the "backup before restore" snapshot.</p></details>
+      <details><summary>How do I list or delete snapshots?</summary><p>Run <code>sudo snapper -c root list</code> to see them with their numbers and descriptions, and <code>sudo snapper -c root delete &lt;number&gt;</code> to remove one. If the deleted entry is still in the boot menu afterwards, run <code>sudo limine-snapper-sync</code> to rebuild it.</p></details>
+      <details><summary>What happens if I run <code>sudo pacman -Syu</code> directly?</summary><p>Omarchy blocks a bare <code>sudo pacman -Syu</code> — the guard stops the upgrade and points you to <code>omarchy update</code>, because a direct upgrade skips the snapshot and the migrations. Always update with <code>omarchy update</code>.</p></details>
     </section>
 
-    <section id="related">
-      <h2>More Utilities apps on Omarchy</h2>
-      <ul><li><a href="/omawake-bin-on-omarchy.html">omawake</a></li><li><a href="/superwhisper-bin-on-omarchy.html">superwhisper</a></li><li><a href="/tzupdate-on-omarchy.html">tzupdate</a></li><li><a href="/vi-on-omarchy.html">vi</a></li><li><a href="/voxtype-bin-on-omarchy.html">voxtype</a></li><li><a href="/yay-on-omarchy.html">yay</a></li></ul>
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/omarchy-boot.html" target="_blank" rel="noopener">Omarchy package listing: omarchy-boot (Utilities, MIT, 3.1 KB download / 0 B installed, version 1-1, depends on limine, limine-mkinitcpio-hook, limine-snapper-sync, snapper, updated 2026-11-25)</a></li>
+        <li><a href="https://omarchy.org/manual/system-snapshots/" target="_blank" rel="noopener">Omarchy Manual: System snapshots (automatic snapshots on update, boot and restore from Limine, restore covers root not /home, migrations caveat, Limine-only, Direct Boot)</a></li>
+        <li><a href="https://www.starryhope.com/linux/omarchy-snapshots-limine-rollback/" target="_blank" rel="noopener">Starry Hope: Roll Back Omarchy with Snapshots and Limine (snapshot create output, boot menu steps, overlay check, restore prompt, 5-snapshot policy, snapper list/delete, limine-snapper-sync, troubleshooting; done on Omarchy 4.0.4)</a></li>
+        <li><a href="https://themissingmanual.dev/guides/when-omarchy-breaks/2" target="_blank" rel="noopener">The Missing Manual: Snapshots and Rolling Back (snapshot policy, <code>omarchy update</code> sequence, Direct Boot trade-off)</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
     </section>
-
   </article>
 
   <aside class="related-guides" aria-labelledby="related-guides-h">
     <h2 id="related-guides-h">Keep exploring</h2>
     <div class="related-guide-grid">
-<a class="related-guide" href="/omawake-bin-on-omarchy.html"><strong>omawake on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/superwhisper-bin-on-omarchy.html"><strong>superwhisper on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/tzupdate-on-omarchy.html"><strong>tzupdate on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/apps/omarchy-boot.html"><strong>omarchy-boot package page</strong><span>Version, size, license and install command</span></a>
+<a class="related-guide" href="/amp-cli-on-omarchy.html"><strong>How to Install &amp; Use Amp CLI on Omarchy (2026) — Free Hobby Tier, the Dial, and Cloud Orbs</strong><span>Install Sourcegraph Amp CLI on Omarchy with one command. Free Hobby tier, login, the Dial modes, AGENTS.md setup, orb pricing, and common fixes.</span></a>
+<a class="related-guide" href="/antigravity-cli-on-omarchy.html"><strong>How to Install &amp; Use Antigravity CLI on Omarchy (2026) — Google&#x27;s Gemini Terminal Agent</strong><span>Install Google Antigravity CLI on Omarchy with one command. Free tier, Google sign-in, Auto mode, MCP setup, quota limits, and the Gemini CLI replacement explained.</span></a>
+<a class="related-guide" href="/antigravity-on-omarchy.html"><strong>How to Install &amp; Use Antigravity on Omarchy (2026) — Free Cursor Alternative</strong><span>Install Google Antigravity on Omarchy with one command. Agent-first AI development, free for individuals: setup, sign-in, and real Linux fixes from Google&#x27;s own forum.</span></a>
+<a class="related-guide" href="/apple-bcm-firmware-fetcher-on-omarchy.html"><strong>How to Install &amp; Use apple-bcm-firmware-fetcher on Omarchy (2026) — Fix Wi-Fi &amp; Bluetooth on T2 Macs</strong><span>Fix Wi-Fi and Bluetooth on your T2 Mac running Omarchy: install apple-bcm-firmware-fetcher with one command, pull the firmware from your macOS volume, verify it loaded, and fix the common failures (macOS wiped, APFS driver, FileVault, iMac models).</span></a>
     </div>
   </aside>
 </main>
 
-<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
+<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">

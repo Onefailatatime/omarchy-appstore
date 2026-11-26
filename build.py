@@ -1526,6 +1526,38 @@ GUIDES = [
             ("Can I use Claude or GPT models with it?", "Yes. Qwen Code supports OpenAI-compatible, Anthropic, and Google GenAI protocols, plus built-in third-party providers (DeepSeek, Grok, MiniMax, Z.AI, Kimi, ModelScope, OpenRouter, Requesty) and any custom endpoint."),
         ],
     },
+
+    {
+        "slug": "fm-cli-on-omarchy",
+        "title": "fm-cli on Omarchy: Fastmail in Your Terminal (2026) | Omarchy Apps",
+        "description": "Install fm-cli on Omarchy for Fastmail in the terminal. Sign in once, open the mail TUI, script inbox checks as JSON, and watch new mail live.",
+        "eyebrow": "Terminal email guide",
+        "heading": "fm-cli on <span>Omarchy</span>",
+        "tagline": "Fastmail in the terminal — a full-screen mail app with scriptable JSON commands and a live watch.",
+        "answer": "Install fm-cli with omarchy pkg add fm-cli, sign in once with fm-cli auth login, and open the mail app with bare fm-cli. The CLI is free and open source, but it only talks to Fastmail: Individual is $60 a year after a 30-day free trial, with no free plan.",
+        "faqs": [
+            ("Does fm-cli work with Gmail?", "No. It only talks to Fastmail's JMAP API. If you want terminal email on Gmail, use aerc or neomutt with IMAP instead."),
+            ("Is Fastmail free?", "No. Individual is $60 a year ($5 a month billed yearly), Basic is $36 a year, both after a 30-day free trial. There is no free plan."),
+            ("Where does fm-cli store my login?", "In the system keyring only — Secret Service, KWallet, Keychain, or Windows Credential Manager — as one record holding the access token, the rotating refresh token, and their expiry. Never in a file."),
+            ("Can I use fm-cli offline?", "Yes, for mail only. Run fm-cli settings offline on to cache mail and bodies locally in ~/.config/fm-cli/emails.db, draft offline, and push queued changes later with fm-cli sync. Calendar and contacts need a connection."),
+        ],
+    },
+
+    {
+        "slug": "omarchy-boot-on-omarchy",
+        "title": "omarchy-boot on Omarchy: Limine Snapshots & Rollback (2026) | Omarchy Apps",
+        "description": "Install omarchy-boot on Omarchy for the Limine boot loader with snapshot entries. Create snapshots, boot into them from the menu, and roll back a broken update in minutes.",
+        "eyebrow": "Omarchy boot guide",
+        "heading": "omarchy-boot on <span>Omarchy</span>",
+        "tagline": "The whole boot stack in one package — Limine plus snapper, so every update gets a snapshot you can boot into.",
+        "answer": "Install omarchy-boot with omarchy pkg add omarchy-boot, then run omarchy snapshot create before risky changes. If an update breaks something, pick the snapshot in the Limine boot menu and restore it with omarchy snapshot restore. Limine has been the default since Omarchy 2.0, so on a standard install the stack is already there.",
+        "faqs": [
+            ("Do I need to install omarchy-boot if Limine is already my boot loader?", "Probably not — Limine has been the default since Omarchy 2.0, and on a standard install the whole stack is already there. The package is the one-command way to (re)install it if pieces were removed."),
+            ("Does omarchy-boot work on GRUB or systemd-boot installs?", "No. Snapshots from the boot menu only work with Limine, which has been the default since Omarchy 2.0. If you are on GRUB or systemd-boot, you need to switch boot loaders first."),
+            ("Does a restore bring back files I deleted from my home folder?", "No. A restore covers the root filesystem only — programs, /etc, and the package database. Your home folder, including ~/.config, is untouched. Back up personal files separately."),
+            ("How many snapshots does Omarchy keep?", "Five. Omarchy's snapper policy keeps the 5 most recent snapshots made by an update or by you, and deletes older ones right after each new one."),
+        ],
+    },
 ]
 GUIDES += seo_guides.GUIDES
 

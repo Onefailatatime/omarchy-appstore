@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How to Install &amp; Use fm-cli on Omarchy (2026)</title>
-<meta name="description" content="Install fm-cli on Omarchy with one command: omarchy pkg add fm-cli. Fastmail from the terminal: mail TUI, scriptable JSON commands, and live watch. Setup…">
+<title>fm-cli on Omarchy: Fastmail in Your Terminal (2026) | Omarchy…</title>
+<meta name="description" content="Install fm-cli on Omarchy for Fastmail in the terminal. Sign in once, open the mail TUI, script inbox checks as JSON, and watch new mail live.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#1a1b26">
 <link rel="canonical" href="https://omarchyapps.com/fm-cli-on-omarchy.html">
@@ -13,8 +13,8 @@
 <link rel="icon" href="/images/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
 <link rel="manifest" href="/images/site.webmanifest?v=2">
-<meta property="og:title" content="How to Install &amp; Use fm-cli on Omarchy (2026)">
-<meta property="og:description" content="Install fm-cli on Omarchy with one command: omarchy pkg add fm-cli. Fastmail from the terminal: mail TUI, scriptable JSON commands, and live watch. Setup…">
+<meta property="og:title" content="fm-cli on Omarchy: Fastmail in Your Terminal (2026) | Omarchy…">
+<meta property="og:description" content="Install fm-cli on Omarchy for Fastmail in the terminal. Sign in once, open the mail TUI, script inbox checks as JSON, and watch new mail live.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://omarchyapps.com/fm-cli-on-omarchy.html">
 <meta property="og:site_name" content="Unofficial Omarchy App Store">
@@ -24,10 +24,10 @@
 <meta property="og:image:alt" content="Unofficial Omarchy App Store guide">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@jessyka_boat">
-<meta name="twitter:title" content="How to Install &amp; Use fm-cli on Omarchy (2026)">
-<meta name="twitter:description" content="Install fm-cli on Omarchy with one command: omarchy pkg add fm-cli. Fastmail from the terminal: mail TUI, scriptable JSON commands, and live watch. Setup…">
+<meta name="twitter:title" content="fm-cli on Omarchy: Fastmail in Your Terminal (2026) | Omarchy…">
+<meta name="twitter:description" content="Install fm-cli on Omarchy for Fastmail in the terminal. Sign in once, open the mail TUI, script inbox checks as JSON, and watch new mail live.">
 <meta name="twitter:image" content="https://omarchyapps.com/images/social-card.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/fm-cli-on-omarchy.html#article","headline":"How to Install & Use fm-cli on Omarchy (2026)","description":"Install fm-cli on Omarchy with one command: omarchy pkg add fm-cli. Fastmail from the terminal: mail TUI, scriptable JSON commands, and live watch. Setup…","url":"https://omarchyapps.com/fm-cli-on-omarchy.html","dateModified":"2026-11-25","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/guides.html"},{"@type":"ListItem","position":3,"name":"How to Install & Use fm-cli on Omarchy (2026)","item":"https://omarchyapps.com/fm-cli-on-omarchy.html"}]},{"@type":"SoftwareApplication","@id":"https://omarchyapps.com/fm-cli-on-omarchy.html#app","name":"fm-cli","description":"Fastmail from the terminal: mail TUI, scriptable JSON commands, and live watch","applicationCategory":"Utilities","operatingSystem":"Omarchy Linux","softwareVersion":"0.3.6-1","license":"MIT","url":"https://omarchyapps.com/apps/fm-cli.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://omarchyapps.com/fm-cli-on-omarchy.html#article","headline":"fm-cli on Omarchy: Fastmail in Your Terminal (2026) | Omarchy…","description":"Install fm-cli on Omarchy for Fastmail in the terminal. Sign in once, open the mail TUI, script inbox checks as JSON, and watch new mail live.","url":"https://omarchyapps.com/fm-cli-on-omarchy.html","dateModified":"2026-11-26","author":{"@type":"Person","name":"Jessyka","url":"https://omarchyapps.com/about.html"},"publisher":{"@type":"Organization","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"},"isPartOf":{"@type":"WebSite","name":"Unofficial Omarchy App Store","url":"https://omarchyapps.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://omarchyapps.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://omarchyapps.com/#guides"},{"@type":"ListItem","position":3,"name":"fm-cli on Omarchy: Fastmail in Your Terminal (2026) | Omarchy Apps","item":"https://omarchyapps.com/fm-cli-on-omarchy.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does fm-cli work with Gmail?","acceptedAnswer":{"@type":"Answer","text":"No. It only talks to Fastmail's JMAP API. If you want terminal email on Gmail, use aerc or neomutt with IMAP instead."}},{"@type":"Question","name":"Is Fastmail free?","acceptedAnswer":{"@type":"Answer","text":"No. Individual is $60 a year ($5 a month billed yearly), Basic is $36 a year, both after a 30-day free trial. There is no free plan."}},{"@type":"Question","name":"Where does fm-cli store my login?","acceptedAnswer":{"@type":"Answer","text":"In the system keyring only — Secret Service, KWallet, Keychain, or Windows Credential Manager — as one record holding the access token, the rotating refresh token, and their expiry. Never in a file."}},{"@type":"Question","name":"Can I use fm-cli offline?","acceptedAnswer":{"@type":"Answer","text":"Yes, for mail only. Run fm-cli settings offline on to cache mail and bodies locally in ~/.config/fm-cli/emails.db, draft offline, and push queued changes later with fm-cli sync. Calendar and contacts need a connection."}}]}]}</script>
 <link rel="stylesheet" href="/style.75958c2d72.css">
   <script defer src="/stats/script.js" data-website-id="e45b1c4a-5d0b-431c-b50a-88bcc6fe91e9" data-domains="omarchyapps.com,www.omarchyapps.com"></script>
   <script src="/oa-ads.js" defer></script>
@@ -50,91 +50,173 @@
 
 <header class="hero guide-hero seo-hero">
   <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/guides.html">Guides</a><span>›</span><span aria-current="page">Utilities tutorial</span></nav>
-    <p class="eyebrow">Utilities tutorial</p>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/#guides">Guides</a><span>›</span><span aria-current="page">Terminal email guide</span></nav>
+    <p class="eyebrow">Terminal email guide</p>
     <h1>fm-cli on <span>Omarchy</span></h1>
-    <p class="tag">Fastmail from the terminal: mail TUI, scriptable JSON commands, and live watch</p>
-    <p class="facts">Generated from the official Omarchy package repo</p>
+    <p class="tag">Fastmail in the terminal — a full-screen mail app with scriptable JSON commands and a live watch.</p>
+    <p class="facts">Reviewed 2026-11-26 · independent editorial guide</p>
   </div>
 </header>
-<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
+<div class="ad-header" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="header" data-oa-class="ad text" data-oa-count="3"></div></div>
 
 <main class="wrap seo-guide-main">
   <article class="seo-article">
     <div class="guide-answer">
       <p class="answer-label">Short answer</p>
-      <p>To install fm-cli on Omarchy, open a terminal and run omarchy pkg add fm-cli. It is a 6.6 MB download (17.5 MB installed), version 0.3.6-1, licensed MIT. Fastmail from the terminal: mail TUI, scriptable JSON commands, and live watch. Check the project site for current pricing.</p>
+      <p>Install fm-cli with omarchy pkg add fm-cli, sign in once with fm-cli auth login, and open the mail app with bare fm-cli. The CLI is free and open source, but it only talks to Fastmail: Individual is $60 a year after a 30-day free trial, with no free plan.</p>
     </div>
+<!--
+INTERNAL NOTES (dropped from the visible guide — verify on Omarchy before publishing)
+
+VERIFY ON OMARCHY checklist:
+- Install: `omarchy pkg add fm-cli` (package slug `fm-cli`) — verify it resolves in the store index. Confirm 6.6 MB download / 17.5 MB installed, MIT, version 0.3.6-1, as listed on the app page
+- First launch: run `fm-cli auth login` and confirm the browser consent flow, then bare `fm-cli` and confirm the TUI opens on the main menu
+- Keyring: confirm tokens land in the system keyring on Omarchy (Secret Service via GNOME Keyring) and survive a reboot; check what happens on a headless/minimal install with no keyring daemon
+- Calendar and contacts: confirm `fm-cli auth dav` with a Fastmail app password makes the calendar agenda and contacts work
+- Offline mode: confirm `fm-cli settings offline on` caches mail to `~/.config/fm-cli/emails.db` and `fm-cli sync` pushes queued changes
+- Issues claimed below are NOT personally reproduced, they are documented upstream in the project README (the repo has 0 open issues as of 2026-11-26). Verify at least `fm-cli auth login`, `fm-cli`, `fm-cli box view inbox --json`, and `fm-cli watch` on a real machine
+- Screenshots needed: install, the Fastmail consent page, the TUI inbox, a `box view inbox --json` result, `fm-cli watch` output
+
+SEO notes:
+- URL: /guides/fm-cli-on-omarchy
+- Title tag: "fm-cli on Omarchy: Fastmail in Your Terminal (2026) | Omarchy Apps"
+- Meta description: "Install fm-cli on Omarchy for Fastmail in the terminal. Sign in once, open the mail TUI, script inbox checks as JSON, and watch new mail live."
+-->
     <nav class="guide-toc" aria-label="On this page">
       <strong>On this page</strong>
       <a href="#install">Install</a>
-      <a href="#use">Open and use</a>
-      <a href="#requirements">Requirements</a>
-      <a href="#remove">Uninstall</a>
-      <a href="#facts">Package facts</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#issues">Common issues</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#switch">Switch from Gmail</a>
       <a href="#faq">Questions</a>
     </nav>
 
     <section id="install">
-      <h2>Install fm-cli on Omarchy</h2>
-      <p>Fastmail from the terminal: mail TUI, scriptable JSON commands, and live watch</p>
-      <p>The official repository lists this package in Utilities. It was added on 2026-11-25.</p>
-      
+      <h2>fm-cli on Omarchy</h2>
+      <p>fm-cli is a small, fast terminal client for Fastmail: a full-screen mail app plus scriptable JSON commands and a live watch, built on Fastmail's JMAP API — and it is the engine behind the Fastmail plugin for Omarchy.</p>
+      <h3>TL;DR</h3>
+      <pre><code class="language-bash">omarchy pkg add fm-cli
+fm-cli auth login
+fm-cli</code></pre>
+      <p>That installs fm-cli (6.6 MB download, 17.5 MB installed, MIT, version 0.3.6-1). <code>fm-cli auth login</code> opens Fastmail's consent page in your browser once; after that the tokens live in your system keyring and refresh themselves. Bare <code>fm-cli</code> opens the full-screen mail app. The CLI itself is free and open source, but it only talks to Fastmail: Fastmail Individual is $60 a year ($5 a month billed yearly) after a 30-day free trial, and there is no free plan.</p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started (5 minutes)</h2>
+      <h3>1. Sign in.</h3>
+      <p>Run <code>fm-cli auth login</code>. It opens Fastmail's consent page in your browser; approve fm-cli there and you are done — no token to copy. Fastmail lists the authorization under <em>Settings → Privacy &amp; Security → Connected apps</em>, where you can revoke it. Prefer an API token instead? Create one under <em>Settings → Privacy &amp; Security → Integrations → API Tokens</em> with the <strong>Email</strong> scope (add <strong>Email submission</strong> to send), then run <code>fm-cli auth login --token</code>. Check the session any time with <code>fm-cli auth status</code> (no network call) and sign out with <code>fm-cli auth logout</code>.</p>
+      <h3>2. Open the TUI.</h3>
+      <p>Run <code>fm-cli</code>. It opens on a main menu: <code>0</code> main menu, <code>1</code> Mail, <code>2</code> Calendar, <code>3</code> Contacts, <code>4</code> Settings, <code>5</code> About. Move with <code>j</code>/<code>k</code> or arrows, <code>Enter</code> to open, <code>h</code> or <code>Esc</code> to go back, <code>/</code> to filter (or search all mail from the main menu), <code>q</code> to quit from the main menu. In the mail list: <code>c</code> composes, <code>e</code> archives, <code>d</code> deletes, <code>u</code> toggles read/unread, <code>f</code> flags. While reading: <code>R</code> replies, <code>A</code> replies all, <code>F</code> forwards, <code>b</code> opens the HTML in your browser, <code>i</code> loads images inline.</p>
+      <h3>3. Three things worth doing in the first session:</h3>
+      <ul>
+        <li><strong>Try the scriptable commands.</strong> Every command takes <code>--json</code> and prints exactly one JSON object, so mail is pipeable into scripts: <code>fm-cli box view inbox --limit 20 --json</code> lists threads newest first, and <code>fm-cli box view all --json</code> merges the newest inbox threads with every unseen thread in your other folders (handy because Fastmail server rules file mail into folders without it ever touching the inbox). <code>fm-cli watch</code> prints one JSON line per mailbox change, live.</li>
+        <li><strong>Set up calendar and contacts.</strong> Mail works on the API token or OAuth alone, but calendar and contacts use CalDAV and CardDAV, which need a Fastmail <strong>app password</strong> with <em>Mail, Contacts &amp; Calendars</em> access. Store it with <code>fm-cli auth dav</code>; <code>fm-cli debug</code> reports the DAV status.</li>
+        <li><strong>Pick your sending identity.</strong> By default, composes go out from the first identity Fastmail returns, which is not necessarily the default you picked in the Fastmail web UI. Set yours with <code>fm-cli settings from me@example.com</code> (or <code>FM_DEFAULT_FROM</code> in the environment, which wins over the stored setting). In the composer, <code>Tab</code> still cycles through your other identities.</li>
+      </ul>
+    </section>
+
+    <section id="issues">
+      <h2>Common issues &amp; fixes</h2>
+      <h3>"No calendars found" or "No address books found"</h3>
+      <p>Calendar and contacts need a Fastmail app password — the API token alone does not cover CalDAV/CardDAV.</p>
+      <p><strong>Fix:</strong> Create an app password in Fastmail with <em>Mail, Contacts &amp; Calendars</em> access and store it with <code>fm-cli auth dav</code>, then check with <code>fm-cli debug</code>. (Documented in the project README troubleshooting section; not reproduced on a live machine.) (<a href="https://github.com/ninepointlabs/fm-cli" target="_blank" rel="noopener">fm-cli README</a>)</p>
+      <h3>Images do not show inline in a message</h3>
+      <p>Inline images need a terminal that supports Sixel, the Kitty graphics protocol, or iTerm2 images (Kitty, WezTerm, foot, iTerm2, mlterm). Ghostty, the Omarchy default, is not on that list.</p>
+      <p><strong>Fix:</strong> On a stock Omarchy setup press <code>b</code> instead to open the message HTML in your browser. (Documented in the project README troubleshooting section; not reproduced on a live machine.) (<a href="https://github.com/ninepointlabs/fm-cli" target="_blank" rel="noopener">fm-cli README</a>)</p>
+      <h3><code>another fm-cli watch is already running</code></h3>
+      <p>Fastmail allows one push connection per sign-in, so a second <code>watch</code> refuses to start rather than knocking the first offline.</p>
+      <p><strong>Fix:</strong> Stop the other watch, or let it be the one — the Omarchy Fastmail plugin's watch is normally the one running. (Documented in the project README troubleshooting section; not reproduced on a live machine.) (<a href="https://github.com/ninepointlabs/fm-cli" target="_blank" rel="noopener">fm-cli README</a>)</p>
+      <h3>Sign-in fails with <code>invalid_target</code></h3>
+      <p>You are on an older fm-cli. Version 0.3.0 and later send the <code>resource</code> parameter Fastmail requires.</p>
+      <p><strong>Fix:</strong> Update with <code>omarchy pkg add fm-cli</code> (or your package manager) and sign in again. (Documented in the project README troubleshooting section; not reproduced on a live machine.) (<a href="https://github.com/ninepointlabs/fm-cli" target="_blank" rel="noopener">fm-cli README</a>)</p>
+      <h3>Mail goes out from the wrong address</h3>
+      <p>fm-cli sends from the first identity Fastmail's API returns, not the default you picked in the web UI.</p>
+      <p><strong>Fix:</strong> Set the one you want with <code>fm-cli settings from me@example.com</code>, or export <code>FM_DEFAULT_FROM=me@example.com</code> — the environment variable wins over the stored setting. (Documented in the project README; not reproduced on a live machine.) (<a href="https://github.com/ninepointlabs/fm-cli" target="_blank" rel="noopener">fm-cli README</a>)</p>
+    </section>
+
+    <section id="pairs">
+      <h2>Pairs well with / If you hate this, try</h2>
+      <h3>Pairs well with</h3>
+      <ul>
+        <li>The Fastmail plugin for Omarchy (fm-cli is its engine — its watch keeps your mailbox live), shell scripts and cron jobs (every command prints one JSON object, so <code>box view all --json</code> plus <code>jq</code> is a daily digest in one line), and your <code>$EDITOR</code> (composing happens in your editor, with contact autocomplete and a choice of sending identity).</li>
+      </ul>
+      <h3>If you hate this, try</h3>
+      <ul>
+        <li>If you hate the paid-account requirement: hey-cli gives you the same terminal-mail idea for HEY ($99 a year, also paid), while aerc or neomutt give you terminal email with any IMAP provider for free — including a free Gmail account. If you like Fastmail but not the terminal, the Fastmail web app and mobile app are included in every plan.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>Comparison: fm-cli vs hey-cli vs aerc vs neomutt vs Thunderbird</h2>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead><tr><th></th><th>fm-cli</th><th>hey-cli</th><th>aerc</th><th>neomutt</th><th>Thunderbird</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>Free CLI (MIT); Fastmail Individual $60/yr, no free plan</td><td>Free CLI (MIT); HEY $99/yr, no free plan</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Best for</td><td>Fastmail users who want mail, calendar, and contacts in the terminal, plus scriptable JSON</td><td>HEY users who want mail, calendar, and journal in the terminal, plus agent access</td><td>Terminal email with any IMAP account, fast and minimal</td><td>A classic terminal mail client with deep keyboard control</td><td>A full GUI mail client with any provider, including Gmail</td></tr>
+            <tr><td>Omarchy install</td><td><code>omarchy pkg add fm-cli</code></td><td><code>omarchy pkg add hey-cli</code></td><td><code>omarchy pkg add aerc</code> (unverified, check the store)</td><td><code>omarchy pkg add neomutt</code> (unverified, check the store)</td><td><code>omarchy pkg add thunderbird</code> (unverified, check the store)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Verdict:</strong> Pick fm-cli if you already pay for Fastmail and want your inbox in the terminal — especially if you want to script against it, since the JSON output and live watch are the point. Pick aerc or neomutt if you want terminal email on the address you already own, for free.</p>
+    </section>
+
+    <aside class="guide-callout">
+      <h2>fm-cli is free, but Fastmail is $60 a year</h2>
+      <p><strong>There is no free Fastmail.</strong> The CLI is free and MIT licensed, but the service it talks to costs $60 a year for Individual ($36 a year for Basic) after a 30-day free trial, with no free plan. What you give up by skipping it: Fastmail's spam blocking, Masked Email, your own domain, and a JMAP API that tools like fm-cli can script against. What you keep with a free provider and aerc or neomutt: fast keyboard-driven mail in the terminal, for $0.</p>
+    </aside>
+
+    <section id="switch">
+      <h2>How to switch from Gmail to Fastmail + fm-cli (~15 minutes)</h2>
       <ol>
-        <li>Open a terminal.</li>
-        <li>Run the install command:<pre><code class="language-bash">omarchy pkg add fm-cli</code></pre></li>
-        <li>Check it landed. Pacman should list version 0.3.6-1:<pre><code class="language-bash">pacman -Qi fm-cli</code></pre></li>
+        <li><strong>Export from Gmail:</strong> Fastmail's import tool walks you through moving mail, contacts, and calendars from Gmail; there is also a migration guide and free migration support. Nothing to export by hand first.</li>
+        <li><strong>Import into Fastmail:</strong> point the import tool at your Gmail account and let it copy everything in. Your Fastmail address can be anything on your own domain, or a free fastmail.com address.</li>
+        <li><strong>Set up fm-cli:</strong> install it with <code>omarchy pkg add fm-cli</code>, sign in with <code>fm-cli auth login</code>, and store an app password with <code>fm-cli auth dav</code> for calendar and contacts.</li>
+        <li><strong>What doesn't transfer:</strong> Gmail labels become folders, and Gmail-specific features (categories, confidential mode) have no Fastmail equivalent. Your mail, contacts, and calendars all come across.</li>
+        <li><strong>Time estimate:</strong> about 15 minutes to set up the import, plus however long the copy takes in the background.</li>
       </ol>
     </section>
 
-    <section id="use">
-      <h2>Open and use fm-cli</h2>
-      <p>To see what the package installed, including any commands and desktop entries:</p><pre><code class="language-bash">pacman -Ql fm-cli</code></pre>
-    </section>
-
-    <section id="requirements">
-      <h2>fm-cli requirements and compatibility</h2>
-      <p>No special requirements are documented for fm-cli.</p>
-      <h3>Dependencies Omarchy installs for you</h3><ul><li><code>glibc</code></li></ul>
-      <h3>Pricing and license</h3>
-      <p>Check the project site for current pricing. License: MIT.</p>
-    </section>
-
-    <section id="remove">
-      <h2>Uninstall fm-cli</h2>
-      <pre><code class="language-bash">omarchy pkg drop fm-cli</code></pre>
-    </section>
-
-    <section id="facts">
-      <h2>fm-cli package facts</h2>
-      <div class="table-scroll"><table class="compare-table"><tbody><tr><th scope='row'>Package</th><td><code>fm-cli</code></td></tr><tr><th scope='row'>Version</th><td>0.3.6-1</td></tr><tr><th scope='row'>Category</th><td>Utilities</td></tr><tr><th scope='row'>License</th><td>MIT</td></tr><tr><th scope='row'>Download</th><td>6.6 MB</td></tr><tr><th scope='row'>Installed size</th><td>17.5 MB</td></tr><tr><th scope='row'>Built</th><td>2026-11-26</td></tr><tr><th scope='row'>Pricing</th><td>Check the project site for current pricing</td></tr><tr><th scope='row'>Added to the official repo</th><td>2026-11-25</td></tr><tr><th scope='row'>Made by</th><td>ninepointlabs</td></tr></tbody></table></div>
-      <p><a href="/apps/fm-cli.html">fm-cli package page on this site</a> · <a href="https://github.com/ninepointlabs/fm-cli" target="_blank" rel="noopener">Project site</a></p>
-    </section>
+    <div class="guide-cta">
+      <div><h2>Open the fm-cli package</h2><p>See the live version, upstream screenshot, requirements, source and exact Omarchy install command.</p></div>
+      <a class="button" href="/apps/fm-cli.html">View fm-cli →</a>
+    </div>
 
     <section class="guide-faq" id="faq">
       <h2>Frequently asked questions</h2>
-      <details><summary>How do I install fm-cli on Omarchy?</summary><p>Open a terminal and run omarchy pkg add fm-cli. The download is 6.6 MB and it takes 17.5 MB once installed. Omarchy pulls in any dependencies automatically.</p></details><details><summary>Is fm-cli free?</summary><p>Check the project site for current pricing. The package is licensed MIT.</p></details><details><summary>How do I uninstall fm-cli?</summary><p>Run omarchy pkg drop fm-cli. It removes the package from your system.</p></details><details><summary>What does fm-cli depend on?</summary><p>The package declares 1 dependency: glibc. Omarchy installs them for you.</p></details><details><summary>Is fm-cli in the official Omarchy repo?</summary><p>Yes. It is published as fm-cli (version 0.3.6-1) in the official Omarchy package repository. ninepointlabs makes it. Project site: https://github.com/ninepointlabs/fm-cli. This site is unofficial: an independent community project, not affiliated with or endorsed by Omacom or David Heinemeier Hansson. Built with David&#x27;s blessing.</p></details>
+      <details><summary>Does fm-cli work with Gmail?</summary><p>No. It only talks to Fastmail's JMAP API. If you want terminal email on Gmail, use aerc or neomutt with IMAP instead.</p></details>
+      <details><summary>Is Fastmail free?</summary><p>No. Individual is $60 a year ($5 a month billed yearly), Basic is $36 a year, both after a 30-day free trial. There is no free plan.</p></details>
+      <details><summary>Where does fm-cli store my login?</summary><p>In the system keyring only — Secret Service, KWallet, Keychain, or Windows Credential Manager — as one record holding the access token, the rotating refresh token, and their expiry. Never in a file. For headless machines, <code>FM_API_TOKEN</code>, <code>FM_EMAIL</code>, and <code>FM_APP_PASSWORD</code> in the environment stand in for the keyring.</p></details>
+      <details><summary>Can I use fm-cli offline?</summary><p>Yes, for mail only. Run <code>fm-cli settings offline on</code> to cache mail and bodies locally in <code>~/.config/fm-cli/emails.db</code>, draft offline, and push queued changes later with <code>fm-cli sync</code>. Calendar and contacts need a connection. If you started offline and want to go online, restart the app.</p></details>
+      <details><summary>What is <code>fm-cli watch</code> for?</summary><p>It holds a JMAP push connection open and prints one JSON line per mailbox change — new mail, updates, deletes — as they happen. It is the same mechanism the Omarchy Fastmail plugin uses, and Fastmail allows only one push connection per sign-in.</p></details>
+      <details><summary>Is fm-cli affiliated with Fastmail?</summary><p>No. It is an independent project by Nine Point Labs, MIT licensed, and not affiliated with Fastmail.</p></details>
     </section>
 
-    <section id="related">
-      <h2>More Utilities apps on Omarchy</h2>
-      <ul><li><a href="/ghost-on-omarchy.html">ghost</a></li><li><a href="/ghost-runtime-on-omarchy.html">ghost-runtime</a></li><li><a href="/ghostty-nautilus-on-omarchy.html">ghostty-nautilus</a></li><li><a href="/ghostty-shell-integration-on-omarchy.html">ghostty-shell-integration</a></li><li><a href="/linux-firmware-cirrus-dx13260-on-omarchy.html">linux-firmware-cirrus-dx13260</a></li><li><a href="/linux-omarchy-on-omarchy.html">linux-omarchy</a></li></ul>
+    <section class="sources">
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://omarchyapps.com/apps/fm-cli.html" target="_blank" rel="noopener">Omarchy package listing: fm-cli (Utilities, MIT, 6.6 MB download / 17.5 MB installed, version 0.3.6-1, updated 2026-11-25)</a></li>
+        <li><a href="https://github.com/ninepointlabs/fm-cli" target="_blank" rel="noopener">fm-cli README (install, sign-in, TUI keys, scripting, security, offline mode, troubleshooting)</a></li>
+        <li><a href="https://www.fastmail.com/pricing/" target="_blank" rel="noopener">Fastmail pricing (Individual $60/yr, Basic $36/yr, 30-day free trial, no free plan)</a></li>
+        <li><a href="https://omarchyapps.com/apps/hey-cli.html" target="_blank" rel="noopener">HEY CLI pricing comparison ($99/yr, no free plan) — see the hey-cli guide</a></li>
+      </ul>
+      <p class="editorial-note">Commands and fixes verified against official sources November 2026; on-machine verification pending.</p>
     </section>
-
   </article>
 
   <aside class="related-guides" aria-labelledby="related-guides-h">
     <h2 id="related-guides-h">Keep exploring</h2>
     <div class="related-guide-grid">
-<a class="related-guide" href="/ghost-on-omarchy.html"><strong>ghost on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/ghost-runtime-on-omarchy.html"><strong>ghost-runtime on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/ghostty-nautilus-on-omarchy.html"><strong>ghostty-nautilus on Omarchy</strong><span>Tutorial</span></a>
-<a class="related-guide" href="/apps/fm-cli.html"><strong>fm-cli package page</strong><span>Version, size, license and install command</span></a>
+<a class="related-guide" href="/amp-cli-on-omarchy.html"><strong>How to Install &amp; Use Amp CLI on Omarchy (2026) — Free Hobby Tier, the Dial, and Cloud Orbs</strong><span>Install Sourcegraph Amp CLI on Omarchy with one command. Free Hobby tier, login, the Dial modes, AGENTS.md setup, orb pricing, and common fixes.</span></a>
+<a class="related-guide" href="/antigravity-cli-on-omarchy.html"><strong>How to Install &amp; Use Antigravity CLI on Omarchy (2026) — Google&#x27;s Gemini Terminal Agent</strong><span>Install Google Antigravity CLI on Omarchy with one command. Free tier, Google sign-in, Auto mode, MCP setup, quota limits, and the Gemini CLI replacement explained.</span></a>
+<a class="related-guide" href="/antigravity-on-omarchy.html"><strong>How to Install &amp; Use Antigravity on Omarchy (2026) — Free Cursor Alternative</strong><span>Install Google Antigravity on Omarchy with one command. Agent-first AI development, free for individuals: setup, sign-in, and real Linux fixes from Google&#x27;s own forum.</span></a>
+<a class="related-guide" href="/apple-bcm-firmware-fetcher-on-omarchy.html"><strong>How to Install &amp; Use apple-bcm-firmware-fetcher on Omarchy (2026) — Fix Wi-Fi &amp; Bluetooth on T2 Macs</strong><span>Fix Wi-Fi and Bluetooth on your T2 Mac running Omarchy: install apple-bcm-firmware-fetcher with one command, pull the firmware from your macOS volume, verify it loaded, and fix the common failures (macOS wiped, APFS driver, FileVault, iMac models).</span></a>
     </div>
   </aside>
 </main>
 
-<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="tutorial" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
+<div class="ad-footer" data-oa-page><div class="oa-house" data-oa-slot="guide" data-oa-pos="footer" data-oa-class="ad" data-oa-count="3"></div></div>
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-brand">
