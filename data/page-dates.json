@@ -50,8 +50,8 @@
   "v": 4
  },
  "apps/amp-cli.html": {
-  "date": "2026-11-25",
-  "hash": "fb17699f903d95e9dc4e1bf23b4d560e322f3dd78a381a805beccf0e721f18d4",
+  "date": "2026-11-26",
+  "hash": "5062403dc2daebc6743519a53b8f33d6f8fdb2479a023f9595ccb56c77e75c2f",
   "v": 4
  },
  "apps/amp-desktop-bin.html": {
@@ -60,8 +60,8 @@
   "v": 4
  },
  "apps/antigravity-cli.html": {
-  "date": "2026-11-25",
-  "hash": "8d59fd5bf6ef89526117c2e11b4ae1ffe887d3c45e8be8d8562b57c228141789",
+  "date": "2026-11-26",
+  "hash": "922314bcf373615818ce908e22ff9d72cc98d92cb1897171656b39a829dabe57",
   "v": 4
  },
  "apps/antigravity.html": {
@@ -805,8 +805,8 @@
   "v": 4
  },
  "apps/kimi-code.html": {
-  "date": "2026-11-25",
-  "hash": "517bdd779fc6ab3ea5ae51a110cb344a7c85eff535664f266bf830235a7c781b",
+  "date": "2026-11-26",
+  "hash": "f5e6fb8d9ee09870f0fbb16c6ddb235afc8b7d92c24ef3ce39aca5f92928ac78",
   "v": 4
  },
  "apps/kujo.html": {
@@ -1160,8 +1160,8 @@
   "v": 4
  },
  "apps/omazed.html": {
-  "date": "2026-11-09",
-  "hash": "d544df69689a41d6e62a34d1cf373061090df40ac8c597ef7bbccc2770601d36",
+  "date": "2026-11-26",
+  "hash": "e5f0a04b9461994f40b683b29c3b899bd41b3764baed51c2dd757b56dbba2fea",
   "v": 4
  },
  "apps/openai-codex-bin.html": {
@@ -1245,13 +1245,13 @@
   "v": 4
  },
  "apps/qwen-code.html": {
-  "date": "2026-11-24",
-  "hash": "c4ed8fb7b86d442d9d20b8e4b38761c243c7900f068e97b4caaaf5e11a7cb091",
+  "date": "2026-11-26",
+  "hash": "b6d9e2410b311aea555b53f4fb5b559d66f9c3c8fbe0092fe389d04f7fb02f12",
   "v": 4
  },
  "apps/rawmakase-bin.html": {
-  "date": "2026-11-23",
-  "hash": "6f4af39f00bd3e0d143beefa01f673be8ef3bda7b0611d643746accf48e5424a",
+  "date": "2026-11-26",
+  "hash": "faa4ff78d6ba261c77a9a677475a39cfe7080414660e978a0ca321f27b6653dc",
   "v": 4
  },
  "apps/retroarch-joypad-autoconfig-git.html": {
