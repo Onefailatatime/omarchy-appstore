@@ -1,13 +1,13 @@
 {
  "schema_version": "1",
  "status": "preview",
- "generated_at": "2026-11-25T16:47:20+00:00",
+ "generated_at": "2026-11-26T02:00:58+00:00",
  "source": "Catalog by omarchyapps.com",
  "attribution": "Catalog by omarchyapps.com",
  "site": "https://omarchyapps.com/",
  "terms_url": "https://omarchyapps.com/catalog.html#terms",
  "docs_url": "https://omarchyapps.com/catalog.html",
- "app_count": 349,
+ "app_count": 351,
  "apps": [
   {
    "id": "1password",
@@ -1605,6 +1605,17 @@
    "url": "https://omarchyapps.com/apps/flea.html"
   },
   {
+   "id": "fm-cli",
+   "name": "fm-cli",
+   "package": "fm-cli",
+   "install_command": "omarchy pkg add fm-cli",
+   "category": "Utilities",
+   "description": "Fastmail from the terminal: mail TUI, scriptable JSON commands, and live watch",
+   "homepage": "https://github.com/ninepointlabs/fm-cli",
+   "tutorial_url": "https://omarchyapps.com/fm-cli-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/fm-cli.html"
+  },
+  {
    "id": "freebuff",
    "name": "freebuff",
    "package": "freebuff",
@@ -1621,7 +1632,7 @@
    "package": "ghost",
    "install_command": "omarchy pkg add ghost",
    "category": "Utilities",
-   "description": "Ghost HUD and desktop integration for Omarchy",
+   "description": "Your own data and your ghost, answered by a model on your machine",
    "homepage": "https://github.com/ferdousbhai/ghost",
    "tutorial_url": "https://omarchyapps.com/ghost-on-omarchy.html",
    "url": "https://omarchyapps.com/ghost-on-omarchy.html"
@@ -2711,6 +2722,17 @@
    "homepage": "https://github.com/llstrk/omarchy-billboard-generator",
    "tutorial_url": "https://omarchyapps.com/apps/omarchy-billboard-generator.html",
    "url": "https://omarchyapps.com/apps/omarchy-billboard-generator.html"
+  },
+  {
+   "id": "omarchy-boot",
+   "name": "omarchy-boot",
+   "package": "omarchy-boot",
+   "install_command": "omarchy pkg add omarchy-boot",
+   "category": "Utilities",
+   "description": "Omarchy boot stack: the Limine boot loader with snapshot entries",
+   "homepage": "https://omarchy.org",
+   "tutorial_url": "https://omarchyapps.com/omarchy-boot-on-omarchy.html",
+   "url": "https://omarchyapps.com/apps/omarchy-boot.html"
   },
   {
    "id": "omarchy-chromium",
