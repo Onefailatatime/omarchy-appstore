@@ -50,8 +50,8 @@
   "v": 4
  },
  "apps/amp-cli.html": {
-  "date": "2026-11-26",
-  "hash": "afcc765d3db2fb8a51158495230acf5a113812b442f000fd66aa960e0abe9226",
+  "date": "2026-11-27",
+  "hash": "d2fdfc0868df7982f99c9c78ab11e3f9934611978a0ea5a96cc2bf12f3827824",
   "v": 4
  },
  "apps/amp-desktop-bin.html": {
@@ -155,8 +155,8 @@
   "v": 4
  },
  "apps/dingtalk-bin.html": {
-  "date": "2026-11-23",
-  "hash": "9e0e8852d6f4ffe390746b4987b32b0c0bbdd09c3849883fa5e32fba576ac6b8",
+  "date": "2026-11-27",
+  "hash": "559c54fba8c601e55a2375865569420bb04ef2f244982e31751b005f4aad5f03",
   "v": 4
  },
  "apps/dropbox-cli.html": {
@@ -720,8 +720,8 @@
   "v": 4
  },
  "apps/github-copilot-cli.html": {
-  "date": "2026-11-25",
-  "hash": "e36060986d5854ebdadf2c16ab32c2ad15d2e190306b5df296aaed41e53ea14a",
+  "date": "2026-11-27",
+  "hash": "21314f653a35da675be10abc4f4f9b1969db40ad7a077fa10f3c0d7f4c7420f0",
   "v": 4
  },
  "apps/gliff.html": {
@@ -800,8 +800,8 @@
   "v": 4
  },
  "apps/kilocode-cli.html": {
-  "date": "2026-11-26",
-  "hash": "9b86a38cca9f2f5a15a06252b871ccef1dbc4148332f1cab0dc01379b07c458d",
+  "date": "2026-11-27",
+  "hash": "898b6f59200c4fd575054a751ccd0791b6135797e70b0aff1c0080de6fc4d8f2",
   "v": 4
  },
  "apps/kimi-code.html": {
@@ -1330,8 +1330,8 @@
   "v": 4
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-26",
-  "hash": "905daeaace1879913d0199f52169278c3716ddd91844f2f60765b81148cd0da6",
+  "date": "2026-11-27",
+  "hash": "61ff2b52e893a275e1a888cc037835f62350aa25724e55aa944e84c97b899ce7",
   "v": 4
  },
  "apps/tensaku.html": {
