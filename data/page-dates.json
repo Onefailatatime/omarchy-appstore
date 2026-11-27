@@ -51,7 +51,7 @@
  },
  "apps/amp-cli.html": {
   "date": "2026-11-26",
-  "hash": "5062403dc2daebc6743519a53b8f33d6f8fdb2479a023f9595ccb56c77e75c2f",
+  "hash": "afcc765d3db2fb8a51158495230acf5a113812b442f000fd66aa960e0abe9226",
   "v": 4
  },
  "apps/amp-desktop-bin.html": {
@@ -120,8 +120,8 @@
   "v": 4
  },
  "apps/crush-bin.html": {
-  "date": "2026-11-23",
-  "hash": "c31946117b3ec5e2edb71f2c080aeb3acc9481a58a33bfebf800f28fae8f34d5",
+  "date": "2026-11-26",
+  "hash": "dda71439b9b20acb5eb3e7e7d9ef99a0b4e3c1249734bf7481a3bf7796a6cac7",
   "v": 4
  },
  "apps/cursor-bin.html": {
@@ -800,8 +800,8 @@
   "v": 4
  },
  "apps/kilocode-cli.html": {
-  "date": "2026-11-23",
-  "hash": "61b73809d5a8e80c33488ead8049890f32d8f127292fca8dc05214417ac76470",
+  "date": "2026-11-26",
+  "hash": "9b86a38cca9f2f5a15a06252b871ccef1dbc4148332f1cab0dc01379b07c458d",
   "v": 4
  },
  "apps/kimi-code.html": {
@@ -815,8 +815,8 @@
   "v": 4
  },
  "apps/ladybird-bin.html": {
-  "date": "2026-11-24",
-  "hash": "44ad699428c831be624fa92e01787645f0abf6d58d6df3f28c5ab48c6d670e2d",
+  "date": "2026-11-26",
+  "hash": "3cd78f4232d93492f837d52fa4980885a4a7a4ece703d1ad2ce7eefb08b4a25f",
   "v": 4
  },
  "apps/learn-omarchy.html": {
@@ -1246,7 +1246,7 @@
  },
  "apps/qwen-code.html": {
   "date": "2026-11-26",
-  "hash": "b6d9e2410b311aea555b53f4fb5b559d66f9c3c8fbe0092fe389d04f7fb02f12",
+  "hash": "0d4314e73460b17c2ce32bcccf65ddbf008ee84e838e4177977d776d967dc410",
   "v": 4
  },
  "apps/rawmakase-bin.html": {
@@ -1325,13 +1325,13 @@
   "v": 4
  },
  "apps/t3code-bin.html": {
-  "date": "2026-11-25",
-  "hash": "6c6ebeb5cafe865a2886fe4cf621ad657cb690a6c260b6ac726a0a0c0cce6879",
+  "date": "2026-11-26",
+  "hash": "c8e4e70e6ac073c3bafbd77342e3c94e74c6e581cca5a55fba941819c43b7644",
   "v": 4
  },
  "apps/t3code-nightly-bin.html": {
-  "date": "2026-11-25",
-  "hash": "839e0f021bbb253934ad19fb0daafec67faab79199a128878dd678b11f38d350",
+  "date": "2026-11-26",
+  "hash": "905daeaace1879913d0199f52169278c3716ddd91844f2f60765b81148cd0da6",
   "v": 4
  },
  "apps/tensaku.html": {
@@ -1385,8 +1385,8 @@
   "v": 4
  },
  "apps/wordcraft-bin.html": {
-  "date": "2026-11-23",
-  "hash": "65212b6625d78ad12abe56a5a62063a1caa6245b26e2ac5ebe3bf41f62468337",
+  "date": "2026-11-26",
+  "hash": "d97a00bd0e48f7f6593eed6d795079728ccb00bd158f3e6f37a2c015ef8e07a1",
   "v": 4
  },
  "apps/xpadneo-dkms.html": {
@@ -2420,8 +2420,8 @@
   "v": 4
  },
  "nordvpn-bin-on-omarchy.html": {
-  "date": "2026-11-18",
-  "hash": "de1e61cff8739f09dcb75af0b30e0f0936cfc42dec5923ff212a54e76ac36747",
+  "date": "2026-11-26",
+  "hash": "6773c12a8333d27309307ee3b64b5bddb11e96144b12c454ea59d09132b8327f",
   "v": 4
  },
  "oh-my-pi-on-omarchy.html": {
