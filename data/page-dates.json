@@ -51,7 +51,7 @@
  },
  "apps/amp-cli.html": {
   "date": "2026-11-27",
-  "hash": "d2fdfc0868df7982f99c9c78ab11e3f9934611978a0ea5a96cc2bf12f3827824",
+  "hash": "7efd0c7fb7267397bbd18a8bb550fa0e8938f60a67d05379dd4b788681a82160",
   "v": 4
  },
  "apps/amp-desktop-bin.html": {
@@ -65,8 +65,8 @@
   "v": 4
  },
  "apps/antigravity.html": {
-  "date": "2026-11-25",
-  "hash": "5af6be3c52c806c82da62027174ccc75a627fcc92efe07b878dc8cad7d668345",
+  "date": "2026-11-27",
+  "hash": "d2dd0b0f6baf86725c359bb5203d0f17290b703a7c8e673cbe133b33420d8a8f",
   "v": 4
  },
  "apps/apple-bcm-firmware-fetcher.html": {
@@ -120,13 +120,13 @@
   "v": 4
  },
  "apps/crush-bin.html": {
-  "date": "2026-11-26",
-  "hash": "dda71439b9b20acb5eb3e7e7d9ef99a0b4e3c1249734bf7481a3bf7796a6cac7",
+  "date": "2026-11-27",
+  "hash": "980cf5ea0653ab2a0417079f7e8fab57ef0910107f4b08248517e16da67e1186",
   "v": 4
  },
  "apps/cursor-bin.html": {
-  "date": "2026-11-25",
-  "hash": "ea88653de1c89ea1aa6d7423301ad901d5b0c96a09a6f2a471714acbe08ee325",
+  "date": "2026-11-27",
+  "hash": "e0a146d1e431b86a01fd0d2a2ff22e3f226ecc7edfa661133c91149c404ab4ac",
   "v": 4
  },
  "apps/cursor-cli.html": {
@@ -1115,8 +1115,8 @@
   "v": 4
  },
  "apps/omarchy-themes-backgrounds.html": {
-  "date": "2026-11-25",
-  "hash": "383e4e0c41d0adc3679a9c23ca77abe42c26faec0874ea0c010f66234b514517",
+  "date": "2026-11-27",
+  "hash": "941c912c0eb7c87479ad851f49eecf9af25190ef778c155abeed3c14266f7fe5",
   "v": 4
  },
  "apps/omarchy-zsh.html": {
@@ -1215,8 +1215,8 @@
   "v": 4
  },
  "apps/perplexity.html": {
-  "date": "2026-11-23",
-  "hash": "d07e65f01a533727967de4686636c822c0a3912909f475acf864cd300427a251",
+  "date": "2026-11-27",
+  "hash": "55e23e0f04a8eebaee1273d42915b8392e9b05972762ec48bc5b5044d6494b15",
   "v": 4
  },
  "apps/pi-coding-agent.html": {
@@ -1331,7 +1331,7 @@
  },
  "apps/t3code-nightly-bin.html": {
   "date": "2026-11-27",
-  "hash": "61ff2b52e893a275e1a888cc037835f62350aa25724e55aa944e84c97b899ce7",
+  "hash": "5edbda1e7e94d90291be2f72e7d417e13bae50d6ce722cc89fc995252841457f",
   "v": 4
  },
  "apps/tensaku.html": {
